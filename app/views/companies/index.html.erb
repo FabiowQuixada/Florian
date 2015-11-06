@@ -1,0 +1,31 @@
+<%= link_to genderize_full_tag(@model, 'helpers.action.new'), new_company_path, :class => "btn btn-primary" %>
+
+</p>
+
+<table class="table table-striped">
+  <tr>
+    <% I18n.with_options(scope: 'activerecord.attributes.company') do |i18n| %>
+	    <th><%= i18n.t :simple_name %></th>
+	    <th><%= i18n.t :long_name %></th>
+	    <th style="width: 16px;"></th>
+        <th class="hidden-xs" style="width: 16px;"></th>
+    <% end %>
+  </tr>
+  
+  <% @list.each do |company| %>
+    <tr id='company_<%= company.id %>'>
+      <td><%= company.simple_name %></td>
+      <td><%= company.long_name %></td>
+      <td style="width: 16px;"><%= link_to image_tag("edit.png", :title => t('helpers.action.remove')), edit_company_path(company) %></td>
+	  <td class="hidden-xs status" style="width: 16px;">
+	  	<% if company.active %>
+			<%= link_to image_tag("activate.png", :title => genderize_tag(company, 'is_active'), :class => 'inactivate_btn'), inactivate_company_path(company), method: :post, :remote => true, :id => 'change_status_company_' + company.id.to_s, "data-type" => :json, :class => 'inactivate_btn' %>
+		<% else %>
+			<%= link_to image_tag("inactivate.png", :title => genderize_tag(company, 'is_inactive'), :class => 'activate_btn'), activate_company_path(company), method: :post, :remote => true, :id => 'change_status_company_' + company.id.to_s, "data-type" => :json, :class => 'activate_btn' %>
+		<% end %>
+	  </td>
+	</tr>
+  <% end %>
+</table>
+
+<%= render partial: "helpers/index_helper", locals: {model: @model} %>

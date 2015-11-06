@@ -1,0 +1,30 @@
+Log;
+Bibliotecas locais + Estudo avançado de jQuery (jQuery.noConflict());
+Testes;
+Como um back button deve funcionar?
+Como funciona a exclusão (cascata)?
+Temp_email_params;
+"Enum" de histórico de e-mail;
+Smooth scroll no fechamento de alerts;
+Smooth scroll na deleção de remetentes;
+PDF: Não precisar salvar arquivo;
+No pt-br, precisa no nome do atributo + alias;
+Voltar pelo browser;
+Estilização do menu ativo;
+Testes: geral, devise, can3;
+Desempenho dos concerns;
+E envio de e-mail tá no controller, deveria estar no IaqMailer;
+Bootstrap select;
+Concern: parametros;
+Eliminar arquivos new e edit q soh tem _form;
+
+
+Cancancan: permissões de status, enviar e-mail, etc;
+Configuração do e-mail fixa no _form (<input>);
+Acesso Externo;
+Exportação dos dados;
+
+
+bundle exec whenever -s --update
+bundle exec whenever -s "environment=production" --update
+

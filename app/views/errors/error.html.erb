@@ -1,0 +1,26 @@
+  <div>
+  <p/>
+  <p/>
+    <div class="centre error_page_box">
+
+    <table>
+        <tr>
+            <td rowspan="2" style="padding:10px"><%= image_tag("error_warning.png", :size => "64x64") %></td>
+            <td><b><h5><%= @title %></b><h5></td>
+        </tr>
+        <tr>
+            <td><p><%= @body %></p></td>
+        </tr>
+    </table>
+
+    <a class="btn btn-primary back_btn"></span><%= t('helpers.action.back') %></a>
+    </div>
+  </div>
+
+  <script>
+
+  $('.back_btn').on('click', function()
+        {
+          parent.history.back();
+        });
+  </script>

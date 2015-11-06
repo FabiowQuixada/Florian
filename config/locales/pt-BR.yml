@@ -1,0 +1,487 @@
+
+pt-BR:
+  app_title: Florian
+  by_author: por Fabiow Quixadá
+  activerecord:
+    models:
+      email:
+        one: E-mail
+        other: E-mails
+      emailconfiguration:
+        one: Configurações de E-mail
+        other: Configurações de E-mail
+      company:
+        one: Empresa
+        other: Empresas
+      user:
+        one: Usuário
+        other: Usuários
+      role:
+        one: Grupo
+        other: Grupos
+    attributes:
+      email:
+        email: "E-mail"
+        title: "Título"
+        body: "Corpo"
+        day_of_month: "Dia do mês"
+        day: "Dia"
+        active: "Ativo"
+        value: "Valor"
+        competence: "Competência"
+        company: "Mantenedora"
+        recipients_array: "Destinatários"
+        receipt_text: "Texto do recibo"
+        email_type: Tipo de e-mail
+        type: Tipo de e-mail
+        type_values:
+          test: Teste
+          resend: Reenvio
+          auto: Automático
+      email_configuration:
+        signature: "Assinatura"
+        from: "De"
+        test_recipient: "Destinatário-teste"
+        bcc: "Cópia oculta"
+      email_history:
+        created_at: Data
+      company:
+        simple_name: Nome simples
+        long_name: Nome longo
+        active: "Ativo"
+      user:
+        name: Nome
+        role: Grupo
+        email: E-mail
+        password: Senha
+        password_confirmation: Confirmação de senha
+        current_password: Senha atual
+        remember_me: Manter-me logado
+        active: "Ativo"
+      role:
+        name: Nome
+        description: Descrição
+        active: "Ativo"
+  activated:
+    m:
+      s: "%{model} ativado com sucesso!"
+      p: "%{model} ativados com sucesso!"
+    f:
+      s: "%{model} ativada com sucesso!"
+      p: "%{model} ativadas com sucesso!"
+  inactivated:
+    m:
+      s: "%{model} inativado com sucesso!"
+      p: "%{model} inativados com sucesso!"
+    f:
+      s: "%{model} inativada com sucesso!"
+      p: "%{model} inativadas com sucesso!"
+  created:
+    m:
+      s: "%{model} criado com sucesso!"
+      p: "%{model} criados com sucesso!"
+    f:
+      s: "%{model} criada com sucesso!"
+      p: "%{model} criadas com sucesso!"
+  updated:
+    m:
+      s: "%{model} atualizado com sucesso!"
+      p: "%{model} atualizados com sucesso!"
+    f:
+      s: "%{model} atualizada com sucesso!"
+      p: "%{model} atualizadas com sucesso!"
+  removed:
+    m:
+      s: "%{model} removido com sucesso!"
+      p: "%{model} removidos com sucesso!"
+    f:
+      s: "%{model} removida com sucesso!"
+      p: "%{model} removidas com sucesso!"
+  resent:
+    m:
+      s: "%{model} reenviado com sucesso!"
+      p: "%{model} reenviados com sucesso!"
+    f:
+      s: "%{model} reenviada com sucesso!"
+      p: "%{model} reenviadas com sucesso!"
+  test_sent:
+    m:
+      s: "%{model} de teste enviado com sucesso!"
+      p: "%{model} de teste enviados com sucesso!"
+    f:
+      s: "%{model} de teste enviada com sucesso!"
+      p: "%{model} de teste enviadas com sucesso!"
+  alert:
+    access_denied: "Acesso negado!"
+    email:
+      sending_test: Enviando e-mail de teste...
+      resending: Reenviando e-mail...
+      error_sending_test: Ocorreu um erro ao enviar um e-mail de teste. Por favor, entre em contato com o administrador.
+      error_resending: Ocorreu um erro ao reenviar o e-mail. Por favor, entre em contato com o administrador.
+      invalid_competence: Competência inválida.
+      invalid_recipient: E-mail inválido.
+      fill_a_recipient: Digite um endereço de e-mail;
+  tags:
+    company: '#mantenedora'
+    competence: '#competencia'
+    value: '#valor'
+  helpers:
+    changelog: Changelog
+    test_email_prefix: '[TESTE] '
+    min_length: '(No mínimo %{min_length} caracteres)'
+    profile: Perfil
+    none: (Nenhum)
+    logged_as: "Logado como "
+    select:
+      prompt: Selecione
+    email:
+      index_footer: '*Os e-mails serão enviados às %{time}:00h da manhã nos respectivos dias.'
+      new_recipient: "Novo destinatário"
+      recent: Recentes
+    action:
+      login: Login
+      signup: Cadastrar
+      new:
+        m:
+          s: Novo
+          p: Novos
+        f:
+          s: Nova
+          p: Novas
+      edit: Editar
+      update: Salvar
+      update_data: Salvar
+      cancel: Cancelar
+      back: Voltar
+      discard: Descartar
+      remove: Remover
+      activate: Ativar
+      inactivate: Inativar
+      email:
+        add_recipient: +
+        send: Enviar
+        resend: Reenviar
+        send_test: Enviar teste
+        view_receipt: Visualizar recibo
+        config: Configurações
+      login: Login
+      sign_up: Registrar-se
+      logout: Logout
+  is_active:
+    m:
+      s: '%{model} está ativo, clique para inativá-lo'
+      p: '%{model} estão ativos, clique para inativá-los'
+    f:
+      s: '%{model} está ativa, clique para inativá-la'
+      p: '%{model} estão ativas, clique para inativá-las'
+  is_inactive:
+    m:
+      s: '%{model} está inativo, clique para ativá-lo'
+      p: '%{model} estão inativos, clique para ativá-los'
+    f:
+      s: '%{model} está inativa, clique para ativá-la'
+      p: '%{model} estão inativas, clique para ativá-las'
+  description:
+    email:
+      resend: Reenviar e-mail para clientes
+      send_test: Enviar e-mail teste apenas para
+  modal:
+    remove_title:
+      m:
+        s: 'Remover %{model}'
+        p: 'Remover %{model}'
+      f:
+        s: 'Remover %{model}'
+        p: 'Remover %{model}'
+    remove_body:
+      m:
+        s: 'Tem certeza que deseja remover este %{model}?'
+        p: 'Tem certeza que deseja remover estes %{model}?'
+      f:
+        s: 'Tem certeza que deseja remover esta %{model}?'
+        p: 'Tem certeza que deseja remover estas %{model}?'
+    title:
+      back: Dados não salvos
+    body:
+      back: Suas alterações não foram salvas, deseja descartá-las?
+    email:
+      title:
+        resend: 'Reenvio de E-mail para '
+        send_test: 'Enviar E-mail de Teste da '
+        remove: 'Remover E-mail da '
+        warning_save: Atenção
+        recent_emails: 'E-mails Enviados nos Últimos %{days} Dias'
+      body:
+        remove: Tem certeza que deseja remover este e-mail?
+        warning_save: Os campos 'Corpo' e 'Texto do recibo' devem constar as tags dinâmicas (#), para que sejam atualizadas corretamente pelo sistema. Por exemplo, se você digitar a competência 'outubro', nos demais meses a competência não será ajustada automaticamente. Em vez disso, use os botões disponíveis ao lado de cada campo.
+  title:
+    new:
+      m:
+        s: 'Novo %{model}'
+        p: 'Novos %{model}'
+      f:
+        s: 'Nova %{model}'
+        p: 'Novas %{model}'
+    edit:
+      m:
+        s: 'Editar %{model}'
+        p: 'Editar %{model}'
+      f:
+        s: 'Editar %{model}'
+        p: 'Editar %{model}'
+  audit:
+    title: Auditoria
+    who: Quem
+    when: Quando
+    where: Onde
+    what: Alterações
+    value: Valor
+    type: Tipo
+    history: Histórico
+  exception:
+    invalid_recipient: O e-mail não pôde ser enviado devido a pelo menos um dos destinatários ser inválido.
+    no_internet_connection: Não há conexão com a internet.
+  error_pages:
+    not_found:
+      title: Desculpe, mas esta página não existe ou você não tem permissão para acessá-la.
+      body: Verifique se o endereço está correto ou contate o administrador.
+    internal_server_error:
+      title: Desculpe, mas algo deu errado.
+      body: Por favor, contate o administrador.
+  date:
+    abbr_day_names:
+    - Dom
+    - Seg
+    - Ter
+    - Qua
+    - Qui
+    - Sex
+    - Sáb
+    abbr_month_names:
+    -
+    - Jan
+    - Fev
+    - Mar
+    - Abr
+    - Mai
+    - Jun
+    - Jul
+    - Ago
+    - Set
+    - Out
+    - Nov
+    - Dez
+    day_names:
+    - domingo
+    - segunda-feira
+    - terça-feira
+    - quarta-feira
+    - quinta-feira
+    - sexta-feira
+    - sábado
+    formats:
+      default: "%d/%m/%Y"
+      long: "%d de %B de %Y"
+      short: "%d de %B"
+      competence: "%B/%Y"
+    month_names:
+    -
+    - janeiro
+    - fevereiro
+    - março
+    - abril
+    - maio
+    - junho
+    - julho
+    - agosto
+    - setembro
+    - outubro
+    - novembro
+    - dezembro
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: aproximadamente 1 hora
+        other: aproximadamente %{count} horas
+      about_x_months:
+        one: aproximadamente 1 mês
+        other: aproximadamente %{count} meses
+      about_x_years:
+        one: aproximadamente 1 ano
+        other: aproximadamente %{count} anos
+      almost_x_years:
+        one: quase 1 ano
+        other: quase %{count} anos
+      half_a_minute: meio minuto
+      less_than_x_minutes:
+        one: menos de um minuto
+        other: menos de %{count} minutos
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      over_x_years:
+        one: mais de 1 ano
+        other: mais de %{count} anos
+      x_days:
+        one: 1 dia
+        other: "%{count} dias"
+      x_minutes:
+        one: 1 minuto
+        other: "%{count} minutos"
+      x_months:
+        one: 1 mês
+        other: "%{count} meses"
+      x_seconds:
+        one: 1 segundo
+        other: "%{count} segundos"
+    prompts:
+      day: Dia
+      hour: Hora
+      minute: Minuto
+      month: Mês
+      second: Segundo
+      year: Ano
+  errors:
+    email:
+      one_recipient: "O e-mail deve ter pelo menos um destinatário;"
+      value_mandatory: "O campo 'Valor' é obrigatório;"
+      value_positive: "O campo 'Valor' deve ser positivo;"
+      value_max: "O campo 'Valor' deve ser no máximo R$ 1.000.000,00;"
+      month_mandatory: "O campo 'Dia do mês' é inválido;"
+      month_max: "O campo 'Dia do mês' deve ser menor que 28;"
+    format: "%{message}"
+    messages:
+      accepted: "O campo '%{attribute}' deve ser aceito;"
+      blank: "O campo '%{attribute}' é obrigatório;"
+      present: "O campo '%{attribute}' deve ficar em branco;"
+      confirmation: "Os campos 'Senha' e 'Confirmação de senha' não conferem;"
+      empty: "O campo '%{attribute}' não pode ficar vazio;"
+      equal_to: "O campo '%{attribute}' deve ser igual a %{count};"
+      even: "O campo '%{attribute}' deve ser par;"
+      exclusion: "O campo '%{attribute}' não está disponível;"
+      greater_than: "O campo '%{attribute}' deve ser maior que %{count};"
+      greater_than_or_equal_to: "O campo '%{attribute}' deve ser maior ou igual a %{count};"
+      inclusion: "O campo '%{attribute}' não está incluído na lista;"
+      invalid: "O campo '%{attribute}' não é válido;"
+      less_than: "O campo '%{attribute}' deve ser menor que %{count};"
+      less_than_or_equal_to: "O campo '%{attribute}' deve ser menor ou igual a %{count};"
+      not_a_number: "O campo '%{attribute}' não é um número;"
+      not_an_integer: "O campo '%{attribute}' não é um número inteiro;"
+      odd: "O campo '%{attribute}' deve ser ímpar;"
+      record_invalid: "A validação falhou: %{errors}"
+      restrict_dependent_destroy:
+        one: Não é possível excluir o registro pois existe um %{record} dependente;
+        many: Não é possível excluir o registro pois existem %{record} dependentes;
+      taken: O campo '%{attribute}' já está em uso;
+      too_long: 'é muito longo (máximo: %{count} caracteres);'
+      too_short: 'é muito curto (mínimo: %{count} caracteres);'
+      wrong_length: O campo '%{attribute}' não possui o tamanho esperado (%{count} caracteres);
+      other_than: O campo '%{attribute}' deve ser diferente de %{count};
+    template:
+      body: 'Por favor, verifique o(s) seguinte(s) campo(s):'
+      header:
+        one: 'Não foi possível gravar %{model}: 1 erro'
+        other: 'Não foi possível gravar %{model}: %{count} erros.'
+  number:
+    currency:
+      format:
+        delimiter: "."
+        format: "%u %n"
+        precision: 2
+        separator: ","
+        significant: false
+        strip_insignificant_zeros: false
+        unit: R$
+    format:
+      delimiter: "."
+      precision: 3
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion:
+            one: bilhão
+            other: bilhões
+          million:
+            one: milhão
+            other: milhões
+          quadrillion:
+            one: quatrilhão
+            other: quatrilhões
+          thousand: mil
+          trillion:
+            one: trilhão
+            other: trilhões
+          unit: ''
+      format:
+        delimiter: "."
+        precision: 2
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: "."
+        format: "%n%"
+    precision:
+      format:
+        delimiter: "."
+  support:
+    array:
+      last_word_connector: " e "
+      two_words_connector: " e "
+      words_connector: ", "
+  time:
+    am: ''
+    formats:
+      default: "%a, %d de %B de %Y, às %H:%M:%S %z"
+      long: "%d de %B de %Y, às %H:%M"
+      long_2: "%d/%m/%y, às %H:%Mh"
+      short: "%d de %B, às %H:%M"
+      really_short: "%d/%m/%y"
+    pm: ''
+  devise:
+    email:
+      welcome: 'Bem-vindo(a), '
+      hello: 'Olá, '
+      reset_password:
+        1: 'Foi requisitada uma mudança de senha para sua conta. Você pode fazer isto através do seguinte link:'
+        2: 'Se não foi você que fez esta requisição, por favor ignore este e-mail.'
+        3: 'Sua senha não mudará a não ser que você acesse o link acima e crie uma nova.'
+        link: 'Mudar minha senha'
+      unlock_instructions:
+        1: 'Sua conta foi bloqueada devido a sucessivas tentativas infrutífgeras de login.'
+        2: 'Clique no link a seguir para desbloquear sua conta:'
+        link: 'Desbloquear minha conta'
+      confirmation_instructions:
+        1: 'Você pode confirmar sua conta de e-mail através do seguinte link:'
+        link: 'Confirmar'
+    title:
+      instruction_resend: Reenvio de Instruções de Confirmação
+      signup: Cadastro
+      forgot_password: Redefinição de Senha
+      didnt_receive_unlock: Não recebeu as instruções de desbloqueio?
+      didnt_receive_confirmation: Não recebeu as instruções de confirmação?
+    login_with: 'Logar com '
+    waiting_for_confirmation: 'Aguardando confirmação para: '
+    leave_blank_if: (Deixe em branco se não quiser alterá-la)
+    type_password_to_change: (Sua senha é necessária para que as mudanças tenham efeito)
+    buttons:
+      forgot_password: Esqueceu sua senha?
+      send_reset_password: Enviar instruções

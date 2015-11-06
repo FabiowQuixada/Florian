@@ -1,0 +1,84 @@
+<% @title = model.model_name.human(:count => 2) %>
+
+<!-- Remove modal -->
+<div class="modal fade" id="remove_modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<%= form_tag({:url => '#'}, method: "delete", :remote => true, :id => 'remove_form') do %>
+			<div class="modal-header">
+				<%= genderize_tag(model, 'modal.remove_title') %>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+			</div>
+			<div class="modal-body">
+				<%= genderize_tag(model, 'modal.remove_body') %>
+			</div>
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-primary" data-dismiss="modal">
+					<%= t('helpers.action.cancel') %>
+				</button>
+				<%= submit_tag t('helpers.action.remove'), :class => "btn btn-primary btn-ok" %>
+			</div>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+<script>
+
+	jQuery(function($) {
+	
+	    $('.status').on('ajax:success', function(event, data, status, xhr) {
+	        display_notice(data.message);
+	        update_status(data.id, data.activated);
+	    }).on("ajax:error", function(e, xhr, status, error) {
+			parse_json_errors(xhr.responseText);
+		});
+		
+		function update_status(id, is_now_active)
+		{
+			var target = "#<%= model.class.name.downcase %>_" + id + " .status > a";
+			
+			if(is_now_active)
+			{
+				$(target).attr("href", change_status_path(id, is_now_active));
+				$(target).html('<%= image_tag('activate.png', :title => genderize_tag(model, 'is_inactive')) %>');
+			}
+			else
+			{
+				$(target).attr("href", change_status_path(id, is_now_active));
+				$(target).html('<%= image_tag('inactivate.png', :title => genderize_tag(model, 'is_active')) %>');
+			}
+		}
+	});
+	
+	function change_status_path(id, is_now_active)
+	{
+		<% model_name = model.class.to_s.underscore %>
+		
+		if(is_now_active)
+			return '<%= send("inactivate_#{model_name}_path", -1) %>'.replace("-1", id);
+		else
+			return '<%= send("activate_#{model_name}_path", -1) %>'.replace("-1", id);
+	}
+
+	
+	$(document).ready(function() {
+		$("#remove_form").on("ajax:success", function(e, data, status, xhr) {
+			display_notice(data.success);
+		}).on("ajax:error", function(e, xhr, status, error) {
+			parse_json_errors(xhr.responseText);
+		});
+		
+		$('.remove_btn').click(function(ev) {
+	
+			id = $(this).parent().parent().find('.<%= model.model_name.param_key %>_id').text();
+			$('#remove_form').get(0).setAttribute('action', '/<%= model.class.name.pluralize.downcase %>/' + id);
+			$('#remove_modal').modal('show');
+		});
+		
+	});
+	
+</script>

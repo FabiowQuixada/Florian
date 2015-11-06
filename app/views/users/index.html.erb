@@ -1,0 +1,35 @@
+<%= link_to genderize_full_tag(@model, 'helpers.action.new'), new_user_path, :class => "btn btn-primary" %>
+
+</p>
+
+<table class="table table-striped">
+	<tr>
+		<% I18n.with_options(scope: 'activerecord.attributes.user') do |i18n| %>
+			<th style="width: 16px; display: none;"></th>
+			<th><%= i18n.t :name %></th>
+			<th><%= i18n.t :email %></th>
+			<th><%= i18n.t :role %></th>
+			<th style="width: 16px;"></th>
+			<th class="hidden-xs" style="width: 16px;"></th>
+		<% end %>
+	</tr>
+
+	<% @list.each do |user| %>
+	<tr id='user_<%= user.id %>'>
+		<td style="width: 16px; display: none;" class="user_id"><%= user.id %></td>
+		<td><%= user.name %></td>
+		<td><%= user.email %></td>
+		<td><%= user.role.name unless user.role.nil? %></td>
+		<td style="width: 16px;"><%= link_to image_tag("edit.png", :title => t('helpers.action.remove')), edit_user_path(user) %></td>
+		<td class="hidden-xs status" style="width: 16px;">
+			<% if user.active %>
+				<%= link_to image_tag("activate.png", :title => genderize_tag(user, 'is_active'), :class => 'inactivate_btn'), inactivate_user_path(user), method: :post, :remote => true, :id => 'change_status_user_' + user.id.to_s, "data-type" => :json, :class => 'inactivate_btn' %>
+			<% else %>
+				<%= link_to image_tag("inactivate.png", :title => genderize_tag(user, 'is_inactive'), :class => 'activate_btn'), activate_user_path(user), method: :post, :remote => true, :id => 'change_status_user_' + user.id.to_s, "data-type" => :json, :class => 'activate_btn' %>
+			<% end %>
+		</td>
+	</tr>
+	<% end %>
+</table>
+
+<%= render partial: "helpers/index_helper", locals: {model: @model} %>

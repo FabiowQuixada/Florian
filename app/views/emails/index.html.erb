@@ -1,0 +1,80 @@
+<%= link_to genderize_full_tag(@model, 'helpers.action.new'), new_email_path, :class => "btn btn-primary" %>
+<%= link_to t('helpers.action.email.config'), edit_email_configuration_path(EmailConfiguration.first), :class => "btn btn-primary" %>
+<%= link_to t('helpers.email.recent'), '#', :id => "recent_emails_btn", :class => "btn btn-primary" %>
+
+</p>
+
+<table class="table table-striped">
+	<tr>
+		<% I18n.with_options(scope: 'activerecord.attributes.email') do |i18n| %>
+			<th style="width: 16px; display: none;"></th>
+			<th style="width: 16px;"><%= i18n.t :day %></th>
+			<th><%= i18n.t :company %></th>
+			<th class="hidden-xs" ><%= i18n.t :competence %></th>
+			<th style="width: 150px;"><%= i18n.t :value %></th>
+			<th style="width: 16px;"></th>
+			<th class="hidden-xs" style="width: 16px;"></th>
+			<th class="hidden-xs" style="width: 16px;"></th>
+			<th class="hidden-xs" style="width: 16px;"></th>
+		<% end %>
+	</tr>
+
+	<% @list.each do |email| %>
+		<tr id='email_<%= email.id %>'>
+			<% I18n.with_options(scope: 'activerecord.attributes.email') do |i18n| %>
+				<td style="width: 16px; display: none;" class="email_id"><%= email.id %></td>
+				<td style="width: 16px;"><%= email.day_of_month %></td>
+				<td class="email_company"><%= email.company.simple_name if email.company %></td>
+				<td class="hidden-xs" ><%= email.capital_competence %></td>
+				<td style="width: 150px;"><%= number_to_currency(email.value) %></td>
+				<td style="width: 16px;"><%= link_to image_tag("edit.png", :title => t('helpers.action.remove')), edit_email_path(email) %></td>
+				<td class="hidden-xs" style="width: 16px;"><%= link_to image_tag("send_email.png", :title => t('description.email.resend')), '#', class: 'resend_btn' %></td>
+				<td class="hidden-xs" style="width: 16px;"><%= link_to image_tag("test_email.png", :title => t('description.email.send_test') + " '" + EmailConfiguration.first.test_recipient + "'"), '#', :remote => true, :class => 'send_test_btn' %></td>
+				<td class="hidden-xs status" style="width: 16px;">
+					<% if email.active %>
+						<%= link_to image_tag("activate.png", :title => genderize_tag(email, 'is_active'), :class => 'inactivate_btn'), inactivate_email_path(email), method: :post, :remote => true, :id => 'change_status_email_' + email.id.to_s, "data-type" => :json, :class => 'inactivate_btn' %>
+					<% else %>
+						<%= link_to image_tag("inactivate.png", :title => genderize_tag(email, 'is_inactive'), :class => 'activate_btn'), activate_email_path(email), method: :post, :remote => true, :id => 'change_status_email_' + email.id.to_s, "data-type" => :json, :class => 'activate_btn' %>
+					<% end %>
+				</td>
+			<% end %>
+		</tr>
+	<% end %>
+</table>
+
+<%= t('helpers.email.index_footer', time: Email.daily_send_hour.to_s) %>
+
+<%= render partial: "helpers/index_helper", locals: {model: @model} %>
+<%= render partial: "modals" %>
+
+<script>
+
+	$(document).ready(function() {
+		jQuery.noConflict();
+		$('.resend_btn').click(function(ev) {
+
+			clean_resend_modal();
+
+			id = $(this).parent().parent().find('.email_id').text();
+			$('#resend_email_form').get(0).setAttribute('action', '/emails/' + id + '/resend');
+			$('.modal_company_name').text($(this).parent().parent().find('.email_company').text());
+			$('#resend_email_modal').modal('show');
+		});
+
+		jQuery.noConflict();
+		$('.send_test_btn').click(function(ev) {
+
+			clean_send_test_modal();
+
+			id = $(this).parent().parent().find('.email_id').text();
+			$('#send_test_email_form').get(0).setAttribute('action', '/emails/' + id + '/send_test');
+			$('.modal_company_name').text($(this).parent().parent().find('.email_company').text());
+			$('#send_test_email_modal').modal('show');
+		});
+
+		jQuery.noConflict();
+		$('#recent_emails_btn').click(function(ev) {
+			$('#recent_emails_modal').modal('show');
+		});
+	});
+</script>

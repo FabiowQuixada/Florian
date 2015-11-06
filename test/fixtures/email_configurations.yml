@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  signature: MyText
+  from: MyString
+  test_recipient: MyString
+  bcc: MyString
+
+two:
+  signature: MyText
+  from: MyString
+  test_recipient: MyString
+  bcc: MyString

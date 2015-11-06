@@ -1,0 +1,231 @@
+<!-- Edited but not saved modal -->
+<div class="modal fade" id="confirm_back_modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<%= t('modal.title.back') %>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+			</div>
+			<div class="modal-body">
+				<%= t('modal.body.back') %>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">
+					<%= t('helpers.action.cancel') %>
+				</button>
+
+				<a class="btn btn-primary" id="modal_back_btn"><%= t('helpers.action.discard') %></a>
+				<a class="btn btn-primary" id="modal_confirm_btn"><%= t('helpers.action.update_data') %></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%= render partial: "helpers/audit_helper", locals: {model: model} %>
+
+<script>
+	<% if !model.new_record? %>
+		$(document).ready(function() {
+
+			jQuery.noConflict();
+			jQuery(document).ready(function($) {
+
+				$("#remove_company_form").on("ajax:success", function(e, data, status, xhr) {
+					display_notice('<%= t('alert.email.test_sent') %>');
+					jQuery.noConflict();
+					$('#remove_company_modal').modal('hide');
+
+				}).on("ajax:error", function(e, xhr, status, error) {
+					display_error('<%= t('alert.email.error_sending_test') %>');
+					$('#remove_company_modal').modal('hide');
+				});
+			});
+
+			var original_values = new Array();
+			window.attribute_names = new Array();
+
+			<% model.attributes.each_pair do |name, value| %>
+
+				<% if name != 'created_at' and name != 'updated_at' %>
+
+			  		original_values['<%= name %>'] =
+
+			  		<% if(value.is_a?(Numeric) and !value.is_a? (Integer)) %>
+			  			'<%= '%.2f' % value %>'.replace('.', ',');
+			  		<% elsif value.is_a? String %>
+			  			'<%= value.gsub(/\r\n?/, "") %>';
+			  		<% else %>
+			  			'<%= value %>';
+			  		<% end %>
+
+			  		attribute_names.push('<%= name %>');
+
+		  		<% end %>
+			<% end%>
+
+
+			$('.back_btn').on('click', function(){
+
+				preprocess_data();
+
+				var changed_values_list = "";
+				var any_change = false;
+
+				for(i = 0; i < attribute_names.length; i++) {
+
+					var value = $("[name='<%= model.model_name.param_key %>[" + attribute_names[i] + "]']");
+
+					if(typeof value.val() !== 'undefined')
+					{
+						if(typeof value.val() === 'string' || value.val() instanceof String)
+						{
+							value = value.val().replace(/(\r\n|\n|\r)/gm,"");
+							value = escapeHtml(value);
+						}
+
+					    if(original_values[attribute_names[i]] != value)
+					    {
+					    	changed_values_list += attribute_names[i] + " ";
+							edited_but_not_saved('/<%= model.model_name.route_key %>');
+							any_change = true;
+					    }
+					}
+				}
+
+				//alert(changed_values_list);
+
+				if(!any_change)
+				{
+					parent.history.back();
+				}
+
+			})
+
+			if(<%= model.active? %>)
+				activate();
+			else
+				inactivate();
+
+			function edited_but_not_saved(url)
+			{
+				$('#confirm_back_modal').modal('show');
+				$('#modal_back_btn').on('click', function()
+				{
+					window.location = url;
+				});
+			}
+
+				// window.onload = function () {
+		    // if (typeof history.pushState === "function") {
+		        // history.pushState("jibberish", null, null);
+		        // window.onpopstate = function () {
+		            // history.pushState('newjibberish', null, null);
+		            // // Handle the back (or forward) buttons here
+		            // // Will NOT handle refresh, use onbeforeunload for this.
+		            // alert('sdsdsdsd');
+		        // };
+		    // }
+		    // else {
+		        // var ignoreHashChange = true;
+		        // window.onhashchange = function () {
+		            // if (!ignoreHashChange) {
+		                // ignoreHashChange = true;
+		                // window.location.hash = Math.random();
+		                // // Detect and redirect change here
+		                // // Works in older FF and IE9
+		                // // * it does mess with your hash symbol (anchor?) pound sign
+		                // // delimiter on the end of the URL
+		            // }
+		            // else {
+		                // ignoreHashChange = false;
+		            // }
+		        // };
+		    // }
+		//}
+
+		});
+
+	<% else %>
+
+		$(document).ready(function() {
+			activate();
+
+			$('.back_btn').on('click', function()
+			{
+				parent.history.back();
+			});
+		});
+
+	<% end %>
+
+	$('#modal_confirm_btn').on('click', function() {
+		document.getElementById("main_form").submit();
+	});
+
+	function display_form_errors(message) {
+		var result = '';
+
+		if (Object.prototype.toString.call(message) === '[object Array]')
+		{
+			result += '<ul>';
+
+			for (var i = 0; i < message.length; i++)
+				result += '<li>' + message[i] + '</li>';
+
+			result += '</ul>';
+		} else {
+			result = message;
+		}
+
+		hide_all_messages();
+		to_top();
+		$('#form_error_messages').html(result);
+		$('#form_error_box').show();
+	}
+
+	function inactivate()
+	{
+		$('#status_btn').removeAttr('class');
+		$('#status_btn').attr("class","btn btn-default btn-xs");
+		$('#status_btn').html('<%= t('helpers.action.activate') %>');
+		$('#model_status').val('false');
+		$('#status_btn').width(50);
+	}
+
+	function activate()
+	{
+		$('#status_btn').removeAttr('class');
+		$('#status_btn').attr("class","btn btn-success btn-xs");
+		$('#status_btn').html('<%= t('helpers.action.inactivate') %>');
+		$('#model_status').val('true');
+		$('#status_btn').width(50);
+	}
+
+	$('#status_btn').on('click', set_status_btn);
+
+	function set_status_btn()
+	{
+		if($('#model_status').val() == 'true')
+			inactivate();
+		else
+			activate();
+	}
+
+	var entityMap = {
+		"&": "&amp;",
+		"<": "&lt;",
+		">": "&gt;",
+		'"': '&quot;',
+		"'": '&#39;',
+		"/": '/' // &#x2F;
+	};
+
+	function escapeHtml(string) {
+		return String(string).replace(/[&<>"'\/]/g, function (s) {
+			return entityMap[s];
+	});
+  }
+
+</script>

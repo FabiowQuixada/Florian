@@ -1,0 +1,19 @@
+
+<% if !model.new_record? %>
+        <a class="btn btn-primary btn-xs status_btn" id="status_btn"></a>
+        <%= f.hidden_field :active, :id => 'model_status' %>
+<% end %>
+
+
+
+<p/>
+
+    <div class="a">
+	<%= f.submit t('helpers.action.update'), :class => "btn btn-primary save_btn" %>
+
+	<% if lookup_context.find_all(ActiveModel::Naming.plural(model) + "/_extra_buttons").any? %>
+		<%= render partial: ActiveModel::Naming.plural(model).to_s + "/extra_buttons" %>
+	<% end %>
+
+	<a class="btn btn-primary back_btn"></span><%= t('helpers.action.back') %></a>
+</div>

@@ -1,0 +1,27 @@
+<%= form_for @model, :html=> {:id => 'main_form'} do |f| %>
+
+	<%= render partial: "helpers/form_errors", locals: {model: @model} %>
+	
+	<div class="form-group">
+		<%= f.label :simple_name %>
+		<%= f.text_field :simple_name, :class => 'form-control', :readonly => f.object.persisted? %>
+	</div>
+	
+	<div class="form-group">
+		<%= f.label :long_name %>
+		<%= f.text_field :long_name, :class => 'form-control', :readonly => f.object.persisted? %>
+	</div>
+	
+	<%= render partial: "helpers/form_buttons", locals: {model: @model, f: f} %>
+
+<%end%>
+
+<%= render partial: "helpers/form_helper", locals: {model: @model} %>
+
+<script>
+	
+	function preprocess_data()
+	{
+		// _form_helper.html.erb;
+	}
+</script>

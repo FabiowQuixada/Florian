@@ -1,0 +1,20 @@
+<% if !current_user.nil? && current_user.admin? %>
+	<p/></p>
+	<div class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title"><a data-toggle="collapse" href="#collapse1"><%= t('helpers.changelog') %></a></h4>
+			</div>
+			<div id="collapse1" class="panel-collapse collapse">
+				<div class="panel-body" style="margin: 0; padding: 0;">
+					Versão 1.0 (00/00/0000)
+						<ul>
+							<li>Implantação</li>
+						</ul>
+				</div>
+				<div class="panel-footer">
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>

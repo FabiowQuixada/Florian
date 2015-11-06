@@ -1,0 +1,46 @@
+<%= form_for @model, :html=> {:id => 'main_form'} do |f| %>
+
+	<%= render partial: "helpers/form_errors", locals: {model: @model} %>
+	
+	<%= f.hidden_field :id %> 
+	
+	<div class="form-group">
+		<%= f.label :name %>
+		<%= f.text_field :name, :class => 'form-control' %>
+	</div>
+	
+	<div class="form-group">
+		<%= f.label :email %>
+		<%= f.text_field :email, :class => 'form-control' %>
+	</div>
+	
+	<div class="form-group">
+		<%= f.label :role %>
+		<%= f.collection_select(:role_id, Role.where(:active => true), :id, :name, {:include_blank => t('helpers.select.prompt')}, {class: "form-control"}) %>
+	</div>
+	
+	<%= render partial: "helpers/form_buttons", locals: {model: @model, f: f} -%>
+	
+<% end %>
+
+<%= render partial: "helpers/form_helper", locals: {model: @model} %>
+
+<script>
+
+	$('#main_form').on('submit', function(evt) {
+
+		preprocess_data();
+		
+		if(!validate_tag_fields())
+		{
+			$('#warning_save_modal').modal('show');
+			evt.preventDefault();
+			return;
+		}
+	});
+	
+	function preprocess_data()
+	{
+	}
+		
+</script>
