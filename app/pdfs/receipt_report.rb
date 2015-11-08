@@ -5,7 +5,7 @@ class ReceiptReport < Prawn::Document
     :page_size   => "A4",
     :margin      => [40, 75]
   }
-  
+
   def initialize(path = nil, email, date)
       @path = path
       @email = email
@@ -14,9 +14,9 @@ class ReceiptReport < Prawn::Document
 
   def pdf
     Prawn::Document.new(PDF_OPTIONS) do |pdf|
-      
+
       # Header
-      pdf.image "#{Rails.root}/app/assets/images/logo_text.jpg", :scale => 0.7, position: :center
+      pdf.image "#{Rails.root}/app/assets/images/logo_text.jpg", :scale => 0.5, position: :left
       pdf.text "Recibo", :size => 25, :style => :bold, :align => :center
 
       # Value
@@ -25,7 +25,7 @@ class ReceiptReport < Prawn::Document
 
       # Main text
       pdf.move_down 30
-      pdf.text @email.processed_pdf_text, :inline_format => true, :align => :justify, :indent_paragraphs => 30
+      pdf.text @email.processed_pdf_text(@date), :inline_format => true, :align => :justify, :indent_paragraphs => 30
 
       # Bank account
       pdf.move_down 30
@@ -35,7 +35,7 @@ class ReceiptReport < Prawn::Document
         pdf.text "Agência: 8373", :inline_format => true
         pdf.text "Conta Corrente: 14373-7", :inline_format => true
       end
-      
+
       # Place / time
       pdf.move_down 30
       pdf.text "Fortaleza, " + I18n.localize(Date.today, format: :long), :inline_format => true, :align => :center
@@ -43,6 +43,7 @@ class ReceiptReport < Prawn::Document
       # Signature
       pdf.move_down 30
       pdf.image "#{Rails.root}/app/assets/images/president_signature.png", :scale => 0.15, position: :center
+      pdf.move_up 15
       pdf.text "Dr. Edmar Maciel Lima Júnior", :inline_format => true, :style => :bold, :align => :center
       pdf.text "Presidente do Instituto de Apoio ao Queimado – I.A.Q.", :inline_format => true, :style => :bold, :align => :center
 
@@ -55,7 +56,7 @@ class ReceiptReport < Prawn::Document
       end
     end
   end
-  
+
   def save
     pdf.render_file(path)
   end

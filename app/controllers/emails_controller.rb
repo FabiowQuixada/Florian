@@ -1,10 +1,8 @@
 class EmailsController < ApplicationController
 
   include MainControllerConcern
-  arguable model_class: Email#, params_validation: method(:email_params)
-
+  arguable model_class: Email
   load_and_authorize_resource
-  before_filter :authenticate_user!
 
   def index
 
@@ -15,28 +13,8 @@ class EmailsController < ApplicationController
 
     # TODO tipo de e-mail
     @recent_emails = EmailHistory.where("created_at >= :start_date AND send_type != 2",
-      {start_date: Date.new - 10.days})
+      {start_date: Date.new - 7.days})
 
-  end
-
-  def create
-    @model = Email.new email_params
-
-    if @model.save
-      redirect_to emails_path, notice: genderize_tag(@model, 'created')
-    else
-      render 'new'
-    end
-  end
-
-  def update
-    @model = Email.find params[:id]
-
-    if @model.update email_params
-      redirect_to emails_path, notice: genderize_tag(@model, 'updated')
-    else
-      render 'edit'
-    end
   end
 
   def resend
@@ -53,16 +31,7 @@ class EmailsController < ApplicationController
 
       IaqMailer.send_email(email, date, 1, current_user).deliver_now
 
-      history = email.email_histories.last
-
-      return render :json => {
-        :message => genderize_tag(email, 'resent'),
-        :date => l(history.created_at, format: :really_short),
-        :company => email.company.simple_name,
-        :value => ActionController::Base.helpers.number_to_currency(history.value),
-        :type => history.send_type_desc,
-        :user => history.user.name
-      }
+      return render history_as_json(email, 'resent')
 
     rescue => exc
       exception_message = handle_exception exc, I18n.t('alert.email.error_resending')
@@ -83,16 +52,7 @@ class EmailsController < ApplicationController
 
       IaqMailer.send_email(email, date, 2, current_user).deliver_now
 
-      history = email.email_histories.last
-
-      return render :json => {
-        :message => genderize_tag(email, 'test_sent'),
-        :date => l(history.created_at, format: :really_short),
-        :company => email.company.simple_name,
-        :value => ActionController::Base.helpers.number_to_currency(history.value),
-        :type => history.send_type_desc,
-        :user => history.user.name
-      }
+      return render history_as_json(email, 'test_sent')
 
     rescue Exception => exc
       exception_message = handle_exception exc, I18n.t('alert.email.error_sending_test')
@@ -112,8 +72,12 @@ class EmailsController < ApplicationController
 
   private ###########################################################################################
 
+  def params_validation
+    email_params
+  end
+
   def email_params
-    params.require(:email).permit(:id, :email_configuration_id, :body, :value, :day_of_month, :active, :company_id, :recipients_array, :receipt_text)
+    params.require(:email).permit(:id, :email_configuration_id, :body, :value, :day_of_month, :active, :company_id, :recipients_array)
   end
 
   # TODO If the user wants to do an action with the (possibly unsaved) data on the screen
@@ -153,7 +117,9 @@ class EmailsController < ApplicationController
     # Else, load it from the database
     email = Email.find params[:id]
 
-    if params[:email] && params[:email][:body]
+    byebug
+
+    if !params[:email_id]
       email.assign_attributes email_params
     end
 
@@ -167,4 +133,19 @@ class EmailsController < ApplicationController
       raise IaqException.new(I18n.t('alert.email.invalid_competence'))
     end
   end
+
+  def history_as_json(email, type)
+
+    history = email.email_histories.last
+
+    return :json => {
+        :message => genderize_tag(email, type),
+        :date => l(history.created_at, format: :really_short),
+        :company => email.company.simple_name,
+        :value => ActionController::Base.helpers.number_to_currency(history.value),
+        :type => history.send_type_desc,
+        :user => history.user.name
+      }
+  end
+
 end

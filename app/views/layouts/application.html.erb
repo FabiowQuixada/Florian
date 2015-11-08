@@ -15,118 +15,137 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes">
+
 		<!-- Rails -->
 		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 		<%= stylesheet_link_tag "application", :media => "all" %>
+
+		<link href='https://fonts.googleapis.com/css?family=Metamorphous' rel='stylesheet' type='text/css'>
 
 		<%= csrf_meta_tags %>
 
 	</head>
 
 	<body>
-		<div class="main_box">
+		<div class="container-fluid padless">
+			<div class="row">
+				<div class="hidden-xs col-md-2"></div>
+		    		<div class="col-xs-12 col-md-8">
+					<div class="main_box">
 
-			<!-- MENU -->
-			<% if user_signed_in? %>
-				<nav class="navbar navbar-default">
-				  <div class="container-fluid">
-				    <div class="navbar-header">
-				      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main_menu">
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>
-				      </button>
-				      <a class="navbar-brand" rel="home" href="/" title="<%= t('app_title') %>">
-					    <img style="max-width: 150%; max-height: 150%; margin-top: -5px;" src="/assets/app_logo.png">
-					  </a>
-				    </div>
-				    <div class="collapse navbar-collapse" id="main_menu">
-				      <ul class="nav navbar-nav">
-				        <li class="<%= 'active' if params[:controller] == 'companies' %>">
-							<a href="/companies"><%= Company.new.model_name.human(:count => 2) %></a>
-						</li>
-						<li class="<%= 'active' if params[:controller] == 'emails' %>">
-							<a href="/emails"><%= Email.new.model_name.human(:count => 2) %></a>
-						</li>
-						<% if !current_user.nil? && current_user.admin? %>
-							<li class="<%= 'active' if params[:controller] == 'users' %>">
-								<a href="/admin/users"><%= User.new.model_name.human(:count => 2) %></a>
-							</li>
-							<li class="<%= 'active' if params[:controller] == 'roles' %>">
-								<a href="/admin/roles"><%= Role.new.model_name.human(:count => 2) %></a>
-							</li>
+						<!-- MENU -->
+						<% if user_signed_in? %>
+							<nav class="navbar navbar-default">
+
+								    <div class="navbar-header inline-block">
+								      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main_menu">
+								        <span class="icon-bar"></span>
+								        <span class="icon-bar"></span>
+								        <span class="icon-bar"></span>
+								      </button>
+								      <a class="navbar-brand" rel="home" href="/" title="<%= t('app_title') %>">
+									    <span><img style="max-width: 100%; max-height: 150%; margin-top: -5px;" src="/assets/app_logo.png"></span>
+										<span class="app_title"><%= t('app_title') %></span>
+									  </a>
+								    </div>
+							    <div class="collapse navbar-collapse" id="main_menu">
+							      <ul class="nav navbar-nav">
+							        <li class="<%= 'active' if params[:controller] == 'companies' %>">
+										<a href="/companies"><%= Company.new.model_name.human(:count => 2) %></a>
+									</li>
+									<li class="<%= 'active' if params[:controller] == 'emails' %>">
+										<a href="/emails"><%= Email.new.model_name.human(:count => 2) %></a>
+									</li>
+									<% if !current_user.nil? && current_user.admin? %>
+										<li class="<%= 'active' if params[:controller] == 'users' %>">
+											<a href="/admin/users"><%= User.new.model_name.human(:count => 2) %></a>
+										</li>
+										<li class="<%= 'active' if params[:controller] == 'roles' %>">
+											<a href="/admin/roles"><%= Role.new.model_name.human(:count => 2) %></a>
+										</li>
+									<% end %>
+									<li class="visible-xs">
+										<a data-method="delete" href="/users/sign_out"><%= t('helpers.action.logout') + ' (' + current_user.name + ')' %></a>
+									</li>
+
+							      </ul>
+							    </div>
+
+							</nav>
+
+							<div class="row non-menu" style="vertical-align: middle; ">
+								<div class="col-xs-12 col-md-4 col-lg-4">
+									<ol class = "breadcrumb">
+										<% @breadcrumbs.each_pair do |u, index| %>
+
+										  <% if index == '' %>
+											<li class = "active"><b><%= u %></b></li>
+										  <% else %>
+										  	<li><a href = "<%= index %>"><%= u %></a></li>
+										  <% end %>
+										<% end %>
+									</ol>
+								</div>
+								<div class="hidden-xs col-md-4 col-lg-4"></div>
+								<div class="hidden-xs col-md-4 col-lg-4" style="margin-top: 10px;">
+									<div align="right" style="vertical-align: middle;">
+										<%= t('helpers.logged_as') %> <%= link_to current_user.name, edit_user_registration_path %> <%= link_to(t('helpers.action.logout'), destroy_user_session_path, :method => :delete, :style => "margin-left: 5px;", :class => "btn btn-primary btn-xs") %>
+									</div>
+								</div>
+							</div>
+
+						<% else %>
+							<div class="centre">
+								<img  style="width: 70px; height: 70px; margin-bottom: -20px;" src="/assets/app_logo.png">
+								<h2><span class="app_title"><%= t('app_title') %></span></h2>
+							</div>
+
 						<% end %>
-				      </ul>
-				    </div>
-				  </div>
-				</nav>
 
-				<div class="row" style="vertical-align: middle; ">
-					<div class="col-md-4 col-lg-4">
-						<ol class = "breadcrumb">
-							<% @breadcrumbs.each_pair do |u, index| %>
+						<!-- MESSAGES -->
+						<div class="non-menu">
+							<div id="global_notice_box" class="alert alert-success fade in" style="display: none;">
+								<a href="#" class="close" data-hide="alert">&times;</a>
+								<div id="global_notice_massages">
+									<%= notice %>
+								</div>
+							</div>
 
-							  <% if index == '' %>
-								<li class = "active"><b><%= u %></b></li>
-							  <% else %>
-							  	<li><a href = "<%= index %>"><%= u %></a></li>
-							  <% end %>
+							<div id="global_info_box" class="alert alert-info fade in" style="display: none;">
+								<div id="global_info_massages">
+
+								</div>
+							</div>
+
+							<div id="global_error_box" class="alert alert-danger fade in" style="display: none;">
+								<a href="#" class="close" data-hide="alert">&times;</a>
+								<div id="global_error_messages">
+									<%= alert %>
+								</div>
+							</div>
+
+							<!-- BODY -->
+							<%= yield -%>
+
+							<% if user_signed_in? %>
+								<div id="app_footer" class="navbar navbar-default" align="center">
+									<%= t('app_title') + ' ' + Time.now.year.to_s %>
+
+									<% if !current_user.nil? && current_user.admin? %>
+										(<%= t(Rails.env) %>)
+									<% end %>
+
+									<br/>
+									<%= t('by_author')%>
+								</div>
 							<% end %>
-						</ol>
-					</div>
-					<div class="col-md-4 col-lg-4"></div>
-					<div class="col-md-4 col-lg-4" style="margin-top: 10px;">
-						<div align="right" style="vertical-align: middle;">
-							<%= t('helpers.logged_as') %> <%= link_to current_user.name, edit_user_registration_path %> <%= link_to(t('helpers.action.logout'), destroy_user_session_path, :method => :delete, :style => "margin-left: 5px;", :class => "btn btn-primary btn-xs") %>
 						</div>
 					</div>
 				</div>
-
-			<% else %>
-				<!-- <div class="centre">
-					<img  style="width: 70px; height: 70px; margin-bottom: -20px;" src="/assets/app_logo.png">
-					<h2><%= t('app_title') %></h2>
-				</div> -->
-
-			<% end %>
-
-			<!-- MESSAGES -->
-			<div id="global_notice_box" class="alert alert-success fade in" style="display: none;">
-				<a href="#" class="close" data-hide="alert">&times;</a>
-				<div id="global_notice_massages">
-					<%= notice %>
-				</div>
+				<div class="hidden-xs col-md-2"></div>
 			</div>
-
-			<div id="global_info_box" class="alert alert-info fade in" style="display: none;">
-				<div id="global_info_massages">
-
-				</div>
-			</div>
-
-			<div id="global_error_box" class="alert alert-danger fade in" style="display: none;">
-				<a href="#" class="close" data-hide="alert">&times;</a>
-				<div id="global_error_messages">
-					<%= alert %>
-				</div>
-			</div>
-
-			<!-- BODY -->
-			<%= yield -%>
-
-			<% if user_signed_in? %>
-				<div id="app_footer" class="navbar navbar-default" align="center">
-					<%= t('app_title') + ' ' + Time.now.year.to_s %>
-
-					<% if !current_user.nil? && current_user.admin? %>
-						(<%= Rails.env %>)
-					<% end %>
-
-					<br/>
-					<%= t('by_author')%>
-				</div>
-			<% end %>
-	</div>
+		</div>
 	</body>
 
 	<script>
@@ -147,6 +166,32 @@
 			$(".money").each(function(){
 				if(!$(this).val() || $(this).val() == '0.0')
 				$(this).val('0,00');
+			});
+
+			$(".cnpj").mask("99.999.999/9999-99", {
+				placeholder : "__.___.___/____-__"
+			});
+
+			$(".cep").mask("99.999-999", {
+				placeholder : "_____-___"
+			});
+
+			// $(".date").mask("99/99/9999", {
+			// 	placeholder : "__/__/____"
+			// });
+
+			$('.datepicker').datepicker({ dateFormat: 'dd/mm/yyyy'});
+
+			$(".telephone").mask("(99) 9999-9999", {
+				placeholder : "(__) ____-____"
+			});
+
+			$(".fax").mask("(99) 9999-9999", {
+				placeholder : "(__) ____-____"
+			});
+
+			$(".cellphone").mask("(99) 9 9999-9999", {
+				placeholder : "(__) _ ____-____"
 			});
 
 			$('.money').mask('000.000.000,00', {

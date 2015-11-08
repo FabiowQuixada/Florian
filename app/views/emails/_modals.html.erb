@@ -16,6 +16,9 @@
 					<div class="form-group">
 						<%= label_tag t('activerecord.attributes.email.competence') %>
 						<%= text_field_tag "competence", "default info", :class => "form-control", :id => "resend_competence" %>
+						<% if  params[:action]  == 'index' %>
+							<%= hidden_field_tag "email_id", :id => "resend_email_id" %>
+						<% end %>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -47,6 +50,9 @@
 					<div class="form-group">
 						<%= label_tag t('activerecord.attributes.email.competence') %>
 						<%= text_field_tag "competence", "default info", :class => "form-control", :id => "send_test_competence" %>
+						<% if  params[:action]  == 'index' %>
+							<%= hidden_field_tag "email_id", :id => "send_test_email_id" %>
+						<% end %>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -62,7 +68,7 @@
 
 <!-- Warning save modal -->
 <div class="modal fade" id="warning_save_modal" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-sm">
+	<div class="modal-dialog modal-md">
 		<div class="modal-content">
 			<div class="modal-header">
 				<%= t('modal.email.title.warning_save') %>
@@ -87,7 +93,7 @@
 <!-- Recent e-mails modal -->
 <% if @recent_emails %>
 	<div class="modal fade" id="recent_emails_modal" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog modal-sm">
+		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<%= form_tag '#', :remote => true, :id => 'resend_email_form' do %>
 					<div class="modal-header">
@@ -112,7 +118,7 @@
 								<tr>
 									<% I18n.with_options(scope: 'activerecord.attributes.email') do |i18n| %>
 										<td><%= l(history.created_at, format: :really_short) %></td>
-										<td class="email_company"><%= history.email.company.simple_name %></td>
+										<td class="email_company">fgdf d  sdfsdfsdfdsfdsfsd   sdfdsfsdfsdfdsf<%= history.email.company.simple_name %></td>
 										<td><%= history.send_type_desc %></td>
 									<% end %>
 								</tr>
@@ -183,12 +189,18 @@
 		display_info('<%= t('alert.email.resending') %>');
 		$('#resend_email_modal').modal('hide');
 
-		for	(i = 0; i < attribute_names.length; i++)
-			add_hidden('resend_email_form', attribute_names[i], $('#email_' + attribute_names[i]).val());
+		<% if  params[:action]  == 'edit' %>
 
-		$('#resend_email_form_recipients_array').val(formated_recipients());
-		$('#resend_email_form_active').val($('#model_status').val());
-		$('#resend_email_form_email_configuration_id').val($('#configuration').val());
+			for	(i = 0; i < attribute_names.length; i++)
+				add_hidden('resend_email_form', attribute_names[i], $('#email_' + attribute_names[i]).val());
+
+			$('#resend_email_form_recipients_array').val(formated_recipients());
+			$('#resend_email_form_active').val($('#model_status').val());
+			$('#resend_email_form_email_configuration_id').val($('#configuration').val());
+
+		<% else %>
+
+		<% end %>
 	});
 
 	$('#send_test_email_form').submit(function(ev) {
@@ -196,12 +208,16 @@
 		display_info('<%= t('alert.email.sending_test') %>');
 		$('#send_test_email_modal').modal('hide');
 
-		for	(i = 0; i < attribute_names.length; i++)
-			add_hidden('send_test_email_form', attribute_names[i], $('#email_' + attribute_names[i]).val());
+		<% if  params[:action]  == 'edit' %>
 
-		$('#send_test_email_form_recipients_array').val(formated_recipients());
-		$('#send_test_email_form_active').val($('#model_status').val());
-		$('#send_test_email_form_email_configuration_id').val($('#configuration').val());
+			for	(i = 0; i < attribute_names.length; i++)
+				add_hidden('send_test_email_form', attribute_names[i], $('#email_' + attribute_names[i]).val());
+
+			$('#send_test_email_form_recipients_array').val(formated_recipients());
+			$('#send_test_email_form_active').val($('#model_status').val());
+			$('#send_test_email_form_email_configuration_id').val($('#configuration').val());
+
+		<% end %>
 
 	});
 

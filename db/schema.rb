@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151018021125) do
+ActiveRecord::Schema.define(version: 20151117114331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,12 +40,54 @@ ActiveRecord::Schema.define(version: 20151018021125) do
   add_index "audits", ["user_id", "user_type"], name: "user_index", using: :btree
 
   create_table "companies", force: :cascade do |t|
-    t.string   "simple_name",                null: false
-    t.string   "long_name",                  null: false
-    t.boolean  "active",      default: true, null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "simple_name",             null: false
+    t.string   "long_name",               null: false
+    t.string   "cnpj",                    null: false
+    t.string   "cep"
+    t.string   "address",                 null: false
+    t.string   "neighborhood"
+    t.string   "city"
+    t.string   "state"
+    t.string   "email_address"
+    t.string   "website"
+    t.integer  "category",                null: false
+    t.integer  "group",                   null: false
+    t.string   "donation"
+    t.date     "first_parcel"
+    t.date     "last_parcel"
+    t.text     "remark"
+    t.integer  "parcel_frequency"
+    t.string   "total_period"
+    t.string   "resp_name"
+    t.string   "resp_cellphone"
+    t.string   "resp_phone"
+    t.string   "resp_fax"
+    t.string   "resp_role"
+    t.string   "resp_email_address"
+    t.string   "assistant_name"
+    t.string   "assistant_phone"
+    t.string   "assistant_cellphone"
+    t.string   "assistant_email_address"
+    t.string   "financial_name"
+    t.string   "financial_phone"
+    t.string   "financial_cellphone"
+    t.string   "financial_email_address"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
+
+  create_table "company_donations", force: :cascade do |t|
+    t.decimal  "value",         precision: 8, scale: 2, null: false
+    t.date     "donation_date",                         null: false
+    t.text     "remark"
+    t.integer  "user_id",                               null: false
+    t.integer  "company_id",                            null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "company_donations", ["company_id"], name: "index_company_donations_on_company_id", using: :btree
+  add_index "company_donations", ["user_id"], name: "index_company_donations_on_user_id", using: :btree
 
   create_table "email_configurations", force: :cascade do |t|
     t.text     "signature",      null: false
@@ -60,7 +102,6 @@ ActiveRecord::Schema.define(version: 20151018021125) do
     t.decimal  "value",            precision: 8, scale: 2, null: false
     t.datetime "created_at",                               null: false
     t.string   "recipients_array",                         null: false
-    t.text     "receipt_text",                             null: false
     t.integer  "send_type",                                null: false
     t.integer  "user_id",                                  null: false
     t.integer  "email_id",                                 null: false
@@ -82,7 +123,6 @@ ActiveRecord::Schema.define(version: 20151018021125) do
   create_table "emails", force: :cascade do |t|
     t.string   "recipients_array",                                              null: false
     t.string   "body",                                                          null: false
-    t.text     "receipt_text",                                                  null: false
     t.integer  "day_of_month",                                                  null: false
     t.boolean  "active",                                         default: true, null: false
     t.decimal  "value",                  precision: 8, scale: 2,                null: false
@@ -116,6 +156,9 @@ ActiveRecord::Schema.define(version: 20151018021125) do
     t.string   "last_sign_in_ip"
     t.string   "name",                                  null: false
     t.boolean  "active",                 default: true, null: false
+    t.text     "signature"
+    t.string   "test_recipient"
+    t.string   "bcc"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
     t.integer  "role_id",                               null: false
@@ -125,6 +168,8 @@ ActiveRecord::Schema.define(version: 20151018021125) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
 
+  add_foreign_key "company_donations", "companies"
+  add_foreign_key "company_donations", "users"
   add_foreign_key "email_histories", "emails"
   add_foreign_key "email_histories", "users"
   add_foreign_key "email_types", "emails"

@@ -10,8 +10,23 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  * = require_tree .
+  *= require bootstrap-datepicker3
  * = require_self
  */
+
+.form_status_box{
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.date-select {
+    display: inline-block;
+    width: 30%;
+}
+
+ .app_title {
+ font-family: 'Metamorphous', cursive;
+}
 
 .main_form { padding-bottom: 400px; }
 
@@ -21,11 +36,16 @@
     background: none;
 }
 
-.row {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display:         flex;
+.notice:empty {
+  display: none;
+}
+
+.padless {
+    padding: 0px;
+}
+
+.table-hover tbody tr:hover td {
+  background-color: #8FAEEE;
 }
 
 #login_box
@@ -64,7 +84,7 @@ body {
 {
     background: #CDD0F6;
     border-radius: 15px;
-    margin: 40px;
+    margin-bottom: 40px;
     padding: 5px;
     padding-bottom: 10px;
 }
@@ -82,15 +102,24 @@ body {
 
 textarea {
     resize: none;
+    height: 120px;
 }
 
-.main_box{
-	padding: 26px;
-  margin-left: 200px;
-  margin-right: 200px;
-	background-color:lavender;
-  min-height: 100%;
-  height: 100%;
+  .main_box{
+    padding: 26px;
+    background-color:lavender;
+    min-height: 100%;
+    /*height: 100%;*/
+  }
+
+@media only screen and (max-width: 480px) {
+  .main_box{
+    padding: 0px;
+  }
+
+  .non-menu{
+    padding: 8px;
+  }
 }
 
 .email_address_table {
@@ -121,6 +150,10 @@ form {
 }
 
 .add_recipient_btn{
+   cursor: pointer;
+}
+
+.clickable{
    cursor: pointer;
 }
 

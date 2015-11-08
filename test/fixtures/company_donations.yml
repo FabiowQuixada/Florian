@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  value: 
+  donation_date: 2015-11-17
+  remark: MyText
+  user_id: 
+  company_id: 
+
+two:
+  value: 
+  donation_date: 2015-11-17
+  remark: MyText
+  user_id: 
+  company_id: 

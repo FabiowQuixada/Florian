@@ -1,30 +1,48 @@
+Em um tamanho intermediário, o alert da colado no botao de sair;
+Selects em Company hard-coded;
+Melhorar mensagens de telefone inválido;
+Nested_attributes: Adicionar doações;
+Produção + Desenvolvimento ao mesmo tempo, em portas diferentes;
+Relacionamentos: has e belongs;
+Ordenador de colunas;
+Voltar pelo browser;
+preprocess_data();
+Configurações de e-mail no Usuário;
+Usuário: Novo, Senha;
+Enviar e-mail: melhorar diferenciação quando for do index ou do form;
+
+Acesso externo;
+Parse do Xls;
+Script pra rodar quando ligar;
+Testar teamviewer;
+Exportação dos dados;
+Envio de e-mail tá no controller, deveria estar no IaqMailer;
+"Enum" de histórico de e-mail;
+Mobile:
+ - Deslize horizontal;
+ - Performance;
+
+==================================
 Log;
 Bibliotecas locais + Estudo avançado de jQuery (jQuery.noConflict());
 Testes;
 Como um back button deve funcionar?
 Como funciona a exclusão (cascata)?
 Temp_email_params;
-"Enum" de histórico de e-mail;
-Smooth scroll no fechamento de alerts;
-Smooth scroll na deleção de remetentes;
+
 PDF: Não precisar salvar arquivo;
 No pt-br, precisa no nome do atributo + alias;
-Voltar pelo browser;
-Estilização do menu ativo;
-Testes: geral, devise, can3;
 Desempenho dos concerns;
-E envio de e-mail tá no controller, deveria estar no IaqMailer;
-Bootstrap select;
-Concern: parametros;
-Eliminar arquivos new e edit q soh tem _form;
 
+
+Visual:
+ - Estilização do menu ativo;
+ - Smooth scroll no fechamento de alerts;
+ - Smooth scroll na deleção de remetentes;
+ - Espaco logo;
+ - Caixa de login centralizada verticalmente;
+ - Logo centralizado entra a caixa e o topo;
+ - Bootstrap select;
 
 Cancancan: permissões de status, enviar e-mail, etc;
 Configuração do e-mail fixa no _form (<input>);
-Acesso Externo;
-Exportação dos dados;
-
-
-bundle exec whenever -s --update
-bundle exec whenever -s "environment=production" --update
-

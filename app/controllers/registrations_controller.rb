@@ -18,6 +18,8 @@ class RegistrationsController < Devise::RegistrationsController
 
     @model = current_user
 
+    @model.password = 'l'
+
     @breadcrumbs = Hash[t('helpers.profile') => ""]
   end
 

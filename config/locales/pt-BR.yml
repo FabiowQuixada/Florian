@@ -2,6 +2,8 @@
 pt-BR:
   app_title: Florian
   by_author: por Fabiow Quixadá
+  development: Desenvolvimento
+  production: Produção
   activerecord:
     models:
       email:
@@ -19,6 +21,9 @@ pt-BR:
       role:
         one: Grupo
         other: Grupos
+      company_donation:
+        one: Doação
+        other: Doações
     attributes:
       email:
         email: "E-mail"
@@ -26,12 +31,10 @@ pt-BR:
         body: "Corpo"
         day_of_month: "Dia do mês"
         day: "Dia"
-        active: "Ativo"
         value: "Valor"
         competence: "Competência"
         company: "Mantenedora"
         recipients_array: "Destinatários"
-        receipt_text: "Texto do recibo"
         email_type: Tipo de e-mail
         type: Tipo de e-mail
         type_values:
@@ -46,22 +49,55 @@ pt-BR:
       email_history:
         created_at: Data
       company:
-        simple_name: Nome simples
-        long_name: Nome longo
-        active: "Ativo"
+        simple_name: Nome fantasia
+        long_name: Razão social
+        cnpj: CNPJ
+        cep: CEP
+        neighborhood: Bairro
+        city: Cidade
+        state: Estado
+        address: Endereço
+        email_address: 'E-mail'
+        website: Site
+        category: Categoria
+        group: Tipo
+        donation: Doação
+        first_parcel: Primeira parcela
+        last_parcel: Última parcela
+        remark: Observação
+        parcel_frequency: Forma
+        total_period: Nº de parcelas
+        resp_name: Nome
+        resp_role: Cargo
+        resp_cellphone: Celular
+        resp_phone: Telefone
+        resp_fax: FAX
+        resp_email_address: E-mail
+        assistant_name: Nome
+        assistant_phone: Telefone
+        assistant_cellphone: Celular
+        assistant_email_address: E-mail
+        financial_name: Nome
+        financial_phone: Telefone
+        financial_cellphone: Celular
+        financial_email_address: E-mail
+        group: "Tipo"
+      company_donation:
+        date: Data
+        value: Valor
+        remark: Observação
       user:
         name: Nome
         role: Grupo
         email: E-mail
         password: Senha
-        password_confirmation: Confirmação de senha
+        new_password: Nova senha
+        password_confirmation: Confirmação da nova senha
         current_password: Senha atual
         remember_me: Manter-me logado
-        active: "Ativo"
       role:
         name: Nome
         description: Descrição
-        active: "Ativo"
   activated:
     m:
       s: "%{model} ativado com sucesso!"
@@ -116,22 +152,42 @@ pt-BR:
     email:
       sending_test: Enviando e-mail de teste...
       resending: Reenviando e-mail...
-      error_sending_test: Ocorreu um erro ao enviar um e-mail de teste. Por favor, entre em contato com o administrador.
-      error_resending: Ocorreu um erro ao reenviar o e-mail. Por favor, entre em contato com o administrador.
-      invalid_competence: Competência inválida.
-      invalid_recipient: E-mail inválido.
+      error_sending_test: 'Ocorreu um erro ao enviar um e-mail de teste. Por favor, entre em contato com o administrador informando o horário do ocorrido;'
+      error_resending: 'Ocorreu um erro ao reenviar o e-mail. Por favor, entre em contato com o administrador informando o horário do ocorrido;'
+      invalid_competence: Competência inválida;
+      invalid_recipient: E-mail inválido;
       fill_a_recipient: Digite um endereço de e-mail;
+      duplicated_recipient: 'O destinatário já foi adicionado;'
   tags:
     company: '#mantenedora'
     competence: '#competencia'
     value: '#valor'
   helpers:
+    main_page: Página Principal
+    error: Erro
+    email_tag: "[Florian] "
     changelog: Changelog
     test_email_prefix: '[TESTE] '
     min_length: '(No mínimo %{min_length} caracteres)'
     profile: Perfil
     none: (Nenhum)
     logged_as: "Logado como "
+    no_donations: (Nenhuma doação registrada para esta empresa)
+    no_recent_emails: (Nenhum e-mail recente)
+    is_active:
+      m:
+        s: 'Este %{model} está ativo, clique aqui para inativá-lo.'
+        p: 'Estes %{model} estão ativos, clique aqui para inativá-los.'
+      f:
+        s: 'Esta %{model} está ativa, clique aqui para inativá-la.'
+        p: 'Estas %{model} estão ativas, clique aqui para inativá-las.'
+    is_inactive:
+      m:
+        s: 'Este %{model} está inativo, clique aqui para ativá-lo.'
+        p: 'Estes %{model} estão inativos, clique aqui para ativá-los.'
+      f:
+        s: 'Esta %{model} está inativa, clique aqui para ativá-la.'
+        p: 'Estas %{model} estão inativas, clique aqui para ativá-las.'
     select:
       prompt: Selecione
     email:
@@ -166,7 +222,7 @@ pt-BR:
         config: Configurações
       login: Login
       sign_up: Registrar-se
-      logout: Logout
+      logout: Sair
   is_active:
     m:
       s: '%{model} está ativo, clique para inativá-lo'
@@ -213,7 +269,7 @@ pt-BR:
         recent_emails: 'E-mails Enviados nos Últimos %{days} Dias'
       body:
         remove: Tem certeza que deseja remover este e-mail?
-        warning_save: Os campos 'Corpo' e 'Texto do recibo' devem constar as tags dinâmicas (#), para que sejam atualizadas corretamente pelo sistema. Por exemplo, se você digitar a competência 'outubro', nos demais meses a competência não será ajustada automaticamente. Em vez disso, use os botões disponíveis ao lado de cada campo.
+        warning_save: O campo 'Corpo' deve constar os símbolos especiais (#), para que seja atualizado corretamente pelo sistema. Por exemplo, se você digitar a competência 'outubro', nos demais meses a competência não será ajustada automaticamente. Em vez disso, use os botões disponíveis acima do campo.
   title:
     new:
       m:
@@ -244,10 +300,10 @@ pt-BR:
   error_pages:
     not_found:
       title: Desculpe, mas esta página não existe ou você não tem permissão para acessá-la.
-      body: Verifique se o endereço está correto ou contate o administrador.
+      body: Verifique se o endereço está correto ou contate o administrador informando o horário do ocorrido.
     internal_server_error:
       title: Desculpe, mas algo deu errado.
-      body: Por favor, contate o administrador.
+      body: Por favor, contate o administrador informando o horário do ocorrido.
   date:
     abbr_day_names:
     - Dom
@@ -353,6 +409,8 @@ pt-BR:
       value_max: "O campo 'Valor' deve ser no máximo R$ 1.000.000,00;"
       month_mandatory: "O campo 'Dia do mês' é inválido;"
       month_max: "O campo 'Dia do mês' deve ser menor que 28;"
+    company:
+      unique_cnpj: "Este CNPJ já está sendo usado;"
     format: "%{message}"
     messages:
       accepted: "O campo '%{attribute}' deve ser aceito;"
@@ -376,11 +434,11 @@ pt-BR:
       restrict_dependent_destroy:
         one: Não é possível excluir o registro pois existe um %{record} dependente;
         many: Não é possível excluir o registro pois existem %{record} dependentes;
-      taken: O campo '%{attribute}' já está em uso;
-      too_long: 'é muito longo (máximo: %{count} caracteres);'
-      too_short: 'é muito curto (mínimo: %{count} caracteres);'
-      wrong_length: O campo '%{attribute}' não possui o tamanho esperado (%{count} caracteres);
-      other_than: O campo '%{attribute}' deve ser diferente de %{count};
+      taken: "O campo '%{attribute}' já está em uso;"
+      too_long: "O campo '%{attribute}' é muito longo (máximo: %{count} caracteres);"
+      too_short: "O campo '%{attribute}' é muito curto (mínimo: %{count} caracteres);"
+      wrong_length: "O campo '%{attribute}' não possui o tamanho esperado (%{count} caracteres);"
+      other_than: "O campo '%{attribute}' deve ser diferente de %{count};"
     template:
       body: 'Por favor, verifique o(s) seguinte(s) campo(s):'
       header:

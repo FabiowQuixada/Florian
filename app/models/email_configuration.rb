@@ -4,7 +4,7 @@ class EmailConfiguration < ActiveRecord::Base
 
   include GenderHelper
 
-  validates :signature, :test_recipient, :presence => true
+  validates :signature, :test_recipient, :bcc, :presence => true
 
   def active?
     true

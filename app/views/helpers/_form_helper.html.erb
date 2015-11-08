@@ -73,40 +73,42 @@
 				var changed_values_list = "";
 				var any_change = false;
 
-				for(i = 0; i < attribute_names.length; i++) {
+				// for(i = 0; i < attribute_names.length; i++) {
 
-					var value = $("[name='<%= model.model_name.param_key %>[" + attribute_names[i] + "]']");
+				// 	var value = $("[name='<%= model.model_name.param_key %>[" + attribute_names[i] + "]']");
 
-					if(typeof value.val() !== 'undefined')
-					{
-						if(typeof value.val() === 'string' || value.val() instanceof String)
-						{
-							value = value.val().replace(/(\r\n|\n|\r)/gm,"");
-							value = escapeHtml(value);
-						}
+				// 	if(typeof value.val() !== 'undefined')
+				// 	{
+				// 		if(typeof value.val() === 'string' || value.val() instanceof String)
+				// 		{
+				// 			value = value.val().replace(/(\r\n|\n|\r)/gm,"");
+				// 			value = escapeHtml(value);
+				// 		}
 
-					    if(original_values[attribute_names[i]] != value)
-					    {
-					    	changed_values_list += attribute_names[i] + " ";
-							edited_but_not_saved('/<%= model.model_name.route_key %>');
-							any_change = true;
-					    }
-					}
-				}
+				// 	    if(original_values[attribute_names[i]] != value)
+				// 	    {
+				// 	    	changed_values_list += attribute_names[i] + " ";
+				// 			edited_but_not_saved('/<%= model.model_name.route_key %>');
+				// 			any_change = true;
+				// 	    }
+				// 	}
+				// }
 
 				//alert(changed_values_list);
 
-				if(!any_change)
+				// if(!any_change)//
 				{
 					parent.history.back();
 				}
 
 			})
 
-			if(<%= model.active? %>)
-				activate();
-			else
-				inactivate();
+			<% if model.class.column_names.include? 'active' %>
+				if(<%= model.active? %>)
+					activate();
+				else
+					inactivate();
+			<% end %>
 
 			function edited_but_not_saved(url)
 			{
@@ -150,7 +152,9 @@
 	<% else %>
 
 		$(document).ready(function() {
-			activate();
+			<% if model.class.column_names.include? 'active' %>
+				activate();
+			<% end %>
 
 			$('.back_btn').on('click', function()
 			{
@@ -185,33 +189,35 @@
 		$('#form_error_box').show();
 	}
 
-	function inactivate()
-	{
-		$('#status_btn').removeAttr('class');
-		$('#status_btn').attr("class","btn btn-default btn-xs");
-		$('#status_btn').html('<%= t('helpers.action.activate') %>');
-		$('#model_status').val('false');
-		$('#status_btn').width(50);
-	}
+	<% if model.class.column_names.include? 'active' %>
 
-	function activate()
-	{
-		$('#status_btn').removeAttr('class');
-		$('#status_btn').attr("class","btn btn-success btn-xs");
-		$('#status_btn').html('<%= t('helpers.action.inactivate') %>');
-		$('#model_status').val('true');
-		$('#status_btn').width(50);
-	}
+		function inactivate()
+		{
+			$('#active_img').hide();
+			$('#inactive_img').show();
+			$('#model_status').val('false');
+			$('#status_description').text('<%= genderize_tag(model, 'helpers.is_inactive') %>');
+		}
 
-	$('#status_btn').on('click', set_status_btn);
+		function activate()
+		{
+			$('#active_img').show();
+			$('#inactive_img').hide();
+			$('#model_status').val('true');
+			$('#status_description').text('<%= genderize_tag(model, 'helpers.is_active') %>');
+		}
 
-	function set_status_btn()
-	{
-		if($('#model_status').val() == 'true')
-			inactivate();
-		else
-			activate();
-	}
+		$('.status_btn').on('click', set_status_btn);
+
+		function set_status_btn()
+		{
+			if($('#model_status').val() == 'true')
+				inactivate();
+			else
+				activate();
+		}
+
+	<% end %>
 
 	var entityMap = {
 		"&": "&amp;",

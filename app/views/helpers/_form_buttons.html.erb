@@ -1,14 +1,16 @@
 
-<% if !model.new_record? %>
-        <a class="btn btn-primary btn-xs status_btn" id="status_btn"></a>
-        <%= f.hidden_field :active, :id => 'model_status' %>
+<% if !model.new_record? and model.class.column_names.include? 'active' %>
+
+    <div class="form_status_box clickable status_btn">
+            <%= image_tag("activate.png", :id => "active_img") %><%= image_tag("inactivate.png", :id => "inactive_img", :stylec => "display:none;") %>  <span id="status_description"><%= genderize_tag(model, 'helpers.is_inactive') %></span>
+    </div>
+
+    <%= f.hidden_field 'active', :id => 'model_status', :value => '1' %>
 <% end %>
-
-
 
 <p/>
 
-    <div class="a">
+<div class="">
 	<%= f.submit t('helpers.action.update'), :class => "btn btn-primary save_btn" %>
 
 	<% if lookup_context.find_all(ActiveModel::Naming.plural(model) + "/_extra_buttons").any? %>

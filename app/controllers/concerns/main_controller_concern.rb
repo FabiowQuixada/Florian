@@ -30,28 +30,28 @@ module MainControllerConcern extend ActiveSupport::Concern
   end
 
   def new
-    @model = model_class.new
+    render '_form'
   end
 
   def create
-    @model = model_class.new company_params
+    @model = model_class.new params_validation
 
     if @model.save
       redirect_to send(@model.model_name.route_key + "_path"), notice: genderize_tag(@model, 'created')
     else
-      render 'new'
+      render '_form'
     end
   end
 
   def edit
-    @model = model_class.find params[:id]
+    render '_form'
   end
 
   def update
-    if @model.update company_params
+    if @model.update params_validation
       redirect_to send(@model.model_name.route_key + "_path"), notice: genderize_tag(@model, 'updated')
     else
-      render 'edit'
+      render '_form'
     end
   end
 
@@ -85,7 +85,6 @@ module MainControllerConcern extend ActiveSupport::Concern
     before_action :authenticate_user!
   end
 
-
   def before_new
     @model = model_class.new
 
@@ -93,7 +92,7 @@ module MainControllerConcern extend ActiveSupport::Concern
   end
 
   def before_edit
-    @model = model_class.new
+    @model = model_class.find(params[:id])
 
     @breadcrumbs = Hash[@model.model_name.human(:count => 2) => send(@model.model_name.route_key + "_path"), t('helpers.action.edit') => ""]
   end

@@ -13,7 +13,6 @@ class Email < ActiveRecord::Base
   belongs_to :company
   #belongs_to :type, :class_name => 'EmailType', :foreign_key => 'email_type_id'
   belongs_to :configuration, :class_name => 'EmailConfiguration', :foreign_key => 'email_configuration_id'
-  alias_attribute :configuration, :email_configuration_id
   alias_attribute :history, :email_histories
   #alias_attribute :type, :email_type_id
 
@@ -21,7 +20,8 @@ class Email < ActiveRecord::Base
   # Validations
   validate :validate_model
   validates :company, uniqueness: true
-  validates :value, :day_of_month, :company, :body, :receipt_text, :presence => true
+  #validates :recipients_array, :presence => I18n.t('errors.email.one_recipient')
+  validates :value, :day_of_month, :company, :body, :presence => true
   #:type
 
 
@@ -96,6 +96,11 @@ class Email < ActiveRecord::Base
     result = result.gsub(I18n.t('tags.competence'), capital_competence(date))
     result = result.gsub(I18n.t('tags.company'), company.simple_name)
     result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
+
+    result += " \n \n-- \n"
+
+    result += configuration.signature
+
     result
   end
 
@@ -105,7 +110,8 @@ class Email < ActiveRecord::Base
       date = Date.today
     end
 
-    result = receipt_text
+    result = 'A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu da ' + company.long_name + ', inscrito sob o CNPJ/MF nº ' + company.cnpj.to_s + ', situada na ' + company.address + ', a importância supra de ' + I18n.t('tags.value') + ' como doação em ' + I18n.t('tags.competence') + '.'
+
     result = result.gsub(I18n.t('tags.competence'), capital_competence(date))
     result = result.gsub(I18n.t('tags.company'), company.long_name)
     result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
@@ -147,7 +153,7 @@ class Email < ActiveRecord::Base
       return true
     else
       if day_of_month == Date.today.strftime("%e").to_f
-        if Time.now.hour < 7#daily_send_hour
+        if Time.now.hour < 7#self.daily_send_hour
           return true
         end
       end
@@ -156,11 +162,4 @@ class Email < ActiveRecord::Base
     return false
   end
 
-  def gender
-    'm'
-  end
-
-  def number
-    's'
-  end
 end

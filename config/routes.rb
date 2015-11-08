@@ -1,14 +1,9 @@
 Rails.application.routes.draw do
 
-  get 'errors/not_found'
-
-  get 'errors/internal_server_error'
-
   root 'welcome#index'
 
   devise_for :users, controllers: { registrations: "registrations" }
 
-  #devise_for :users
   scope "/admin" do
     resources :users, except: [:show, :destroy] do
 
@@ -27,8 +22,6 @@ Rails.application.routes.draw do
     end
 
   end
-
-  #resources :users, except: [:show]
 
   resources :companies, except: [:show, :destroy] do
 

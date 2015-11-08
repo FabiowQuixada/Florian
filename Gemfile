@@ -8,6 +8,11 @@ gem 'cancancan', '~> 1.10'
 gem "audited-activerecord", "~> 4.0"
 gem 'pg'
 gem 'whenever', require: false
+gem 'figaro'
+# gem 'momentjs-rails', '>= 2.9.0'
+# gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
+
+gem 'bootstrap-datepicker-rails'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

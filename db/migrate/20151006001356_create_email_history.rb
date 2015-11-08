@@ -5,7 +5,6 @@ class CreateEmailHistory < ActiveRecord::Migration
       t.decimal  :value,                  precision: 8, scale: 2,                null: false
       t.datetime :created_at,                                                    null: false
       t.string   :recipients_array,                                              null: false
-      t.text     :receipt_text,                                                  null: false
       t.integer  :send_type,                                                     null: false
     end
 

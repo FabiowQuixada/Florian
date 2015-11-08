@@ -2,7 +2,7 @@
 
 </p>
 
-<table class="table table-striped">
+<table class="table table-striped table-hover">
 	<tr>
 		<% I18n.with_options(scope: 'activerecord.attributes.user') do |i18n| %>
 			<th style="width: 16px; display: none;"></th>
@@ -20,7 +20,7 @@
 		<td><%= user.name %></td>
 		<td><%= user.email %></td>
 		<td><%= user.role.name unless user.role.nil? %></td>
-		<td style="width: 16px;"><%= link_to image_tag("edit.png", :title => t('helpers.action.remove')), edit_user_path(user) %></td>
+		<td style="width: 16px;"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), edit_user_path(user) %></td>
 		<td class="hidden-xs status" style="width: 16px;">
 			<% if user.active %>
 				<%= link_to image_tag("activate.png", :title => genderize_tag(user, 'is_active'), :class => 'inactivate_btn'), inactivate_user_path(user), method: :post, :remote => true, :id => 'change_status_user_' + user.id.to_s, "data-type" => :json, :class => 'inactivate_btn' %>

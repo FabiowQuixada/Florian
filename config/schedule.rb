@@ -18,7 +18,7 @@ set :output, "/home/fabiow/Development/Florianus/Florianus/log/cron.log"
 #
 
 #every 1.minute do
-every 1.day, :at => '8:12 pm' do
+every 1.day, :at => '7:00 am' do
   runner "EmailsController.send_email_daily"
 end
 

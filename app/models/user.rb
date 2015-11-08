@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
 
   audited
-
   include GenderHelper
 
   # Include default devise modules. Others available are:
@@ -19,14 +18,12 @@ class User < ActiveRecord::Base
 
   # Methods
   def admin?
+
+    if self.role.nil?
+      return false
+    end
+
     self.role.name == "Admin"
   end
 
-  def gender
-    'm'
-  end
-
-  def number
-    's'
-  end
 end

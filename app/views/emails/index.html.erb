@@ -4,7 +4,7 @@
 
 </p>
 
-<table class="table table-striped">
+<table class="table table-striped table-hover">
 	<tr>
 		<% I18n.with_options(scope: 'activerecord.attributes.email') do |i18n| %>
 			<th style="width: 16px; display: none;"></th>
@@ -27,7 +27,7 @@
 				<td class="email_company"><%= email.company.simple_name if email.company %></td>
 				<td class="hidden-xs" ><%= email.capital_competence %></td>
 				<td style="width: 150px;"><%= number_to_currency(email.value) %></td>
-				<td style="width: 16px;"><%= link_to image_tag("edit.png", :title => t('helpers.action.remove')), edit_email_path(email) %></td>
+				<td style="width: 16px;"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), edit_email_path(email) %></td>
 				<td class="hidden-xs" style="width: 16px;"><%= link_to image_tag("send_email.png", :title => t('description.email.resend')), '#', class: 'resend_btn' %></td>
 				<td class="hidden-xs" style="width: 16px;"><%= link_to image_tag("test_email.png", :title => t('description.email.send_test') + " '" + EmailConfiguration.first.test_recipient + "'"), '#', :remote => true, :class => 'send_test_btn' %></td>
 				<td class="hidden-xs status" style="width: 16px;">
@@ -56,6 +56,7 @@
 			clean_resend_modal();
 
 			id = $(this).parent().parent().find('.email_id').text();
+			$('#resend_email_id').val(id);
 			$('#resend_email_form').get(0).setAttribute('action', '/emails/' + id + '/resend');
 			$('.modal_company_name').text($(this).parent().parent().find('.email_company').text());
 			$('#resend_email_modal').modal('show');
@@ -67,6 +68,7 @@
 			clean_send_test_modal();
 
 			id = $(this).parent().parent().find('.email_id').text();
+			$('#send_test_email_id').val(id);
 			$('#send_test_email_form').get(0).setAttribute('action', '/emails/' + id + '/send_test');
 			$('.modal_company_name').text($(this).parent().parent().find('.email_company').text());
 			$('#send_test_email_modal').modal('show');
