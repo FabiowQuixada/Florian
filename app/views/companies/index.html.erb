@@ -6,8 +6,8 @@
   <tr>
     <% I18n.with_options(scope: 'activerecord.attributes.company') do |i18n| %>
 	    <th><%= i18n.t :simple_name %></th>
-	    <!-- <th><%= i18n.t :category %></th>
-          <th><%= i18n.t :group %></th> -->
+	    <th><%= i18n.t :category %></th>
+          <th><%= i18n.t :group %></th>
 	    <th style="width: 16px;"></th>
     <% end %>
   </tr>
@@ -15,8 +15,8 @@
   <% @list.each do |company| %>
     <tr id='company_<%= company.id %>'>
       <td><%= company.simple_name %></td>
-     <!--  <td><%= company.category %></td>
-      <td><%= company.group %></td> -->
+      <td><%= company.category_desc %></td>
+      <td><%= company.group_desc %></td>
       <td style="width: 16px;"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), edit_company_path(company) %></td>
 	</tr>
   <% end %>

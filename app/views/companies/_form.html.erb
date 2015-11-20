@@ -40,32 +40,7 @@
 
 		<div class="form-group col-md-6">
 			<%= f.label :state %>
-			<%= f.select :state, [["Alagoas", "AL"],
-    ["Amapá", "AP"],
-    ["Amazonas", "AM"],
-    ["Bahia", "BA"],
-    ["Ceará", "CE"],
-    ["Distrito Federal", "DF"],
-    ["Espírito Santo", "ES"],
-    ["Goiás", "GO"],
-    ["Maranhão", "MA"],
-    ["Mato Grosso", "MT"],
-    ["Mato Grosso do Sul", "MS"],
-    ["Minas Gerais", "MG"],
-    ["Pará", "PA"],
-    ["Paraíba", "PB"],
-    ["Paraná", "PR"],
-    ["Pernambuco", "PE"],
-    ["Piauí", "PI"],
-    ["Rio de Janeiro", "RJ"],
-    ["Rio Grande do Norte", "RN"],
-    ["Rio Grande do Sul", "RS"],
-    ["Rondônia", "RO"],
-    ["Roraima", "RR"],
-    ["Santa Catarina", "SC"],
-    ["São Paulo", "SP"],
-    ["Sergipe", "SE"],
-    ["Tocantins", "TO"]], {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+			<%= f.select :state, BR_STATES, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
 
 		</div>
 	</div><div class="row">
@@ -85,12 +60,12 @@
 		<div class="form-group col-md-6">
 
 			<%= f.label :category %>
-			<%= f.select :category, [["I (Abaixo de R$ 300,00)", 1],["II (Entre R$ 300,00 e R$ 600,00)", 2], ["III (Acima de R$ 600,00)", 3]], {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+			<%= f.select :category, CompaniesHelper::CATEGORIES, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
 		</div>
 
 		<div class="form-group col-md-6">
 			<%= f.label :group %>
-			<%= f.select :group, [["Mantenedora", 1], ["Pontual", 2], ["Negativa", 3], ["Desativada", 4]], {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+			<%= f.select :group, CompaniesHelper::GROUPS, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
 
 		</div>
 	</div><div class="row">
@@ -124,7 +99,7 @@
 
 					<div class="form-group col-md-4">
 						<%= f.label :parcel_frequency %>
-						<%= f.select :parcel_frequency, [["Diário", 1], ["Semanal", 2], ["Mensal", 3], ["Bimestral", 4], ["Semestral", 5], ["Anual", 6], ["Outro (Observações)", 7]], {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+						<%= f.select :parcel_frequency, CompaniesHelper::PARCEL_FREQUENCY, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
 					</div>
 					<div class="form-group col-md-4">
 						<%= f.label :total_period %>

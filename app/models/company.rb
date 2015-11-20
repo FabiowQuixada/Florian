@@ -4,13 +4,12 @@ class Company < ActiveRecord::Base
   audited
   include GenderHelper
   usar_como_cnpj :cnpj
-  usar_como_dinheiro :value
   usar_como_dinheiro :donation
 
 
-  # enum group: {"Mantenedora": 1, "Pontual": 2, "Negativa": 3, "Desativada": 4}
-  # enum parcel_frequency:  {"Diário": 1, "Semanal": 2, "Mensal": 3, "Bimestral": 4, "Semestral": 5, "Anual": 6, "Outro (Observações)": 7}
-  # enum category: {"I (Abaixo de R$ 300,00)": 1,"II (Entre R$ 300,00 e R$ 600,00)": 2, "III (Acima de R$ 600,00)": 3}
+  CATEGORIES = [["I (Abaixo de R$ 300,00)", 1],["II (Entre R$ 300,00 e R$ 600,00)", 2], ["III (Acima de R$ 600,00)", 3]]
+  GROUPS = [["Mantenedora", 1], ["Pontual", 2], ["Negativa", 3], ["Desativada", 4]]
+  PARCEL_FREQUENCY = [["Diário", 1], ["Semanal", 2], ["Mensal", 3], ["Bimestral", 4], ["Semestral", 5], ["Anual", 6], ["Outro (Observações)", 7]]
 
 
   # Relationships
@@ -21,7 +20,7 @@ class Company < ActiveRecord::Base
 
   # Validations
   validates :simple_name, :long_name, uniqueness: true
-  validate :cnpj_unico
+  validate :unique_cnpj
   validates :simple_name, :long_name, :cnpj, :address, :category, :group, :presence => true
   validates :resp_phone, length: { is: 14 }, :allow_blank => true
   validates :resp_cellphone, length: { in: 14..16 }, :allow_blank => true
@@ -37,10 +36,22 @@ class Company < ActiveRecord::Base
   end
 
 #TODO
-def cnpj_unico
+def unique_cnpj
     if self.cnpj and !self.cnpj.to_s.empty? and Company.where(cnpj: self.cnpj).where('id <> ?', self.id || 0).first
       errors.add(:cnpj, I18n.t('errors.company.unique_cnpj'))
     end
 end
+
+def group_desc
+  GROUPS[group-1].first unless GROUPS[group-1].nil?
+  end
+
+  def category_desc
+  CATEGORIES[category-1].first unless CATEGORIES[category-1].nil?
+  end
+
+  def payment_frequency_desc
+  PARCEL_FREQUENCY[parcel_frequency-1].first unless PARCEL_FREQUENCY[parcel_frequency-1].nil?
+  end
 
 end
