@@ -22,6 +22,12 @@ comp4 = Company.create(simple_name: "Empresa IV", long_name: "Empresa IV Ltda.",
 comp5 = Company.create(simple_name: "Empresa V", long_name: "Empresa V Ltda.", cnpj: "01.302.458/0001-68", category: 2, address: "lala",  group: 1)
 comp6 = Company.create(simple_name: "Empresa VI", long_name: "Empresa VI Ltda.", cnpj: "47.461.434/0001-52", category: 3, address: "lala",  group: 2)
 
+don1 = Donation.create(value: 0.00, donation_date: Time.now, remark: "02 potes de creme", company: comp1)
+don2 = Donation.create(donation_date: Time.now, remark: "02 potes de creme", company: comp1)
+don3 = Donation.create(value: 0.00, donation_date: Time.now, company: comp1)
+don4 = Donation.create(value: 0.00, donation_date: Time.now, remark: "02 potes de creme", company: comp2)
+don5 = Donation.create(value: 0.00, donation_date: Time.now, company: comp2)
+
 email1 = Email.create(recipients_array: 'ftquixada@gmail.com', value: 0.01, day_of_month: '3', company_id: comp1.id, body: 'Prezados, até.', email_configuration_id: conf.id)
 email2 = Email.create(recipients_array: 'ftquixada@gmail.com', value: 0.00, day_of_month: '28', company_id: comp2.id, body: 'Prezados, até.', email_configuration_id: conf.id)
 email3 = Email.create(recipients_array: 'ftquixada@gmail.com', value: 12.33, day_of_month: '15', company_id: comp3.id, body: 'Prezados, até.', email_configuration_id: conf.id)

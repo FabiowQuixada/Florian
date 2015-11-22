@@ -180,7 +180,7 @@
 			// 	placeholder : "__/__/____"
 			// });
 
-			$('.datepicker').datepicker({ dateFormat: 'dd/mm/yyyy'});
+			//$('.datepicker').datepicker({ dateFormat: 'dd/mm/yyyy'});
 
 			$(".telephone").mask("(99) 9999-9999", {
 				placeholder : "(__) ____-____"
@@ -301,6 +301,12 @@
 		  $('html, body').animate({
 			    scrollTop: $("body").offset().top
 			}, 1000);
+		}
+
+		function add_fields(link, association, content) {
+		  var new_id = new Date().getTime();
+		  var regexp = new RegExp("new_" + association, "g")
+		  $(link).parent().parent().parent().before(content.replace(regexp, new_id));
 		}
 
 	</script>

@@ -76,18 +76,16 @@ ActiveRecord::Schema.define(version: 20151117114331) do
     t.datetime "updated_at",              null: false
   end
 
-  create_table "company_donations", force: :cascade do |t|
+  create_table "donations", force: :cascade do |t|
     t.decimal  "value",         precision: 8, scale: 2, null: false
     t.date     "donation_date",                         null: false
     t.text     "remark"
-    t.integer  "user_id",                               null: false
     t.integer  "company_id",                            null: false
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
   end
 
-  add_index "company_donations", ["company_id"], name: "index_company_donations_on_company_id", using: :btree
-  add_index "company_donations", ["user_id"], name: "index_company_donations_on_user_id", using: :btree
+  add_index "donations", ["company_id"], name: "index_donations_on_company_id", using: :btree
 
   create_table "email_configurations", force: :cascade do |t|
     t.text     "signature",      null: false
@@ -168,8 +166,7 @@ ActiveRecord::Schema.define(version: 20151117114331) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
 
-  add_foreign_key "company_donations", "companies"
-  add_foreign_key "company_donations", "users"
+  add_foreign_key "donations", "companies"
   add_foreign_key "email_histories", "emails"
   add_foreign_key "email_histories", "users"
   add_foreign_key "email_types", "emails"

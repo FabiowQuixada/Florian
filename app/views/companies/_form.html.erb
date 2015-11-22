@@ -70,9 +70,9 @@
 		</div>
 	</div><div class="row">
 		<div class="form-group col-md-12"><fieldset>
-			<legend>Doações</legend>
+			<legend><%= Donation.new.model_name.human(:count => 2) %></legend>
 
-			<div class="row">
+				<div class="row">
 					<div class="form-group col-md-6">
 						<%= f.label :first_parcel %>
 						<div>
@@ -113,51 +113,50 @@
 					</div>
 				</div>
 
-				<div style="display:none;">
-
-				-------------------------------------
-
-					<div class="row">
-						<div class="form-group col-md-4">
-							<%= f.label :first_parcel %>
-							<%= f.date_select :first_parcel, :class => 'form-control date' %>
-						</div>
-
-						<div class="form-group col-md-4">
-							<%= f.label :last_parcel %>
-							<%= f.date_field :last_parcel, :class => 'form-control date' %>
-						</div>
-
-						<div class="form-group col-md-4">
-							<%= f.label :remark %>
-							<%= f.text_field :remark, :class => 'form-control' %>
-						</div>
-					</div>
-
-					<%= link_to("Registrar doação", destroy_user_session_path, :method => :delete, :style => "margin-left: 5px;", :class => "btn btn-primary btn-xs") %>
-
+				<div>
 					<div class="row">
 						<div class="col-md-12">
 							<table id="donations_table" class="table table-striped table-condensed table-bordered">
 								<tr>
-									<% I18n.with_options(scope: 'activerecord.attributes.company_donation') do |i18n| %>
+									<% I18n.with_options(scope: 'activerecord.attributes.donation') do |i18n| %>
 										<th><%= i18n.t :value %></th>
 										<th><%= i18n.t :date %></th>
 										<th><%= i18n.t :remark %></th>
 									<% end %>
 								</tr>
 								<tbody>
-									<% if @model.company_donations.empty? %>
+									<% if @model.donations.empty? %>
 										<tr><td colspan="3"><%= t('helpers.no_donations') %></td></tr>
 									<% end %>
 
-									<% @model.company_donations.each_with_index do |donation, index| %>
-										<tr>
-											<td class="">R$ 5,00</td>
-											<td class=""></td>
-											<td></td>
-										</tr>
+									<%= f.fields_for :donations do |d| %>
+										<% if d.object.persisted? %>
+											<tr>
+												<td class=""><%= number_to_currency(d.object.value) %></td>
+												<td class="" style="width: 40%"><%= d.object.donation_date %></td>
+												<td style="width: 35%"><%= d.object.remark %></td>
+											</tr>
+										<% else %>
+
+											<tr>
+												<td class="">
+													<div class="input-group">
+														<span class="input-group-addon">R$</span>
+														<%= d.text_field :value, :id => "new_donation_value", :class => 'form-control money input-sm' %>
+													</div>
+												</td>
+												<td class=""><%=d.date_select :donation_date, {:prompt => { :day => t('helpers.select.prompt'), :month => t('helpers.select.prompt'), :year => t('helpers.select.prompt')}}, {:class => ' date-select form-control input-sm'} %></td>
+												<td><%= d.text_field :remark, :class => 'form-control input-sm' %></td>
+											</tr>
+										<% end %>
 									<% end %>
+									<tr>
+										<td colspan="3">
+										<div class="centre">
+											<%= link_to_add_fields(t('helpers.company.new_donation') , f, :donations) %>
+											</div>
+										</td>
+									</tr>
 								</tbody>
 							</table>
 						</div>

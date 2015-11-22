@@ -14,8 +14,8 @@ class Company < ActiveRecord::Base
 
   # Relationships
   has_many :email
-  has_many :company_donations
-  belongs_to :configuration, :class_name => 'EmailConfiguration', :foreign_key => 'email_configuration_id'
+  has_many :donations, :dependent => :destroy
+  accepts_nested_attributes_for :donations, :allow_destroy => true, reject_if: :donation_rejectable?
 
 
   # Validations
@@ -52,6 +52,10 @@ def group_desc
 
   def payment_frequency_desc
   PARCEL_FREQUENCY[parcel_frequency-1].first unless PARCEL_FREQUENCY[parcel_frequency-1].nil?
+  end
+
+  def donation_rejectable?(att)
+    (att['value'].nil? or att['value'] == '0,00') && (att['donation_date'].nil? or !att['donation_date'].is_a?(Date)) && (att['remark'].nil? or att['remark'].blank?)
   end
 
 end

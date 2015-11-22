@@ -21,7 +21,7 @@ pt-BR:
       role:
         one: Grupo
         other: Grupos
-      company_donation:
+      donation:
         one: Doação
         other: Doações
     attributes:
@@ -82,7 +82,7 @@ pt-BR:
         financial_cellphone: Celular
         financial_email_address: E-mail
         group: "Tipo"
-      company_donation:
+      donation:
         date: Data
         value: Valor
         remark: Observação
@@ -194,6 +194,8 @@ pt-BR:
       index_footer: '*Os e-mails serão enviados às %{time}:00h da manhã nos respectivos dias.'
       new_recipient: "Novo destinatário"
       recent: Recentes
+    company:
+      new_donation: Nova doação
     action:
       login: Login
       signup: Cadastrar
