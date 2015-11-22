@@ -17,6 +17,7 @@
 
 		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes">
 
+		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.0/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 		<!-- Rails -->
 		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 		<%= stylesheet_link_tag "application", :media => "all" %>
@@ -150,6 +151,10 @@
 
 	<script>
 
+	 $('.datepicker').datepicker()
+  $('[data-behaviour~=datepicker]').datepicker({format: "dd/mm/yyyy",
+						language: "pt-BR"});
+
 		jQuery.noConflict();
 		$(function() {
 
@@ -176,11 +181,7 @@
 				placeholder : "_____-___"
 			});
 
-			// $(".date").mask("99/99/9999", {
-			// 	placeholder : "__/__/____"
-			// });
 
-			//$('.datepicker').datepicker({ dateFormat: 'dd/mm/yyyy'});
 
 			$(".telephone").mask("(99) 9999-9999", {
 				placeholder : "(__) ____-____"

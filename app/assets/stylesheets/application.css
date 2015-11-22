@@ -10,8 +10,9 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  * = require_tree .
-  *= require bootstrap-datepicker3
+
  * = require_self
+   *= require bootstrap-datepicker3
  */
 
 .form_status_box{
@@ -19,9 +20,9 @@
   margin-bottom: 20px;
 }
 
-.date-select {
-    display: inline-block;
-    width: 30%;
+td.table_icon {
+  width: 30px;
+  vertical-align:middle;
 }
 
  .app_title {

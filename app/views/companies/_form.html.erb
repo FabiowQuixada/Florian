@@ -68,24 +68,29 @@
 			<%= f.select :group, CompaniesHelper::GROUPS, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
 
 		</div>
+
+
 	</div><div class="row">
 		<div class="form-group col-md-12"><fieldset>
 			<legend><%= Donation.new.model_name.human(:count => 2) %></legend>
 
 				<div class="row">
 					<div class="form-group col-md-6">
+
 						<%= f.label :first_parcel %>
-						<div>
-						<%= f.date_select :first_parcel, {:prompt => { :day => t('helpers.select.prompt'), :month => t('helpers.select.prompt'), :year => t('helpers.select.prompt')}}, {:class => ' date-select form-control'} %>
+					    	<div class="input-group date" data-behaviour='datepicker' >
+					     		 <%= f.text_field :first_parcel, {:class => 'form-control datepicker'} %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+						</div>
+					</div><div class="form-group col-md-6">
+						<%= f.label :last_parcel %>
+						<div class="input-group date" data-behaviour='datepicker' >
+							<%= f.text_field :last_parcel, {:class => 'form-control datepicker'} %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 						</div>
 					</div>
 
-					<div class="form-group col-md-6">
-						<%= f.label :last_parcel %>
-						<div>
-						<%= f.date_select :last_parcel, {:prompt => { :day => t('helpers.select.prompt'), :month => t('helpers.select.prompt'), :year => t('helpers.select.prompt')}}, {:class => ' date-select form-control'} %>
-						</div>
-					</div>
+						<script type="text/javascript">
+
+</script>
 				</div>
 				<div class="row">
 
@@ -145,7 +150,11 @@
 														<%= d.text_field :value, :id => "new_donation_value", :class => 'form-control money input-sm' %>
 													</div>
 												</td>
-												<td class=""><%=d.date_select :donation_date, {:prompt => { :day => t('helpers.select.prompt'), :month => t('helpers.select.prompt'), :year => t('helpers.select.prompt')}}, {:class => ' date-select form-control input-sm'} %></td>
+												<td class="">
+												<div class="input-group date" data-behaviour='datepicker' >
+													<%= d.text_field :donation_date, {:class => 'form-control datepicker input-sm'} %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+												</div>
+												</td>
 												<td><%= d.text_field :remark, :class => 'form-control input-sm' %></td>
 											</tr>
 										<% end %>
