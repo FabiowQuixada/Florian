@@ -23,7 +23,7 @@ module MainControllerConcern extend ActiveSupport::Concern
   end
 
   def index
-    @list = model_class.all
+    @list = model_class.order order_attribute
     @model = model_class.new
 
     @breadcrumbs = Hash[@model.model_name.human(:count => 2) => ""]
@@ -95,5 +95,9 @@ module MainControllerConcern extend ActiveSupport::Concern
     @model = model_class.find(params[:id])
 
     @breadcrumbs = Hash[@model.model_name.human(:count => 2) => send(@model.model_name.route_key + "_path"), t('helpers.action.edit') => ""]
+  end
+
+  def order_attribute
+    "created_at ASC"
   end
 end

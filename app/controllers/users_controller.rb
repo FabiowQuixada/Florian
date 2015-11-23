@@ -18,4 +18,8 @@ class UsersController < ApplicationController
     params[:password].present?
   end
 
+  def order_attribute
+    "name"
+  end
+
 end

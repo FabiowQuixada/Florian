@@ -34,4 +34,8 @@ class CompaniesController < ApplicationController
     @model.donations.build
 
   end
+
+  def order_attribute
+    "trading_name"
+  end
 end

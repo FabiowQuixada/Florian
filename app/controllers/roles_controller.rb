@@ -13,4 +13,9 @@ class RolesController < ApplicationController
     def role_params
       params.require(:role).permit(:name, :description)
     end
+
+
+  def order_attribute
+    "name"
+  end
 end
