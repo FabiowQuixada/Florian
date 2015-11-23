@@ -17,7 +17,7 @@ class Donation < ActiveRecord::Base
 
   # Methods
   def init
-      #self.donation_date  ||= Time.now
+      self.donation_date  ||= Time.now
   end
 
   def default_values
@@ -26,9 +26,9 @@ class Donation < ActiveRecord::Base
 
   def validate_model
 
-    if ((value.nil? or value != '0,00') or !remark.empty?) and !donation_date.is_a?(Date)
+    if ((value.nil? or value != '0,00') or (!remark.nil? or !remark.empty?)) and !donation_date.is_a?(Date)
       errors.add :donation_date, 'tem que ter data se tiver um ou outro preenchido'
-    elsif (value.nil? or value == '0,00') and remark.empty? and donation_date.is_a?(Date)
+    elsif (value.nil? or value == '0,00') and (remark.nil? or remark.empty?) and donation_date.is_a?(Date)
       errors.add :donation_date, 'data preenchida, mas pelo menos um dos dois tem q ter'
     end
   end

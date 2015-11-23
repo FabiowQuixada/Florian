@@ -49,8 +49,8 @@ pt-BR:
       email_history:
         created_at: Data
       company:
-        simple_name: Nome fantasia
-        long_name: Razão social
+        trading_name: Nome fantasia
+        name: Razão social
         cnpj: CNPJ
         cep: CEP
         neighborhood: Bairro
@@ -61,12 +61,12 @@ pt-BR:
         website: Site
         category: Categoria
         group: Tipo
-        donation: Doação
+        contract: Contrato
         first_parcel: Primeira parcela
         last_parcel: Última parcela
-        remark: Observação
-        parcel_frequency: Forma
-        total_period: Nº de parcelas
+        remark: Anotações Gerais sobre a empresa
+        payment_frequency: Frequência
+        payment_period: No. parcelas
         resp_name: Nome
         resp_role: Cargo
         resp_cellphone: Celular

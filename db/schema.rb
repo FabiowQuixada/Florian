@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 20151117114331) do
   add_index "audits", ["user_id", "user_type"], name: "user_index", using: :btree
 
   create_table "companies", force: :cascade do |t|
-    t.string   "simple_name",             null: false
-    t.string   "long_name",               null: false
+    t.string   "trading_name",            null: false
+    t.string   "name",                    null: false
     t.string   "cnpj",                    null: false
     t.string   "cep"
     t.string   "address",                 null: false
@@ -50,14 +50,13 @@ ActiveRecord::Schema.define(version: 20151117114331) do
     t.string   "state"
     t.string   "email_address"
     t.string   "website"
+    t.text     "remark"
     t.integer  "category",                null: false
     t.integer  "group",                   null: false
-    t.string   "donation"
+    t.integer  "contract"
     t.date     "first_parcel"
-    t.date     "last_parcel"
-    t.text     "remark"
-    t.integer  "parcel_frequency"
-    t.string   "total_period"
+    t.integer  "payment_frequency"
+    t.integer  "payment_period"
     t.string   "resp_name"
     t.string   "resp_cellphone"
     t.string   "resp_phone"

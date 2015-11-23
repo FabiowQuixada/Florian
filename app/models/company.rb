@@ -4,24 +4,23 @@ class Company < ActiveRecord::Base
   audited
   include GenderHelper
   usar_como_cnpj :cnpj
-  usar_como_dinheiro :donation
 
 
   CATEGORIES = [["I (Abaixo de R$ 300,00)", 1],["II (Entre R$ 300,00 e R$ 600,00)", 2], ["III (Acima de R$ 600,00)", 3]]
   GROUPS = [["Mantenedora", 1], ["Pontual", 2], ["Negativa", 3], ["Desativada", 4]]
-  PARCEL_FREQUENCY = [["Diário", 1], ["Semanal", 2], ["Mensal", 3], ["Bimestral", 4], ["Semestral", 5], ["Anual", 6], ["Outro (Observações)", 7]]
-
+  PARCEL_FREQUENCIES = [["Indeterminado", 8], ["Diário", 1], ["Semanal", 2], ["Mensal", 3], ["Bimestral", 4], ["Semestral", 5], ["Anual", 6], ["Outro (Observações)", 7]]
+  CONTRACTS = [["Com contrato", 1], ["Sem contrato", 2], ["Contrato + Aditivo", 3]]
 
   # Relationships
   has_many :email
-  has_many :donations, :dependent => :destroy
+  has_many :donations, -> { order("donation_date") }, :dependent => :destroy
   accepts_nested_attributes_for :donations, :allow_destroy => true, reject_if: :donation_rejectable?
 
 
   # Validations
-  validates :simple_name, :long_name, uniqueness: true
+  validates :trading_name, :name, uniqueness: true
   validate :unique_cnpj
-  validates :simple_name, :long_name, :cnpj, :address, :category, :group, :presence => true
+  validates :trading_name, :name, :cnpj, :address, :category, :group, :presence => true
   validates :resp_phone, length: { is: 14 }, :allow_blank => true
   validates :resp_cellphone, length: { in: 14..16 }, :allow_blank => true
   validates :assistant_phone, length: { is: 14 }, :allow_blank => true
@@ -51,11 +50,13 @@ def group_desc
   end
 
   def payment_frequency_desc
-  PARCEL_FREQUENCY[parcel_frequency-1].first unless PARCEL_FREQUENCY[parcel_frequency-1].nil?
+  PARCEL_FREQUENCIES[parcel_frequency-1].first unless PARCEL_FREQUENCIES[parcel_frequency-1].nil?
   end
 
   def donation_rejectable?(att)
     (att['value'].nil? or att['value'] == '0,00') && (att['donation_date'].nil? or !att['donation_date'].is_a?(Date)) && (att['remark'].nil? or att['remark'].blank?)
   end
+
+  #:define_attribute 'last_parcel'
 
 end

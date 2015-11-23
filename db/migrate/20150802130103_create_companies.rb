@@ -1,8 +1,9 @@
 class CreateCompanies < ActiveRecord::Migration
   def change
     create_table :companies do |t|
-      t.string :simple_name,                  null: false, unique: true
-      t.string :long_name,                    null: false, unique: true
+
+      t.string :trading_name,                  null: false, unique: true # Nome fantasia
+      t.string :name,                    null: false, unique: true            # Razao social
 
      t.string :cnpj, null: false
      t.string :cep
@@ -12,17 +13,16 @@ class CreateCompanies < ActiveRecord::Migration
      t.string :state
    t.string  :email_address
   t.string    :website
+  t.text :remark
 
     t.integer :category, null: false
     t.integer :group,      null: false
 
     # Donation
-    t.string  :donation
+    t.integer :contract
     t.date :first_parcel
-    t.date :last_parcel
-    t.text :remark
-    t.integer :parcel_frequency
-   t.string   :total_period
+    t.integer :payment_frequency
+   t.integer   :payment_period
 
     # Contacts
   t.string   :resp_name
