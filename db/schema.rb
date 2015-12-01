@@ -118,19 +118,17 @@ ActiveRecord::Schema.define(version: 20151117114331) do
   add_index "email_types", ["email_id"], name: "index_email_types_on_email_id", using: :btree
 
   create_table "emails", force: :cascade do |t|
-    t.string   "recipients_array",                                              null: false
-    t.string   "body",                                                          null: false
-    t.integer  "day_of_month",                                                  null: false
-    t.boolean  "active",                                         default: true, null: false
-    t.decimal  "value",                  precision: 8, scale: 2,                null: false
-    t.datetime "created_at",                                                    null: false
-    t.datetime "updated_at",                                                    null: false
-    t.integer  "email_configuration_id",                                        null: false
-    t.integer  "company_id",                                                    null: false
+    t.string   "recipients_array",                                        null: false
+    t.string   "body",                                                    null: false
+    t.integer  "day_of_month",                                            null: false
+    t.boolean  "active",                                   default: true, null: false
+    t.decimal  "value",            precision: 8, scale: 2,                null: false
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
+    t.integer  "company_id",                                              null: false
   end
 
   add_index "emails", ["company_id"], name: "index_emails_on_company_id", using: :btree
-  add_index "emails", ["email_configuration_id"], name: "index_emails_on_email_configuration_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",                       null: false
@@ -170,6 +168,5 @@ ActiveRecord::Schema.define(version: 20151117114331) do
   add_foreign_key "email_histories", "users"
   add_foreign_key "email_types", "emails"
   add_foreign_key "emails", "companies"
-  add_foreign_key "emails", "email_configurations"
   add_foreign_key "users", "roles"
 end

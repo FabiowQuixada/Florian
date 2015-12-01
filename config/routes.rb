@@ -35,10 +35,6 @@ Rails.application.routes.draw do
 
   resources :emails, except: [:show, :destroy] do
 
-    collection do
-      post 'resend_all'
-    end
-
     member do
       post 'resend'
       post 'send_test'

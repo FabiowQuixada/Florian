@@ -34,7 +34,6 @@ class Company < ActiveRecord::Base
     'f'
   end
 
-#TODO
 def unique_cnpj
     if self.cnpj and !self.cnpj.to_s.empty? and Company.where(cnpj: self.cnpj).where('id <> ?', self.id || 0).first
       errors.add(:cnpj, I18n.t('errors.company.unique_cnpj'))
@@ -56,7 +55,5 @@ def group_desc
   def donation_rejectable?(att)
     (att['value'].nil? or att['value'] == '0,00') && (att['donation_date'].nil? or !att['donation_date'].is_a?(Date)) && (att['remark'].nil? or att['remark'].blank?)
   end
-
-  #:define_attribute 'last_parcel'
 
 end

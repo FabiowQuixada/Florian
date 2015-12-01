@@ -1,8 +1,9 @@
 Voltar pelo browser: history API;
 Data - refresh;
 Data para doações adicionadas dinamicamente;
+Competência: data;
 
-Desempenho;
+Desempenho (note e mobile);
 Testes;
 Configuração e acesso ao banco postgresql;
 Doações: background da linha, caminhos não-felizes;
@@ -13,11 +14,9 @@ Depois:
  - Testar teamviewer;
  - Menu de doações;
   -Exportação dos dados;
-  -Usuário desativado pode fazer login?
+
   -Mobile:
    - Deslize horizontal;
-   - Performance;
-   - Configurações de e-mail no Usuário;
    - Github?
 
 
@@ -31,6 +30,7 @@ Interno:
  - Usuário: Novo, Senha no Firefox;
  - SSH no windows;
  - Reusar _donation_fields.html.erb;
+ - Contatos da empresa;
 
  Frescurinha:
   - Ordenador de colunas;
@@ -60,3 +60,9 @@ Visual:
 
 Cancancan: permissões de status, enviar e-mail, etc;
 Configuração do e-mail fixa no _form (<input>);
+
+
+Testes:
+Ativar e inativar todos;
+Organizar Testes;
+Testar reenvio e teste do index e do form;

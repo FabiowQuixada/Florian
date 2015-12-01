@@ -139,7 +139,7 @@
 
 			clean_resend_modal();
 			$('#resend_email_form').get(0).setAttribute('action', '/emails/' + <%= @model.id.to_s %> + '/resend');
-			$('.modal_company_name').text('<%= @model.company.simple_name %>');
+			$('.modal_company_name').text('<%= @model.company.trading_name %>');
 			a();
 		});
 
@@ -147,7 +147,7 @@
 
 			clean_send_test_modal();
 			$('#send_test_email_form').get(0).setAttribute('action', '/emails/' + <%= @model.id.to_s %> + '/send_test');
-			$('.modal_company_name').text('<%= @model.company.simple_name %>');
+			$('.modal_company_name').text('<%= @model.company.trading_name %>');
 			$('#send_test_email_modal').modal('show');
 		});
 
@@ -155,7 +155,7 @@
 
 			$('#remove_email_form').removeAttr('data-remote');
 			$('#remove_email_form').get(0).setAttribute('action', '/emails/' + <%= @model.id.to_s %>);
-			$('.modal_company_name').text('<%= @model.company.simple_name %>');
+			$('.modal_company_name').text('<%= @model.company.trading_name %>');
 			$('#remove_email_modal').modal('show');
 
 	});

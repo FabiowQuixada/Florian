@@ -58,7 +58,6 @@
 		</div>
 	</div><div class="row">
 		<div class="form-group col-md-6">
-
 			<%= f.label :category %>
 			<%= f.select :category, CompaniesHelper::CATEGORIES, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
 		</div>
@@ -66,92 +65,89 @@
 		<div class="form-group col-md-6">
 			<%= f.label :group %>
 			<%= f.select :group, CompaniesHelper::GROUPS, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
-
 		</div>
-
-
 	</div><div class="row">
-		<div class="form-group col-md-12"><fieldset>
-			<legend><%= Donation.new.model_name.human(:count => 2) %></legend>
+		<div class="form-group col-md-12">
+			<fieldset>
+				<legend><%= Donation.new.model_name.human(:count => 2) %></legend>
 
-				<div class="row">
-					<div class="form-group col-md-6">
+					<div class="row">
+						<div class="form-group col-md-6">
 
-						<%= f.label :first_parcel %>
-					    	<div class="input-group date" data-behaviour='datepicker' >
-					     		 <%= f.text_field :first_parcel, {:class => 'form-control'} %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+							<%= f.label :first_parcel %>
+						    	<div class="input-group date" data-behaviour='datepicker' >
+						     		 <%= f.text_field :first_parcel, {:class => 'form-control'} %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+							</div>
+						</div><div class="form-group col-md-6">
+							<%= label_tag t('activerecord.attributes.company.last_parcel')%>
+							<%= text_field_tag :last_parcel, '', {:id => 'company_last_parcel', :class => 'form-control', readonly: true} %>
 						</div>
-					</div><div class="form-group col-md-6">
-						<%= label_tag t('activerecord.attributes.company.last_parcel')%>
-						<%= text_field_tag :last_parcel, '', {:id => 'company_last_parcel', :class => 'form-control', readonly: true} %>
-					</div>
+						</div><div class="row">
+						<div class="form-group col-md-4">
+							<%= f.label :payment_frequency %>
+							<%= f.select :payment_frequency, CompaniesHelper::PARCEL_FREQUENCIES, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+						</div>
+						<div class="form-group col-md-4">
+							<%= f.label :payment_period %>
+							<%= f.text_field :payment_period, :class => 'form-control numbers_only' %>
+						</div>
+						<div class="form-group col-md-4">
+							<%= f.label :contract %>
+							<%= f.select :contract, CompaniesHelper::CONTRACTS, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+						</div>
 					</div><div class="row">
-					<div class="form-group col-md-4">
-						<%= f.label :payment_frequency %>
-						<%= f.select :payment_frequency, CompaniesHelper::PARCEL_FREQUENCIES, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
-					</div>
-					<div class="form-group col-md-4">
-						<%= f.label :payment_period %>
-						<%= f.text_field :payment_period, :class => 'form-control numbers_only' %>
-					</div>
-					<div class="form-group col-md-4">
-						<%= f.label :contract %>
-						<%= f.select :contract, CompaniesHelper::CONTRACTS, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
-					</div>
-				<div>
-				<div class="row">
-					<div class="col-md-12">
-						<table id="donations_table" class="table table-striped table-condensed table-bordered">
-							<tr>
-								<% I18n.with_options(scope: 'activerecord.attributes.donation') do |i18n| %>
-									<th><%= i18n.t :date %></th>
-									<th><%= i18n.t :value %></th>
-									<th><%= i18n.t :remark %></th>
-								<% end %>
-							</tr>
-							<tbody>
-								<% if @model.donations.empty? %>
-									<tr><td colspan="3"><%= t('helpers.no_donations') %></td></tr>
-								<% end %>
-
-								<%= f.fields_for :donations do |d| %>
-									<% if d.object.persisted? %>
-										<tr>
-											<td class="" style="width: 40%"><%= d.object.donation_date %></td>
-											<td class=""><%= number_to_currency(d.object.value) %></td>
-											<td style="width: 35%"><%= d.object.remark %></td>
-										</tr>
-									<% else %>
-
-										<tr>
-											<td class="">
-												<div class="input-group date" data-behaviour='datepicker' >
-													<%= d.text_field :donation_date, {:class => 'form-control datepicker input-sm'} %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-												</div>
-											</td>
-											<td class="">
-												<div class="input-group">
-													<span class="input-group-addon">R$</span>
-													<%= d.text_field :value, :id => "new_donation_value", :class => 'form-control money input-sm' %>
-												</div>
-											</td>
-											<td><%= d.text_field :remark, :class => 'form-control input-sm' %></td>
-										</tr>
-									<% end %>
-								<% end %>
+						<div class="col-md-12">
+							<table id="donations_table" class="table table-striped table-condensed table-bordered">
 								<tr>
-									<td colspan="3">
-									<div class="centre">
-										<%= link_to_add_fields(t('helpers.company.new_donation') , f, :donations) %>
-										</div>
-									</td>
+									<% I18n.with_options(scope: 'activerecord.attributes.donation') do |i18n| %>
+										<th><%= i18n.t :date %></th>
+										<th><%= i18n.t :value %></th>
+										<th><%= i18n.t :remark %></th>
+									<% end %>
 								</tr>
-							</tbody>
-						</table>
+								<tbody>
+									<% if @model.donations.empty? %>
+										<tr><td colspan="3"><%= t('helpers.no_donations') %></td></tr>
+									<% end %>
+
+									<%= f.fields_for :donations do |d| %>
+										<% if d.object.persisted? %>
+											<tr>
+												<td class="" style="width: 40%"><%= d.object.donation_date %></td>
+												<td class=""><%= number_to_currency(d.object.value) %></td>
+												<td style="width: 35%"><%= d.object.remark %></td>
+											</tr>
+										<% else %>
+
+											<tr>
+												<td class="">
+													<div class="input-group date" data-behaviour='datepicker' >
+														<%= d.text_field :donation_date, {:class => 'form-control datepicker input-sm'} %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+													</div>
+												</td>
+												<td class="">
+													<div class="input-group">
+														<span class="input-group-addon">R$</span>
+														<%= d.text_field :value, :id => "new_donation_value", :class => 'form-control money input-sm' %>
+													</div>
+												</td>
+												<td><%= d.text_field :remark, :class => 'form-control input-sm' %></td>
+											</tr>
+										<% end %>
+									<% end %>
+									<tr>
+										<td colspan="3">
+										<div class="centre">
+											<%= link_to_add_fields(t('helpers.company.new_donation') , f, :donations) %>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
-			</div>
-		</fieldset>
+			</fieldset>
 		</div>
 	</div><div class="row">
 		<div class="form-group col-md-12">
@@ -266,11 +262,13 @@
 					</div>
 					</div>
 			</fieldset>
-		</div><div class="row">
-			<div class="form-group col-md-12">
-				<%= f.label :remark %>
-				<%= f.text_area :remark, :class => 'form-control' %>
-			</div>
+		</div>
+	</div>
+	<div class="row">
+
+		<div class="form-group col-md-12">
+			<%= f.label :remark %>
+			<%= f.text_area :remark, :rows => 6, :class => 'form-control' %>
 		</div>
 	</div>
 

@@ -12,6 +12,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/pt-br.js"></script>
 
+
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
@@ -19,7 +20,10 @@
 
 		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes">
 
+		<!-- CSS -->
 		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.0/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+		<link href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+
 		<!-- Rails -->
 		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 		<%= stylesheet_link_tag "application", :media => "all" %>
@@ -28,6 +32,7 @@
 
 		<%= csrf_meta_tags %>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.24.6/js/jquery.tablesorter.js"></script>
 	</head>
 
 	<body>

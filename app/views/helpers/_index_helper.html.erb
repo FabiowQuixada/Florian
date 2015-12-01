@@ -28,6 +28,8 @@
 
 <script>
 
+	<% if model.class.column_names.include? 'active' %>
+
 	jQuery(function($) {
 
 	    $('.status').on('ajax:success', function(event, data, status, xhr) {
@@ -63,6 +65,8 @@
 		else
 			return '<%= send("activate_#{model_name}_path", -1) %>'.replace("-1", id);
 	}
+
+	<% end %>
 
 
 	$(document).ready(function() {

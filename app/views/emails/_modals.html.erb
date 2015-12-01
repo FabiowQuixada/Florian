@@ -118,7 +118,7 @@
 								<tr>
 									<% I18n.with_options(scope: 'activerecord.attributes.email') do |i18n| %>
 										<td><%= l(history.created_at, format: :really_short) %></td>
-										<td class="email_company">fgdf d  sdfsdfsdfdsfdsfsd   sdfdsfsdfsdfdsf<%= history.email.company.simple_name %></td>
+										<td class="email_company"><%= history.email.company.trading_name %></td>
 										<td><%= history.send_type_desc %></td>
 									<% end %>
 								</tr>
@@ -194,9 +194,7 @@
 			for	(i = 0; i < attribute_names.length; i++)
 				add_hidden('resend_email_form', attribute_names[i], $('#email_' + attribute_names[i]).val());
 
-			$('#resend_email_form_recipients_array').val(formated_recipients());
-			$('#resend_email_form_active').val($('#model_status').val());
-			$('#resend_email_form_email_configuration_id').val($('#configuration').val());
+			add_hidden('resend_email_form', 'active', $('#model_status').val());
 
 		<% else %>
 
@@ -213,9 +211,7 @@
 			for	(i = 0; i < attribute_names.length; i++)
 				add_hidden('send_test_email_form', attribute_names[i], $('#email_' + attribute_names[i]).val());
 
-			$('#send_test_email_form_recipients_array').val(formated_recipients());
-			$('#send_test_email_form_active').val($('#model_status').val());
-			$('#send_test_email_form_email_configuration_id').val($('#configuration').val());
+			add_hidden('send_test_email_form', 'active', $('#model_status').val());
 
 		<% end %>
 

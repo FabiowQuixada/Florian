@@ -2,62 +2,78 @@
 	<%= devise_error_messages! %>
 
 	<div class="row">
-		<div class="col-sm-3"></div>
-		<div class="col-sm-6 main_box"><div class="form-group">
-			<%= f.label :email %>
-			<%= f.email_field :email, autofocus: true, :disabled => true, :class => 'form-control' %>
-		</div>
-
-		<% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-			<div>
-				<%= t('devise.waiting_for_confirmation') + resource.unconfirmed_email %>
+		<div class="col-sm-6">
+			<div class="form-group">
+				<%= f.label :name %>
+				<%= f.text_field :name, :disabled => true, :class => 'form-control' %>
 			</div>
-		<% end %>
 
-		<div class="form-group">
-			<%= f.label t('activerecord.attributes.user.new_password') %> <i><%= t('devise.leave_blank_if') %></i>
-			<%= f.password_field :password, :autocomplete => 'off', :class => 'form-control' %>
+		</div><div class="col-sm-6">
+
+			<div class="form-group">
+				<%= f.label :email %>
+				<%= f.email_field :email, autofocus: true, :disabled => true, :class => 'form-control' %>
+			</div>
+
+			<% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+				<div>
+					<%= t('devise.waiting_for_confirmation') + resource.unconfirmed_email %>
+				</div>
+			<% end %>
 		</div>
+	</div><div class="row">
+		<div class="col-sm-6">
+			<div class="form-group">
+				<%= f.label t('activerecord.attributes.user.new_password') %> <i><%= t('devise.leave_blank_if') %></i>
+				<%= f.password_field :password, :autocomplete => 'off', :class => 'form-control' %>
+			</div>
 
-		<div class="form-group">
-			<%= f.label :password_confirmation %>
-			<%= f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control' %>
+		</div><div class="col-sm-6">
+
+			<div class="form-group">
+				<%= f.label :password_confirmation %>
+				<%= f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control' %>
+			</div>
+
 		</div>
+	</div><div class="row">
+		<div class="col-sm-6">
+			<div class="form-group">
+				<%= f.label :test_recipient %>
+				<div class="input-group">
+					<span class="input-group-addon">@</span>
+					<%= f.text_field :test_recipient, :class => 'form-control', :type => 'email' %>
+				</div>
+			</div>
 
-		<div class="form-group">
-			<%= f.label :current_password %> <i><%= t('devise.type_password_to_change') %></i>
-			<%= f.password_field :current_password, autocomplete: "off", :class => 'form-control' %>
-		</div>
+		</div><div class="col-sm-6">
 
-		<div class="form-group">
-			<%= f.label :test_recipient %>
-			<div class="input-group">
-				<span class="input-group-addon">@</span>
-				<%= f.text_field :test_recipient, :class => 'form-control', :type => 'email' %>
+			<div class="form-group">
+				<%= f.label :bcc %>
+				<div class="input-group">
+					<span class="input-group-addon">@</span>
+					<%= f.text_field :bcc, :class => 'form-control', :type => 'email' %>
+				</div>
 			</div>
 		</div>
+	</div><div class="row">
+		<div class="col-sm-12">
 
-		<div class="form-group">
-			<%= f.label :bcc %>
-			<div class="input-group">
-				<span class="input-group-addon">@</span>
-				<%= f.text_field :bcc, :class => 'form-control', :type => 'email' %>
+			<div class="form-group">
+				<%= f.label :signature %>
+				<%= f.text_area :signature, size: "24x6", :class => 'form-control' %>
 			</div>
 		</div>
+	</div>
 
-		<div class="form-group">
-			<%= f.label :signature %>
-			<%= f.text_area :signature, size: "24x6", :class => 'form-control' %>
-		</div>
+	<div class="form-group">
+		<%= f.label :current_password %> <i><%= t('devise.type_password_to_change') %></i>
+		<%= f.password_field :current_password, autocomplete: "off", :class => 'form-control' %>
+	</div>
 
-		<div class="">
-			<%= f.submit t('helpers.action.update'), :class => "btn btn-primary save_btn" %>
-			<a class="btn btn-primary back_btn"></span><%= t('helpers.action.back') %></a>
-		</div>
-
-
-  	</div>
-	<div class="col-sm-3"></div>
+	<div class="">
+		<%= f.submit t('helpers.action.update'), :class => "btn btn-primary save_btn" %>
+		<a class="btn btn-primary back_btn"></span><%= t('helpers.action.back') %></a>
 	</div>
 
 <% end %>

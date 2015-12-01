@@ -1,4 +1,4 @@
-<% if !@email.new_record? %>
+<% if !@model.new_record? %>
 	<%= link_to t('helpers.action.email.resend'), '#', :class => "btn btn-primary resend_btn" %>
 	<%= link_to t('helpers.action.email.send_test'), '#', :class => "btn btn-primary send_test_btn" %>
 <% end %>

@@ -13,7 +13,7 @@ class EmailsController < ApplicationController
 
     # TODO tipo de e-mail
     @recent_emails = EmailHistory.where("created_at >= :start_date AND send_type != 2",
-      {start_date: Date.new - 7.days})
+      {start_date: Date.new - Email.recent_emails_days.days})
 
   end
 
@@ -117,8 +117,6 @@ class EmailsController < ApplicationController
     # Else, load it from the database
     email = Email.find params[:id]
 
-    byebug
-
     if !params[:email_id]
       email.assign_attributes email_params
     end
@@ -141,7 +139,7 @@ class EmailsController < ApplicationController
     return :json => {
         :message => genderize_tag(email, type),
         :date => l(history.created_at, format: :really_short),
-        :company => email.company.simple_name,
+        :company => email.company.trading_name,
         :value => ActionController::Base.helpers.number_to_currency(history.value),
         :type => history.send_type_desc,
         :user => history.user.name

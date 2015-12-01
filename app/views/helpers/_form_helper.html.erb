@@ -73,30 +73,30 @@
 				var changed_values_list = "";
 				var any_change = false;
 
-				// for(i = 0; i < attribute_names.length; i++) {
+				for(i = 0; i < attribute_names.length; i++) {
 
-				// 	var value = $("[name='<%= model.model_name.param_key %>[" + attribute_names[i] + "]']");
+					var value = $("[name='<%= model.model_name.param_key %>[" + attribute_names[i] + "]']");
 
-				// 	if(typeof value.val() !== 'undefined')
-				// 	{
-				// 		if(typeof value.val() === 'string' || value.val() instanceof String)
-				// 		{
-				// 			value = value.val().replace(/(\r\n|\n|\r)/gm,"");
-				// 			value = escapeHtml(value);
-				// 		}
+					if(typeof value.val() !== 'undefined')
+					{
+						if(typeof value.val() === 'string' || value.val() instanceof String)
+						{
+							value = value.val().replace(/(\r\n|\n|\r)/gm,"");
+							value = escapeHtml(value);
+						}
 
-				// 	    if(original_values[attribute_names[i]] != value)
-				// 	    {
-				// 	    	changed_values_list += attribute_names[i] + " ";
-				// 			edited_but_not_saved('/<%= model.model_name.route_key %>');
-				// 			any_change = true;
-				// 	    }
-				// 	}
-				// }
+					    if(original_values[attribute_names[i]] != value)
+					    {
+					    	changed_values_list += attribute_names[i] + " ";
+							edited_but_not_saved('/<%= model.model_name.route_key %>');
+							any_change = true;
+					    }
+					}
+				}
 
 				//alert(changed_values_list);
 
-				// if(!any_change)//
+				if(!any_change)
 				{
 					parent.history.back();
 				}
@@ -119,33 +119,15 @@
 				});
 			}
 
-				// window.onload = function () {
-		    // if (typeof history.pushState === "function") {
-		        // history.pushState("jibberish", null, null);
-		        // window.onpopstate = function () {
-		            // history.pushState('newjibberish', null, null);
-		            // // Handle the back (or forward) buttons here
-		            // // Will NOT handle refresh, use onbeforeunload for this.
-		            // alert('sdsdsdsd');
-		        // };
-		    // }
-		    // else {
-		        // var ignoreHashChange = true;
-		        // window.onhashchange = function () {
-		            // if (!ignoreHashChange) {
-		                // ignoreHashChange = true;
-		                // window.location.hash = Math.random();
-		                // // Detect and redirect change here
-		                // // Works in older FF and IE9
-		                // // * it does mess with your hash symbol (anchor?) pound sign
-		                // // delimiter on the end of the URL
-		            // }
-		            // else {
-		                // ignoreHashChange = false;
-		            // }
-		        // };
-		    // }
-		//}
+		//   if (window.history && window.history.pushState) {
+
+		//     window.history.pushState('forward', null, './#forward');
+
+		//     $(window).on('popstate', function() {
+		//       alert('Back button was pressed.');
+		//     });
+
+		//   }
 
 		});
 
