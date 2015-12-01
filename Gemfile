@@ -9,11 +9,10 @@ gem "audited-activerecord", "~> 4.0"
 gem 'pg'
 gem 'whenever', require: false
 gem 'figaro'
-# gem 'momentjs-rails', '>= 2.9.0'
-# gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
-
-#gem 'bootstrap-datepicker-rails'
-
+gem "factory_girl_rails", "~> 4.0"
+gem 'capybara'
+gem 'selenium-webdriver'
+gem 'launchy'
 gem 'bootstrap-sass'
 gem 'bootstrap-datepicker-rails'
 
@@ -52,6 +51,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem "minitest-rails-capybara"
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'

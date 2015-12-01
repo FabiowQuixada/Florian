@@ -1,39 +1,53 @@
-Em um tamanho intermediário, o alert da colado no botao de sair;
-Selects em Company hard-coded;
-Melhorar mensagens de telefone inválido;
-Nested_attributes: Adicionar doações;
-Produção + Desenvolvimento ao mesmo tempo, em portas diferentes;
-Relacionamentos: has e belongs;
-Ordenador de colunas;
-Voltar pelo browser;
-preprocess_data();
-Configurações de e-mail no Usuário;
-Usuário: Novo, Senha;
-Enviar e-mail: melhorar diferenciação quando for do index ou do form;
+Voltar pelo browser: history API;
+Data - refresh;
+Data para doações adicionadas dinamicamente;
 
-Acesso externo;
-Parse do Xls;
-Script pra rodar quando ligar;
-Testar teamviewer;
-Exportação dos dados;
-Envio de e-mail tá no controller, deveria estar no IaqMailer;
-"Enum" de histórico de e-mail;
-Mobile:
- - Deslize horizontal;
- - Performance;
+Desempenho;
+Testes;
+Configuração e acesso ao banco postgresql;
+Doações: background da linha, caminhos não-felizes;
+
+
+Depois:
+ - Produção + Desenvolvimento ao mesmo tempo, em portas diferentes;
+ - Testar teamviewer;
+ - Menu de doações;
+  -Exportação dos dados;
+  -Usuário desativado pode fazer login?
+  -Mobile:
+   - Deslize horizontal;
+   - Performance;
+   - Configurações de e-mail no Usuário;
+   - Github?
+
+
+Interno:
+ - Relacionamentos: has e belongs;
+ - Enviar e-mail: melhorar diferenciação quando for do index ou do form;
+ - Envio de e-mail tá no controller, deveria estar no IaqMailer;
+ - "Enum" de histórico de e-mail;
+ - preprocess_data();
+ - Selects em Company duplicado;
+ - Usuário: Novo, Senha no Firefox;
+ - SSH no windows;
+ - Reusar _donation_fields.html.erb;
+
+ Frescurinha:
+  - Ordenador de colunas;
+  - Em um tamanho intermediário, o alert da colado no botao de sair;
+  - Melhorar mensagens de telefone inválido;
+
 
 ==================================
 Log;
 Bibliotecas locais + Estudo avançado de jQuery (jQuery.noConflict());
-Testes;
+
 Como um back button deve funcionar?
 Como funciona a exclusão (cascata)?
 Temp_email_params;
 
 PDF: Não precisar salvar arquivo;
 No pt-br, precisa no nome do atributo + alias;
-Desempenho dos concerns;
-
 
 Visual:
  - Estilização do menu ativo;
