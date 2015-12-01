@@ -26,7 +26,7 @@ class IaqMailer < ApplicationMailer
     ReceiptReport.new("/tmp/recibo.pdf", email, date).save
     attachments['recibo_de_doacao.pdf'] = File.read('/tmp/recibo.pdf')
 
-    mail(to: recipients, bcc: EmailConfiguration.first.bcc, body: email.processed_body(date), subject: prefix + email.processed_title(date))
+    mail(to: recipients, bcc: user.bcc, body: email.processed_body(date) + " \n \n-- \n" + user.signature, subject: prefix + email.processed_title(date))
   end
 
   def send_email_daily()

@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 
   # Validations
   validates :name, :email, :role, :presence => true
+  validates :signature, :test_recipient, :bcc, :presence => true
 
 
   # Methods
@@ -24,6 +25,13 @@ class User < ActiveRecord::Base
     end
 
     self.role.name == "Admin"
+  end
+
+  def active_for_authentication?
+        # Uncomment the below debug statement to view the properties of the returned self model values.
+        # logger.debug self.to_yaml
+
+    super && active?
   end
 
 end

@@ -3,15 +3,13 @@ pt-BR:
   app_title: Florian
   by_author: por Fabiow Quixadá
   development: Desenvolvimento
+  test: Teste
   production: Produção
   activerecord:
     models:
       email:
         one: E-mail
         other: E-mails
-      emailconfiguration:
-        one: Configurações de E-mail
-        other: Configurações de E-mail
       company:
         one: Empresa
         other: Empresas
@@ -41,11 +39,6 @@ pt-BR:
           test: Teste
           resend: Reenvio
           auto: Automático
-      email_configuration:
-        signature: "Assinatura"
-        from: "De"
-        test_recipient: "Destinatário-teste"
-        bcc: "Cópia oculta"
       email_history:
         created_at: Data
       company:
@@ -95,6 +88,10 @@ pt-BR:
         password_confirmation: Confirmação da nova senha
         current_password: Senha atual
         remember_me: Manter-me logado
+        signature: "Assinatura"
+        from: "De"
+        test_recipient: "Destinatário-teste"
+        bcc: "Cópia oculta"
       role:
         name: Nome
         description: Descrição

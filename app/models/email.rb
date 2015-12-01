@@ -12,25 +12,20 @@ class Email < ActiveRecord::Base
   accepts_nested_attributes_for :email_histories
   belongs_to :company
   #belongs_to :type, :class_name => 'EmailType', :foreign_key => 'email_type_id'
-  belongs_to :configuration, :class_name => 'EmailConfiguration', :foreign_key => 'email_configuration_id'
   alias_attribute :history, :email_histories
   #alias_attribute :type, :email_type_id
 
 
   # Validations
+  validates :recipients_array, presence: {message: I18n.t('errors.email.one_recipient')}
   validate :validate_model
   validates :company, uniqueness: true
-  #validates :recipients_array, :presence => I18n.t('errors.email.one_recipient')
   validates :value, :day_of_month, :company, :body, :presence => true
   #:type
 
 
   # Methods
   def validate_model
-
-    if recipients_array.blank?
-      errors.add(:recipients_array, I18n.t('errors.email.one_recipient'))
-    end
 
     if !value.blank?
 
@@ -49,12 +44,6 @@ class Email < ActiveRecord::Base
       elsif day_of_month > 28
         errors.add(:day_of_month, I18n.t('errors.email.month_max'))
       end
-    end
-  end
-
-  after_initialize do
-    if self.new_record?
-     # self.configuration = EmailConfiguration.find 1
     end
   end
 
@@ -82,7 +71,7 @@ class Email < ActiveRecord::Base
     result = title
 
     result = result.gsub(I18n.t('tags.competence'), capital_competence(date))
-    result = result.gsub(I18n.t('tags.company'), company.simple_name)
+    result = result.gsub(I18n.t('tags.company'), company.trading_name)
     result
   end
 
@@ -94,14 +83,8 @@ class Email < ActiveRecord::Base
 
     result = body
     result = result.gsub(I18n.t('tags.competence'), capital_competence(date))
-    result = result.gsub(I18n.t('tags.company'), company.simple_name)
+    result = result.gsub(I18n.t('tags.company'), company.trading_name)
     result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
-
-    result += " \n \n-- \n"
-
-    result += configuration.signature
-
-    result
   end
 
   def processed_pdf_text(date = nil)
@@ -110,13 +93,7 @@ class Email < ActiveRecord::Base
       date = Date.today
     end
 
-    result = 'A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu da ' + company.long_name + ', inscrito sob o CNPJ/MF nº ' + company.cnpj.to_s + ', situada na ' + company.address + ', a importância supra de ' + I18n.t('tags.value') + ' como doação em ' + I18n.t('tags.competence') + '.'
-
-    result = result.gsub(I18n.t('tags.competence'), capital_competence(date))
-    result = result.gsub(I18n.t('tags.company'), company.long_name)
-    result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
-    result
-
+    'A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu da ' + company.name + ', inscrito sob o CNPJ/MF nº ' + company.cnpj.to_s + ', situada na ' + company.address + ', a importância supra de ' + I18n.t('tags.value') + ' como doação em ' + I18n.t('tags.competence') + '.'
   end
 
   def competence(date = nil)
@@ -153,7 +130,7 @@ class Email < ActiveRecord::Base
       return true
     else
       if day_of_month == Date.today.strftime("%e").to_f
-        if Time.now.hour < 7#self.daily_send_hour
+        if Time.now.hour < self.daily_send_hour
           return true
         end
       end

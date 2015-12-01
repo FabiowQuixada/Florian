@@ -1,5 +1,4 @@
 <%= link_to genderize_full_tag(@model, 'helpers.action.new'), new_email_path, :class => "btn btn-primary" %>
-<%= link_to t('helpers.action.email.config'), edit_email_configuration_path(EmailConfiguration.first), :class => "btn btn-primary" %>
 <%= link_to t('helpers.email.recent'), '#', :id => "recent_emails_btn", :class => "btn btn-primary" %>
 
 </p>
@@ -24,12 +23,12 @@
 			<% I18n.with_options(scope: 'activerecord.attributes.email') do |i18n| %>
 				<td style="width: 16px; display: none;" class="email_id"><%= email.id %></td>
 				<td style="width: 16px;"><%= email.day_of_month %></td>
-				<td class="email_company"><%= email.company.simple_name if email.company %></td>
+				<td class="email_company"><%= email.company.trading_name %></td>
 				<td class="hidden-xs" ><%= email.capital_competence %></td>
 				<td style="width: 150px;"><%= number_to_currency(email.value) %></td>
 				<td style="width: 16px;"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), edit_email_path(email) %></td>
 				<td class="hidden-xs" style="width: 16px;"><%= link_to image_tag("send_email.png", :title => t('description.email.resend')), '#', class: 'resend_btn' %></td>
-				<td class="hidden-xs" style="width: 16px;"><%= link_to image_tag("test_email.png", :title => t('description.email.send_test') + " '" + EmailConfiguration.first.test_recipient + "'"), '#', :remote => true, :class => 'send_test_btn' %></td>
+				<td class="hidden-xs" style="width: 16px;"><%= link_to image_tag("test_email.png", :title => t('description.email.send_test') + " '" + current_user.test_recipient + "'"), '#', :remote => true, :class => 'send_test_btn' %></td>
 				<td class="hidden-xs status" style="width: 16px;">
 					<% if email.active %>
 						<%= link_to image_tag("activate.png", :title => genderize_tag(email, 'is_active'), :class => 'inactivate_btn'), inactivate_email_path(email), method: :post, :remote => true, :id => 'change_status_email_' + email.id.to_s, "data-type" => :json, :class => 'inactivate_btn' %>
