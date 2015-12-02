@@ -24,9 +24,6 @@ module MainControllerConcern extend ActiveSupport::Concern
 
   def index
     @list = model_class.order order_attribute
-    @model = model_class.new
-
-    @breadcrumbs = Hash[@model.model_name.human(:count => 2) => ""]
   end
 
   def new
@@ -82,7 +79,14 @@ module MainControllerConcern extend ActiveSupport::Concern
   included do
     before_action :before_new, only: [:new, :create]
     before_action :before_edit, only: [:edit, :update]
+    before_action :before_index, only: [:index]
     before_action :authenticate_user!
+  end
+
+  def before_index
+    @model = model_class.new
+
+    @breadcrumbs = Hash[@model.model_name.human(:count => 2) => ""]
   end
 
   def before_new

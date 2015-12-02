@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  post '/donations/filter'
+
+  resources :donations, only: [:index, :new, :create] do
+    collection do
+        post 'create_and_new'
+      end
+  end
+
   root 'welcome#index'
 
   devise_for :users, controllers: { registrations: "registrations" }

@@ -76,7 +76,9 @@ pt-BR:
         financial_email_address: E-mail
         group: "Tipo"
       donation:
+        company: Mantenedora
         date: Data
+        donation_date: Data
         value: Valor
         remark: Observação
       user:
@@ -146,6 +148,10 @@ pt-BR:
       p: "%{model} de teste enviadas com sucesso!"
   alert:
     access_denied: "Acesso negado!"
+    query_results:
+      zero: 'Sua consulta não retornou nenhum registro.'
+      one: 'Sua consulta retornou 1 registro.'
+      other: 'Sua consulta retornou %{count} registros.'
     email:
       sending_test: Enviando e-mail de teste...
       resending: Reenviando e-mail...
@@ -187,6 +193,13 @@ pt-BR:
         p: 'Estas %{model} estão inativas, clique aqui para ativá-las.'
     select:
       prompt: Selecione
+      all:
+        m:
+          s: 'Todos'
+          p: 'Todos.'
+        f:
+          s: 'Todas'
+          p: 'Todas'
     email:
       index_footer: '*Os e-mails serão enviados às %{time}:00h da manhã nos respectivos dias.'
       new_recipient: "Novo destinatário"
@@ -205,10 +218,18 @@ pt-BR:
           p: Novas
       edit: Editar
       update: Salvar
+      update_and_new:
+        m:
+          s: Salvar e cadastrar novo
+          p: Salvar e cadastrar novos
+        f:
+          s: Salvar e cadastrar nova
+          p: Salvar e cadastrar novas
       update_data: Salvar
       cancel: Cancelar
       back: Voltar
       discard: Descartar
+      filter: Filtrar
       remove: Remover
       activate: Ativar
       inactivate: Inativar

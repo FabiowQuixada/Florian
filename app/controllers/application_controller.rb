@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
 
+  # 'info' is closeable, while 'waiting_msg' is not
+  add_flash_types :info, :waiting_msg
+
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   # TODO Já tem no app_helper!!!
