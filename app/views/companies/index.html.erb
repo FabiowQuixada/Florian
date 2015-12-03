@@ -14,7 +14,7 @@
 </thead>
     <tbody>
   <% @list.each do |company| %>
-    <tr id='company_<%= company.id %>'>
+    <tr id='company_<%= company.id %>' class="model_row">
       <td><%= company.trading_name %></td>
       <td class="hidden-xs"><%= company.category_desc %></td>
       <td class="hidden-xs"><%= company.group_desc %></td>

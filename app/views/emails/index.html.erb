@@ -19,7 +19,7 @@
 	</tr>
 
 	<% @list.each do |email| %>
-		<tr id='email_<%= email.id %>'>
+		<tr id='email_<%= email.id %>' class="model_row">
 			<% I18n.with_options(scope: 'activerecord.attributes.email') do |i18n| %>
 				<td style="width: 16px; display: none;" class="email_id"><%= email.id %></td>
 				<td style="width: 16px;"><%= email.day_of_month %></td>
@@ -31,9 +31,9 @@
 				<td class="hidden-xs" style="width: 16px;"><%= link_to image_tag("test_email.png", :title => t('description.email.send_test') + " '" + current_user.test_recipient + "'"), '#', :remote => true, :class => 'send_test_btn' %></td>
 				<td class="hidden-xs status" style="width: 16px;">
 					<% if email.active %>
-						<%= link_to image_tag("activate.png", :title => genderize_tag(email, 'is_active'), :class => 'inactivate_btn'), inactivate_email_path(email), method: :post, :remote => true, :id => 'change_status_email_' + email.id.to_s, "data-type" => :json, :class => 'inactivate_btn' %>
+						<%= link_to image_tag("activate.png", :title => genderize_tag(email, 'is_active'), :class => 'inactivate_btn status_btn'), inactivate_email_path(email), method: :post, :remote => true, :id => 'change_status_email_' + email.id.to_s, "data-type" => :json, :class => 'inactivate_btn' %>
 					<% else %>
-						<%= link_to image_tag("inactivate.png", :title => genderize_tag(email, 'is_inactive'), :class => 'activate_btn'), activate_email_path(email), method: :post, :remote => true, :id => 'change_status_email_' + email.id.to_s, "data-type" => :json, :class => 'activate_btn' %>
+						<%= link_to image_tag("inactivate.png", :title => genderize_tag(email, 'is_inactive'), :class => 'activate_btn status_btn'), activate_email_path(email), method: :post, :remote => true, :id => 'change_status_email_' + email.id.to_s, "data-type" => :json, :class => 'activate_btn' %>
 					<% end %>
 				</td>
 			<% end %>

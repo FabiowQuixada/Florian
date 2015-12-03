@@ -2,17 +2,21 @@ Voltar pelo browser: history API;
 Data - refresh;
 Data para doações adicionadas dinamicamente;
 Competência: data;
+Salvar nova empresa;
+Configuração e acesso ao banco postgresql;
+Ao adicionar uma doação e voltar, não aparece o "Deseja descartar?";
 
 Desempenho (note e mobile);
 Testes;
-Configuração e acesso ao banco postgresql;
+Mensagem do cancan qnd n tiver permissão.
+
 Doações: background da linha, caminhos não-felizes;
+Filtros de doações;
 
 
 Depois:
  - Produção + Desenvolvimento ao mesmo tempo, em portas diferentes;
  - Testar teamviewer;
- - Menu de doações;
   -Exportação dos dados;
 
   -Mobile:

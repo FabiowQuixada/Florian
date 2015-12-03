@@ -10,7 +10,7 @@ class EmailsControllerTest < Capybara::Rails::TestCase
             fill_in 'Senha', :with => 'fulano0123'
             check 'Manter-me logado'
 
-           click_on 'Login'
+            click_on 'Login'
 
             page.must_have_content('sucesso')
 
@@ -31,7 +31,7 @@ class EmailsControllerTest < Capybara::Rails::TestCase
             fill_in 'Senha', :with => 'fulano0123'
             check 'Manter-me logado'
 
-           click_on('Login')
+            click_on('Login')
 
             page.must_have_content('sucesso')
 

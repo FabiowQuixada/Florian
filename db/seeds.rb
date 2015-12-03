@@ -11,6 +11,7 @@ role2 = Role.create({name: "Usuário", description: 'Usuário comum'})
 
 user1 = User.create({name: "Sistema", email: "apoioaoqueimado@yahoo.com.br", password: "fulano0123", password_confirmation: "fulano0123", bcc: 'teste@test.com', test_recipient: 'teste@teste.com', signature: 'teste', role: role1})
 user2 = User.create({name: "Fabiow", email: "ftquixada@gmail.com", password: "fulano0123", password_confirmation: "fulano0123", bcc: 'teste@test.com', test_recipient: 'teste@teste.com', signature: 'teste', role: role1})
+user3 = User.create({name: "Lucivânia", email: "luci@yahoo.com.br", password: "senha_renata", password_confirmation: "senha_renata", bcc: 'teste@test.com', test_recipient: 'teste@teste.com', signature: 'teste', role: role2})
 user3 = User.create({name: "Renata", email: "fquixada@yahoo.com.br", password: "senha_renata", password_confirmation: "senha_renata", bcc: 'teste@test.com', test_recipient: 'teste@teste.com', signature: 'teste', role: role2})
 user3 = User.create({name: "Usuário Inativo", email: "teste_inativo@yahoo.com.br", password: "usuario_teste", password_confirmation: "usuario_teste", bcc: 'teste@test.com', test_recipient: 'teste@teste.com', signature: 'teste', role: role2, active: false})
 
