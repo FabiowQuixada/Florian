@@ -1,8 +1,7 @@
 class Role < ActiveRecord::Base
 
   audited
-
-  include GenderHelper
+  include ModelHelper
 
   validates :name, uniqueness: true
   validates :name, :description, :presence => true

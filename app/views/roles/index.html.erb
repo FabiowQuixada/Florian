@@ -1,33 +1,3 @@
-<%= link_to genderize_full_tag(@model, 'helpers.action.new'), new_role_path, :class => "btn btn-primary" %>
-
-</p>
-
-<table class="table table-striped table-hover">
-	<tr>
-		<% I18n.with_options(scope: 'activerecord.attributes.role') do |i18n| %>
-			<th style="width: 16px; display: none;"></th>
-			<th><%= i18n.t :name %></th>
-			<th style="width: 16px;"></th>
-			<th class="hidden-xs" style="width: 16px;"></th>
-		<% end %>
-	</tr>
-
-	<% @list.each do |role| %>
-	<tr id='role_<%= role.id %>' class="model_row">
-		<% I18n.with_options(scope: 'activerecord.attributes.role') do |i18n| %>
-			<td style="width: 16px; display: none;" class="role_id"><%= role.id %></td>
-			<td class="name"><%= role.name %></td>
-			<td style="width: 16px;"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), edit_role_path(role) %></td>
-			<td class="hidden-xs status" style="width: 16px;">
-				<% if role.active %>
-					<%= link_to image_tag("activate.png", :title => genderize_tag(role, 'is_active'), :class => 'inactivate_btn status_btn'), inactivate_role_path(role), method: :post, :remote => true, :id => 'change_status_role_' + role.id.to_s, "data-type" => :json, :class => 'inactivate_btn' %>
-				<% else %>
-					<%= link_to image_tag("inactivate.png", :title => genderize_tag(role, 'is_inactive'), :class => 'activate_btn status_btn'), activate_role_path(role), method: :post, :remote => true, :id => 'change_status_role_' + role.id.to_s, "data-type" => :json, :class => 'activate_btn' %>
-				<% end %>
-			</td>
-		<% end %>
-	</tr>
-	<% end %>
-</table>
-
-<%= render partial: "helpers/index_helper", locals: {model: @model} %>
+<%= render partial: "helpers/index_table", locals: {model: @model, columns: Array.[](
+    Hash[:header => "name", :model_attr => 'name']
+  )} %>

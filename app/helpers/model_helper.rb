@@ -1,4 +1,4 @@
-module GenderHelper
+module ModelHelper
 
   # Gender: Male / Female
   # Number: Singular / Plural
@@ -12,5 +12,9 @@ module GenderHelper
 
   def number
     's'
+  end
+
+  def updatable
+    true
   end
 end

@@ -2,7 +2,7 @@ class Donation < ActiveRecord::Base
 
   # Configuration
   audited
-  include GenderHelper
+  include ModelHelper
   after_initialize :init
   before_save :default_values
   usar_como_dinheiro :value
@@ -48,6 +48,10 @@ class Donation < ActiveRecord::Base
 
   def gender
     'f'
+  end
+
+  def updatable
+    false
   end
 
 end

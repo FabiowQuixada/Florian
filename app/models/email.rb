@@ -3,7 +3,7 @@ require 'date'
 class Email < ActiveRecord::Base
 
   audited
-  include GenderHelper
+  include ModelHelper
   usar_como_dinheiro :value
 
 
@@ -130,7 +130,7 @@ class Email < ActiveRecord::Base
       return true
     else
       if day_of_month == Date.today.strftime("%e").to_f
-        if Time.now.hour < self.daily_send_hour
+        if Time.now.hour < 7#self.daily_send_hour
           return true
         end
       end

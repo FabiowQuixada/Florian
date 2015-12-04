@@ -2,7 +2,7 @@ class Company < ActiveRecord::Base
 
   # Configuration
   audited
-  include GenderHelper
+  include ModelHelper
   usar_como_cnpj :cnpj
 
 

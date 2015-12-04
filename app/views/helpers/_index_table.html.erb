@@ -1,0 +1,64 @@
+<%= link_to genderize_full_tag(@model, 'helpers.action.new'), send("new_" + @model.class.name.singularize.underscore + "_path"), :class => "btn btn-primary" %>
+<% if lookup_context.find_all(ActiveModel::Naming.plural(model) + "/_index_buttons").any? %>
+	<%= render partial: "index_buttons" %>
+<% end %>
+
+</p>
+
+<table class="table table-striped table-hover">
+	<tr>
+		<% I18n.with_options(scope: 'activerecord.attributes.' + @model.class.name.underscore) do |i18n| %>
+			<th style="display: none;"></th>
+			<% columns.each_with_index do |a, i| %>
+				<th style="<%= columns[i][:style] %>" class="<%= columns[i][:class] %>"><%= i18n.t columns[i][:header] %></th>
+			<% end %>
+			<% if model.updatable %>
+				<th style="width: 16px;"></th>
+			<% end %>
+			<% if lookup_context.find_all(ActiveModel::Naming.plural(model) + "/_index_action_buttons").any? %>
+				<th class="hidden-xs" style="width: 16px;"></th>
+				<th class="hidden-xs" style="width: 16px;"></th>
+			<% end %>
+			<% if model.class.column_names.include? 'active' %>
+				<th class="hidden-xs" style="width: 16px;"></th>
+			<% end %>
+		<% end %>
+	</tr>
+
+	<% @list.each do |iterator| %>
+		<tr id='model_<%= iterator.id %>' class="model_row">
+			<td style="display: none;" class="model_id"><%= iterator.id %></td>
+			<% columns.each_with_index do |a, i| %>
+				<td style="<%= columns[i][:style] %>" class="<%= columns[i][:class] %>">
+				<%=
+					 if columns[i][:type] == 'money'
+						number_to_currency(iterator.public_send(columns[i][:model_attr]))
+					else
+						iterator.instance_eval(columns[i][:model_attr])
+					end
+				%></td>
+			<% end %>
+			<% if model.updatable %>
+				<td style="width: 16px;"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), send("edit_" + model.class.name.singularize.underscore + "_path", iterator) %></td>
+			<% end %>
+			<% if lookup_context.find_all(ActiveModel::Naming.plural(model) + "/_index_action_buttons").any? %>
+				<%= render partial: ActiveModel::Naming.plural(model).to_s + "/index_action_buttons" %>
+			<% end %>
+			<% if model.class.column_names.include? 'active' %>
+				<td class="hidden-xs status" style="width: 16px;">
+					<% if iterator.active %>
+						<%= link_to image_tag("activate.png", :title => genderize_tag(iterator, 'is_active'), :class => 'inactivate_btn status_btn'), send("inactivate_" + @model.class.name.singularize.underscore + "_path", iterator), method: :post, :remote => true, :id => 'change_status_' + iterator.id.to_s, "data-type" => :json, :class => 'inactivate_btn' %>
+					<% else %>
+						<%= link_to image_tag("inactivate.png", :title => genderize_tag(iterator, 'is_inactive'), :class => 'activate_btn status_btn'), send("activate_" + @model.class.name.singularize.underscore + "_path", iterator), method: :post, :remote => true, :id => 'change_status_' + iterator.id.to_s, "data-type" => :json, :class => 'activate_btn' %>
+					<% end %>
+				</td>
+			<% end %>
+		</tr>
+	<% end %>
+</table>
+
+<%= render partial: "helpers/index_helper", locals: {model: @model} %>
+
+<% if lookup_context.find_all(ActiveModel::Naming.plural(model) + "/_modals").any? %>
+	<%= render partial: "modals" %>
+<% end %>

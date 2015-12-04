@@ -1,50 +1,12 @@
-<%= link_to genderize_full_tag(@model, 'helpers.action.new'), new_email_path, :class => "btn btn-primary" %>
-<%= link_to t('helpers.email.recent'), '#', :id => "recent_emails_btn", :class => "btn btn-primary" %>
 
-</p>
-
-<table class="table table-striped table-hover">
-	<tr>
-		<% I18n.with_options(scope: 'activerecord.attributes.email') do |i18n| %>
-			<th style="width: 16px; display: none;"></th>
-			<th style="width: 16px;"><%= i18n.t :day %></th>
-			<th><%= i18n.t :company %></th>
-			<th class="hidden-xs" ><%= i18n.t :competence %></th>
-			<th style="width: 150px;"><%= i18n.t :value %></th>
-			<th style="width: 16px;"></th>
-			<th class="hidden-xs" style="width: 16px;"></th>
-			<th class="hidden-xs" style="width: 16px;"></th>
-			<th class="hidden-xs" style="width: 16px;"></th>
-		<% end %>
-	</tr>
-
-	<% @list.each do |email| %>
-		<tr id='email_<%= email.id %>' class="model_row">
-			<% I18n.with_options(scope: 'activerecord.attributes.email') do |i18n| %>
-				<td style="width: 16px; display: none;" class="email_id"><%= email.id %></td>
-				<td style="width: 16px;"><%= email.day_of_month %></td>
-				<td class="email_company"><%= email.company.trading_name %></td>
-				<td class="hidden-xs" ><%= email.capital_competence %></td>
-				<td style="width: 150px;"><%= number_to_currency(email.value) %></td>
-				<td style="width: 16px;"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), edit_email_path(email) %></td>
-				<td class="hidden-xs" style="width: 16px;"><%= link_to image_tag("send_email.png", :title => t('description.email.resend')), '#', class: 'resend_btn' %></td>
-				<td class="hidden-xs" style="width: 16px;"><%= link_to image_tag("test_email.png", :title => t('description.email.send_test') + " '" + current_user.test_recipient + "'"), '#', :remote => true, :class => 'send_test_btn' %></td>
-				<td class="hidden-xs status" style="width: 16px;">
-					<% if email.active %>
-						<%= link_to image_tag("activate.png", :title => genderize_tag(email, 'is_active'), :class => 'inactivate_btn status_btn'), inactivate_email_path(email), method: :post, :remote => true, :id => 'change_status_email_' + email.id.to_s, "data-type" => :json, :class => 'inactivate_btn' %>
-					<% else %>
-						<%= link_to image_tag("inactivate.png", :title => genderize_tag(email, 'is_inactive'), :class => 'activate_btn status_btn'), activate_email_path(email), method: :post, :remote => true, :id => 'change_status_email_' + email.id.to_s, "data-type" => :json, :class => 'activate_btn' %>
-					<% end %>
-				</td>
-			<% end %>
-		</tr>
-	<% end %>
-</table>
+<%= render partial: "helpers/index_table", locals: {model: @model, columns: Array.[](
+	Hash[:header => "day", :model_attr => 'day_of_month', :style => "width: 16px;"],
+	Hash[:header => "company", :model_attr => 'company.trading_name', :class => "email_company"],
+	Hash[:header => "competence", :model_attr => 'capital_competence', :class => "hidden-xs"],
+	Hash[:header => "value", :model_attr => 'value', :style => "width: 150px;", :type => 'money']
+)} %>
 
 <%= t('helpers.email.index_footer', time: Email.daily_send_hour.to_s) %>
-
-<%= render partial: "helpers/index_helper", locals: {model: @model} %>
-<%= render partial: "modals" %>
 
 <script>
 
@@ -54,7 +16,7 @@
 
 			clean_resend_modal();
 
-			id = $(this).parent().parent().find('.email_id').text();
+			id = $(this).parent().parent().find('.model_id').text();
 			$('#resend_email_id').val(id);
 			$('#resend_email_form').get(0).setAttribute('action', '/emails/' + id + '/resend');
 			$('.modal_company_name').text($(this).parent().parent().find('.email_company').text());
@@ -66,7 +28,7 @@
 
 			clean_send_test_modal();
 
-			id = $(this).parent().parent().find('.email_id').text();
+			id = $(this).parent().parent().find('.model_id').text();
 			$('#send_test_email_id').val(id);
 			$('#send_test_email_form').get(0).setAttribute('action', '/emails/' + id + '/send_test');
 			$('.modal_company_name').text($(this).parent().parent().find('.email_company').text());
