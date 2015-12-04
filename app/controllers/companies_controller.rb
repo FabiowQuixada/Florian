@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
 
-  include MainControllerConcern
+  include MainConcern
   arguable model_class: Company
   load_and_authorize_resource
 

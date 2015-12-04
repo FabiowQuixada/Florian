@@ -1,6 +1,7 @@
 class RolesController < ApplicationController
 
-  include MainControllerConcern
+  include MainConcern
+  include StatusConcern
   arguable model_class: Role
   load_and_authorize_resource
 

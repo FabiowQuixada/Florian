@@ -1,6 +1,6 @@
 class DonationsController < ApplicationController
 
-  include MainControllerConcern
+  include MainConcern
   arguable model_class: Donation
   load_and_authorize_resource
 

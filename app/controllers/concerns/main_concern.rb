@@ -1,4 +1,4 @@
-module MainControllerConcern extend ActiveSupport::Concern
+module MainConcern extend ActiveSupport::Concern
 
   module ClassMethods
     attr_reader :arguable_opts
@@ -50,24 +50,6 @@ module MainControllerConcern extend ActiveSupport::Concern
     else
       render '_form'
     end
-  end
-
-  def activate
-
-    model = model_class.find params[:id]
-    model.active = true
-    model.save
-
-    render :json => {:message => genderize_tag(model, 'activated'), :id => model.id, :activated => true}
-  end
-
-  def inactivate
-
-    model = model_class.find params[:id]
-    model.active = false
-    model.save
-
-    render :json => {:message => genderize_tag(model, 'inactivated'), :id => model.id, :activated => false}
   end
 
   private

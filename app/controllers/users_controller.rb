@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-  include MainControllerConcern
+  include MainConcern
+  include StatusConcern
   arguable model_class: User
   load_and_authorize_resource
 

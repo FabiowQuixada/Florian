@@ -1,6 +1,7 @@
 class EmailsController < ApplicationController
 
-  include MainControllerConcern
+  include MainConcern
+  include StatusConcern
   arguable model_class: Email
   load_and_authorize_resource
 
