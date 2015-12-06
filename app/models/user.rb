@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   # Validations
   validates :name, :email, :role, :presence => true
-  validates :signature, :test_recipient, :bcc, :presence => true
+  validates :signature, :bcc, :presence => true
 
 
   # Methods

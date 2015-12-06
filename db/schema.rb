@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151117114331) do
+ActiveRecord::Schema.define(version: 20151206020631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,14 +86,6 @@ ActiveRecord::Schema.define(version: 20151117114331) do
 
   add_index "donations", ["company_id"], name: "index_donations_on_company_id", using: :btree
 
-  create_table "email_configurations", force: :cascade do |t|
-    t.text     "signature",      null: false
-    t.string   "test_recipient"
-    t.string   "bcc"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
   create_table "email_histories", force: :cascade do |t|
     t.string   "body",                                     null: false
     t.decimal  "value",            precision: 8, scale: 2, null: false
@@ -101,23 +93,39 @@ ActiveRecord::Schema.define(version: 20151117114331) do
     t.string   "recipients_array",                         null: false
     t.integer  "send_type",                                null: false
     t.integer  "user_id",                                  null: false
-    t.integer  "email_id",                                 null: false
+    t.integer  "receipt_email_id",                         null: false
   end
 
-  add_index "email_histories", ["email_id"], name: "index_email_histories_on_email_id", using: :btree
+  add_index "email_histories", ["receipt_email_id"], name: "index_email_histories_on_receipt_email_id", using: :btree
   add_index "email_histories", ["user_id"], name: "index_email_histories_on_user_id", using: :btree
 
-  create_table "email_types", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email_title"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "email_id",    null: false
+  create_table "product_and_service_emails", force: :cascade do |t|
+    t.string   "competence",                  null: false
+    t.integer  "psychology",                  null: false
+    t.integer  "physiotherapy",               null: false
+    t.integer  "plastic_surgery",             null: false
+    t.integer  "mesh_service",                null: false
+    t.integer  "gynecology",                  null: false
+    t.integer  "occupational_therapy",        null: false
+    t.integer  "psychology_return",           null: false
+    t.integer  "physiotherapy_return",        null: false
+    t.integer  "plastic_surgery_return",      null: false
+    t.integer  "mesh_service_return",         null: false
+    t.integer  "gynecology_return",           null: false
+    t.integer  "occupational_therapy_return", null: false
+    t.integer  "mesh",                        null: false
+    t.integer  "cream",                       null: false
+    t.integer  "protector",                   null: false
+    t.integer  "silicon",                     null: false
+    t.integer  "mask",                        null: false
+    t.integer  "foam",                        null: false
+    t.integer  "skin_expander",               null: false
+    t.integer  "cervical_collar",             null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
-  add_index "email_types", ["email_id"], name: "index_email_types_on_email_id", using: :btree
-
-  create_table "emails", force: :cascade do |t|
+  create_table "receipt_emails", force: :cascade do |t|
     t.string   "recipients_array",                                        null: false
     t.string   "body",                                                    null: false
     t.integer  "day_of_month",                                            null: false
@@ -128,7 +136,7 @@ ActiveRecord::Schema.define(version: 20151117114331) do
     t.integer  "company_id",                                              null: false
   end
 
-  add_index "emails", ["company_id"], name: "index_emails_on_company_id", using: :btree
+  add_index "receipt_emails", ["company_id"], name: "index_receipt_emails_on_company_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",                       null: false
@@ -136,6 +144,14 @@ ActiveRecord::Schema.define(version: 20151117114331) do
     t.boolean  "active",      default: true, null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.string   "pse_recipients_array", null: false
+    t.string   "pse_default_body",     null: false
+    t.integer  "pse_day_of_month",     null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -164,9 +180,8 @@ ActiveRecord::Schema.define(version: 20151117114331) do
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
 
   add_foreign_key "donations", "companies"
-  add_foreign_key "email_histories", "emails"
+  add_foreign_key "email_histories", "receipt_emails"
   add_foreign_key "email_histories", "users"
-  add_foreign_key "email_types", "emails"
-  add_foreign_key "emails", "companies"
+  add_foreign_key "receipt_emails", "companies"
   add_foreign_key "users", "roles"
 end

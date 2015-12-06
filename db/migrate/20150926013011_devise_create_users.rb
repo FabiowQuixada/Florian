@@ -34,7 +34,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.datetime :locked_at
 
       t.text :signature
-      t.string :test_recipient
       t.string :bcc
 
 
