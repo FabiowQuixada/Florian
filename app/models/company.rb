@@ -12,7 +12,7 @@ class Company < ActiveRecord::Base
   CONTRACTS = [["Com contrato", 1], ["Sem contrato", 2], ["Contrato + Aditivo", 3]]
 
   # Relationships
-  has_many :email
+  has_one :email
   has_many :donations, -> { order("donation_date") }, :dependent => :destroy
   accepts_nested_attributes_for :donations, :allow_destroy => true, reject_if: :donation_rejectable?
 

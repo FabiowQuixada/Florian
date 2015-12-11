@@ -11,6 +11,8 @@ module IaqProject
 
     config.action_view.embed_authenticity_token_in_remote_forms = true
 
+    Prawn::Font::AFM.hide_m17n_warning = true
+
     config.exceptions_app = self.routes
 
     # Avoids insertion of a error message div in the forms, which would break the layout

@@ -2,6 +2,7 @@ require 'date'
 
 class ReceiptEmail < ActiveRecord::Base
 
+  # Configuration
   audited
   include ModelHelper
   usar_como_dinheiro :value

@@ -30,7 +30,7 @@ class ReceiptEmailsController < ApplicationController
         return render json: email.errors, status: :unprocessable_entity
       end
 
-      IaqMailer.send_receipt_email(email, date, 1, current_user).deliver_now
+      IaqMailer.resend_receipt_email(email, date, current_user).deliver_now
 
       return render history_as_json(email, 'resent')
 
@@ -51,7 +51,7 @@ class ReceiptEmailsController < ApplicationController
         return render json: email.errors, status: :unprocessable_entity
       end
 
-      IaqMailer.send_receipt_email(email, date, 2, current_user).deliver_now
+      IaqMailer.send_test_receipt_email(email, date, current_user).deliver_now
 
       return render history_as_json(email, 'test_sent')
 
@@ -67,7 +67,7 @@ class ReceiptEmailsController < ApplicationController
     emails = ReceiptEmail.where(day_of_month: Time.now.day, active: true)
 
     emails.each do |email|
-        IaqMailer.send_email(email, Date.today, 0, User.first).deliver_now
+        IaqMailer.send_automatic_receipt_email(email).deliver_now
     end
   end
 
