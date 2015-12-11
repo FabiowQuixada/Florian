@@ -21,4 +21,17 @@ end
 
   include FactoryGirl::Syntax::Methods
 
+  def login_as_admin
+
+    visit root_path
+
+    email = 'ftquixada@gmail.com'
+
+     fill_in 'E-mail', :with => email
+     fill_in 'Senha', :with => 'fulano0123'
+     check 'Manter-me logado'
+
+     click_on 'Login'
+  end
+
 end

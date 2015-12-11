@@ -34,4 +34,14 @@ class User < ActiveRecord::Base
     super && active?
   end
 
+  def active=(value)
+
+    if admin?
+      raise 'Não pode inativar admin'
+    end
+
+    write_attribute(:active, value)
+
+  end
+
 end

@@ -31,6 +31,7 @@ module MainConcern extend ActiveSupport::Concern
   end
 
   def create
+
     @model = model_class.new params_validation
 
     if @model.save

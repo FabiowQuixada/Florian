@@ -14,7 +14,7 @@ class EmailsControllerTest < Capybara::Rails::TestCase
 
             page.must_have_content('sucesso')
 
-            visit emails_path
+            visit receipt_emails_path
 
             all(".resend_btn").first.click()
             fill_in 'resend_competence', :with => '10/2015'
@@ -35,7 +35,7 @@ class EmailsControllerTest < Capybara::Rails::TestCase
 
             page.must_have_content('sucesso')
 
-            visit edit_email_path Email.first.id
+            visit edit_receipt_email_path ReceiptEmail.first.id
 
             all(".resend_btn").first.click()
             fill_in 'resend_competence', :with => '10/2015'
@@ -56,7 +56,7 @@ class EmailsControllerTest < Capybara::Rails::TestCase
 
             page.must_have_content('sucesso')
 
-            visit emails_path
+            visit receipt_emails_path
 
             all(".send_test_btn").first.click()
             fill_in 'send_test_competence', :with => '10/2015'
@@ -77,10 +77,12 @@ class EmailsControllerTest < Capybara::Rails::TestCase
 
             page.must_have_content('sucesso')
 
-            visit edit_email_path Email.first.id
+            visit edit_receipt_email_path ReceiptEmail.first.id
 
             all(".send_test_btn").first.click()
+
             fill_in 'send_test_competence', :with => '10/2015'
+
             click_on 'Enviar'
 
             assert_content page, "sucesso"
