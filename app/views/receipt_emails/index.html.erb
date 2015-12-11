@@ -6,7 +6,7 @@
 	Hash[:header => "value", :model_attr => 'value', :style => "width: 150px;", :type => 'money']
 )} %>
 
-<%= t('helpers.email.index_footer', time: Email.daily_send_hour.to_s) %>
+<%= t('helpers.email.index_footer', time: ReceiptEmail.daily_send_hour.to_s) %>
 
 <script>
 
@@ -18,7 +18,7 @@
 
 			id = $(this).parent().parent().find('.model_id').text();
 			$('#resend_email_id').val(id);
-			$('#resend_email_form').get(0).setAttribute('action', '/emails/' + id + '/resend');
+			$('#resend_email_form').get(0).setAttribute('action', '/receipt_emails/' + id + '/resend');
 			$('.modal_company_name').text($(this).parent().parent().find('.email_company').text());
 			$('#resend_email_modal').modal('show');
 		});
@@ -30,7 +30,7 @@
 
 			id = $(this).parent().parent().find('.model_id').text();
 			$('#send_test_email_id').val(id);
-			$('#send_test_email_form').get(0).setAttribute('action', '/emails/' + id + '/send_test');
+			$('#send_test_email_form').get(0).setAttribute('action', '/receipt_emails/' + id + '/send_test');
 			$('.modal_company_name').text($(this).parent().parent().find('.email_company').text());
 			$('#send_test_email_modal').modal('show');
 		});

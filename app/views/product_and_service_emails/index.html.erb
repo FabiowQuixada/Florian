@@ -1,0 +1,40 @@
+<%= render partial: "helpers/index_table", locals: {model: @model, columns: Array.[](
+	Hash[:header => "created_at", :model_attr => 'created_at'],
+	Hash[:header => "competence", :model_attr => 'competence'],
+	Hash[:header => "services", :model_attr => 'services', :class => "hidden-xs"],
+	Hash[:header => "products", :model_attr => 'products', :class => "hidden-xs"]
+)} %>
+
+<script>
+
+	$(document).ready(function() {
+		jQuery.noConflict();
+		$('.resend_btn').click(function(ev) {
+
+			clean_resend_modal();
+
+			id = $(this).parent().parent().find('.model_id').text();
+			$('#resend_email_id').val(id);
+			$('#resend_email_form').get(0).setAttribute('action', '/emails/' + id + '/resend');
+			$('.modal_company_name').text($(this).parent().parent().find('.email_company').text());
+			$('#resend_email_modal').modal('show');
+		});
+
+		jQuery.noConflict();
+		$('.send_test_btn').click(function(ev) {
+
+			clean_send_test_modal();
+
+			id = $(this).parent().parent().find('.model_id').text();
+			$('#send_test_email_id').val(id);
+			$('#send_test_email_form').get(0).setAttribute('action', '/emails/' + id + '/send_test');
+			$('.modal_company_name').text($(this).parent().parent().find('.email_company').text());
+			$('#send_test_email_modal').modal('show');
+		});
+
+		jQuery.noConflict();
+		$('#recent_emails_btn').click(function(ev) {
+			$('#recent_emails_modal').modal('show');
+		});
+	});
+</script>

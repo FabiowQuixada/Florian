@@ -45,7 +45,7 @@ class CreateCompanies < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_reference :emails, :company, index: true, foreign_key: true, unique: true, null: false
+    add_reference :receipt_emails, :company, index: true, foreign_key: true, unique: true, null: false
 
   end
 end

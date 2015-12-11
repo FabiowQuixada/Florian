@@ -2,7 +2,7 @@
 
     class StatusTest < Capybara::Rails::TestCase
 
-       DATA = [Role, User, Email]
+       DATA = [Role, User, ReceiptEmail]
 
         test "[Admin] change models' status" do
 

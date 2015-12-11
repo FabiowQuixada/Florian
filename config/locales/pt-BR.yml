@@ -7,9 +7,12 @@ pt-BR:
   production: Produção
   activerecord:
     models:
-      email:
-        one: E-mail
-        other: E-mails
+      receipt_email:
+        one: E-mail de Recibo
+        other: E-mails de Recibo
+      product_and_service_email:
+        one: E-mail de Produtos e Serviços
+        other: E-mails de Produtos e Serviços
       company:
         one: Empresa
         other: Empresas
@@ -23,7 +26,7 @@ pt-BR:
         one: Doação
         other: Doações
     attributes:
-      email:
+      receipt_email:
         email: "E-mail"
         title: "Título"
         body: "Corpo"
@@ -39,6 +42,27 @@ pt-BR:
           test: Teste
           resend: Reenvio
           auto: Automático
+      product_and_service_email:
+        products: Produtos
+        services: Serviços
+        recipients_array: "Destinatários"
+        competence: Competência
+        competence_date: Competência
+        created_at: Data de envio
+        psychology: Psicologia
+        physiotherapy: Fisioterapia
+        plastic_surgery: Cirurgia Plástica
+        mesh_service: Malha
+        gynecology: Ginecologia
+        occupational_therapy: Terapia Ocupacional
+        mesh: Malha
+        cream: Creme
+        protector: Protetor
+        silicon: Silicone
+        mask: Máscara
+        foam: Espuma
+        skin_expander: Expansor de Pele
+        cervical_collar: Colar Cervical
       email_history:
         created_at: Data
       company:

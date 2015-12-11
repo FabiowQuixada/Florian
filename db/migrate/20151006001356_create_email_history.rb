@@ -9,6 +9,6 @@ class CreateEmailHistory < ActiveRecord::Migration
     end
 
     add_reference :email_histories, :user, index: true, foreign_key: true, null: false
-    add_reference :email_histories, :email, index: true, foreign_key: true, null: false
+    add_reference :email_histories, :receipt_email, index: true, foreign_key: true, null: false
   end
 end

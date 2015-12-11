@@ -4,24 +4,27 @@ Data para doações adicionadas dinamicamente;
 Competência: data;
 Salvar nova empresa;
 Configuração e acesso ao banco postgresql;
+Estudar o javascript do rails - pq comentando o negocio o dropdown dá certo;
 Ao adicionar uma doação e voltar, não aparece o "Deseja descartar?";
+Git;
+Testar e-mail de test;
 
-Desempenho (note e mobile);
+Produtos e serviços:
+Campos com três dígitos;
+Configs;
+Competência;
+Encaminhar? Reenviar? teste?
+Visualizar;
+
+
 Testes;
-Mensagem do cancan qnd n tiver permissão.
-
 Doações: background da linha, caminhos não-felizes;
 Filtros de doações;
-
-
-Depois:
- - Produção + Desenvolvimento ao mesmo tempo, em portas diferentes;
- - Testar teamviewer;
-  -Exportação dos dados;
-
-  -Mobile:
-   - Deslize horizontal;
-   - Github?
+Produção + Desenvolvimento ao mesmo tempo, em portas diferentes;
+Testar teamviewer;
+Exportação dos dados;
+Mobile: Deslize horizontal;
+Github?
 
 
 Interno:
@@ -65,8 +68,7 @@ Visual:
 Cancancan: permissões de status, enviar e-mail, etc;
 Configuração do e-mail fixa no _form (<input>);
 
-
 Testes:
-Ativar e inativar todos;
-Organizar Testes;
-Testar reenvio e teste do index e do form;
+Salvar;
+Warning pop-up;
+Se já tiver logado, simplesmente reencaminhar p index, sem msg de erro.

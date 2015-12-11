@@ -14,8 +14,10 @@
 						<a href="#" class="close" data-hide="alert">&times;</a>
 					</div>
 					<div class="form-group">
-						<%= label_tag t('activerecord.attributes.email.competence') %>
-						<%= text_field_tag "competence", "default info", :class => "form-control", :id => "resend_competence" %>
+						<%= label_tag t('activerecord.attributes.receipt_email.competence') %>
+						<div class="input-group competence">
+							<%= text_field_tag "competence", "default info", :class => "competence form-control", :id => "resend_competence" %>
+						</div>
 						<% if  params[:action]  == 'index' %>
 							<%= hidden_field_tag "email_id", :id => "resend_email_id" %>
 						<% end %>
@@ -48,7 +50,7 @@
 						<a href="#" class="close" data-hide="alert">&times;</a>
 					</div>
 					<div class="form-group">
-						<%= label_tag t('activerecord.attributes.email.competence') %>
+						<%= label_tag t('activerecord.attributes.receipt_email.competence') %>
 						<%= text_field_tag "competence", "default info", :class => "form-control", :id => "send_test_competence" %>
 						<% if  params[:action]  == 'index' %>
 							<%= hidden_field_tag "email_id", :id => "send_test_email_id" %>
@@ -97,7 +99,7 @@
 			<div class="modal-content">
 				<%= form_tag '#', :remote => true, :id => 'resend_email_form' do %>
 					<div class="modal-header">
-						<%= t('modal.email.title.recent_emails', days: Email.recent_emails_days) %>
+						<%= t('modal.email.title.recent_emails', days: ReceiptEmail.recent_emails_days) %>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 							&times;
 						</button>
@@ -116,9 +118,9 @@
 
 							<% @recent_emails.each do |history| %>
 								<tr>
-									<% I18n.with_options(scope: 'activerecord.attributes.email') do |i18n| %>
+									<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
 										<td><%= l(history.created_at, format: :really_short) %></td>
-										<td class="email_company"><%= history.email.company.trading_name %></td>
+										<td class="email_company"><%= history.receipt_email.company.trading_name %></td>
 										<td><%= history.send_type_desc %></td>
 									<% end %>
 								</tr>
@@ -192,7 +194,7 @@
 		<% if  params[:action]  == 'edit' %>
 
 			for	(i = 0; i < attribute_names.length; i++)
-				add_hidden('resend_email_form', attribute_names[i], $('#email_' + attribute_names[i]).val());
+				add_hidden('resend_email_form', attribute_names[i], $('#receipt_email_' + attribute_names[i]).val());
 
 			add_hidden('resend_email_form', 'active', $('#model_status').val());
 
@@ -209,7 +211,7 @@
 		<% if  params[:action]  == 'edit' %>
 
 			for	(i = 0; i < attribute_names.length; i++)
-				add_hidden('send_test_email_form', attribute_names[i], $('#email_' + attribute_names[i]).val());
+				add_hidden('send_test_email_form', attribute_names[i], $('#receipt_email_' + attribute_names[i]).val());
 
 			add_hidden('send_test_email_form', 'active', $('#model_status').val());
 
@@ -238,7 +240,7 @@
 	function add_hidden(form_id, key, value) {
 	    var input = document.createElement('input');
 	    input.type = 'hidden';
-	    input.name = 'email[' + key + ']';
+	    input.name = 'receipt_email[' + key + ']';
 	    input.value = value;
 	    document.getElementById(form_id).appendChild(input);
 	}

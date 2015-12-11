@@ -39,15 +39,21 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :email_configuration, only: [:edit, :update]
-
-  resources :emails, except: [:show, :destroy] do
+  resources :receipt_emails, except: [:show, :destroy] do
 
     member do
       post 'resend'
       post 'send_test'
       post 'activate'
       post 'inactivate'
+    end
+  end
+
+    resources :product_and_service_emails, except: [:show, :destroy] do
+
+    member do
+      post 'send_email'
+      post 'send_test'
     end
   end
 

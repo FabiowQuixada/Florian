@@ -11,10 +11,13 @@
 <p/>
 
 <div class="">
-	<%= f.submit t('helpers.action.update'), :class => "btn btn-primary save_btn" %>
+
+            <% if model.updatable %>
+                <%= f.submit t('helpers.action.update'), :class => "btn btn-primary save_btn" %>
+            <% end %>
 
 	<% if lookup_context.find_all(ActiveModel::Naming.plural(model) + "/_form_buttons").any? %>
-		<%= render partial: ActiveModel::Naming.plural(model).to_s + "/form_buttons" %>
+		<%= render partial: ActiveModel::Naming.plural(model).to_s + "/form_buttons", locals: {f: f} %>
 	<% end %>
 
 	<a class="btn btn-primary back_btn"></span><%= t('helpers.action.back') %></a>

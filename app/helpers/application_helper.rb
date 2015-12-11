@@ -1,11 +1,11 @@
 module ApplicationHelper
 
   def genderize_tag(model, tag)
-    t(model.genderize(tag), model: t('activerecord.models.' + model.class.name.downcase + '.one')).downcase.capitalize
+    t(model.genderize(tag), model: t('activerecord.models.' + model.class.model_name.param_key + '.one')).downcase.capitalize
   end
 
   def genderize_title(model, tag)
-    t(model.genderize(tag), model: t('activerecord.models.' + model.class.name.downcase + '.one'))
+    t(model.genderize(tag), model: t('activerecord.models.' + model.name.param_key + '.one'))
   end
 
   def link_to_add_fields(name, f, association)

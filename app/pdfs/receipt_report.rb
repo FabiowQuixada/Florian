@@ -25,7 +25,7 @@ class ReceiptReport < Prawn::Document
 
       # Main text
       pdf.move_down 30
-      pdf.text @email.processed_pdf_text(@date), :inline_format => true, :align => :justify, :indent_paragraphs => 30
+      pdf.text @email.processed_receipt_text(@date), :inline_format => true, :align => :justify, :indent_paragraphs => 30
 
       # Bank account
       pdf.move_down 30

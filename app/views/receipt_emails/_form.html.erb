@@ -2,8 +2,6 @@
 
 	<%= render partial: "helpers/form_errors", locals: {model: @model} %>
 
-	<!-- TODO -->
-	<%= f.hidden_field 'email_configuration_id', :value => '1' %>
 	<%= f.hidden_field :id %>
 
 	<div class="container-fluid padless">
@@ -53,15 +51,14 @@
 						</div>
 						<div class="col-sm-4 form-group">
 							<%= f.label :company %>
-							<%= f.collection_select(:company_id, Company.where(group: 1), :id, :trading_name, {:include_blank => t('helpers.select.prompt')}, {class: "form-control", :disabled => f.object.persisted?}) %>
+							<% if f.object.persisted? %>
+								<%= f.collection_select(:company_id, Company.where(id: f.object.company_id), :id, :trading_name, {}, {class: "form-control", :disabled => true}) %>
+							<% else %>
+								<%= f.collection_select(:company_id, Company.where(group: 1), :id, :trading_name, {:include_blank => t('helpers.select.prompt')}, {class: "form-control"}) %>
+							<% end %>
 						</div>
 					</div>
 				</div>
-
-				<!-- <div class="form-group">
-					<%# f.label :type %>
-					<%# f.collection_select(:type, EmailType.all, :id, :name, {:include_blank => t('helpers.select.prompt')}, {class: "form-control", :disabled => f.object.persisted?}) %>
-				</div> -->
 			</div>
 		</div>
 	</div>
@@ -74,7 +71,7 @@
 	<div class="form-group">
 		<%= f.label :body %>
 		<span style="float:right">
-			<% I18n.with_options(scope: 'activerecord.attributes.email') do |i18n| %>
+			<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
 			<div class="btn-group">
 				<button type="button" class="btn btn-primary btn-xs" id="add_company_to_body_btn"><%= i18n.t :company %></button>
 				<button type="button" class="btn btn-primary btn-xs" id="add_value_to_body_btn"><%= i18n.t :value %></button>
@@ -138,7 +135,7 @@
 		$('.resend_btn').click(function(ev) {
 
 			clean_resend_modal();
-			$('#resend_email_form').get(0).setAttribute('action', '/emails/' + <%= @model.id.to_s %> + '/resend');
+			$('#resend_email_form').get(0).setAttribute('action', '/receipt_emails/' + <%= @model.id.to_s %> + '/resend');
 			$('.modal_company_name').text('<%= @model.company.trading_name %>');
 			a();
 		});
@@ -146,19 +143,10 @@
 		$('.send_test_btn').click(function(ev) {
 
 			clean_send_test_modal();
-			$('#send_test_email_form').get(0).setAttribute('action', '/emails/' + <%= @model.id.to_s %> + '/send_test');
+			$('#send_test_email_form').get(0).setAttribute('action', '/receipt_emails/' + <%= @model.id.to_s %> + '/send_test');
 			$('.modal_company_name').text('<%= @model.company.trading_name %>');
 			$('#send_test_email_modal').modal('show');
 		});
-
-		$('.remove_btn').click(function(ev) {
-
-			$('#remove_email_form').removeAttr('data-remote');
-			$('#remove_email_form').get(0).setAttribute('action', '/emails/' + <%= @model.id.to_s %>);
-			$('.modal_company_name').text('<%= @model.company.trading_name %>');
-			$('#remove_email_modal').modal('show');
-
-	});
 	<% end %>
 
 	var temp_id = -1;
@@ -270,10 +258,5 @@
 			$('#email_address_' + id).remove();
 		});
 	});
-
-	var email_type_titles = new Array();
-	<% EmailType.all.each do |type| %>
-	  	email_type_titles['<%= type.id%>'] = '<%= type.email_title %>';
-	<% end %>
 
 </script>

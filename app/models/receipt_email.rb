@@ -1,6 +1,6 @@
 require 'date'
 
-class Email < ActiveRecord::Base
+class ReceiptEmail < ActiveRecord::Base
 
   audited
   include ModelHelper
@@ -11,9 +11,7 @@ class Email < ActiveRecord::Base
   has_many :email_histories
   accepts_nested_attributes_for :email_histories
   belongs_to :company
-  #belongs_to :type, :class_name => 'EmailType', :foreign_key => 'email_type_id'
   alias_attribute :history, :email_histories
-  #alias_attribute :type, :email_type_id
 
 
   # Validations
@@ -21,7 +19,6 @@ class Email < ActiveRecord::Base
   validate :validate_model
   validates :company, uniqueness: true
   validates :value, :day_of_month, :company, :body, :presence => true
-  #:type
 
 
   # Methods
@@ -87,7 +84,7 @@ class Email < ActiveRecord::Base
     result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
   end
 
-  def processed_pdf_text(date = nil)
+  def processed_receipt_text(date = nil)
 
     if date.nil?
       date = Date.today

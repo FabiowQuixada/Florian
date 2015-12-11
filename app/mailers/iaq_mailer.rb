@@ -1,6 +1,6 @@
 class IaqMailer < ApplicationMailer
 
-  def send_email(email, date = nil, type, user)
+  def send_receipt_email(email, date = nil, type, user)
     @email = email
 
     if type == 0
@@ -8,7 +8,7 @@ class IaqMailer < ApplicationMailer
     end
 
     email.email_histories.create(
-        email: email,
+        receipt_email: email,
         body: email.body,
         value: email.value,
         recipients_array: email.recipients_array,
@@ -29,9 +29,10 @@ class IaqMailer < ApplicationMailer
     mail(to: recipients, bcc: user.bcc, body: email.processed_body(date) + " \n \n-- \n" + user.signature, subject: prefix + email.processed_title(date))
   end
 
-  def send_email_daily()
+  def send_receipt_email_daily()
 
-    emails = Email.find_by_day_of_month Time.now.day
+    # TODO active
+    emails = ReceiptEmail.find_by_day_of_month Time.now.day
 
     for email in emails
         send_email email, Date.new, 0, User.first

@@ -30,31 +30,31 @@
 
 	<% if model.class.column_names.include? 'active' %>
 
-	jQuery(function($) {
+		jQuery(function($) {
 
-	    $('.status').on('ajax:success', function(event, data, status, xhr) {
-	        display_notice(data.message);
-	        update_status(data.id, data.activated);
-	    }).on("ajax:error", function(e, xhr, status, error) {
-			parse_json_errors(xhr.responseText);
+		    $('.status').on('ajax:success', function(event, data, status, xhr) {
+		        display_notice(data.message);
+		        update_status(data.id, data.activated);
+		    }).on("ajax:error", function(e, xhr, status, error) {
+				parse_json_errors(xhr.responseText);
+			});
+
+			function update_status(id, is_now_active)
+			{
+				var target = "#<%= model.class.name.downcase %>_" + id + " .status > a";
+
+				if(is_now_active)
+				{
+					$(target).attr("href", change_status_path(id, is_now_active));
+					$(target).html('<%= image_tag('activate.png', :title => genderize_tag(model, 'is_inactive')) %>');
+				}
+				else
+				{
+					$(target).attr("href", change_status_path(id, is_now_active));
+					$(target).html('<%= image_tag('inactivate.png', :title => genderize_tag(model, 'is_active')) %>');
+				}
+			}
 		});
-
-		function update_status(id, is_now_active)
-		{
-			var target = "#<%= model.class.name.downcase %>_" + id + " .status > a";
-
-			if(is_now_active)
-			{
-				$(target).attr("href", change_status_path(id, is_now_active));
-				$(target).html('<%= image_tag('activate.png', :title => genderize_tag(model, 'is_inactive')) %>');
-			}
-			else
-			{
-				$(target).attr("href", change_status_path(id, is_now_active));
-				$(target).html('<%= image_tag('inactivate.png', :title => genderize_tag(model, 'is_active')) %>');
-			}
-		}
-	});
 
 	function change_status_path(id, is_now_active)
 	{

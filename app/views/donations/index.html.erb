@@ -7,7 +7,7 @@
 
         <div class="col-md-6 form-group">
             <%= label_tag "Mês" %>
-            <%= select_tag("search[month]", options_for_select(@month_list, @month), {:include_blank => genderize_full_tag(Email.new, 'helpers.select.all'), class: "form-control"}) %>
+            <%= select_tag("search[month]", options_for_select(@month_list, @month), {:include_blank => genderize_full_tag(ReceiptEmail.new, 'helpers.select.all'), class: "form-control"}) %>
         </div>
     </div> -->
 

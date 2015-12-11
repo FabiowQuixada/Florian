@@ -1,43 +1,35 @@
-class EmailsController < ApplicationController
+class ProductAndServiceEmailsController < ApplicationController
 
   include MainConcern
-  include StatusConcern
-  arguable model_class: Email
+  arguable model_class: ProductAndServiceEmail
   load_and_authorize_resource
 
-  def index
+  def send_email
 
-    @model = Email.new
-    @list = order_emails_by_date
+    @model = ProductAndServiceEmail.new product_and_service_email_params
 
-    @breadcrumbs = Hash[@model.model_name.human(:count => 2) => ""]
-
-    # TODO tipo de e-mail
-    @recent_emails = EmailHistory.where("created_at >= :start_date AND send_type != 2",
-      {start_date: Date.new - Email.recent_emails_days.days})
-
-  end
-
-  def resend
-
-    email = load_email
-
-    begin
-
-      date = check_competence
-
-      if !email.valid?
-        return render json: email.errors, status: :unprocessable_entity
-      end
-
-      IaqMailer.send_email(email, date, 1, current_user).deliver_now
-
-      return render history_as_json(email, 'resent')
-
-    rescue => exc
-      exception_message = handle_exception exc, I18n.t('alert.email.error_resending')
-      return render json: exception_message, status: :unprocessable_entity
+    if @model.save
+      redirect_to send(@model.model_name.route_key + "_path"), notice: genderize_tag(@model, 'created')
+    else
+      render '_form'
     end
+
+    # begin
+
+    #   date = check_competence
+
+    #   if !email.valid?
+    #     return render json: email.errors, status: :unprocessable_entity
+    #   end
+
+    #   IaqMailer.send_email(email, date, 1, current_user).deliver_now
+
+    #   return render history_as_json(email, 'resent')
+
+    # rescue => exc
+    #   exception_message = handle_exception exc, I18n.t('alert.email.error_resending')
+    #   return render json: exception_message, status: :unprocessable_entity
+    # end
   end
 
   def send_test
@@ -61,24 +53,17 @@ class EmailsController < ApplicationController
     end
   end
 
-
-  def self.send_email_daily
-
-    emails = Email.where(day_of_month: Time.now.day, active: true)
-
-    emails.each do |email|
-        IaqMailer.send_email(email, Date.today, 0, User.first).deliver_now
-    end
-  end
-
   private ###########################################################################################
 
   def params_validation
-    email_params
+
+byebug
+
+    product_and_service_email_params
   end
 
-  def email_params
-    params.require(:email).permit(:id, :email_configuration_id, :body, :value, :day_of_month, :active, :company_id, :recipients_array)
+  def product_and_service_email_params
+    params.require(:product_and_service_email).permit(:id, :competence_date, :psychology, :physiotherapy, :plastic_surgery, :mesh_service, :gynecology, :occupational_therapy, :psychology_return, :physiotherapy_return, :plastic_surgery_return, :mesh_service_return, :gynecology_return, :occupational_therapy_return, :mesh, :cream, :protector, :silicon, :mask, :foam, :skin_expander, :cervical_collar)
   end
 
   # TODO If the user wants to do an action with the (possibly unsaved) data on the screen
@@ -88,7 +73,7 @@ class EmailsController < ApplicationController
 
   def order_emails_by_date
 
-    emails = Email.all
+    emails = ProductAndServiceEmail.all
 
     this_month_emails = Array.new
     next_month_emails = Array.new
@@ -116,7 +101,7 @@ class EmailsController < ApplicationController
 
     # If there's anything other than the id, load it from the parameters
     # Else, load it from the database
-    email = Email.find params[:id]
+    email = ProductAndServiceEmail.find params[:id]
 
     if !params[:email_id]
       email.assign_attributes email_params

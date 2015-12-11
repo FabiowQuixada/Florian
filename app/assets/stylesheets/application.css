@@ -15,6 +15,21 @@
    *= require bootstrap-datepicker3
  */
 
+ ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+}
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+@media (min-width: 979px) {
+  ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+  }
+}
+
 .form_status_box{
   margin-top: 5px;
   margin-bottom: 20px;

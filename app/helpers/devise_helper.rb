@@ -7,12 +7,12 @@ module DeviseHelper
                       :count => resource.errors.count,
                       :resource => resource.class.model_name.human.downcase)
 
-    model = Email.new
-    
+    model = ReceiptEmail.new
+
     resource.errors.full_messages.each do |msg|
       model.errors.add(:base, msg)
     end
-    
+
     render 'helpers/form_errors', :model => model
   end
 

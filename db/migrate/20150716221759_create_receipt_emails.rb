@@ -1,6 +1,6 @@
-class CreateEmails < ActiveRecord::Migration
+class CreateReceiptEmails < ActiveRecord::Migration
   def change
-    create_table :emails do |t|
+    create_table :receipt_emails do |t|
       t.string :recipients_array,                       null: false
       t.string :body,                                   null: false
       t.integer :day_of_month,                          null: false

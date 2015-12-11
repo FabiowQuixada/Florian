@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 20151206020631) do
   add_index "email_histories", ["user_id"], name: "index_email_histories_on_user_id", using: :btree
 
   create_table "product_and_service_emails", force: :cascade do |t|
-    t.string   "competence",                  null: false
+    t.string   "competence_date",             null: false
     t.integer  "psychology",                  null: false
     t.integer  "physiotherapy",               null: false
     t.integer  "plastic_surgery",             null: false
@@ -168,7 +168,6 @@ ActiveRecord::Schema.define(version: 20151206020631) do
     t.string   "name",                                  null: false
     t.boolean  "active",                 default: true, null: false
     t.text     "signature"
-    t.string   "test_recipient"
     t.string   "bcc"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
