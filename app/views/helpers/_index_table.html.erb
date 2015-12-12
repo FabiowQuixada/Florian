@@ -47,9 +47,9 @@
 			<% if model.class.column_names.include? 'active' %>
 				<td class="hidden-xs status" style="width: 16px;">
 					<% if iterator.active %>
-						<%= link_to image_tag("activate.png", :title => genderize_tag(iterator, 'is_active'), :class => 'inactivate_btn status_btn'), send("inactivate_" + @model.class.name.singularize.underscore + "_path", iterator), method: :post, :remote => true, :id => 'change_status_' + iterator.id.to_s, "data-type" => :json, :class => 'inactivate_btn' %>
+						<%= link_to image_tag("activate.png", :title => genderize_tag(iterator, 'is_active'), :class => 'deactivate_btn status_btn'), send("deactivate_" + @model.class.name.singularize.underscore + "_path", iterator), method: :post, :remote => true, :id => 'change_status_' + iterator.id.to_s, "data-type" => :json, :class => 'deactivate_btn' %>
 					<% else %>
-						<%= link_to image_tag("inactivate.png", :title => genderize_tag(iterator, 'is_inactive'), :class => 'activate_btn status_btn'), send("activate_" + @model.class.name.singularize.underscore + "_path", iterator), method: :post, :remote => true, :id => 'change_status_' + iterator.id.to_s, "data-type" => :json, :class => 'activate_btn' %>
+						<%= link_to image_tag("deactivate.png", :title => genderize_tag(iterator, 'is_inactive'), :class => 'activate_btn status_btn'), send("activate_" + @model.class.name.singularize.underscore + "_path", iterator), method: :post, :remote => true, :id => 'change_status_' + iterator.id.to_s, "data-type" => :json, :class => 'activate_btn' %>
 					<% end %>
 				</td>
 			<% end %>

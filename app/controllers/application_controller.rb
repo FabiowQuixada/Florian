@@ -30,8 +30,9 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
   end
 
-  def handle_exception(exc, default_message)
-    logger.error("Exception catch ==> #{exc.message}")
+  def handle_exception(exc, default_message = nil)
+
+    logger.error("Exception catch ==> " + default_message)
 
     if exc.message. == 'getaddrinfo: Name or service not known'
       return I18n.t('exception.no_internet_connection')
@@ -42,7 +43,7 @@ class ApplicationController < ActionController::Base
     elsif exc.instance_of? IaqException
       return exc.message
     else
-      return I18n.t('alert.email.error_resending')
+      return default_message
     end
   end
 

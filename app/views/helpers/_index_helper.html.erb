@@ -51,7 +51,7 @@
 				else
 				{
 					$(target).attr("href", change_status_path(id, is_now_active));
-					$(target).html('<%= image_tag('inactivate.png', :title => genderize_tag(model, 'is_active')) %>');
+					$(target).html('<%= image_tag('deactivate.png', :title => genderize_tag(model, 'is_active')) %>');
 				}
 			}
 		});
@@ -61,7 +61,7 @@
 		<% model_name = model.class.to_s.underscore %>
 
 		if(is_now_active)
-			return '<%= send("inactivate_#{model_name}_path", -1) %>'.replace("-1", id);
+			return '<%= send("deactivate_#{model_name}_path", -1) %>'.replace("-1", id);
 		else
 			return '<%= send("activate_#{model_name}_path", -1) %>'.replace("-1", id);
 	}

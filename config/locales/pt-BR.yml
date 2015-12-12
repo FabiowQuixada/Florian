@@ -128,7 +128,7 @@ pt-BR:
     f:
       s: "%{model} ativada com sucesso!"
       p: "%{model} ativadas com sucesso!"
-  inactivated:
+  deactivated:
     m:
       s: "%{model} inativado com sucesso!"
       p: "%{model} inativados com sucesso!"
@@ -256,7 +256,7 @@ pt-BR:
       filter: Filtrar
       remove: Remover
       activate: Ativar
-      inactivate: Inativar
+      deactivate: Inativar
       email:
         add_recipient: +
         send: Enviar
@@ -446,6 +446,8 @@ pt-BR:
       second: Segundo
       year: Ano
   errors:
+    user:
+      cannot_deactivate_admin: 'Não é possível desativar um administrador;'
     email:
       one_recipient: "O e-mail deve ter pelo menos um destinatário;"
       value_mandatory: "O campo 'Valor' é obrigatório;"

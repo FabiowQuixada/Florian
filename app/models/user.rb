@@ -28,17 +28,12 @@ class User < ActiveRecord::Base
   end
 
   def active_for_authentication?
-        # Uncomment the below debug statement to view the properties of the returned self model values.
-        # logger.debug self.to_yaml
-
     super && active?
   end
 
   def active=(value)
 
-    if admin?
-      raise 'Não pode inativar admin'
-    end
+    raise I18n.t('errors.user.cannot_deactivate_admin') if admin?
 
     write_attribute(:active, value)
 

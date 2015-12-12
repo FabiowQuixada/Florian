@@ -23,21 +23,30 @@ module StatusConcern extend ActiveSupport::Concern
   end
 
   def activate
+    begin
+      model = model_class.find params[:id]
+      model.active = true
+      model.save
 
-    model = model_class.find params[:id]
-    model.active = true
-    model.save
-
-    render :json => {:message => genderize_tag(model, 'activated'), :id => model.id, :activated => true}
+      render :json => {:message => genderize_tag(model, 'activated'), :id => model.id, :activated => true}
+    rescue => exc
+      exception_message = handle_exception exc, exc.message
+      return render json: exception_message, status: :unprocessable_entity
+    end
   end
 
-  def inactivate
+  def deactivate
+    begin
 
-    model = model_class.find params[:id]
-    model.active = false
-    model.save
+      model = model_class.find params[:id]
+      model.active = false
+      model.save
 
-    render :json => {:message => genderize_tag(model, 'inactivated'), :id => model.id, :activated => false}
+      render :json => {:message => genderize_tag(model, 'deactivated'), :id => model.id, :activated => false}
+    rescue => exc
+      exception_message = handle_exception exc, exc.message
+      return render json: exception_message, status: :unprocessable_entity
+    end
   end
 
   private

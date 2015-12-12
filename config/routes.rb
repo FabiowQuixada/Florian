@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
       member do
         post 'activate'
-        post 'inactivate'
+        post 'deactivate'
       end
     end
 
@@ -25,19 +25,13 @@ Rails.application.routes.draw do
 
       member do
         post 'activate'
-        post 'inactivate'
+        post 'deactivate'
       end
     end
 
   end
 
-  resources :companies, except: [:show, :destroy] do
-
-    member do
-      post 'activate'
-      post 'inactivate'
-    end
-  end
+  resources :companies, except: [:show, :destroy]
 
   resources :receipt_emails, except: [:show, :destroy] do
 
@@ -45,7 +39,7 @@ Rails.application.routes.draw do
       post 'resend'
       post 'send_test'
       post 'activate'
-      post 'inactivate'
+      post 'deactivate'
     end
   end
 
