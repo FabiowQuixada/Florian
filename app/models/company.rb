@@ -16,7 +16,7 @@ class Company < ActiveRecord::Base
   has_many :donations, -> { order("donation_date") }, :dependent => :destroy
   has_many :contacts, -> { order("contact_type") }, :dependent => :destroy
   accepts_nested_attributes_for :donations, :allow_destroy => true, reject_if: :donation_rejectable?
-  accepts_nested_attributes_for :contacts#, reject_if: :contact_rejectable?
+  accepts_nested_attributes_for :contacts
 
 
   # Validations

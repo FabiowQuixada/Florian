@@ -28,11 +28,11 @@ class ReceiptEmail < ActiveRecord::Base
     if !value.blank?
 
       if value == 0
-        errors.add(:value, I18n.t('errors.email.value_mandatory'))
+        errors.add :value, I18n.t('errors.email.value_mandatory')
       elsif value < 0
-        errors.add(:value, I18n.t('errors.email.value_positive'))
+        errors.add :value, I18n.t('errors.email.value_positive')
       elsif value > 1000000
-        errors.add(:value, I18n.t('errors.email.value_max'))
+        errors.add :value, I18n.t('errors.email.value_max')
       end
     end
 

@@ -5,7 +5,6 @@ JS:
  - Competência no modal: datepicker;
  - Salvar nova empresa;
 Configuração e acesso ao banco postgresql;
-Melhorar mensagens de telefone inválido;
 
 Git;
 helper explicando como funciona a adição de doações;
@@ -33,7 +32,6 @@ Interno:
  - Validações mais fortes;
  - Enviar e-mail: melhorar diferenciação quando for do index ou do form;
  - Envio de e-mail tá no controller, deveria estar no IaqMailer;
- - preprocess_data();
  - Selects em Company duplicado;
  - Usuário: Novo, Senha no Firefox;
  - SSH no windows;

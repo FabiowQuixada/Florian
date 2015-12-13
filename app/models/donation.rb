@@ -11,6 +11,7 @@ class Donation < ActiveRecord::Base
   # Relationships
   belongs_to :company
 
+
   # Validations
   validate :validate_model
   validates :donation_date, :company, :presence => true
@@ -40,9 +41,9 @@ class Donation < ActiveRecord::Base
   def validate_model
 
     if ((value.nil? or value != '0,00') or (!remark.nil? or !remark.empty?)) and !donation_date.is_a?(Date)
-      errors.add :donation_date, 'tem que ter data se tiver um ou outro preenchido'
+      errors.add :donation_date, I18n.t('errors.donation.date_mandatory')
     elsif (value.nil? or value == '0,00') and (remark.nil? or remark.empty?) and donation_date.is_a?(Date)
-      errors.add :donation_date, "Preencha pelo menos um dos seguintes campos: 'Valor' ou 'Observação';"
+      errors.add :donation_date, I18n.t('errors.donation.value_or_remark')
     end
   end
 
