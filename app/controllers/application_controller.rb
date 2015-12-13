@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 
   def handle_exception(exc, default_message = nil)
 
-    logger.error("Exception catch ==> " + default_message)
+    logger.error("Exception catch [" + DateTime.new + "] ==> " + default_message)
 
     if exc.message. == 'getaddrinfo: Name or service not known'
       return I18n.t('exception.no_internet_connection')

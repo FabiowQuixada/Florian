@@ -111,10 +111,6 @@ class ReceiptEmail < ActiveRecord::Base
     end
   end
 
-  def capital_competence(date = nil)
-    competence(date).capitalize
-  end
-
   def recipients_as_array
     if recipients_array.nil? || recipients_array.empty?
       return Array.new

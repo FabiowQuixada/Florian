@@ -24,24 +24,6 @@ class CreateCompanies < ActiveRecord::Migration
     t.integer :payment_frequency
    t.integer   :payment_period
 
-    # Contacts
-  t.string   :resp_name
-  t.string   :resp_cellphone
-   t.string  :resp_phone
- t.string   :resp_fax
-   t.string  :resp_role
-  t.string   :resp_email_address
-
- t.string   :assistant_name
- t.string   :assistant_phone
-  t.string   :assistant_cellphone
-  t.string  :assistant_email_address
-
-  t.string   :financial_name
-   t.string  :financial_phone
-  t.string  :financial_cellphone
-  t.string   :financial_email_address
-
       t.timestamps null: false
     end
 

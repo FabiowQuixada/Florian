@@ -71,33 +71,35 @@
 				preprocess_data();
 
 				var changed_values_list = "";
-				var any_change = false;
 
-				for(i = 0; i < attribute_names.length; i++) {
+				if(!window.any_change) {
+					for(i = 0; i < attribute_names.length; i++) {
 
-					var value = $("[name='<%= model.model_name.param_key %>[" + attribute_names[i] + "]']");
+						var value = $("[name='<%= model.model_name.param_key %>[" + attribute_names[i] + "]']");
 
-					if(typeof value.val() !== 'undefined')
-					{
-						if(typeof value.val() === 'string' || value.val() instanceof String)
+						if(typeof value.val() !== 'undefined')
 						{
-							value = value.val().replace(/(\r\n|\n|\r)/gm,"");
-							value = escapeHtml(value);
-						}
+							if(typeof value.val() === 'string' || value.val() instanceof String)
+							{
+								value = value.val().replace(/(\r\n|\n|\r)/gm,"");
+								value = escapeHtml(value);
+							}
 
-					    if(original_values[attribute_names[i]] != value)
-					    {
-					    	changed_values_list += attribute_names[i] + " ";
-							edited_but_not_saved('/<%= model.model_name.route_key %>');
-							any_change = true;
-					    }
+						    if(original_values[attribute_names[i]] != value)
+						    {
+						    	changed_values_list += attribute_names[i] + " ";
+
+								window.any_change = true;
+						    }
+						}
 					}
 				}
 
 				//alert(changed_values_list);
 
-				if(!any_change)
-				{
+				if(window.any_change) {
+					edited_but_not_saved('/<%= model.model_name.route_key %>');
+				} else {
 					parent.history.back();
 				}
 

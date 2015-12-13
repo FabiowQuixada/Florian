@@ -112,26 +112,26 @@
 
 									<%= f.fields_for :donations do |d| %>
 										<% if d.object.persisted? %>
-											<tr>
-												<td class="" style="width: 40%"><%= d.object.donation_date %></td>
-												<td class=""><%= number_to_currency(d.object.value) %></td>
-												<td style="width: 35%"><%= d.object.remark %></td>
+											<tr class="persisted_donation">
+												<td class="donation_date" style="width: 40%"><%= d.object.donation_date %></td>
+												<td class="donation_value"><%= number_to_currency(d.object.value) %></td>
+												<td style="width: 35%" class="donation_remark"><%= d.object.remark %></td>
 											</tr>
 										<% else %>
 
-											<tr>
+											<tr class="transient_donation">
 												<td class="">
 													<div class="input-group date" data-behaviour='datepicker' >
-														<%= d.text_field :donation_date, {:class => 'form-control datepicker input-sm'} %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+														<%= d.text_field :donation_date, {:class => 'form-control datepicker input-sm donation_date new_donation_date'} %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 													</div>
 												</td>
 												<td class="">
 													<div class="input-group">
 														<span class="input-group-addon">R$</span>
-														<%= d.text_field :value, :id => "new_donation_value", :class => 'form-control money input-sm' %>
+														<%= d.text_field :value, :class => 'form-control money input-sm donation_value new_donation_value' %>
 													</div>
 												</td>
-												<td><%= d.text_field :remark, :class => 'form-control input-sm' %></td>
+												<td><%= d.text_field :remark, :class => 'form-control input-sm donation_remark new_donation_remark' %></td>
 											</tr>
 										<% end %>
 									<% end %>
@@ -152,115 +152,60 @@
 	</div><div class="row">
 		<div class="form-group col-md-12">
 			<fieldset>
-				<legend>Contatos</legend>
+				<legend><%= Contact.new.model_name.human(:count => 2) %></legend>
 
 				<ul class="nav nav-tabs">
-				  <li id="responsible_title" class="active clickable"><a>Responsável</a></li>
-				  <li id="assistant_title" class="clickable"><a>Secretária</a></li>
-				  <li id="financial_title" class="clickable"><a>Setor Financeiro</a></li>
+					<% f.object.contacts.each_with_index do |contact, index| %>
+						<li id="tab_<%= index %>_title" class="<%= 'active ' if index == 0 %>clickable"><a><%= t('activerecord.attributes.company.contacts.contact_' + index.to_s) %></a></li>
+					<% end %>
 				</ul>
 
-				<div class="container-fluid" style="background-color: white;">
-					<div id="responsible_tab">
-						<div class="row">
-							<div class="form-group col-md-4">
-								<%= f.label :resp_name %>
-								<%= f.text_field :resp_name, :class => 'form-control' %>
-							</div>
+				<% f.object.contacts.each_with_index do |contact, index| %>
+					<%= f.fields_for :contacts, contact do |ff| %>
 
-							<div class="form-group col-md-4">
-								<%= f.label :resp_role %>
-								<%= f.text_field :resp_role, :class => 'form-control' %>
-							</div>
+						<%= ff.hidden_field :contact_type %>
 
-							<div class="form-group col-md-4">
-								<%= f.label :resp_email_address %>
-								<div class="input-group">
-									<span class="input-group-addon">@</span>
-									<%= f.text_field :resp_email_address, :class => 'form-control' %>
+						<div class="container-fluid" style="background-color: white;">
+							<div id="tab_<%= index %>" style="<%= 'display: none;' if index != 0 %>">
+								<div class="row">
+									<div class="form-group col-md-4">
+										<%= ff.label :name %>
+										<%= ff.text_field :name, :class => 'form-control' %>
+									</div>
+
+									<div class="form-group col-md-4">
+										<%= ff.label :position %>
+										<%= ff.text_field :position, :class => 'form-control', :value => index != 0 ? t('activerecord.attributes.company.contacts.contact_' + index.to_s) : '', :readonly => index != 0 %>
+									</div>
+
+									<div class="form-group col-md-4">
+										<%= ff.label :email_address %>
+										<div class="input-group">
+											<span class="input-group-addon">@</span>
+											<%= ff.text_field :email_address, :class => 'form-control' %>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-4">
+										<%= ff.label :telephone %>
+										<%= ff.text_field :telephone, :class => 'form-control telephone' %>
+									</div>
+
+									<div class="form-group col-md-4">
+										<%= ff.label :celphone %>
+										<%= ff.text_field :celphone, :class => 'form-control cellphone' %>
+									</div>
+
+									<div class="form-group col-md-4">
+										<%= ff.label :fax %>
+										<%= ff.text_field :fax, :class => 'form-control fax' %>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="form-group col-md-4">
-								<%= f.label :resp_phone %>
-								<%= f.text_field :resp_phone, :class => 'form-control telephone' %>
-							</div>
-
-							<div class="form-group col-md-4">
-								<%= f.label :resp_cellphone %>
-								<%= f.text_field :resp_cellphone, :class => 'form-control cellphone' %>
-							</div>
-
-							<div class="form-group col-md-4">
-								<%= f.label :resp_fax %>
-								<%= f.text_field :resp_fax, :class => 'form-control fax' %>
-							</div>
-						</div>
-					</div>
-
-					<div id="assistant_tab" style="display: none;">
-						<div class="row">
-							<div class="form-group col-md-4">
-								<%= f.label :assistant_name %>
-								<%= f.text_field :assistant_name, :class => 'form-control' %>
-							</div>
-
-							<div class="form-group col-md-4">
-								<%= f.label :assistant_phone %>
-								<%= f.text_field :assistant_phone, :class => 'form-control telephone' %>
-							</div>
-
-							<div class="form-group col-md-4">
-								<%= f.label :assistant_cellphone %>
-								<%= f.text_field :assistant_cellphone, :class => 'form-control cellphone' %>
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-md-4">
-								<%= f.label :assistant_email_address %>
-								<div class="input-group">
-									<span class="input-group-addon">@</span>
-									<%= f.text_field :assistant_email_address, :class => 'form-control' %>
-								</div>
-							</div>
-
-							<div class="form-group col-md-8">
-							</div>
-						</div>
-					</div>
-
-					<div id="financial_tab" style="display: none;">
-						<div class="row">
-							<div class="form-group col-md-4">
-								<%= f.label :financial_name %>
-								<%= f.text_field :financial_name, :class => 'form-control' %>
-							</div>
-
-							<div class="form-group col-md-4">
-								<%= f.label :financial_phone %>
-								<%= f.text_field :financial_phone, :class => 'form-control telephone' %>
-							</div>
-
-							<div class="form-group col-md-4">
-								<%= f.label :financial_cellphone %>
-								<%= f.text_field :financial_cellphone, :class => 'form-control cellphone' %>
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-md-4">
-								<%= f.label :financial_email_address %>
-								<div class="input-group">
-									<span class="input-group-addon">@</span>
-									<%= f.text_field :financial_email_address, :class => 'form-control' %>
-								</div>
-							</div>
-
-							<div class="form-group col-md-8">
-							</div>
-						</div>
-					</div>
-					</div>
+					<% end %>
+				<% end %>
 			</fieldset>
 		</div>
 	</div>
@@ -282,8 +227,22 @@
 
 function preprocess_data()
 	{
-		// _form_helper.html.erb;
+		$('.new_donation_date').each(function() {
+			if($(this).val() != formatted_today())
+				window.any_change = true;
+		});
+
+		$('.new_donation_value').each(function() {
+			if($(this).val() != '0,00')
+				window.any_change = true;
+		});
+
+		$('.new_donation_remark').each(function() {
+			if($(this).val())
+				window.any_change = true;
+		});
 	}
+
 
 $(function(){
 
@@ -354,33 +313,24 @@ $(function(){
 		last_date.val(moment(first_date, "DD/MM/YYYY").add((temp-1), frequency_type).format("DD/MM/YYYY"));
 	}
 
-	$('#responsible_title').on('click', function()
-	{
-		hide_all_tabs_except('responsible');
-	});
+	<% @model.contacts.each_with_index do |contact, index| %>
 
-	$('#assistant_title').on('click', function()
-	{
-		hide_all_tabs_except('assistant');
-	});
+		$('#tab_<%= index %>_title').on('click', function()
+		{
+			hide_all_tabs_except(<%= index %>);
+		});
 
-	$('#financial_title').on('click', function()
-	{
-		hide_all_tabs_except('financial');
-	});
+	<% end %>
 
 	function hide_all_tabs_except(tab_id)
 	{
-		$('#responsible_title').removeClass('active');
-		$('#assistant_title').removeClass('active');
-		$('#financial_title').removeClass('active');
+		for(i = 0; i <= 2; ++i) {
+			$('#tab_' + i + '_title').removeClass('active');
+			$('#tab_' + i).hide();
+		}
 
-		$('#responsible_tab').hide();
-		$('#assistant_tab').hide();
-		$('#financial_tab').hide();
-
-		$('#' + tab_id + '_tab').show();
-		$('#' + tab_id + '_title').addClass('active');
+		$('#tab_' + tab_id).show();
+		$('#tab_' + tab_id + '_title').addClass('active');
 	};
 });
 </script>

@@ -1,62 +1,56 @@
 Voltar pelo browser: history API;
-Data - refresh;
-Data para doações adicionadas dinamicamente;
-Competência: data;
-Salvar nova empresa;
+JS:
+ - Data - refresh;
+ - Data para doações adicionadas dinamicamente;
+ - Competência no modal: datepicker;
+ - Salvar nova empresa;
 Configuração e acesso ao banco postgresql;
-Estudar o javascript do rails - pq comentando o negocio o dropdown dá certo;
-Ao adicionar uma doação e voltar, não aparece o "Deseja descartar?";
+Melhorar mensagens de telefone inválido;
+
 Git;
-Testar e-mail de test;
+helper explicando como funciona a adição de doações;
 
-Produtos e serviços:
-Campos com três dígitos;
-Configs;
-Competência;
-Encaminhar? Reenviar? teste?
-Visualizar;
+Testar: Ao adicionar uma doação e voltar, não aparece o "Deseja descartar?";
+Testar e-mail de teste (do usuário);
+Testar cco;
 
 
-Testes;
-Doações: background da linha, caminhos não-felizes;
-Filtros de doações;
-Produção + Desenvolvimento ao mesmo tempo, em portas diferentes;
-Testar teamviewer;
-Exportação dos dados;
-Mobile: Deslize horizontal;
-Github?
+Depois:
+ - Doações: background da linha, caminhos não-felizes;
+ - Produção + Desenvolvimento ao mesmo tempo, em portas diferentes;
+ - Testar teamviewer;
+ - Exportação dos dados;
+ - Filtros de doações;
+ - ModelHelper: nomes dos modelos;
+ - Produtos e serviços:
+   - Configs;
+   - Competência;
+   - Encaminhar? Reenviar? teste?
+   - Visualizar;
 
 
 Interno:
- - Relacionamentos: has e belongs;
+ - Validações mais fortes;
  - Enviar e-mail: melhorar diferenciação quando for do index ou do form;
  - Envio de e-mail tá no controller, deveria estar no IaqMailer;
- - "Enum" de histórico de e-mail;
  - preprocess_data();
  - Selects em Company duplicado;
  - Usuário: Novo, Senha no Firefox;
  - SSH no windows;
  - Reusar _donation_fields.html.erb;
- - Contatos da empresa;
+ - Log;
+ - Bibliotecas locais + Estudo avançado de jQuery (jQuery.noConflict());
+ - Como um back button deve funcionar?
+ - Como funciona a exclusão (cascata)?
+ - Temp_email_params;
+ - PDF: Não precisar salvar arquivo;
+ - No pt-br, precisa no nome do atributo + alias;
+ - Cancancan: permissões de status, enviar e-mail, etc;
 
- Frescurinha:
-  - Ordenador de colunas;
-  - Em um tamanho intermediário, o alert da colado no botao de sair;
-  - Melhorar mensagens de telefone inválido;
 
-
-==================================
-Log;
-Bibliotecas locais + Estudo avançado de jQuery (jQuery.noConflict());
-
-Como um back button deve funcionar?
-Como funciona a exclusão (cascata)?
-Temp_email_params;
-
-PDF: Não precisar salvar arquivo;
-No pt-br, precisa no nome do atributo + alias;
-
-Visual:
+Frescurinha:
+ - Ordenador de colunas;
+ - Em um tamanho intermediário, o alert da colado no botao de sair;
  - Estilização do menu ativo;
  - Smooth scroll no fechamento de alerts;
  - Smooth scroll na deleção de remetentes;
@@ -64,11 +58,14 @@ Visual:
  - Caixa de login centralizada verticalmente;
  - Logo centralizado entra a caixa e o topo;
  - Bootstrap select;
+ - Mobile: Deslize horizontal;
 
-Cancancan: permissões de status, enviar e-mail, etc;
-Configuração do e-mail fixa no _form (<input>);
 
 Testes:
-Salvar;
-Warning pop-up;
-Se já tiver logado, simplesmente reencaminhar p index, sem msg de erro.
+ - Salvar;
+ - not-saved pop-up;
+ - adicionar doação;
+ - Se já tiver logado, simplesmente reencaminhar p index, sem msg de erro.
+ - Mailing;
+ - Cron;
+ - Locale;

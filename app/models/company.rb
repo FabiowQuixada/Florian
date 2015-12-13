@@ -14,22 +14,26 @@ class Company < ActiveRecord::Base
   # Relationships
   has_one :email
   has_many :donations, -> { order("donation_date") }, :dependent => :destroy
+  has_many :contacts, -> { order("contact_type") }, :dependent => :destroy
   accepts_nested_attributes_for :donations, :allow_destroy => true, reject_if: :donation_rejectable?
+  accepts_nested_attributes_for :contacts#, reject_if: :contact_rejectable?
 
 
   # Validations
   validates :trading_name, :name, uniqueness: true
   validate :unique_cnpj
   validates :trading_name, :name, :cnpj, :address, :category, :group, :presence => true
-  validates :resp_phone, length: { is: 14 }, :allow_blank => true
-  validates :resp_cellphone, length: { in: 14..16 }, :allow_blank => true
-  validates :assistant_phone, length: { is: 14 }, :allow_blank => true
-  validates :assistant_cellphone, length: { in: 14..16 }, :allow_blank => true
-  validates :financial_phone, length: { is: 14 }, :allow_blank => true
-  validates :financial_cellphone, length: { in: 14..16 }, :allow_blank => true
 
 
   # Methods
+  after_initialize do
+    if self.contacts.empty?
+      for i in 0..2
+         self.contacts.new(contact_type: i)
+      end
+    end
+  end
+
   def gender
     'f'
   end

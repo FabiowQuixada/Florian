@@ -22,7 +22,6 @@
 
 		<!-- CSS -->
 		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.0/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-		<link href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 
 		<!-- Rails -->
 		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -32,7 +31,6 @@
 
 		<%= csrf_meta_tags %>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.24.6/js/jquery.tablesorter.js"></script>
 	</head>
 
 	<body>
@@ -59,17 +57,30 @@
 								    </div>
 							    <div class="collapse navbar-collapse" id="main_menu">
 							      <ul class="nav navbar-nav">
-							        <li class="<%= 'active' if params[:controller] == 'companies' %>">
+							        		<li class="<%# 'active' if params[:controller] == 'companies' %>">
 										<a href="/companies"><%= Company.new.model_name.human(:count => 2) %></a>
 									</li>
-									<li class="<%= 'active' if params[:controller] == 'emails' %>">
-										<a href="/emails"><%= Email.new.model_name.human(:count => 2) %></a>
+									<li class="<%# 'active' if params[:controller] == 'donations' %>">
+										<a href="/donations"><%= Donation.new.model_name.human(:count => 2) %></a>
+									</li>
+									<li class="dropdown <%# 'active' if params[:controller] == 'receipt_emails' %>">
+										<a class="dropdown-toggle" data-toggle="dropdown" href="/receipt_emails"><%= ReceiptEmail.new.model_name.human(:count => 2) %></a>
+										 <!-- O 'a' acima tem que ter class="dropdown-toggle" data-toggle="dropdown"  -->
+
+
+										 <ul class="dropdown-menu">
+									            <li><a href="/receipt_emails">Recibo</a></li>
+									            <li><a href="/product_and_service_emails">Financeiro & Serviços</a></li>
+									          </ul>
+									</li>
+									<li class="dropdown <%# 'active' if params[:controller] == 'product_and_service_emails' %>">
+										<a href="/product_and_service_emails"><%= ProductAndServiceEmail.new.model_name.human(:count => 2) %></a>
 									</li>
 									<% if !current_user.nil? && current_user.admin? %>
-										<li class="<%= 'active' if params[:controller] == 'users' %>">
+										<li class="<%# 'active' if params[:controller] == 'users' %>">
 											<a href="/admin/users"><%= User.new.model_name.human(:count => 2) %></a>
 										</li>
-										<li class="<%= 'active' if params[:controller] == 'roles' %>">
+										<li class="<%# 'active' if params[:controller] == 'roles' %>">
 											<a href="/admin/roles"><%= Role.new.model_name.human(:count => 2) %></a>
 										</li>
 									<% end %>
@@ -83,7 +94,7 @@
 							</nav>
 
 							<div class="row non-menu" style="vertical-align: middle; ">
-								<div class="col-xs-12 col-md-4 col-lg-4">
+								<div class="col-xs-12 col-md-6 col-lg-6">
 									<ol class = "breadcrumb">
 										<% @breadcrumbs.each_pair do |u, index| %>
 
@@ -95,7 +106,7 @@
 										<% end %>
 									</ol>
 								</div>
-								<div class="hidden-xs col-md-4 col-lg-4"></div>
+								<div class="hidden-xs col-md-2 col-lg-2"></div>
 								<div class="hidden-xs col-md-4 col-lg-4" style="margin-top: 10px;">
 									<div align="right" style="vertical-align: middle;">
 										<%= t('helpers.logged_as') %> <%= link_to current_user.name, edit_user_registration_path %> <%= link_to(t('helpers.action.logout'), destroy_user_session_path, :method => :delete, :style => "margin-left: 5px;", :class => "btn btn-primary btn-xs") %>
@@ -122,7 +133,7 @@
 
 							<div id="global_info_box" class="alert alert-info fade in" style="display: none;">
 								<div id="global_info_massages">
-
+									<%= info %>
 								</div>
 							</div>
 
@@ -159,16 +170,31 @@
 	<script>
 
 	$('.datepicker').datepicker()
-  	$('[data-behaviour~=datepicker]').datepicker({
+   	$('[data-behaviour~=datepicker]').datepicker({
   		format: "dd/mm/yyyy",
-		language: "pt-BR"
-	});
+	 	language: "pt-BR"
+	 });
+
+	// $('#lala input').datepicker({
+	// 	    format: "mm/yyyy",
+ //    			minViewMode: 1,
+	// 	language: "pt-BR"
+	// });
+
+	$('#sandbox-container input').datepicker({
+    format: "mm/yyyy",
+    minViewMode: 1
+});
 
 		jQuery.noConflict();
 		$(function() {
 
 			<% if notice %>
 			$('#global_notice_box').show();
+			<% end %>
+
+			<% if flash[:info] %>
+			$('#global_info_box').show();
 			<% end %>
 
 			<% if alert %>
@@ -319,6 +345,25 @@
 		  var new_id = new Date().getTime();
 		  var regexp = new RegExp("new_" + association, "g")
 		  $(link).parent().parent().parent().before(content.replace(regexp, new_id));
+		}
+
+		function formatted_today()
+		{
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth()+1; //January is 0!
+			var yyyy = today.getFullYear();
+
+			if(dd<10) {
+			    dd='0'+dd
+			}
+
+			if(mm<10) {
+			    mm='0'+mm
+			}
+
+			today = dd+'/'+mm +'/'+yyyy;
+			 return today;
 		}
 
 	</script>

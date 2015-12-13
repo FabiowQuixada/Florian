@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206020631) do
+ActiveRecord::Schema.define(version: 20151212012013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,40 +40,41 @@ ActiveRecord::Schema.define(version: 20151206020631) do
   add_index "audits", ["user_id", "user_type"], name: "user_index", using: :btree
 
   create_table "companies", force: :cascade do |t|
-    t.string   "trading_name",            null: false
-    t.string   "name",                    null: false
-    t.string   "cnpj",                    null: false
+    t.string   "trading_name",      null: false
+    t.string   "name",              null: false
+    t.string   "cnpj",              null: false
     t.string   "cep"
-    t.string   "address",                 null: false
+    t.string   "address",           null: false
     t.string   "neighborhood"
     t.string   "city"
     t.string   "state"
     t.string   "email_address"
     t.string   "website"
     t.text     "remark"
-    t.integer  "category",                null: false
-    t.integer  "group",                   null: false
+    t.integer  "category",          null: false
+    t.integer  "group",             null: false
     t.integer  "contract"
     t.date     "first_parcel"
     t.integer  "payment_frequency"
     t.integer  "payment_period"
-    t.string   "resp_name"
-    t.string   "resp_cellphone"
-    t.string   "resp_phone"
-    t.string   "resp_fax"
-    t.string   "resp_role"
-    t.string   "resp_email_address"
-    t.string   "assistant_name"
-    t.string   "assistant_phone"
-    t.string   "assistant_cellphone"
-    t.string   "assistant_email_address"
-    t.string   "financial_name"
-    t.string   "financial_phone"
-    t.string   "financial_cellphone"
-    t.string   "financial_email_address"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string   "name"
+    t.string   "position"
+    t.string   "email_address"
+    t.string   "telephone"
+    t.string   "celphone"
+    t.string   "fax"
+    t.integer  "contact_type",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "company_id",    null: false
+  end
+
+  add_index "contacts", ["company_id"], name: "index_contacts_on_company_id", using: :btree
 
   create_table "donations", force: :cascade do |t|
     t.decimal  "value",         precision: 8, scale: 2, null: false
@@ -178,6 +179,7 @@ ActiveRecord::Schema.define(version: 20151206020631) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
 
+  add_foreign_key "contacts", "companies"
   add_foreign_key "donations", "companies"
   add_foreign_key "email_histories", "receipt_emails"
   add_foreign_key "email_histories", "users"

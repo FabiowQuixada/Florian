@@ -16,6 +16,9 @@ pt-BR:
       company:
         one: Empresa
         other: Empresas
+      contact:
+        one: Contato
+        other: Contatos
       user:
         one: Usuário
         other: Usuários
@@ -84,21 +87,18 @@ pt-BR:
         remark: Anotações Gerais sobre a empresa
         payment_frequency: Frequência
         payment_period: No. parcelas
-        resp_name: Nome
-        resp_role: Cargo
-        resp_cellphone: Celular
-        resp_phone: Telefone
-        resp_fax: FAX
-        resp_email_address: E-mail
-        assistant_name: Nome
-        assistant_phone: Telefone
-        assistant_cellphone: Celular
-        assistant_email_address: E-mail
-        financial_name: Nome
-        financial_phone: Telefone
-        financial_cellphone: Celular
-        financial_email_address: E-mail
         group: "Tipo"
+        contacts:
+          contact_0: Responsável
+          contact_1: Secretária
+          contact_2: Setor Financeiro
+      contact:
+        name: Nome
+        position: Cargo
+        telephone: Celular
+        celphone: Telefone
+        fax: FAX
+        email_address: E-mail
       donation:
         company: Mantenedora
         date: Data
