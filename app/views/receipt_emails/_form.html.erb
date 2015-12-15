@@ -3,7 +3,7 @@
 	<%= render partial: "helpers/form_errors", locals: {model: @model} %>
 
 	<%= f.hidden_field :id %>
-
+translation_missing
 	<div class="container-fluid padless">
 		<div class="row">
 			<div class="col-md-5">
@@ -128,7 +128,6 @@
 
 		function a()
 		{
-			jQuery.noConflict();
 			$('#resend_email_modal').modal('show');
 		}
 
@@ -225,9 +224,9 @@
 		return text.indexOf("<%= t('tags.company') %>") == -1 || text.indexOf("<%= t('tags.value') %>") == -1 || text.indexOf("<%= t('tags.competence') %>") == -1;
 	}
 
-	$("#add_company_to_body_btn").on('click', function() {add_tag_to_field('email_body', '<%= t('tags.company') %>')});
-	$("#add_value_to_body_btn").on('click', function() {add_tag_to_field('email_body', '<%= t('tags.value') %>')});
-	$("#add_competence_to_body_btn").on('click', function() {add_tag_to_field('email_body', '<%= t('tags.competence') %>')});
+	$("#add_company_to_body_btn").on('click', function() {add_tag_to_field('receipt_email_body', '<%= t('tags.company') %>')});
+	$("#add_value_to_body_btn").on('click', function() {add_tag_to_field('receipt_email_body', '<%= t('tags.value') %>')});
+	$("#add_competence_to_body_btn").on('click', function() {add_tag_to_field('receipt_email_body', '<%= t('tags.competence') %>')});
 
 	function add_tag_to_field(field, tag) {
 	    var caretPos = document.getElementById(field).selectionStart;

@@ -24,8 +24,6 @@ class ReceiptEmailsController < ApplicationController
 
     begin
 
-      date = check_competence
-
       if !email.valid?
         return render json: email.errors, status: :unprocessable_entity
       end
@@ -45,7 +43,6 @@ class ReceiptEmailsController < ApplicationController
     email = load_email
 
     begin
-      date = check_competence
 
       if !email.valid?
         return render json: email.errors, status: :unprocessable_entity
@@ -123,14 +120,6 @@ class ReceiptEmailsController < ApplicationController
     end
 
     email
-  end
-
-  def check_competence
-    begin
-      date = Date.strptime("{ 1, " + params[:competence][0..1] + ", " + params[:competence][3,6] + "}", "{ %d, %m, %Y }")
-    rescue Exception => exc
-      raise IaqException.new(I18n.t('alert.email.invalid_competence'))
-    end
   end
 
   def history_as_json(email, type)

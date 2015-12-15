@@ -13,6 +13,7 @@ gem "factory_girl_rails", "~> 4.0"
 gem 'capybara'
 gem 'selenium-webdriver'
 gem 'launchy'
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'bootstrap-sass'
 gem 'bootstrap-datepicker-rails'
 

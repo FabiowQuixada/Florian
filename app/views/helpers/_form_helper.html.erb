@@ -29,12 +29,10 @@
 	<% if !model.new_record? %>
 		$(document).ready(function() {
 
-			jQuery.noConflict();
 			jQuery(document).ready(function($) {
 
 				$("#remove_company_form").on("ajax:success", function(e, data, status, xhr) {
 					display_notice('<%= t('alert.email.test_sent') %>');
-					jQuery.noConflict();
 					$('#remove_company_modal').modal('hide');
 
 				}).on("ajax:error", function(e, xhr, status, error) {
