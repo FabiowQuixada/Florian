@@ -1,16 +1,10 @@
 require "test_helper"
 
-class DonationsControllerTest < Capybara::Rails::TestCase
+class DonationFlowTest < Capybara::Rails::TestCase
 
   test "add donation to company through new donation screen" do
 
-            visit root_path
-
-            fill_in 'E-mail', :with => 'ftquixada@gmail.com'
-            fill_in 'Senha', :with => 'fulano0123'
-            check 'Manter-me logado'
-
-            click_on 'Login'
+            login_as_admin
 
             visit new_donation_path
 
@@ -25,13 +19,7 @@ class DonationsControllerTest < Capybara::Rails::TestCase
 
       test "add donation and prepare to add another" do
 
-            visit root_path
-
-            fill_in 'E-mail', :with => 'ftquixada@gmail.com'
-            fill_in 'Senha', :with => 'fulano0123'
-            check 'Manter-me logado'
-
-            click_on 'Login'
+            login_as_admin
 
             visit new_donation_path
 

@@ -34,4 +34,7 @@ end
      click_on 'Login'
   end
 
+  def assert_success_message_displayed
+  end
+
 end

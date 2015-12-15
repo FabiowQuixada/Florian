@@ -1,6 +1,6 @@
     require 'test_helper'
 
-    class StatusTest < Capybara::Rails::TestCase
+    class StatusFlowTest < Capybara::Rails::TestCase
 
        DATA = [Role, User, ReceiptEmail]
 

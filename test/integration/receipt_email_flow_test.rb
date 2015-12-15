@@ -1,18 +1,10 @@
 require 'test_helper'
 
-class EmailsControllerTest < Capybara::Rails::TestCase
+class ReceiptEmailFlowTest < Capybara::Rails::TestCase
 
         test "resend e-mail though listing page" do
 
-            visit root_path
-
-            fill_in 'E-mail', :with => 'ftquixada@gmail.com'
-            fill_in 'Senha', :with => 'fulano0123'
-            check 'Manter-me logado'
-
-            click_on 'Login'
-
-            page.must_have_content('sucesso')
+            login_as_admin
 
             visit receipt_emails_path
 
@@ -25,15 +17,7 @@ class EmailsControllerTest < Capybara::Rails::TestCase
 
       test "resend e-mail though update page" do
 
-            visit root_path
-
-            fill_in 'E-mail', :with => 'ftquixada@gmail.com'
-            fill_in 'Senha', :with => 'fulano0123'
-            check 'Manter-me logado'
-
-            click_on('Login')
-
-            page.must_have_content('sucesso')
+            login_as_admin
 
             visit edit_receipt_email_path ReceiptEmail.first.id
 
@@ -46,15 +30,7 @@ class EmailsControllerTest < Capybara::Rails::TestCase
 
       test "send test e-mail though listing page" do
 
-            visit root_path
-
-            fill_in 'E-mail', :with => 'ftquixada@gmail.com'
-            fill_in 'Senha', :with => 'fulano0123'
-            check 'Manter-me logado'
-
-           click_on('Login')
-
-            page.must_have_content('sucesso')
+            login_as_admin
 
             visit receipt_emails_path
 
@@ -67,15 +43,7 @@ class EmailsControllerTest < Capybara::Rails::TestCase
 
       test "send test e-mail though update page" do
 
-            visit root_path
-
-            fill_in 'E-mail', :with => 'ftquixada@gmail.com'
-            fill_in 'Senha', :with => 'fulano0123'
-            check 'Manter-me logado'
-
-           click_on('Login')
-
-            page.must_have_content('sucesso')
+            login_as_admin
 
             visit edit_receipt_email_path ReceiptEmail.first.id
 

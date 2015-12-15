@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class EmailsControllerTest < Capybara::Rails::TestCase
+class UserFlowTest < Capybara::Rails::TestCase
 
         test "inactive user should not login" do
 

@@ -1,15 +1,13 @@
 Voltar pelo browser: history API;
 Configuração e acesso ao banco postgresql;
-Título em inglês da competência no modal;
-JS:
- - Data - refresh;
- - Data para doações adicionadas dinamicamente;
- - Salvar nova empresa;
-
 Git;
 helper explicando como funciona a adição de doações;
 Testar e-mail de teste (do usuário);
 Testar cco;
+JS:
+ - Data - refresh;
+ - Data para doações adicionadas dinamicamente;
+ - Salvar nova empresa;
 
 
 Depois:
@@ -33,7 +31,6 @@ Interno:
  - Usuário: Novo, Senha no Firefox;
  - SSH no windows;
  - Reusar _donation_fields.html.erb;
- - Log;
  - Bibliotecas locais + Estudo avançado de jQuery (jQuery.noConflict());
  - Como um back button deve funcionar?
  - Como funciona a exclusão (cascata)?
@@ -54,6 +51,7 @@ Frescurinha:
  - Logo centralizado entra a caixa e o topo;
  - Bootstrap select;
  - Mobile: Deslize horizontal;
+ - Título em inglês da competência no modal;
 
 
 Testes:
