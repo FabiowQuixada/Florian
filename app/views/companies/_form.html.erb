@@ -166,16 +166,16 @@
 						<%= ff.hidden_field :contact_type %>
 
 						<div class="container-fluid" style="background-color: white;">
-							<div id="tab_<%= index %>" style="<%= 'display: none;' if index != 0 %>">
+							<div id="tab_<%= index %>" class="contact_tab" style="<%= 'display: none;' if index != 0 %>">
 								<div class="row">
 									<div class="form-group col-md-4">
 										<%= ff.label :name %>
-										<%= ff.text_field :name, :class => 'form-control' %>
+										<%= ff.text_field :name, :class => 'form-control contact_name' %>
 									</div>
 
 									<div class="form-group col-md-4">
 										<%= ff.label :position %>
-										<%= ff.text_field :position, :class => 'form-control', :value => index != 0 ? t('activerecord.attributes.company.contacts.contact_' + index.to_s) : '', :readonly => index != 0 %>
+										<%= ff.text_field :position, :class => 'form-control contact_position', :value => index != 0 ? t('activerecord.attributes.company.contacts.contact_' + index.to_s) : '', :readonly => index != 0 %>
 									</div>
 
 									<div class="form-group col-md-4">
@@ -225,7 +225,7 @@
 
 <script>
 
-function preprocess_data()
+	function preprocess_data()
 	{
 		$('.new_donation_date').each(function() {
 			if($(this).val() != formatted_today())

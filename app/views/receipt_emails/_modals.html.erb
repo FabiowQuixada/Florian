@@ -15,8 +15,8 @@
 					</div>
 					<div class="form-group">
 						<%= label_tag t('activerecord.attributes.receipt_email.competence') %>
-						<div class="input-group competence">
-							<%= text_field_tag "competence", "default info", :class => "competence form-control", :id => "resend_competence" %>
+						<div class="input-group date" data-behaviour='datepickercompetence' >
+						 		 <%= text_field_tag 'competence', '', :id => 'resend_competence', :class => 'form-control' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 						</div>
 						<% if  params[:action]  == 'index' %>
 							<%= hidden_field_tag "email_id", :id => "resend_email_id" %>
@@ -51,7 +51,9 @@
 					</div>
 					<div class="form-group">
 						<%= label_tag t('activerecord.attributes.receipt_email.competence') %>
-						<%= text_field_tag "competence", "default info", :class => "form-control", :id => "send_test_competence" %>
+						<div class="input-group date" data-behaviour='datepickercompetence' >
+						 	<%= text_field_tag 'competence', '', :id => 'send_test_competence', :class => 'form-control' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+						</div>
 						<% if  params[:action]  == 'index' %>
 							<%= hidden_field_tag "email_id", :id => "send_test_email_id" %>
 						<% end %>
@@ -141,10 +143,6 @@
 
 	function clean_resend_modal() {
 
-		$('#resend_competence').mask('00/0000', {
-			placeholder : "__/____"
-		});
-
 		competence_default = ("0" + (new Date().getMonth()+1)).slice(-2) + "/" + new Date().getFullYear();
 
 		$('#resend_competence').val(competence_default);
@@ -152,16 +150,12 @@
 
 	function clean_send_test_modal() {
 
-		$('#send_test_competence').mask('00/0000', {
-			placeholder : "__/____"
-		});
-
 		competence_default = ("0" + (new Date().getMonth()+1)).slice(-2) + "/" + new Date().getFullYear();
 
 		$('#send_test_competence').val(competence_default);
 	}
 
-	jQuery.noConflict();
+	//jQuery.noConflict();
 	jQuery(document).ready(function($) {
 
 		$("#send_test_email_form").on("ajax:success", function(e, data, status, xhr) {

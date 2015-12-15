@@ -56,9 +56,6 @@ class ProductAndServiceEmailsController < ApplicationController
   private ###########################################################################################
 
   def params_validation
-
-byebug
-
     product_and_service_email_params
   end
 

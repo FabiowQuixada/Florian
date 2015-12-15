@@ -1,15 +1,13 @@
 Voltar pelo browser: history API;
+Configuração e acesso ao banco postgresql;
+Título em inglês da competência no modal;
 JS:
  - Data - refresh;
  - Data para doações adicionadas dinamicamente;
- - Competência no modal: datepicker;
  - Salvar nova empresa;
-Configuração e acesso ao banco postgresql;
 
 Git;
 helper explicando como funciona a adição de doações;
-
-Testar: Ao adicionar uma doação e voltar, não aparece o "Deseja descartar?";
 Testar e-mail de teste (do usuário);
 Testar cco;
 
@@ -20,7 +18,7 @@ Depois:
  - Testar teamviewer;
  - Exportação dos dados;
  - Filtros de doações;
- - ModelHelper: nomes dos modelos;
+ - ModelHelper: nomes de menu dos modelos;
  - Produtos e serviços:
    - Configs;
    - Competência;
@@ -29,7 +27,6 @@ Depois:
 
 
 Interno:
- - Validações mais fortes;
  - Enviar e-mail: melhorar diferenciação quando for do index ou do form;
  - Envio de e-mail tá no controller, deveria estar no IaqMailer;
  - Selects em Company duplicado;
@@ -60,10 +57,7 @@ Frescurinha:
 
 
 Testes:
- - Salvar;
  - not-saved pop-up;
- - adicionar doação;
- - Se já tiver logado, simplesmente reencaminhar p index, sem msg de erro.
+ - Editar contato: warning-poup-up;
  - Mailing;
- - Cron;
  - Locale;

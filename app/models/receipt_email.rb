@@ -68,7 +68,7 @@ class ReceiptEmail < ActiveRecord::Base
 
     result = title
 
-    result = result.gsub(I18n.t('tags.competence'), capital_competence(date))
+    result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
     result = result.gsub(I18n.t('tags.company'), company.trading_name)
     result
   end
@@ -80,7 +80,7 @@ class ReceiptEmail < ActiveRecord::Base
     end
 
     result = body
-    result = result.gsub(I18n.t('tags.competence'), capital_competence(date))
+    result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
     result = result.gsub(I18n.t('tags.company'), company.trading_name)
     result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
   end

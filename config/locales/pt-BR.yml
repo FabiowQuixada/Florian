@@ -5,6 +5,11 @@ pt-BR:
   development: Desenvolvimento
   test: Teste
   production: Produção
+  menu:
+    emails: E-mails
+    email:
+      receipt: Recibo
+      prod_serv: "Financeiro & Serviços"
   activerecord:
     models:
       receipt_email:

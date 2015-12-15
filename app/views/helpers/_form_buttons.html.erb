@@ -12,7 +12,7 @@
 
 <div class="">
 
-            <% if model.updatable %>
+            <% if model.updatable or !model.persisted? %>
                 <%= f.submit t('helpers.action.update'), :class => "btn btn-primary save_btn" %>
             <% end %>
 
@@ -20,5 +20,5 @@
 		<%= render partial: ActiveModel::Naming.plural(model).to_s + "/form_buttons", locals: {f: f} %>
 	<% end %>
 
-	<a class="btn btn-primary back_btn"></span><%= t('helpers.action.back') %></a>
+	<a id="form_back_btn" class="btn btn-primary back_btn"></span><%= t('helpers.action.back') %></a>
 </div>

@@ -64,17 +64,11 @@
 										<a href="/donations"><%= Donation.new.model_name.human(:count => 2) %></a>
 									</li>
 									<li class="dropdown <%# 'active' if params[:controller] == 'receipt_emails' %>">
-										<a class="dropdown-toggle" data-toggle="dropdown" href="/receipt_emails"><%= ReceiptEmail.new.model_name.human(:count => 2) %></a>
-										 <!-- O 'a' acima tem que ter class="dropdown-toggle" data-toggle="dropdown"  -->
-
-
-										 <ul class="dropdown-menu">
-									            <li><a href="/receipt_emails">Recibo</a></li>
-									            <li><a href="/product_and_service_emails">Financeiro & Serviços</a></li>
-									          </ul>
-									</li>
-									<li class="dropdown <%# 'active' if params[:controller] == 'product_and_service_emails' %>">
-										<a href="/product_and_service_emails"><%= ProductAndServiceEmail.new.model_name.human(:count => 2) %></a>
+										<a class="dropdown-toggle" data-toggle="dropdown" href="/receipt_emails"><%= t('menu.emails') %></a>
+										<ul class="dropdown-menu">
+										            <li><a href="/receipt_emails"><%= t('menu.email.receipt') %></a></li>
+										            <li><a href="/product_and_service_emails"><%= t('menu.email.prod_serv') %></a></li>
+									           </ul>
 									</li>
 									<% if !current_user.nil? && current_user.admin? %>
 										<li class="<%# 'active' if params[:controller] == 'users' %>">
@@ -169,22 +163,25 @@
 
 	<script>
 
+
+       $('.datepicker-competence').datepicker()
+       $('[data-behaviour~=datepickercompetence]').datepicker({
+		minViewMode: 1,
+		maxViewMode: 1,
+  		format: "mm/yyyy",
+  		autoclose: true,
+	 	language: "pt-BR",
+	 	setDate: new Date()
+	 });
+
+
 	$('.datepicker').datepicker()
    	$('[data-behaviour~=datepicker]').datepicker({
   		format: "dd/mm/yyyy",
-	 	language: "pt-BR"
+		autoclose: true,
+	 	language: "pt-BR",
+	 	setDate: new Date()
 	 });
-
-	// $('#lala input').datepicker({
-	// 	    format: "mm/yyyy",
- //    			minViewMode: 1,
-	// 	language: "pt-BR"
-	// });
-
-	$('#sandbox-container input').datepicker({
-    format: "mm/yyyy",
-    minViewMode: 1
-});
 
 		jQuery.noConflict();
 		$(function() {
