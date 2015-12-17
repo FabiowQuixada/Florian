@@ -1,0 +1,96 @@
+<div class="form-group">
+
+                    <%= f.label :recipients_array, :class => 'required' %>
+
+                    <div class="input-group">
+                        <span class="input-group-addon">@</span>
+                        <input type="text" class="form-control" id="new_recipient_field" placeholder="<%= t('helpers.receipt_email.new_recipient') %>">
+                        <span class="input-group-addon"><span class=" glyphicon glyphicon-plus add_recipient_btn" id="add_recipient_btn"></span></span>
+                        <span class="input-group-btn add_recipient_btn"/>
+                    </div>
+                </div>
+
+                <table id="recipients_table" class="table table-striped table-condensed table-bordered email_address_table">
+                    <tbody>
+                        <% @model.recipients_as_array.each_with_index do |email_address, index| %>
+                            <%= render partial: 'helpers/email_address', locals: {email_address: email_address, index: index} %>
+                        <% end %>
+                    </tbody>
+                </table>
+
+                <%= f.hidden_field :recipients_array %>
+
+<script>
+
+    var temp_id = -1;
+
+    $('#add_recipient_btn').on('click', function() {
+
+        email_address = $('#new_recipient_field').val();
+
+        if (!$('#new_recipient_field').val())
+        {
+            display_form_errors('<%= t('alert.email.fill_a_recipient') %>');
+
+        } else if(already_present(email_address))
+        {
+            display_form_errors('<%= t('alert.email.duplicated_recipient') %>');
+        } else if (validate_recipient_email(email_address))
+        {
+            line = "<%= render partial: 'helpers/email_address', locals: {email_address: email_address, index: index} %>"
+            $('#recipients_table > tbody:last-child').append(line);
+            temp_id = temp_id - 1;
+
+            hide_all_messages();
+            $('#new_recipient_field').val('');
+        } else
+        {
+            display_form_errors('<%= t('alert.email.invalid_recipient') %>');
+        }
+    });
+
+    function already_present(email_address)
+    {
+        var result = false;
+
+        $('#recipients_table > tbody > tr').each(function() {
+            if($(this).find('.recipient_email').html() == email_address) {
+                result = true;
+            }
+        })
+
+        return result;
+    }
+
+    function validate_recipient_email(email) {
+        var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        return regex.test(email);
+    }
+
+
+    $('body').on('click', '.remove_receipt_btn', function() {
+        id = $(this).parent().parent().find('.recipient_id').text();
+
+        $('#email_address_' + id).fadeOut('slow', function() {
+            $('#email_address_' + id).remove();
+        });
+    });
+
+    function remove_recipient(id) {
+        $('#email_address_' + id).fadeOut('slow', function() {
+            $('#email_address_' + id).remove();
+        });
+    }
+
+    function formated_recipients()
+    {
+        var array = '';
+
+        $('#recipients_table > tbody > tr').each(function() {
+            array = array.concat($(this).find('.recipient_email').html() + ', ');
+        })
+
+        return array.substring(0, array.length - 2);
+    }
+
+</script>

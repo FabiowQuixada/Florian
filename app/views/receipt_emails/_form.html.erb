@@ -3,36 +3,11 @@
 	<%= render partial: "helpers/form_errors", locals: {model: @model} %>
 
 	<%= f.hidden_field :id %>
-translation_missing
+
 	<div class="container-fluid padless">
 		<div class="row">
 			<div class="col-md-5">
-
-				<div class="form-group">
-
-					<%= f.label :recipients_array, :class => 'required' %>
-
-					<div class="input-group">
-						<span class="input-group-addon">@</span>
-						<input type="text" class="form-control" id="new_recipient_field" placeholder="<%= t('helpers.email.new_recipient') %>">
-						<span class="input-group-addon"><span class=" glyphicon glyphicon-plus add_recipient_btn" id="add_recipient_btn"></span></span>
-						<span class="input-group-btn add_recipient_btn"/>
-					</div>
-				</div>
-
-				<table id="recipients_table" class="table table-striped table-condensed table-bordered email_address_table">
-					<tbody>
-						<% @model.recipients_as_array.each_with_index do |email_address, index| %>
-							<tr id="email_address_<%= index %>" class="email_receipt">
-								<td class="recipient_id" style="display:none;"><%= index.to_s %></td>
-								<td class="recipient_email"><%= email_address %></td>
-								<td style="width: 30px; vertical-align:middle"><%= image_tag("delete.png", :title => t('helpers.action.remove'), :class => 'remove_receipt_btn') %> </td>
-							</tr>
-						<% end %>
-					</tbody>
-				</table>
-
-				<%= f.hidden_field :recipients_array %>
+				<%= render partial: 'helpers/email_address_table', locals: {f: f, model: @model} %>
 			</div>
 			<div class="col-md-7">
 
@@ -126,17 +101,12 @@ translation_missing
 <script>
 	<% if !@model.new_record? %>
 
-		function a()
-		{
-			$('#resend_email_modal').modal('show');
-		}
-
 		$('.resend_btn').click(function(ev) {
 
 			clean_resend_modal();
 			$('#resend_email_form').get(0).setAttribute('action', '/receipt_emails/' + <%= @model.id.to_s %> + '/resend');
 			$('.modal_company_name').text('<%= @model.company.trading_name %>');
-			a();
+			$('#resend_email_modal').modal('show');
 		});
 
 		$('.send_test_btn').click(function(ev) {
@@ -147,8 +117,6 @@ translation_missing
 			$('#send_test_email_modal').modal('show');
 		});
 	<% end %>
-
-	var temp_id = -1;
 
 	$('#main_form').on('submit', function(evt) {
 
@@ -162,61 +130,9 @@ translation_missing
 		}
 	});
 
-	function remove_recipient(id) {
-		$('#email_address_' + id).fadeOut('slow', function() {
-			$('#email_address_' + id).remove();
-		});
-	}
-
-	$('#email_type').on('change', function() {
-		$('#title').val(email_type_titles[$('#email_type').val()]);
-	});
-
-	$('#add_recipient_btn').on('click', function() {
-
-		email_address = $('#new_recipient_field').val();
-
-		if (!$('#new_recipient_field').val())
-		{
-			display_form_errors('<%= t('alert.email.fill_a_recipient') %>');
-
-		} else if(already_present(email_address))
-		{
-			display_form_errors('<%= t('alert.email.duplicated_recipient') %>');
-		} else if (validate_recipient_email(email_address))
-		{
-			line = '<tr id="email_address_' + temp_id + '"><td class="recipient_id" style="display:none;">' + temp_id + '</td><td class="recipient_email">' + email_address + '</td><td style="width: 30px; vertical-align:middle"><%= link_to image_tag("delete.png", :title =>  t('helpers.action.remove'), :class => 'remove_receipt_btn'), '#', :class => 'remove_receipt_btn' %></td></tr>';
-			$('#recipients_table > tbody:last-child').append(line);
-			temp_id = temp_id - 1;
-
-			hide_all_messages();
-			$('#new_recipient_field').val('');
-		} else
-		{
-			display_form_errors('<%= t('alert.email.invalid_recipient') %>');
-		}
-	});
-
-	function already_present(email_address)
-	{
-		var result = false;
-
-		$('#recipients_table > tbody > tr').each(function() {
-			if($(this).find('.recipient_email').html() == email_address) {
-				result = true;
-			}
-		})
-
-		return result;
-	}
-	function validate_recipient_email(email) {
-		var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-		return regex.test(email);
-	}
-
 	function validate_tag_fields()
 	{
-		return !(contains_all_tags($('#email_body').val()) && contains_all_tags($('#email_receipt_text').val()));
+		return !(contains_all_tags($('#receipt_email_body').val()) && contains_all_tags($('#email_receipt_text').val()));
 	}
 
 	function contains_all_tags(text)
@@ -234,28 +150,10 @@ translation_missing
 	    jQuery("#" + field).val(textAreaTxt.substring(0, caretPos) + ' ' + tag + ' ' + textAreaTxt.substring(caretPos) );
 	}
 
-	function formated_recipients()
-	{
-		var array = '';
-
-		$('#recipients_table > tbody > tr').each(function() {
-			array = array.concat($(this).find('.recipient_email').html() + ', ');
-		})
-
-		return array.substring(0, array.length - 2);
-	}
-
 	function preprocess_data()
 	{
 		$('#email_recipients_array').val(formated_recipients());
 	}
 
-	$('body').on('click', '.remove_receipt_btn', function() {
-    	id = $(this).parent().parent().find('.recipient_id').text();
-
-		$('#email_address_' + id).fadeOut('slow', function() {
-			$('#email_address_' + id).remove();
-		});
-	});
 
 </script>
