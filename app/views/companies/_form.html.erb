@@ -332,5 +332,9 @@ $(function(){
 		$('#tab_' + tab_id).show();
 		$('#tab_' + tab_id + '_title').addClass('active');
 	};
+
+   	$('body').on('click', '#new_donation_btn', function() {
+	    set_datepicker();
+	});
 });
 </script>

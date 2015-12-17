@@ -145,19 +145,21 @@
 		</div>
 	</body>
 
-	<script>
+<script>
 
-
-       $('.datepicker-competence').datepicker()
-       $('[data-behaviour~=datepickercompetence]').datepicker({
+       function set_month_datepicker() {
+       	$('.datepicker-competence').datepicker()
+      	$('[data-behaviour~=datepickercompetence]').datepicker({
 		minViewMode: 1,
-		maxViewMode: 1,
   		format: "mm/yyyy",
   		autoclose: true,
-	 	language: "pt-BR",
-	 	setDate: new Date()
+	 	language: "pt-BR"
 	 });
 
+
+       }
+
+       function set_datepicker() {
 
 	$('.datepicker').datepicker()
    	$('[data-behaviour~=datepicker]').datepicker({
@@ -166,8 +168,14 @@
 	 	language: "pt-BR",
 	 	setDate: new Date()
 	 });
+   }
 
 		$(function() {
+
+			set_month_datepicker();
+			set_datepicker();
+
+			$(".datepicker-switch").html("Meses");
 
 			<% if notice %>
 			$('#global_notice_box').show();
@@ -344,6 +352,19 @@
 
 			today = dd+'/'+mm +'/'+yyyy;
 			 return today;
+		}
+
+		function current_competence()
+		{
+			var today = new Date();
+			var mm = today.getMonth()+1; //January is 0!
+			var yyyy = today.getFullYear();
+
+			if(mm<10) {
+			    mm='0'+mm
+			}
+
+			 return mm +'/'+yyyy;
 		}
 
 	</script>
