@@ -229,10 +229,14 @@ pt-BR:
         f:
           s: 'Todas'
           p: 'Todas'
-    email:
+    receipt_email:
       index_footer: '*Os e-mails serão enviados às %{time}:00h da manhã nos respectivos dias.'
       new_recipient: "Novo destinatário"
       recent: Recentes
+    prod_and_serv_email:
+      checkup: Avaliação
+      return: Retorno
+      total: Total
     company:
       new_donation: Nova doação
     action:
@@ -246,6 +250,7 @@ pt-BR:
           s: Nova
           p: Novas
       edit: Editar
+      show: Visualizar
       update: Salvar
       update_and_new:
         m:

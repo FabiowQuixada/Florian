@@ -4,10 +4,7 @@ Git;
 helper explicando como funciona a adição de doações;
 Testar e-mail de teste (do usuário);
 Testar cco;
-JS:
- - Data - refresh;
- - Data para doações adicionadas dinamicamente;
- - Salvar nova empresa;
+JS: Salvar nova empresa;
 
 
 Depois:
@@ -16,12 +13,11 @@ Depois:
  - Testar teamviewer;
  - Exportação dos dados;
  - Filtros de doações;
- - ModelHelper: nomes de menu dos modelos;
+ - ModelHelper: Hierarquia Menu / Breadcrumb;
  - Produtos e serviços:
    - Configs;
-   - Competência;
+   - Ao adicionar doação, apagar a linha "Não tem nenhuma";
    - Encaminhar? Reenviar? teste?
-   - Visualizar;
 
 
 Interno:
@@ -31,18 +27,16 @@ Interno:
  - Usuário: Novo, Senha no Firefox;
  - SSH no windows;
  - Reusar _donation_fields.html.erb;
- - Bibliotecas locais + Estudo avançado de jQuery (jQuery.noConflict());
  - Como um back button deve funcionar?
- - Como funciona a exclusão (cascata)?
  - Temp_email_params;
  - PDF: Não precisar salvar arquivo;
  - No pt-br, precisa no nome do atributo + alias;
  - Cancancan: permissões de status, enviar e-mail, etc;
+ - TODOs;
 
 
 Frescurinha:
  - Ordenador de colunas;
- - Em um tamanho intermediário, o alert da colado no botao de sair;
  - Estilização do menu ativo;
  - Smooth scroll no fechamento de alerts;
  - Smooth scroll na deleção de remetentes;
@@ -51,7 +45,6 @@ Frescurinha:
  - Logo centralizado entra a caixa e o topo;
  - Bootstrap select;
  - Mobile: Deslize horizontal;
- - Título em inglês da competência no modal;
 
 
 Testes:

@@ -15,9 +15,14 @@
 			<% if model.updatable %>
 				<th style="width: 16px;"></th>
 			<% end %>
+			<% if model.visualizable %>
+				<th style="width: 16px;"></th>
+			<% end %>
 			<% if lookup_context.find_all(ActiveModel::Naming.plural(model) + "/_index_action_buttons").any? %>
-				<th class="hidden-xs" style="width: 16px;"></th>
-				<th class="hidden-xs" style="width: 16px;"></th>
+				<% render partial: ActiveModel::Naming.plural(model).to_s + "/index_action_buttons" %>
+				<% for i in 1..@number_of_columns %>
+					<th class="hidden-xs" style="width: 16px;"></th>
+				<% end %>
 			<% end %>
 			<% if model.class.column_names.include? 'active' %>
 				<th class="hidden-xs" style="width: 16px;"></th>
@@ -40,6 +45,9 @@
 			<% end %>
 			<% if model.updatable %>
 				<td style="width: 16px;"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), send("edit_" + model.class.name.singularize.underscore + "_path", iterator) %></td>
+			<% end %>
+			<% if model.visualizable %>
+				<td style="width: 16px;"><%= link_to image_tag("find.png", :title => t('helpers.action.show')), send(model.class.name.singularize.underscore + "_path", iterator) %></td>
 			<% end %>
 			<% if lookup_context.find_all(ActiveModel::Naming.plural(model) + "/_index_action_buttons").any? %>
 				<%= render partial: ActiveModel::Naming.plural(model).to_s + "/index_action_buttons" %>

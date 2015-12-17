@@ -17,4 +17,8 @@ module ModelHelper
   def updatable
     true
   end
+
+  def visualizable
+    false
+  end
 end

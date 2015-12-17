@@ -66,8 +66,7 @@ class ProductAndServiceEmail < ActiveRecord::Base
   #   result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
   # end
 
-  def competence(date = nil)
-
+  def competence
       I18n.localize(competence_date.to_date, format: :competence)
   end
 
@@ -82,6 +81,10 @@ class ProductAndServiceEmail < ActiveRecord::Base
 
   def updatable
     false
+  end
+
+  def visualizable
+    true
   end
 
 end

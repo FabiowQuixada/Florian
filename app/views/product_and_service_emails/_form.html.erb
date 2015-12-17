@@ -3,11 +3,27 @@
 	<%= render partial: "helpers/form_errors", locals: {model: @model} %>
 
 	<div class="row">
-		<div class="col-md-3 form-group">
+		<div class="col-md-4 form-group">
+
 			<%= f.label :competence_date %>
-			<%= f.text_field :competence_date, :class => "form-control competence" %>
+			<% if f.object.persisted? %>
+				<%= f.text_field '', {:class => 'form-control', :value => f.object.competence.capitalize, :readonly => true} %>
+			<% else %>
+				<div class="input-group date" data-behaviour='datepickercompetence' >
+			     		 <%= f.text_field :competence_date, {:class => 'form-control', :id => 'competence'} %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+				</div>
+			<% end %>
 		</div>
+
+		<% if f.object.persisted? %>
+			<div class="col-md-4 form-group">
+				<%= f.label :created_at %>
+				<%= f.text_field :created_at, {:class => 'form-control', :readonly => true} %>
+			</div>
+		<% end %>
 	</div>
+
+	<p/>
 
 	<div class="container-fluid padless">
 
@@ -15,36 +31,36 @@
 			<div class="col-md-6">
 				<fieldset>
 
-					<legend>Serviços</legend>
+					<legend><%= t 'activerecord.attributes.product_and_service_email.services' %></legend>
 
 					<div class="row">
 						<div class="col-xs-5 col-md-5 form-group">
 						</div>
 						<div class="col-xs-2 col-md-2 nopadding form-group centre">
-							<%= f.label 'Avaliação' %>
+							<%= f.label t 'helpers.prod_and_serv_email.checkup' %>
 						</div>
 						<div class="col-xs-2 col-md-2 nopadding form-group centre">
-							<%= f.label 'Retorno' %>
+							<%= f.label t 'helpers.prod_and_serv_email.return' %>
 						</div>
 						<div class="col-xs-2 col-md-2 nopadding form-group centre">
-							<%= f.label 'Total' %>
+							<%= f.label t 'helpers.prod_and_serv_email.total' %>
 						</div>
 					</div>
 
 					<% ProductAndServiceEmailsHelper::SERVICES.each do |name| %>
 
-				  		<div class="row">
+				  		<div class="row service-row">
 							<div class="col-xs-5 col-md-5 form-group">
 								<%= f.label name %>
 							</div>
 							<div class="col-xs-2 col-md-2 nopadding form-group">
-								<%= f.text_field name, :class => 'form-control input-sm service service_checkup', :maxlength => 3 %>
+								<%= f.text_field name, :class => 'form-control input-sm service service_checkup', :readonly => f.object.persisted?, :maxlength => 3 %>
 							</div>
 							<div class="col-xs-2 col-md-2 nopadding form-group">
-								<%= f.text_field name + '_return', :class => 'form-control input-sm service service_return', :maxlength => 3 %>
+								<%= f.text_field name + '_return', :class => 'form-control input-sm service service_return', :readonly => f.object.persisted?, :maxlength => 3 %>
 							</div>
 							<div class="col-xs-2 col-md-2 nopadding form-group">
-								<%= text_field_tag name, '', id: 'total_' + name, class: 'form-control input-sm', maxlength: 3, readonly: true %>
+								<%= text_field_tag name, '', id: 'total_' + name, class: 'form-control input-sm service_total', maxlength: 3, readonly: true %>
 							</div>
 						</div>
 
@@ -87,58 +103,11 @@
 							});
 
 						</script>
-					<% end%>
-
-					<script>
-							function sum_checkups()
-							{
-								sum = 0;
-
-								$('.service_checkup').each(function(i, obj) {
-								    if(!isNaN($(this).val()))
-								    	sum = +sum + +$(this).val();
-								});
-
-								$('#total_service_checkup').val(sum);
-
-								sum_total_service();
-							}
-
-							function sum_returns()
-							{
-								sum = 0;
-
-								$('.service_return').each(function(i, obj) {
-								    if(!isNaN($(this).val()))
-								    	sum = +sum + +$(this).val();
-								});
-
-								$('#total_service_return').val(sum);
-
-								sum_total_service();
-							}
-
-							function sum_total_service()
-							{
-								checkups = $('#total_service_checkup').val();
-								returns = $('#total_service_return').val();
-
-								if(isNaN(checkups)) {
-									checkups = 0;
-								}
-
-								if(isNaN(returns)) {
-									returns = 0;
-								}
-
-								$('#total_service').val(+checkups + +returns);
-							}
-					</script>
-
+					<% end %>
 
 					<div class="row">
 						<div class="col-xs-5 col-md-5 form-group">
-						<%= label_tag 'Total' %>
+						<%= label_tag t 'helpers.prod_and_serv_email.total' %>
 						</div>
 						<div class="col-xs-2 col-md-2 nopadding form-group">
 							<%= text_field_tag 'total_service_checkup', 0, id: 'total_service_checkup', class: 'form-control input-sm', readonly: true %>
@@ -154,7 +123,7 @@
 				</div><div class="col-md-6">
 					<fieldset>
 
-						<legend>Produtos</legend>
+						<legend><%= t 'activerecord.attributes.product_and_service_email.products' %></legend>
 
 						<div class="row">
 							<div class="col-xs-12 col-md-12 form-group">
@@ -168,7 +137,7 @@
 									<%= f.label name %>
 								</div>
 								<div class="col-xs-2 col-md-2 nopadding form-group">
-									<%= f.text_field name, :class => 'form-control input-sm product', :maxlength => 3 %>
+									<%= f.text_field name, :class => 'form-control input-sm product', :readonly => f.object.persisted?, :maxlength => 3 %>
 								</div>
 							</div>
 
@@ -182,7 +151,7 @@
 
 						<div class="row">
 							<div class="col-xs-5 col-md-5 form-group">
-							<%= label_tag 'Total' %>
+							<%= label_tag t 'helpers.prod_and_serv_email.total' %>
 							</div>
 							<div class="col-xs-2 col-md-2 nopadding form-group">
 								<%= text_field_tag 'total_product', 0, id: 'total_product', class: 'form-control input-sm', readonly: true %>
@@ -235,12 +204,144 @@
 
 <%= render partial: "helpers/form_helper", locals: {model: @model} %>
 
-<script>
-jQuery.noConflict();
-		$(function() {
-$('.service').mask('999');
-$('.product').mask('999');
-});
+	<script>
+
+			function sum_checkups()
+							{
+								sum = 0;
+
+								$('.service_checkup').each(function(i, obj) {
+								    if(!isNaN($(this).val()))
+								    	sum = +sum + +$(this).val();
+								});
+
+								$('#total_service_checkup').val(sum);
+
+								sum_total_service();
+							}
+
+		function sum_total_service()
+		{
+			checkups = $('#total_service_checkup').val();
+			returns = $('#total_service_return').val();
+
+			if(isNaN(checkups)) {
+				checkups = 0;
+			}
+
+			if(isNaN(returns)) {
+				returns = 0;
+			}
+
+			$('#total_service').val(+checkups + +returns);
+		}
+
+	function sum_checkups()
+	{
+		sum = 0;
+
+		$('.service_checkup').each(function(i, obj) {
+		    if(!isNaN($(this).val()))
+		    	sum = +sum + +$(this).val();
+		});
+
+		$('#total_service_checkup').val(sum);
+
+		sum_total_service();
+	}
+
+	function sum_returns()
+	{
+		sum = 0;
+
+		$('.service_return').each(function(i, obj) {
+		    if(!isNaN($(this).val()))
+		    	sum = +sum + +$(this).val();
+		});
+
+		$('#total_service_return').val(sum);
+
+		sum_total_service();
+	}
+
+	function sum_total_service()
+	{
+		checkups = $('#total_service_checkup').val();
+		returns = $('#total_service_return').val();
+
+		if(isNaN(checkups)) {
+			checkups = 0;
+		}
+
+		if(isNaN(returns)) {
+			returns = 0;
+		}
+
+		$('#total_service').val(+checkups + +returns);
+	}
+
+// TODO
+	$(function() {
+
+
+		$('.service-row').each(function() {
+
+		total = $(this).find('.service_total');
+	           total.val(+$(this).find('.service_checkup').val() + +$(this).find('.service_return').val());
+	        });
+
+
+		$('.service').mask('999');
+		$('.product').mask('999');
+
+		$('#competence').val(current_competence());
+
+		sum = 0;
+
+		$('.product').each(function(i, obj) {
+		    if(!isNaN($(this).val()))
+		    	sum = +sum + +$(this).val();
+		});
+
+		$('#total_product').val(sum);
+
+
+		sum = 0;
+
+		$('.service_checkup').each(function(i, obj) {
+		    if(!isNaN($(this).val()))
+		    	sum = +sum + +$(this).val();
+		});
+
+		$('#total_service_checkup').val(sum);
+
+		sum_total_service();
+
+		sum = 0;
+
+		$('.service_return').each(function(i, obj) {
+		    if(!isNaN($(this).val()))
+		    	sum = +sum + +$(this).val();
+		});
+
+		$('#total_service_return').val(sum);
+
+		sum_total_service();
+
+		checkups = $('#total_service_checkup').val();
+		returns = $('#total_service_return').val();
+
+		if(isNaN(checkups)) {
+			checkups = 0;
+		}
+
+		if(isNaN(returns)) {
+			returns = 0;
+		}
+
+		$('#total_service').val(+checkups + +returns);
+
+	});
 
 
 
@@ -248,34 +349,9 @@ $('.product').mask('999');
 
 		function a()
 		{
-			jQuery.noConflict();
 			$('#resend_email_modal').modal('show');
 		}
 
-		$('.resend_btn').click(function(ev) {
-
-			clean_resend_modal();
-			$('#resend_email_form').get(0).setAttribute('action', '/emails/' + <%= @model.id.to_s %> + '/resend');
-			$('.modal_company_name').text('<%= @model.company.trading_name %>');
-			a();
-		});
-
-		$('.send_test_btn').click(function(ev) {
-
-			clean_send_test_modal();
-			$('#send_test_email_form').get(0).setAttribute('action', '/emails/' + <%= @model.id.to_s %> + '/send_test');
-			$('.modal_company_name').text('<%= @model.company.trading_name %>');
-			$('#send_test_email_modal').modal('show');
-		});
-
-		$('.remove_btn').click(function(ev) {
-
-			$('#remove_email_form').removeAttr('data-remote');
-			$('#remove_email_form').get(0).setAttribute('action', '/emails/' + <%= @model.id.to_s %>);
-			$('.modal_company_name').text('<%= @model.company.trading_name %>');
-			$('#remove_email_modal').modal('show');
-
-	});
 	<% end %>
 
 	var temp_id = -1;

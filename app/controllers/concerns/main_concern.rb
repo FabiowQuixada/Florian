@@ -45,6 +45,10 @@ module MainConcern extend ActiveSupport::Concern
     render '_form'
   end
 
+  def show
+    render '_form'
+  end
+
   def update
     if @model.update params_validation
       redirect_to send(@model.model_name.route_key + "_path"), notice: genderize_tag(@model, 'updated')
@@ -62,6 +66,7 @@ module MainConcern extend ActiveSupport::Concern
   included do
     before_action :before_new, only: [:new, :create]
     before_action :before_edit, only: [:edit, :update]
+    before_action :before_show, only: [:show]
     before_action :before_index, only: [:index]
     before_action :authenticate_user!
   end
@@ -82,6 +87,12 @@ module MainConcern extend ActiveSupport::Concern
     @model = model_class.find(params[:id])
 
     @breadcrumbs = Hash[@model.model_name.human(:count => 2) => send(@model.model_name.route_key + "_path"), t('helpers.action.edit') => ""]
+  end
+
+  def before_show
+    @model = model_class.find(params[:id])
+
+    @breadcrumbs = Hash[@model.model_name.human(:count => 2) => send(@model.model_name.route_key + "_path"), t('helpers.action.show') => ""]
   end
 
   def order_attribute
