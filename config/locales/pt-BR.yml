@@ -220,6 +220,13 @@ pt-BR:
       f:
         s: 'Esta %{model} está inativa, clique aqui para ativá-la.'
         p: 'Estas %{model} estão inativas, clique aqui para ativá-las.'
+    none_registered:
+      m:
+        s: 'Nenhum %{model} cadastrado.'
+        p: 'Nenhum %{model} cadastrado.'
+      f:
+        s: 'Nenhuma %{model} cadastrada.'
+        p: 'Nenhuma %{model} cadastrada.'
     select:
       prompt: Selecione
       all:

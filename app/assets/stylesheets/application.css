@@ -60,7 +60,7 @@ td.table_icon {
     padding: 0px;
 }
 
-.table-hover tbody tr:hover td {
+.table-hover tbody tr.model_row:hover td {
   background-color: #8FAEEE;
 }
 

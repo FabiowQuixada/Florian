@@ -5,6 +5,10 @@
 
 </p>
 
+<%
+	has_extra_action_buttons = lookup_context.find_all(ActiveModel::Naming.plural(model) + "/_index_action_buttons").any?
+%>
+
 <table class="table table-striped table-hover">
 	<tr>
 		<% I18n.with_options(scope: 'activerecord.attributes.' + @model.class.name.underscore) do |i18n| %>
@@ -18,7 +22,7 @@
 			<% if model.visualizable %>
 				<th style="width: 16px;"></th>
 			<% end %>
-			<% if lookup_context.find_all(ActiveModel::Naming.plural(model) + "/_index_action_buttons").any? %>
+			<% if has_extra_action_buttons %>
 				<% render partial: ActiveModel::Naming.plural(model).to_s + "/index_action_buttons" %>
 				<% for i in 1..@number_of_columns %>
 					<th class="hidden-xs" style="width: 16px;"></th>
@@ -30,38 +34,54 @@
 		<% end %>
 	</tr>
 
-	<% @list.each do |iterator| %>
-		<tr id='model_<%= iterator.id %>' class="model_row">
-			<td style="display: none;" class="model_id"><%= iterator.id %></td>
-			<% columns.each_with_index do |a, i| %>
-				<td style="<%= columns[i][:style] %>" class="<%= columns[i][:class] %>">
-				<%=
-					 if columns[i][:type] == 'money'
-						number_to_currency(iterator.public_send(columns[i][:model_attr]))
-					else
-						iterator.instance_eval(columns[i][:model_attr])
-					end
-				%></td>
-			<% end %>
-			<% if model.updatable %>
-				<td style="width: 16px;"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), send("edit_" + model.class.name.singularize.underscore + "_path", iterator) %></td>
-			<% end %>
-			<% if model.visualizable %>
-				<td style="width: 16px;"><%= link_to image_tag("find.png", :title => t('helpers.action.show')), send(model.class.name.singularize.underscore + "_path", iterator) %></td>
-			<% end %>
-			<% if lookup_context.find_all(ActiveModel::Naming.plural(model) + "/_index_action_buttons").any? %>
-				<%= render partial: ActiveModel::Naming.plural(model).to_s + "/index_action_buttons" %>
-			<% end %>
-			<% if model.class.column_names.include? 'active' %>
-				<td class="hidden-xs status" style="width: 16px;">
-					<% if iterator.active %>
-						<%= link_to image_tag("activate.png", :title => genderize_tag(iterator, 'is_active'), :class => 'deactivate_btn status_btn'), send("deactivate_" + @model.class.name.singularize.underscore + "_path", iterator), method: :post, :remote => true, :id => 'change_status_' + iterator.id.to_s, "data-type" => :json, :class => 'deactivate_btn' %>
-					<% else %>
-						<%= link_to image_tag("deactivate.png", :title => genderize_tag(iterator, 'is_inactive'), :class => 'activate_btn status_btn'), send("activate_" + @model.class.name.singularize.underscore + "_path", iterator), method: :post, :remote => true, :id => 'change_status_' + iterator.id.to_s, "data-type" => :json, :class => 'activate_btn' %>
-					<% end %>
-				</td>
-			<% end %>
+	<% if @list.empty? %>
+		<tr>
+			<%
+				colspan = columns.size
+				colspan += 1 if model.updatable
+				colspan += 1 if model.visualizable
+				colspan += 1 if model.updatable
+				colspan += @number_of_columns if has_extra_action_buttons
+				colspan += 1 if model.class.column_names.include? 'active'
+			%>
+			<td colspan="<%= colspan %>" bgcolor="#E0E0F4" align="center"><%= genderize_tag(model, 'helpers.none_registered') %></td>
 		</tr>
+
+	<% else %>
+		<% @list.each do |iterator| %>
+			<tr id='model_<%= iterator.id %>' class="model_row">
+				<td style="display: none;" class="model_id"><%= iterator.id %></td>
+				<% columns.each_with_index do |a, i| %>
+					<td style="<%= columns[i][:style] %>" class="<%= columns[i][:class] %>">
+					<%=
+						 if columns[i][:type] == 'money'
+							number_to_currency(iterator.public_send(columns[i][:model_attr]))
+						else
+							iterator.instance_eval(columns[i][:model_attr])
+						end
+					%></td>
+				<% end %>
+				<% if model.updatable %>
+					<td style="width: 16px;"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), send("edit_" + model.class.name.singularize.underscore + "_path", iterator) %></td>
+				<% end %>
+				<% if model.visualizable %>
+					<td style="width: 16px;"><%= link_to image_tag("find.png", :title => t('helpers.action.show')), send(model.class.name.singularize.underscore + "_path", iterator) %></td>
+				<% end %>
+				<% if has_extra_action_buttons %>
+					<%= render partial: ActiveModel::Naming.plural(model).to_s + "/index_action_buttons" %>
+				<% end %>
+				<% if model.class.column_names.include? 'active' %>
+					<td class="hidden-xs status" style="width: 16px;">
+						<% if iterator.active %>
+							<%= link_to image_tag("activate.png", :title => genderize_tag(iterator, 'is_active'), :class => 'deactivate_btn status_btn'), send("deactivate_" + @model.class.name.singularize.underscore + "_path", iterator), method: :post, :remote => true, :id => 'change_status_' + iterator.id.to_s, "data-type" => :json, :class => 'deactivate_btn' %>
+						<% else %>
+							<%= link_to image_tag("deactivate.png", :title => genderize_tag(iterator, 'is_inactive'), :class => 'activate_btn status_btn'), send("activate_" + @model.class.name.singularize.underscore + "_path", iterator), method: :post, :remote => true, :id => 'change_status_' + iterator.id.to_s, "data-type" => :json, :class => 'activate_btn' %>
+						<% end %>
+					</td>
+				<% end %>
+			</tr>
+		<% end %>
+
 	<% end %>
 </table>
 
