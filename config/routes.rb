@@ -45,7 +45,7 @@ Rails.application.routes.draw do
 
     resources :product_and_service_emails, except: [:destroy] do
 
-    member do
+    collection do
       post 'send_email'
       post 'send_test'
     end

@@ -1,8 +1,8 @@
 <%= render partial: "helpers/index_table", locals: {model: @model, columns: Array.[](
 	Hash[:header => "created_at", :model_attr => 'created_at'],
 	Hash[:header => "competence", :model_attr => 'competence.capitalize'],
-	Hash[:header => "services", :model_attr => 'services', :class => "hidden-xs"],
-	Hash[:header => "products", :model_attr => 'products', :class => "hidden-xs"]
+	Hash[:header => "services", :model_attr => 'services_qty', :class => "hidden-xs"],
+	Hash[:header => "products", :model_attr => 'products_qty', :class => "hidden-xs"]
 )} %>
 
 <script>

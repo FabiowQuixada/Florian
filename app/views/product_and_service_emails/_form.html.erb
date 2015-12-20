@@ -47,17 +47,17 @@
 						</div>
 					</div>
 
-					<% ProductAndServiceEmailsHelper::SERVICES.each do |name| %>
+					<% @model.class.services.each do |name| %>
 
 				  		<div class="row service-row">
 							<div class="col-xs-5 col-md-5 form-group">
 								<%= f.label name %>
 							</div>
 							<div class="col-xs-2 col-md-2 nopadding form-group">
-								<%= f.text_field name, :class => 'form-control input-sm service service_checkup', :readonly => f.object.persisted?, :maxlength => 3 %>
+								<%= f.text_field name, :value=> 1, :class => 'form-control input-sm service service_checkup', :readonly => f.object.persisted?, :maxlength => 3 %>
 							</div>
 							<div class="col-xs-2 col-md-2 nopadding form-group">
-								<%= f.text_field name + '_return', :class => 'form-control input-sm service service_return', :readonly => f.object.persisted?, :maxlength => 3 %>
+								<%= f.text_field name + '_return', :value=> 1, :class => 'form-control input-sm service service_return', :readonly => f.object.persisted?, :maxlength => 3 %>
 							</div>
 							<div class="col-xs-2 col-md-2 nopadding form-group">
 								<%= text_field_tag name, '', id: 'total_' + name, class: 'form-control input-sm service_total', maxlength: 3, readonly: true %>
@@ -130,14 +130,14 @@
 							</div>
 						</div>
 
-						<% ProductAndServiceEmailsHelper::PRODUCTS.each do |name| %>
+						<% @model.class.products.each do |name| %>
 
 					  		<div class="row">
 								<div class="col-xs-5 col-md-5 form-group">
 									<%= f.label name %>
 								</div>
 								<div class="col-xs-2 col-md-2 nopadding form-group">
-									<%= f.text_field name, :class => 'form-control input-sm product', :readonly => f.object.persisted?, :maxlength => 3 %>
+									<%= f.text_field name, :value=> 1,  :class => 'form-control input-sm product', :readonly => f.object.persisted?, :maxlength => 3 %>
 								</div>
 							</div>
 
@@ -343,125 +343,24 @@
 
 	});
 
-
-
-	<% if !@model.new_record? %>
-
-		function a()
-		{
-			$('#resend_email_modal').modal('show');
-		}
-
-	<% end %>
-
-	var temp_id = -1;
-
-	// $('#main_form').on('submit', function(evt) {
-
-	// 	preprocess_data();
-
-	// 	// if(!validate_tag_fields())
-	// 	// {
-	// 	// 	$('#warning_save_modal').modal('show');
-	// 	// 	evt.preventDefault();
-	// 	// 	return;
-	// 	// }
+	// $('#test_btn').click(function(ev) {
+	// 	$('#main_form').get(0).setAttribute('action', '/product_and_service_emails');
+	// 	$('#main_form').get(0).removeAttr('remote');
+	// 	$('#main_form').get(0).submit();
 	// });
 
-	function remove_recipient(id) {
-		$('#email_address_' + id).fadeOut('slow', function() {
-			$('#email_address_' + id).remove();
-		});
-	}
+	// $('#send_test_btn').click(function(ev) {
+	// 	$('#main_form').get(0).setAttribute('action', '/product_and_service_emails/send_test');
+	// 	$('#main_form').get(0).setAttribute('remote', 'true');
+	// 	$('#main_form').get(0).submit();
 
-	$('#email_type').on('change', function() {
-		$('#title').val(email_type_titles[$('#email_type').val()]);
-	});
+	// 	$("#main_form").on("ajax:success", function(e, data, status, xhr) {
+	// 		display_notice(data.message);
+	// 		add_history_item(data);
+	// 	}).on("ajax:error", function(e, xhr, status, error) {
+	// 		parse_json_errors(xhr.responseText);
+	// 	});
+	// });
 
-	$('#add_recipient_btn').on('click', function() {
-
-		email_address = $('#new_recipient_field').val();
-
-		if (!$('#new_recipient_field').val())
-		{
-			display_form_errors('<%= t('alert.email.fill_a_recipient') %>');
-
-		} else if(already_present(email_address))
-		{
-			display_form_errors('<%= t('alert.email.duplicated_recipient') %>');
-		} else if (validate_recipient_email(email_address))
-		{
-			line = '<tr id="email_address_' + temp_id + '"><td class="recipient_id" style="display:none;">' + temp_id + '</td><td class="recipient_email">' + email_address + '</td><td style="width: 30px; vertical-align:middle"><%= link_to image_tag("delete.png", :title =>  t('helpers.action.remove'), :class => 'remove_receipt_btn'), '#', :class => 'remove_receipt_btn' %></td></tr>';
-			$('#recipients_table > tbody:last-child').append(line);
-			temp_id = temp_id - 1;
-
-			hide_all_messages();
-			$('#new_recipient_field').val('');
-		} else
-		{
-			display_form_errors('<%= t('alert.email.invalid_recipient') %>');
-		}
-	});
-
-	function already_present(email_address)
-	{
-		var result = false;
-
-		$('#recipients_table > tbody > tr').each(function() {
-			if($(this).find('.recipient_email').html() == email_address) {
-				result = true;
-			}
-		})
-
-		return result;
-	}
-	function validate_recipient_email(email) {
-		var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-		return regex.test(email);
-	}
-
-	function validate_tag_fields()
-	{
-		return !(contains_all_tags($('#email_body').val()) && contains_all_tags($('#email_receipt_text').val()));
-	}
-
-	function contains_all_tags(text)
-	{
-		return text.indexOf("<%= t('tags.company') %>") == -1 || text.indexOf("<%= t('tags.value') %>") == -1 || text.indexOf("<%= t('tags.competence') %>") == -1;
-	}
-
-	$("#add_company_to_body_btn").on('click', function() {add_tag_to_field('email_body', '<%= t('tags.company') %>')});
-	$("#add_value_to_body_btn").on('click', function() {add_tag_to_field('email_body', '<%= t('tags.value') %>')});
-	$("#add_competence_to_body_btn").on('click', function() {add_tag_to_field('email_body', '<%= t('tags.competence') %>')});
-
-	function add_tag_to_field(field, tag) {
-	    var caretPos = document.getElementById(field).selectionStart;
-	    var textAreaTxt = jQuery("#" + field).val();
-	    jQuery("#" + field).val(textAreaTxt.substring(0, caretPos) + ' ' + tag + ' ' + textAreaTxt.substring(caretPos) );
-	}
-
-	function formated_recipients()
-	{
-		var array = '';
-
-		$('#recipients_table > tbody > tr').each(function() {
-			array = array.concat($(this).find('.recipient_email').html() + ', ');
-		})
-
-		return array.substring(0, array.length - 2);
-	}
-
-	function preprocess_data()
-	{
-		$('#email_recipients_array').val(formated_recipients());
-	}
-
-	$('body').on('click', '.remove_receipt_btn', function() {
-    	id = $(this).parent().parent().find('.recipient_id').text();
-
-		$('#email_address_' + id).fadeOut('slow', function() {
-			$('#email_address_' + id).remove();
-		});
-	});
 
 </script>

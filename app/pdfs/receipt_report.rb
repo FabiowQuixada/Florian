@@ -12,7 +12,7 @@ class ReceiptReport < Prawn::Document
       @date = date
     end
 
-  def pdf
+    def pdf
     Prawn::Document.new(PDF_OPTIONS) do |pdf|
 
       # Header

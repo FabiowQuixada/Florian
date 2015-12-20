@@ -14,6 +14,10 @@ module ModelHelper
     's'
   end
 
+  def insertable
+    true
+  end
+
   def updatable
     true
   end

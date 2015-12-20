@@ -1,5 +1,6 @@
 Voltar pelo browser: history API;
 Configuração e acesso ao banco postgresql;
+ - Exportação dos dados;
 Git;
 helper explicando como funciona a adição de doações;
 Testar e-mail de teste (do usuário);
@@ -12,11 +13,11 @@ Warning modal: alteração de contato e doação;
 Warning modal: empresa do Tom Cavalcante;
 
 
+
 Depois:
  - Doações: background da linha, caminhos não-felizes;
  - Produção + Desenvolvimento ao mesmo tempo, em portas diferentes;
  - Testar teamviewer;
- - Exportação dos dados;
  - Filtros de doações;
  - ModelHelper: Hierarquia Menu / Breadcrumb;
  - Produtos e serviços:
@@ -38,6 +39,7 @@ Interno:
  - No pt-br, precisa no nome do atributo + alias;
  - Cancancan: permissões de status, enviar e-mail, etc;
  - TODOs;
+ - Reutilizar coisas do PDF;
 
 
 Frescurinha:

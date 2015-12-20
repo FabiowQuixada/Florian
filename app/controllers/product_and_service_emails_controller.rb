@@ -4,54 +4,47 @@ class ProductAndServiceEmailsController < ApplicationController
   arguable model_class: ProductAndServiceEmail
   load_and_authorize_resource
 
-  def send_email
+  def create
 
     @model = ProductAndServiceEmail.new product_and_service_email_params
 
-    if @model.save
-      redirect_to send(@model.model_name.route_key + "_path"), notice: genderize_tag(@model, 'created')
-    else
-      render '_form'
+    if !@model.save
+      return render '_form'
     end
-
-    # begin
-
-    #   date = check_competence
-
-    #   if !email.valid?
-    #     return render json: email.errors, status: :unprocessable_entity
-    #   end
-
-    #   IaqMailer.send_email(email, date, 1, current_user).deliver_now
-
-    #   return render history_as_json(email, 'resent')
-
-    # rescue => exc
-    #   exception_message = handle_exception exc, I18n.t('alert.email.error_resending')
-    #   return render json: exception_message, status: :unprocessable_entity
-    # end
-  end
-
-  def send_test
-
-    email = load_email
 
     begin
-      date = check_competence
 
-      if !email.valid?
-        return render json: email.errors, status: :unprocessable_entity
-      end
+      IaqMailer.send_prod_and_serv_email(@model, current_user).deliver_now
 
-      IaqMailer.send_email(email, date, 2, current_user).deliver_now
+     rescue => exc
+       @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
+       return render '_form'
+     end
 
-      return render history_as_json(email, 'test_sent')
-
-    rescue Exception => exc
-      exception_message = handle_exception exc, I18n.t('alert.email.error_sending_test')
-      return render json: exception_message, status: :unprocessable_entity
-    end
+    redirect_to send(@model.model_name.route_key + "_path"), notice: genderize_tag(@model, 'updated')
   end
+
+  # def send_test
+
+  #   @model = ProductAndServiceEmail.new product_and_service_email_params
+
+  #   if !@model.valid?
+  #     return render '_form'
+  #   end
+
+  #   begin
+
+  #     IaqMailer.send_prod_and_serv_test_email(@model, current_user).deliver_now
+
+  #    rescue => exc
+  #      @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending_test'))
+  #      return render '_form'
+  #    end
+
+  #   return render :json => {
+  #       :message => genderize_tag(@model, 'test_sent')
+  #     }
+  # end
 
   private ###########################################################################################
 

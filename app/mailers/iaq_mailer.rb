@@ -2,7 +2,6 @@ class IaqMailer < ApplicationMailer
 
   def send_test_receipt_email(email, date = nil, user)
     send_email(email, date, user, EmailHistory.send_types[:test], I18n.t('helpers.test_email_prefix'), user.email)
-
   end
 
   def resend_receipt_email(email, date, user)
@@ -11,6 +10,26 @@ class IaqMailer < ApplicationMailer
 
   def send_automatic_receipt_email(email)
     send_email email, date, User.find_by_email('apoioaoqueimado@yahoo.com.br')
+  end
+
+  def send_prod_and_serv_email(email, user)
+      recipients = 'ftquixada@gmail.com'#email.recipients_array
+
+      ProductAndServiceReport.new("/tmp/prod_serv.pdf", email, Date.today).save
+      attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
+
+      mail(to: recipients,
+        bcc: user.bcc,
+        body: email.processed_body(Date.today) + " \n \n-- \n" + user.signature,
+        subject: email.processed_title(Date.today))
+  end
+
+  def send_prod_and_serv_test_email(email, user)
+
+      ProductAndServiceReport.new("/tmp/prod_serv.pdf", email, Date.today).save
+      attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
+
+      send_test_email(email, email.competence, user)
   end
 
 
@@ -47,5 +66,11 @@ class IaqMailer < ApplicationMailer
         bcc: user.bcc,
         body: email.processed_body(date) + " \n \n-- \n" + user.signature,
         subject: prefix + email.processed_title(date))
+    end
+
+    def send_test_email(email, date, user)
+      mail(to: user.email,
+        body: email.processed_body(date) + " \n \n-- \n" + user.signature,
+        subject: I18n.t('helpers.test_email_prefix') + email.processed_title(date))
     end
 end

@@ -6,9 +6,6 @@ class ProductAndServiceEmail < ActiveRecord::Base
   include ModelHelper
   # after_initialize :default_values
 
-  SERVICES = ['psychology', 'physiotherapy', 'plastic_surgery', 'mesh_service', 'gynecology', 'occupational_therapy']
-  PRODUCTS = ['mesh', 'cream', 'protector', 'silicon', 'mask', 'foam', 'skin_expander', 'cervical_collar']
-
 
   # Validations
   validate :validate_model
@@ -29,11 +26,19 @@ class ProductAndServiceEmail < ActiveRecord::Base
   #   end
   end
 
-  def services
+  def self.services
+    ['psychology', 'physiotherapy', 'plastic_surgery', 'mesh_service', 'gynecology', 'occupational_therapy']
+  end
+
+  def self.products
+    ['mesh', 'cream', 'protector', 'silicon', 'mask', 'foam', 'skin_expander', 'cervical_collar']
+  end
+
+  def services_qty
     psychology + physiotherapy + plastic_surgery + mesh_service + gynecology + occupational_therapy + psychology_return + physiotherapy_return + plastic_surgery_return + mesh_service_return + gynecology_return + occupational_therapy_return
   end
 
-  def products
+  def products_qty
     mesh + cream + protector + silicon + mask + foam + skin_expander + cervical_collar
   end
 
@@ -47,24 +52,26 @@ class ProductAndServiceEmail < ActiveRecord::Base
       date = Date.today
     end
 
-    result = title
+    # result = title
 
-    result = result.gsub(I18n.t('tags.competence'), capital_competence(date))
-    result = result.gsub(I18n.t('tags.company'), company.trading_name)
-    result
+    # result = result.gsub(I18n.t('tags.competence'), capital_competence(date))
+    # result = result.gsub(I18n.t('tags.company'), company.trading_name)
+    # result
+    "jkk"
   end
 
-  # def processed_body(date = nil)
+  def processed_body(date = nil)
 
-  #   if date.nil?
-  #     date = Date.today
-  #   end
+    if date.nil?
+      date = Date.today
+    end
+    "dsdgfsdghsdg"
 
-  #   result = body
-  #   result = result.gsub(I18n.t('tags.competence'), capital_competence(date))
-  #   result = result.gsub(I18n.t('tags.company'), company.trading_name)
-  #   result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
-  # end
+    # result = "body"
+    # result = result.gsub(I18n.t('tags.competence'), competence(date).ca)
+    # result = result.gsub(I18n.t('tags.company'), company.trading_name)
+    # result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
+  end
 
   def competence
       I18n.localize(competence_date.to_date, format: :competence)
@@ -77,6 +84,10 @@ class ProductAndServiceEmail < ActiveRecord::Base
     end
 
     recipients_array.split(/,/);
+  end
+
+  def insertable
+    false
   end
 
   def updatable

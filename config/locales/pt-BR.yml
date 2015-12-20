@@ -9,7 +9,7 @@ pt-BR:
     emails: E-mails
     email:
       receipt: Recibo
-      prod_serv: "Financeiro & Serviços"
+      prod_serv: "Produtos & Serviços"
   activerecord:
     models:
       receipt_email:
@@ -195,6 +195,13 @@ pt-BR:
     company: '#mantenedora'
     competence: '#competencia'
     value: '#valor'
+  report:
+    title:
+      prod_and_service: "Relatório de Produtos e Serviços"
+    footer:
+      address: "Rua Visconde de Sabóia, nº 75 – Salas 01 a 16 - Centro – Cep: 60.030-090 - Fortaleza – CE"
+      phone: "Fone: 55 85 3251-1093"
+      email: "E-mail: apoioaoqueimado@yahoo.com.br"
   helpers:
     main_page: Página Principal
     error: Erro
@@ -241,6 +248,10 @@ pt-BR:
       new_recipient: "Novo destinatário"
       recent: Recentes
     prod_and_serv_email:
+      attendances: Atendimentos
+      product_output: Saída de Produtos
+      product: Produto
+      service: Serviço
       checkup: Avaliação
       return: Retorno
       total: Total
