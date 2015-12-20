@@ -5,6 +5,11 @@ helper explicando como funciona a adição de doações;
 Testar e-mail de teste (do usuário);
 Testar cco;
 JS: Salvar nova empresa;
+Ultima parcela da empresa: moment;
+Tratar input de celular;
+Parse: mantenedora e categoria;
+Warning modal: alteração de contato e doação;
+Warning modal: empresa do Tom Cavalcante;
 
 
 Depois:
@@ -17,7 +22,7 @@ Depois:
  - Produtos e serviços:
    - Configs;
    - Ao adicionar doação, apagar a linha "Não tem nenhuma";
-   - Encaminhar? Reenviar? teste?
+   - Teste;
 
 
 Interno:

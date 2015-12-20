@@ -107,7 +107,7 @@
 								</tr>
 								<tbody>
 									<% if @model.donations.empty? %>
-										<tr><td colspan="3"><%= t('helpers.no_donations') %></td></tr>
+										<tr><td colspan="3"><%= genderize_tag(Donation.new, 'helpers.none_registered') %></td></tr>
 									<% end %>
 
 									<%= f.fields_for :donations do |d| %>
@@ -154,7 +154,7 @@
 
 									<div class="form-group col-md-4">
 										<%= ff.label :position %>
-										<%= ff.text_field :position, :class => 'form-control contact_position', :value => index != 0 ? t('activerecord.attributes.company.contacts.contact_' + index.to_s) : '', :readonly => index != 0 %>
+										<%= ff.text_field :position, :class => 'form-control contact_position', :value => index != 0 ? t('activerecord.attributes.company.contacts.contact_' + index.to_s) : ff.object.position, :readonly => index != 0 %>
 									</div>
 
 									<div class="form-group col-md-4">
@@ -173,7 +173,7 @@
 
 									<div class="form-group col-md-4">
 										<%= ff.label :celphone %>
-										<%= ff.text_field :celphone, :class => 'form-control cellphone' %>
+										<%= ff.text_field :celphone, :class => 'form-control celphone' %>
 									</div>
 
 									<div class="form-group col-md-4">

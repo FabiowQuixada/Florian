@@ -100,8 +100,8 @@ pt-BR:
       contact:
         name: Nome
         position: Cargo
-        telephone: Celular
-        celphone: Telefone
+        telephone: Telefone
+        celphone: Celular
         fax: FAX
         email_address: E-mail
       donation:
@@ -185,6 +185,7 @@ pt-BR:
       sending_test: Enviando e-mail de teste...
       resending: Reenviando e-mail...
       error_sending_test: 'Ocorreu um erro ao enviar um e-mail de teste. Por favor, entre em contato com o administrador informando o horário do ocorrido;'
+      error_sending: 'Ocorreu um erro ao enviar o e-mail. Por favor, entre em contato com o administrador informando o horário do ocorrido;'
       error_resending: 'Ocorreu um erro ao reenviar o e-mail. Por favor, entre em contato com o administrador informando o horário do ocorrido;'
       invalid_competence: Competência inválida;
       invalid_recipient: E-mail inválido;
@@ -204,8 +205,7 @@ pt-BR:
     profile: Perfil
     none: (Nenhum)
     logged_as: "Logado como "
-    no_donations: (Nenhuma doação registrada para esta empresa)
-    no_recent_emails: (Nenhum e-mail recente)
+    no_recent_emails: Nenhum e-mail recente
     is_active:
       m:
         s: 'Este %{model} está ativo, clique aqui para inativá-lo.'

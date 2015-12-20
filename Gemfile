@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 
 gem 'prawn'
+gem 'prawn-table'
+gem 'roo', '~> 2.1.0'
+gem 'roo-xls'
 gem 'brazilian-rails'
 gem 'devise'
 gem 'cancancan', '~> 1.10'

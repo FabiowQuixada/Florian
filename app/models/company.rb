@@ -22,7 +22,13 @@ class Company < ActiveRecord::Base
   # Validations
   validates :trading_name, :name, uniqueness: true
   validate :unique_cnpj
+  validate :contact_qty
   validates :trading_name, :name, :cnpj, :address, :category, :group, :presence => true
+  validates :category, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 3, only_integer: true }
+  validates :group, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 4, only_integer: true }
+  validates :contract, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 3, only_integer: true }, allow_nil: true
+  validates :payment_frequency, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 8, only_integer: true }, allow_nil: true
+
 
 
   # Methods
@@ -42,6 +48,12 @@ def unique_cnpj
     if self.cnpj and !self.cnpj.to_s.empty? and Company.where(cnpj: self.cnpj).where('id <> ?', self.id || 0).first
       errors.add(:cnpj, I18n.t('errors.company.unique_cnpj'))
     end
+end
+
+def contact_qty
+  if contacts.size < 1 or contacts.size > 3
+    errors.add(:contacts, 'Número de contatos inválidos: ' + contacts.size)
+  end
 end
 
 def group_desc
