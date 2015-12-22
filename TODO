@@ -6,24 +6,22 @@ helper explicando como funciona a adição de doações;
 Testar e-mail de teste (do usuário);
 Testar cco;
 JS: Salvar nova empresa;
-Ultima parcela da empresa: moment;
 Tratar input de celular;
 Parse: mantenedora e categoria;
 Warning modal: alteração de contato e doação;
-Warning modal: empresa do Tom Cavalcante;
+Warning modal: Mudança de campos devido às máscaras;
+Validação individual das configurações;
+Testar Configurações: Permissões, ninguem pode acessar/alterar do outro - redirecionamento;
 
-
+=====================================================================
 
 Depois:
  - Doações: background da linha, caminhos não-felizes;
  - Produção + Desenvolvimento ao mesmo tempo, em portas diferentes;
  - Testar teamviewer;
+ - Ao adicionar doação, apagar a linha "Não tem nenhuma";
  - Filtros de doações;
  - ModelHelper: Hierarquia Menu / Breadcrumb;
- - Produtos e serviços:
-   - Configs;
-   - Ao adicionar doação, apagar a linha "Não tem nenhuma";
-   - Teste;
 
 
 Interno:
@@ -32,14 +30,18 @@ Interno:
  - Selects em Company duplicado;
  - Usuário: Novo, Senha no Firefox;
  - SSH no windows;
- - Reusar _donation_fields.html.erb;
+ - Reusar:
+  - Donation_fields.html.erb;
+  - Coisas do PDF;
+  - _tag_buttons, passando model, atributo e tag;
+  - _e-mail_address: tem coisa q poderia tar nele;
+  - Criar configurações automaticamente junto com usuário;
  - Como um back button deve funcionar?
  - Temp_email_params;
  - PDF: Não precisar salvar arquivo;
  - No pt-br, precisa no nome do atributo + alias;
  - Cancancan: permissões de status, enviar e-mail, etc;
  - TODOs;
- - Reutilizar coisas do PDF;
 
 
 Frescurinha:

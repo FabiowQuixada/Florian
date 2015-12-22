@@ -13,12 +13,11 @@ class IaqMailer < ApplicationMailer
   end
 
   def send_prod_and_serv_email(email, user)
-      recipients = 'ftquixada@gmail.com'#email.recipients_array
 
       ProductAndServiceReport.new("/tmp/prod_serv.pdf", email, Date.today).save
       attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
 
-      mail(to: recipients,
+      mail(to: user.system_setting.pse_recipients_array,
         bcc: user.bcc,
         body: email.processed_body(Date.today) + " \n \n-- \n" + user.signature,
         subject: email.processed_title(Date.today))

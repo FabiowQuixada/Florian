@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :system_settings, except: [:show, :destroy]
   post '/donations/filter'
 
   resources :donations, only: [:index, :new, :create] do

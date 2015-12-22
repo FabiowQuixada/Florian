@@ -5,6 +5,7 @@ class ReceiptEmail < ActiveRecord::Base
   # Configuration
   audited
   include ModelHelper
+  # after_initialize :init
   usar_como_dinheiro :value
 
 
@@ -23,6 +24,11 @@ class ReceiptEmail < ActiveRecord::Base
 
 
   # Methods
+
+  # def init
+  #     self.title  ||= #user.system_setting.re_title
+  # end
+
   def validate_model
 
     if !value.blank?
@@ -54,26 +60,23 @@ class ReceiptEmail < ActiveRecord::Base
   end
 
   def title
-
-    #return type.email_title unless type.nil?
-
-    'Recibo de Doação IAQ ' + I18n.t('tags.company') + ' - ' + I18n.t('tags.competence')
+    #user.system_setting.re_title
+    'Titulo'
   end
 
-  def processed_title(date = nil)
+  def processed_title(user, date = nil)
 
     if date.nil?
       date = Date.today
     end
 
-    result = title
-
+    result = user.system_setting.re_title
     result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
     result = result.gsub(I18n.t('tags.company'), company.trading_name)
     result
   end
 
-  def processed_body(date = nil)
+  def processed_body(user, date = nil)
 
     if date.nil?
       date = Date.today
@@ -85,7 +88,7 @@ class ReceiptEmail < ActiveRecord::Base
     result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
   end
 
-  def processed_receipt_text(date = nil)
+  def processed_receipt_text(user, date = nil)
 
     if date.nil?
       date = Date.today

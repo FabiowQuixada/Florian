@@ -2,9 +2,9 @@ require 'date'
 
 class ProductAndServiceEmail < ActiveRecord::Base
 
+  # Configuration
   audited
   include ModelHelper
-  # after_initialize :default_values
 
 
   # Validations

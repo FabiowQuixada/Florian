@@ -1,6 +1,8 @@
+<% field_name = 'recipients_array' if local_assigns[:field_name].nil? %>
+
 <div class="form-group">
 
-                    <%= f.label :recipients_array, :class => 'required' %>
+                    <%= f.label field_name, :class => 'required' %>
 
                     <div class="input-group">
                         <span class="input-group-addon">@</span>
@@ -18,36 +20,11 @@
                     </tbody>
                 </table>
 
-                <%= f.hidden_field :recipients_array %>
+                <%= f.hidden_field field_name %>
 
 <script>
 
     var temp_id = -1;
-
-    $('#add_recipient_btn').on('click', function() {
-
-        email_address = $('#new_recipient_field').val();
-
-        if (!$('#new_recipient_field').val())
-        {
-            display_form_errors('<%= t('alert.email.fill_a_recipient') %>');
-
-        } else if(already_present(email_address))
-        {
-            display_form_errors('<%= t('alert.email.duplicated_recipient') %>');
-        } else if (validate_recipient_email(email_address))
-        {
-            line = "<%= render partial: 'helpers/email_address', locals: {email_address: email_address, index: index} %>"
-            $('#recipients_table > tbody:last-child').append(line);
-            temp_id = temp_id - 1;
-
-            hide_all_messages();
-            $('#new_recipient_field').val('');
-        } else
-        {
-            display_form_errors('<%= t('alert.email.invalid_recipient') %>');
-        }
-    });
 
     function already_present(email_address)
     {

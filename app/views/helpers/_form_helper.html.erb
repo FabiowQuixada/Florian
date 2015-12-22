@@ -214,6 +214,14 @@
 		return String(string).replace(/[&<>"'\/]/g, function (s) {
 			return entityMap[s];
 	});
-  }
+	}
+
+        function add_tag_to_field(field, tag) {
+            var caretPos = document.getElementById(field).selectionStart;
+            var textAreaTxt = jQuery("#" + field).val();
+            jQuery("#" + field).val(textAreaTxt.substring(0, caretPos) + ' ' + tag + ' ' + textAreaTxt.substring(caretPos) );
+         }
+
+
 
 </script>

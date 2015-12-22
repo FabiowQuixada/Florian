@@ -24,6 +24,9 @@ pt-BR:
       contact:
         one: Contato
         other: Contatos
+      system_setting:
+        one: Configuração
+        other: Configurações
       user:
         one: Usuário
         other: Usuários
@@ -50,6 +53,15 @@ pt-BR:
           test: Teste
           resend: Reenvio
           auto: Automático
+      system_setting:
+        user: Usuário
+        re_title: "Título"
+        re_body: "Corpo"
+        pse_title: "Título"
+        pse_body: "Corpo"
+        pse_day_of_month: "Dia do lembrete"
+        company: "Mantenedora"
+        pse_recipients_array: "Destinatários"
       product_and_service_email:
         products: Produtos
         services: Serviços

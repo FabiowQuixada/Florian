@@ -19,6 +19,11 @@
     display: block;
 }
 
+.tab_body {
+  background: white;
+  padding-top: 10px;
+}
+
 .nopadding {
    padding: 0 !important;
    margin: 0 !important;

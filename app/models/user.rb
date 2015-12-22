@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
   # Relationships
   belongs_to :role
+  has_one :system_setting
 
 
   # Validations
