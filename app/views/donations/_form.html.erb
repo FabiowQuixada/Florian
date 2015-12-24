@@ -4,13 +4,13 @@
 
 	<div class="container-fluid padless">
 		<div class="row">
-			<div class="col-md-4 form-group">
+			<div class="col-md-3 form-group">
 				<%= f.label :donation_date %>
 			    	<div class="input-group date" data-behaviour='datepicker' >
 			     		 <%= f.text_field :donation_date, {:class => 'form-control'} %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 				</div>
 			</div>
-			<div class="col-md-4 form-group">
+			<div class="col-md-3 form-group">
 				<%= f.label :value %>
 				<div class="input-group">
 					<span class="input-group-addon">R$</span>
@@ -18,7 +18,7 @@
 				</div>
 			</div>
 
-			<div class="col-md-4 form-group">
+			<div class="col-md-6 form-group">
 				<%= f.label :company %>
 				<%= f.collection_select(:company_id, Company.where(group: 1), :id, :trading_name, {:include_blank => t('helpers.select.prompt')}, {class: "form-control", :disabled => f.object.persisted?}) %>
 			</div>

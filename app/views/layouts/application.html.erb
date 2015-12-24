@@ -5,6 +5,8 @@
 
 		<link rel="icon" type="image/png" href="/assets/app_logo.png" sizes="32x32">
 		<link href='https://fonts.googleapis.com/css?family=Metamorphous' rel='stylesheet' type='text/css'>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/pt-br.js"></script>
 
 
 		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -74,8 +76,9 @@
 
 							</nav>
 
+							<!-- Breadcrumbs -->
 							<div class="row non-menu" style="vertical-align: middle; ">
-								<div class="col-xs-12 col-md-6 col-lg-6">
+								<div class="col-xs-12 col-md-7 col-lg-7">
 									<ol class = "breadcrumb">
 										<% @breadcrumbs.each_pair do |u, index| %>
 
@@ -87,7 +90,7 @@
 										<% end %>
 									</ol>
 								</div>
-								<div class="hidden-xs col-md-2 col-lg-2"></div>
+								<div class="hidden-xs col-md-1 col-lg-1"></div>
 								<div class="hidden-xs col-md-4 col-lg-4" style="margin-top: 10px; margin-bottom: 10px;">
 									<div align="right" style="vertical-align: middle;">
 										<%= t('helpers.logged_as') %> <%= link_to current_user.name, edit_user_registration_path %> <%= link_to(t('helpers.action.logout'), destroy_user_session_path, :method => :delete, :style => "margin-left: 5px;", :class => "btn btn-primary btn-xs") %>
@@ -210,7 +213,6 @@
 			});
 
 
-
 			$(".telephone").mask("(99) 9999-9999", {
 				placeholder : "(__) ____-____"
 			});
@@ -221,6 +223,16 @@
 
 			$(".celphone").mask("(99) 9 9999-9999", {
 				placeholder : "(__) _ ____-____"
+			});
+
+			$(".celphone").on('blur', function() {
+
+				if($(this).val().length == 15) {
+					$(this).unmask().mask("(99) 9999-9999");
+				}
+				else {
+					$(this).unmask().mask("(99) 9 9999-9999");
+				}
 			});
 
 			$('.money').mask('000.000.000,00', {

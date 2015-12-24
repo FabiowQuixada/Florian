@@ -4,6 +4,10 @@ bundle exec whenever -s "environment=production" --update
 rake db:migrate VERSION=0 && rake db:migrate && rake db:seed && rails s
 rake db:migrate VERSION=0 RAILS_ENV=test && rake db:migrate RAILS_ENV=test && rake db:seed RAILS_ENV=test
 
+
+rake db:rollback STEP=1 $$ rake db:migrate
+
+
   Company.reflect_on_all_associations.map { |assoc| assoc.name}
 
   sleep(inspection_time=5)

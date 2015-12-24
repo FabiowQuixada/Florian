@@ -6,10 +6,9 @@ class ProductAndServiceReport < Prawn::Document
     :margin      => [40, 75]
   }
 
-  def initialize(path = nil, email, date)
+  def initialize(path = nil, email)
       @path = path
       @email = email
-      @date = date
   end
 
   def pdf

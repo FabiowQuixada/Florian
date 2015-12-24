@@ -139,12 +139,13 @@
 					<% end %>
 				</ul>
 
-				<% f.object.contacts.each_with_index do |contact, index| %>
+				<div class="container-fluid tab_body">
+					<% f.object.contacts.each_with_index do |contact, index| %>
 					<%= f.fields_for :contacts, contact do |ff| %>
 
 						<%= ff.hidden_field :contact_type %>
 
-						<div class="container-fluid" style="background-color: white;">
+
 							<div id="tab_<%= index %>" class="contact_tab" style="<%= 'display: none;' if index != 0 %>">
 								<div class="row">
 									<div class="form-group col-md-4">
@@ -182,9 +183,9 @@
 									</div>
 								</div>
 							</div>
-						</div>
 					<% end %>
 				<% end %>
+				</div>
 			</fieldset>
 		</div>
 	</div>

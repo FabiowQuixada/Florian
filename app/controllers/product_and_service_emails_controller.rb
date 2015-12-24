@@ -21,7 +21,7 @@ class ProductAndServiceEmailsController < ApplicationController
        return render '_form'
      end
 
-    redirect_to send(@model.model_name.route_key + "_path"), notice: genderize_tag(@model, 'updated')
+    redirect_to send(@model.model_name.route_key + "_path"), notice: genderize_tag(@model, 'sent')
   end
 
   # def send_test

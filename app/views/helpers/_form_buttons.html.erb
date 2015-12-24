@@ -5,14 +5,14 @@
             <%= image_tag("activate.png", :id => "active_img") %><%= image_tag("deactivate.png", :id => "inactive_img", :stylec => "display:none;") %>  <span id="status_description"><%= genderize_tag(model, 'helpers.is_inactive') %></span>
     </div>
 
-    <%= f.hidden_field 'active', :id => 'model_status', :value => '1' %>
+    <%= f.hidden_field 'active', :id => 'model_status', :value => model.active %>
 <% end %>
 
 <p/>
 
 <div class="">
 
-            <% if model.updatable || model.insertable %>
+            <% if (!model.new_record? and model.updatable) or (model.new_record? and model.insertable) %>
                 <%= f.submit t('helpers.action.update'), :class => "btn btn-primary save_btn" %>
             <% end %>
 

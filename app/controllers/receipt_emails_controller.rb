@@ -28,7 +28,7 @@ class ReceiptEmailsController < ApplicationController
         return render json: email.errors, status: :unprocessable_entity
       end
 
-      IaqMailer.resend_receipt_email(email, date, current_user).deliver_now
+      IaqMailer.resend_receipt_email(email, params[:competence], current_user).deliver_now
 
       return render history_as_json(email, 'resent')
 
@@ -76,11 +76,6 @@ class ReceiptEmailsController < ApplicationController
 
   def receipt_email_params
     params.require(:receipt_email).permit(:id, :body, :value, :day_of_month, :active, :company_id, :recipients_array)
-  end
-
-  # TODO If the user wants to do an action with the (possibly unsaved) data on the screen
-  def temp_email_params
-    params.permit(:utf8, :_method, :authenticity_token, :commit, :id, :competence, { email: [:id, :body, :value, :day_of_month, :active, :company_id, :recipients_array, :receipt_text] })
   end
 
   def order_emails_by_date

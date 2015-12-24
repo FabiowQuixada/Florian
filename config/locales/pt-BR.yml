@@ -173,6 +173,13 @@ pt-BR:
     f:
       s: "%{model} removida com sucesso!"
       p: "%{model} removidas com sucesso!"
+  sent:
+    m:
+      s: "%{model} enviado com sucesso!"
+      p: "%{model} enviados com sucesso!"
+    f:
+      s: "%{model} enviada com sucesso!"
+      p: "%{model} enviadas com sucesso!"
   resent:
     m:
       s: "%{model} reenviado com sucesso!"
@@ -210,10 +217,13 @@ pt-BR:
   report:
     title:
       prod_and_service: "Relatório de Produtos e Serviços"
+      receipt: Recibo
     footer:
       address: "Rua Visconde de Sabóia, nº 75 – Salas 01 a 16 - Centro – Cep: 60.030-090 - Fortaleza – CE"
       phone: "Fone: 55 85 3251-1093"
       email: "E-mail: apoioaoqueimado@yahoo.com.br"
+    president_name: "Dr. Edmar Maciel Lima Júnior"
+    president_description: "Presidente do Instituto de Apoio ao Queimado – I.A.Q."
   helpers:
     main_page: Página Principal
     error: Erro

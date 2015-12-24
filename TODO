@@ -2,14 +2,12 @@ Voltar pelo browser: history API;
 Configuração e acesso ao banco postgresql;
  - Exportação dos dados;
 Git;
-helper explicando como funciona a adição de doações;
+Reformular adição de doações;
 Testar e-mail de teste (do usuário);
 Testar cco;
 JS: Salvar nova empresa;
 Tratar input de celular;
-Parse: mantenedora e categoria;
-Warning modal: alteração de contato e doação;
-Warning modal: Mudança de campos devido às máscaras;
+Warning modal: jQuery checando os valores dos campos;
 Validação individual das configurações;
 Testar Configurações: Permissões, ninguem pode acessar/alterar do outro - redirecionamento;
 
@@ -32,7 +30,6 @@ Interno:
  - SSH no windows;
  - Reusar:
   - Donation_fields.html.erb;
-  - Coisas do PDF;
   - _tag_buttons, passando model, atributo e tag;
   - _e-mail_address: tem coisa q poderia tar nele;
   - Criar configurações automaticamente junto com usuário;
@@ -42,6 +39,7 @@ Interno:
  - No pt-br, precisa no nome do atributo + alias;
  - Cancancan: permissões de status, enviar e-mail, etc;
  - TODOs;
+ - IaqScaffold;
 
 
 Frescurinha:

@@ -14,18 +14,18 @@ class IaqMailer < ApplicationMailer
 
   def send_prod_and_serv_email(email, user)
 
-      ProductAndServiceReport.new("/tmp/prod_serv.pdf", email, Date.today).save
+      ProductAndServiceReport.new("/tmp/prod_serv.pdf", email).save
       attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
 
-      mail(to: user.system_setting.pse_recipients_array,
+      mail(to: 'ftquixada@gmail.com',#user.system_setting.pse_recipients_array,
         bcc: user.bcc,
-        body: email.processed_body(Date.today) + " \n \n-- \n" + user.signature,
-        subject: email.processed_title(Date.today))
+        body: email.processed_body(user) + " \n \n-- \n" + user.signature,
+        subject: email.processed_title(user))
   end
 
   def send_prod_and_serv_test_email(email, user)
 
-      ProductAndServiceReport.new("/tmp/prod_serv.pdf", email, Date.today).save
+      ProductAndServiceReport.new("/tmp/prod_serv.pdf", email).save
       attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
 
       send_test_email(email, email.competence, user)
@@ -63,13 +63,13 @@ class IaqMailer < ApplicationMailer
 
       mail(to: recipients,
         bcc: user.bcc,
-        body: email.processed_body(date) + " \n \n-- \n" + user.signature,
-        subject: prefix + email.processed_title(date))
+        body: email.processed_body(user, date) + " \n \n-- \n" + user.signature,
+        subject: prefix + email.processed_title(user, date))
     end
 
     def send_test_email(email, date, user)
       mail(to: user.email,
-        body: email.processed_body(date) + " \n \n-- \n" + user.signature,
-        subject: I18n.t('helpers.test_email_prefix') + email.processed_title(date))
+        body: email.processed_body(user, date) + " \n \n-- \n" + user.signature,
+        subject: I18n.t('helpers.test_email_prefix') + email.processed_title(user, date))
     end
 end

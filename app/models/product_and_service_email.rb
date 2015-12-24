@@ -46,37 +46,36 @@ class ProductAndServiceEmail < ActiveRecord::Base
     'Relatório Mensal IAQ - ' + I18n.t('tags.competence')
   end
 
-  def processed_title(date = nil)
+  def processed_title(user, date = nil)
 
     if date.nil?
-      date = Date.today
+      date = competence_date.to_date
     end
 
-    # result = title
-
-    # result = result.gsub(I18n.t('tags.competence'), capital_competence(date))
-    # result = result.gsub(I18n.t('tags.company'), company.trading_name)
-    # result
-    "jkk"
+    result = user.system_setting.pse_title
+    result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
+    result
   end
 
-  def processed_body(date = nil)
+  def processed_body(user, date = nil)
 
     if date.nil?
-      date = Date.today
+      date = competence_date.to_date
     end
-    "dsdgfsdghsdg"
 
-    # result = "body"
-    # result = result.gsub(I18n.t('tags.competence'), competence(date).ca)
-    # result = result.gsub(I18n.t('tags.company'), company.trading_name)
-    # result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
+    result = user.system_setting.pse_body
+    result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
+    result
   end
 
-  def competence
-      I18n.localize(competence_date.to_date, format: :competence)
-  end
+  def competence(date = nil)
 
+    if date.nil?
+      date = competence_date.to_date
+    end
+
+      I18n.localize(date, format: :competence)
+  end
 
   def recipients_as_array
     if recipients_array.nil? || recipients_array.empty?
