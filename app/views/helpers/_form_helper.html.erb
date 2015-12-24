@@ -41,55 +41,27 @@
 				});
 			});
 
-			var original_values = new Array();
-			window.attribute_names = new Array();
 
-			<% model.attributes.each_pair do |name, value| %>
+			window.attr_values = new Array();
+			$('input').each(function(){
+				if(!$(this).hasClass('btn') && !(typeof $(this).attr('id') === 'undefined'))
+			   		attr_values[$(this).attr('id')] = $(this).val();
+			})
 
-				<% if name != 'created_at' and name != 'updated_at' %>
+			$('#form_back_btn').on('click', function(){
 
-			  		original_values['<%= name %>'] =
-
-			  		<% if(value.is_a?(Numeric) and !value.is_a? (Integer)) %>
-			  			'<%= '%.2f' % value %>'.replace('.', ',');
-			  		<% elsif value.is_a? String %>
-			  			'<%= value.gsub(/\r\n?/, "") %>';
-			  		<% else %>
-			  			'<%= value %>';
-			  		<% end %>
-
-			  		attribute_names.push('<%= name %>');
-
-		  		<% end %>
-			<% end%>
-
-
-			$('.back_btn').on('click', function(){
+				window.any_change = false;
 
 				preprocess_data();
 
 				var changed_values_list = "";
 
 				if(!window.any_change) {
-					for(i = 0; i < attribute_names.length; i++) {
-
-						var value = $("[name='<%= model.model_name.param_key %>[" + attribute_names[i] + "]']");
-
-						if(typeof value.val() !== 'undefined')
-						{
-							if(typeof value.val() === 'string' || value.val() instanceof String)
-							{
-								value = value.val().replace(/(\r\n|\n|\r)/gm,"");
-								value = escapeHtml(value);
-							}
-
-						    if(original_values[attribute_names[i]] != value)
-						    {
-						    	changed_values_list += attribute_names[i] + " ";
-
-								window.any_change = true;
-						    }
-						}
+					for (var key in attr_values) {
+					    if(attr_values[key] != $('#' + key).val()) {
+					    	changed_values_list += ' ' + key;
+					    	any_change = true;
+					    }
 					}
 				}
 
