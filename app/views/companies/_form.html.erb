@@ -96,31 +96,55 @@
 							<%= f.select :contract, CompaniesHelper::CONTRACTS, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
 						</div>
 					</div><div class="row">
+	                                                    	<div class="container-fluid">
+		                                                    	<div class="panel panel-default">
+			                                                    	<div class="panel-heading"><%= t('helpers.company.new_donation') %></div>
+			                                                    	<div class="panel-body">
+
+				                                                    	<%= render partial: 'helpers/error_alert', locals: {id: 'donation'} %>
+
+									<div class="form-group  col-md-3">
+					                                                    <div class="input-group date" data-behaviour='datepicker' >
+					                                                        <%= text_field_tag :donation_date, '',{:id => 'new_donation_date', :class => 'form-control datepicker input-sm donation_date new_donation_date'} %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+					                                                    </div>
+					                                         	</div><div class="form-group  col-md-3">
+					                                                    <div class="input-group">
+					                                                        <span class="input-group-addon">R$</span>
+					                                                        <%= text_field_tag :value, '', :id => 'new_donation_value', :class => 'form-control money input-sm donation_value new_donation_value' %>
+					                                                    </div>
+				                                                    	</div><div class="form-group  col-md-6">
+					                                                	<%= text_field_tag :remark, '', :id => 'new_donation_remark', :placeholder => t('activerecord.attributes.donation.remark'), :class => 'form-control input-sm donation_remark new_donation_remark' %>
+				                                                    	</div>
+
+									<div class="col-md-12">
+										<div align="right">
+											<a id="add_donation_btn" class="btn btn-primary btn-xs add_btn"></span><%= t('helpers.action.add') %></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div class="row">
 						<div class="col-md-12">
+
 							<table id="donations_table" class="table table-striped table-condensed table-bordered">
 								<tr>
 									<% I18n.with_options(scope: 'activerecord.attributes.donation') do |i18n| %>
 										<th><%= i18n.t :date %></th>
 										<th><%= i18n.t :value %></th>
-										<th><%= i18n.t :remark %></th>
+										<th style="width: 50%"><%= i18n.t :remark %></th>
+										<th></th>
 									<% end %>
 								</tr>
 								<tbody>
 									<% if @model.donations.empty? %>
-										<tr><td colspan="3"><%= genderize_tag(Donation.new, 'helpers.none_registered') %></td></tr>
+										<tr id="no_donations_row"><td colspan="4"><%= genderize_tag(Donation.new, 'helpers.none_registered') %></td></tr>
 									<% end %>
 
-									<%= f.fields_for :donations do |d| %>
-										<!-- TODO -->
-										<%= render partial: 'donation_fields_2', locals: {d: d} %>
+									<% @model.donations.each do |d| %>
+										<%= render partial: 'donations/donation_fields', locals: {d: d} %>
 									<% end %>
-									<tr>
-										<td colspan="3">
-											<div class="centre">
-												<%= link_to_add_fields(t('helpers.company.new_donation') , f, :donations) %>
-											</div>
-										</td>
-									</tr>
+
 								</tbody>
 							</table>
 						</div>
@@ -135,7 +159,7 @@
 
 				<ul class="nav nav-tabs">
 					<% f.object.contacts.each_with_index do |contact, index| %>
-						<li id="tab_<%= index %>_title" class="<%= 'active ' if index == 0 %>clickable"><a><%= t('activerecord.attributes.company.contacts.contact_' + index.to_s) %></a></li>
+						<li id="contact_tab_<%= index %>_title" class="<%= 'active ' if index == 0 %>clickable"><a><%= t('activerecord.attributes.company.contacts.contact_' + index.to_s) %></a></li>
 					<% end %>
 				</ul>
 
@@ -146,7 +170,7 @@
 						<%= ff.hidden_field :contact_type %>
 
 
-							<div id="tab_<%= index %>" class="contact_tab" style="<%= 'display: none;' if index != 0 %>">
+							<div id="contact_tab_<%= index %>" class="contact_tab" style="<%= 'display: none;' if index != 0 %>">
 								<div class="row">
 									<div class="form-group col-md-4">
 										<%= ff.label :name %>
@@ -207,20 +231,6 @@
 
 	function preprocess_data()
 	{
-		$('.new_donation_date').each(function() {
-			if($(this).val() != formatted_today())
-				window.any_change = true;
-		});
-
-		$('.new_donation_value').each(function() {
-			if($(this).val() != '0,00')
-				window.any_change = true;
-		});
-
-		$('.new_donation_remark').each(function() {
-			if($(this).val())
-				window.any_change = true;
-		});
 	}
 
 
@@ -229,10 +239,10 @@ $(function(){
 	update_number_parcels();
 	set_last_parcel_date();
 
-	// $('#company_first_parcel').datepicker({
-	//      onSelect:function(evt, ui){
-	//           set_last_parcel_date();
-	//      }});
+	$('#company_first_parcel').datepicker({
+	     onSelect:function(evt, ui){
+	          set_last_parcel_date();
+	     }});
 
 	$('#company_payment_frequency').change(function()
 	{
@@ -240,7 +250,7 @@ $(function(){
 	});
 
 
-	$('#company_payment_period').on('change', function()	{
+	$('#company_payment_period').on('change', function() {
 		set_last_parcel_date();
 	});
 
@@ -295,27 +305,86 @@ $(function(){
 
 	<% @model.contacts.each_with_index do |contact, index| %>
 
-		$('#tab_<%= index %>_title').on('click', function()
+		$('#contact_tab_<%= index %>_title').on('click', function()
 		{
-			hide_all_tabs_except(<%= index %>);
+			hide_all_contact_tabs_except(<%= index %>);
 		});
 
 	<% end %>
 
-	function hide_all_tabs_except(tab_id)
+	function hide_all_contact_tabs_except(tab_id)
 	{
 		for(i = 0; i <= 2; ++i) {
-			$('#tab_' + i + '_title').removeClass('active');
-			$('#tab_' + i).hide();
+			$('#contact_tab_' + i + '_title').removeClass('active');
+			$('#contact_tab_' + i).hide();
 		}
 
-		$('#tab_' + tab_id).show();
-		$('#tab_' + tab_id + '_title').addClass('active');
+		$('#contact_tab_' + tab_id).show();
+		$('#contact_tab_' + tab_id + '_title').addClass('active');
 	};
 
    	$('body').on('click', '#new_donation_btn', function() {
 	    set_datepicker();
-	    $( "#donations_table tr:odd" ).css( "background-color", "#ffffff" );
 	});
+
+	$('#add_donation_btn').on('click', function add_donation() {
+
+		if(validate_donation()) {
+
+			date = $('#new_donation_date').val();
+			value = 'R$ ' + $('#new_donation_value').val();
+			remark = $('#new_donation_remark').val();
+
+			temp_id = (new Date).getTime();
+
+			line = 	'<tr class="persisted_donation" id="donation_' + temp_id + '">'+
+				    	'<td class="donation_id" style="display:none;">' + temp_id + '</td>' +
+				    	'<td class="donation_date">' + date + '<input class="form-control input-sm donation_remark new_donation_date" value="' + to_rails_date(date) + '" type="hidden" name="company[donations_attributes][' + temp_id + '][donation_date]" id="company_donations_attributes_' + temp_id + '_date"></td>'+
+				    	'<td class="donation_value">' + value + '<input class="form-control input-sm donation_remark new_donation_value" value="' + value + '" type="hidden" name="company[donations_attributes][' + temp_id + '][value]" id="company_donations_attributes_' + temp_id + '_value"></td>'+
+				    	'<td style="width: 50%" class="donation_remark">' + remark + '<input class="form-control input-sm donation_remark new_donation_remark" value="' + remark + '" type="hidden" name="company[donations_attributes][' + temp_id + '][remark]" id="company_donations_attributes_' + temp_id + '_remark"></td>' +
+				    	'<td style="width: 16px;"><%= link_to image_tag("delete.png", :title =>  t('helpers.action.remove'), :class => 'remove_donation_btn'), 'javascript:void(0)', :class => 'remove_donation_btn' %></td>' +
+				'</tr>';
+
+			$('#donations_table > tbody:last-child').append(line);
+
+			$('#new_donation_date').val('');
+			$('#new_donation_value').val('0,00');
+			$('#new_donation_remark').val('');
+
+			$('#no_donations_row').hide();
+
+			hide_errors_from_box('donation');
+		}
+	});
+
+	function validate_donation() {
+
+		var errors = new Array();
+
+		if(!$('#new_donation_date').val())
+			errors.push('<%= I18n.t('errors.donation.date_mandatory') %>');
+
+		if((!$('#new_donation_value').val() || $('#new_donation_value').val() == '0,00') && !$('#new_donation_remark').val())
+			errors.push('<%= I18n.t('errors.donation.value_or_remark') %>');
+
+		if(errors.length > 0) {
+			display_error('donation', errors);
+		}
+
+		return errors.length == 0;
+	}
+
+	$('body').on('click', '.remove_donation_btn', function() {
+	        id = $(this).parent().parent().find('.donation_id').text();
+
+	        //$('#donation_' + id).fadeOut('slow', function() {
+	            $('#donation_' + id).remove();
+	        //});
+
+	        if(document.getElementById("donations_table").rows.length == 2)
+	        	$('#no_donations_row').show();
+
+	    });
+
 });
 </script>

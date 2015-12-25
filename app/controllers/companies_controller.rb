@@ -20,16 +20,10 @@ class CompaniesController < ApplicationController
   end
 
   before_filter :after_new, only: [:new]
-  before_filter :after_edit, only: [:edit]
 
   def after_new
     @model.city = "Fortaleza"
     @model.state = "CE"
-
-  end
-
-    def after_edit
-    @model.donations.build
 
   end
 

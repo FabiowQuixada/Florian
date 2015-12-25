@@ -109,7 +109,7 @@
 						<!-- MESSAGES -->
 						<div class="non-menu">
 							<div id="global_notice_box" class="alert alert-success fade in" style="display: none;">
-								<a href="#" class="close" data-hide="alert">&times;</a>
+								<a href="javascript:void(0)" class="close" data-hide="alert">&times;</a>
 								<div id="global_notice_massages">
 									<%= notice %>
 								</div>
@@ -122,7 +122,7 @@
 							</div>
 
 							<div id="global_error_box" class="alert alert-danger fade in" style="display: none;">
-								<a href="#" class="close" data-hide="alert">&times;</a>
+								<a href="javascript:void(0)" class="close" data-hide="alert">&times;</a>
 								<div id="global_error_messages">
 									<%= alert %>
 								</div>
@@ -212,7 +212,6 @@
 				placeholder : "_____-___"
 			});
 
-
 			$(".telephone").mask("(99) 9999-9999", {
 				placeholder : "(__) ____-____"
 			});
@@ -227,11 +226,11 @@
 
 			$(".celphone").on('blur', function() {
 
-				if($(this).val().length == 15) {
-					$(this).unmask().mask("(99) 9999-9999");
+				if($(this).val().length <= 15) {
+					$(this).unmask("(99) 9 9999-9999").mask("(99) 9999-9999");
 				}
 				else {
-					$(this).unmask().mask("(99) 9 9999-9999");
+					$(this).unmask("(99) 9999-9999").mask("(99) 9 9999-9999");
 				}
 			});
 
@@ -262,6 +261,27 @@
 			$('#global_error_box').show();
 		}
 
+		function display_error(error_box_id, message) {
+
+			var result = '';
+
+			if (Object.prototype.toString.call(message) === '[object Array]') {
+
+				result += '<ul>';
+
+				for (var i = 0; i < message.length; i++)
+					result += '<li>' + message[i] + '</li>';
+
+				result += '</ul>';
+			} else {
+				result = message;
+			}
+
+			hide_all_messages();
+			$('#' + error_box_id + '_error_messages').html(result);
+			$('#' + error_box_id + '_error_box').show();
+		}
+
 		function display_info(message) {
 
 			hide_all_messages();
@@ -288,6 +308,12 @@
 		{
 			$('#global_notice_massages').html('');
 			$('#global_notice_box').hide();
+		}
+
+		function hide_errors_from_box(error_box_id)
+		{
+			$('#' + error_box_id + '_error_messages').html('');
+			$('#' + error_box_id + '_error_box').hide();
 		}
 
 		function hide_errors()
@@ -380,6 +406,12 @@
 			}
 
 			 return mm +'/'+yyyy;
+		}
+
+		function to_rails_date(date_string) {
+			var temp = date_string.split("/");
+			var date = new Date(temp[2], temp[1] - 1, temp[0]);
+			return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
 		}
 
 	</script>

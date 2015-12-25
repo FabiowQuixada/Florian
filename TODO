@@ -2,22 +2,21 @@ Voltar pelo browser: history API;
 Configuração e acesso ao banco postgresql;
  - Exportação dos dados;
 Git;
-Reformular adição de doações;
+Organizar edição de empresas em abas;
 Testar e-mail de teste (do usuário);
 Testar cco;
 JS: Salvar nova empresa;
 Tratar input de celular;
 Warning modal: jQuery checando os valores dos campos;
 Validação individual das configurações;
+listener no first parcel p adicionar last_parcel;
 Testar Configurações: Permissões, ninguem pode acessar/alterar do outro - redirecionamento;
 
 =====================================================================
 
 Depois:
- - Doações: background da linha, caminhos não-felizes;
  - Produção + Desenvolvimento ao mesmo tempo, em portas diferentes;
  - Testar teamviewer;
- - Ao adicionar doação, apagar a linha "Não tem nenhuma";
  - Filtros de doações;
  - ModelHelper: Hierarquia Menu / Breadcrumb;
 

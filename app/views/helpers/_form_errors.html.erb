@@ -1,5 +1,5 @@
 <div id="form_error_box" class="alert alert-danger fade in" style="display: none;">
-	<a href="#" class="close" data-hide="alert" aria-label="close">&times;</a>
+	<a href="javascript:void(0)" class="close" data-hide="alert" aria-label="close">&times;</a>
 	<div id="form_error_messages">
 		<ul>
 			<% model.errors.full_messages.each do |msg| %>
@@ -10,7 +10,7 @@
 </div>
 
 <script>
-	
+
 	<% if model.errors.any? %>
 		$('#form_error_box').show();
 	<% end %>

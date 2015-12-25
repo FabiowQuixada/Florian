@@ -11,3 +11,6 @@ rake db:rollback STEP=1 $$ rake db:migrate
   Company.reflect_on_all_associations.map { |assoc| assoc.name}
 
   sleep(inspection_time=5)
+
+  ps aux | grep rails
+  kill -9 {process_id}
