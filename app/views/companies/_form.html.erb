@@ -2,74 +2,92 @@
 
 	<%= render partial: "helpers/form_errors", locals: {model: @model} %>
 
-	<div class="row">
-		<div class="form-group col-md-6">
-			<%= f.label :trading_name %>
-			<%= f.text_field :trading_name, :class => 'form-control', :readonly => f.object.persisted? %>
-		</div>
+	<ul class="nav nav-tabs">
+		<li id="main_tab_0_title" class="active  clickable"><a>Geral</a></li>
+		<li id="main_tab_1_title" class="clickable"><a><%= Donation.new.model_name.human(:count => 2) %></a></li>
+		<li id="main_tab_2_title" class="clickable"><a><%= Contact.new.model_name.human(:count => 2) %></a></li>
+	</ul>
 
-		<div class="form-group col-md-6">
-			<%= f.label :name %>
-			<%= f.text_field :name, :class => 'form-control', :readonly => f.object.persisted? %>
-		</div>
-	</div><div class="row">
-		<div class="form-group col-md-6">
-			<%= f.label :cnpj %>
-			<%= f.text_field :cnpj, :class => 'form-control cnpj', :readonly => f.object.persisted? %>
-		</div>
+	<div id="main_tab_0" class="general_tab">
+		<div class="container-fluid tab_body">
+			<div class="row">
+				<div class="form-group col-md-6">
+					<%= f.label :trading_name %>
+					<%= f.text_field :trading_name, :class => 'form-control', :readonly => f.object.persisted? %>
+				</div>
 
-		<div class="form-group col-md-6">
-			<%= f.label :address %>
-			<%= f.text_field :address, :class => 'form-control' %>
-		</div>
-	</div><div class="row">
-		<div class="form-group col-md-6">
-			<%= f.label :cep %>
-			<%= f.text_field :cep, :class => 'form-control cep' %>
-		</div>
+				<div class="form-group col-md-6">
+					<%= f.label :name %>
+					<%= f.text_field :name, :class => 'form-control', :readonly => f.object.persisted? %>
+				</div>
+			</div><div class="row">
+				<div class="form-group col-md-6">
+					<%= f.label :cnpj %>
+					<%= f.text_field :cnpj, :class => 'form-control cnpj', :readonly => f.object.persisted? %>
+				</div>
 
-		<div class="form-group col-md-6">
-			<%= f.label :neighborhood %>
-			<%= f.text_field :neighborhood, :class => 'form-control' %>
-		</div>
-	</div><div class="row">
-		<div class="form-group col-md-6">
-			<%= f.label :city %>
-			<%= f.text_field :city, :class => 'form-control' %>
-		</div>
+				<div class="form-group col-md-6">
+					<%= f.label :address %>
+					<%= f.text_field :address, :class => 'form-control' %>
+				</div>
+			</div><div class="row">
+				<div class="form-group col-md-6">
+					<%= f.label :cep %>
+					<%= f.text_field :cep, :class => 'form-control cep' %>
+				</div>
 
-		<div class="form-group col-md-6">
-			<%= f.label :state %>
-			<%= f.select :state, BR_STATES, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+				<div class="form-group col-md-6">
+					<%= f.label :neighborhood %>
+					<%= f.text_field :neighborhood, :class => 'form-control' %>
+				</div>
+			</div><div class="row">
+				<div class="form-group col-md-6">
+					<%= f.label :city %>
+					<%= f.text_field :city, :class => 'form-control' %>
+				</div>
 
-		</div>
-	</div><div class="row">
-		<div class="form-group col-md-6">
-			<%= f.label :email_address %>
-			<div class="input-group">
-				<span class="input-group-addon">@</span>
-				<%= f.text_field :email_address, :class => 'form-control' %>
+				<div class="form-group col-md-6">
+					<%= f.label :state %>
+					<%= f.select :state, BR_STATES, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+
+				</div>
+			</div><div class="row">
+				<div class="form-group col-md-6">
+					<%= f.label :email_address %>
+					<div class="input-group">
+						<span class="input-group-addon">@</span>
+						<%= f.text_field :email_address, :class => 'form-control' %>
+					</div>
+				</div>
+
+				<div class="form-group col-md-6">
+					<%= f.label :website %>
+					<%= f.text_field :website, :class => 'form-control' %>
+				</div>
+			</div><div class="row">
+				<div class="form-group col-md-6">
+					<%= f.label :category %>
+					<%= f.select :category, CompaniesHelper::CATEGORIES, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+				</div>
+
+				<div class="form-group col-md-6">
+					<%= f.label :group %>
+					<%= f.select :group, CompaniesHelper::GROUPS, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+				</div>
+			</div><div class="row">
+
+			<div class="form-group col-md-12">
+				<%= f.label :remark %>
+				<%= f.text_area :remark, :rows => 6, :class => 'form-control' %>
 			</div>
 		</div>
+	</div>
 
-		<div class="form-group col-md-6">
-			<%= f.label :website %>
-			<%= f.text_field :website, :class => 'form-control' %>
-		</div>
-	</div><div class="row">
-		<div class="form-group col-md-6">
-			<%= f.label :category %>
-			<%= f.select :category, CompaniesHelper::CATEGORIES, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
-		</div>
+	</div><div id="main_tab_1" class="contact_tab" style="display: none;">
+		<div class="container-fluid tab_body">
 
-		<div class="form-group col-md-6">
-			<%= f.label :group %>
-			<%= f.select :group, CompaniesHelper::GROUPS, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
-		</div>
-	</div><div class="row">
-		<div class="form-group col-md-12">
-			<fieldset>
-				<legend><%= Donation.new.model_name.human(:count => 2) %></legend>
+			<div class="row">
+				<div class="form-group col-md-12">
 
 					<div class="row">
 						<div class="form-group col-md-6">
@@ -150,81 +168,80 @@
 						</div>
 					</div>
 				</div>
-			</fieldset>
+				</div>
+			</div>
 		</div>
-	</div><div class="row">
-		<div class="form-group col-md-12">
-			<fieldset>
-				<legend><%= Contact.new.model_name.human(:count => 2) %></legend>
 
-				<ul class="nav nav-tabs">
-					<% f.object.contacts.each_with_index do |contact, index| %>
-						<li id="contact_tab_<%= index %>_title" class="<%= 'active ' if index == 0 %>clickable"><a><%= t('activerecord.attributes.company.contacts.contact_' + index.to_s) %></a></li>
-					<% end %>
-				</ul>
+	</div><div id="main_tab_2" style="display: none;">
+		<div class="container-fluid tab_body">
 
-				<div class="container-fluid tab_body">
-					<% f.object.contacts.each_with_index do |contact, index| %>
-					<%= f.fields_for :contacts, contact do |ff| %>
+			<div class="row">
+				<div class="form-group col-md-12">
 
-						<%= ff.hidden_field :contact_type %>
+					<ul class="nav nav-tabs">
+						<% f.object.contacts.each_with_index do |contact, index| %>
+							<li id="contact_tab_<%= index %>_title" class="<%= 'active ' if index == 0 %>clickable"><a><%= t('activerecord.attributes.company.contacts.contact_' + index.to_s) %></a></li>
+						<% end %>
+					</ul>
+
+					<div class="container-fluid tab_body">
+						<% f.object.contacts.each_with_index do |contact, index| %>
+						<%= f.fields_for :contacts, contact do |ff| %>
+
+							<%= ff.hidden_field :contact_type %>
 
 
-							<div id="contact_tab_<%= index %>" class="contact_tab" style="<%= 'display: none;' if index != 0 %>">
-								<div class="row">
-									<div class="form-group col-md-4">
-										<%= ff.label :name %>
-										<%= ff.text_field :name, :class => 'form-control contact_name' %>
+								<div id="contact_tab_<%= index %>" class="contact_tab" style="<%= 'display: none;' if index != 0 %>">
+									<div class="row">
+										<div class="form-group col-md-4">
+											<%= ff.label :name %>
+											<%= ff.text_field :name, :class => 'form-control contact_name' %>
+										</div>
+
+										<div class="form-group col-md-4">
+											<%= ff.label :position %>
+											<%= ff.text_field :position, :class => 'form-control contact_position', :value => index != 0 ? t('activerecord.attributes.company.contacts.contact_' + index.to_s) : ff.object.position, :readonly => index != 0 %>
+										</div>
+
+										<div class="form-group col-md-4">
+											<%= ff.label :email_address %>
+											<div class="input-group">
+												<span class="input-group-addon">@</span>
+												<%= ff.text_field :email_address, :class => 'form-control' %>
+											</div>
+										</div>
 									</div>
+									<div class="row">
+										<div class="form-group col-md-4">
+											<%= ff.label :telephone %>
+											<%= ff.text_field :telephone, :class => 'form-control telephone' %>
+										</div>
 
-									<div class="form-group col-md-4">
-										<%= ff.label :position %>
-										<%= ff.text_field :position, :class => 'form-control contact_position', :value => index != 0 ? t('activerecord.attributes.company.contacts.contact_' + index.to_s) : ff.object.position, :readonly => index != 0 %>
-									</div>
+										<div class="form-group col-md-4">
+											<%= ff.label :celphone %>
+											<%= ff.text_field :celphone, :class => 'form-control celphone' %>
+										</div>
 
-									<div class="form-group col-md-4">
-										<%= ff.label :email_address %>
-										<div class="input-group">
-											<span class="input-group-addon">@</span>
-											<%= ff.text_field :email_address, :class => 'form-control' %>
+										<div class="form-group col-md-4">
+											<%= ff.label :fax %>
+											<%= ff.text_field :fax, :class => 'form-control fax' %>
 										</div>
 									</div>
 								</div>
-								<div class="row">
-									<div class="form-group col-md-4">
-										<%= ff.label :telephone %>
-										<%= ff.text_field :telephone, :class => 'form-control telephone' %>
-									</div>
-
-									<div class="form-group col-md-4">
-										<%= ff.label :celphone %>
-										<%= ff.text_field :celphone, :class => 'form-control celphone' %>
-									</div>
-
-									<div class="form-group col-md-4">
-										<%= ff.label :fax %>
-										<%= ff.text_field :fax, :class => 'form-control fax' %>
-									</div>
-								</div>
-							</div>
+						<% end %>
 					<% end %>
-				<% end %>
+					</div>
 				</div>
-			</fieldset>
-		</div>
-	</div>
-	<div class="row">
-
-		<div class="form-group col-md-12">
-			<%= f.label :remark %>
-			<%= f.text_area :remark, :rows => 6, :class => 'form-control' %>
-		</div>
+			</div>
+			</div>
 	</div>
 
 	<%= render partial: "helpers/form_buttons", locals: {model: @model, f: f} %>
 
 <%end%>
 
+<%= render partial: "helpers/tab_helper", locals: {tab_type: 'contact', number_of_tabs: 3} %>
+<%= render partial: "helpers/tab_helper", locals: {tab_type: 'main', number_of_tabs: 3} %>
 <%= render partial: "helpers/form_helper", locals: {model: @model} %>
 
 <script>
@@ -302,26 +319,6 @@ $(function(){
 
 		last_date.val(moment(first_date, "DD/MM/YYYY").add((temp-1), frequency_type).format("DD/MM/YYYY"));
 	}
-
-	<% @model.contacts.each_with_index do |contact, index| %>
-
-		$('#contact_tab_<%= index %>_title').on('click', function()
-		{
-			hide_all_contact_tabs_except(<%= index %>);
-		});
-
-	<% end %>
-
-	function hide_all_contact_tabs_except(tab_id)
-	{
-		for(i = 0; i <= 2; ++i) {
-			$('#contact_tab_' + i + '_title').removeClass('active');
-			$('#contact_tab_' + i).hide();
-		}
-
-		$('#contact_tab_' + tab_id).show();
-		$('#contact_tab_' + tab_id + '_title').addClass('active');
-	};
 
    	$('body').on('click', '#new_donation_btn', function() {
 	    set_datepicker();

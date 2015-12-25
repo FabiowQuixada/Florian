@@ -1,0 +1,23 @@
+<script>
+
+    function hide_all_<%= tab_type %>_tabs_except(tab_id)
+    {
+        for(i = 0; i <= 2; ++i) {
+            $('#<%= tab_type %>_tab_' + i + '_title').removeClass('active');
+            $('#<%= tab_type %>_tab_' + i).hide();
+        }
+
+        $('#<%= tab_type %>_tab_' + tab_id).show();
+        $('#<%= tab_type %>_tab_' + tab_id + '_title').addClass('active');
+    };
+
+    <% for i in 0..(number_of_tabs-1) do  %>
+
+        $('#<%= tab_type %>_tab_<%= i %>_title').on('click', function()
+        {
+            hide_all_<%= tab_type %>_tabs_except(<%= i %>);
+        });
+
+    <% end %>
+
+</script>
