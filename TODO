@@ -1,9 +1,6 @@
 Voltar pelo browser: history API;
 Exportação dos dados;
 Git;
-Testar cco;
-Tratar input de celular;
-Testar Warning modal: jQuery checando os valores dos campos;
 
 =====================================================================
 
@@ -14,6 +11,7 @@ Depois:
  - Tirar parser do main_concern;
  - ModelHelper: Hierarquia Menu / Breadcrumb;
  - Validação individual das configurações;
+ - Gráficos;
 
 
 Interno:
@@ -29,6 +27,7 @@ Interno:
  - Cancancan: permissões de status, enviar e-mail, etc;
  - TODOs;
  - IaqScaffold;
+ - Tirar as variaveis de e-mail de confir/env.
 
 
 Frescurinha:

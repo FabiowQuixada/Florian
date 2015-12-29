@@ -43,8 +43,8 @@
 
 
 			window.attr_values = new Array();
-			$('input').each(function(){
-				if(!$(this).hasClass('btn') && !(typeof $(this).attr('id') === 'undefined'))
+			$('input, textarea, select').each(function(){
+				if(!$(this).hasClass('btn') && !(typeof $(this).attr('id') === 'undefined') && !$(this).hasClass('temp_field'))
 			   		attr_values[$(this).attr('id')] = $(this).val();
 			})
 
