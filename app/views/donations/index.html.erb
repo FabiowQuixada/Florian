@@ -16,7 +16,7 @@
 
 <%= render partial: "helpers/index_table", locals: {model: @model, columns: Array.[](
     Hash[:header => "donation_date", :model_attr => 'donation_date', :style => "width: 16px;"],
-    Hash[:header => "value", :model_attr => 'value', :style => "width: 150px;", :type => 'money'],
+    Hash[:header => "value", :model_attr => 'value', :style => "width: 150px;", :type => 'money', :class => "hidden-xs"],
     Hash[:header => "company", :model_attr => 'company.trading_name'],
-    Hash[:header => "remark", :model_attr => 'remark']
+    Hash[:header => "remark", :model_attr => 'remark', :class => "hidden-xs"]
 )} %>

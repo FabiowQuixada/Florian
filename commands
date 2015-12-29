@@ -4,6 +4,7 @@ bundle exec whenever -s "environment=production" --update
 rake db:migrate VERSION=0 && rake db:migrate && rake db:seed && rails s
 rake db:migrate VERSION=0 RAILS_ENV=test && rake db:migrate RAILS_ENV=test && rake db:seed RAILS_ENV=test
 
+rake db:drop db:create db:migrate db:seed
 
 rake db:rollback STEP=1 $$ rake db:migrate
 
@@ -14,3 +15,8 @@ rake db:rollback STEP=1 $$ rake db:migrate
 
   ps aux | grep rails
   kill -9 {process_id}
+
+Pra gem Backup funcionar corretamente, no arquivo pg_hba.conf:
+    Postgres: local   all             all                                     trust
+    ('trust' no lugar de 'peer' no local)
+    e então rodar: sudo service postgresql restart

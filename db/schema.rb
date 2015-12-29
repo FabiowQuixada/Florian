@@ -147,14 +147,6 @@ ActiveRecord::Schema.define(version: 20151220202246) do
     t.datetime "updated_at",                 null: false
   end
 
-  create_table "settings", force: :cascade do |t|
-    t.string   "pse_recipients_array", null: false
-    t.string   "pse_default_body",     null: false
-    t.integer  "pse_day_of_month",     null: false
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
   create_table "system_settings", force: :cascade do |t|
     t.string   "pse_recipients_array", null: false
     t.integer  "pse_day_of_month",     null: false

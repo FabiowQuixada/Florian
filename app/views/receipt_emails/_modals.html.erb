@@ -70,30 +70,6 @@
 	</div>
 </div>
 
-<!-- Warning save modal -->
-<div class="modal fade" id="warning_save_modal" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-md">
-		<div class="modal-content">
-			<div class="modal-header">
-				<%= t('modal.email.title.warning_save') %>
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					&times;
-				</button>
-			</div>
-			<div class="modal-body">
-				<%= t('modal.email.body.warning_save') %>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">
-					<%= t('helpers.action.cancel') %>
-				</button>
-
-				<a class="btn btn-primary" id="modal_save_btn"><%= t('helpers.action.update') %></a>
-			</div>
-		</div>
-	</div>
-</div>
-
 <!-- Recent e-mails modal -->
 <% if @recent_emails %>
 	<div class="modal fade" id="recent_emails_modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -171,12 +147,6 @@
 		}).on("ajax:error", function(e, xhr, status, error) {
 			parse_json_errors(xhr.responseText);
 		});
-
-		$("#remove_email_form").on("ajax:success", function(e, data, status, xhr) {
-			display_notice(data.success);
-		}).on("ajax:error", function(e, xhr, status, error) {
-			parse_json_errors(xhr.responseText);
-		});
 	});
 
 	$('#resend_email_form').submit(function(ev) {
@@ -186,12 +156,11 @@
 
 		<% if  params[:action]  == 'edit' %>
 
-			for	(i = 0; i < attribute_names.length; i++)
-				add_hidden('resend_email_form', attribute_names[i], $('#receipt_email_' + attribute_names[i]).val());
+			for (var key in attr_values) {
+				add_hidden_field('resend_email_form', key, $('#' + key).val());
+			}
 
-			add_hidden('resend_email_form', 'active', $('#model_status').val());
-
-		<% else %>
+			add_hidden_field('resend_email_form', 'active', $('#model_status').val());
 
 		<% end %>
 	});
@@ -203,10 +172,11 @@
 
 		<% if  params[:action]  == 'edit' %>
 
-			for	(i = 0; i < attribute_names.length; i++)
-				add_hidden('send_test_email_form', attribute_names[i], $('#receipt_email_' + attribute_names[i]).val());
+			for (var key in attr_values) {
+				add_hidden_field('send_test_email_form', key, $('#' + key).val());
+			}
 
-			add_hidden('send_test_email_form', 'active', $('#model_status').val());
+			add_hidden_field('send_test_email_form', 'active', $('#model_status').val());
 
 		<% end %>
 
@@ -230,7 +200,7 @@
 		$('#recent_emails_table > tbody:last-child').append(line);
 	}
 
-	function add_hidden(form_id, key, value) {
+	function add_hidden_field(form_id, key, value) {
 	    var input = document.createElement('input');
 	    input.type = 'hidden';
 	    input.name = 'receipt_email[' + key + ']';

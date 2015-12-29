@@ -52,6 +52,7 @@ module MainConcern extend ActiveSupport::Concern
   end
 
   def update
+
     if @model.update params_validation
       redirect_to send(@model.model_name.route_key + "_path"), notice: genderize_tag(@model, 'updated')
     else

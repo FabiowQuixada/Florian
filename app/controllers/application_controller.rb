@@ -25,14 +25,14 @@ class ApplicationController < ActionController::Base
     # end
   end
 
-  rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = t('alert.access_denied')
-    redirect_to root_url
+  rescue_from CanCan::AccessDenied do |exc|
+    logger.error("Exception catch [" + DateTime.now.strftime("%d/%m/%Y :: %H:%M:%S") + "] ==> " + exc.message + '\n' + exc.backtrace.join("\n"))
+    redirect_to root_url, :alert => t('alert.access_denied')
   end
 
   def handle_exception(exc, default_message = nil)
 
-    logger.error("Exception catch [" + DateTime.now.strftime("%d/%m/%Y :: %H:%M:%S") + "] ==> " + exc.message + '\n' + exc.backtrace.to_s)
+    logger.error("Exception catch [" + DateTime.now.strftime("%d/%m/%Y :: %H:%M:%S") + "] ==> " + exc.message + '\n' + exc.backtrace.join("\n"))
 
     if exc.message. == 'getaddrinfo: Name or service not known'
       return I18n.t('exception.no_internet_connection')

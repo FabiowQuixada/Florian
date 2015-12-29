@@ -1,16 +1,9 @@
 Voltar pelo browser: history API;
-Configuração e acesso ao banco postgresql;
- - Exportação dos dados;
+Exportação dos dados;
 Git;
-Organizar edição de empresas em abas;
-Testar e-mail de teste (do usuário);
 Testar cco;
-JS: Salvar nova empresa;
 Tratar input de celular;
-Warning modal: jQuery checando os valores dos campos;
-Validação individual das configurações;
-listener no first parcel p adicionar last_parcel;
-Testar Configurações: Permissões, ninguem pode acessar/alterar do outro - redirecionamento;
+Testar Warning modal: jQuery checando os valores dos campos;
 
 =====================================================================
 
@@ -18,7 +11,9 @@ Depois:
  - Produção + Desenvolvimento ao mesmo tempo, em portas diferentes;
  - Testar teamviewer;
  - Filtros de doações;
+ - Tirar parser do main_concern;
  - ModelHelper: Hierarquia Menu / Breadcrumb;
+ - Validação individual das configurações;
 
 
 Interno:
@@ -27,13 +22,8 @@ Interno:
  - Selects em Company duplicado;
  - Usuário: Novo, Senha no Firefox;
  - SSH no windows;
- - Reusar:
-  - Donation_fields.html.erb;
-  - _tag_buttons, passando model, atributo e tag;
-  - _e-mail_address: tem coisa q poderia tar nele;
-  - Criar configurações automaticamente junto com usuário;
- - Como um back button deve funcionar?
- - Temp_email_params;
+ - Reusar _e-mail_address: tem coisa q poderia tar nele;
+ - Criar configurações automaticamente junto com usuário;
  - PDF: Não precisar salvar arquivo;
  - No pt-br, precisa no nome do atributo + alias;
  - Cancancan: permissões de status, enviar e-mail, etc;
@@ -43,7 +33,6 @@ Interno:
 
 Frescurinha:
  - Ordenador de colunas;
- - Estilização do menu ativo;
  - Smooth scroll no fechamento de alerts;
  - Smooth scroll na deleção de remetentes;
  - Espaco logo;

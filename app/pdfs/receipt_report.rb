@@ -6,7 +6,7 @@ class ReceiptReport < IaqReport
       @date = date
     end
 
-    def pdf
+  def pdf
       Prawn::Document.new(PDF_OPTIONS) do |pdf|
 
         # Header
@@ -43,7 +43,5 @@ class ReceiptReport < IaqReport
         footer pdf
 
       end
-    end
   end
-
 end

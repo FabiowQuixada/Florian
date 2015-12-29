@@ -19,7 +19,6 @@ class SystemSettingsController < ApplicationController
 
     if !current_user.admin?
       if params[:action] == 'edit' and params[:id] != SystemSetting.find_by_user_id(current_user.id).id.to_s
-        byebug
         redirect_to url_for(:controller => :errors, :action => :not_found)
       elsif params[:action] == 'index'
         redirect_to edit_system_setting_path(SystemSetting.find_by_user_id(current_user.id)) and return

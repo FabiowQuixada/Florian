@@ -3,7 +3,7 @@
 	<%= render partial: "helpers/form_errors", locals: {model: @model} %>
 
 	<ul class="nav nav-tabs">
-		<li id="main_tab_0_title" class="active  clickable"><a>Geral</a></li>
+		<li id="main_tab_0_title" class="active  clickable"><a><%= I18n.t('helpers.general') %></a></li>
 		<li id="main_tab_1_title" class="clickable"><a><%= Donation.new.model_name.human(:count => 2) %></a></li>
 		<li id="main_tab_2_title" class="clickable"><a><%= Contact.new.model_name.human(:count => 2) %></a></li>
 	</ul>
@@ -168,7 +168,6 @@
 						</div>
 					</div>
 				</div>
-				</div>
 			</div>
 		</div>
 
@@ -233,10 +232,10 @@
 					</div>
 				</div>
 			</div>
-			</div>
+		</div>
 	</div>
 
-	<%= render partial: "helpers/form_buttons", locals: {model: @model, f: f} %>
+	<%= render partial: "helpers/form_buttons", locals: {model: @model, f: f} -%>
 
 <%end%>
 
@@ -256,16 +255,14 @@ $(function(){
 	update_number_parcels();
 	set_last_parcel_date();
 
-	$('#company_first_parcel').datepicker({
-	     onSelect:function(evt, ui){
+	$('#company_first_parcel').on('change', function (){
 	          set_last_parcel_date();
-	     }});
+	});
 
 	$('#company_payment_frequency').change(function()
 	{
 		update_number_parcels();
 	});
-
 
 	$('#company_payment_period').on('change', function() {
 		set_last_parcel_date();

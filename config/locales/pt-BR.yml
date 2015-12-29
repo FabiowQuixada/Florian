@@ -227,6 +227,7 @@ pt-BR:
   helpers:
     main_page: Página Principal
     error: Erro
+    general: Geral
     email_tag: "[Florian] "
     changelog: Changelog
     test_email_prefix: '[TESTE] '

@@ -10,6 +10,8 @@ class Ability
         can :manage, ReceiptEmail
         can :manage, ProductAndServiceEmail
         can :manage, Company
+        can :manage, Donation
+        can :manage, SystemSetting
       end
     #
     # The first argument to `can` is the action you are giving the user
