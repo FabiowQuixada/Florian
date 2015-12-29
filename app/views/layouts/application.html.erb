@@ -220,19 +220,17 @@
 				placeholder : "(__) ____-____"
 			});
 
-			$(".celphone").mask("(99) 9 9999-9999", {
-				placeholder : "(__) _ ____-____"
-			});
+			var celphone_mask_behavior = function (val) {
+			  return val.replace(/\D/g, '').length === 11 ? '(00) 0 0000-0000' : '(00) 0000-00009';
+			},
+			celphone_mask_ptions = {
+			  onKeyPress: function(val, e, field, options) {
+			      field.mask(celphone_mask_behavior.apply({}, arguments), options);
+			    },
+			    placeholder : "(__) _ ____-____"
+			};
 
-			$(".celphone").on('blur', function() {
-
-				if($(this).val().length <= 15) {
-					$(this).unmask("(99) 9 9999-9999").mask("(99) 9999-9999");
-				}
-				else {
-					$(this).unmask("(99) 9999-9999").mask("(99) 9 9999-9999");
-				}
-			});
+			$('.celphone').mask(celphone_mask_behavior, celphone_mask_ptions);
 
 			$('.money').mask('000.000.000,00', {
 				reverse : true
