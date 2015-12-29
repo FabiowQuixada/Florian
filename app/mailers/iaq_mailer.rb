@@ -18,7 +18,6 @@ class IaqMailer < ApplicationMailer
       attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
 
       mail(to: 'ftquixada@gmail.com',#user.system_setting.pse_recipients_array,
-        bcc: user.bcc,
         body: email.processed_body(user) + " \n \n-- \n" + user.signature,
         subject: email.processed_title(user))
   end
@@ -42,6 +41,16 @@ class IaqMailer < ApplicationMailer
   #   end
   # end
 
+
+  def send_backup_email()
+
+   attachments['backup.tar'] = File.read(Dir['/home/fabiow/backups/db_backup/*'].sort.reverse[1] + '/db_backup.tar')
+
+    mail(to: 'ftquixada@gmail.com',
+      body: 'Banco de Producao',
+      subject: ' Backup Semanal')
+  end
+
   private
 
     def send_email(email, date, user, type, prefix = '', recipients = nil)
@@ -61,8 +70,9 @@ class IaqMailer < ApplicationMailer
       ReceiptReport.new("/tmp/recibo.pdf", email, date).save
       attachments['recibo_de_doacao.pdf'] = File.read('/tmp/recibo.pdf')
 
+      byebug
+
       mail(to: recipients,
-        bcc: user.bcc,
         body: email.processed_body(user, date) + " \n \n-- \n" + user.signature,
         subject: prefix + email.processed_title(user, date))
     end
@@ -72,4 +82,5 @@ class IaqMailer < ApplicationMailer
         body: email.processed_body(user, date) + " \n \n-- \n" + user.signature,
         subject: I18n.t('helpers.test_email_prefix') + email.processed_title(user, date))
     end
+
 end
