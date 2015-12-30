@@ -80,12 +80,12 @@
 							<div class="row non-menu" style="vertical-align: middle; ">
 								<div class="col-xs-12 col-md-7 col-lg-7">
 									<ol class = "breadcrumb">
-										<% @breadcrumbs.each_pair do |u, index| %>
+										<% @breadcrumbs.each_with_index do |u, index| %>
 
-										  <% if index == '' %>
-											<li class = "active"><b><%= u %></b></li>
+										  <% if index == (@breadcrumbs.size - 1) %>
+											<li class = "active"><b><%= u.first %></b></li>
 										  <% else %>
-										  	<li><a href = "<%= index %>"><%= u %></a></li>
+										  	<li><%= u.first %></li>
 										  <% end %>
 										<% end %>
 									</ol>

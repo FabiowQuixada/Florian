@@ -25,4 +25,8 @@ module ModelHelper
   def visualizable
     false
   end
+
+  def breadcrumb_path
+    Hash[self.model_name.human(:count => 2) => 'send(self.model_name.route_key + "_path")']
+  end
 end

@@ -59,9 +59,9 @@ class ReceiptEmail < ActiveRecord::Base
     7
   end
 
-  def title
+  def title#(user)
     #user.system_setting.re_title
-    'Titulo'
+    'adsa'
   end
 
   def processed_title(user, date = nil)
@@ -136,6 +136,10 @@ class ReceiptEmail < ActiveRecord::Base
     end
 
     return false
+  end
+
+  def breadcrumb_path
+    Hash[I18n.t('menu.emails') => '', I18n.t('menu.email.receipt') => '']
   end
 
 end

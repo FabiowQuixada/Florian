@@ -98,4 +98,8 @@ class ProductAndServiceEmail < ActiveRecord::Base
     true
   end
 
+  def breadcrumb_path
+    Hash[I18n.t('menu.emails') => '', I18n.t('menu.email.prod_serv') => '']
+  end
+
 end

@@ -2,6 +2,7 @@ Voltar pelo browser: history API;
 Exportação dos dados;
 Git;
 Iniciar servidor e whenever quando ligar note;
+Permitir apenas números no prod serv;
 
 =====================================================================
 
@@ -9,21 +10,17 @@ Depois:
  - Produção + Desenvolvimento ao mesmo tempo, em portas diferentes;
  - Testar teamviewer;
  - Filtros de doações;
- - Tirar parser do main_concern;
- - ModelHelper: Hierarquia Menu / Breadcrumb;
  - Validação individual das configurações;
  - Charts;
 
 
 Interno:
  - Envio de e-mail tá no controller, deveria estar no IaqMailer;
- - Selects em Company duplicado;
  - Usuário: Novo, Senha no Firefox;
  - SSH no windows;
  - Reusar _e-mail_address: tem coisa q poderia tar nele;
  - Criar configurações automaticamente junto com usuário;
  - PDF: Não precisar salvar arquivo;
- - No pt-br, precisa no nome do atributo + alias;
  - Cancancan: permissões de status, enviar e-mail, etc;
  - IaqScaffold;
 
