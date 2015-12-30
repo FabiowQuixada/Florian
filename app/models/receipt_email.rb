@@ -59,9 +59,8 @@ class ReceiptEmail < ActiveRecord::Base
     7
   end
 
-  def title#(user)
-    #user.system_setting.re_title
-    'adsa'
+  def title(user)
+    user.system_setting.re_title
   end
 
   def processed_title(user, date = nil)
