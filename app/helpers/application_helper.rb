@@ -1,12 +1,8 @@
+require './lib/modules/locale'
+
 module ApplicationHelper
 
-  def genderize_tag(model, tag)
-    t(model.genderize(tag), model: t('activerecord.models.' + model.class.model_name.param_key + '.one')).downcase.capitalize
-  end
-
-  def genderize_title(model, tag)
-    t(model.genderize(tag), model: t('activerecord.models.' + model.name.param_key + '.one'))
-  end
+  include Locale
 
   def link_to_add_fields(name, f, association)
     new_object = f.object.class.reflect_on_association(association).klass.new

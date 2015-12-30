@@ -25,7 +25,6 @@ Interno:
  - PDF: Não precisar salvar arquivo;
  - No pt-br, precisa no nome do atributo + alias;
  - Cancancan: permissões de status, enviar e-mail, etc;
- - TODOs;
  - IaqScaffold;
 
 

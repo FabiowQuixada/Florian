@@ -1,14 +1,13 @@
+require './lib/modules/locale'
+
 class ApplicationController < ActionController::Base
+
+  include Locale
 
   # 'info' is closeable, while 'waiting_msg' is not
   add_flash_types :info, :waiting_msg
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
-
-  # TODO Já tem no app_helper!!!
-  def genderize_tag(model, tag)
-    t(model.genderize(tag), model: t('activerecord.models.' + model.class.model_name.param_key + '.one')).downcase.capitalize
-  end
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
