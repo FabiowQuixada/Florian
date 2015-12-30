@@ -7,14 +7,10 @@ class ReceiptEmailsController < ApplicationController
 
   def index
 
-    @model = ReceiptEmail.new
     @list = order_emails_by_date
 
-    @breadcrumbs = Hash[@model.model_name.human(:count => 2) => ""]
-
-    # TODO tipo de e-mail
-    @recent_emails = EmailHistory.where("created_at >= :start_date AND send_type != 2",
-      {start_date: Date.new - ReceiptEmail.recent_emails_days.days})
+    @recent_emails = EmailHistory.where("created_at >= :start_date AND send_type != :send_type",
+      {start_date: Date.new - ReceiptEmail.recent_emails_days.days, send_type: EmailHistory.send_types[:test]})
 
   end
 

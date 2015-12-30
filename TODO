@@ -1,6 +1,7 @@
 Voltar pelo browser: history API;
 Exportação dos dados;
 Git;
+Iniciar servidor e whenever quando ligar note;
 
 =====================================================================
 
@@ -11,11 +12,10 @@ Depois:
  - Tirar parser do main_concern;
  - ModelHelper: Hierarquia Menu / Breadcrumb;
  - Validação individual das configurações;
- - Gráficos;
+ - Charts;
 
 
 Interno:
- - Enviar e-mail: melhorar diferenciação quando for do index ou do form;
  - Envio de e-mail tá no controller, deveria estar no IaqMailer;
  - Selects em Company duplicado;
  - Usuário: Novo, Senha no Firefox;
@@ -27,7 +27,6 @@ Interno:
  - Cancancan: permissões de status, enviar e-mail, etc;
  - TODOs;
  - IaqScaffold;
- - Tirar as variaveis de e-mail de confir/env.
 
 
 Frescurinha:

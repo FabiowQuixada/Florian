@@ -18,8 +18,6 @@ module ApplicationHelper
   end
 
   def link_to_function(name, *args, &block)
-    # TODO
-     btn_id = 'new_donation_btn'
 
      html_options = args.extract_options!.symbolize_keys
 
@@ -27,7 +25,7 @@ module ApplicationHelper
      onclick = "#{"#{html_options[:onclick]}; " if html_options[:onclick]}#{function}; return false;"
      href = html_options[:href] || '#'
 
-     content_tag(:a, name, html_options.merge(:href => href, :onclick => onclick, :id => btn_id, :class => 'btn btn-primary btn-xs', :style => " vertical-align:middle; horizontal-align:center;"))
+     content_tag(:a, name, html_options.merge(:href => href, :onclick => onclick, :class => 'btn btn-primary btn-xs', :style => " vertical-align:middle; horizontal-align:center;"))
   end
 
   def genderize_full_tag(model, full_tag)

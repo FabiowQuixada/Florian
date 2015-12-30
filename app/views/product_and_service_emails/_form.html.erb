@@ -33,6 +33,7 @@
 
 					<legend><%= t 'activerecord.attributes.product_and_service_email.services' %></legend>
 
+					<!-- Service header row -->
 					<div class="row">
 						<div class="col-xs-5 col-md-5 form-group">
 						</div>
@@ -47,6 +48,7 @@
 						</div>
 					</div>
 
+					<!-- Service body rows -->
 					<% @model.class.services.each do |name| %>
 
 				  		<div class="row service-row">
@@ -54,60 +56,22 @@
 								<%= f.label name %>
 							</div>
 							<div class="col-xs-2 col-md-2 nopadding form-group">
-								<%= f.text_field name, :value=> 1, :class => 'form-control input-sm service service_checkup', :readonly => f.object.persisted?, :maxlength => 3 %>
+								<%= f.text_field name, :value=> 1, :class => 'form-control input-sm service_input service_checkup', :readonly => f.object.persisted?, :maxlength => 3 %>
 							</div>
 							<div class="col-xs-2 col-md-2 nopadding form-group">
-								<%= f.text_field name + '_return', :value=> 1, :class => 'form-control input-sm service service_return', :readonly => f.object.persisted?, :maxlength => 3 %>
+								<%= f.text_field name + '_return', :value=> 1, :class => 'form-control input-sm service_input service_return', :readonly => f.object.persisted?, :maxlength => 3 %>
 							</div>
 							<div class="col-xs-2 col-md-2 nopadding form-group">
-								<%= text_field_tag name, '', id: 'total_' + name, class: 'form-control input-sm service_total', maxlength: 3, readonly: true %>
+								<%= text_field_tag name, '', id: 'total_' + name, :class => 'form-control input-sm service_total', maxlength: 3, readonly: true %>
 							</div>
 						</div>
 
-						<script>
-
-							$('#product_and_service_email_<%= name %>').on('blur', function()
-							{
-								checkups = $('#product_and_service_email_<%= name %>').val();
-								returns = $('#product_and_service_email_<%= name %>_return').val();
-
-								if(isNaN(checkups)) {
-									checkups = 0;
-								}
-
-								if(isNaN(returns)) {
-									returns = 0;
-								}
-
-								$('#total_<%= name %>').val(+checkups + +returns);
-
-								sum_checkups();
-							});
-
-							$('#product_and_service_email_<%= name %>_return').on('blur', function()
-							{
-								checkups = $('#product_and_service_email_<%= name %>').val();
-								returns = $('#product_and_service_email_<%= name %>_return').val();
-
-								if(isNaN(checkups)) {
-									checkups = 0;
-								}
-
-								if(isNaN(returns)) {
-									returns = 0;
-								}
-
-								$('#total_<%= name %>').val(+checkups + +returns);
-
-								sum_returns();
-							});
-
-						</script>
 					<% end %>
 
+					<!-- Service totals row -->
 					<div class="row">
 						<div class="col-xs-5 col-md-5 form-group">
-						<%= label_tag t 'helpers.prod_and_serv_email.total' %>
+							<%= label_tag t 'helpers.prod_and_serv_email.total' %>
 						</div>
 						<div class="col-xs-2 col-md-2 nopadding form-group">
 							<%= text_field_tag 'total_service_checkup', 0, id: 'total_service_checkup', class: 'form-control input-sm', readonly: true %>
@@ -120,247 +84,105 @@
 						</div>
 					</div>
 				</fieldset>
-				</div><div class="col-md-6">
-					<fieldset>
+			</div><div class="col-md-6">
+				<fieldset>
 
-						<legend><%= t 'activerecord.attributes.product_and_service_email.products' %></legend>
+					<legend><%= t 'activerecord.attributes.product_and_service_email.products' %></legend>
 
-						<div class="row">
-							<div class="col-xs-12 col-md-12 form-group">
-							</div>
+					<div class="row">
+						<div class="col-xs-12 col-md-12 form-group">
 						</div>
+					</div>
 
-						<% @model.class.products.each do |name| %>
+					<!-- Product body rows -->
+					<% @model.class.products.each do |name| %>
 
-					  		<div class="row">
-								<div class="col-xs-5 col-md-5 form-group">
-									<%= f.label name %>
-								</div>
-								<div class="col-xs-2 col-md-2 nopadding form-group">
-									<%= f.text_field name, :value=> 1,  :class => 'form-control input-sm product', :readonly => f.object.persisted?, :maxlength => 3 %>
-								</div>
-							</div>
-
-							<script>
-								$('#<%= name %> #<%= name %>_a').on('blur', function()
-								{
-									$('#total_<%= name %>').val($('#<%= name %>').val() + $('#<%= name %>_a').val());
-								});
-							</script>
-						<% end%>
-
-						<div class="row">
+				  		<div class="row">
 							<div class="col-xs-5 col-md-5 form-group">
-							<%= label_tag t 'helpers.prod_and_serv_email.total' %>
+								<%= f.label name %>
 							</div>
 							<div class="col-xs-2 col-md-2 nopadding form-group">
-								<%= text_field_tag 'total_product', 0, id: 'total_product', class: 'form-control input-sm', readonly: true %>
+								<%= f.text_field name, :value=> 1,  :class => 'form-control input-sm product_input', :readonly => f.object.persisted?, :maxlength => 3 %>
 							</div>
 						</div>
 
-						<script>
-							$('.product').on('blur', function()
-								{
-									sum = 0;
+					<% end%>
 
-									$('.product').each(function(i, obj) {
-									    if(!isNaN($(this).val()))
-									    	sum = +sum + +$(this).val();
-									});
-
-									$('#total_product').val(sum);
-								});
-						</script>
-
-					</fieldset>
-				</div>
+					<!-- Product total row -->
+					<div class="row">
+						<div class="col-xs-5 col-md-5 form-group">
+							<%= label_tag t 'helpers.prod_and_serv_email.total' %>
+						</div>
+						<div class="col-xs-2 col-md-2 nopadding form-group">
+							<%= text_field_tag 'total_product', 0, id: 'total_product', class: 'form-control input-sm', readonly: true %>
+						</div>
+					</div>
+				</fieldset>
 			</div>
-
-
 		</div>
 	</div>
-
-	<!-- <div class="form-group">
-		<%# f.label :title %>
-		<%# text_field_tag "title", @model.title, :disabled => true, :class => "form-control" %>
-	</div>
-
-	<div class="form-group">
-		<%# f.label :body %>
-		<span style="float:right">
-			<div class="btn-group">
-				<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_body_btn"><%= t 'activerecord.attributes.product_and_service_email.competence' %></button>
-			</div>
-		</span>
-		<%# f.text_area :body, size: "24x6", :class => 'form-control' %>
-	</div> -->
-
-
 
 	<%= render partial: "helpers/form_buttons", locals: {model: @model, f: f} -%>
 
 <% end %>
 
-
 <%= render partial: "helpers/form_helper", locals: {model: @model} %>
 
 	<script>
 
-			function sum_checkups()
-							{
-								sum = 0;
+		function sum_services() {
 
-								$('.service_checkup').each(function(i, obj) {
-								    if(!isNaN($(this).val()))
-								    	sum = +sum + +$(this).val();
-								});
+			total_checkups = 0;
+			total_returns = 0;
 
-								$('#total_service_checkup').val(sum);
+		 	$('.service-row').each(function(i, obj) {
+		 		checkups = $(this).find('.service_checkup').val();
+		 		returns = $(this).find('.service_return').val();
+		 		total = $(this).find('.service_total');
 
-								sum_total_service();
-							}
+		 		if(isNaN(checkups)) {
+					checkups = 0;
+				}
 
-		function sum_total_service()
-		{
-			checkups = $('#total_service_checkup').val();
-			returns = $('#total_service_return').val();
+				if(isNaN(returns)) {
+					returns = 0;
+				}
 
-			if(isNaN(checkups)) {
-				checkups = 0;
-			}
+				total_checkups += +checkups;
+				total_returns += +returns;
 
-			if(isNaN(returns)) {
-				returns = 0;
-			}
+				total.val(+checkups + +returns);
+		 	});
 
-			$('#total_service').val(+checkups + +returns);
+		 	$('#total_service_checkup').val(total_checkups);
+		 	$('#total_service_return').val(total_checkups);
+		 	$('#total_service').val(+total_checkups + +total_returns);
+
 		}
 
-	function sum_checkups()
-	{
-		sum = 0;
+		function sum_products() {
+			sum = 0;
 
-		$('.service_checkup').each(function(i, obj) {
-		    if(!isNaN($(this).val()))
-		    	sum = +sum + +$(this).val();
-		});
+			$('.product_input').each(function(i, obj) {
+			    if(!isNaN($(this).val()))
+			    	sum = +sum + +$(this).val();
+			});
 
-		$('#total_service_checkup').val(sum);
-
-		sum_total_service();
-	}
-
-	function sum_returns()
-	{
-		sum = 0;
-
-		$('.service_return').each(function(i, obj) {
-		    if(!isNaN($(this).val()))
-		    	sum = +sum + +$(this).val();
-		});
-
-		$('#total_service_return').val(sum);
-
-		sum_total_service();
-	}
-
-	function sum_total_service()
-	{
-		checkups = $('#total_service_checkup').val();
-		returns = $('#total_service_return').val();
-
-		if(isNaN(checkups)) {
-			checkups = 0;
+			$('#total_product').val(sum);
 		}
 
-		if(isNaN(returns)) {
-			returns = 0;
-		}
+		$(function() {
 
-		$('#total_service').val(+checkups + +returns);
-	}
+			$('.service').mask('999');
+			$('.product').mask('999');
 
-// TODO
-	$(function() {
+			$('#competence').val(current_competence());
 
+			sum_services();
+			sum_products();
 
-		$('.service-row').each(function() {
-
-		total = $(this).find('.service_total');
-	           total.val(+$(this).find('.service_checkup').val() + +$(this).find('.service_return').val());
-	        });
-
-
-		$('.service').mask('999');
-		$('.product').mask('999');
-
-		$('#competence').val(current_competence());
-
-		sum = 0;
-
-		$('.product').each(function(i, obj) {
-		    if(!isNaN($(this).val()))
-		    	sum = +sum + +$(this).val();
+			$('.service_input').on('blur', sum_services);
+			$('.product_input').on('blur', sum_products);
 		});
-
-		$('#total_product').val(sum);
-
-
-		sum = 0;
-
-		$('.service_checkup').each(function(i, obj) {
-		    if(!isNaN($(this).val()))
-		    	sum = +sum + +$(this).val();
-		});
-
-		$('#total_service_checkup').val(sum);
-
-		sum_total_service();
-
-		sum = 0;
-
-		$('.service_return').each(function(i, obj) {
-		    if(!isNaN($(this).val()))
-		    	sum = +sum + +$(this).val();
-		});
-
-		$('#total_service_return').val(sum);
-
-		sum_total_service();
-
-		checkups = $('#total_service_checkup').val();
-		returns = $('#total_service_return').val();
-
-		if(isNaN(checkups)) {
-			checkups = 0;
-		}
-
-		if(isNaN(returns)) {
-			returns = 0;
-		}
-
-		$('#total_service').val(+checkups + +returns);
-
-	});
-
-	// $('#test_btn').click(function(ev) {
-	// 	$('#main_form').get(0).setAttribute('action', '/product_and_service_emails');
-	// 	$('#main_form').get(0).removeAttr('remote');
-	// 	$('#main_form').get(0).submit();
-	// });
-
-	// $('#send_test_btn').click(function(ev) {
-	// 	$('#main_form').get(0).setAttribute('action', '/product_and_service_emails/send_test');
-	// 	$('#main_form').get(0).setAttribute('remote', 'true');
-	// 	$('#main_form').get(0).submit();
-
-	// 	$("#main_form").on("ajax:success", function(e, data, status, xhr) {
-	// 		display_notice(data.message);
-	// 		add_history_item(data);
-	// 	}).on("ajax:error", function(e, xhr, status, error) {
-	// 		parse_json_errors(xhr.responseText);
-	// 	});
-	// });
-
 
 </script>
