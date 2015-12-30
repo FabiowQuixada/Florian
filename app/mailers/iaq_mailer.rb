@@ -17,8 +17,8 @@ class IaqMailer < ApplicationMailer
       ProductAndServiceReport.new("/tmp/prod_serv.pdf", email).save
       attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
 
-      mail(to: 'ftquixada@gmail.com',#user.system_setting.pse_recipients_array,
-        body: email.processed_body(user) + " \n \n-- \n" + user.signature,
+      mail(to: user.system_setting.pse_recipients_array,
+        body: email.processed_body(user),
         subject: email.processed_title(user))
   end
 
@@ -29,18 +29,6 @@ class IaqMailer < ApplicationMailer
 
       send_test_email(email, email.competence, user)
   end
-
-
-  # def send_receipt_email_daily()
-
-  #   # TODO active
-  #   emails = ReceiptEmail.find_by_day_of_month Time.now.day
-
-  #   for email in emails
-  #       send_email email, Date.new, 0, User.first
-  #   end
-  # end
-
 
   def send_backup_email()
 
@@ -70,16 +58,14 @@ class IaqMailer < ApplicationMailer
       ReceiptReport.new("/tmp/recibo.pdf", email, date).save
       attachments['recibo_de_doacao.pdf'] = File.read('/tmp/recibo.pdf')
 
-      byebug
-
       mail(to: recipients,
-        body: email.processed_body(user, date) + " \n \n-- \n" + user.signature,
+        body: email.processed_body(user, date),
         subject: prefix + email.processed_title(user, date))
     end
 
     def send_test_email(email, date, user)
       mail(to: user.email,
-        body: email.processed_body(user, date) + " \n \n-- \n" + user.signature,
+        body: email.processed_body(user, date),
         subject: I18n.t('helpers.test_email_prefix') + email.processed_title(user, date))
     end
 

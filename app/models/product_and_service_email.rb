@@ -65,6 +65,7 @@ class ProductAndServiceEmail < ActiveRecord::Base
 
     result = user.system_setting.pse_body
     result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
+    result += " \n \n-- \n" + user.signature
     result
   end
 
