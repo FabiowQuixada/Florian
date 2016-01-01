@@ -70,6 +70,31 @@
 	</div>
 </div>
 
+<!-- Tag warning modal -->
+<div class="modal fade" id="warning_save_modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<%= t('modal.email.title.warning_save') %>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+			</div>
+			<div class="modal-body">
+				<%= t('modal.email.body.warning_save') %>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">
+					<%= t('helpers.action.cancel') %>
+				</button>
+
+				<a class="btn btn-primary" id="modal_save_btn"><%= t('helpers.action.update') %></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <!-- Recent e-mails modal -->
 <% if @recent_emails %>
 	<div class="modal fade" id="recent_emails_modal" tabindex="-1" role="dialog" aria-hidden="true">

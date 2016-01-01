@@ -47,8 +47,6 @@ pt-BR:
         competence: "Competência"
         company: "Mantenedora"
         recipients_array: "Destinatários"
-        email_type: Tipo de e-mail
-        type: Tipo de e-mail
         type_values:
           test: Teste
           resend: Reenvio
@@ -266,6 +264,8 @@ pt-BR:
         f:
           s: 'Todas'
           p: 'Todas'
+    system_setting:
+      its_a_suggestion: (Será apenas uma sugestão)
     receipt_email:
       index_footer: '*Os e-mails serão enviados às %{time}:00h da manhã nos respectivos dias.'
       new_recipient: "Novo destinatário"

@@ -56,13 +56,13 @@
 								<%= f.label name %>
 							</div>
 							<div class="col-xs-2 col-md-2 nopadding form-group">
-								<%= f.text_field name, :value=> 1, :class => 'form-control input-sm service_input service_checkup', :readonly => f.object.persisted?, :maxlength => 3 %>
+								<%= f.text_field name, :class => 'form-control input-sm service_input service_checkup', :readonly => f.object.persisted? %>
 							</div>
 							<div class="col-xs-2 col-md-2 nopadding form-group">
-								<%= f.text_field name + '_return', :value=> 1, :class => 'form-control input-sm service_input service_return', :readonly => f.object.persisted?, :maxlength => 3 %>
+								<%= f.text_field name + '_return', :class => 'form-control input-sm service_input service_return', :readonly => f.object.persisted? %>
 							</div>
 							<div class="col-xs-2 col-md-2 nopadding form-group">
-								<%= text_field_tag name, '', id: 'total_' + name, :class => 'form-control input-sm service_total', maxlength: 3, readonly: true %>
+								<%= text_field_tag name, '', id: 'total_' + name, :class => 'form-control input-sm service_total', readonly: true %>
 							</div>
 						</div>
 
@@ -102,7 +102,7 @@
 								<%= f.label name %>
 							</div>
 							<div class="col-xs-2 col-md-2 nopadding form-group">
-								<%= f.text_field name, :value=> 1,  :class => 'form-control input-sm product_input', :readonly => f.object.persisted?, :maxlength => 3 %>
+								<%= f.text_field name,  :class => 'form-control input-sm product_input', :readonly => f.object.persisted? %>
 							</div>
 						</div>
 
@@ -173,8 +173,7 @@
 
 		$(function() {
 
-			$('.service').mask('999');
-			$('.product').mask('999');
+			$('.service_input, .product_input').mask('999');
 
 			$('#competence').val(current_competence());
 
