@@ -28,53 +28,7 @@
 
 						<!-- MENU -->
 						<% if user_signed_in? %>
-							<nav class="navbar navbar-default">
-
-								    <div class="navbar-header inline-block">
-								      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main_menu">
-								        <span class="icon-bar"></span>
-								        <span class="icon-bar"></span>
-								        <span class="icon-bar"></span>
-								      </button>
-								      <a class="navbar-brand" rel="home" href="/" title="<%= t('app_title') %>">
-									    <span><img style="max-width: 100%; max-height: 150%; margin-top: -5px;" src="/assets/app_logo.png"></span>
-										<span class="app_title"><%= t('app_title') %></span>
-									  </a>
-								    </div>
-							    <div class="collapse navbar-collapse" id="main_menu">
-							      <ul class="nav navbar-nav">
-							        		<li class="<%# 'active' if params[:controller] == 'companies' %>">
-										<a href="/companies"><%= Company.new.model_name.human(:count => 2) %></a>
-									</li>
-									<li class="<%# 'active' if params[:controller] == 'donations' %>">
-										<a href="/donations"><%= Donation.new.model_name.human(:count => 2) %></a>
-									</li>
-									<li class="dropdown <%# 'active' if params[:controller] == 'receipt_emails' %>">
-										<a class="dropdown-toggle" data-toggle="dropdown" href="/receipt_emails"><%= t('menu.emails') %></a>
-										<ul class="dropdown-menu">
-										            <li><a href="/receipt_emails"><%= t('menu.email.receipt') %></a></li>
-										            <li><a href="/product_and_service_emails"><%= t('menu.email.prod_serv') %></a></li>
-									           </ul>
-									</li>
-									<li class="<%# 'active' if params[:controller] == 'system_settings' %>">
-										<a href="/system_settings"><%= SystemSetting.new.model_name.human(:count => 2) %></a>
-									</li>
-									<% if !current_user.nil? && current_user.admin? %>
-										<li class="<%# 'active' if params[:controller] == 'users' %>">
-											<a href="/admin/users"><%= User.new.model_name.human(:count => 2) %></a>
-										</li>
-										<li class="<%# 'active' if params[:controller] == 'roles' %>">
-											<a href="/admin/roles"><%= Role.new.model_name.human(:count => 2) %></a>
-										</li>
-									<% end %>
-									<li class="visible-xs">
-										<a data-method="delete" href="/users/sign_out"><%= t('helpers.action.logout') + ' (' + current_user.name + ')' %></a>
-									</li>
-
-							      </ul>
-							    </div>
-
-							</nav>
+							<%= render partial: "others/menu" %>
 
 							<!-- Breadcrumbs -->
 							<div class="row non-menu" style="vertical-align: middle; ">

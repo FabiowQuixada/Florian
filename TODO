@@ -2,7 +2,6 @@ Voltar pelo browser: history API;
 Exportação dos dados;
 Git;
 Iniciar servidor e whenever quando ligar note;
-Permitir apenas números no prod serv;
 
 =====================================================================
 
@@ -22,7 +21,6 @@ Interno:
  - Criar configurações automaticamente junto com usuário;
  - PDF: Não precisar salvar arquivo;
  - Cancancan: permissões de status, enviar e-mail, etc;
- - IaqScaffold;
 
 
 Frescurinha:

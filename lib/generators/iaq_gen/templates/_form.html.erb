@@ -1,0 +1,35 @@
+<%= form_for @model, :html=> {:id => 'main_form'} do |f| %>
+
+	<%= render partial: "helpers/form_errors", locals: {model: @model} %>
+
+	<%= f.hidden_field :id %>
+
+	<div class="container-fluid padless">
+	<< fields >>
+	</div>
+
+	<%= render partial: "helpers/form_buttons", locals: {model: @model, f: f} -%>
+
+<% end %>
+
+<%= render partial: "helpers/form_helper", locals: {model: @model} %>
+
+<script>
+
+	$('#main_form').on('submit', function(evt) {
+
+		preprocess_data();
+
+		if(!validate_tag_fields())
+		{
+			$('#warning_save_modal').modal('show');
+			evt.preventDefault();
+			return;
+		}
+	});
+
+	function preprocess_data()
+	{
+	}
+
+</script>

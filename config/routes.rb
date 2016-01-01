@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  # Automatic resources
+
   resources :system_settings, only: [:index, :new, :edit, :update]
   post '/donations/filter'
 
