@@ -13,6 +13,7 @@
 
  * = require_self
    *= require bootstrap-datepicker3
+    *= require jquery-tablesorter/theme.blue
  */
 
  ul.nav li.dropdown:hover > ul.dropdown-menu {
@@ -43,6 +44,7 @@
 td.table_icon {
   width: 30px;
   vertical-align:middle;
+  horizontal-align: center;
 }
 
 .app_title {
@@ -50,12 +52,6 @@ td.table_icon {
 }
 
 .main_form { padding-bottom: 400px; }
-
-#main_menu .active a
-{
-    color: #171F87 !important;
-    background: none;
-}
 
 .notice:empty {
   display: none;
@@ -68,6 +64,12 @@ td.table_icon {
 .table-hover tbody tr.model_row:hover td {
   background-color: #8FAEEE;
 }
+
+thead {
+  background-color: #7E9DDD;
+}
+
+table.tablesorter thead tr th.headerSortUp {}
 
 #login_box
 {
@@ -83,6 +85,16 @@ td.table_icon {
     padding-bottom: 10px;
 
    vertical-align: middle;
+}
+
+tr td.icon-column{
+    width:1%;
+    white-space:nowrap;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+    text-align: center;
 }
 
 div.centre

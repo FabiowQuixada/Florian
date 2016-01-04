@@ -59,7 +59,7 @@ def group_desc
   end
 
   def category_desc
-  CATEGORIES[category-1].first unless CATEGORIES[category-1].nil?
+    CATEGORIES[category-1].first unless CATEGORIES[category-1].nil?
   end
 
   def payment_frequency_desc

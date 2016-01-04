@@ -24,7 +24,6 @@ Interno:
 
 
 Frescurinha:
- - Ordenador de colunas;
  - Smooth scroll no fechamento de alerts;
  - Smooth scroll na deleção de remetentes;
  - Espaco logo;
@@ -32,6 +31,7 @@ Frescurinha:
  - Logo centralizado entra a caixa e o topo;
  - Bootstrap select;
  - Mobile: Deslize horizontal;
+ - Ordenador de colunas: Dinheiro;
 
 
 Testes:

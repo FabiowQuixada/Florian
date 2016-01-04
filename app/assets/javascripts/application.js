@@ -16,4 +16,6 @@
 //= require bootstrap
 //= require twitter/bootstrap
 //= require bootstrap-datepicker
+//= require jquery.turbolinks
+//= require jquery-tablesorter
 //= require_tree .

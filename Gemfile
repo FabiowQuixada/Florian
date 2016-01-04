@@ -19,6 +19,8 @@ gem 'launchy'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'bootstrap-sass'
 gem 'bootstrap-datepicker-rails'
+gem 'jquery-tablesorter'
+gem 'jquery-turbolinks'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
