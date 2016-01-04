@@ -30,15 +30,6 @@ class IaqMailer < ApplicationMailer
       send_test_email(email, email.competence, user)
   end
 
-  def send_backup_email()
-
-   attachments['backup.tar'] = File.read(Dir['/home/fabiow/backups/db_backup/*'].sort.reverse[1] + '/db_backup.tar')
-
-    mail(to: 'ftquixada@gmail.com',
-      body: 'Banco de Producao',
-      subject: ' Backup Semanal')
-  end
-
   private
 
     def send_email(email, date, user, type, prefix = '', recipients = nil)
