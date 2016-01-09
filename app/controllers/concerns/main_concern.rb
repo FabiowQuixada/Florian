@@ -32,10 +32,10 @@ module MainConcern extend ActiveSupport::Concern
 
   def create
 
-    @model = model_class.new params_validation
+    @model = model_class.new send(@model.model_name.singular + "_params")
 
     if @model.save
-      redirect_to send(@model.model_name.route_key + "_path"), notice: genderize_tag(@model, 'created')
+      redirect_to send(@model.model_name.route_key + "_path"), notice: @model.was('created')
     else
       render '_form'
     end
@@ -51,8 +51,8 @@ module MainConcern extend ActiveSupport::Concern
 
   def update
 
-    if @model.update params_validation
-      redirect_to send(@model.model_name.route_key + "_path"), notice: genderize_tag(@model, 'updated')
+    if @model.update send(@model.model_name.singular + "_params")
+      redirect_to send(@model.model_name.route_key + "_path"), notice: @model.was('updated')
     else
       render '_form'
     end

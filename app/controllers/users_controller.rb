@@ -5,11 +5,7 @@ class UsersController < ApplicationController
   arguable model_class: User
   load_and_authorize_resource
 
-  private
-
-  def params_validation
-    user_params
-  end
+  private ###################################################
 
   def user_params
     params.require(:user).permit(:id, :name, :email, :password, :role_id)

@@ -5,11 +5,7 @@ class SystemSettingsController < ApplicationController
   load_and_authorize_resource
   before_action :before_all
 
-  private
-
-  def params_validation
-    system_setting_params
-  end
+  private ###########################
 
   def system_setting_params
     params.require(:system_setting).permit(:id, :user_id, :re_title, :re_body, :pse_recipients_array, :pse_day_of_month, :pse_title, :pse_body)

@@ -70,10 +70,6 @@ class ReceiptEmailsController < ApplicationController
 
   private ###########################################################################################
 
-  def params_validation
-    receipt_email_params
-  end
-
   def receipt_email_params
     params.require(:receipt_email).permit(:id, :body, :value, :day_of_month, :active, :company_id, :recipients_array)
   end

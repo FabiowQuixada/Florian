@@ -28,7 +28,7 @@ module StatusConcern extend ActiveSupport::Concern
       model.active = true
       model.save
 
-      render :json => {:message => genderize_tag(model, 'activated'), :id => model.id, :activated => true}
+      render :json => {:message => model.was('activated'), :id => model.id, :activated => true}
     rescue => exc
       exception_message = handle_exception exc, exc.message
       return render json: exception_message, status: :unprocessable_entity
@@ -42,7 +42,7 @@ module StatusConcern extend ActiveSupport::Concern
       model.active = false
       model.save
 
-      render :json => {:message => genderize_tag(model, 'deactivated'), :id => model.id, :activated => false}
+      render :json => {:message => model.was('deactivated'), :id => model.id, :activated => false}
     rescue => exc
       exception_message = handle_exception exc, exc.message
       return render json: exception_message, status: :unprocessable_entity

@@ -22,6 +22,10 @@ module ModelHelper
     true
   end
 
+  def was(verb)
+    I18n.t("#{verb}.#{self.gender}.#{self.number}", model: I18n.t('activerecord.models.' + self.class.model_name.param_key + '.one')).downcase.capitalize
+  end
+
   def visualizable
     false
   end

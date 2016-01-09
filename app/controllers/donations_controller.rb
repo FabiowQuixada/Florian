@@ -50,10 +50,6 @@ class DonationsController < ApplicationController
 
   private ###########################################################################################
 
-  def params_validation
-    donation_params
-  end
-
   def donation_params
     params.require(:donation).permit(:value, :donation_date, :remark, :company_id, :user_id)
   end

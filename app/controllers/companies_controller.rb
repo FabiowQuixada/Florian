@@ -4,11 +4,7 @@ class CompaniesController < ApplicationController
   arguable model_class: Company
   load_and_authorize_resource
 
-  private
-
-  def params_validation
-    company_params
-  end
+  private #############################################
 
   def company_params
     params.require(:company).permit(:id, :trading_name, :name, :cnpj, :address, :cep,

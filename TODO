@@ -1,6 +1,4 @@
 Voltar pelo browser: history API;
-Exportação dos dados;
-Git;
 Iniciar servidor e whenever quando ligar note;
 
 =====================================================================
@@ -29,7 +27,6 @@ Frescurinha:
  - Espaco logo;
  - Caixa de login centralizada verticalmente;
  - Logo centralizado entra a caixa e o topo;
- - Bootstrap select;
  - Mobile: Deslize horizontal;
  - Ordenador de colunas: Dinheiro;
 
