@@ -34,34 +34,26 @@ class DonationFlowTest < Capybara::Rails::TestCase
 
       test "add donation to company through company screen" do
 
-            visit root_path
-
-            fill_in 'E-mail', :with => 'ftquixada@gmail.com'
-            fill_in 'Senha', :with => 'fulano0123'
-            check 'Manter-me logado'
-
-            click_on 'Login'
+            login_as_admin
 
             visit edit_company_path Company.first.id
 
             remark = 'observacao ' + Time.new.usec.to_s
 
-            within all('.transient_donation').last do
-              find('.donation_date').set '01/10/2015'
-              find('.donation_value').set '5678'
-              find('.donation_remark').set remark
-            end
+            page.find('#donation_tab_title').click
 
-            click_on 'Nova doação'
-            click_on 'Salvar'
+            fill_in 'new_donation_date', :with => '01/10/2015' + "\n"
+            fill_in 'new_donation_value', :with => '5678'
+            fill_in 'new_donation_remark', :with => remark
+
+            page.find('#add_donation_btn').click
 
             visit edit_company_path Company.first.id
 
-            # within all('.persisted_donation').last do
-              # find('.donation_date').set '01/10/2015'
-              # find('.donation_value').set '5678'
-              assert_content page, remark
-          # end
+            page.all('tr.transient_donation').each do |tr|
+              tr.should have_content(remark)
+            end
+
       end
 
 end

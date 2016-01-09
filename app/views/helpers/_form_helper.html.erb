@@ -48,60 +48,79 @@
 			   		attr_values[$(this).attr('id')] = $(this).val();
 			})
 
-			$('#form_back_btn').on('click', function(){
-
-				window.any_change = false;
-
-				preprocess_data();
-
-				var changed_values_list = "";
-
-				if(!window.any_change) {
-					for (var key in attr_values) {
-					    if(attr_values[key] != $('#' + key).val()) {
-					    	changed_values_list += ' ' + key;
-					    	any_change = true;
-					    }
-					}
-				}
-
-				//alert(changed_values_list);
-
-				if(window.any_change) {
-					edited_but_not_saved('/<%= model.model_name.route_key %>');
-				} else {
-					parent.history.back();
-				}
-
-			})
+			$('#form_back_btn').on('click', handle_back_on_edit);
 
 			<% if model.class.column_names.include? 'active' %>
-				if(<%= model.active? %>)
-					activate();
-				else
-					inactivate();
-			<% end %>
 
-			function edited_but_not_saved(url)
-			{
-				$('#confirm_back_modal').modal('show');
-				$('#modal_back_btn').on('click', function()
-				{
-					window.location = url;
-				});
+				if(<%= model.active? %>) {
+					activate();
+				}
+				else {
+					inactivate();
+				}
+
+			<% end %>
+		});
+
+		function handle_back_on_edit() {
+
+			if(window.any_change === 'undefined') {
+				window.any_change = false;
 			}
 
-		//   if (window.history && window.history.pushState) {
+			preprocess_data();
 
-		//     window.history.pushState('forward', null, './#forward');
+			var changed_values_list = "";
 
-		//     $(window).on('popstate', function() {
-		//       alert('Back button was pressed.');
-		//     });
+			if(!window.any_change) {
+				for (var key in attr_values) {
+				    if(attr_values[key] != $('#' + key).val()) {
+				    	changed_values_list += ' ' + key;
+				    	any_change = true;
+				    }
+				}
+			}
 
-		//   }
+			//alert(changed_values_list);
 
-		});
+			if(window.any_change) {
+				$('#confirm_back_modal').modal('show');
+				$('#modal_back_btn').on('click', function() {
+					window.location = '/<%= model.model_name.route_key %>';
+				});
+			} else {
+				parent.history.back();
+			}
+		}
+
+		// window.onload = function (e) {
+		//     if (typeof history.pushState === "function") {
+		//         history.pushState("jibberish", null, null);
+		//         window.onpopstate = function () {
+		//             //history.pushState('newjibberish', null, null);
+		//             e.preventDefault();
+		//             handle_back_on_edit();
+		//             // Handle the back (or forward) buttons here
+		//             // Will NOT handle refresh, use onbeforeunload for this.
+		//         };
+		//     }
+		//     else {
+		//         var ignoreHashChange = true;
+		//         window.onhashchange = function () {
+		//             if (!ignoreHashChange) {
+		//                 ignoreHashChange = true;
+		//                 window.location.hash = Math.random();
+		//                 // Detect and redirect change here
+		//                 // Works in older FF and IE9
+		//                 // * it does mess with your hash symbol (anchor?) pound sign
+		//                 // delimiter on the end of the URL
+		//             }
+		//             else {
+		//                 ignoreHashChange = false;
+		//             }
+		//         };
+		//     }
+		// }
 
 	<% else %>
 
@@ -110,8 +129,7 @@
 				activate();
 			<% end %>
 
-			$('.back_btn').on('click', function()
-			{
+			$('.back_btn').on('click', function() {
 				parent.history.back();
 			});
 		});
@@ -145,16 +163,14 @@
 
 	<% if model.class.column_names.include? 'active' %>
 
-		function inactivate()
-		{
+		function inactivate() {
 			$('#active_img').hide();
 			$('#inactive_img').show();
 			$('#model_status').val('false');
 			$('#status_description').text('<%= genderize_tag(model, 'helpers.is_inactive') %>');
 		}
 
-		function activate()
-		{
+		function activate() {
 			$('#active_img').show();
 			$('#inactive_img').hide();
 			$('#model_status').val('true');
@@ -163,12 +179,13 @@
 
 		$('.status_btn').on('click', set_status_btn);
 
-		function set_status_btn()
-		{
-			if($('#model_status').val() == 'true')
+		function set_status_btn() {
+			if($('#model_status').val() == 'true') {
 				inactivate();
-			else
+			}
+			else {
 				activate();
+			}
 		}
 
 	<% end %>
@@ -185,7 +202,7 @@
 	function escapeHtml(string) {
 		return String(string).replace(/[&<>"'\/]/g, function (s) {
 			return entityMap[s];
-	});
+		});
 	}
 
         function add_tag_to_field(field, tag) {
@@ -193,7 +210,5 @@
             var textAreaTxt = jQuery("#" + field).val();
             jQuery("#" + field).val(textAreaTxt.substring(0, caretPos) + ' ' + tag + ' ' + textAreaTxt.substring(caretPos) );
          }
-
-
 
 </script>

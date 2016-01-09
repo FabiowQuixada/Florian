@@ -37,7 +37,7 @@ class DonationsController < ApplicationController
 
   def create_and_new
 
-    @model = model_class.new params_validation
+    @model = model_class.new donation_params
 
     @breadcrumbs = Hash[@model.model_name.human(:count => 2) => send(@model.model_name.route_key + "_path"), t(@model.genderize('helpers.action.new')) => ""]
 

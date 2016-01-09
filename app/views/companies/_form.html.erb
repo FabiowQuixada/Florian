@@ -83,7 +83,7 @@
 		</div>
 	</div>
 
-	</div><div id="main_tab_1" class="contact_tab" style="display: none;">
+	</div><div id="main_tab_1" style="display: none;">
 		<div class="container-fluid tab_body">
 
 			<div class="row">
@@ -121,16 +121,16 @@
 
 				                                                    	<%= render partial: 'helpers/error_alert', locals: {id: 'donation'} %>
 
-									<div class="form-group  col-md-3">
+									<div class="form-group col-md-3">
 					                                                    <div class="input-group date" data-behaviour='datepicker' >
-					                                                        <%= text_field_tag :donation_date, '',{:id => 'new_donation_date', :class => 'form-control datepicker temp_field'} %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+					                                                        <%= text_field_tag :donation_date, '', :id => 'new_donation_date', :class => 'form-control datepicker temp_field' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 					                                                    </div>
-					                                         	</div><div class="form-group  col-md-3">
+					                                         	</div><div class="form-group col-md-3">
 					                                                    <div class="input-group">
 					                                                        <span class="input-group-addon">R$</span>
 					                                                        <%= text_field_tag :value, '', :id => 'new_donation_value', :class => 'form-control money temp_field' %>
 					                                                    </div>
-				                                                    	</div><div class="form-group  col-md-6">
+				                                                    	</div><div class="form-group col-md-6">
 					                                                	<%= text_field_tag :remark, '', :id => 'new_donation_remark', :placeholder => t('activerecord.attributes.donation.remark'), :class => 'form-control temp_field' %>
 				                                                    	</div>
 
@@ -325,13 +325,15 @@ $(function(){
 
 		if(validate_donation()) {
 
+			window.any_change = true;
+
 			date = $('#new_donation_date').val();
 			value = 'R$ ' + $('#new_donation_value').val();
 			remark = $('#new_donation_remark').val();
 
 			temp_id = (new Date).getTime();
 
-			line = 	'<tr class="persisted_donation" id="donation_' + temp_id + '">'+
+			line = 	'<tr class="transient_donation" id="donation_' + temp_id + '">'+
 				    	'<td class="donation_id" style="display:none;">' + temp_id + '</td>' +
 				    	'<td class="donation_date">' + date + '<input class="form-control input-sm donation_remark new_donation_date" value="' + to_rails_date(date) + '" type="hidden" name="company[donations_attributes][' + temp_id + '][donation_date]" id="company_donations_attributes_' + temp_id + '_date"></td>'+
 				    	'<td class="donation_value">' + value + '<input class="form-control input-sm donation_remark new_donation_value" value="' + value + '" type="hidden" name="company[donations_attributes][' + temp_id + '][value]" id="company_donations_attributes_' + temp_id + '_value"></td>'+
