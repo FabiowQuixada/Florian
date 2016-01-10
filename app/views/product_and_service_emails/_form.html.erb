@@ -62,7 +62,7 @@
 								<%= f.text_field name + '_return', :class => 'form-control input-sm service_input service_return', :readonly => f.object.persisted? %>
 							</div>
 							<div class="col-xs-2 col-md-2 nopadding form-group">
-								<%= text_field_tag name, '', id: 'total_' + name, :class => 'form-control input-sm service_total', readonly: true %>
+								<%= text_field_tag name, '', id: 'total_' + name, :class => 'form-control input-sm service_total temp_field', readonly: true %>
 							</div>
 						</div>
 
@@ -74,17 +74,21 @@
 							<%= label_tag t 'helpers.prod_and_serv_email.total' %>
 						</div>
 						<div class="col-xs-2 col-md-2 nopadding form-group">
-							<%= text_field_tag 'total_service_checkup', 0, id: 'total_service_checkup', class: 'form-control input-sm', readonly: true %>
+							<%= text_field_tag 'total_service_checkup', 0, id: 'total_service_checkup', class: 'form-control input-sm temp_field', readonly: true %>
 						</div>
 						<div class="col-xs-2 col-md-2 nopadding form-group">
-							<%= text_field_tag 'total_service_return', 0, id: 'total_service_return', class: 'form-control input-sm', readonly: true %>
+							<%= text_field_tag 'total_service_return', 0, id: 'total_service_return', class: 'form-control input-sm temp_field', readonly: true %>
 						</div>
 						<div class="col-xs-2 col-md-2 nopadding form-group">
-							<%= text_field_tag 'total_service', 0, id: 'total_service', class: 'form-control input-sm', readonly: true %>
+							<%= text_field_tag 'total_service', 0, id: 'total_service', class: 'form-control input-sm temp_field', readonly: true %>
 						</div>
 					</div>
 				</fieldset>
-			</div><div class="col-md-6">
+			</div>
+
+			<p/>
+
+			<div class="col-md-6">
 				<fieldset>
 
 					<legend><%= t 'activerecord.attributes.product_and_service_email.products' %></legend>
@@ -98,8 +102,10 @@
 					<% @model.class.products.each do |name| %>
 
 				  		<div class="row">
-							<div class="col-xs-5 col-md-5 form-group">
+							<div class="col-xs-7 col-md-5 form-group">
 								<%= f.label name %>
+							</div>
+							<div class="col-xs-2 col-md-2 nopadding form-group">
 							</div>
 							<div class="col-xs-2 col-md-2 nopadding form-group">
 								<%= f.text_field name,  :class => 'form-control input-sm product_input', :readonly => f.object.persisted? %>
@@ -110,11 +116,13 @@
 
 					<!-- Product total row -->
 					<div class="row">
-						<div class="col-xs-5 col-md-5 form-group">
+						<div class="col-xs-7 col-md-5 form-group">
 							<%= label_tag t 'helpers.prod_and_serv_email.total' %>
 						</div>
 						<div class="col-xs-2 col-md-2 nopadding form-group">
-							<%= text_field_tag 'total_product', 0, id: 'total_product', class: 'form-control input-sm', readonly: true %>
+						</div>
+						<div class="col-xs-2 col-md-2 nopadding form-group">
+							<%= text_field_tag 'total_product', 0, id: 'total_product', class: 'form-control input-sm temp_field', readonly: true %>
 						</div>
 					</div>
 				</fieldset>
@@ -129,6 +137,8 @@
 <%= render partial: "helpers/form_helper", locals: {model: @model} %>
 
 	<script>
+
+		function preprocess_data() {}
 
 		function sum_services() {
 

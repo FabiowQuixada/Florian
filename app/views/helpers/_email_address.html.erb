@@ -1,5 +1,5 @@
 <tr id="email_address_<%= index %>" class="email_receipt">
     <td class="recipient_id" style="display:none;"><%= index.to_s %></td>
-    <td class="recipient_email"><%= email_address %></td>
-    <td style="width: 30px; vertical-align:middle"><%= image_tag("delete.png", :title => t('helpers.action.remove'), :class => 'remove_receipt_btn') %> </td>
+    <td class="recipient_email" style="vertical-align: middle;"><%= email_address %></td>
+    <td class="button-wrapper"><%= image_tag("delete.png", :title => t('helpers.action.remove'), :class => 'remove_recipient_btn remove_btn') %> </td>
 </tr>

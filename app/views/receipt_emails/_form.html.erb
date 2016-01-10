@@ -130,21 +130,18 @@
 
 		preprocess_data();
 
-		if(!validate_tag_fields())
-		{
+		if(!validate_tag_fields()) {
 			$('#warning_save_modal').modal('show');
 			evt.preventDefault();
 			return;
 		}
 	});
 
-	function validate_tag_fields()
-	{
+	function validate_tag_fields() {
 		return !contains_all_tags($('#receipt_email_body').val());
 	}
 
-	function contains_all_tags(text)
-	{
+	function contains_all_tags(text) {
 		return text.indexOf("<%= t('tags.company') %>") == -1 || text.indexOf("<%= t('tags.value') %>") == -1 || text.indexOf("<%= t('tags.competence') %>") == -1;
 	}
 
@@ -152,8 +149,11 @@
 	$("#add_value_to_body_btn").on('click', function() {add_tag_to_field('receipt_email_body', '<%= t('tags.value') %>')});
 	$("#add_competence_to_body_btn").on('click', function() {add_tag_to_field('receipt_email_body', '<%= t('tags.competence') %>')});
 
-	function preprocess_data()
-	{
+	function preprocess_data() {
+		if(transient_recipients > 0) {
+			window.any_changes = true;
+		}
+
 		$('#receipt_email_recipients_array').val(formated_recipients());
 	}
 
@@ -161,23 +161,20 @@
 
 		email_address = $('#new_recipient_field').val();
 
-		if (!$('#new_recipient_field').val())
-		{
+		if (!$('#new_recipient_field').val()) {
 			display_form_errors('<%= t('alert.email.fill_a_recipient') %>');
 
-		} else if(already_present(email_address))
-		{
+		} else if(already_present(email_address)) {
 			display_form_errors('<%= t('alert.email.duplicated_recipient') %>');
-		} else if (validate_recipient_email(email_address))
-		{
-			line = '<tr id="email_address_' + temp_id + '"><td class="recipient_id" style="display:none;">' + temp_id + '</td><td class="recipient_email">' + email_address + '</td><td style="width: 30px; vertical-align:middle"><%= link_to image_tag("delete.png", :title =>  t('helpers.action.remove'), :class => 'remove_receipt_btn'), '#', :class => 'remove_receipt_btn' %></td></tr>';
+		} else if (validate_recipient_email(email_address)) {
+			line = '<tr id="email_address_' + temp_id + '"><td class="recipient_id" style="display:none;">' + temp_id + '</td><td class="recipient_email">' + email_address + '</td><td class="button-wrapper"><%= link_to image_tag("delete.png", :title =>  t('helpers.action.remove'), :class => 'remove_btn'), 'javascript:void(0)', :class => 'remove_recipient_btn remove_btn' %></td></tr>';
 			$('#recipients_table > tbody:last-child').append(line);
 			temp_id = temp_id - 1;
+			transient_recipients += 1;
 
 			hide_all_messages();
 			$('#new_recipient_field').val('');
-		} else
-		{
+		} else {
 			display_form_errors('<%= t('alert.email.invalid_recipient') %>');
 		}
 	});

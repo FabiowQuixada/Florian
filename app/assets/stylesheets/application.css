@@ -155,7 +155,7 @@ textarea {
   }
 }
 
-.email_address_table {
+.unbreakable-table {
     table-layout: fixed;
     word-wrap: break-word;
 }
@@ -178,8 +178,17 @@ form {
     bottom:-2;
 }
 
-.remove_receipt_btn{
+.remove_btn{
 	 cursor: pointer;
+}
+
+td.button-wrapper {
+  width: 30px; vertical-align:middle
+}
+
+.lala {
+  margin-top: -2px;
+  padding-top: -2px;
 }
 
 .add_recipient_btn{

@@ -12,7 +12,7 @@
                     </div>
                 </div>
 
-                <table id="recipients_table" class="table table-striped table-condensed table-bordered email_address_table">
+                <table id="recipients_table" class="table table-striped table-condensed table-bordered unbreakable-table">
                     <tbody>
                         <% @model.recipients_as_array.each_with_index do |email_address, index| %>
                             <%= render partial: 'helpers/email_address', locals: {email_address: email_address, index: index} %>
@@ -25,6 +25,7 @@
 <script>
 
     var temp_id = -1;
+    var transient_recipients = 0;
 
     function already_present(email_address)
     {
@@ -45,12 +46,14 @@
     }
 
 
-    $('body').on('click', '.remove_receipt_btn', function() {
+    $('body').on('click', '.remove_recipient_btn', function() {
         id = $(this).parent().parent().find('.recipient_id').text();
 
         $('#email_address_' + id).fadeOut('slow', function() {
             $('#email_address_' + id).remove();
         });
+
+        transient_recipients -= 1;
     });
 
     function formated_recipients()
