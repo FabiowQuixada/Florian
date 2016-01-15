@@ -13,6 +13,8 @@ Rails.application.configure do
 
   config.action_mailer.perform_deliveries = true
 
+  config.serve_static_files = true
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 

@@ -1,7 +1,6 @@
 Voltar pelo browser: history API;
 Iniciar servidor e whenever quando ligar note;
 Testes de mailing;
-Adição mais remoção de destinatários: warning pop-up;
 
 =====================================================================
 
@@ -12,7 +11,7 @@ Depois:
  - Validação individual das configurações;
  - Charts;
  - Ordenador de colunas: Dinheiro;
-
+ - Melhorar tabela de doações na empresa, no mobile;
 
 Interno:
  - Envio de e-mail tá no controller, deveria estar no IaqMailer;
@@ -27,7 +26,5 @@ Interno:
 Frescurinha:
  - Smooth scroll no fechamento de alerts;
  - Smooth scroll na deleção de remetentes;
- - Espaco logo;
- - Caixa de login centralizada verticalmente;
- - Logo centralizado entra a caixa e o topo;
  - Mobile: Deslize horizontal;
+ - Mobile: Não aparecer teclado em campo de data;
