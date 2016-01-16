@@ -1,0 +1,13 @@
+<tr class="donation_row hidden-xs">
+    <td class="donation_date col-xs-6 col-md-3"><%= donation.donation_date %></td>
+    <td class="donation_value col-xs-6 col-md-3"><%= number_to_currency(donation.value) %></td>
+    <td class="donation_remark col-xs-12 col-md-6"><%= donation.remark %></td>
+    <td style="width:16px;"></td>
+</tr>
+
+<tr class="visible-xs">
+    <td class="donation_date" bgcolor="#F9F9F9"><%= donation.donation_date %></td>
+    <td class="donation_value" bgcolor="#F9F9F9"><%= number_to_currency(donation.value) %></td>
+</tr><tr class="visible-xs">
+    <td colspan="2" style="width: 50%" class="donation_remark" bgcolor="#FFFFFF"><%= donation.remark %></td>
+</tr>
