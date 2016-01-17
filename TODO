@@ -1,7 +1,6 @@
 Voltar pelo browser: history API;
 Iniciar servidor e whenever quando ligar note;
 Testes de mailing;
-Os status estão trocados?
 DNS;
 
 =====================================================================
@@ -12,7 +11,8 @@ Depois:
  - Validação individual das configurações;
  - Charts;
  - Ordenador de colunas: Dinheiro;
- - Adicção de doações à empresa no mobile;
+ - Adição de doações à empresa no mobile;
+
 
 Interno:
  - Envio de e-mail tá no controller, deveria estar no IaqMailer;
@@ -28,4 +28,3 @@ Frescurinha:
  - Smooth scroll no fechamento de alerts;
  - Smooth scroll na deleção de remetentes;
  - Mobile: Deslize horizontal;
- - Mobile: Não aparecer teclado em campo de data;

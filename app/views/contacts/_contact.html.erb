@@ -1,0 +1,37 @@
+<%= ff.hidden_field :contact_type %>
+
+<div class="row">
+    <div class="form-group col-md-4">
+        <%= ff.label :name %>
+        <%= ff.text_field :name, :class => 'form-control contact_name' %>
+    </div>
+
+    <div class="form-group col-md-4">
+        <%= ff.label :position %>
+        <%= ff.text_field :position, :class => 'form-control contact_position', :value => index != 0 ? t('activerecord.attributes.company.contacts.contact_' + index.to_s) : ff.object.position, :readonly => index != 0 %>
+    </div>
+
+    <div class="form-group col-md-4">
+        <%= ff.label :email_address %>
+        <div class="input-group">
+            <span class="input-group-addon">@</span>
+            <%= ff.text_field :email_address, :class => 'form-control' %>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-4">
+        <%= ff.label :telephone %>
+        <%= ff.text_field :telephone, :class => 'form-control telephone' %>
+    </div>
+
+    <div class="form-group col-md-4">
+        <%= ff.label :celphone %>
+        <%= ff.text_field :celphone, :class => 'form-control celphone' %>
+    </div>
+
+    <div class="form-group col-md-4">
+        <%= ff.label :fax %>
+        <%= ff.text_field :fax, :class => 'form-control fax' %>
+    </div>
+</div>
