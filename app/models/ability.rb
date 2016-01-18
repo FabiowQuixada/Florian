@@ -7,11 +7,17 @@ class Ability
       if user.admin?
         can :manage, :all
       else
-        can :manage, ReceiptEmail
-        can :manage, ProductAndServiceEmail
+
         can :manage, Company
         can :manage, Donation
         can :manage, SystemSetting
+
+        if user.name == 'Renata'
+          can :manage, ReceiptEmail
+        elsif user.name == 'Lucivânia'
+          can :manage, ProductAndServiceEmail
+        end
+
       end
     #
     # The first argument to `can` is the action you are giving the user
