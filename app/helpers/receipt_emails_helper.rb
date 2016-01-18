@@ -1,2 +1,0 @@
-module ReceiptEmailsHelper
-end

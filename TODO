@@ -2,12 +2,13 @@ Voltar pelo browser: history API;
 Iniciar servidor e whenever quando ligar note;
 Testes de mailing;
 DNS;
+ - Produção + Desenvolvimento ao mesmo tempo, em portas diferentes;
 Adição de doações à empresa no mobile;
+Renomear aquivos e diretórios;
 
 =====================================================================
 
 Depois:
- - Produção + Desenvolvimento ao mesmo tempo, em portas diferentes;
  - Filtros de doações;
  - Charts;
  - Ordenador de colunas: Dinheiro;
