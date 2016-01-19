@@ -1,6 +1,6 @@
 <%= form_for @model, :html=> {:id => 'main_form'} do |f| %>
 
-	<%= render partial: "helpers/form_errors", locals: {model: @model} %>
+	<%= render partial: "shared/form_errors", locals: {model: @model} %>
 
 	<ul class="nav nav-tabs">
 		<li id="main_tab_0_title" class="active clickable"><a><%= I18n.t('helpers.general') %></a></li>
@@ -120,7 +120,7 @@
 			                                                    	<div class="panel-heading"><%= t('helpers.company.new_donation') %></div>
 			                                                    	<div class="panel-body">
 
-				                                                    	<%= render partial: 'helpers/error_alert', locals: {id: 'donation'} %>
+				                                                    	<%= render partial: 'shared/error_alert', locals: {id: 'donation'} %>
 
 									<div class="form-group col-md-3">
 					                                                    <div class="input-group date" data-behaviour='datepicker' >
@@ -197,13 +197,13 @@
 		</div>
 	</div>
 
-	<%= render partial: "helpers/form_buttons", locals: {model: @model, f: f} -%>
+	<%= render partial: "shared/form_buttons", locals: {model: @model, f: f} -%>
 
 <%end%>
 
-<%= render partial: "helpers/tab_helper", locals: {tab_type: 'contact', number_of_tabs: 3} %>
-<%= render partial: "helpers/tab_helper", locals: {tab_type: 'main', number_of_tabs: 3} %>
-<%= render partial: "helpers/form_helper", locals: {model: @model} %>
+<%= render partial: "shared/tab_commons", locals: {tab_type: 'contact', number_of_tabs: 3} %>
+<%= render partial: "shared/tab_commons", locals: {tab_type: 'main', number_of_tabs: 3} %>
+<%= render partial: "shared/form_commons", locals: {model: @model} %>
 
 <script>
 

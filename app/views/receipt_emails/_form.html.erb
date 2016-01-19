@@ -1,13 +1,13 @@
 <%= form_for @model, :html=> {:id => 'main_form'} do |f| %>
 
-	<%= render partial: "helpers/form_errors", locals: {model: @model} %>
+	<%= render partial: "shared/form_errors", locals: {model: @model} %>
 
 	<%= f.hidden_field :id %>
 
 	<div class="container-fluid padless">
 		<div class="row">
 			<div class="col-md-5">
-				<%= render partial: 'helpers/email_address_table', locals: {f: f, model: @model} %>
+				<%= render partial: 'shared/email_address_table', locals: {f: f, model: @model} %>
 			</div>
 			<div class="col-md-7">
 
@@ -91,12 +91,12 @@
 	</div>
 	<% end %>
 
-	<%= render partial: "helpers/form_buttons", locals: {model: @model, f: f} -%>
+	<%= render partial: "shared/form_buttons", locals: {model: @model, f: f} -%>
 
 <% end %>
 
 
-<%= render partial: "helpers/form_helper", locals: {model: @model} %>
+<%= render partial: "shared/form_commons", locals: {model: @model} %>
 <%= render partial: "modals" %>
 
 <script>

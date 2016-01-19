@@ -1,10 +1,10 @@
 <%= form_for @model, :html=> {:id => 'main_form'} do |f| %>
 
-	<%= render partial: "helpers/form_errors", locals: {model: @model} %>
+	<%= render partial: "shared/form_errors", locals: {model: @model} %>
 
 	<ul class="nav nav-tabs">
 		<% if can? :manage, ReceiptEmail.new %>
-			<li id="tab_0_title" class="active clickable"><a><%= t('activerecord.models.receipt_email.one') %></a></li>
+			<li idshared="tab_0_title" class="active clickable"><a><%= t('activerecord.models.receipt_email.one') %></a></li>
 		<% end %>
 		<% if can? :manage, ProductAndServiceEmail.new %>
 			<li id="tab_1_title" class="active clickable"><a><%= t('activerecord.models.product_and_service_email.one') %></a></li>
@@ -50,7 +50,7 @@
 				<div class="container-fluid padless">
 					<div class="row">
 						<div class="col-md-5">
-							<%= render partial: 'helpers/email_address_table', locals: {f: f, model: @model, field_name: 'pse_recipients_array'} %>
+							<%= render partial: 'shared/email_address_table', locals: {f: f, model: @model, field_name: 'pse_recipients_array'} %>
 						</div>
 						<div class="col-md-7">
 
@@ -95,11 +95,11 @@
 		<% end %>
 	</div>
 
-	<%= render partial: "helpers/form_buttons", locals: {model: @model, f: f} -%>
+	<%= render partial: "shared/form_buttons", locals: {model: @model, f: f} -%>
 
 <% end %>
 
-<%= render partial: "helpers/form_helper", locals: {model: @model} %>
+<%= render partial: "shared/form_commons", locals: {model: @model} %>
 
 <script>
 

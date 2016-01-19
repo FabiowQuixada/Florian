@@ -14,7 +14,7 @@
     <!--<%= submit_tag t('helpers.action.filter'), class: "btn btn-primary" %> -->
 <%# end %>
 
-<%= render partial: "helpers/index_table", locals: {model: @model, columns: Array.[](
+<%= render partial: "shared/index_table", locals: {model: @model, columns: Array.[](
     Hash[:header => "donation_date", :model_attr => 'donation_date', :style => "width: 16px;", :class => 'sorter-false'],
     Hash[:header => "value", :model_attr => 'value', :style => "width: 150px;", :type => 'money', :class => "hidden-xs sorter-false"],
     Hash[:header => "company", :model_attr => 'company.trading_name', :class => 'sorter-false'],

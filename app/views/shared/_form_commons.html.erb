@@ -23,7 +23,7 @@
 	</div>
 </div>
 
-<%= render partial: "helpers/audit_helper", locals: {model: model} %>
+<%= render partial: "shared/audit_commons", locals: {model: model} %>
 
 <script>
 	<% if !model.new_record? %>

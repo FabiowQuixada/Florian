@@ -1,6 +1,6 @@
 <%= form_for @model, :html=> {:id => 'main_form'} do |f| %>
 
-	<%= render partial: "helpers/form_errors", locals: {model: @model} %>
+	<%= render partial: "shared/form_errors", locals: {model: @model} %>
 
 	<%= f.hidden_field :id %>
 
@@ -29,11 +29,11 @@
 		<%= f.collection_select(:role_id, Role.where(:active => true), :id, :name, {:include_blank => t('helpers.select.prompt')}, {class: "form-control"}) %>
 	</div>
 
-	<%= render partial: "helpers/form_buttons", locals: {model: @model, f: f} -%>
+	<%= render partial: "shared/form_buttons", locals: {model: @model, f: f} -%>
 
 <% end %>
 
-<%= render partial: "helpers/form_helper", locals: {model: @model} %>
+<%= render partial: "shared/form_commons", locals: {model: @model} %>
 
 <script>
 

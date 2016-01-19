@@ -15,7 +15,7 @@
                 <table id="recipients_table" class="table table-striped table-condensed table-bordered unbreakable-table">
                     <tbody>
                         <% @model.recipients_as_array.each_with_index do |email_address, index| %>
-                            <%= render partial: 'helpers/email_address', locals: {email_address: email_address, index: index} %>
+                            <%= render partial: 'shared/email_address', locals: {email_address: email_address, index: index} %>
                         <% end %>
                     </tbody>
                 </table>

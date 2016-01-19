@@ -90,7 +90,7 @@
 	<% end %>
 </table>
 
-<%= render partial: "helpers/index_helper", locals: {model: @model} %>
+<%= render partial: "shared/index_commons", locals: {model: @model} %>
 
 <% if lookup_context.find_all(ActiveModel::Naming.plural(model) + "/_modals").any? %>
 	<%= render partial: "modals" %>
