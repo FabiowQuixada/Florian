@@ -8,7 +8,7 @@ class CompanyFlowTest < Capybara::Rails::TestCase
 
             visit edit_company_path Company.first.id
 
-            page.find('#donation_tab_title').click
+            page.find('#main_tab_1_title').click
 
             fill_in 'new_donation_date', :with => '01/10/2015' + "\n"
             fill_in 'new_donation_value', :with => '5678'
