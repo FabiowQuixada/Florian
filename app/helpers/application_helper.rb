@@ -2,6 +2,8 @@ require './lib/modules/locale'
 
 module ApplicationHelper
 
+  # TODO Verificar utilidade de todos os métodos
+
   include Locale
 
   def link_to_add_fields(name, f, association)

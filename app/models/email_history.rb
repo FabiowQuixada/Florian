@@ -2,8 +2,6 @@ class EmailHistory < ActiveRecord::Base
 
   # Configuration
   usar_como_dinheiro :value
-
-
   enum send_type: { auto: 0, resend: 1, test: 2 }
 
 
@@ -19,7 +17,6 @@ class EmailHistory < ActiveRecord::Base
   end
 
   def send_type_desc
-
     I18n.t("activerecord.attributes.receipt_email.type_values." + send_type)
   end
 end

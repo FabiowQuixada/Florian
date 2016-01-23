@@ -9,13 +9,13 @@ env :GEM_PATH, ''
 set :output, "/home/fabiow/Desktop/Florian/log/cron.log"
 
 every 1.day, :at => '7:00 am' do
-  runner "EmailsController.send_email_daily"
+  runner "ReceiptEmailsController.send_email_daily", :environment => 'production'
 end
 
 every :sunday, :at => '7:00 am' do
   # TODO Application path
   command "backup perform -t db_backup --data-path " + "/home/fabiow/Desktop/Florian/" + "/backups/"
-  runner "ApplicationMailer.send_backup_email.deliver_now"
+  runner "ApplicationMailer.send_backup_email.deliver_now", :environment => 'production'
 end
 
 # Learn more: http://github.com/javan/whenever

@@ -4,11 +4,16 @@ class SystemSetting < ActiveRecord::Base
   audited
   include ModelHelper
 
+
   # RE: Receipt E-mail
   # PSE: Product and Service Email
 
+
+  # Relationships
   belongs_to :user
 
+
+  # Validations
   validates :re_title, :re_body, :presence => true
   validates :pse_title, :pse_day_of_month, :pse_body, :presence => true
 
@@ -16,7 +21,7 @@ class SystemSetting < ActiveRecord::Base
     'f'
   end
 
-    def recipients_as_array
+  def recipients_as_array
     if pse_recipients_array.nil? || pse_recipients_array.empty?
       return Array.new
     end

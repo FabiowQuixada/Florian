@@ -42,10 +42,6 @@ class ProductAndServiceEmail < ActiveRecord::Base
     mesh + cream + protector + silicon + mask + foam + skin_expander + cervical_collar
   end
 
-  def title
-    'Relatório Mensal IAQ - ' + I18n.t('tags.competence')
-  end
-
   def processed_title(user, date = nil)
 
     if date.nil?

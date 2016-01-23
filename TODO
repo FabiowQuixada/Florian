@@ -1,10 +1,8 @@
 Voltar pelo browser: history API;
 Iniciar servidor e whenever quando ligar note;
-Testes de mailing;
-DNS;
  - Produção + Desenvolvimento ao mesmo tempo, em portas diferentes;
-Adição de doações à empresa no mobile;
-Renomear aquivos e diretórios;
+Testes de mailing;
+Importar empresas em produção;
 
 =====================================================================
 
@@ -12,13 +10,16 @@ Depois:
  - Filtros de doações;
  - Charts;
  - Ordenador de colunas: Dinheiro;
+ - Acesso browser sem senha;
+ - Ssh;
+ - Adição de doações à empresa no mobile;
+ - Teste de validação de telefones;
 
 
 Interno:
  - Envio de e-mail tá no controller, deveria estar no IaqMailer;
  - Usuário: Novo, Senha no Firefox;
  - Reusar _e-mail_address: tem coisa q poderia tar nele;
- - Criar configurações automaticamente junto com usuário;
  - PDF: Não precisar salvar arquivo;
 
 

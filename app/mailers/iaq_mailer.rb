@@ -9,7 +9,7 @@ class IaqMailer < ApplicationMailer
   end
 
   def send_automatic_receipt_email(email)
-    send_email email, date, User.find_by_email('apoioaoqueimado@yahoo.com.br')
+    send_email email, Date.today, User.find_by_email('ftquixada@gmail.com'), EmailHistory.send_types[:auto]
   end
 
   def send_prod_and_serv_email(email, user)
@@ -38,6 +38,13 @@ class IaqMailer < ApplicationMailer
         recipients = email.recipients_array
       end
 
+      ReceiptReport.new("/tmp/recibo.pdf", email, date).save
+      attachments['recibo_de_doacao.pdf'] = File.read('/tmp/recibo.pdf')
+
+      mail(to: recipients,
+        body: email.processed_body(user, date),
+        subject: prefix + email.processed_title(user, date))
+
       email.email_histories.create(
           receipt_email: email,
           body: email.body,
@@ -45,13 +52,6 @@ class IaqMailer < ApplicationMailer
           recipients_array: email.recipients_array,
           user: user,
           send_type: type)
-
-      ReceiptReport.new("/tmp/recibo.pdf", email, date).save
-      attachments['recibo_de_doacao.pdf'] = File.read('/tmp/recibo.pdf')
-
-      mail(to: recipients,
-        body: email.processed_body(user, date),
-        subject: prefix + email.processed_title(user, date))
     end
 
     def send_test_email(email, date, user)

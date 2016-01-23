@@ -9,7 +9,7 @@ class WelcomeController < ApplicationController
     end
 
     #LanguagesHelper.build_void_languagemain
-    @breadcrumbs = Hash["Página Principal" => ""]
+    @breadcrumbs = Hash[t('main_page') => ""]
   end
 
 end
