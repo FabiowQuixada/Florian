@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
 
   audited
   include ModelHelper
+  before_create :build_default_system_setting
+
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable :registerable, :recoverable,
@@ -39,5 +41,20 @@ class User < ActiveRecord::Base
     write_attribute(:active, value)
 
   end
+
+  def build_default_system_setting
+  # build default profile instance. Will use default params.
+  # The foreign key to the owning User model is set automatically
+  build_system_setting
+
+  system_setting.pse_recipients_array = '(Preencha)'
+  system_setting.pse_day_of_month = '(Preencha)'
+  system_setting.pse_title = '(Preencha)'
+  system_setting.pse_body = '(Preencha)'
+  system_setting.re_title = '(Preencha)'
+  system_setting.re_body = '(Preencha)'
+
+  system_setting.valid?
+end
 
 end
