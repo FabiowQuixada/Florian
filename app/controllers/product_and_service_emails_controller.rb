@@ -52,4 +52,8 @@ class ProductAndServiceEmailsController < ApplicationController
     params.require(:product_and_service_email).permit(:id, :competence_date, :psychology, :physiotherapy, :plastic_surgery, :mesh_service, :gynecology, :occupational_therapy, :psychology_return, :physiotherapy_return, :plastic_surgery_return, :mesh_service_return, :gynecology_return, :occupational_therapy_return, :mesh, :cream, :protector, :silicon, :mask, :foam, :skin_expander, :cervical_collar)
   end
 
+  def order_attribute
+    "created_at DESC"
+  end
+
 end
