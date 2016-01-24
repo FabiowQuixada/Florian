@@ -1,7 +1,4 @@
-Voltar pelo browser: history API;
 Iniciar servidor e whenever quando ligar note;
- - Produção + Desenvolvimento ao mesmo tempo, em portas diferentes;
-Testes de mailing;
 Importar empresas em produção;
 
 =====================================================================
@@ -14,6 +11,8 @@ Depois:
  - Ssh;
  - Adição de doações à empresa no mobile;
  - Teste de validação de telefones;
+ - Voltar pelo browser: history API;
+ - Testes de mailing;
 
 
 Interno:

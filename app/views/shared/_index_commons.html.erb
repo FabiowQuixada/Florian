@@ -41,17 +41,17 @@
 
 			function update_status(id, is_now_active)
 			{
-				var target = "#<%= model.class.name.downcase %>_" + id + " .status > a";
+				var target = "#model_" + id + " .status > a";
 
 				if(is_now_active)
 				{
 					$(target).attr("href", change_status_path(id, is_now_active));
-					$(target).html('<%= image_tag('activate.png', :title => genderize_tag(model, 'is_inactive')) %>');
+					$(target).html('<%= image_tag("activate.png", :title => genderize_tag(model, "is_active"), :class => "deactivate_btn status_btn") %>');
 				}
 				else
 				{
 					$(target).attr("href", change_status_path(id, is_now_active));
-					$(target).html('<%= image_tag('deactivate.png', :title => genderize_tag(model, 'is_active')) %>');
+					$(target).html('<%= image_tag("deactivate.png", :title => genderize_tag(model, "is_inactive"), :class => "activate_btn status_btn") %>');
 				}
 			}
 		});
