@@ -24,11 +24,6 @@ class ReceiptEmail < ActiveRecord::Base
 
 
   # Methods
-
-  # def init
-  #     self.title  ||= #user.system_setting.re_title
-  # end
-
   def validate_model
 
     if !value.blank?
@@ -72,6 +67,7 @@ class ReceiptEmail < ActiveRecord::Base
     result = user.system_setting.re_title
     result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
     result = result.gsub(I18n.t('tags.company'), company.trading_name)
+    result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
     result
   end
 
@@ -89,13 +85,18 @@ class ReceiptEmail < ActiveRecord::Base
     result
   end
 
-  def processed_receipt_text(user, date = nil)
+  def processed_receipt_text(date = nil)
 
     if date.nil?
       date = Date.today
     end
 
-    'A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu da ' + company.name + ', inscrito sob o CNPJ/MF nº ' + company.cnpj.to_s + ', situada na ' + company.address + ', a importância supra de ' + I18n.t('tags.value') + ' como doação em ' + I18n.t('tags.competence') + '.'
+    result = I18n.t('report.other.receipt_text', company_name: company.name, cnpj: company.cnpj.to_s, address: company.address, value_tag: I18n.t('tags.value'), competence_tag: I18n.t('tags.competence'))
+    result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
+    result = result.gsub(I18n.t('tags.company'), company.trading_name)
+    result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
+    result
+
   end
 
   def competence(date = nil)
@@ -128,7 +129,7 @@ class ReceiptEmail < ActiveRecord::Base
       return true
     else
       if day_of_month == Date.today.strftime("%e").to_f
-        if Time.now.hour < 7#self.daily_send_hour
+        if Time.now.hour < ReceiptEmail.daily_send_hour
           return true
         end
       end

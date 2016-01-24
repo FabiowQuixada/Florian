@@ -223,6 +223,8 @@ pt-BR:
       email: "E-mail: apoioaoqueimado@yahoo.com.br"
     president_name: "Dr. Edmar Maciel Lima Júnior"
     president_description: "Presidente do Instituto de Apoio ao Queimado – I.A.Q."
+    other:
+      receipt_text: 'A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu da %{company_name}, inscrito sob o CNPJ/MF nº %{cnpj}, situada na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
   helpers:
     main_page: Página Principal
     error: Erro

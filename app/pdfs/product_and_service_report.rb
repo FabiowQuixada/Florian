@@ -10,7 +10,7 @@ class ProductAndServiceReport < IaqReport
 
       header pdf, I18n.t('report.title.prod_and_service'), @email.competence.capitalize
 
-      print_session_title I18n.t('helpers.prod_and_serv_email.attendances')
+      print_session_title pdf, I18n.t('helpers.prod_and_serv_email.attendances')
 
       table = []
       total_a = 0
@@ -28,12 +28,12 @@ class ProductAndServiceReport < IaqReport
 
       table << [I18n.t('helpers.prod_and_serv_email.total'), total_a, total_b, total_a + total_b]
 
-      print_table table
+      print_table pdf, table
 
 
       ##################
 
-      print_session_title I18n.t('helpers.prod_and_serv_email.product_output')
+      print_session_title pdf, I18n.t('helpers.prod_and_serv_email.product_output')
 
 
       table = []
@@ -47,7 +47,7 @@ class ProductAndServiceReport < IaqReport
 
       table << [I18n.t('helpers.prod_and_serv_email.total'), total_products]
 
-      print_table table
+      print_table pdf, table
 
       footer pdf
 

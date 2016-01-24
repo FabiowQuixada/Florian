@@ -61,7 +61,7 @@ class ReceiptEmailsController < ApplicationController
 
   def self.send_email_daily
 
-    emails = ReceiptEmail.where(day_of_month: Time.now.day, active: true)
+    emails = ReceiptEmail.where(day_of_month: Date.today.day, active: true)
 
     emails.each do |email|
         IaqMailer.send_automatic_receipt_email(email).deliver_now
