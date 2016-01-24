@@ -56,15 +56,14 @@
 			}
 		});
 
-	function change_status_path(id, is_now_active)
-	{
-		<% model_name = model.class.to_s.underscore %>
+		function change_status_path(id, is_now_active) {
+			<% model_name = model.class.to_s.underscore %>
 
-		if(is_now_active)
-			return '<%= send("deactivate_#{model_name}_path", -1) %>'.replace("-1", id);
-		else
-			return '<%= send("activate_#{model_name}_path", -1) %>'.replace("-1", id);
-	}
+			if(is_now_active)
+				return '<%= send("deactivate_#{model_name}_path", -1) %>'.replace("-1", id);
+			else
+				return '<%= send("activate_#{model_name}_path", -1) %>'.replace("-1", id);
+		}
 
 	<% end %>
 

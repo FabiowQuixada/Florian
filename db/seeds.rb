@@ -1,25 +1,16 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 
 role1 = Role.create({name: "Admin", description: 'Administrador'})
 role2 = Role.create({name: "Usuário", description: 'Usuário comum'})
+role3 = Role.create({name: "Secretária 1", description: '(Renata)'})
+role4 = Role.create({name: "Secretária 2", description: '(Lucivania)'})
 
-user1 = User.create({name: "Sistema", email: "apoioaoqueimado@yahoo.com.br", password: "fulano0123", password_confirmation: "fulano0123", bcc: 'teste@test.com', signature: 'teste', role: role1})
-user2 = User.create({name: "Fabiow", email: "ftquixada@gmail.com", password: "fulano0123", password_confirmation: "fulano0123", bcc: 'teste@test.com', signature: 'teste', role: role1})
-user3 = User.create({name: "Lucivânia", email: "luci@yahoo.com.br", password: "senha_renata", password_confirmation: "senha_renata", bcc: 'teste@test.com', signature: 'teste', role: role2})
-user4 = User.create({name: "Renata", email: "fquixada@yahoo.com.br", password: "senha_renata", password_confirmation: "senha_renata", bcc: 'teste@test.com', signature: 'teste', role: role2})
-user5 = User.create({name: "Usuário Inativo", email: "teste_inativo@yahoo.com.br", password: "usuario_teste", password_confirmation: "usuario_teste", bcc: 'teste@test.com', signature: 'teste', role: role2, active: false})
-
-settings1 = SystemSetting.create({re_title: 'Titulo RE', re_body: 'Corpo RE', pse_recipients_array: 'ftquixada@gmail.com', pse_day_of_month: 3, pse_title: 'Titulo PSE', pse_body: 'Corpo PSE', user: user1})
-settings2 = SystemSetting.create({re_title: 'Titulo RE', re_body: 'Corpo RE', pse_recipients_array: 'ftquixada@gmail.com', pse_day_of_month: 3, pse_title: 'Titulo PSE', pse_body: 'Corpo PSE', user: user2})
-settings3 = SystemSetting.create({re_title: 'Titulo RE', re_body: 'Corpo RE', pse_recipients_array: 'ftquixada@gmail.com', pse_day_of_month: 3, pse_title: 'Titulo PSE', pse_body: 'Corpo PSE', user: user3})
-settings4 = SystemSetting.create({re_title: 'Titulo RE', re_body: 'Corpo RE', pse_recipients_array: 'ftquixada@gmail.com', pse_day_of_month: 3, pse_title: 'Titulo PSE', pse_body: 'Corpo PSE', user: user4})
-settings5 = SystemSetting.create({re_title: 'Titulo RE', re_body: 'Corpo RE', pse_recipients_array: 'ftquixada@gmail.com', pse_day_of_month: 3, pse_title: 'Titulo PSE', pse_body: 'Corpo PSE', user: user5})
+user1 = User.create({name: "Sistema",     email: "apoioaoqueimado@yahoo.com.br", password: "fulano0123", password_confirmation: "fulano0123", bcc: 'teste@test.com', signature: 'teste', role: role1})
+user2 = User.create({name: "Fabiow",      email: "ftquixada@gmail.com", password: "fulano0123", password_confirmation: "fulano0123", bcc: 'teste@test.com', signature: 'teste', role: role1})
+user3 = User.create({name: "Edmar",       email: "edmar@gmail.com", password: "fulano0123", password_confirmation: "fulano0123", bcc: 'teste@test.com', signature: 'teste', role: role1})
+user4 = User.create({name: "Márcia",       email: "marcia@gmail.com", password: "fulano0123", password_confirmation: "fulano0123", bcc: 'teste@test.com', signature: 'teste', role: role1})
+user5 = User.create({name: "Lucivânia",   email: "luci@yahoo.com.br", password: "senha_renata", password_confirmation: "senha_renata", bcc: 'teste@test.com', signature: 'teste', role: role4})
+user6 = User.create({name: "Renata",       email: "fquixada@yahoo.com.br", password: "senha_renata", password_confirmation: "senha_renata", bcc: 'teste@test.com', signature: 'teste', role: role3})
+user7 = User.create({name: "Inativo",       email: "teste_inativo@yahoo.com.br", password: "usuario_teste", password_confirmation: "usuario_teste", bcc: 'teste@test.com', signature: 'teste', role: role2, active: false})
 
 comp1 = Company.create(trading_name: "Empresa I", name: "Empresa I Ltda.", cnpj: "31162488000187", category: 1, address: "lala", group: 1)
 comp2 = Company.create(trading_name: "Empresa II", name: "Empresa II Ltda.", cnpj: "34.781.467/0001-38", category: 2, address: "lala",  group: 2)

@@ -23,12 +23,14 @@
 		<% end %>
 	</div>
 
-	<p/>
+	<div class="visible-xs">
+		<p/>
+	</div>
 
 	<div class="container-fluid padless">
 
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-7">
 				<fieldset>
 
 					<legend><%= t 'activerecord.attributes.product_and_service_email.services' %></legend>
@@ -86,9 +88,11 @@
 				</fieldset>
 			</div>
 
-			<p/>
+			<div class="visible-xs">
+				<p/>
+			</div>
 
-			<div class="col-md-6">
+			<div class="col-md-5">
 				<fieldset>
 
 					<legend><%= t 'activerecord.attributes.product_and_service_email.products' %></legend>
@@ -102,10 +106,10 @@
 					<% @model.class.products.each do |name| %>
 
 				  		<div class="row">
-							<div class="col-xs-7 col-md-5 form-group">
+							<div class="col-xs-7 col-md-6 form-group">
 								<%= f.label name %>
 							</div>
-							<div class="col-xs-2 col-md-2 nopadding form-group">
+							<div class="col-xs-2 col-md-1 nopadding form-group">
 							</div>
 							<div class="col-xs-2 col-md-2 nopadding form-group">
 								<%= f.text_field name,  :class => 'form-control input-sm product_input', :readonly => f.object.persisted? %>
@@ -116,10 +120,10 @@
 
 					<!-- Product total row -->
 					<div class="row">
-						<div class="col-xs-7 col-md-5 form-group">
+						<div class="col-xs-7 col-md-6 form-group">
 							<%= label_tag t 'helpers.prod_and_serv_email.total' %>
 						</div>
-						<div class="col-xs-2 col-md-2 nopadding form-group">
+						<div class="col-xs-2 col-md-1 nopadding form-group">
 						</div>
 						<div class="col-xs-2 col-md-2 nopadding form-group">
 							<%= text_field_tag 'total_product', 0, id: 'total_product', class: 'form-control input-sm temp_field', readonly: true %>
