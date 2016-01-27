@@ -212,9 +212,12 @@
 			$('#global_error_box').show();
 		}
 
-		function display_error(error_box_id, message) {
+		function display_error(message, error_box_id) {
 
 			var result = '';
+
+			if(!error_box_id)
+				error_box_id = 'global';
 
 			if (Object.prototype.toString.call(message) === '[object Array]') {
 
