@@ -41,9 +41,9 @@ class ApplicationController < ActionController::Base
       end
     elsif exc.instance_of? IaqException
       return exc.message
-    else
-      return default_message
     end
+
+    return default_message
   end
 
   def internet_connection?
