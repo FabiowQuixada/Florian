@@ -1,5 +1,5 @@
-Iniciar servidor e whenever quando ligar note;
-Importar empresas em produção;
+
+Voltar: sempre pra listagem;
 
 =====================================================================
 
@@ -13,7 +13,7 @@ Depois:
  - Teste de validação de telefones;
  - Voltar pelo browser: history API;
  - Testes de mailing;
-
+ - Salva empresa > edita volta > ainda ta a mensagem "com sucesso";
 
 Interno:
  - Envio de e-mail tá no controller, deveria estar no IaqMailer;

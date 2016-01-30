@@ -1,9 +1,10 @@
 class ApplicationMailer < ActionMailer::Base
 
-    default from: "ftquixada@gmail.com"
+    default from: "apoioaoqueimado@yahoo.com.br"
 
     def  send_backup_email()
 
+        # TODO Endereço dinamico q tem no server_up.sh
         attachments['backup.tar'] = File.read(Dir['/home/fabiow/backups/db_backup/*'].sort.reverse[1] + '/db_backup.tar')
 
         # TODO Porque deliver now da erro aqui?
