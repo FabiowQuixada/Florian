@@ -48,7 +48,7 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
   def user_params
-    params.require(:user).permit(:id, :name, :email, :role_id)
+    params.require(:user).permit(:id, :name, :email, :role_id, :password, :password_confirmation, :signature, :current_password)
   end
 
   def needs_password?(user, params)
@@ -56,7 +56,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def account_update_params
-    params.require(:user).permit(:signature, :test_recipient, :bcc, :email, :password, :password_confirmation, :current_password)
+    params.require(:user).permit(:signature, :bcc, :email, :password, :password_confirmation, :current_password)
   end
 
 end
