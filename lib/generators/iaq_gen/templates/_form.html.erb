@@ -1,6 +1,6 @@
 <%= form_for @model, :html=> {:id => 'main_form'} do |f| %>
 
-	<%= render partial: "helpers/form_errors", locals: {model: @model} %>
+	<%= render partial: "shared/form_errors", locals: {model: @model} %>
 
 	<%= f.hidden_field :id %>
 
@@ -8,11 +8,11 @@
 	<< fields >>
 	</div>
 
-	<%= render partial: "helpers/form_buttons", locals: {model: @model, f: f} -%>
+	<%= render partial: "shared/form_buttons", locals: {model: @model, f: f} -%>
 
 <% end %>
 
-<%= render partial: "helpers/form_helper", locals: {model: @model} %>
+<%= render partial: "shared/form_helper", locals: {model: @model} %>
 
 <script>
 
