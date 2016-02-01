@@ -1,5 +1,5 @@
 class ExcelParser
- def parse
+ def self.parse
 
          file = Roo::Excel.new(Rails.root.join('app', 'assets', 'test.xls'))
 
@@ -10,15 +10,15 @@ class ExcelParser
 
               row = sheet.rows[r]
 
-              byebug if index > 0
+              #byebug if index > 0
 
-              byebug if row.nil?
+              #byebug if row.nil?
 
               company = parse_company row, (index+1)
 
               if !company.save
                   puts company.errors
-                  byebug if index > 0
+                  #byebug if index > 0
               end
           end # Row loop end
 
@@ -27,7 +27,7 @@ class ExcelParser
 
     private
 
-    def parse_company(row, group)
+    def self.parse_company(row, group)
 
       col = 1
       company = Company.new
@@ -98,12 +98,6 @@ class ExcelParser
       company.contacts.push contact1
       company.contacts.push contact2
       company.contacts.push contact3
-
-      # Donation fields ####################################################
-      # company.payment_frequency = row[28]
-      # company.payment_period = row[29]
-      # company.first_parcel = row[30]
-      # company.contract =row[32]
 
       company
   end
