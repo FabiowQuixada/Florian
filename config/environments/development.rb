@@ -8,7 +8,9 @@ Rails.application.configure do
     user_name:            ENV["user_name"],
     password:             ENV["password"],
     authentication:       ENV["authentication"],
-    enable_starttls_auto: true  }
+    enable_starttls_auto: true,
+    ssl: true
+}
 
   config.action_mailer.perform_deliveries = true
 
