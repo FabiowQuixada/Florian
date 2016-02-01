@@ -202,9 +202,9 @@ pt-BR:
     email:
       sending_test: Enviando e-mail de teste...
       resending: Reenviando e-mail...
-      error_sending_test: 'Ocorreu um erro ao enviar um e-mail de teste. Por favor, entre em contato com o administrador informando o horário do ocorrido;'
-      error_sending: 'Ocorreu um erro ao enviar o e-mail. Por favor, entre em contato com o administrador informando o horário do ocorrido;'
-      error_resending: 'Ocorreu um erro ao reenviar o e-mail. Por favor, entre em contato com o administrador informando o horário do ocorrido;'
+      error_sending_test: 'Ocorreu um erro ao enviar um e-mail de teste. Por favor, entre em contato com o administrador informando o horário do ocorrido.'
+      error_sending: 'Ocorreu um erro ao enviar o e-mail. Por favor, entre em contato com o administrador informando o horário do ocorrido.'
+      error_resending: 'Ocorreu um erro ao reenviar o e-mail. Por favor, entre em contato com o administrador informando o horário do ocorrido.'
       invalid_competence: Competência inválida;
       invalid_recipient: E-mail inválido;
       fill_a_recipient: Digite um endereço de e-mail;
@@ -358,7 +358,7 @@ pt-BR:
     title:
       back: Dados não salvos
     body:
-      back: Suas alterações não foram salvas, deseja descartá-las?
+      back: 'Suas alterações não foram salvas, deseja descartá-las?'
     email:
       title:
         resend: 'Reenvio de E-mail para '
@@ -368,7 +368,7 @@ pt-BR:
         recent_emails: 'E-mails Enviados nos Últimos %{days} Dias'
       body:
         remove: Tem certeza que deseja remover este e-mail?
-        warning_save: O campo 'Corpo' deve constar os símbolos especiais (#), para que seja atualizado corretamente pelo sistema. Por exemplo, se você digitar a competência 'outubro', nos demais meses a competência não será ajustada automaticamente. Em vez disso, use os botões disponíveis acima do campo.
+        warning_save: "O campo 'Corpo' deve constar os símbolos especiais (#), para que seja atualizado corretamente pelo sistema. Por exemplo, se você digitar a competência 'outubro', nos demais meses a competência não será ajustada automaticamente. Em vez disso, use os botões disponíveis acima do campo."
   title:
     new:
       m:
@@ -398,11 +398,11 @@ pt-BR:
     no_internet_connection: Não há conexão com a internet.
   error_pages:
     not_found:
-      title: Desculpe, mas esta página não existe ou você não tem permissão para acessá-la.
+      title: "Desculpe, mas esta página não existe ou você não tem permissão para acessá-la."
       body: Verifique se o endereço está correto ou contate o administrador informando o horário do ocorrido.
     internal_server_error:
-      title: Desculpe, mas algo deu errado.
-      body: Por favor, contate o administrador informando o horário do ocorrido.
+      title: "Desculpe, mas algo deu errado."
+      body: "Por favor, contate o administrador informando o horário do ocorrido."
   date:
     abbr_day_names:
     - Dom
@@ -461,26 +461,26 @@ pt-BR:
     distance_in_words:
       about_x_hours:
         one: aproximadamente 1 hora
-        other: aproximadamente %{count} horas
+        other: "aproximadamente %{count} horas"
       about_x_months:
         one: aproximadamente 1 mês
-        other: aproximadamente %{count} meses
+        other: "aproximadamente %{count} meses"
       about_x_years:
         one: aproximadamente 1 ano
-        other: aproximadamente %{count} anos
+        other: "aproximadamente %{count} anos"
       almost_x_years:
         one: quase 1 ano
-        other: quase %{count} anos
+        other: "quase %{count} anos"
       half_a_minute: meio minuto
       less_than_x_minutes:
         one: menos de um minuto
-        other: menos de %{count} minutos
+        other: "menos de %{count} minutos"
       less_than_x_seconds:
         one: menos de 1 segundo
-        other: menos de %{count} segundos
+        other: "menos de %{count} segundos"
       over_x_years:
         one: mais de 1 ano
-        other: mais de %{count} anos
+        other: "mais de %{count} anos"
       x_days:
         one: 1 dia
         other: "%{count} dias"

@@ -22,9 +22,9 @@ class Company < ActiveRecord::Base
   validate :unique_cnpj
   validate :contact_qty
   validates :trading_name, :name, :cnpj, :address, :category, :group, :presence => true
-  validates :category, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 3, only_integer: true }
-  validates :group, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 4, only_integer: true }
-  validates :contract, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 3, only_integer: true }, allow_nil: true
+  #validates :category, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 3, only_integer: true }
+  #validates :group, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 4, only_integer: true }
+  #validates :contract, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 3, only_integer: true }, allow_nil: true
   validates :payment_frequency, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 8, only_integer: true }, allow_nil: true
 
 

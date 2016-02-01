@@ -17,7 +17,7 @@ class ProductAndServiceEmail < ActiveRecord::Base
   # Methods
   def validate_model
 
-  #   if psychology.blank? or physiotherapy.blank? or plastic_surgery.blank? or mesh_service.blank? or gynecology.blank? or occupational_therapy.blank? or psychology_return.blank? or physiotherapy_return.blank? or plastic_surgery_return.blank? or mesh_service_return.blank? or gynecology_return.blank? or occupational_therapy_return.blank?
+  # if psychology.blank? or physiotherapy.blank? or plastic_surgery.blank? or mesh_service.blank? or gynecology.blank? or occupational_therapy.blank? or psychology_return.blank? or physiotherapy_return.blank? or plastic_surgery_return.blank? or mesh_service_return.blank? or gynecology_return.blank? or occupational_therapy_return.blank?
   #     errors.add(:cream, 'Todos os serviços são obrigatórios;')
   # end
 

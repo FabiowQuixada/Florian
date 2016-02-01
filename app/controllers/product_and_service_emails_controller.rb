@@ -8,18 +8,19 @@ class ProductAndServiceEmailsController < ApplicationController
 
     @model = ProductAndServiceEmail.new product_and_service_email_params
 
+    if !@model.save
+      return render '_form'
+    end
+
     begin
 
       IaqMailer.send_prod_and_serv_email(@model, current_user).deliver_now
-
-      if !@model.save
-        return render '_form'
-      end
 
      rescue => exc
        @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
        return render '_form'
      end
+
 
     redirect_to send(@model.model_name.route_key + "_path"), notice: genderize_tag(@model, 'sent')
   end

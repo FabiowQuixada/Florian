@@ -1,5 +1,5 @@
-
 Voltar: sempre pra listagem;
+ - Testes de mailing;
 
 =====================================================================
 
@@ -8,11 +8,9 @@ Depois:
  - Charts;
  - Ordenador de colunas: Dinheiro;
  - Acesso browser sem senha;
- - Ssh;
  - Adição de doações à empresa no mobile;
  - Teste de validação de telefones;
  - Voltar pelo browser: history API;
- - Testes de mailing;
  - Salva empresa > edita volta > ainda ta a mensagem "com sucesso";
 
 Interno:
