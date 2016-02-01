@@ -14,7 +14,7 @@
 	<div class="container-fluid tab_body">
 
 		<% if can? :manage, ReceiptEmail.new %>
-			<div id="tab_0" class="contact_tab">
+			<div id="tab_0" class="receipt_email_tab">
 				<div class="form-group">
 					<%= f.label :re_title %>
 					<span style="float:right">
@@ -45,7 +45,7 @@
 			</div>
 		<% end %>
 		<% if can? :manage, ProductAndServiceEmail.new %>
-			<div id="tab_1" class="contact_tab">
+			<div id="tab_1" class="prod_serv_email_tab">
 
 				<div class="container-fluid padless">
 					<div class="row">
@@ -105,7 +105,11 @@
 
 	function preprocess_data()
 	{
+		if(transient_recipients > 0) {
+			window.any_changes = true;
+		}
 
+		$('#system_setting_pse_recipients_array').val(formated_recipients());
 	}
 
 	<% for t in 0..1 do %>
@@ -161,5 +165,10 @@
 		{
 			display_form_errors('<%= t('alert.email.invalid_recipient') %>');
 		}
+	});
+
+	$('#main_form').on('submit', function(evt) {
+
+		preprocess_data();
 	});
 </script>
