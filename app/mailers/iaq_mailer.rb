@@ -9,7 +9,7 @@ class IaqMailer < ApplicationMailer
   end
 
   def send_automatic_receipt_email(email)
-    send_email email, Date.today, User.find_by_email('ftquixada@gmail.com'), EmailHistory.send_types[:auto]
+    send_email email, Date.today, User.find_by_email(SYSTEM_EMAIL), EmailHistory.send_types[:auto]
   end
 
   def send_prod_and_serv_email(email, user)

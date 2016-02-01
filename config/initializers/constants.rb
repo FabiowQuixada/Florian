@@ -24,3 +24,6 @@ BR_STATES = [["Alagoas", "AL"],
     ["São Paulo", "SP"],
     ["Sergipe", "SE"],
     ["Tocantins", "TO"]]
+
+ADMIN_EMAIL = "ftquixada@gmail.com"
+SYSTEM_EMAIL = "apoioaoqueimado@yahoo.com.br"

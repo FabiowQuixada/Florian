@@ -1,6 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
 
-    default from: "apoioaoqueimado@yahoo.com.br"
+    default from: ENV["user_name"]
 
     def  send_backup_email()
 
@@ -8,7 +8,7 @@ class ApplicationMailer < ActionMailer::Base
         attachments['backup.tar'] = File.read(Dir['/home/fabiow/backups/db_backup/*'].sort.reverse[1] + '/db_backup.tar')
 
         # TODO Porque deliver now da erro aqui?
-        mail(to: 'ftquixada@gmail.com',
+        mail(to: ADMIN_EMAIL,
           body: 'Banco de Producao',
           subject: I18n.t('helpers.email_tag') + ' Backup Semanal')#.deliver_now
   end
