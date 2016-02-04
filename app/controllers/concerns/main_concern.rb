@@ -85,6 +85,8 @@ module MainConcern extend ActiveSupport::Concern
   def before_edit
     @model = model_class.find(params[:id])
     @breadcrumbs = @model.breadcrumb_path.merge Hash[t('helpers.action.edit') => ""]
+
+    @breadcrumbs = @breadcrumbs.merge @model.breadcrumb_suffix unless @model.breadcrumb_suffix.nil?
   end
 
   def before_show

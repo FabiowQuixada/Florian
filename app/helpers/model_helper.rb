@@ -33,4 +33,7 @@ module ModelHelper
   def breadcrumb_path
     Hash[self.model_name.human(:count => 2) => 'send(self.model_name.route_key + "_path")']
   end
+
+  def breadcrumb_suffix
+  end
 end

@@ -63,11 +63,15 @@ def group_desc
   end
 
   def payment_frequency_desc
-  PARCEL_FREQUENCIES[parcel_frequency-1].first unless PARCEL_FREQUENCIES[parcel_frequency-1].nil?
+    PARCEL_FREQUENCIES[parcel_frequency-1].first unless PARCEL_FREQUENCIES[parcel_frequency-1].nil?
   end
 
   def donation_rejectable?(att)
     (att['value'].nil? or att['value'] == '0,00') && (att['donation_date'].nil? or !att['donation_date'].is_a?(Date)) && (att['remark'].nil? or att['remark'].blank?)
+  end
+
+  def breadcrumb_suffix
+    Hash[trading_name => 'send(self.model_name.route_key + "_path")']
   end
 
 end
