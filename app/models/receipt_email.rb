@@ -5,7 +5,6 @@ class ReceiptEmail < ActiveRecord::Base
   # Configuration
   audited
   include ModelHelper
-  # after_initialize :init
   usar_como_dinheiro :value
 
 

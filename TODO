@@ -1,6 +1,9 @@
 Voltar: sempre pra listagem;
  - Testes de mailing;
 
+se tiver #sasas. (sem espaco?)
+
+
 =====================================================================
 
 Depois:
@@ -12,6 +15,7 @@ Depois:
  - Teste de validação de telefones;
  - Voltar pelo browser: history API;
  - Salva empresa > edita volta > ainda ta a mensagem "com sucesso";
+ - Prod serv: e-mail interno;
 
 Interno:
  - Envio de e-mail tá no controller, deveria estar no IaqMailer;
