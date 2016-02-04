@@ -11,12 +11,8 @@ class Ability
         can :manage, Company
         can :manage, Donation
         can :manage, SystemSetting
-
-        if user.name == 'Renata'
-          can :manage, ReceiptEmail
-        elsif user.name == 'Lucivânia'
-          can :manage, ProductAndServiceEmail
-        end
+        can :manage, ReceiptEmail
+        can :manage, ProductAndServiceEmail
 
       end
     #
