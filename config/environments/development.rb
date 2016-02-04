@@ -1,5 +1,6 @@
 Rails.application.configure do
 
+
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:              ENV["address"],
@@ -8,8 +9,7 @@ Rails.application.configure do
     user_name:            ENV["user_name"],
     password:             ENV["password"],
     authentication:       ENV["authentication"],
-    enable_starttls_auto: true,
-    ssl: true
+    enable_starttls_auto: true
 }
 
   config.action_mailer.perform_deliveries = true
