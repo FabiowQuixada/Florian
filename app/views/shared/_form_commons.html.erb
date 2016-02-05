@@ -26,7 +26,7 @@
 <%= render partial: "shared/audit_commons", locals: {model: model} %>
 
 <script>
-	<% if !model.new_record? %>
+	<% if model.persisted? %>
 		$(document).ready(function() {
 
 			jQuery(document).ready(function($) {
@@ -86,10 +86,10 @@
 			if(window.any_change) {
 				$('#confirm_back_modal').modal('show');
 				$('#modal_back_btn').on('click', function() {
-					window.location = '/<%= model.model_name.route_key %>';
+					go_back();
 				});
 			} else {
-				parent.history.back();
+				go_back();
 			}
 		}
 
@@ -130,7 +130,7 @@
 			<% end %>
 
 			$('.back_btn').on('click', function() {
-				parent.history.back();
+				go_back();
 			});
 		});
 
@@ -205,10 +205,14 @@
 		});
 	}
 
-        function add_tag_to_field(field, tag) {
-            var caretPos = document.getElementById(field).selectionStart;
-            var textAreaTxt = jQuery("#" + field).val();
-            jQuery("#" + field).val(textAreaTxt.substring(0, caretPos) + ' ' + tag + ' ' + textAreaTxt.substring(caretPos) );
-         }
+    function add_tag_to_field(field, tag) {
+        var caretPos = document.getElementById(field).selectionStart;
+        var textAreaTxt = jQuery("#" + field).val();
+        jQuery("#" + field).val(textAreaTxt.substring(0, caretPos) + ' ' + tag + ' ' + textAreaTxt.substring(caretPos) );
+     }
+
+     function go_back() {
+     	window.location = '/<%= model.model_name.route_key %>';
+     }
 
 </script>
