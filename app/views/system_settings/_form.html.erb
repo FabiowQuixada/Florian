@@ -37,10 +37,13 @@
 
 				<div class="container-fluid padless">
 					<div class="row">
-						<div class="col-md-5">
-							<%= render partial: 'shared/email_address_table', locals: {f: f, model: @model, field_name: 'pse_recipients_array'} %>
+						<div class="col-md-6">
+							<%= render partial: 'shared/email_address_table', locals: {f: f, model: @model, field_name: 'pse_recipients_array', method_name: 'recipients_as_array'} %>
 						</div>
-						<div class="col-md-7">
+						<div class="col-md-6">
+							<%= render partial: 'shared/email_address_table', locals: {f: f, model: @model, field_name: 'pse_private_recipients_array', method_name: 'private_recipients_as_array'} %>
+						</div>
+						<!-- <div class="col-md-7"> -->
 
 							<!-- <div class="container-fluid padless">
 								<div class="row">
@@ -52,7 +55,7 @@
 
 								</div>
 							</div> -->
-						</div>
+						<!-- </div> -->
 					</div>
 				</div>
 
@@ -99,7 +102,8 @@
 			window.any_changes = true;
 		}
 
-		$('#system_setting_pse_recipients_array').val(formated_recipients());
+		$('#system_setting_pse_recipients_array').val(formated_recipients('pse_recipients_array'));
+		$('#system_setting_pse_private_recipients_array').val(formated_recipients('pse_private_recipients_array'));
 	}
 
 	<% for t in 0..(tabs_qty-1) do %>
@@ -132,31 +136,6 @@
 		$("#add_competence_to_pse_title_btn").on('click', function() {add_tag_to_field('system_setting_pse_title', '<%= t('tags.competence') %>')});
 
 		hide_all_tabs_except(0);
-	});
-
-	$('#add_recipient_btn').on('click', function() {
-
-		email_address = $('#new_recipient_field').val();
-
-		if (!$('#new_recipient_field').val())
-		{
-			display_form_errors('<%= t('alert.email.fill_a_recipient') %>');
-
-		} else if(already_present(email_address))
-		{
-			display_form_errors('<%= t('alert.email.duplicated_recipient') %>');
-		} else if (validate_recipient_email(email_address))
-		{
-			line = '<tr id="email_address_' + temp_id + '"><td class="recipient_id" style="display:none;">' + temp_id + '</td><td class="recipient_email">' + email_address + '</td><td class="button-wrapper"><%= link_to image_tag("delete.png", :title =>  t('helpers.action.remove'), :class => 'remove_btn'), 'javascript:void(0)', :class => 'remove_recipient_btn remove_btn' %></td></tr>';
-			$('#recipients_table > tbody:last-child').append(line);
-			temp_id = temp_id - 1;
-
-			hide_all_messages();
-			$('#new_recipient_field').val('');
-		} else
-		{
-			display_form_errors('<%= t('alert.email.invalid_recipient') %>');
-		}
 	});
 
 	$('#main_form').on('submit', function(evt) {

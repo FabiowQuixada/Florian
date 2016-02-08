@@ -8,7 +8,7 @@ class SystemSettingsController < ApplicationController
   private ###########################
 
   def system_setting_params
-    params.require(:system_setting).permit(:id, :user_id, :re_title, :re_body, :pse_recipients_array, :pse_day_of_month, :pse_title, :pse_body)
+    params.require(:system_setting).permit(:id, :user_id, :re_title, :re_body, :pse_recipients_array, :pse_private_recipients_array, :pse_day_of_month, :pse_title, :pse_body)
   end
 
   def before_all

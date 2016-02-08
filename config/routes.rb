@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  # Automatic resources
-
   resources :system_settings, only: [:index, :new, :edit, :update]
   post '/donations/filter'
 
@@ -46,13 +44,7 @@ Rails.application.routes.draw do
     end
   end
 
-    resources :product_and_service_emails, except: [:destroy] do
-
-    collection do
-      post 'send_email'
-      post 'send_test'
-    end
-  end
+  resources :product_and_service_emails, except: [:destroy]
 
   get "/404" => "errors#not_found"
   get "/500" => "errors#internal_server_error"

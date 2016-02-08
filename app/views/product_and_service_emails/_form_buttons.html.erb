@@ -1,4 +1,9 @@
-<% if !f.object.persisted? %>
-    <%= f.submit t('helpers.action.email.send'), :class => "btn btn-primary" %>
-    <%# link_to t('helpers.action.email.send_test'), '#', :class => "btn btn-primary send_test_btn" %>
+<% if f.object.persisted? %>
+    
+	<%= f.submit t('helpers.action.email.private_send'), :id => 'send_private_btn', :class => "btn btn-primary" %>
+
+	<% if f.object.on_analysis? %>
+
+	    <%= f.submit t('helpers.action.email.send'), :id => 'send_clients_btn', :class => "btn btn-primary" %>
+	<% end %>
 <% end %>

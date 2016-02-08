@@ -12,7 +12,7 @@ class IaqMailer < ApplicationMailer
     send_email email, Date.today, User.find_by_email(SYSTEM_EMAIL), EmailHistory.send_types[:auto]
   end
 
-  def send_prod_and_serv_email(email, user)
+  def send_prod_and_serv_email(email, date, user)
 
       ProductAndServiceReport.new("/tmp/prod_serv.pdf", email).save
       attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
@@ -22,12 +22,14 @@ class IaqMailer < ApplicationMailer
         subject: email.processed_title(user))
   end
 
-  def send_prod_and_serv_test_email(email, user)
+  def send_prod_and_serv_private_email(email, date, user)
 
       ProductAndServiceReport.new("/tmp/prod_serv.pdf", email).save
       attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
 
-      send_test_email(email, email.competence, user)
+      mail(to: user.system_setting.pse_private_recipients_array,
+        body: email.processed_body(user, date),
+        subject: email.processed_title(user, date))
   end
 
   private

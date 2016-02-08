@@ -6,15 +6,15 @@
 
                     <div class="input-group">
                         <span class="input-group-addon">@</span>
-                        <input type="text" class="form-control" id="new_recipient_field" placeholder="<%= t('helpers.receipt_email.new_recipient') %>">
-                        <span class="input-group-addon"><span class=" glyphicon glyphicon-plus add_recipient_btn" id="add_recipient_btn"></span></span>
+                        <input type="text" class="form-control" id="<%= field_name %>_new_recipient_field" placeholder="<%= t('helpers.receipt_email.new_recipient') %>">
+                        <span class="input-group-addon"><span class=" glyphicon glyphicon-plus add_recipient_btn" id="<%= field_name %>_add_recipient_btn"></span></span>
                         <span class="input-group-btn add_recipient_btn"/>
                     </div>
                 </div>
 
-                <table id="recipients_table" class="table table-striped table-condensed table-bordered unbreakable-table">
+                <table id="<%= field_name %>_recipients_table" class="table table-striped table-condensed table-bordered unbreakable-table">
                     <tbody>
-                        <% @model.recipients_as_array.each_with_index do |email_address, index| %>
+                        <% @model.public_send(method_name).each_with_index do |email_address, index| %>
                             <%= render partial: 'shared/email_address', locals: {email_address: email_address, index: index} %>
                         <% end %>
                     </tbody>
@@ -31,7 +31,7 @@
     {
         var result = false;
 
-        $('#recipients_table > tbody > tr').each(function() {
+        $('#<%= field_name %>_recipients_table > tbody > tr').each(function() {
             if($(this).find('.recipient_email').html() == email_address) {
                 result = true;
             }
@@ -56,15 +56,43 @@
         transient_recipients -= 1;
     });
 
-    function formated_recipients()
+    function formated_recipients(id)
     {
         var array = '';
 
-        $('#recipients_table > tbody > tr').each(function() {
+        if(!id)
+            id = '<%= field_name %>';
+
+        $('#' + id + '_recipients_table > tbody > tr').each(function() {
             array = array.concat($(this).find('.recipient_email').html() + ', ');
         })
 
         return array.substring(0, array.length - 2);
     }
+
+    $('#<%= field_name %>_add_recipient_btn').on('click', function() {
+
+        email_address = $('#<%= field_name %>_new_recipient_field').val();
+
+        if (!$('#<%= field_name %>_new_recipient_field').val())
+        {
+            display_form_errors('<%= t('alert.email.fill_a_recipient') %>');
+
+        } else if(already_present(email_address))
+        {
+            display_form_errors('<%= t('alert.email.duplicated_recipient') %>');
+        } else if (validate_recipient_email(email_address))
+        {
+            line = '<tr id="email_address_' + temp_id + '"><td class="recipient_id" style="display:none;">' + temp_id + '</td><td class="recipient_email">' + email_address + '</td><td class="button-wrapper"><%= link_to image_tag("delete.png", :title =>  t('helpers.action.remove'), :class => 'remove_btn'), 'javascript:void(0)', :class => 'remove_recipient_btn remove_btn' %></td></tr>';
+            $('#<%= field_name %>_recipients_table > tbody:last-child').append(line);
+            temp_id = temp_id - 1;
+
+            hide_all_messages();
+            $('#<%= field_name %>_new_recipient_field').val('');
+        } else
+        {
+            display_form_errors('<%= t('alert.email.invalid_recipient') %>');
+        }
+    });
 
 </script>

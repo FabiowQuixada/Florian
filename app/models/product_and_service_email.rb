@@ -1,10 +1,12 @@
-require 'date'
+require './lib/modules/prod_serv_module'
 
 class ProductAndServiceEmail < ActiveRecord::Base
 
   # Configuration
   audited
   include ModelHelper
+  include ProdServModule
+  enum status: [ :created, :on_analysis, :finalized ]
 
 
   # Validations
@@ -82,16 +84,16 @@ class ProductAndServiceEmail < ActiveRecord::Base
     recipients_array.split(/,/);
   end
 
-  def insertable
-    false
-  end
-
-  def updatable
-    false
-  end
-
   def visualizable
     true
+  end
+
+  def can_edit?
+    !finalized?
+  end
+
+  def status_desc
+    I18n.t('activerecord.enums.product_and_service_email.status.' + status)
   end
 
   def breadcrumb_path

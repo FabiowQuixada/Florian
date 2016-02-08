@@ -1,6 +1,13 @@
-Testes de mailing;
-Editar doacao;
 Prod serv: e-mail interno + estado;
+ - Editar / visualizar;
+
+
+Testes de mailing;
+
+Contas
+Graficos das contas;
+Editar doacao;
+Doador: Pessoa fisica;
 
 =====================================================================
 
@@ -12,7 +19,6 @@ Depois:
  - Adição de doações à empresa no mobile;
  - Teste de validação de telefones;
  - Voltar pelo browser: history API;
- - Salva empresa > edita volta > ainda ta a mensagem "com sucesso";
 
 
 Interno:

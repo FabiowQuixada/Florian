@@ -1,6 +1,6 @@
 <%= render partial: "shared/index_table", locals: {model: @model, columns: Array.[](
-	Hash[:header => "created_at", :model_attr => 'created_at', :class => 'sorter-false'],
 	Hash[:header => "competence", :model_attr => 'competence.capitalize', :class => 'sorter-false'],
+	Hash[:header => "status", :model_attr => 'status_desc', :class => 'sorter-false'],
 	Hash[:header => "services", :model_attr => 'services_qty', :class => "hidden-xs sorter-false"],
 	Hash[:header => "products", :model_attr => 'products_qty', :class => "hidden-xs sorter-false"]
 )} %>

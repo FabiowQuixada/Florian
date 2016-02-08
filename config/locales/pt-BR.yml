@@ -61,13 +61,15 @@ pt-BR:
         pse_day_of_month: "Dia do lembrete"
         company: "Mantenedora"
         pse_recipients_array: "Destinatários"
+        pse_private_recipients_array: "Destinatários privados"
       product_and_service_email:
         products: Produtos
         services: Serviços
         recipients_array: "Destinatários"
         competence: Competência
         competence_date: Competência
-        created_at: Data de envio
+        send_date: Data de finalização
+        status: Status
         psychology: Psicologia
         physiotherapy: Fisioterapia
         plastic_surgery: Cirurgia plástica
@@ -80,8 +82,9 @@ pt-BR:
         silicon: Silicone
         mask: Máscara
         foam: Espuma
-        skin_expander: Expansor de pele
-        cervical_collar: Colar cervical
+        skin_expander: Expansor de Pele
+        cervical_collar: Colar Cervical
+        status: Status
       email_history:
         created_at: Data
       company:
@@ -138,6 +141,12 @@ pt-BR:
       role:
         name: Nome
         description: Descrição
+    enums:
+      product_and_service_email:
+        status:
+          created: Novo
+          on_analysis: Em análise
+          finalized: Finalizado
   activated:
     m:
       s: "%{model} ativado com sucesso!"
@@ -284,6 +293,7 @@ pt-BR:
       checkup: Avaliação
       return: Retorno
       total: Total
+      footer: '*Os dados serão salvos automaticamente ao serem enviados e-mails.'
     company:
       new_donation: Nova doação
     action:
@@ -317,6 +327,7 @@ pt-BR:
       deactivate: Inativar
       email:
         add_recipient: +
+        private_send: Enviar internamente
         send: Enviar
         resend: Reenviar
         send_test: Enviar teste
@@ -522,6 +533,9 @@ pt-BR:
     donation:
       date_mandatory: "O campo 'Data' é obrigatório;"
       value_or_remark: "Preencha pelo menos um dos seguintes campos: 'Valor' ou 'Observação';"
+    system_setting:
+      recipients: "Adicione pelo menos um destinatario;"
+      private_recipients: "Adicione pelo menos um destinatario privado;"
     format: "%{message}"
     messages:
       accepted: "O campo '%{attribute}' deve ser aceito;"
