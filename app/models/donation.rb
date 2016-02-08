@@ -51,8 +51,4 @@ class Donation < ActiveRecord::Base
     'f'
   end
 
-  def updatable
-    false
-  end
-
 end

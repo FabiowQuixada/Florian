@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :system_settings, only: [:index, :new, :edit, :update]
   post '/donations/filter'
 
-  resources :donations, only: [:index, :new, :create] do
+  resources :donations, except: [:show, :destroy] do
     collection do
         post 'create_and_new'
       end
