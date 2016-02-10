@@ -26,7 +26,20 @@
 	</div>
 </div>
 
+<% if lookup_context.find_all(ActiveModel::Naming.plural(model) + "/_modals").any? %>
+	<%= render partial: "modals" %>
+<% end %>
+
 <script>
+
+	$(document).ready(function() {
+	  return $(function() {
+	    $.extend($.tablesorter.defaults, {
+	      widgets: ["zebra"]
+	    });
+	    $("#index_table").tablesorter();
+	  });
+	});
 
 	<% if model.class.column_names.include? 'active' %>
 
