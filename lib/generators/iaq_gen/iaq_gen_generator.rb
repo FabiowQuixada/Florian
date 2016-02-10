@@ -27,7 +27,7 @@ class IaqGenGenerator < Rails::Generators::NamedBase
       extra_conf = ""
       args2.each do |arg|
         if arg[1] == 'money'
-          extra_conf += "usar_como_dinheiro :" + arg[0] + "\n"
+          extra_conf += "usar_como_dinheiro :" + arg[0] + "\n\t"
         end
       end
 

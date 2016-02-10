@@ -8,6 +8,8 @@ rake db:drop db:create db:migrate db:seed RAILS_ENV=production
 
 rake db:rollback STEP=1 && rake db:migrate
 
+rails g iaq_gen Bill competence:date:m water:money energy:money telephone:money
+
 
   sleep(inspection_time=5)
 
