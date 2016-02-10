@@ -23,7 +23,10 @@ module MainConcern extend ActiveSupport::Concern
   end
 
   def index
-    @list = model_class.order order_attribute
+
+    @list = index_sorting_method
+
+    @list = model_class.order order_attribute if !@list
   end
 
   def new
@@ -96,6 +99,9 @@ module MainConcern extend ActiveSupport::Concern
 
   def order_attribute
     "created_at ASC"
+  end
+
+  def index_sorting_method
   end
 
 end
