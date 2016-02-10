@@ -13,6 +13,9 @@ pt-BR:
       prod_serv: "Produtos & Serviços"
   activerecord:
     models:
+      bill:
+        one: Conta
+        other: Contas
       receipt_email:
         one: E-mail de Recibo
         other: E-mails de Recibo
@@ -38,6 +41,11 @@ pt-BR:
         one: Doação
         other: Doações
     attributes:
+      bill:
+        competence: "Competência"
+        water: Água
+        energy: Energia
+        telephone: Telefone
       receipt_email:
         email: "E-mail"
         title: "Título"
@@ -453,6 +461,7 @@ pt-BR:
       long: "%d de %B de %Y"
       short: "%d de %B"
       competence: "%B/%Y"
+      competence_i: "%m/%Y"
     month_names:
     -
     - janeiro

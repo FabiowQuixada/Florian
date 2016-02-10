@@ -34,6 +34,9 @@
             <li>
                 <a href="/system_settings"><%= SystemSetting.new.model_name.human(:count => 2) %></a>
             </li>
+            <li>
+                <a href='/bills'><%= Bill.new.model_name.human(:count => 2) %></a>
+            </li>
             <!-- new_menus_here -->
             <% if !current_user.nil? && current_user.admin? %>
                 <li>

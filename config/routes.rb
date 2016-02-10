@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   end
 
   resources :companies, except: [:show, :destroy]
+  resources :bills, except: [:show, :destroy]
 
   resources :receipt_emails, except: [:show, :destroy] do
 

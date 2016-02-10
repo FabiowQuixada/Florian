@@ -1,6 +1,5 @@
 Editar / visualizar objetos;
 Testes de mailing;
-Contas
 Graficos das contas;
 Doador: Pessoa fisica;
 
@@ -8,12 +7,12 @@ Doador: Pessoa fisica;
 
 Depois:
  - Filtros de doações;
- - Charts;
  - Ordenador de colunas: Dinheiro;
  - Acesso browser sem senha;
  - Adição de doações à empresa no mobile;
  - Teste de validação de telefones;
  - Voltar pelo browser: history API;
+ - Checagem de competencia em classe pr´opria;
 
 
 Interno:
@@ -21,6 +20,7 @@ Interno:
  - Usuário: Novo, Senha no Firefox;
  - Reusar _e-mail_address: tem coisa q poderia tar nele;
  - PDF: Não precisar salvar arquivo;
+ - Checagem de competencia nos controllers;
 
 
 Frescurinha:

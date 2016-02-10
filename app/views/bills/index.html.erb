@@ -1,0 +1,42 @@
+
+<%= link_to genderize_full_tag(@model, 'helpers.action.new'), send("new_bill_path"), :class => "btn btn-primary" %>
+
+</p>
+
+<table id="index_table" class="table table-striped table-hover table-bordered table-condensed tablesorter tablesorter-blue">
+	<thead>
+		<tr>
+			<% I18n.with_options(scope: 'activerecord.attributes.bill') do |i18n| %>
+				<th style="display: none;"></th>
+					<th class="sorter-false"><%= i18n.t 'competence' %></th>
+					<th class="sorter-false"><%= i18n.t 'water' %></th>
+					<th class="sorter-false"><%= i18n.t 'energy' %></th>
+					<th class="sorter-false"><%= i18n.t 'telephone' %></th>
+					<th class="sorter-false" style="width: 16px;"></th>
+			<% end %>
+		</tr>
+	</thead>
+
+	<% if @list.empty? %>
+		<tr>
+			<td colspan="5" bgcolor="#E0E0F4" align="center"><%= genderize_tag(@model, 'helpers.none_registered') %></td>
+		</tr>
+
+	<% else %>
+		<tbody>
+			<% @list.each do |iterator| %>
+				<tr id='model_<%= iterator.id %>' class="model_row">
+					<td><%=	I18n.localize(iterator.competence, format: :competence).capitalize %></td>
+					<td style="display: none;" class="model_id"><%= iterator.id %></td>
+					<td><%=	number_to_currency(iterator.public_send('water')) %></td>
+					<td><%=	number_to_currency(iterator.public_send('energy')) %></td></td>
+					<td><%=	number_to_currency(iterator.public_send('telephone')) %></td>
+					<td class="icon-column"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), send("edit_bill_path", iterator) %></td>
+				</tr>
+			<% end %>
+		</tbody>
+
+	<% end %>
+</table>
+
+<%= render partial: "shared/index_commons", locals: {model: @model} %>
