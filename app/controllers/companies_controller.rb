@@ -15,14 +15,6 @@ class CompaniesController < ApplicationController
       )
   end
 
-  before_filter :after_new, only: [:new]
-
-  def after_new
-    @model.city = "Fortaleza"
-    @model.state = "CE"
-
-  end
-
   def order_attribute
     "name"
   end

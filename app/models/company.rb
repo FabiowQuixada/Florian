@@ -8,6 +8,7 @@ class Company < ActiveRecord::Base
   include CompanyModule
   usar_como_cnpj :cnpj
   usar_como_cpf :cpf
+  after_initialize :default_values
 
 
   # Relationships
@@ -104,6 +105,11 @@ def group_desc
     else
       "O campo 'Nome fantasia' é obrigatório;"
     end
+  end
+
+  def default_values
+    self.city = "Fortaleza"
+    self.state = "CE"
   end
 
 end
