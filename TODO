@@ -1,6 +1,5 @@
 Editar / visualizar objetos;
 Testes de mailing;
-Graficos das contas;
 Doador: Pessoa fisica;
 
 =====================================================================
@@ -13,6 +12,8 @@ Depois:
  - Teste de validação de telefones;
  - Voltar pelo browser: history API;
  - Checagem de competencia em classe pr´opria;
+ - Numeros na esquerda: Quando grafico esta vazio;
+ - Foco no ano corrente;
 
 
 Interno:

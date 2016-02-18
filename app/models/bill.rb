@@ -14,7 +14,8 @@ class Bill < ActiveRecord::Base
 
 
   # Validations
-  validates :competence,  :presence => true
+  validates :competence, :presence => true, uniqueness: true
+  validates :water, :energy, :telephone, :numericality => { :greater_than_or_equal_to => 0 }
 
 
   # Methods

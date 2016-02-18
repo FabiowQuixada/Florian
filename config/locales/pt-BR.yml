@@ -378,6 +378,7 @@ pt-BR:
         s: 'Tem certeza que deseja remover esta %{model}?'
         p: 'Tem certeza que deseja remover estas %{model}?'
     title:
+      bill_graphs: Gráficos de Contas Por Ano
       back: Dados não salvos
     body:
       back: 'Suas alterações não foram salvas, deseja descartá-las?'
@@ -579,6 +580,7 @@ pt-BR:
         one: 'Não foi possível gravar %{model}: 1 erro'
         other: 'Não foi possível gravar %{model}: %{count} erros.'
   number:
+    value: Valor
     currency:
       format:
         delimiter: "."
@@ -648,6 +650,10 @@ pt-BR:
       short: "%d de %B, às %H:%M"
       really_short: "%d/%m/%y"
     pm: ''
+  other: 
+    graph:
+      one: Gráfico
+      other: Gráficos
   devise:
     email:
       welcome: 'Bem-vindo(a), '

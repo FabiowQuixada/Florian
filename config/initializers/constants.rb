@@ -27,3 +27,5 @@ BR_STATES = [["Alagoas", "AL"],
 
 ADMIN_EMAIL = "ftquixada@gmail.com"
 SYSTEM_EMAIL = "apoioaoqueimado@yahoo.com.br"
+
+NUMBER_OF_BILLS = 3

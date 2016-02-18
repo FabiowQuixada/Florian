@@ -1,5 +1,7 @@
 
+
 <%= link_to genderize_full_tag(@model, 'helpers.action.new'), send("new_bill_path"), :class => "btn btn-primary" %>
+<%= link_to t('other.graph.other'), '#', :id => "graphs_btn", :class => "btn btn-primary" %>
 
 </p>
 
@@ -38,5 +40,13 @@
 
 	<% end %>
 </table>
+
+<script>
+
+$('#graphs_btn').click(function(ev) {
+			$('#graphs_modal').modal('show');
+		});
+
+</script>
 
 <%= render partial: "shared/index_commons", locals: {model: @model} %>

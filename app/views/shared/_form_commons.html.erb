@@ -190,21 +190,6 @@
 
 	<% end %>
 
-	var entityMap = {
-		"&": "&amp;",
-		"<": "&lt;",
-		">": "&gt;",
-		'"': '&quot;',
-		"'": '&#39;',
-		"/": '/' // &#x2F;
-	};
-
-	function escapeHtml(string) {
-		return String(string).replace(/[&<>"'\/]/g, function (s) {
-			return entityMap[s];
-		});
-	}
-
     function add_tag_to_field(field, tag) {
         var caretPos = document.getElementById(field).selectionStart;
         var textAreaTxt = jQuery("#" + field).val();
