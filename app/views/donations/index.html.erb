@@ -2,7 +2,7 @@
     <!-- <div class="row">
         <div class="col-md-6 form-group">
             <%= label_tag "Mantenedora" %>
-            <%= select_tag("search[company_id]", options_from_collection_for_select(Company.where(group: 1), "id", "trading_name", @company_id), {:include_blank => genderize_full_tag(Company.new, 'helpers.select.all'), class: "form-control"}) %>
+            <%= select_tag("search[company_id]", options_from_collection_for_select(Company.where(group: 1), "id", "name", @company_id), {:include_blank => genderize_full_tag(Company.new, 'helpers.select.all'), class: "form-control"}) %>
         </div>
 
         <div class="col-md-6 form-group">
@@ -17,6 +17,6 @@
 <%= render partial: "shared/index_table", locals: {model: @model, columns: Array.[](
     Hash[:header => "donation_date", :model_attr => 'donation_date', :style => "width: 16px;", :class => 'sorter-false'],
     Hash[:header => "value", :model_attr => 'value', :style => "width: 150px;", :type => 'money', :class => "hidden-xs sorter-false"],
-    Hash[:header => "company", :model_attr => 'company.trading_name', :class => 'sorter-false'],
+    Hash[:header => "company", :model_attr => 'company.name', :class => 'sorter-false'],
     Hash[:header => "remark", :model_attr => 'remark', :class => "hidden-xs sorter-false"]
 )} %>

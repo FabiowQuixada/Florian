@@ -7,7 +7,7 @@ class CompaniesController < ApplicationController
   private #############################################
 
   def company_params
-    params.require(:company).permit(:id, :trading_name, :name, :cnpj, :address, :cep,
+    params.require(:company).permit(:id, :entity_type, :name, :registration_name, :cpf, :cnpj, :address, :cep,
       :neighborhood, :city, :state, :email_address, :website, :category, :donation, :first_parcel,
        :last_parcel, :remark, :parcel_frequency, :total_period, :group,
          donations_attributes: [:id, :value, :donation_date, :remark],
@@ -24,6 +24,6 @@ class CompaniesController < ApplicationController
   end
 
   def order_attribute
-    "trading_name"
+    "name"
   end
 end

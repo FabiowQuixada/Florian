@@ -1,7 +1,7 @@
 
 <%= render partial: "shared/index_table", locals: {model: @model, columns: Array.[](
 	Hash[:header => "day", :model_attr => 'day_of_month', :style => "width: 90px;", :class => 'sorter-false'],
-	Hash[:header => "company", :model_attr => 'company.trading_name', :class => "email_company sorter-false"],
+	Hash[:header => "company", :model_attr => 'company.name', :class => "email_company sorter-false"],
 	Hash[:header => "competence", :model_attr => 'competence.capitalize', :class => "hidden-xs sorter-false"],
            Hash[:header => "value", :model_attr => 'value', :style => "width: 150px;", :type => 'money', :class => 'sorter-false']
 )} %>

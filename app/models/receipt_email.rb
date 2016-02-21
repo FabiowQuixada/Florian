@@ -65,7 +65,7 @@ class ReceiptEmail < ActiveRecord::Base
 
     result = user.system_setting.re_title
     result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
-    result = result.gsub(I18n.t('tags.company'), company.trading_name)
+    result = result.gsub(I18n.t('tags.company'), company.name)
     result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
     result
   end
@@ -78,7 +78,7 @@ class ReceiptEmail < ActiveRecord::Base
 
     result = body
     result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
-    result = result.gsub(I18n.t('tags.company'), company.trading_name)
+    result = result.gsub(I18n.t('tags.company'), company.name)
     result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
     result += " \n \n-- \n" + user.signature
     result
@@ -90,9 +90,15 @@ class ReceiptEmail < ActiveRecord::Base
       date = Date.today
     end
 
-    result = I18n.t('report.other.receipt_text', company_name: company.name, cnpj: company.cnpj.to_s, address: company.address, value_tag: I18n.t('tags.value'), competence_tag: I18n.t('tags.competence'))
+    if company.person?
+      result = I18n.t('report.other.receipt_text.person', name: company.name, cpf: company.cpf.to_s, address: company.address, value_tag: I18n.t('tags.value'), competence_tag: I18n.t('tags.competence'))
+    elsif company.company?
+      result = I18n.t('report.other.receipt_text.company', name: company.registration_name, cnpj: company.cnpj.to_s, address: company.address, value_tag: I18n.t('tags.value'), competence_tag: I18n.t('tags.competence'))
+    end
+
+    byebug
     result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
-    result = result.gsub(I18n.t('tags.company'), company.trading_name)
+    result = result.gsub(I18n.t('tags.company'), company.name)
     result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
     result
 

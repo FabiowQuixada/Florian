@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151220202246) do
+ActiveRecord::Schema.define(version: 20160220222328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,10 +39,19 @@ ActiveRecord::Schema.define(version: 20151220202246) do
   add_index "audits", ["request_uuid"], name: "index_audits_on_request_uuid", using: :btree
   add_index "audits", ["user_id", "user_type"], name: "user_index", using: :btree
 
+  create_table "bills", force: :cascade do |t|
+    t.date     "competence",                         null: false
+    t.decimal  "water",      precision: 8, scale: 2
+    t.decimal  "energy",     precision: 8, scale: 2
+    t.decimal  "telephone",  precision: 8, scale: 2
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
   create_table "companies", force: :cascade do |t|
-    t.string   "trading_name",      null: false
+    t.string   "registration_name"
     t.string   "name",              null: false
-    t.string   "cnpj",              null: false
+    t.string   "cnpj"
     t.string   "cep"
     t.string   "address",           null: false
     t.string   "neighborhood"
@@ -59,6 +68,8 @@ ActiveRecord::Schema.define(version: 20151220202246) do
     t.integer  "payment_period"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.string   "cpf"
+    t.integer  "entity_type"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -100,31 +111,55 @@ ActiveRecord::Schema.define(version: 20151220202246) do
   add_index "email_histories", ["receipt_email_id"], name: "index_email_histories_on_receipt_email_id", using: :btree
   add_index "email_histories", ["user_id"], name: "index_email_histories_on_user_id", using: :btree
 
-  create_table "product_and_service_emails", force: :cascade do |t|
-    t.string   "competence_date",             null: false
-    t.integer  "psychology",                  null: false
-    t.integer  "physiotherapy",               null: false
-    t.integer  "plastic_surgery",             null: false
-    t.integer  "mesh_service",                null: false
-    t.integer  "gynecology",                  null: false
-    t.integer  "occupational_therapy",        null: false
-    t.integer  "psychology_return",           null: false
-    t.integer  "physiotherapy_return",        null: false
-    t.integer  "plastic_surgery_return",      null: false
-    t.integer  "mesh_service_return",         null: false
-    t.integer  "gynecology_return",           null: false
-    t.integer  "occupational_therapy_return", null: false
-    t.integer  "mesh",                        null: false
-    t.integer  "cream",                       null: false
-    t.integer  "protector",                   null: false
-    t.integer  "silicon",                     null: false
-    t.integer  "mask",                        null: false
-    t.integer  "foam",                        null: false
-    t.integer  "skin_expander",               null: false
-    t.integer  "cervical_collar",             null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+  create_table "product_and_service_data", force: :cascade do |t|
+    t.date     "date",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
+
+  create_table "product_and_service_emails", force: :cascade do |t|
+    t.string   "competence_date",                         null: false
+    t.integer  "psychology",                              null: false
+    t.integer  "physiotherapy",                           null: false
+    t.integer  "plastic_surgery",                         null: false
+    t.integer  "mesh_service",                            null: false
+    t.integer  "gynecology",                              null: false
+    t.integer  "occupational_therapy",                    null: false
+    t.integer  "psychology_return",                       null: false
+    t.integer  "physiotherapy_return",                    null: false
+    t.integer  "plastic_surgery_return",                  null: false
+    t.integer  "mesh_service_return",                     null: false
+    t.integer  "gynecology_return",                       null: false
+    t.integer  "occupational_therapy_return",             null: false
+    t.integer  "mesh",                                    null: false
+    t.integer  "cream",                                   null: false
+    t.integer  "protector",                               null: false
+    t.integer  "silicon",                                 null: false
+    t.integer  "mask",                                    null: false
+    t.integer  "foam",                                    null: false
+    t.integer  "skin_expander",                           null: false
+    t.integer  "cervical_collar",                         null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.integer  "status",                      default: 0, null: false
+    t.date     "send_date"
+  end
+
+  create_table "product_data", force: :cascade do |t|
+    t.integer  "mesh",                         null: false
+    t.integer  "cream",                        null: false
+    t.integer  "protector",                    null: false
+    t.integer  "silicon",                      null: false
+    t.integer  "mask",                         null: false
+    t.integer  "foam",                         null: false
+    t.integer  "skin_expander",                null: false
+    t.integer  "cervical_collar",              null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "product_and_service_datum_id"
+  end
+
+  add_index "product_data", ["product_and_service_datum_id"], name: "index_product_data_on_product_and_service_datum_id", using: :btree
 
   create_table "receipt_emails", force: :cascade do |t|
     t.string   "recipients_array",                                        null: false
@@ -147,16 +182,31 @@ ActiveRecord::Schema.define(version: 20151220202246) do
     t.datetime "updated_at",                 null: false
   end
 
+  create_table "service_data", force: :cascade do |t|
+    t.integer  "psychology",                   null: false
+    t.integer  "physiotherapy",                null: false
+    t.integer  "plastic_surgery",              null: false
+    t.integer  "mesh_service",                 null: false
+    t.integer  "gynecology",                   null: false
+    t.integer  "occupational_therapy",         null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "product_and_service_datum_id"
+  end
+
+  add_index "service_data", ["product_and_service_datum_id"], name: "index_service_data_on_product_and_service_datum_id", using: :btree
+
   create_table "system_settings", force: :cascade do |t|
-    t.string   "pse_recipients_array", null: false
-    t.integer  "pse_day_of_month",     null: false
-    t.string   "pse_title",            null: false
-    t.string   "pse_body",             null: false
-    t.string   "re_title",             null: false
-    t.string   "re_body",              null: false
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.integer  "user_id",              null: false
+    t.string   "pse_recipients_array",                                          null: false
+    t.integer  "pse_day_of_month",                                              null: false
+    t.string   "pse_title",                                                     null: false
+    t.string   "pse_body",                                                      null: false
+    t.string   "re_title",                                                      null: false
+    t.string   "re_body",                                                       null: false
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
+    t.integer  "user_id",                                                       null: false
+    t.string   "pse_private_recipients_array", default: "exemplo@yahoo.com.br", null: false
   end
 
   add_index "system_settings", ["user_id"], name: "index_system_settings_on_user_id", using: :btree
@@ -189,7 +239,9 @@ ActiveRecord::Schema.define(version: 20151220202246) do
   add_foreign_key "donations", "companies"
   add_foreign_key "email_histories", "receipt_emails"
   add_foreign_key "email_histories", "users"
+  add_foreign_key "product_data", "product_and_service_data"
   add_foreign_key "receipt_emails", "companies"
+  add_foreign_key "service_data", "product_and_service_data"
   add_foreign_key "system_settings", "users"
   add_foreign_key "users", "roles"
 end

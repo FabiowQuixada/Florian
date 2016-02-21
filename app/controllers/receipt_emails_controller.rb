@@ -128,7 +128,7 @@ class ReceiptEmailsController < ApplicationController
     return :json => {
         :message => genderize_tag(email, type),
         :date => l(history.created_at, format: :really_short),
-        :company => email.company.trading_name,
+        :company => email.company.name,
         :value => ActionController::Base.helpers.number_to_currency(history.value),
         :type => history.send_type_desc,
         :user => history.user.name

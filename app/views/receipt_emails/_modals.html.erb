@@ -123,7 +123,7 @@
 								<tr>
 									<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
 										<td><%= l(history.created_at, format: :really_short) %></td>
-										<td class="email_company"><%= history.receipt_email.company.trading_name %></td>
+										<td class="email_company"><%= history.receipt_email.company.name %></td>
 										<td><%= history.send_type_desc %></td>
 									<% end %>
 								</tr>

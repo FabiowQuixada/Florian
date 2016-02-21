@@ -1,6 +1,6 @@
 
 pt-BR:
-  app_title: Florian
+  app_title: Flórian
   by_author: por Fabiow Quixadá
   main_page: Página Principal
   development: Desenvolvimento
@@ -20,8 +20,8 @@ pt-BR:
         one: E-mail de Produtos e Serviços
         other: E-mails de Produtos e Serviços
       company:
-        one: Empresa
-        other: Empresas
+        one: Entidade
+        other: Entidades
       contact:
         one: Contato
         other: Contatos
@@ -70,24 +70,26 @@ pt-BR:
         created_at: Data de envio
         psychology: Psicologia
         physiotherapy: Fisioterapia
-        plastic_surgery: Cirurgia Plástica
+        plastic_surgery: Cirurgia plástica
         mesh_service: Malha
         gynecology: Ginecologia
-        occupational_therapy: Terapia Ocupacional
+        occupational_therapy: Terapia ocupacional
         mesh: Malha
         cream: Creme
         protector: Protetor
         silicon: Silicone
         mask: Máscara
         foam: Espuma
-        skin_expander: Expansor de Pele
-        cervical_collar: Colar Cervical
+        skin_expander: Expansor de pele
+        cervical_collar: Colar cervical
       email_history:
         created_at: Data
       company:
-        trading_name: Nome fantasia
-        name: Razão social
+        registration_name: Razão social
         cnpj: CNPJ
+        cpf: CPF
+        entity_type: Tipo de pessoa
+        name: Nome / Nome fantasia
         cep: CEP
         neighborhood: Bairro
         city: Cidade
@@ -96,14 +98,13 @@ pt-BR:
         email_address: 'E-mail'
         website: Site
         category: Categoria
-        group: Tipo
+        group: Grupo
         contract: Contrato
         first_parcel: Primeira parcela
         last_parcel: Última parcela
-        remark: Anotações Gerais sobre a empresa
+        remark: Anotações gerais
         payment_frequency: Frequência
         payment_period: No. parcelas
-        group: "Tipo"
         contacts:
           contact_0: Responsável
           contact_1: Secretária
@@ -224,7 +225,9 @@ pt-BR:
     president_name: "Dr. Edmar Maciel Lima Júnior"
     president_description: "Presidente do Instituto de Apoio ao Queimado – I.A.Q."
     other:
-      receipt_text: 'A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu da %{company_name}, inscrito sob o CNPJ/MF nº %{cnpj}, situada na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
+      receipt_text:
+        company: 'A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu da %{name}, inscrito sob o CNPJ/MF nº %{cnpj}, situada na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
+        person: 'A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu de %{name}, CPF nº %{cpf}, residente na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
   helpers:
     main_page: Página Principal
     error: Erro
@@ -515,6 +518,7 @@ pt-BR:
       invalid_celphone: "O campo 'Celular' é inválido;"
     company:
       unique_cnpj: "Este CNPJ já está sendo usado;"
+      unique_cpf: "Este CPF já está sendo usado;"
     donation:
       date_mandatory: "O campo 'Data' é obrigatório;"
       value_or_remark: "Preencha pelo menos um dos seguintes campos: 'Valor' ou 'Observação';"
