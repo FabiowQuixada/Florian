@@ -145,6 +145,7 @@ ActiveRecord::Schema.define(version: 20160220222328) do
     t.date     "send_date"
   end
 
+<<<<<<< HEAD
   create_table "product_data", force: :cascade do |t|
     t.integer  "mesh",                         null: false
     t.integer  "cream",                        null: false
@@ -154,12 +155,38 @@ ActiveRecord::Schema.define(version: 20160220222328) do
     t.integer  "foam",                         null: false
     t.integer  "skin_expander",                null: false
     t.integer  "cervical_collar",              null: false
+=======
+  create_table "product_and_service_weeks", force: :cascade do |t|
+    t.integer  "number",                       null: false
+    t.date     "start_date",                   null: false
+    t.date     "end_date",                     null: false
+>>>>>>> 2bf55ac... Decomposicao de Produtos e Servicos
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.integer  "product_and_service_datum_id"
   end
 
+<<<<<<< HEAD
   add_index "product_data", ["product_and_service_datum_id"], name: "index_product_data_on_product_and_service_datum_id", using: :btree
+=======
+  add_index "product_and_service_weeks", ["product_and_service_datum_id"], name: "index_product_and_service_weeks_on_product_and_service_datum_id", using: :btree
+
+  create_table "product_data", force: :cascade do |t|
+    t.integer  "mesh",                        null: false
+    t.integer  "cream",                       null: false
+    t.integer  "protector",                   null: false
+    t.integer  "silicon",                     null: false
+    t.integer  "mask",                        null: false
+    t.integer  "foam",                        null: false
+    t.integer  "skin_expander",               null: false
+    t.integer  "cervical_collar",             null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "product_and_service_week_id"
+  end
+
+  add_index "product_data", ["product_and_service_week_id"], name: "index_product_data_on_product_and_service_week_id", using: :btree
+>>>>>>> 2bf55ac... Decomposicao de Produtos e Servicos
 
   create_table "receipt_emails", force: :cascade do |t|
     t.string   "recipients_array",                                        null: false
@@ -183,6 +210,7 @@ ActiveRecord::Schema.define(version: 20160220222328) do
   end
 
   create_table "service_data", force: :cascade do |t|
+<<<<<<< HEAD
     t.integer  "psychology",                   null: false
     t.integer  "physiotherapy",                null: false
     t.integer  "plastic_surgery",              null: false
@@ -195,6 +223,20 @@ ActiveRecord::Schema.define(version: 20160220222328) do
   end
 
   add_index "service_data", ["product_and_service_datum_id"], name: "index_service_data_on_product_and_service_datum_id", using: :btree
+=======
+    t.integer  "psychology",                  null: false
+    t.integer  "physiotherapy",               null: false
+    t.integer  "plastic_surgery",             null: false
+    t.integer  "mesh_service",                null: false
+    t.integer  "gynecology",                  null: false
+    t.integer  "occupational_therapy",        null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "product_and_service_week_id"
+  end
+
+  add_index "service_data", ["product_and_service_week_id"], name: "index_service_data_on_product_and_service_week_id", using: :btree
+>>>>>>> 2bf55ac... Decomposicao de Produtos e Servicos
 
   create_table "system_settings", force: :cascade do |t|
     t.string   "pse_recipients_array",                                          null: false
@@ -239,9 +281,10 @@ ActiveRecord::Schema.define(version: 20160220222328) do
   add_foreign_key "donations", "companies"
   add_foreign_key "email_histories", "receipt_emails"
   add_foreign_key "email_histories", "users"
-  add_foreign_key "product_data", "product_and_service_data"
+  add_foreign_key "product_and_service_weeks", "product_and_service_data"
+  add_foreign_key "product_data", "product_and_service_weeks"
   add_foreign_key "receipt_emails", "companies"
-  add_foreign_key "service_data", "product_and_service_data"
+  add_foreign_key "service_data", "product_and_service_weeks"
   add_foreign_key "system_settings", "users"
   add_foreign_key "users", "roles"
 end

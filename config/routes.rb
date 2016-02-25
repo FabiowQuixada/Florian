@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :product_and_service_emails, except: [:destroy]
+  resources :product_and_service_data, except: [:destroy]
 
   get "/404" => "errors#not_found"
   get "/500" => "errors#internal_server_error"

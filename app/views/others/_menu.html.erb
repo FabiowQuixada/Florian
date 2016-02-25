@@ -26,8 +26,8 @@
                 <% if can? :manage, ReceiptEmail.new %>
                     <li><a href="/receipt_emails"><%= t('menu.email.receipt') %></a></li>
                 <% end %>
-                <% if can? :manage, ProductAndServiceEmail.new %>
-                    <li><a href="/product_and_service_emails"><%= t('menu.email.prod_serv') %></a></li>
+                <% if can? :manage, ProductAndServiceDatum.new %>
+                    <li><a href="/product_and_service_data"><%= t('menu.email.prod_serv') %></a></li>
                 <% end %>
                 </ul>
             </li>

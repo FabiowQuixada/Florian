@@ -9,6 +9,10 @@ class ProductAndServiceEmail < ActiveRecord::Base
   enum status: [ :created, :on_analysis, :finalized ]
 
 
+  # Relationships
+  has_many :product_and_service_data
+
+
   # Validations
   validate :validate_model
   validates :competence_date, :presence => true
@@ -17,6 +21,14 @@ class ProductAndServiceEmail < ActiveRecord::Base
 
 
   # Methods
+  after_initialize do
+    # if self.product_and_service_data.empty?
+    #   for i in 0..2
+    #      self.product_and_service_data.new
+    #   end
+    # end
+  end
+
   def validate_model
 
   # if psychology.blank? or physiotherapy.blank? or plastic_surgery.blank? or mesh_service.blank? or gynecology.blank? or occupational_therapy.blank? or psychology_return.blank? or physiotherapy_return.blank? or plastic_surgery_return.blank? or mesh_service_return.blank? or gynecology_return.blank? or occupational_therapy_return.blank?
@@ -93,7 +105,7 @@ class ProductAndServiceEmail < ActiveRecord::Base
   end
 
   def status_desc
-    I18n.t('activerecord.enums.product_and_service_email.status.' + status)
+    I18n.t('activerecord.enums.product_and_service_datum.status.' + status)
   end
 
   def breadcrumb_path

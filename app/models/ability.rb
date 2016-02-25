@@ -9,10 +9,11 @@ class Ability
       else
 
         can :manage, Company
+        can :manage, Bill
         can :manage, Donation
         can :manage, SystemSetting
         can :manage, ReceiptEmail
-        can :manage, ProductAndServiceEmail
+        can :manage, ProductAndServiceDatum
 
       end
     #

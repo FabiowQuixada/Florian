@@ -22,9 +22,18 @@ pt-BR:
       receipt_email:
         one: E-mail de Recibo
         other: E-mails de Recibo
-      product_and_service_email:
-        one: E-mail de Produtos e Serviços
-        other: E-mails de Produtos e Serviços
+      product_and_service_datum:
+        one: Produto ou Serviço
+        other: Produtos e Serviços
+      product_and_service_week:
+        one: Semana
+        other: Semanas
+      service_datum:
+        one: Serviço
+        other: Serviços
+      product_datum:
+        one: Produto
+        other: Produtos
       company:
         one: Entidade
         other: Entidades
@@ -73,20 +82,23 @@ pt-BR:
         company: "Mantenedora"
         pse_recipients_array: "Destinatários"
         pse_private_recipients_array: "Destinatários privados"
-      product_and_service_email:
-        products: Produtos
-        services: Serviços
+      product_and_service_datum:
         recipients_array: "Destinatários"
         competence: Competência
-        competence_date: Competência
         send_date: Data de finalização
         status: Status
+      product_and_service_week:
+        number: Número
+        start_date: Data de início
+        end_date: Data de término
+      service_datum:
         psychology: Psicologia
         physiotherapy: Fisioterapia
         plastic_surgery: Cirurgia plástica
         mesh_service: Malha
         gynecology: Ginecologia
-        occupational_therapy: Terapia ocupacional
+        occupational_therapy: Ter. ocupacional
+      product_datum:
         mesh: Malha
         cream: Creme
         protector: Protetor
@@ -153,7 +165,7 @@ pt-BR:
         name: Nome
         description: Descrição
     enums:
-      product_and_service_email:
+      product_and_service_datum:
         status:
           created: Novo
           on_analysis: Em análise
@@ -258,6 +270,10 @@ pt-BR:
     min_length: '(No mínimo %{min_length} caracteres)'
     profile: Perfil
     none: (Nenhum)
+    from: De
+    to: a
+    total: Total
+    final_data: Dados finais
     logged_as: "Logado como "
     no_recent_emails: Nenhum e-mail recente
     is_active:
@@ -286,25 +302,21 @@ pt-BR:
       all:
         m:
           s: 'Todos'
-          p: 'Todos.'
+          p: 'Todos'
         f:
           s: 'Todas'
           p: 'Todas'
-    system_setting:
-      its_a_suggestion: (Será apenas uma sugestão)
     receipt_email:
       index_footer: '*Os e-mails serão enviados às %{time}:00h da manhã nos respectivos dias.'
       new_recipient: "Novo destinatário"
       recent: Recentes
-    prod_and_serv_email:
+    prod_and_serv_datum:
       attendances: Atendimentos
       product_output: Saída de Produtos
-      product: Produto
-      service: Serviço
       checkup: Avaliação
       return: Retorno
-      total: Total
-      footer: '*Os dados serão salvos automaticamente ao serem enviados e-mails.'
+      week_footer: '* Os dados desta semana serão enviados por e-mail apenas para os colaboradores.'
+      final_footer: '* Estes serão os dados enviados por e-mail para os clientes. Esta aba é preenchida automaticamente de acordo com as informações das semanas, mas você pode alterar estas informações antes de enviá-las aos clientes.'
     company:
       new_donation: Nova doação
     action:
@@ -339,6 +351,7 @@ pt-BR:
       email:
         add_recipient: +
         private_send: Enviar internamente
+        save_and_send: Salvar e enviar
         send: Enviar
         resend: Reenviar
         send_test: Enviar teste
@@ -419,6 +432,7 @@ pt-BR:
     value: Valor
     type: Tipo
     history: Histórico
+    data: Dados
   exception:
     invalid_recipient: O e-mail não pôde ser enviado devido a pelo menos um dos destinatários ser inválido.
     no_internet_connection: Não há conexão com a internet.

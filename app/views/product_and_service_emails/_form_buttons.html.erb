@@ -1,9 +1,0 @@
-<% if f.object.persisted? %>
-    
-	<%= f.submit t('helpers.action.email.private_send'), :id => 'send_private_btn', :class => "btn btn-primary" %>
-
-	<% if f.object.on_analysis? %>
-
-	    <%= f.submit t('helpers.action.email.send'), :id => 'send_clients_btn', :class => "btn btn-primary" %>
-	<% end %>
-<% end %>

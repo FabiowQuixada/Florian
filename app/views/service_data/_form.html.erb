@@ -1,0 +1,71 @@
+<fieldset>
+
+	<legend><%= t 'activerecord.models.service_datum.other' %></legend>
+
+	<!-- Service header row -->
+	<table class="input-table">
+		<thead>
+			<th scope="col">
+			</th>
+			<th scope="col">
+				<%= week_form.label t 'helpers.prod_and_serv_datum.checkup' %>
+			</th>
+			<th scope="col">
+				<%= week_form.label t 'helpers.prod_and_serv_datum.return' %>
+			</th>
+			<th scope="col">
+				<%= week_form.label t 'helpers.total' %>
+			</th>
+		</thead>				
+
+		<div class="container-fluid padless" style="text-align:center">
+
+			<%= week_form.fields_for :attendance_data do |attendance_form| %>
+			<%= week_form.fields_for :return_data do |return_form| %>
+
+			<% service_row = 0 %>
+
+			<!-- Service body rows -->
+			<% ServiceData.services.each do |name| %>
+
+			<tr class="service-<%= index %>-row">
+				<td scope="row">
+					<%= label_tag t('activerecord.attributes.service_datum.' + name) %>
+				</td>
+				<td>
+					<%= attendance_form.text_field name, class: 'form-control ' + name + ' attendance attendance_week_' + index.to_s + ' service_input service_checkup input-sm service_row_' + service_row.to_s + '_col_0' + (index >= 5 ? '_totals_tab extra_tab temp_field' : ' '), disabled: index >= 5 %>
+				</td>
+				<td>
+					<%= return_form.text_field name, :class => 'form-control ' + name + ' return return_week_' + index.to_s + ' service_input service_return input-sm service_row_' + service_row.to_s + '_col_1' + (index >= 5 ? '_totals_tab extra_tab temp_field' : ' '), disabled: index >= 5 %>
+				</td>
+				<td>
+					<%= text_field_tag name, '', id: 'total_week_' + index.to_s, :class => 'form-control input-sm service_total temp_field', readonly: true, :disabled => true %>
+				</td>
+			</tr>
+
+			<% service_row += 1 %>
+
+			<% end %>
+			<% end %>
+			<% end %>
+		</div>
+
+		<!-- Service totals row -->
+		<tfoot>
+			<tr>
+				<td class="col-md-6">
+					<%= label_tag t 'helpers.total' %>
+				</td>
+				<td class="col-md-2">
+					<%= text_field_tag 'total_service_checkup', 0, id: 'total_service_checkup_week_' + index.to_s, class: 'form-control input-sm temp_field', readonly: true, disabled: true %>
+				</td>
+				<td class="col-md-2">
+				<%= text_field_tag 'total_service_return', 0, id: 'total_service_return_week_' + index.to_s, class: 'form-control input-sm temp_field', readonly: true, disabled: true %>
+				</td>
+				<td class="col-md-2">
+					<%= text_field_tag 'total_service', 0, id: 'total_service_week_' + index.to_s, class: 'form-control input-sm temp_field', readonly: true, disabled: true %>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</fieldset>

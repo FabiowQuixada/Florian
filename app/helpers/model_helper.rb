@@ -3,14 +3,14 @@ module ModelHelper
   # Gender: Male / Female
   # Number: Singular / Plural
   def genderize(key)
-    "#{key}.#{self.gender}.#{self.number}"
+    "#{key}.#{self.model_gender}.#{self.model_number}"
   end
 
-  def gender
+  def model_gender
     'm'
   end
 
-  def number
+  def model_number
     's'
   end
 
@@ -23,7 +23,7 @@ module ModelHelper
   end
 
   def was(verb)
-    I18n.t("#{verb}.#{self.gender}.#{self.number}", model: I18n.t('activerecord.models.' + self.class.model_name.param_key + '.one')).downcase.capitalize
+    I18n.t("#{verb}.#{self.model_gender}.#{self.model_number}", model: I18n.t('activerecord.models.' + self.class.model_name.param_key + '.one')).downcase.capitalize
   end
 
   def visualizable

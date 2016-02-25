@@ -1,20 +1,14 @@
-class ProductAndServiceEmailsController < ApplicationController
+class ProductAndServiceDataController < ApplicationController
 
   include MainConcern
-  arguable model_class: ProductAndServiceEmail
+  arguable model_class: ProductAndServiceDatum
   load_and_authorize_resource
 
   def update
 
-    @model = ProductAndServiceEmail.find params[:id]
-
-    byebug
-
-    date = check_competence
-
     begin
 
-      if !@model.update product_and_service_email_params
+      if !@model.update product_and_service_datum_params
         return render '_form'
       end
       
@@ -43,8 +37,13 @@ class ProductAndServiceEmailsController < ApplicationController
 
   private ###########################################################################################
 
-  def product_and_service_email_params
-    params.require(:product_and_service_email).permit(:id, :competence_date, :psychology, :physiotherapy, :plastic_surgery, :mesh_service, :gynecology, :occupational_therapy, :psychology_return, :physiotherapy_return, :plastic_surgery_return, :mesh_service_return, :gynecology_return, :occupational_therapy_return, :mesh, :cream, :protector, :silicon, :mask, :foam, :skin_expander, :cervical_collar)
+  def product_and_service_datum_params
+
+    params.require(:product_and_service_datum).permit(:id, :competence, 
+      product_and_service_weeks_attributes: [:id, :number, :start_date, :end_date, 
+        attendance_data_attributes: [:id, :psychology, :physiotherapy, :plastic_surgery, :mesh_service, :gynecology, :occupational_therapy],
+        return_data_attributes: [:id, :psychology, :physiotherapy, :plastic_surgery, :mesh_service, :gynecology, :occupational_therapy],
+        product_data_attributes: [:id, :mesh, :cream, :protector, :silicon, :mask, :foam, :skin_expander, :cervical_collar]])
   end
 
   def order_attribute
@@ -54,11 +53,12 @@ class ProductAndServiceEmailsController < ApplicationController
 
   def check_competence
 
-    competence = params[:product_and_service_email][:competence_date]
+    competence = params[:product_and_service_datum][:competence]
 
     begin
-      date = Date.strptime("{ 1, " + competence[0..1] + ", " + competence[3,6] + "}", "{ %d, %m, %Y }")
+      Date.strptime("{ 1, " + competence[0..1] + ", " + competence[3,6] + "}", "{ %d, %m, %Y }")
     rescue Exception => exc
+      byebug
       raise IaqException.new(I18n.t('alert.email.invalid_competence'))
     end
   end

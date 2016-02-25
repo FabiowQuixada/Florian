@@ -16,6 +16,8 @@
     *= require jquery-tablesorter/theme.blue
  */
 
+.input-table td {margin: 0 !important; padding: 0 !important;}
+
  ul.nav li.dropdown:hover > ul.dropdown-menu {
     display: block;
 }
@@ -23,6 +25,7 @@
 .tab_body {
   background: white;
   padding-top: 10px;
+  border-radius: 5px;
 }
 
 .asterisk::after {
@@ -76,11 +79,18 @@ td.table_icon {
   background-color: #8FAEEE;
 }
 
-thead {
-  background-color: #7E9DDD;
-}
-
 table.tablesorter thead tr th.headerSortUp {}
+
+.input-group-addon {
+  border-left-width: 0;
+  border-right-width: 0;
+}
+.input-group-addon:first-child {
+  border-left-width: 1px;
+}
+.input-group-addon:last-child {
+  border-right-width: 1px;
+}
 
 #login_box
 {
