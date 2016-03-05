@@ -61,6 +61,15 @@
 
 						<!-- MESSAGES -->
 						<div class="non-menu">
+
+							<% if Rails.env.uat? %>
+								<div class="alert alert-warning">
+									<div>
+										<strong><%= t('attention') %>:</strong> <%= t('uat_mode_message') %>
+									</div>
+								</div>
+							<% end %>
+
 							<div id="global_notice_box" class="alert alert-success fade in" style="display: none;">
 								<a href="javascript:void(0)" class="close" data-hide="alert">&times;</a>
 								<div id="global_notice_massages">

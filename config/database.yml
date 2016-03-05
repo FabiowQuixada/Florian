@@ -18,6 +18,10 @@ test:
   <<: *default
   database: db/test
 
+uat:
+  <<: *default
+  database: db/uat
+
 production:
   <<: *default
   database: db/production
