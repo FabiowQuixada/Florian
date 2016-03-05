@@ -144,7 +144,8 @@
 
 				<%= render partial: 'shared/error_alert', locals: {id: 'donation'} %>
 
-				<div class="form-group col-md-3">
+				<div class="row">
+				<div class="form-group col-md-4">
 					<div class="input-group date" data-behaviour='datepicker' >
 						<%= text_field_tag :donation_date, '', :id => 'new_donation_date', :class => 'form-control datepicker temp_field' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 					</div>
@@ -153,15 +154,16 @@
 					<span class="input-group-addon">R$</span>
 					<%= text_field_tag :value, '', :id => 'new_donation_value', :class => 'form-control money temp_field' %>
 				</div>
-			</div><div class="form-group col-md-6">
+			</div><div class="form-group col-md-5">
 			<%= text_field_tag :remark, '', :id => 'new_donation_remark', :placeholder => t('activerecord.attributes.donation.remark'), :class => 'form-control temp_field' %>
-		</div>
+		</div></div>
 
+		<div class="row">
 		<div class="col-md-12">
 			<div align="right">
 				<a id="add_donation_btn" class="btn btn-primary btn-xs add_btn"></span><%= t('helpers.action.add') %></a>
 			</div>
-		</div>
+		</div></div>
 	</div>
 </div>
 </div>
