@@ -127,13 +127,15 @@
 			<%= f.select :payment_frequency, CompaniesHelper::PARCEL_FREQUENCIES, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
 		</div>
 		<div class="form-group col-md-4">
-			<%= f.label :payment_period %>
+			<%= f.label :payment_period, :class => 'asterisk' %>
 			<%= f.text_field :payment_period, :class => 'form-control numbers_only' %>
 		</div>
 		<div class="form-group col-md-4">
 			<%= f.label :contract %>
 			<%= f.select :contract, CompaniesHelper::CONTRACTS, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
 		</div>
+
+		<div class="form-group col-md-12 asterisk-description">* Digite 0 para "Indeterminado".</div>
 	</div><div class="row">
 	<div class="container-fluid">
 		<div class="panel panel-default">
@@ -313,7 +315,9 @@
 				frequency_type = 'years';
 			}
 
-			last_date.val(moment(first_date, "DD/MM/YYYY").add((temp-1), frequency_type).format("DD/MM/YYYY"));
+			if(parcel_qty != 0) {
+				last_date.val(moment(first_date, "DD/MM/YYYY").add((temp-1), frequency_type).format("DD/MM/YYYY"));
+			}
 		}
 
 		$('body').on('click', '#new_donation_btn', function() {

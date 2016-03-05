@@ -25,6 +25,17 @@
   padding-top: 10px;
 }
 
+.asterisk::after {
+  color: #428BCA;
+  content: " *";
+}
+
+.asterisk-description {
+  font-size: 80%;
+  color: #428BCA;
+  font-weight: bold;
+}
+
 .nopadding {
    padding: 0 !important;
    margin: 0 !important;
