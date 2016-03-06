@@ -46,10 +46,6 @@ class ApplicationController < ActionController::Base
     return default_message
   end
 
-  def internet_connection?
-    Ping.pingecho "google.com", 1, 80
-  end
-
 
   protected ######################################################################################
 

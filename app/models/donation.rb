@@ -19,19 +19,7 @@ class Donation < ActiveRecord::Base
 
   # Methods
   def init
-      self.donation_date  ||= Time.now
-  end
-
-  def self.search(search)
-
-    if search['company_id']
-      where("company_id = ?", search['company_id'])
-    end
-
-    if search[:donation_date]
-      where("extract(month from donation_date) = :month and extract(year from donation_date) = :year", {m: 1, y: 2015})
-    end
-
+      self.donation_date ||= Time.now
   end
 
   def default_values
