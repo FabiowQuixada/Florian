@@ -2,6 +2,15 @@
 
     class StatusFlowTest < Capybara::Rails::TestCase
 
+      # def initialize(num)
+      #   ActiveRecord::Base.connection.tables.map do |model|
+      #     klass = model.capitalize.singularize.camelize
+      #     if klass != "SchemaMigration" and klass != "Audit" and Object.const_get(klass).column_names.include? 'active'
+      #       puts klass
+      #     end
+      #   end
+      # end
+
        DATA = [Role, User, ReceiptEmail]
 
         test "[Admin] change models' status" do
@@ -38,22 +47,14 @@
                     end
                 end
 
-                assert_content page, "sucesso"
+                assert page.has_content?("sucesso"), ('Expected to include "sucesso": ' + data.to_s)
 
            end
      end
 
      test "change models' status" do
 
-           visit root_path
-
-           email = 'fquixada@yahoo.com.br'
-
-            fill_in 'E-mail', :with => email
-            fill_in 'Senha', :with => 'senha_renata'
-            check 'Manter-me logado'
-
-            click_on 'Login'
+           login_as_common_user
 
             DATA.each do |data|
 
@@ -78,9 +79,9 @@
                 end
 
                 if @model.is_a? User or @model.is_a? Role
-                  #assert_content page, "sucesso"
+                  assert_content page, "negado"
                 else
-                  assert_content page, "sucesso"
+                  assert page.has_content?("sucesso"), ('Expected to include "sucesso": ' + data.to_s)
                 end
            end
      end

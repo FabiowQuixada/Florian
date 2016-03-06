@@ -10,7 +10,7 @@ class DonationFlowTest < Capybara::Rails::TestCase
 
             fill_in 'Data', :with => '01/10/2015'
             fill_in 'Valor', :with => '1234'
-            select(Company.first.trading_name, :from => 'donation_company_id')
+            select(Company.first.name, :from => 'donation_company_id')
 
             click_on 'Salvar'
 
@@ -25,7 +25,7 @@ class DonationFlowTest < Capybara::Rails::TestCase
 
             fill_in 'Data', :with => '01/10/2015'
             fill_in 'Valor', :with => '1234'
-            select(Company.first.trading_name, :from => 'donation_company_id')
+            select(Company.first.name, :from => 'donation_company_id')
 
             click_on 'Salvar e cadastrar nova'
 

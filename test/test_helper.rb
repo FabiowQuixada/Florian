@@ -34,6 +34,19 @@ end
      click_on 'Login'
   end
 
+  def login_as_common_user
+    
+    visit root_path
+
+   email = 'renata.sbq@gmail.com'
+
+    fill_in 'E-mail', :with => email
+    fill_in 'Senha', :with => '4453566486'
+    check 'Manter-me logado'
+
+    click_on 'Login'
+  end
+
   def assert_success_message_displayed
   end
 

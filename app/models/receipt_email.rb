@@ -96,7 +96,6 @@ class ReceiptEmail < ActiveRecord::Base
       result = I18n.t('report.other.receipt_text.company', name: company.registration_name, cnpj: company.cnpj.to_s, address: company.address, value_tag: I18n.t('tags.value'), competence_tag: I18n.t('tags.competence'))
     end
 
-    byebug
     result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
     result = result.gsub(I18n.t('tags.company'), company.name)
     result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
