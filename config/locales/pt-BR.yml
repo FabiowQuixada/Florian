@@ -5,7 +5,7 @@ pt-BR:
   main_page: Página Principal
   development: Desenvolvimento
   test: Teste
-  uat: Teste de aceitação do usuário
+  uat: Homologação
   production: Produção
   attention: Atenção
   uat_mode_message: Você está em ambiente de teste.
