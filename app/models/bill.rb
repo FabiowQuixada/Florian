@@ -22,7 +22,7 @@ class Bill < ActiveRecord::Base
   # def breadcrumb_path
   #   Hash[I18n.t('menu.XXX') => '', I18n.t('menu.XXX.YYY') => '']
   # end
-  def gender 
+  def model_gender 
     'f'
   end
 

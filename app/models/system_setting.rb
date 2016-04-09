@@ -21,7 +21,7 @@ class SystemSetting < ActiveRecord::Base
 
 
   # Methods
-  def gender
+  def model_gender
     'f'
   end
 

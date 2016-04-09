@@ -35,7 +35,7 @@ class Donation < ActiveRecord::Base
     end
   end
 
-  def gender
+  def model_gender
     'f'
   end
 

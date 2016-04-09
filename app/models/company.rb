@@ -47,7 +47,7 @@ class Company < ActiveRecord::Base
   end
 
   # TODO
-  def gender
+  def model_gender
     'f'
   end
 
