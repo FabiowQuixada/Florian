@@ -6,10 +6,6 @@ class BillsController < ApplicationController
 
   private
 
-  def params_validation
-    bill_params
-  end
-
   def bill_params
     params.require(:bill).permit(:id, :competence, :water, :energy, :telephone)
   end

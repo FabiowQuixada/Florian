@@ -12,14 +12,9 @@
 				<div class="input-group date" data-behaviour='datepickercompetence' >
 					<%= text_field_tag 'aux_competence', I18n.localize(@model.competence, format: :competence_i), :class => 'form-control' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 				</div>
-				<%= f.hidden_field :competence %>
-
-				<script>
-					$('#aux_competence').on('change', function() {
-						$('#bill_competence').val(to_rails_date('01/' + $('#aux_competence').val()));
-					})
-				</script>
 			</div>
+
+			<%= f.hidden_field :competence %>
 		</div>
 
 		<div class='row'>
@@ -66,5 +61,9 @@
 	function preprocess_data()
 	{
 	}
+
+	$('#aux_competence').on('change', function() {
+		$('#bill_competence').val(to_rails_date('01/' + $('#aux_competence').val()));
+	})
 
 </script>
