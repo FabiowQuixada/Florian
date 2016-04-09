@@ -37,4 +37,20 @@ class ProductAndServiceDatum < ActiveRecord::Base
     I18n.t('activerecord.enums.product_and_service_datum.status.' + status.to_s)
   end
 
+  def service_qty
+    sum = 0
+
+    weeks.each {|week| sum += week.service_qty }
+    
+    sum
+  end
+
+  def product_qty
+    sum = 0
+
+    weeks.each {|week| sum += week.product_qty }
+    
+    sum
+  end
+
 end

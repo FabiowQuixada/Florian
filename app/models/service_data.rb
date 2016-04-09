@@ -23,8 +23,14 @@ class ServiceData < ActiveRecord::Base
     ['psychology', 'physiotherapy', 'plastic_surgery', 'mesh_service', 'gynecology', 'occupational_therapy']
   end
 
-  def self.quantity
+  def self.number_of_services
     services.length
+  end
+
+  def qty
+    sum = 0
+    self.class.services.each {|service| sum += self[service]}
+    sum
   end
 
 end

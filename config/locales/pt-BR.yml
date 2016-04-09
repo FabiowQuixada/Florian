@@ -86,6 +86,8 @@ pt-BR:
         recipients_array: "Destinatários"
         competence: Competência
         send_date: Data de finalização
+        services: Serviços
+        products: Produtos
         status: Status
       product_and_service_week:
         number: Número

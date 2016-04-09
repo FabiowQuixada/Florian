@@ -1,37 +1,41 @@
-<%= render partial: "shared/index_table", locals: {model: @model, columns: Array.[](
-	Hash[:header => "competence", :model_attr => 'competence', :class => 'sorter-false'],
-	Hash[:header => "status", :model_attr => 'status_desc', :class => 'sorter-false']#,
-	#Hash[:header => "services", :model_attr => 'services_qty', :class => "hidden-xs sorter-false"],
-	#Hash[:header => "products", :model_attr => 'products_qty', :class => "hidden-xs sorter-false"]
-)} %>
+<%= link_to genderize_full_tag(@model, 'helpers.action.new'), send("new_product_and_service_datum_path"), :class => "btn btn-primary" %>
 
-<script>
+</p>
 
-	$(document).ready(function() {
-		$('.resend_btn').click(function(ev) {
+<table id="index_table" class="table table-striped table-hover table-bordered table-condensed tablesorter tablesorter-blue">
+	<thead>
+		<tr>
+			<% I18n.with_options(scope: 'activerecord.attributes.product_and_service_datum') do |i18n| %>
+			<th style="display: none;"></th>
+			<th class="sorter-false"><%= i18n.t 'competence' %></th>
+			<th class="sorter-false"><%= i18n.t 'services' %></th>
+			<th class="sorter-false"><%= i18n.t 'products' %></th>
+			<th class="sorter-false"><%= i18n.t 'status' %></th>
+			<th class="sorter-false" style="width: 16px;"></th>
+			<% end %>
+		</tr>
+	</thead>
 
-			clean_resend_modal();
+	<% if @list.empty? %>
+	<tr>
+		<td colspan="5" bgcolor="#E0E0F4" align="center"><%= genderize_tag(@model, 'helpers.none_registered') %></td>
+	</tr>
 
-			id = $(this).parent().parent().find('.model_id').text();
-			$('#resend_email_id').val(id);
-			$('#resend_email_form').get(0).setAttribute('action', '/emails/' + id + '/resend');
-			$('.modal_company_name').text($(this).parent().parent().find('.email_company').text());
-			$('#resend_email_modal').modal('show');
-		});
+	<% else %>
+	<tbody>
+		<% @list.each do |iterator| %>
+		<tr id='model_<%= iterator.id %>' class="model_row">
+			<td><%=	I18n.localize(iterator.competence, format: :competence).capitalize %></td>
+			<td style="display: none;" class="model_id"><%= iterator.id %></td>
+			<td><%= iterator.service_qty %></td>
+			<td><%= iterator.product_qty %></td>
+			<td><%= iterator.status_desc %></td>
+			<td class="icon-column"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), send("edit_product_and_service_datum_path", iterator) %></td>
+		</tr>
+		<% end %>
+	</tbody>
 
-		$('.send_test_btn').click(function(ev) {
+	<% end %>
+</table>
 
-			clean_send_test_modal();
-
-			id = $(this).parent().parent().find('.model_id').text();
-			$('#send_test_email_id').val(id);
-			$('#send_test_email_form').get(0).setAttribute('action', '/emails/' + id + '/send_test');
-			$('.modal_company_name').text($(this).parent().parent().find('.email_company').text());
-			$('#send_test_email_modal').modal('show');
-		});
-
-		$('#recent_emails_btn').click(function(ev) {
-			$('#recent_emails_modal').modal('show');
-		});
-	});
-</script>
+<%= render partial: "shared/index_commons", locals: {model: @model} %>

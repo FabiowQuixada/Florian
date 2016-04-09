@@ -23,8 +23,14 @@ class ProductData < ActiveRecord::Base
     ['mesh', 'cream', 'protector', 'silicon', 'mask', 'foam', 'skin_expander', 'cervical_collar']
   end
 
-  def self.quantity
+  def self.number_of_products
     products.length
+  end
+
+  def qty
+    sum = 0
+    self.class.products.each {|product| sum += self[product]}
+    sum
   end
 
 end
