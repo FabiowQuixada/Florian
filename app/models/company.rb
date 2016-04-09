@@ -46,11 +46,13 @@ class Company < ActiveRecord::Base
     end
   end
 
+  # TODO
   def gender
     'f'
   end
 
 def contact_qty
+  #  TODO
   if contacts.size < 1 or contacts.size > 3
     errors.add(:contacts, 'Número de contatos inválidos: ' + contacts.size)
   end
@@ -100,6 +102,7 @@ def group_desc
   end
 
   def unique_name_message
+    # TODO
     if person?
       "O campo 'Nome' é obrigatório;"
     else

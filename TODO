@@ -1,7 +1,15 @@
-Editar / visualizar objetos;
+
+
+Campos disabled;
+Salvar semana;
+Enviar e-mails de semana e final;
+
+
 Testes de mailing;
-Separacao de Objetos: Produtos e servicos;
-Semanas de ProdServ;
+eliminacao do index_table;
+E-mail assincrono: Resque;
+Eliminar historico git;
+
 
 =====================================================================
 
@@ -12,7 +20,7 @@ Depois:
  - Adição de doações à empresa no mobile;
  - Teste de validação de telefones;
  - Voltar pelo browser: history API;
- - Checagem de competencia em classe pr´opria;
+ - Checagem de competencia em classe propria;
  - Numeros na esquerda: Quando grafico esta vazio;
  - Foco no ano corrente;
 
