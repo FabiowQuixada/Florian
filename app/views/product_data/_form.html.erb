@@ -24,7 +24,7 @@
 			<td class="col-xs-1 col-md-1 nopadding form-group">
 			</td>
 			<td>
-				<%= product_form.text_field name, class: 'form-control product_input product_row_' + product_row.to_s + ' input-sm product_week_' + index.to_s + (index >= 5 ? ' extra_tab product_row_' + product_row.to_s + '_totals_tab temp_field' : ''), disabled: index >= 5 %>
+				<%= product_form.text_field name, class: 'form-control product_input numbers_only product_row_' + product_row.to_s + ' input-sm product_week_' + index.to_s + (index >= 5 ? ' extra_tab product_row_' + product_row.to_s + '_totals_tab temp_field' : ''), disabled: index >= 5 %>
 			</td>
 		</tr>
 

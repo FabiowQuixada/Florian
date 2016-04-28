@@ -6,7 +6,7 @@
 	<thead>
 		<tr>
 			<% I18n.with_options(scope: 'activerecord.attributes.product_and_service_datum') do |i18n| %>
-			<th style="display: none;"></th>
+			<th></th>
 			<th class="sorter-false"><%= i18n.t 'competence' %></th>
 			<th class="sorter-false"><%= i18n.t 'services' %></th>
 			<th class="sorter-false"><%= i18n.t 'products' %></th>
@@ -18,15 +18,15 @@
 
 	<% if @list.empty? %>
 	<tr>
-		<td colspan="5" bgcolor="#E0E0F4" align="center"><%= genderize_tag(@model, 'helpers.none_registered') %></td>
+		<td colspan="6" bgcolor="#E0E0F4" align="center"><%= genderize_tag(@model, 'helpers.none_registered') %></td>
 	</tr>
 
 	<% else %>
 	<tbody>
 		<% @list.each do |iterator| %>
 		<tr id='model_<%= iterator.id %>' class="model_row">
+			<td class="model_id"><%= iterator.id %></td>
 			<td><%=	I18n.localize(iterator.competence, format: :competence).capitalize %></td>
-			<td style="display: none;" class="model_id"><%= iterator.id %></td>
 			<td><%= iterator.service_qty %></td>
 			<td><%= iterator.product_qty %></td>
 			<td><%= iterator.status_desc %></td>

@@ -45,7 +45,19 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :product_and_service_data, except: [:destroy]
+  resources :product_and_service_data, except: [:destroy] do
+
+    collection do
+      post 'update_and_send'
+    end
+  end
+  
+  resources :product_and_service_weeks do
+
+    collection do
+      post 'update_and_send'
+    end
+  end
 
   get "/404" => "errors#not_found"
   get "/500" => "errors#internal_server_error"

@@ -1,10 +1,14 @@
 
 
-Campos disabled;
-Salvar semana;
-Enviar e-mails de semana e final;
+Enviar e-mail final;
+Substituicao nos titulo e corpo do EPS;
+Estado de analise;
+Salvar semana final;
+"Semana enviado";
+Adicionar id em todo canto;
 
 
+Auditoria de produtos e servicos: submodelos;
 Testes de mailing;
 eliminacao do index_table;
 E-mail assincrono: Resque;

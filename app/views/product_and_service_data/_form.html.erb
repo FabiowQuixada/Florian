@@ -8,12 +8,11 @@
 	<div class="col-md-4 form-group">
 
 		<%= f.label :competence %>
-		<% if f.object.finalized? %>
-		<%= f.text_field '', {:class => 'form-control', :readonly => true} %>
+		<% if @model.persisted? %>
+		<%= text_field_tag :competence, I18n.localize(@model.competence, format: :competence).capitalize, {:class => 'form-control', id: 'competence_text', :readonly => true} %>
 		<% else %>
 		<div class="input-group date" data-behaviour='datepickercompetence' >
 			<%= text_field_tag 'aux_competence', I18n.localize(@model.competence, format: :competence_i), :class => 'form-control' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-			
 		</div>
 		<%= f.hidden_field :competence %>
 		<% end %>
@@ -49,6 +48,7 @@
 <div id="prod_serv_data_tab_<%= i %>">
 	<div class="tab_body">
 
+		<%= week_form.hidden_field :id %>
 		<%= week_form.hidden_field :number %>
 
 		<!-- Week range -->
@@ -58,12 +58,12 @@
 					<div class="input-group">
 						<span class="input-group-addon"><%= t 'helpers.from' %></span>
 						<div class="date" data-behaviour='datepicker' >
-							<span></span><%= week_form.text_field 'start_date', format: :competence_i, :class => 'form-control' %><span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+							<span></span><%= week_form.text_field :start_date, format: :competence_i, :class => 'form-control' %><span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 						</div>
 						<span class="input-group-addon" style="border-left: 0; border-right: 0;"><%= t 'helpers.to' %></span>
 						<div class="date" data-behaviour='datepicker'>
 							<span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-							<%= week_form.text_field 'end_date', format: :competence_i, :class => 'form-control' %>
+							<%= week_form.text_field :end_date, format: :competence_i, :class => 'form-control' %>
 						</div>
 					</div>
 				</div>
@@ -75,32 +75,30 @@
 			<!-- Main data -->
 			<div class="row">
 				<div class="col-xs-12 col-md-7">
-					<%= render partial: "service_data/form", locals: {index: i, week_form: week_form}%>
+					<%= render partial: "service_data/form", locals: {week: week, index: i, week_form: week_form}%>
 				</div>
 				<div class="col-xs-12 col-md-5">
-					<%= render partial: "product_data/form", locals: {index: i, week_form: week_form}%>
+					<%= render partial: "product_data/form", locals: {week: week, index: i, week_form: week_form}%>
 				</div>
 			</div>
 
 			<br/>
 
-			<!-- Tab's footer -->
-			<% if i == totals_tab_index+1 %>
-			<div class="form-group">
-				<div class="form-group col-md-12 asterisk-description"><%#= t('helpers.prod_and_serv_datum.final_footer') %></div>
-			</div>
-			<% elsif i != totals_tab_index %>
+			<!-- Weeks tab's footer -->
+			<% if @model.persisted? %>
 			<div class="row">
-				<div class="form-group col-md-12 asterisk-description"><%#= t('helpers.prod_and_serv_datum.week_footer') %></div></div>
-				<% end %>
+				<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.week_footer') %></div></div>
+				
 
 				<div class="form-group">
-					<%#= link_to t('helpers.action.email.save_and_send'), '#', :id => 'create_and_new_btn', :class => "btn btn-primary resend_btn" %>
+					<%= link_to t('helpers.action.email.save_and_send'), 'javascript:void(0)', id: 'update_and_send_btn_' + i.to_s, :class => "btn btn-primary resend_btn" %>
 				</div>
+			<% end %>
 			</div>
+
+			<% end %>
 		</div>
 	</div>
-	<% end %>
 	<% end %>
 
 	<!-- Totals tab -->
@@ -113,10 +111,10 @@
 				<!-- Main data -->
 				<div class="row">
 					<div class="col-xs-12 col-md-7">
-						<%= render partial: "service_data/form", locals: {index: 5, week_form: total_form}%>
+						<%= render partial: "service_data/form", locals: {week: ProductAndServiceWeek.new, index: 5, week_form: total_form}%>
 					</div>
 					<div class="col-xs-12 col-md-5">
-						<%= render partial: "product_data/form", locals: {index: 5, week_form: total_form}%>
+						<%= render partial: "product_data/form", locals: {week: ProductAndServiceWeek.new, index: 5, week_form: total_form}%>
 					</div>
 				</div>
 
@@ -138,32 +136,60 @@
 				<!-- Main data -->
 				<div class="row">
 					<div class="col-xs-12 col-md-7">
-						<%= render partial: "service_data/form", locals: {index: 6, week_form: total_form}%>
+						<%= render partial: "service_data/form", locals: {week: ProductAndServiceWeek.new, index: 6, week_form: total_form}%>
 					</div>
 					<div class="col-xs-12 col-md-5">
-						<%= render partial: "product_data/form", locals: {index: 6, week_form: total_form}%>
+						<%= render partial: "product_data/form", locals: {week: ProductAndServiceWeek.new, index: 6, week_form: total_form}%>
 					</div>
 				</div>
 
 				<br/>
 
 				<!-- Tab's footer -->
+				<% if @model.persisted? %>
 				<div class="row">
 
-					<div class="form-group col-md-12 asterisk-description"><%#= t('helpers.prod_and_serv_datum.final_footer') %></div>
+					<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.final_footer') %></div>
 				</div>
 
 				<div class="form-group">
-					<%#= link_to t('helpers.action.email.send'), '#', :id => 'create_and_new_btn', :class => "btn btn-primary resend_btn" %>
+					<%= link_to t('helpers.action.email.send'), 'javascript:void(0)', :id => 'update_and_send_btn_6', :class => "btn btn-primary resend_btn" %>
 				</div>
+				<% end %>
 
 			</div>
 		</div>
 	</div>
 	<% end %>
 
+
 	<%= render partial: "shared/form_buttons", locals: {model: @model, f: f} -%>
 
+	<% end %>
+
+
+	<%= form_for ProductAndServiceWeek.new, url: update_and_send_product_and_service_weeks_path, html: {id: 'hidden_week_form', style: "display:none;"}, authenticity_token: true do |f| %>
+
+	<div class="row">
+		<%= f.text_field :id, :class => "form-control" %>
+		<%= f.text_field :start_date, :class => "form-control" %>
+		<%= f.text_field :end_date, :class => "form-control" %>
+
+		<input type="hidden" name="product_and_service_week[service_data_attributes][0][id]" id="product_and_service_week_service_data_attributes_0_id">
+
+		<input type="hidden" name="product_and_service_week[service_data_attributes][1][id]" id="product_and_service_week_service_data_attributes_1_id">
+
+		<input type="hidden" name="product_and_service_week[product_data_attributes][id]" id="product_and_service_week_product_data_attributes_id">
+
+
+		<input type="hidden" value="0" name="product_and_service_week[service_data_attributes][0][service_type]" id="product_and_service_week_service_data_attributes_1_service_type">
+
+		<input type="hidden" value="1" name="product_and_service_week[service_data_attributes][1][service_type]" id="product_and_service_week_service_data_attributes_1_service_type">
+	</div>
+
+
+		<%= render partial: "service_data/form", locals: {week: ProductAndServiceWeek.new, index: -1, week_form: f}%>
+		<%= render partial: "product_data/form", locals: {week: ProductAndServiceWeek.new, index: -1, week_form: f}%>
 	<% end %>
 
 	<%= render partial: "shared/form_commons", locals: {model: @model} %>
@@ -237,7 +263,7 @@
 
 		// Services;
 		for (var col = 0; col < 2; col++) {
-			for (var row = 0; row < <%= ServiceData.quantity %>; row++) {
+			for (var row = 0; row < <%= ServiceData.number_of_services %>; row++) {
 
 				var sum = 0;
 				field = '.service_row_' + row + '_col_' + col;
@@ -253,7 +279,7 @@
 		};
 
 		// Products;
-		for (var row = 0; row < <%= ProductData.quantity %>; row++) {
+		for (var row = 0; row < <%= ProductData.number_of_products %>; row++) {
 
 			var sum = 0;
 			field = '.product_row_' + row;
@@ -288,10 +314,59 @@
 		$('.product_input:not(.extra_tab)').on('blur', sum_products_for_each_tab);
 
 		$('.attendance_week_<%= totals_tab_index %>, .return_week_<%= totals_tab_index %>, .product_week_<%= totals_tab_index %>').attr('readonly', true);
+
+		for (var i = 0; i < <%= @model.weeks.length+2 %>; i++) {
+			$('#update_and_send_btn_' + i).on('click', copy_to_hidden_form_and_send.bind(self, i));
+		}
 	});
 
 	$('#aux_competence').on('change', function() {
-		$('#bill_competence').val(to_rails_date('01/' + $('#aux_competence').val()));
+		$('#product_and_service_datum_competence').val(to_rails_date('01/' + $('#aux_competence').val()));
 	})
 
+	function copy_to_hidden_form_and_send(source_week_id) {
+
+		<% ProductData.products.each do |name| %>
+			$('#product_and_service_week_product_data_attributes_<%= name %>').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + source_week_id + '_product_data_attributes_<%= name %>').val());
+		<% end %>
+
+		<% ServiceData.services.each do |name| %>
+			$('#product_and_service_week_service_data_attributes_0_<%= name %>').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + source_week_id + '_service_data_attributes_0_<%= name %>').val());
+
+			$('#product_and_service_week_service_data_attributes_1_<%= name %>').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + source_week_id + '_service_data_attributes_1_<%= name %>').val());
+		<% end %>
+
+		// The final data will be sent to the the institute's clients. Else, the partial data will be sent to the collaborators;
+		if(source_week_id == <%= totals_tab_index+1 %>) {
+			$('#hidden_week_form').attr('action', '/product_and_service_data/update_and_send');
+		} else {
+			
+			// Week ID;
+			$('#product_and_service_week_id').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + source_week_id + '_id').val());
+
+			// Services and product IDs;
+			$('#product_and_service_week_service_data_attributes_0_id').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + source_week_id + '_service_data_attributes_0_id').val());
+
+			$('#product_and_service_week_service_data_attributes_1_id').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + source_week_id + '_service_data_attributes_1_id').val());
+
+			$('#product_and_service_week_product_data_attributes_id').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + source_week_id + '_product_data_attributes_id').val());
+
+			// Dates;
+			$('#product_and_service_week_start_date').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + source_week_id + '_start_date').val());
+
+			$('#product_and_service_week_end_date').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + source_week_id + '_end_date').val());
+
+			// Service types;
+			$('#product_and_service_week_service_data_0_service_type').val(0);
+
+			$('#product_and_service_week_service_data_1_service_type').val(1);
+
+			
+		}
+
+		display_info("Enviando e-mail...");
+
+		$("#hidden_week_form").submit();
+
+	}
 </script>

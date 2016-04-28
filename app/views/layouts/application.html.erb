@@ -134,6 +134,7 @@
   		format: "dd/mm/yyyy",
 		autoclose: true,
 	 	language: "pt-BR",
+	 	daysOfWeekDisabled: [0,6],
 	 	setDate: new Date()
 	 });
    }
@@ -166,6 +167,16 @@
 				$(this).val('0,00');
 			});
 
+			$('.numbers_only').each(function(){
+				if(!$(this).val())
+					$(this).val('0');
+			});
+
+			$('.numbers_only').on('blur', function(){
+				if(!$(this).val())
+					$(this).val('0');
+			});
+
 			$(".cnpj").mask("99.999.999/9999-99", {
 				placeholder : "__.___.___/____-__"
 			});
@@ -185,6 +196,7 @@
 			$(".fax").mask("(99) 9999-9999", {
 				placeholder : "(__) ____-____"
 			});
+
 
 			var celphone_mask_behavior = function (val) {
 			  return val.replace(/\D/g, '').length === 11 ? '(00) 0 0000-0000' : '(00) 0000-00009';

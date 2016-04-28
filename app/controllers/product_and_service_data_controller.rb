@@ -4,27 +4,19 @@ class ProductAndServiceDataController < ApplicationController
   arguable model_class: ProductAndServiceDatum
   load_and_authorize_resource
 
-  def update
+  def update_and_send
+
+    byebug
+
+    @week = ProductAndServiceWeek.new(params[:product_and_service_week])
+    @model = @week.product_and_service_datum
+    @breadcrumbs = @model.breadcrumb_path.merge Hash[t('helpers.action.edit') => ""]
+    @breadcrumbs = @breadcrumbs.merge @model.breadcrumb_suffix unless @model.breadcrumb_suffix.nil?
 
     begin
 
-      if !@model.update product_and_service_datum_params
-        return render '_form'
-      end
-      
-      if params[:commit] == t('helpers.action.update')
-    
-      elsif params[:commit] == t('helpers.action.email.private_send')
-        IaqMailer.send_prod_and_serv_private_email(@model, date, current_user).deliver_now
-
-        @model.on_analysis!
-      elsif params[:commit] == t('helpers.action.email.send')
-        IaqMailer.send_prod_and_serv_email(@model, date, current_user).deliver_now
-
-        @model.finalized!
-        @model.send_date = Date.today
-      
-      end
+        IaqMailer.send_monthly_prod_and_serv_email(@week, current_user).deliver_now
+        #@model.on_analysis!
 
     rescue => exc
        @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
@@ -41,8 +33,7 @@ class ProductAndServiceDataController < ApplicationController
 
     params.require(:product_and_service_datum).permit(:id, :competence, 
       product_and_service_weeks_attributes: [:id, :number, :start_date, :end_date, 
-        attendance_data_attributes: [:id, :psychology, :physiotherapy, :plastic_surgery, :mesh_service, :gynecology, :occupational_therapy],
-        return_data_attributes: [:id, :psychology, :physiotherapy, :plastic_surgery, :mesh_service, :gynecology, :occupational_therapy],
+        service_data_attributes: [:id, :service_type, :psychology, :physiotherapy, :plastic_surgery, :mesh, :gynecology, :occupational_therapy],
         product_data_attributes: [:id, :mesh, :cream, :protector, :silicon, :mask, :foam, :skin_expander, :cervical_collar]])
   end
 

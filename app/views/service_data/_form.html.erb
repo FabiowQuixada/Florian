@@ -20,8 +20,17 @@
 
 		<div class="container-fluid padless" style="text-align:center">
 
-			<%= week_form.fields_for :attendance_data do |attendance_form| %>
-			<%= week_form.fields_for :return_data do |return_form| %>
+			<% if index >= 0 and index < 5 %>
+
+			<input type="hidden" value="<%= week.service_data[0].id %>" name="product_and_service_datum[product_and_service_weeks_attributes][<%= index %>][service_data_attributes][0][id]" id="product_and_service_datum_product_and_service_weeks_attributes_<%= index %>_service_data_attributes_0_id">
+
+			<input type="hidden" value="<%= week.service_data[1].id %>" name="product_and_service_datum[product_and_service_weeks_attributes][<%= index %>][service_data_attributes][1][id]" id="product_and_service_datum_product_and_service_weeks_attributes_<%= index %>_service_data_attributes_1_id">
+
+			<input type="hidden" value="0" name="product_and_service_datum[product_and_service_weeks_attributes][<%= index %>][service_data_attributes][0][service_type]" id="product_and_service_datum_product_and_service_weeks_attributes_<%= index %>_service_data_attributes_1_service_type">
+
+			<input type="hidden" value="1" name="product_and_service_datum[product_and_service_weeks_attributes][<%= index %>][service_data_attributes][1][service_type]" id="product_and_service_datum_product_and_service_weeks_attributes_<%= index %>_service_data_attributes_1_service_type">
+
+			<% end %>
 
 			<% service_row = 0 %>
 
@@ -33,20 +42,29 @@
 					<%= label_tag t('activerecord.attributes.service_datum.' + name) %>
 				</td>
 				<td>
-					<%= attendance_form.text_field name, class: 'form-control ' + name + ' attendance attendance_week_' + index.to_s + ' service_input service_checkup input-sm service_row_' + service_row.to_s + '_col_0' + (index >= 5 ? '_totals_tab extra_tab temp_field' : ' '), disabled: index >= 5 %>
+				<% if index != -1 %>
+					<%= text_field_tag 'product_and_service_datum[product_and_service_weeks_attributes][' + index.to_s + '][service_data_attributes][0][' + name +']', (week.persisted? ? week.service_data[0].instance_eval(name) : 0), class: 'form-control ' + name + ' attendance attendance_week_' + index.to_s + ' numbers_only service_input service_checkup input-sm service_row_' + service_row.to_s + '_col_0' + (index >= 5 ? '_totals_tab extra_tab temp_field' : ' '), disabled: index >= 5 %>
+
+					<% else %>
+					<%= text_field_tag 'product_and_service_week[service_data_attributes][0][' + name +']', (week.persisted? ? week.service_data[0].instance_eval(name) : 0), class: 'form-control ' + name + ' attendance attendance_week_' + index.to_s + ' numbers_only service_input service_checkup input-sm service_row_' + service_row.to_s + '_col_0' + (index >= 5 ? '_totals_tab extra_tab temp_field' : ' '), disabled: index >= 5 %>
+					<% end %>
 				</td>
 				<td>
-					<%= return_form.text_field name, :class => 'form-control ' + name + ' return return_week_' + index.to_s + ' service_input service_return input-sm service_row_' + service_row.to_s + '_col_1' + (index >= 5 ? '_totals_tab extra_tab temp_field' : ' '), disabled: index >= 5 %>
+					<% if index != -1 %>
+
+					<%= text_field_tag 'product_and_service_datum[product_and_service_weeks_attributes][' + index.to_s + '][service_data_attributes][1][' + name +']', (week.persisted? ? week.service_data[1].instance_eval(name) : 0), class: 'form-control ' + name + ' return return_week_' + index.to_s + ' service_input numbers_only service_return input-sm service_row_' + service_row.to_s + '_col_1' + (index >= 5 ? '_totals_tab extra_tab temp_field' : ' '), disabled: index >= 5 %>
+
+					<% else %>
+					<%= text_field_tag 'product_and_service_week[service_data_attributes][1][' + name +']', (week.persisted? ? week.service_data[1].instance_eval(name) : 0), class: 'form-control ' + name + ' attendance attendance_week_' + index.to_s + ' numbers_only service_input service_checkup input-sm service_row_' + service_row.to_s + '_col_0' + (index >= 5 ? '_totals_tab extra_tab temp_field' : ' '), disabled: index >= 5 %>
+					<% end %>
 				</td>
 				<td>
-					<%= text_field_tag name, '', id: 'total_week_' + index.to_s, :class => 'form-control input-sm service_total temp_field', readonly: true, :disabled => true %>
+					<%= text_field_tag name, '', id: 'total_week_' + index.to_s, class: 'form-control input-sm service_total temp_field', readonly: true, disabled: true %>
 				</td>
 			</tr>
 
 			<% service_row += 1 %>
 
-			<% end %>
-			<% end %>
 			<% end %>
 		</div>
 

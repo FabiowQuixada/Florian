@@ -23,7 +23,7 @@ pt-BR:
         one: E-mail de Recibo
         other: E-mails de Recibo
       product_and_service_datum:
-        one: Produto ou Serviço
+        one: Produtos e Serviços
         other: Produtos e Serviços
       product_and_service_week:
         one: Semana
@@ -88,6 +88,8 @@ pt-BR:
         send_date: Data de finalização
         services: Serviços
         products: Produtos
+        attendances: Atendimentos
+        returns: Retornos
         status: Status
       product_and_service_week:
         number: Número
@@ -97,7 +99,7 @@ pt-BR:
         psychology: Psicologia
         physiotherapy: Fisioterapia
         plastic_surgery: Cirurgia plástica
-        mesh_service: Malha
+        mesh: Malha
         gynecology: Ginecologia
         occupational_therapy: Ter. ocupacional
       product_datum:
@@ -250,7 +252,8 @@ pt-BR:
     value: '#valor'
   report:
     title:
-      prod_and_service: "Relatório de Produtos e Serviços"
+      weekly_prod_and_service: "Relatório Semanal de Produtos e Serviços"
+      monthly_prod_and_service: "Relatório Mensal de Produtos e Serviços"
       receipt: Recibo
     footer:
       address: "Rua Visconde de Sabóia, nº 75 – Salas 01 a 16 - Centro – Cep: 60.030-090 - Fortaleza – CE"

@@ -53,4 +53,8 @@ class ProductAndServiceDatum < ActiveRecord::Base
     sum
   end
 
+  def model_number
+    'p'
+  end
+
 end

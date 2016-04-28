@@ -53,7 +53,6 @@ module MainConcern extend ActiveSupport::Concern
   end
 
   def update
-
     if @model.update send(@model.model_name.singular + "_params")
       redirect_to send(@model.model_name.route_key + "_path"), notice: @model.was('updated')
     else

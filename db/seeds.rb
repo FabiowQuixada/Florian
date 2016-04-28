@@ -15,12 +15,12 @@ user7 = User.create({name: "Lucivânia",   email: "lucivania_nojosa@hotmail.com"
 
 case Rails.env
     when "development" then
-        comp1 = Company.create(trading_name: "Empresa I", name: "Empresa I Ltda.", cnpj: "31162488000187", category: 1, address: "lala", group: 1)
-        comp2 = Company.create(trading_name: "Empresa II", name: "Empresa II Ltda.", cnpj: "34.781.467/0001-38", category: 2, address: "lala",  group: 2)
-        comp3 = Company.create(trading_name: "Empresa III", name: "Empresa III Ltda.", cnpj: "01.476.667/0001-28", category: 3, address: "lala",  group: 3)
-        comp4 = Company.create(trading_name: "Empresa IV", name: "Empresa IV Ltda.", cnpj: "46.426.366/0001-28", category: 1, address: "lala",  group: 3)
-        comp5 = Company.create(trading_name: "Empresa V", name: "Empresa V Ltda.", cnpj: "01.302.458/0001-68", category: 2, address: "lala",  group: 1)
-        comp6 = Company.create(trading_name: "Empresa VI", name: "Empresa VI Ltda.", cnpj: "47.461.434/0001-52", category: 3, address: "lala",  group: 2)
+        comp1 = Company.create(entity_type: 1, name: "Empresa I", registration_name: "Empresa I Ltda.", cnpj: "31162488000187", category: 1, address: "lala", group: 1)
+        comp2 = Company.create(entity_type: 1, name: "Empresa II", registration_name: "Empresa II Ltda.", cnpj: "34.781.467/0001-38", category: 2, address: "lala",  group: 2)
+        comp3 = Company.create(entity_type: 1, name: "Empresa III", registration_name: "Empresa III Ltda.", cnpj: "01.476.667/0001-28", category: 3, address: "lala",  group: 3)
+        comp4 = Company.create(entity_type: 1, name: "Empresa IV", registration_name: "Empresa IV Ltda.", cnpj: "46.426.366/0001-28", category: 1, address: "lala",  group: 3)
+        comp5 = Company.create(entity_type: 1, name: "Empresa V", registration_name: "Empresa V Ltda.", cnpj: "01.302.458/0001-68", category: 2, address: "lala",  group: 1)
+        comp6 = Company.create(entity_type: 1, name: "Empresa VI", registration_name: "Empresa VI Ltda.", cnpj: "47.461.434/0001-52", category: 3, address: "lala",  group: 2)
 
         don1 = Donation.create(value: 0.00, donation_date: Time.now, remark: "02 potes de creme", company: comp1)
         don2 = Donation.create(donation_date: Time.now, remark: "02 potes de creme", company: comp1)
