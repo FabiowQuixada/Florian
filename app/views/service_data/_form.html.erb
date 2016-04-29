@@ -2,6 +2,14 @@
 
 	<legend><%= t 'activerecord.models.service_datum.other' %></legend>
 
+		<div class="container-fluid admin-only" style="display:none;"><div class="row"><div class="form-group col-md-3">
+		<%= text_field_tag '', week.service_data[0].id, class: 'form-control', disabled: true %>
+		</div><div class="form-group col-md-3">
+		<%= text_field_tag '', week.service_data[1].id, class: 'form-control', disabled: true %>
+
+		</div></div>
+		</div>
+
 	<!-- Service header row -->
 	<table class="input-table">
 		<thead>

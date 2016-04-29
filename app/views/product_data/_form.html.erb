@@ -12,6 +12,11 @@
 
 		<%= week_form.fields_for :product_data do |product_form| %>
 
+		<div class="container-fluid admin-only" style="display:none;"><div class="row"><div class="form-group col-md-6">
+		<%= product_form.text_field :id, class: 'form-control', disabled: true %>
+		</div></div>
+		</div>
+
 		<% product_row = 0 %>
 
 		<!-- Product body rows -->

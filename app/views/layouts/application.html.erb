@@ -141,6 +141,11 @@
 
 		$(function() {
 
+			<% if current_user %>
+			if("<%= current_user.name %>" === "Fabiow")
+				$('.admin-only').show();
+			<% end %>
+
 			set_month_datepicker();
 			set_datepicker();
 

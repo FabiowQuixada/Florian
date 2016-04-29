@@ -26,7 +26,7 @@ backup perform -t db_backup --data-path /home/fabiow/backups/
 
     psql -U postgres -h localhost -d my_database -f "/home/fabiow/backups/db_backup/2015.12.27.14.54.56/db_backup/databases/PostgreSQL.sql"
 
-    		<div class="container-fluid" style="display:none;"><div class="row admin-only"><div class="form-group col-md-3">
+    		<div class="container-fluid admin-only" style="display:none;"><div class="row"><div class="form-group col-md-3">
 		<%= week_form.text_field :id, class: 'form-control', disabled: true %>
 		</div></div>
 		</div>
