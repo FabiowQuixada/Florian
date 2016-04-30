@@ -12,24 +12,24 @@ class IaqMailer < ApplicationMailer
     send_email email, Date.today, User.find_by_email(SYSTEM_EMAIL), EmailHistory.send_types[:auto]
   end
 
-  def send_weekly_prod_and_serv_email(email, user)
+  def send_weekly_prod_and_serv_email(week, user)
 
-      ProductAndServiceReport.new("/tmp/prod_serv.pdf", email).save
+      ProductAndServiceReport.new("/tmp/prod_serv.pdf", week).save
       attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
 
       mail(to: user.system_setting.pse_private_recipients_array,
-        body: user.system_setting.pse_processed_body,
-        subject: user.system_setting.pse_processed_title)
+        body: user.system_setting.pse_processed_body(week.product_and_service_datum.competence),
+        subject: user.system_setting.pse_processed_title(week.product_and_service_datum.competence))
   end
 
-  def send_monthly_prod_and_serv_email(email, date, user)
+  def send_monthly_prod_and_serv_email(week, date, user)
 
-      ProductAndServiceReport.new("/tmp/prod_serv.pdf", email).save
+      ProductAndServiceReport.new("/tmp/prod_serv.pdf", week).save
       attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
 
       mail(to: user.system_setting.pse_recipients_array,
-        body: user.system_setting.pse_processed_body,
-        subject: user.system_setting.pse_processed_title)
+        body: user.system_setting.pse_processed_body(week.product_and_service_datum.competence),
+        subject: user.system_setting.pse_processed_title(week.product_and_service_datum.competence))
   end
 
 
