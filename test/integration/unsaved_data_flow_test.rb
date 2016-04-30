@@ -10,6 +10,8 @@ class UnsavedDataFlowTest < Capybara::Rails::TestCase
 
             DATA.each do |data|
 
+              begin
+
                   @model = data.new
 
                   visit send("edit_" + @model.class.name.singularize.underscore + "_path", data.first.id)
@@ -26,7 +28,12 @@ class UnsavedDataFlowTest < Capybara::Rails::TestCase
 
                   sleep(inspection_time=2)
 
-                  assert_content page, 'Dados não salvos'
+                  assert page.has_content?('Dados não salvos'), data
+
+                rescue Capybara::ElementNotFound => e
+
+                  raise Capybara::ElementNotFound, e.message + ': ' + data.name
+                 end
 
            end
          end
@@ -36,6 +43,8 @@ class UnsavedDataFlowTest < Capybara::Rails::TestCase
            login_as_admin
 
             DATA.each do |data|
+
+              begin
 
                   @model = data.new
 
@@ -49,7 +58,11 @@ class UnsavedDataFlowTest < Capybara::Rails::TestCase
 
                   sleep(inspection_time=1)
 
-                  refute_content page, 'Dados não salvos'
+                  assert_not page.has_content?('Dados não salvos'), data
+                rescue Capybara::ElementNotFound => e
+
+                  raise Capybara::ElementNotFound, e.message + ': ' + data.name
+                 end
 
            end
      end

@@ -27,6 +27,8 @@
 
             DATA.each do |data|
 
+              begin
+
                   @model = data.new
 
                   visit send(@model.model_name.route_key + "_path")
@@ -49,6 +51,11 @@
 
                 assert page.has_content?("sucesso"), ('Expected to include "sucesso": ' + data.to_s)
 
+               rescue Capybara::ElementNotFound => e
+
+                  raise Capybara::ElementNotFound, e.message + ': ' + data.name
+                 end
+
            end
      end
 
@@ -57,6 +64,8 @@
            login_as_common_user
 
             DATA.each do |data|
+
+              begin
 
                  @model = data.new
 
@@ -83,6 +92,11 @@
                 else
                   assert page.has_content?("sucesso"), ('Expected to include "sucesso": ' + data.to_s)
                 end
+
+                rescue Capybara::ElementNotFound => e
+
+                  raise Capybara::ElementNotFound, e.message + ': ' + data.name
+                 end
            end
      end
 end

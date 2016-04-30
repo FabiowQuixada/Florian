@@ -10,22 +10,27 @@
 
             DATA.each do |data|
 
+              begin
+
                   @model = data.new
 
                   visit send(@model.model_name.route_key + "_path")
 
-                  refute_content page, 'translation_missing'
+                  assert_not page.has_content?('translation_missing'), data
 
                   visit send("new_" + @model.class.name.singularize.underscore + "_path")
 
                   if @model.insertable
                     click_on 'Salvar'
 
-                  refute_content page, 'translation_missing'
+                  assert_not page.has_content?('translation_missing'), data
 
                  end
 
-           end
+                 rescue Capybara::ElementNotFound => e
 
+                  raise Capybara::ElementNotFound, e.message + ': ' + data.name
+                 end
+           end
      end
 end
