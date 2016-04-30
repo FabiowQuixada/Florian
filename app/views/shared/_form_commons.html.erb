@@ -42,6 +42,7 @@
 			});
 
 
+			// Saves the values of the model on page load, so it can be compared to the values when the user goes back, allowing a 'not-saved data' pop-up to display;
 			window.attr_values = new Array();
 			$('input, textarea, select').each(function(){
 				if(!$(this).hasClass('btn') && !(typeof $(this).attr('id') === 'undefined') && !$(this).hasClass('temp_field'))
@@ -64,9 +65,7 @@
 
 		function handle_back_on_edit() {
 
-			if(window.any_change === 'undefined') {
-				window.any_change = false;
-			}
+			window.any_change = false;
 
 			preprocess_data();
 
