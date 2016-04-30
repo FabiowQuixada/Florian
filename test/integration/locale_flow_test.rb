@@ -2,7 +2,7 @@
 
     class LocaleFlowTest < Capybara::Rails::TestCase
 
-       DATA = [Company, Donation, ReceiptEmail, ProductAndServiceEmail, User, Role]
+       DATA = [Company, Donation, ReceiptEmail, ProductAndServiceDatum, User, Role]
 
         test "Should contain no translation missing" do
 

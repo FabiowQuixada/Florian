@@ -6,7 +6,7 @@
 		<% if can? :manage, ReceiptEmail.new %>
 			<li id="tab_0_title" class="clickable"><a><%= t('activerecord.models.receipt_email.one') %></a></li>
 		<% end %>
-		<% if can? :manage, ProductAndServiceEmail.new %>
+		<% if can? :manage, ProductAndServiceDatum.new %>
 			<li id="tab_1_title" class="clickable"><a><%= t('activerecord.models.product_and_service_datum.one') %></a></li>
 		<% end %>
 	</ul>
@@ -32,7 +32,7 @@
 				
 			</div>
 		<% end %>
-		<% if can? :manage, ProductAndServiceEmail.new %>
+		<% if can? :manage, ProductAndServiceDatum.new %>
 			<div id="tab_1" class="prod_serv_email_tab">
 
 				<div class="container-fluid padless">
