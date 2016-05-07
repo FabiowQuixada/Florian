@@ -338,6 +338,7 @@ pt-BR:
       edit: Editar
       show: Visualizar
       save: Salvar
+      show_admin_private_data: Exibir dados de administrador
       update: Atualizar
       update_and_new:
         m:

@@ -17,6 +17,7 @@ Rails.application.config.assets.precompile += %w( activate.png )
 Rails.application.config.assets.precompile += %w( deactivate.png )
 Rails.application.config.assets.precompile += %w( delete.png )
 Rails.application.config.assets.precompile += %w( find.png )
+Rails.application.config.assets.precompile += %w( key.png )
 
 Rails.application.config.assets.precompile << proc do |path|
   if path =~ /\.(css|js)\z/

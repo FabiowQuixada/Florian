@@ -1,15 +1,16 @@
-
-
-Enviar e-mail final;
 Estado de analise;
-Salvar semana final;
+Envio de e-mail final;
 
 
+Botao que mostra todas as informacoes relevantes p admin;
 Auditoria de produtos e servicos: submodelos;
 Testes de mailing;
 eliminacao do index_table;
 E-mail assincrono: Resque;
 Eliminar historico git;
+Nao deixar urls como http://localhost:3000/product_and_service_weeks/update_and_send
+
+Delecao: admin, valdiacao no serv, fializacao no cliente;
 
 
 =====================================================================
