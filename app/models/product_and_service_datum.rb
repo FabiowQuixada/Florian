@@ -20,7 +20,7 @@ class ProductAndServiceDatum < ActiveRecord::Base
   # Methods
   after_initialize do
     if self.product_and_service_weeks.empty?
-      for i in 1..NUMBER_OF_WEEKS
+      for i in 1..NUMBER_OF_WEEKS+2
          self.product_and_service_weeks.new :number => i
       end
     end
@@ -40,7 +40,7 @@ class ProductAndServiceDatum < ActiveRecord::Base
   def service_qty
     sum = 0
 
-    weeks.each {|week| sum += week.service_qty }
+    weeks.each {|week| sum += week.service_qty if week.number <= 5 }
     
     sum
   end
@@ -48,13 +48,17 @@ class ProductAndServiceDatum < ActiveRecord::Base
   def product_qty
     sum = 0
 
-    weeks.each {|week| sum += week.product_qty }
+    weeks.each {|week| sum += week.product_qty if week.number <= 5 }
     
     sum
   end
 
   def model_number
     'p'
+  end
+
+  def final_week
+    weeks.last
   end
 
 end

@@ -34,7 +34,6 @@ module MainConcern extend ActiveSupport::Concern
   end
 
   def create
-
     @model = model_class.new send(@model.model_name.singular + "_params")
 
     if @model.save

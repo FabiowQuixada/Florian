@@ -1,4 +1,6 @@
-<% totals_tab_index = 5 %>
+<% totals_week_number = 6 %>
+<% final_week_number = 7 %>
+
 
 <%= form_for @model, :html=> {:id => 'main_form'} do |f| %>
 
@@ -34,7 +36,9 @@
 <ul class="nav nav-tabs">
 
 	<% @model.weeks.each do |week| %>
+	<% if week.number < totals_week_number %>
 	<li id="prod_serv_data_tab_<%= week.number-1 %>_title" class="clickable"><a><%= t('activerecord.models.product_and_service_week.one') + ' ' + week.number.to_s %></a></li>
+	<% end %>
 	<% end %>
 
 	<li id="prod_serv_data_tab_5_title" class="clickable"><a><%= t 'helpers.total' %></a></li>
@@ -42,229 +46,184 @@
 </ul>
 
 <!-- Tabs' body -->
-<% f.object.product_and_service_weeks.each_with_index do |week, i| %>
+<% f.object.product_and_service_weeks.each_with_index do |week, index| %>
 <%= f.fields_for :product_and_service_weeks, week do |week_form| %>
 
-<div id="prod_serv_data_tab_<%= i %>">
+<div id="prod_serv_data_tab_<%= index %>">
 	<div class="tab_body">
 
-	<div class="container-fluid admin-only" style="display:none;"><div class="row"><div class="form-group col-md-3">
-		<%= week_form.text_field :id, class: 'form-control', disabled: true %>
-		</div></div>
+		<div class="container-fluid admin-only" style="display:none;">
+		<div class="row">
+		<div class="form-group col-md-3">
+			<%= week_form.text_field :id, class: 'form-control', disabled: true %>
+			<%= week_form.text_field :number, class: 'form-control', disabled: true %>
+		</div>
+		</div>
 		</div>
 
-		<%= week_form.hidden_field :id %>
-		<%= week_form.hidden_field :number %>
+	<%= week_form.hidden_field :id %>
+	<%= week_form.hidden_field :number %>
 
-		<!-- Week range -->
-		<div class="container-fluid">
-			<div class="row">
-				<div class="form-group col-md-6">
-					<div class="input-group">
-						<span class="input-group-addon"><%= t 'helpers.from' %></span>
-						<div class="date" data-behaviour='datepicker' >
-							<span></span><%= week_form.text_field :start_date, format: :competence_i, :class => 'form-control' %><span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-						</div>
-						<span class="input-group-addon" style="border-left: 0; border-right: 0;"><%= t 'helpers.to' %></span>
-						<div class="date" data-behaviour='datepicker'>
-							<span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-							<%= week_form.text_field :end_date, format: :competence_i, :class => 'form-control' %>
-						</div>
+	<!-- Week range -->
+	<div class="container-fluid" <%= 'style=display:none' if week.number >= totals_week_number %>>
+		<div class="row">
+			<div class="form-group col-md-6">
+				<div class="input-group">
+					<span class="input-group-addon"><%= t 'helpers.from' %></span>
+					<div class="date" data-behaviour='datepicker' >
+						<span></span><%= week_form.text_field :start_date, value: Date.today, format: :competence_i, :class => 'form-control' %><span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+					</div>
+					<span class="input-group-addon" style="border-left: 0; border-right: 0;"><%= t 'helpers.to' %></span>
+					<div class="date" data-behaviour='datepicker'>
+						<span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+						<%= week_form.text_field :end_date, value: Date.today, format: :competence_i, :class => 'form-control' %>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<div class="container-fluid">
+	<div class="container-fluid">
 
-			<!-- Main data -->
-			<div class="row">
-				<div class="col-xs-12 col-md-7">
-					<%= render partial: "service_data/form", locals: {week: week, index: i, week_form: week_form}%>
-				</div>
-				<div class="col-xs-12 col-md-5">
-					<%= render partial: "product_data/form", locals: {week: week, index: i, week_form: week_form}%>
-				</div>
+		<!-- Main data -->
+		<div class="row">
+			<div class="col-xs-12 col-md-7">
+				<%= render partial: "service_data/form", locals: {week: week, index: index, week_form: week_form}%>
 			</div>
+			<div class="col-xs-12 col-md-5">
+				<%= render partial: "product_data/form", locals: {week: week, index: index, week_form: week_form}%>
+			</div>
+		</div>
 
-			<br/>
+		<br/>
 
-			<!-- Weeks tab's footer -->
-			<% if @model.persisted? %>
-			<div class="row">
-				<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.week_footer') %></div></div>
-				
+		<% if index < totals_week_number %>
+		<!-- Weeks tab's footer -->
+		<% if @model.persisted? %>
+		<div class="row">
+			<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.week_footer') %></div></div>
 
-				<div class="form-group">
-					<%= link_to t('helpers.action.email.save_and_send'), 'javascript:void(0)', id: 'update_and_send_btn_' + i.to_s, :class => "btn btn-primary resend_btn" %>
-				</div>
+
+			<div class="form-group">
+				<%= link_to t('helpers.action.email.save_and_send'), 'javascript:void(0)', id: 'update_and_send_btn_' + index.to_s, :class => "btn btn-primary resend_btn" %>
+			</div>
 			<% end %>
-			</div>
+		
+		<% elsif week.number == final_week_number %>
 
-			<% end %>
+		<div class="form-group"><%= link_to t('helpers.action.product_and_service.update_final_data'), 'javascript:void(0)', id: 'update_final_data_btn', class: "btn btn-primary" %></div>
+
+		<!-- Tab's footer -->
+		<% if @model.persisted? %>
+		<div class="row">
+
+			<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.final_footer') %></div>
 		</div>
-	</div>
-	<% end %>
 
-	<!-- Totals tab -->
-	<%= fields_for :totals_week do |total_form| %>
-	<div id="prod_serv_data_tab_5">
-		<div class="tab_body">
-
-			<div class="container-fluid">
-
-				<!-- Main data -->
-				<div class="row">
-					<div class="col-xs-12 col-md-7">
-						<%= render partial: "service_data/form", locals: {week: ProductAndServiceWeek.new, index: 5, week_form: total_form}%>
-					</div>
-					<div class="col-xs-12 col-md-5">
-						<%= render partial: "product_data/form", locals: {week: ProductAndServiceWeek.new, index: 5, week_form: total_form}%>
-					</div>
-				</div>
-
-				<br/>
-				<br/>
-
-			</div>
+		<div class="form-group">
+			
+			<%= link_to t('helpers.action.email.send'), 'javascript:void(0)', id: 'update_and_send_btn_6', :class => "btn btn-primary send_btn" %>
 		</div>
+		<% end # if persisted %>
+		<% end # if common week %>
 	</div>
-	<% end %>
+</div></div>
+<% end # fields_for %>
+<% end # week loop %>
 
-	<!-- Final data tab -->
-	<%= fields_for :final_data_week do |total_form| %>
-	<div id="prod_serv_data_tab_6">
-		<div class="tab_body">
+<%= render partial: "shared/form_buttons", locals: {model: @model, f: f} -%>
 
-			<div class="container-fluid">
+<% end %>
 
-				<!-- Main data -->
-				<div class="row">
-					<div class="col-xs-12 col-md-7">
-						<%= render partial: "service_data/form", locals: {week: ProductAndServiceWeek.new, index: 6, week_form: total_form}%>
-					</div>
-					<div class="col-xs-12 col-md-5">
-						<%= render partial: "product_data/form", locals: {week: ProductAndServiceWeek.new, index: 6, week_form: total_form}%>
-					</div>
-				</div>
+<%= form_for ProductAndServiceWeek.new, url: update_and_send_product_and_service_weeks_path, html: {id: 'hidden_week_form', style: "display:none;"}, authenticity_token: true do |hidden_f| %>
 
-				<br/>
+<div class="row">
+	<%= hidden_f.text_field :id, class: "form-control" %>
+	<%= hidden_f.text_field :start_date, value: Date.today, class: "form-control" %>
+	<%= hidden_f.text_field :end_date, value: Date.today, class: "form-control" %>
 
-				<!-- Tab's footer -->
-				<% if @model.persisted? %>
-				<div class="row">
+	<input type="hidden" name="product_and_service_week[service_data_attributes][0][id]" id="product_and_service_week_service_data_attributes_0_id">
 
-					<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.final_footer') %></div>
-				</div>
+	<input type="hidden" name="product_and_service_week[service_data_attributes][1][id]" id="product_and_service_week_service_data_attributes_1_id">
 
-				<div class="form-group">
-					<%= link_to t('helpers.action.email.send'), 'javascript:void(0)', :id => 'update_and_send_btn_6', :class => "btn btn-primary resend_btn" %>
-				</div>
-				<% end %>
+	<input type="hidden" value="0" name="product_and_service_week[service_data_attributes][0][service_type]" id="product_and_service_week_service_data_attributes_1_service_type">
 
-			</div>
-		</div>
-	</div>
-	<% end %>
+	<input type="hidden" value="1" name="product_and_service_week[service_data_attributes][1][service_type]" id="product_and_service_week_service_data_attributes_1_service_type">
+</div>
 
 
-	<%= render partial: "shared/form_buttons", locals: {model: @model, f: f} -%>
+<%= render partial: "service_data/form", locals: {week: ProductAndServiceWeek.new, index: -1, week_form: hidden_f}%>
+<%= render partial: "product_data/form", locals: {week: ProductAndServiceWeek.new, index: -1, week_form: hidden_f}%>
+<% end %>
 
-	<% end %>
+<%= render partial: "shared/form_commons", locals: {model: @model} %>
+<%= render partial: "shared/tab_commons", locals: {tab_type: 'prod_serv_data', number_of_tabs: 7} %>
 
+<script>
 
-	<%= form_for ProductAndServiceWeek.new, url: update_and_send_product_and_service_weeks_path, html: {id: 'hidden_week_form', style: "display:none;"}, authenticity_token: true do |f| %>
+	function preprocess_data() {}
 
-	<div class="row">
-		<%= f.text_field :id, :class => "form-control" %>
-		<%= f.text_field :start_date, :class => "form-control" %>
-		<%= f.text_field :end_date, :class => "form-control" %>
+	function sum_services_for_each_tab() {
 
-		<input type="hidden" name="product_and_service_week[service_data_attributes][0][id]" id="product_and_service_week_service_data_attributes_0_id">
+		for (var i = 0; i <= <%= final_week_number %>; i++) {
+			sum_services_from_tab(i);
+		}
 
-		<input type="hidden" name="product_and_service_week[service_data_attributes][1][id]" id="product_and_service_week_service_data_attributes_1_id">
+		sums_to_tab(<%= totals_week_number-1 %>);
 
-		<input type="hidden" name="product_and_service_week[product_data_attributes][id]" id="product_and_service_week_product_data_attributes_id">
+	}
 
+	function sum_products_for_each_tab() {
 
-		<input type="hidden" value="0" name="product_and_service_week[service_data_attributes][0][service_type]" id="product_and_service_week_service_data_attributes_1_service_type">
+		for (var i = 0; i <= <%= final_week_number %>; i++) {
+			sum_products_from_tab(i);			
+		}
 
-		<input type="hidden" value="1" name="product_and_service_week[service_data_attributes][1][service_type]" id="product_and_service_week_service_data_attributes_1_service_type">
-	</div>
+		sums_to_tab(<%= totals_week_number-1 %>);
+	}
 
+	function sum_products_from_tab(i) {
 
-		<%= render partial: "service_data/form", locals: {week: ProductAndServiceWeek.new, index: -1, week_form: f}%>
-		<%= render partial: "product_data/form", locals: {week: ProductAndServiceWeek.new, index: -1, week_form: f}%>
-	<% end %>
+		sum = 0;
 
-	<%= render partial: "shared/form_commons", locals: {model: @model} %>
-	<%= render partial: "shared/tab_commons", locals: {tab_type: 'prod_serv_data', number_of_tabs: 7} %>
+		$('.product_week_' + i).each(function(i, obj) {
+			if(!isNaN($(this).val()))
+				sum = +sum + +$(this).val();
+		});
 
-	<script>
+		$('#total_product_week_' + i).val(sum);
+	}
 
-		function preprocess_data() {}
+	function sum_services_from_tab(i) {
 
-		function sum_services_for_each_tab() {
+		total_checkups = 0;
+		total_returns = 0;
 
-			for (var i = 0; i <= 6; i++) {
-				sum_services_from_tab(i);
+		$('.service-' + i + '-row').each(function(i, obj) {
+			checkups = $(this).find('.service_checkup').val();
+			returns = $(this).find('.service_return').val();
+			total = $(this).find('.service_total');
+
+			if(isNaN(checkups)) {
+				checkups = 0;
 			}
 
-			load_extra_tabs();
-
-		}
-
-		function sum_products_for_each_tab() {
-
-			for (var i = 0; i <= 6; i++) {
-				sum_products_from_tab(i);			
+			if(isNaN(returns)) {
+				returns = 0;
 			}
 
-			load_extra_tabs();
-		}
+			total_checkups += +checkups;
+			total_returns += +returns;
 
-		function sum_products_from_tab(i) {
+			total.val(+checkups + +returns);
+		});
 
-			sum = 0;
+		$('#total_service_checkup_week_' + i).val(total_checkups);
+		$('#total_service_return_week_' + i).val(total_returns);
+		$('#total_service_week_' + i).val(+total_checkups + +total_returns);
+	}
 
-			$('.product_week_' + i).each(function(i, obj) {
-				if(!isNaN($(this).val()))
-					sum = +sum + +$(this).val();
-			});
-
-			$('#total_product_week_' + i).val(sum);
-		}
-
-		function sum_services_from_tab(i) {
-
-			total_checkups = 0;
-			total_returns = 0;
-
-			$('.service-' + i + '-row').each(function(i, obj) {
-				checkups = $(this).find('.service_checkup').val();
-				returns = $(this).find('.service_return').val();
-				total = $(this).find('.service_total');
-
-				if(isNaN(checkups)) {
-					checkups = 0;
-				}
-
-				if(isNaN(returns)) {
-					returns = 0;
-				}
-
-				total_checkups += +checkups;
-				total_returns += +returns;
-
-				total.val(+checkups + +returns);
-			});
-
-			$('#total_service_checkup_week_' + i).val(total_checkups);
-			$('#total_service_return_week_' + i).val(total_returns);
-			$('#total_service_week_' + i).val(+total_checkups + +total_returns);
-		}
-
-		function load_extra_tabs() {
+	function sums_to_tab(index) {
 
 		// Services;
 		for (var col = 0; col < 2; col++) {
@@ -279,7 +238,7 @@
 					}
 				});
 
-				$('.service_row_' + row + '_col_' + col + '_totals_tab').val(sum);
+				$('.service_row_' + row + '_col_' + col + '.week_' + index).val(sum);
 			}
 		};
 
@@ -295,15 +254,12 @@
 				}
 			});
 
-			$('.product_row_' + row + '_totals_tab').val(sum);
+			$('.product_row_' + row + '.week_' + index).val(sum);
 
 		};
 
-		sum_products_from_tab(<%= totals_tab_index %>);
-		sum_services_from_tab(<%= totals_tab_index %>);
-		sum_products_from_tab(<%= totals_tab_index+1 %>);
-		sum_services_from_tab(<%= totals_tab_index+1 %>);
-		
+		sum_products_from_tab(index);
+		sum_services_from_tab(index);		
 	}
 
 	$(function() {
@@ -315,10 +271,10 @@
 		sum_services_for_each_tab();
 		sum_products_for_each_tab();
 
-		$('.service_input:not(.extra_tab)').on('blur', sum_services_for_each_tab);
-		$('.product_input:not(.extra_tab)').on('blur', sum_products_for_each_tab);
+		$('.service_input').on('blur', sum_services_for_each_tab);
+		$('.product_input').on('blur', sum_products_for_each_tab);
 
-		$('.attendance_week_<%= totals_tab_index %>, .return_week_<%= totals_tab_index %>, .product_week_<%= totals_tab_index %>').attr('readonly', true);
+		$('#update_final_data_btn').on('click', sums_to_tab.bind(self, <%= totals_week_number %>));
 
 		for (var i = 0; i < <%= @model.weeks.length+2 %>; i++) {
 			$('#update_and_send_btn_' + i).on('click', copy_to_hidden_form_and_send.bind(self, i));
@@ -329,47 +285,48 @@
 		$('#product_and_service_datum_competence').val(to_rails_date('01/' + $('#aux_competence').val()));
 	})
 
-	function copy_to_hidden_form_and_send(source_week_id) {
+	function copy_to_hidden_form_and_send(week_number) {
 
 		<% ProductData.products.each do |name| %>
-			$('#product_and_service_week_product_data_attributes_<%= name %>').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + source_week_id + '_product_data_attributes_<%= name %>').val());
+		$('#product_and_service_week_product_data_attributes_<%= name %>').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + week_number + '_product_data_attributes_<%= name %>').val());
 		<% end %>
 
 		<% ServiceData.services.each do |name| %>
-			$('#product_and_service_week_service_data_attributes_0_<%= name %>').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + source_week_id + '_service_data_attributes_0_<%= name %>').val());
+		$('#product_and_service_week_service_data_attributes_0_<%= name %>').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + week_number + '_service_data_attributes_0_<%= name %>').val());
 
-			$('#product_and_service_week_service_data_attributes_1_<%= name %>').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + source_week_id + '_service_data_attributes_1_<%= name %>').val());
+		$('#product_and_service_week_service_data_attributes_1_<%= name %>').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + week_number + '_service_data_attributes_1_<%= name %>').val());
 		<% end %>
 
+
+		// Week ID;
+		$('#product_and_service_week_id').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + week_number + '_id').val());
+
+		// Services and product IDs;
+		$('#product_and_service_week_service_data_attributes_0_id').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + week_number + '_service_data_attributes_0_id').val());
+
+		$('#product_and_service_week_service_data_attributes_1_id').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + week_number + '_service_data_attributes_1_id').val());
+
+		$('#product_and_service_week_product_data_attributes_id').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + week_number + '_product_data_attributes_id').val());
+
+
+		// Service types;
+		$('#product_and_service_week_service_data_0_service_type').val(0);
+
+		$('#product_and_service_week_service_data_1_service_type').val(1);
+
 		// The final data will be sent to the the institute's clients. Else, the partial data will be sent to the collaborators;
-		if(source_week_id == <%= totals_tab_index+1 %>) {
-			$('#hidden_week_form').attr('action', '/product_and_service_data/update_and_send');
+		if(week_number == <%= final_week_number %>) {
+
+			$('#hidden_week_form').attr('action', '/product_and_service_weeks/send_clients');
 		} else {
-			
-			// Week ID;
-			$('#product_and_service_week_id').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + source_week_id + '_id').val());
-
-			// Services and product IDs;
-			$('#product_and_service_week_service_data_attributes_0_id').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + source_week_id + '_service_data_attributes_0_id').val());
-
-			$('#product_and_service_week_service_data_attributes_1_id').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + source_week_id + '_service_data_attributes_1_id').val());
-
-			$('#product_and_service_week_product_data_attributes_id').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + source_week_id + '_product_data_attributes_id').val());
 
 			// Dates;
-			$('#product_and_service_week_start_date').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + source_week_id + '_start_date').val());
+			$('#product_and_service_week_start_date').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + week_number + '_start_date').val());
 
-			$('#product_and_service_week_end_date').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + source_week_id + '_end_date').val());
-
-			// Service types;
-			$('#product_and_service_week_service_data_0_service_type').val(0);
-
-			$('#product_and_service_week_service_data_1_service_type').val(1);
-
-			
+			$('#product_and_service_week_end_date').val($('#product_and_service_datum_product_and_service_weeks_attributes_' + week_number + '_end_date').val());
 		}
 
-		display_info("Enviando e-mail...");
+		display_info("<%= t 'alert.email.sending' %>");
 
 		$("#hidden_week_form").submit();
 

@@ -4,29 +4,6 @@ class ProductAndServiceDataController < ApplicationController
   arguable model_class: ProductAndServiceDatum
   load_and_authorize_resource
 
-  def update_and_send
-
-    byebug
-
-    @week = ProductAndServiceWeek.new(params[:product_and_service_week])
-    @model = @week.product_and_service_datum
-    @breadcrumbs = @model.breadcrumb_path.merge Hash[t('helpers.action.edit') => ""]
-    @breadcrumbs = @breadcrumbs.merge @model.breadcrumb_suffix unless @model.breadcrumb_suffix.nil?
-
-    begin
-
-        IaqMailer.send_monthly_prod_and_serv_email(@week, current_user).deliver_now
-        #@model.on_analysis!
-
-    rescue => exc
-       @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
-       return render '_form'
-    end
-
-    redirect_to send(@model.model_name.route_key + "_path"), notice: genderize_tag(@model, 'sent')
-
-  end
-
   private ###########################################################################################
 
   def product_and_service_datum_params

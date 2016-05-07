@@ -237,6 +237,7 @@ pt-BR:
       one: 'Sua consulta retornou 1 registro.'
       other: 'Sua consulta retornou %{count} registros.'
     email:
+      sending: Enviando e-mail...
       sending_test: Enviando e-mail de teste...
       resending: Reenviando e-mail...
       error_sending_test: 'Ocorreu um erro ao enviar um e-mail de teste. Por favor, entre em contato com o administrador informando o horário do ocorrido.'
@@ -336,7 +337,8 @@ pt-BR:
           p: Novas
       edit: Editar
       show: Visualizar
-      update: Salvar
+      save: Salvar
+      update: Atualizar
       update_and_new:
         m:
           s: Salvar e cadastrar novo
@@ -362,6 +364,8 @@ pt-BR:
         send_test: Enviar teste
         view_receipt: Visualizar recibo
         config: Configurações
+      product_and_service:
+        update_final_data: Copiar de "Total"
       login: Login
       sign_up: Registrar-se
       logout: Sair

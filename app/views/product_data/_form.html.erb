@@ -1,3 +1,6 @@
+<% totals_week_number = 6 %>
+<% final_week_number = 7 %>
+
 <fieldset>
 
 	<legend><%= t 'activerecord.models.product_datum.other' %></legend>
@@ -13,7 +16,7 @@
 		<%= week_form.fields_for :product_data do |product_form| %>
 
 		<div class="container-fluid admin-only" style="display:none;"><div class="row"><div class="form-group col-md-6">
-		<%= product_form.text_field :id, class: 'form-control', disabled: true %>
+		<%= product_form.text_field :id, class: 'form-control' %>
 		</div></div>
 		</div>
 
@@ -29,7 +32,7 @@
 			<td class="col-xs-1 col-md-1 nopadding form-group">
 			</td>
 			<td>
-				<%= product_form.text_field name, class: 'form-control product_input numbers_only product_row_' + product_row.to_s + ' input-sm product_week_' + index.to_s + (index >= 5 ? ' extra_tab product_row_' + product_row.to_s + '_totals_tab temp_field' : ''), disabled: index >= 5 %>
+				<%= product_form.text_field name, class: 'form-control product_input numbers_only product_row_' + product_row.to_s + ' product_week_' + index.to_s + ' input-sm week_' + index.to_s + (index >= totals_week_number ? ' extra_tab temp_field' : ''), readonly: index == totals_week_number-1 %>
 			</td>
 		</tr>
 

@@ -45,17 +45,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :product_and_service_data, except: [:destroy] do
-
-    collection do
-      post 'update_and_send'
-    end
-  end
+  resources :product_and_service_data, except: [:destroy] 
   
   resources :product_and_service_weeks do
 
     collection do
       post 'update_and_send'
+      post 'send_clients'
     end
   end
 
