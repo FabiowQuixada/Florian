@@ -68,17 +68,21 @@
 	<div class="container-fluid" <%= 'style=display:none' if week.number >= totals_week_number %>>
 		<div class="row">
 			<div class="form-group col-md-6">
+			<% if @model.finalized? %>
+				<%= f.text_field_tag 'a', t('helpers.from') + ' ' +  week.start_date.to_s + ' ' + t('helpers.to') + ' ' + week.end_date.to_s, class: 'form-control', readonly: true %>
+			<% else %>
 				<div class="input-group">
 					<span class="input-group-addon"><%= t 'helpers.from' %></span>
 					<div class="date" data-behaviour='datepicker' >
-						<span></span><%= week_form.text_field :start_date, value: Date.today, format: :competence_i, :class => 'form-control' %><span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+						<span></span><%= week_form.text_field :start_date, value: Date.today, format: :competence_i, :class => 'form-control', readonly: @model.finalized? %><span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 					</div>
 					<span class="input-group-addon" style="border-left: 0; border-right: 0;"><%= t 'helpers.to' %></span>
 					<div class="date" data-behaviour='datepicker'>
 						<span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-						<%= week_form.text_field :end_date, value: Date.today, format: :competence_i, :class => 'form-control' %>
+						<%= week_form.text_field :end_date, value: Date.today, format: :competence_i, :class => 'form-control', readonly: @model.finalized? %>
 					</div>
 				</div>
+				<% end %>
 			</div>
 		</div>
 	</div>
@@ -99,7 +103,7 @@
 
 		<% if index < totals_week_number %>
 		<!-- Weeks tab's footer -->
-		<% if @model.persisted? %>
+		<% if @model.persisted? and !@model.persisted? %>
 		<div class="row">
 			<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.week_footer') %></div></div>
 
@@ -109,7 +113,7 @@
 			</div>
 			<% end %>
 		
-		<% elsif week.number == final_week_number %>
+		<% elsif week.number == final_week_number and !@model.persisted? %>
 
 		<div class="form-group"><%= link_to t('helpers.action.product_and_service.update_final_data'), 'javascript:void(0)', id: 'update_final_data_btn', class: "btn btn-primary" %></div>
 
@@ -315,7 +319,7 @@
 		$('#product_and_service_week_service_data_1_service_type').val(1);
 
 		// The final data will be sent to the the institute's clients. Else, the partial data will be sent to the collaborators;
-		if(week_number == <%= final_week_number %>) {
+		if(week_number == <%= final_week_number-1 %>) {
 
 			$('#hidden_week_form').attr('action', '/product_and_service_weeks/send_clients');
 		} else {

@@ -16,7 +16,6 @@ class ProductAndServiceWeeksController < ApplicationController
       begin
 
        IaqMailer.send_weekly_prod_and_serv_email(@week, current_user).deliver_now
-       #@model.finalized!
 
      rescue => exc
        @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
@@ -25,17 +24,16 @@ class ProductAndServiceWeeksController < ApplicationController
    else
     @week.errors.messages.map { |key, value| @model.errors[key] << @week.errors.messages[key].first }
     return render 'product_and_service_data/_form'
+    end
+
+    redirect_to send(@model.model_name.route_key + "_path"), notice: genderize_tag(@model, 'sent')
   end
-
-  redirect_to send(@model.model_name.route_key + "_path"), notice: genderize_tag(@model, 'sent')
-
-end
 
   def send_clients
 
-    #byebug
+    byebug
 
-    @week = ProductAndServiceWeek.find params[:id]
+    @week = ProductAndServiceWeek.find params[:product_and_service_week][:id]
     @model = @week.product_and_service_datum
     @breadcrumbs = @model.breadcrumb_path.merge Hash[t('helpers.action.edit') => ""]
     @breadcrumbs = @breadcrumbs.merge @model.breadcrumb_suffix unless @model.breadcrumb_suffix.nil?
@@ -43,7 +41,8 @@ end
     begin
       if @week.update product_and_service_week_params
         IaqMailer.send_monthly_prod_and_serv_email(@week, current_user).deliver_now
-        #@model.on_analysis!
+        @model.finalized!
+        @model.save
       else
         @week.errors.messages.map { |key, value| @model.errors[key] << @week.errors.messages[key].first }
         return render 'product_and_service_data/_form'
@@ -51,7 +50,7 @@ end
 
     rescue => exc
        @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
-       return render '_form'
+       return render 'product_and_service_data/_form'
     end
 
     redirect_to send(@model.model_name.route_key + "_path"), notice: genderize_tag(@model, 'sent')

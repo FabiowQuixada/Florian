@@ -3,19 +3,20 @@ class ProductAndServiceReport < IaqReport
   def initialize(path = nil, week)
       @path = path
       @week = week
-      @weekly_report = true
   end
 
   def pdf
     Prawn::Document.new(PDF_OPTIONS) do |pdf|
 
-      if @weekly_report
+      if @week.number != 7
+        title = I18n.t('report.title.weekly_prod_and_service')
         subtitle = (@week.start_date.to_s + ' - ' + @week.end_date.to_s)
       else
-        subtitle = @week.competence
+        title = I18n.t('report.title.monthly_prod_and_service')
+        subtitle = I18n.localize(@week.product_and_service_datum.competence, format: :competence).capitalize
       end
 
-      header pdf, I18n.t('report.title.weekly_prod_and_service'), subtitle
+      header pdf, title, subtitle
 
       print_session_title pdf, I18n.t('helpers.prod_and_serv_datum.attendances')
 

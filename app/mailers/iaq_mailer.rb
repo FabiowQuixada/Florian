@@ -22,7 +22,7 @@ class IaqMailer < ApplicationMailer
         subject: user.system_setting.pse_processed_title(week.product_and_service_datum.competence))
   end
 
-  def send_monthly_prod_and_serv_email(week, date, user)
+  def send_monthly_prod_and_serv_email(week, user)
 
       ProductAndServiceReport.new("/tmp/prod_serv.pdf", week).save
       attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
