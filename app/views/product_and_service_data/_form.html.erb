@@ -167,7 +167,10 @@
 
 		<script>
 
-			function preprocess_data() {}
+			$('#main_form').submit(function() {
+				$("#aux_competence").prop("disabled", true);
+				$('#product_and_service_datum_competence').val('01/' + $('#aux_competence').val());
+			});
 
 			function sum_services_for_each_tab() {
 
@@ -268,6 +271,8 @@
 	}
 
 	$(function() {
+
+		$("#aux_competence").prop("disabled", false);
 
 		$('.service_input, .product_input').mask('999');
 

@@ -1,5 +1,5 @@
-Estado de analise;
-Quando ta em dias diferentes, deixa salvar com a mesma competencia;
+Soma total: alterar o mesmo campo 2x;
+Validacao Semanas;
 
 Auditoria de produtos e servicos: submodelos;
 Testes de mailing;
@@ -7,6 +7,7 @@ eliminacao do index_table;
 E-mail assincrono: Resque;
 Eliminar historico git;
 Nao deixar urls como http://localhost:3000/product_and_service_weeks/update_and_send
+A paina cai se ficar parada por um tempo;
 
 Delecao: admin, valdiacao no serv, fializacao no cliente;
 

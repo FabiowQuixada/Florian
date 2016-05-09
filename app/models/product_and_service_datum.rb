@@ -15,6 +15,7 @@ class ProductAndServiceDatum < ActiveRecord::Base
   # Validations
   validates :status, :competence, :presence => true
   validates :competence, uniqueness: true
+  validate :validate_model
   
 
   # Methods
@@ -27,7 +28,6 @@ class ProductAndServiceDatum < ActiveRecord::Base
 
     self.competence ||= Date.today
   end
-
 
   def can_edit?
     !finalized?
@@ -59,6 +59,12 @@ class ProductAndServiceDatum < ActiveRecord::Base
 
   def final_week
     weeks.last
+  end
+
+  private
+
+  def validate_model
+    self.competence = self.competence.change(:day => 1)
   end
 
 end
