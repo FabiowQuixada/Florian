@@ -37,6 +37,9 @@ class ProductAndServiceWeek < ActiveRecord::Base
   end
 
   def validate_model
+
+    errors.add(:start_date, 'Período inválido - Semana ' + number.to_s + ';') if self.end_date < self.start_date
+
     errors.add(:attendance_data, 'Todos os atendimentos são obrigatórios - Semana ' + number.to_s + ';') if self.service_data[0].validate_model
     errors.add(:return_data, 'Todos os retornos são obrigatórios - Semana ' + number.to_s + ';') if self.service_data[1].validate_model
     errors.add(:product_data, 'Todos os produtos são obrigatórios;') if self.product_data.validate_model
