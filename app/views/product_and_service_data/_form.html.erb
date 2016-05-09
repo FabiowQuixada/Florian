@@ -53,181 +53,182 @@
 	<div class="tab_body">
 
 		<div class="container-fluid admin-only" style="display:none;">
-		<div class="row">
-		<div class="form-group col-md-3">
-			<%= week_form.text_field :id, class: 'form-control', disabled: true %>
-			<%= week_form.text_field :number, class: 'form-control', disabled: true %>
-		</div>
-		</div>
+			<div class="row">
+				<div class="form-group col-md-3">
+					<%= week_form.text_field :id, class: 'form-control', disabled: true %>
+					<%= week_form.text_field :number, class: 'form-control', disabled: true %>
+				</div>
+			</div>
 		</div>
 
-	<%= week_form.hidden_field :id %>
-	<%= week_form.hidden_field :number %>
+		<%= week_form.hidden_field :id %>
+		<%= week_form.hidden_field :number %>
 
-	<!-- Week range -->
-	<div class="container-fluid" <%= 'style=display:none' if week.number >= totals_week_number %>>
-		<div class="row">
-			<div class="form-group col-md-6">
-			<% if @model.finalized? %>
-				<%= f.text_field_tag 'a', t('helpers.from') + ' ' +  week.start_date.to_s + ' ' + t('helpers.to') + ' ' + week.end_date.to_s, class: 'form-control', readonly: true %>
-			<% else %>
-				<div class="input-group">
-					<span class="input-group-addon"><%= t 'helpers.from' %></span>
-					<div class="date" data-behaviour='datepicker' >
-						<span></span><%= week_form.text_field :start_date, value: Date.today, format: :competence_i, :class => 'form-control', readonly: @model.finalized? %><span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+		<!-- Week range -->
+		<div class="container-fluid" <%= 'style=display:none' if week.number >= totals_week_number %>>
+			<div class="row">
+				<div class="form-group col-md-6">
+					<% if week_range_readonly?(week) %>
+					<%= f.text_field_tag 'week_range', t('helpers.from') + ' ' +  week.start_date.to_s + ' ' + t('helpers.to') + ' ' + week.end_date.to_s, class: 'form-control', readonly: true %>
+					<% else %>
+					<div class="input-group">
+						<span class="input-group-addon"><%= t 'helpers.from' %></span>
+						<div class="date" data-behaviour='datepicker' >
+							<span></span><%= week_form.text_field :start_date, value: Date.today, format: :competence_i, :class => 'form-control', readonly: @model.finalized? %><span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+						</div>
+						<span class="input-group-addon" style="border-left: 0; border-right: 0;"><%= t 'helpers.to' %></span>
+						<div class="date" data-behaviour='datepicker'>
+							<span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+							<%= week_form.text_field :end_date, value: Date.today, format: :competence_i, :class => 'form-control', readonly: @model.finalized? %>
+						</div>
 					</div>
-					<span class="input-group-addon" style="border-left: 0; border-right: 0;"><%= t 'helpers.to' %></span>
-					<div class="date" data-behaviour='datepicker'>
-						<span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-						<%= week_form.text_field :end_date, value: Date.today, format: :competence_i, :class => 'form-control', readonly: @model.finalized? %>
-					</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+
+		<div class="container-fluid">
+
+			<!-- Main data -->
+			<div class="row">
+				<div class="col-xs-12 col-md-7">
+					<%= render partial: "service_data/form", locals: {week: week, index: index, week_form: week_form}%>
+				</div>
+				<div class="col-xs-12 col-md-5">
+					<%= render partial: "product_data/form", locals: {week: week, index: index, week_form: week_form}%>
+				</div>
+			</div>
+
+			<br/>
+
+			<!-- Weeks tab's footer -->
+			<% if week.number < totals_week_number %>
+			<!-- Weeks -->
+			<% if @model.persisted? and !@model.finalized? and !@model.on_analysis? %>
+			<div class="row">
+				<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.week_footer') %></div></div>
+
+
+				<div class="form-group">
+					<%= link_to t('helpers.action.email.save_and_send'), 'javascript:void(0)', id: 'update_and_send_btn_' + index.to_s, :class => "btn btn-primary resend_btn" %>
 				</div>
 				<% end %>
+				<!-- Totals week -->
+				<% elsif week.number == totals_week_number and !@model.finalized? and !@model.on_analysis? %>
+				<div class="form-group"><%= link_to t('helpers.action.send_to_analysis'), 'javascript:void(0)', id: 'update_and_send_btn_5', :class => "btn btn-primary send_btn" %></div>
+				<!-- Final Week -->
+				<% elsif week.number == final_week_number and !@model.finalized? %>
+
+				<div class="form-group"><%= link_to t('helpers.action.product_and_service.update_final_data'), 'javascript:void(0)', id: 'update_final_data_btn', class: "btn btn-primary" %></div>
+
+				<% if @model.persisted? %>
+				<div class="row">
+
+					<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.final_footer') %></div>
+				</div>
+
+				<div class="form-group">
+
+					<%= link_to t('helpers.action.email.send'), 'javascript:void(0)', id: 'update_and_send_btn_6', :class => "btn btn-primary send_btn" %>
+				</div>
+				<% end # if persisted %>
+				<% end # if common week %>
 			</div>
-		</div>
-	</div>
+		</div></div>
+		<% end # fields_for %>
+		<% end # week loop %>
 
-	<div class="container-fluid">
+		<%= render partial: "shared/form_buttons", locals: {model: @model, f: f} -%>
 
-		<!-- Main data -->
+		<% end %>
+
+		<%= form_for ProductAndServiceWeek.new, url: update_and_send_product_and_service_weeks_path, html: {id: 'hidden_week_form', style: "display:none;"}, authenticity_token: true do |hidden_f| %>
+
 		<div class="row">
-			<div class="col-xs-12 col-md-7">
-				<%= render partial: "service_data/form", locals: {week: week, index: index, week_form: week_form}%>
-			</div>
-			<div class="col-xs-12 col-md-5">
-				<%= render partial: "product_data/form", locals: {week: week, index: index, week_form: week_form}%>
-			</div>
+			<%= hidden_f.text_field :id, class: "form-control" %>
+			<%= hidden_f.text_field :start_date, value: Date.today, class: "form-control" %>
+			<%= hidden_f.text_field :end_date, value: Date.today, class: "form-control" %>
+
+			<input type="hidden" name="product_and_service_week[service_data_attributes][0][id]" id="product_and_service_week_service_data_attributes_0_id">
+
+			<input type="hidden" name="product_and_service_week[service_data_attributes][1][id]" id="product_and_service_week_service_data_attributes_1_id">
+
+			<input type="hidden" value="0" name="product_and_service_week[service_data_attributes][0][service_type]" id="product_and_service_week_service_data_attributes_1_service_type">
+
+			<input type="hidden" value="1" name="product_and_service_week[service_data_attributes][1][service_type]" id="product_and_service_week_service_data_attributes_1_service_type">
 		</div>
 
-		<br/>
+		<%= render partial: "service_data/form", locals: {week: ProductAndServiceWeek.new, index: -1, week_form: hidden_f}%>
+		<%= render partial: "product_data/form", locals: {week: ProductAndServiceWeek.new, index: -1, week_form: hidden_f}%>
+		<% end %>
 
-		<% if index < totals_week_number %>
-		<!-- Weeks tab's footer -->
-		<% if @model.persisted? and !@model.persisted? %>
-		<div class="row">
-			<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.week_footer') %></div></div>
+		<%= render partial: "shared/form_commons", locals: {model: @model} %>
+		<%= render partial: "shared/tab_commons", locals: {tab_type: 'prod_serv_data', number_of_tabs: 7} %>
 
+		<script>
 
-			<div class="form-group">
-				<%= link_to t('helpers.action.email.save_and_send'), 'javascript:void(0)', id: 'update_and_send_btn_' + index.to_s, :class => "btn btn-primary resend_btn" %>
-			</div>
-			<% end %>
-		
-		<% elsif week.number == final_week_number and !@model.persisted? %>
+			function preprocess_data() {}
 
-		<div class="form-group"><%= link_to t('helpers.action.product_and_service.update_final_data'), 'javascript:void(0)', id: 'update_final_data_btn', class: "btn btn-primary" %></div>
+			function sum_services_for_each_tab() {
 
-		<!-- Tab's footer -->
-		<% if @model.persisted? %>
-		<div class="row">
+				for (var i = 0; i <= <%= final_week_number %>; i++) {
+					sum_services_from_tab(i);
+				}
 
-			<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.final_footer') %></div>
-		</div>
-
-		<div class="form-group">
-			
-			<%= link_to t('helpers.action.email.send'), 'javascript:void(0)', id: 'update_and_send_btn_6', :class => "btn btn-primary send_btn" %>
-		</div>
-		<% end # if persisted %>
-		<% end # if common week %>
-	</div>
-</div></div>
-<% end # fields_for %>
-<% end # week loop %>
-
-<%= render partial: "shared/form_buttons", locals: {model: @model, f: f} -%>
-
-<% end %>
-
-<%= form_for ProductAndServiceWeek.new, url: update_and_send_product_and_service_weeks_path, html: {id: 'hidden_week_form', style: "display:none;"}, authenticity_token: true do |hidden_f| %>
-
-<div class="row">
-	<%= hidden_f.text_field :id, class: "form-control" %>
-	<%= hidden_f.text_field :start_date, value: Date.today, class: "form-control" %>
-	<%= hidden_f.text_field :end_date, value: Date.today, class: "form-control" %>
-
-	<input type="hidden" name="product_and_service_week[service_data_attributes][0][id]" id="product_and_service_week_service_data_attributes_0_id">
-
-	<input type="hidden" name="product_and_service_week[service_data_attributes][1][id]" id="product_and_service_week_service_data_attributes_1_id">
-
-	<input type="hidden" value="0" name="product_and_service_week[service_data_attributes][0][service_type]" id="product_and_service_week_service_data_attributes_1_service_type">
-
-	<input type="hidden" value="1" name="product_and_service_week[service_data_attributes][1][service_type]" id="product_and_service_week_service_data_attributes_1_service_type">
-</div>
-
-
-<%= render partial: "service_data/form", locals: {week: ProductAndServiceWeek.new, index: -1, week_form: hidden_f}%>
-<%= render partial: "product_data/form", locals: {week: ProductAndServiceWeek.new, index: -1, week_form: hidden_f}%>
-<% end %>
-
-<%= render partial: "shared/form_commons", locals: {model: @model} %>
-<%= render partial: "shared/tab_commons", locals: {tab_type: 'prod_serv_data', number_of_tabs: 7} %>
-
-<script>
-
-	function preprocess_data() {}
-
-	function sum_services_for_each_tab() {
-
-		for (var i = 0; i <= <%= final_week_number %>; i++) {
-			sum_services_from_tab(i);
-		}
-
-		sums_to_tab(<%= totals_week_number-1 %>);
-
-	}
-
-	function sum_products_for_each_tab() {
-
-		for (var i = 0; i <= <%= final_week_number %>; i++) {
-			sum_products_from_tab(i);			
-		}
-
-		sums_to_tab(<%= totals_week_number-1 %>);
-	}
-
-	function sum_products_from_tab(i) {
-
-		sum = 0;
-
-		$('.product_week_' + i).each(function(i, obj) {
-			if(!isNaN($(this).val()))
-				sum = +sum + +$(this).val();
-		});
-
-		$('#total_product_week_' + i).val(sum);
-	}
-
-	function sum_services_from_tab(i) {
-
-		total_checkups = 0;
-		total_returns = 0;
-
-		$('.service-' + i + '-row').each(function(i, obj) {
-			checkups = $(this).find('.service_checkup').val();
-			returns = $(this).find('.service_return').val();
-			total = $(this).find('.service_total');
-
-			if(isNaN(checkups)) {
-				checkups = 0;
+				sums_to_tab(<%= totals_week_number-1 %>);
 			}
 
-			if(isNaN(returns)) {
-				returns = 0;
+			function sum_products_for_each_tab() {
+
+				for (var i = 0; i <= <%= final_week_number %>; i++) {
+					sum_products_from_tab(i);			
+				}
+
+				sums_to_tab(<%= totals_week_number-1 %>);
 			}
 
-			total_checkups += +checkups;
-			total_returns += +returns;
+			function sum_products_from_tab(i) {
 
-			total.val(+checkups + +returns);
-		});
+				sum = 0;
 
-		$('#total_service_checkup_week_' + i).val(total_checkups);
-		$('#total_service_return_week_' + i).val(total_returns);
-		$('#total_service_week_' + i).val(+total_checkups + +total_returns);
-	}
+				$('.product_week_' + i).each(function(i, obj) {
+					if(!isNaN($(this).val()))
+						sum = +sum + +$(this).val();
+				});
 
-	function sums_to_tab(index) {
+				$('#total_product_week_' + i).val(sum);
+			}
+
+			function sum_services_from_tab(i) {
+
+				total_checkups = 0;
+				total_returns = 0;
+
+				$('.service-' + i + '-row').each(function(i, obj) {
+					checkups = $(this).find('.service_checkup').val();
+					returns = $(this).find('.service_return').val();
+					total = $(this).find('.service_total');
+
+					if(isNaN(checkups)) {
+						checkups = 0;
+					}
+
+					if(isNaN(returns)) {
+						returns = 0;
+					}
+
+					total_checkups += +checkups;
+					total_returns += +returns;
+
+					total.val(+checkups + +returns);
+				});
+
+				$('#total_service_checkup_week_' + i).val(total_checkups);
+				$('#total_service_return_week_' + i).val(total_returns);
+				$('#total_service_week_' + i).val(+total_checkups + +total_returns);
+			}
+
+			function sums_to_tab(index) {
 
 		// Services;
 		for (var col = 0; col < 2; col++) {
@@ -322,6 +323,9 @@
 		if(week_number == <%= final_week_number-1 %>) {
 
 			$('#hidden_week_form').attr('action', '/product_and_service_weeks/send_clients');
+		} else if(week_number == <%= totals_week_number-1 %>) {
+
+			$('#hidden_week_form').attr('action', '/product_and_service_weeks/send_to_analysis');
 		} else {
 
 			// Dates;

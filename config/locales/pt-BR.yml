@@ -356,6 +356,7 @@ pt-BR:
       remove: Remover
       activate: Ativar
       deactivate: Inativar
+      send_to_analysis: Enviar para análise
       email:
         add_recipient: +
         private_send: Enviar internamente
