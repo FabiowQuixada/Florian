@@ -25,6 +25,10 @@
 		<%= f.label :status %>
 		<%= f.text_field :status_desc, {:class => 'form-control', :readonly => true} %>
 	</div>
+	<div class="col-md-2 form-group admin-only">
+		<%= f.label :id %>
+		<%= f.text_field :id, {:class => 'form-control', :readonly => true} %>
+	</div>
 	<% end %>
 </div>
 
@@ -52,25 +56,19 @@
 <div id="prod_serv_data_tab_<%= index %>">
 	<div class="tab_body">
 
-		<div class="container-fluid admin-only" style="display:none;">
-			<div class="row">
-				<div class="form-group col-md-3">
-					<%= week_form.text_field :id, class: 'form-control', disabled: true %>
-					<%= week_form.text_field :number, class: 'form-control', disabled: true %>
-				</div>
-			</div>
-		</div>
-
 		<%= week_form.hidden_field :id %>
 		<%= week_form.hidden_field :number %>
 
 		<!-- Week range -->
 		<div class="container-fluid" <%= 'style=display:none' if week.number >= totals_week_number %>>
 			<div class="row">
-				<div class="form-group col-md-6">
+				
 					<% if week_range_readonly?(week) %>
+					<div class="form-group col-md-5">
 					<%= f.text_field_tag 'week_range', t('helpers.from') + ' ' +  week.start_date.to_s + ' ' + t('helpers.to') + ' ' + week.end_date.to_s, class: 'form-control', readonly: true %>
+					</div>
 					<% else %>
+					<div class="form-group col-md-6">
 					<div class="input-group">
 						<span class="input-group-addon"><%= t 'helpers.from' %></span>
 						<div class="date" data-behaviour='datepicker' >
@@ -82,7 +80,13 @@
 							<%= week_form.text_field :end_date, value: Date.today, format: :competence_i, :class => 'form-control', readonly: @model.finalized? %>
 						</div>
 					</div>
+					</div>
 					<% end %>
+
+					<div class="form-group col-md-2 admin-only">
+					<%= week_form.text_field :id, class: 'form-control', disabled: true %>
+					</div><div class="form-group col-md-2 admin-only">
+					<%= week_form.text_field :number, class: 'form-control', disabled: true %>
 				</div>
 			</div>
 		</div>

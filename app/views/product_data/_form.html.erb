@@ -3,7 +3,7 @@
 
 <fieldset>
 
-	<legend><%= t 'activerecord.models.product_datum.other' %></legend>
+	<legend><%= t 'activerecord.models.product_datum.other' %><span class="admin-only"> (<%= week.product_data.id.to_s %>)</span></legend>
 
 	<!-- Product empty header row -->
 	<table class="input-table">
@@ -15,10 +15,7 @@
 
 		<%= week_form.fields_for :product_data do |product_form| %>
 
-		<div class="container-fluid admin-only" style="display:none;"><div class="row"><div class="form-group col-md-6">
-		<%= product_form.text_field :id, class: 'form-control' %>
-		</div></div>
-		</div>
+		<%= product_form.hidden_field :id, class: 'form-control' %>
 
 		<% product_row = 0 %>
 
