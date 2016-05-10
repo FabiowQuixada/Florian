@@ -53,7 +53,7 @@
 <% f.object.product_and_service_weeks.each_with_index do |week, index| %>
 <%= f.fields_for :product_and_service_weeks, week do |week_form| %>
 
-<div id="prod_serv_data_tab_<%= index %>">
+<div id="prod_serv_data_tab_<%= index %>" style="display:none;">
 	<div class="tab_body">
 
 		<%= week_form.hidden_field :id %>
