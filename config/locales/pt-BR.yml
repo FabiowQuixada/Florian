@@ -299,10 +299,10 @@ pt-BR:
     none_registered:
       m:
         s: 'Nenhum %{model} cadastrado.'
-        p: 'Nenhum %{model} cadastrado.'
+        p: 'Não há quaisquer %{model} cadastrados.'
       f:
         s: 'Nenhuma %{model} cadastrada.'
-        p: 'Nenhuma %{model} cadastrada.'
+        p: 'Não há quaisquer %{model} cadastradas.'
     select:
       prompt: Selecione
       all:
@@ -574,6 +574,10 @@ pt-BR:
     system_setting:
       recipients: "Adicione pelo menos um destinatario;"
       private_recipients: "Adicione pelo menos um destinatario privado;"
+    product_and_service_datum:
+      cant_send: "Não é possível enviar estes dados;"
+      cant_send_to_analysis: "Não é possível enviar estes dados para análise;"
+      cant_send_to_clients: "Não é possível enviar estes dados para os clientes;"
     format: "%{message}"
     messages:
       accepted: "O campo '%{attribute}' deve ser aceito;"

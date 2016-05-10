@@ -5,32 +5,41 @@ class ProductAndServiceWeeksController < ApplicationController
   load_and_authorize_resource
 
   def update_and_send
+    begin
 
-    if @week.update product_and_service_week_params
-
-      begin
-
-       IaqMailer.send_weekly_prod_and_serv_email(@week, current_user).deliver_now
-
-      rescue => exc
-        @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
+      if @model.on_analysis? or @model.finalized?
+        @model.errors[:base] << I18n.t('errors.product_and_service_datum.cant_send')
         return render 'product_and_service_data/_form'
       end
-    else
-      @week.errors.messages.map { |key, value| @model.errors[key] << @week.errors.messages[key].first }
+
+      if @week.update product_and_service_week_params
+        IaqMailer.send_weekly_prod_and_serv_email(@week, current_user).deliver_now
+        else
+        @week.errors.messages.map { |key, value| @model.errors[key] << @week.errors.messages[key].first }
+        return render 'product_and_service_data/_form'
+      end
+
+    rescue => exc
+      @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
       return render 'product_and_service_data/_form'
     end
-
+    
     redirect_to send(@model.model_name.route_key + "_path"), notice: genderize_tag(@model, 'sent')
   end
 
   def send_to_analysis
 
     begin
-      if @week.update product_and_service_week_params
-        IaqMailer.send_prod_and_serv_to_analysis(@week, current_user).deliver_now
-        @model.on_analysis!
-        @model.save
+
+      unless @model.created?
+        @model.errors[:base] << I18n.t('errors.product_and_service_datum.cant_send_to_analysis')
+        return render 'product_and_service_data/_form'
+      end
+
+      @model.on_analysis!
+
+      if @week.update product_and_service_week_params and @model.save
+        IaqMailer.send_prod_and_serv_to_analysis(@week, current_user).deliver_now        
       else
         @week.errors.messages.map { |key, value| @model.errors[key] << @week.errors.messages[key].first }
         return render 'product_and_service_data/_form'
@@ -48,10 +57,16 @@ class ProductAndServiceWeeksController < ApplicationController
   def send_clients
 
     begin
-      if @week.update product_and_service_week_params
+
+      unless @model.on_analysis?
+        @model.errors[:base] << I18n.t('errors.product_and_service_datum.cant_send_to_clients')
+        return render 'product_and_service_data/_form'
+      end
+
+      @model.finalized!
+
+      if @week.update product_and_service_week_params and @model.save
         IaqMailer.send_monthly_prod_and_serv_email(@week, current_user).deliver_now
-        @model.finalized!
-        @model.save
       else
         @week.errors.messages.map { |key, value| @model.errors[key] << @week.errors.messages[key].first }
         return render 'product_and_service_data/_form'

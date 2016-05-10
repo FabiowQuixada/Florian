@@ -1,6 +1,5 @@
 Quando cai em alguma validacao, os dados nao sao recarregados;
 Bloqueio de envio final enquanto nao estiver em analise;
-Validacao de estados no servidor;
 
 Auditoria de produtos e servicos: submodelos;
 Testes de mailing;

@@ -29,7 +29,7 @@ class ServiceData < ActiveRecord::Base
 
   def qty
     sum = 0
-    self.class.services.each {|service| sum += self[service]}
+    self.class.services.each {|service| sum += (self[service] ? self[service] : 0)}
     sum
   end
 

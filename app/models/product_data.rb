@@ -29,7 +29,7 @@ class ProductData < ActiveRecord::Base
 
   def qty
     sum = 0
-    self.class.products.each {|product| sum += self[product]}
+    self.class.products.each {|product| sum += (self[product] ? self[product] : 0)}
     sum
   end
 
