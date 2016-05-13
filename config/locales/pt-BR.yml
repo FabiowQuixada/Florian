@@ -322,7 +322,7 @@ pt-BR:
       checkup: Avaliação
       return: Retorno
       week_footer: '* Os dados desta semana serão enviados por e-mail apenas para os colaboradores.'
-      final_footer: '* Estes serão os dados enviados por e-mail para os clientes. Esta aba é preenchida automaticamente de acordo com as informações das semanas, mas você pode alterar estas informações antes de enviá-las aos clientes.'
+      final_footer: 'Estes serão os dados enviados por e-mail para os mantenedores.'
     company:
       new_donation: Nova doação
     action:

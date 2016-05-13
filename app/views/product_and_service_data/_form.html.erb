@@ -46,7 +46,9 @@
 	<% end %>
 
 	<li id="prod_serv_data_tab_5_title" class="clickable"><a><%= t 'helpers.total' %></a></li>
+	<% if @model.on_analysis? or @model.finalized? %>
 	<li id="prod_serv_data_tab_6_title" class="clickable"><a><%= t 'helpers.final_data' %></a></li>
+	<% end %>
 </ul>
 
 <!-- Tabs' body -->
@@ -123,7 +125,10 @@
 				<!-- Final Week -->
 				<% elsif week.number == final_week_number and !@model.finalized? %>
 
-				<div class="form-group"><%= link_to t('helpers.action.product_and_service.update_final_data'), 'javascript:void(0)', id: 'update_final_data_btn', class: "btn btn-primary" %></div>
+				<div class="form-group">
+					<%= link_to t('helpers.action.product_and_service.update_final_data'), 'javascript:void(0)', id: 'update_final_data_btn', class: "btn btn-primary" %>
+					<%= link_to t('helpers.action.email.send'), 'javascript:void(0)', id: 'update_and_send_btn_6', :class => "btn btn-primary send_btn" %>
+						</div>
 
 				<% if @model.persisted? %>
 				<div class="row">
@@ -131,10 +136,6 @@
 					<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.final_footer') %></div>
 				</div>
 
-				<div class="form-group">
-
-					<%= link_to t('helpers.action.email.send'), 'javascript:void(0)', id: 'update_and_send_btn_6', :class => "btn btn-primary send_btn" %>
-				</div>
 				<% end # if persisted %>
 				<% end # if common week %>
 			</div>
