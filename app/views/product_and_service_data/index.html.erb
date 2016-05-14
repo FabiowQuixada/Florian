@@ -6,12 +6,12 @@
 	<thead>
 		<tr>
 			<% I18n.with_options(scope: 'activerecord.attributes.product_and_service_datum') do |i18n| %>
-			<th class="admin-only" style="display: none;"></th>
+			<th class="admin-only id-column" style="display: none;"></th>
 			<th class="sorter-false"><%= i18n.t 'competence' %></th>
 			<th class="sorter-false"><%= i18n.t 'services' %></th>
 			<th class="sorter-false"><%= i18n.t 'products' %></th>
 			<th class="sorter-false"><%= i18n.t 'status' %></th>
-			<th class="sorter-false" style="width: 16px;"></th>
+			<th class="sorter-false icon-column"></th>
 			<th class="admin-only sorter-false" style="display:none;"></th>
 			<% end %>
 		</tr>
@@ -32,7 +32,7 @@
 			<td><%= iterator.product_qty %></td>
 			<td><%= iterator.status_desc %></td>
 			<td class="icon-column"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), send("edit_product_and_service_datum_path", iterator) %></td>
-			<td class="admin-only table_icon" style="display:none;">
+			<td class="admin-only icon-column" style="display:none;">
 					<%= image_tag("destroy.png", title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %>
 					</td>
 		</tr>

@@ -14,27 +14,27 @@
 	<thead>
 		<tr>
 			<% I18n.with_options(scope: 'activerecord.attributes.' + @model.class.name.underscore) do |i18n| %>
-				<th class="admin-only"></th>
+				<th class="admin-only id-column"></th>
 				<th style="display: none;"></th>
 				<% columns.each_with_index do |a, i| %>
 					<th style="<%= columns[i][:style] %>" class="<%= columns[i][:class] %>"><%= i18n.t columns[i][:header] %></th>
 				<% end %>
 				<% if model.updatable %>
-					<th class="sorter-false" style="width: 16px;"></th>
+					<th class="sorter-false icon-column"></th>
 				<% end %>
 				<% if model.visualizable %>
-					<th class="sorter-false" style="width: 16px;"></th>
+					<th class="sorter-false icon-column"></th>
 				<% end %>
 				<% if has_extra_action_buttons %>
 					<% render partial: ActiveModel::Naming.plural(model).to_s + "/index_action_buttons" %>
 					<% for i in 1..@number_of_columns %>
-						<th class="hidden-xs sorter-false" style="width: 16px;"></th>
+						<th class="hidden-xs sorter-false icon-column"></th>
 					<% end %>
 				<% end %>
 				<% if model.class.column_names.include? 'active' %>
-					<th class="hidden-xs sorter-false" style="width: 16px;"></th>
+					<th class="hidden-xs sorter-false icon-column"></th>
 				<% end %>
-				<th class="admin-only sorter-false" style="display:none;"></th>
+				<th class="admin-only sorter-false icon-column" style="display:none;"></th>
 			<% end %>
 		</tr>
 	</thead>
@@ -85,7 +85,7 @@
 							<% end %>
 						</td>
 					<% end %>
-					<td class="admin-only table_icon" style="display:none;">
+					<td class="admin-only icon-column" style="display:none;">
 					<%= image_tag("destroy.png", title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %>
 					</td>
 				</tr>

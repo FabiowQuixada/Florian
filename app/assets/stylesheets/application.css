@@ -55,12 +55,6 @@
   margin-bottom: 20px;
 }
 
-td.table_icon {
-  width: 30px;
-  vertical-align:middle;
-  horizontal-align: center;
-}
-
 .app_title {
  font-family: 'Metamorphous', cursive;
 }
@@ -108,14 +102,24 @@ table.tablesorter thead tr th.headerSortUp {}
    vertical-align: middle;
 }
 
+tr th.icon-column{
+    width:16px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 tr td.icon-column{
-    width:1%;
+    width:16px;
     white-space:nowrap;
     display: block;
     margin-left: auto;
     margin-right: auto;
     align-content: center;
     text-align: center;
+}
+
+th.id-column{
+    width:64px;
 }
 
 div.centre

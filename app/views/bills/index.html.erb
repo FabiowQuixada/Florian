@@ -10,11 +10,12 @@
 		<tr>
 			<% I18n.with_options(scope: 'activerecord.attributes.bill') do |i18n| %>
 				<th style="display: none;"></th>
+					<th class="admin-only id-column" style="display: none;"></th>
 					<th class="sorter-false"><%= i18n.t 'competence' %></th>
 					<th class="sorter-false"><%= i18n.t 'water' %></th>
 					<th class="sorter-false"><%= i18n.t 'energy' %></th>
 					<th class="sorter-false"><%= i18n.t 'telephone' %></th>
-					<th class="sorter-false" style="width: 16px;"></th>
+					<th class="sorter-false icon-column"></th>
 					<th class="admin-only sorter-false" style="display:none;"></th>
 			<% end %>
 		</tr>
@@ -29,13 +30,14 @@
 		<tbody>
 			<% @list.each do |iterator| %>
 				<tr id='model_<%= iterator.id %>' class="model_row">
+					<td class="model_id admin-only" style="display: none;"><%= iterator.id %></td>
 					<td><%=	I18n.localize(iterator.competence, format: :competence).capitalize %></td>
 					<td style="display: none;" class="model_id"><%= iterator.id %></td>
 					<td><%=	number_to_currency(iterator.public_send('water')) %></td>
 					<td><%=	number_to_currency(iterator.public_send('energy')) %></td></td>
 					<td><%=	number_to_currency(iterator.public_send('telephone')) %></td>
 					<td class="icon-column"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), send("edit_bill_path", iterator) %></td>
-					<td class="admin-only table_icon" style="display:none;">
+					<td class="admin-only icon-column" style="display:none;">
 					<%= image_tag("destroy.png", title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %>
 					</td>
 				</tr>
