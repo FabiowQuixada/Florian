@@ -1,14 +1,13 @@
 Quando cai em alguma validacao, os dados nao sao recarregados;
-Bloqueio de envio final enquanto nao estiver em analise;
+Eliminar historico git;
+Competencia da conta (dia 1o);
+Nao deixar urls como http://localhost:3000/product_and_service_weeks/update_and_send
 
 Auditoria de produtos e servicos: submodelos;
 Testes de mailing;
 eliminacao do index_table;
 E-mail assincrono: Resque;
-Eliminar historico git;
-Nao deixar urls como http://localhost:3000/product_and_service_weeks/update_and_send
 A pagina cai se ficar parada por um tempo;
-Competencia da conta (dia 1o);
 
 
 =====================================================================
