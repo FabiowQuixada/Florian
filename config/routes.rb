@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :system_settings, only: [:index, :new, :edit, :update]
   post '/donations/filter'
 
-  resources :donations, except: [:show, :destroy] do
+  resources :donations, except: [:show] do
     collection do
         post 'create_and_new'
       end
@@ -32,10 +32,10 @@ Rails.application.routes.draw do
 
   end
 
-  resources :companies, except: [:show, :destroy]
-  resources :bills, except: [:show, :destroy]
+  resources :companies, except: [:show]
+  resources :bills, except: [:show]
 
-  resources :receipt_emails, except: [:show, :destroy] do
+  resources :receipt_emails, except: [:show] do
 
     member do
       post 'resend'
@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :product_and_service_data, except: [:destroy] 
+  resources :product_and_service_data
   
   resources :product_and_service_weeks do
 

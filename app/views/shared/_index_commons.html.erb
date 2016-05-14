@@ -32,6 +32,8 @@
 
 <script>
 
+	var id_to_be_deleted = -1;
+
 	$(document).ready(function() {
 	  return $(function() {
 	    $.extend($.tablesorter.defaults, {
@@ -95,6 +97,44 @@
 			$('#remove_modal').modal('show');
 		});
 
+		$('.destroy_btn').on('click', function() {
+
+			id = $(this).parent().parent().find('.model_id').html();
+			display_confirm_modal("<%= t('modal.title.destroy') %>",
+				"<%= genderize_tag(@model, 'modal.destroy_model') %>", destroy_model.bind(self, id));
+		});
+
 	});
+
+	
+
+	function destroy_model(id) {
+
+		id_to_be_deleted = id;
+
+		$.ajax({
+	        type: "DELETE",
+	        url: "/<%= model.model_name.route_key %>/" + id,
+	        dataType: "json",
+	        success: function(response) {
+	        	var message = response.message;
+
+		        	if(response.success) {
+		        		display_notice(message);
+
+		        		$('#model_' + id_to_be_deleted).remove();
+
+		        		if(!$('#index_table tbody tr').length) {
+		        			$('#index_table tbody').html('<td colspan="' + $('#index_table thead th').length + '" bgcolor="#E0E0F4" align="center"><%= genderize_tag(@model, 'helpers.none_registered') %></td>');
+		        		}
+		        	} else {
+		        		display_error(message);
+		        	}
+	        },
+	        error: function(response) {
+	        	display_error("<%= t('error_pages.internal_server_error.title') %>");
+	        }
+	    });
+	}
 
 </script>

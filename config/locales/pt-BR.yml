@@ -209,6 +209,13 @@ pt-BR:
     f:
       s: "%{model} removida com sucesso!"
       p: "%{model} removidas com sucesso!"
+  destroyed:
+    m:
+      s: "%{model} deletado com sucesso!"
+      p: "%{model} deletados com sucesso!"
+    f:
+      s: "%{model} deletada com sucesso!"
+      p: "%{model} deletadas com sucesso!"
   sent:
     m:
       s: "%{model} enviado com sucesso!"
@@ -348,6 +355,8 @@ pt-BR:
           s: Salvar e cadastrar nova
           p: Salvar e cadastrar novas
       update_data: Salvar
+      destroy: Deletar
+      confirm: Confirmar
       cancel: Cancelar
       back: Voltar
       discard: Descartar
@@ -404,9 +413,17 @@ pt-BR:
       f:
         s: 'Tem certeza que deseja remover esta %{model}?'
         p: 'Tem certeza que deseja remover estas %{model}?'
+    destroy_model:
+      m:
+        s: 'Tem certeza que deseja deletar este %{model}?'
+        p: 'Tem certeza que deseja deletar estes %{model}?'
+      f:
+        s: 'Tem certeza que deseja deletar esta %{model}?'
+        p: 'Tem certeza que deseja deletar estas %{model}?'
     title:
       bill_graphs: Gráficos de Contas Por Ano
       back: Dados não salvos
+      destroy: Deleção
     body:
       back: 'Suas alterações não foram salvas, deseja descartá-las?'
     email:
@@ -553,6 +570,8 @@ pt-BR:
       second: Segundo
       year: Ano
   errors:
+    deletion: A deleção não pôde ser efetuada por algum motivo. Verifique o log.
+    unpermitted_action: Desculpe, você não tem permissão para realizar esta ação.
     user:
       cannot_deactivate_admin: 'Não é possível desativar um administrador;'
     email:

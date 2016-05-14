@@ -12,13 +12,14 @@
 			<th class="sorter-false"><%= i18n.t 'products' %></th>
 			<th class="sorter-false"><%= i18n.t 'status' %></th>
 			<th class="sorter-false" style="width: 16px;"></th>
+			<th class="admin-only sorter-false" style="display:none;"></th>
 			<% end %>
 		</tr>
 	</thead>
 
 	<% if @list.empty? %>
 	<tr>
-		<td colspan="6" bgcolor="#E0E0F4" align="center"><%= genderize_tag(@model, 'helpers.none_registered') %></td>
+		<td colspan="7" bgcolor="#E0E0F4" align="center"><%= genderize_tag(@model, 'helpers.none_registered') %></td>
 	</tr>
 
 	<% else %>
@@ -31,6 +32,9 @@
 			<td><%= iterator.product_qty %></td>
 			<td><%= iterator.status_desc %></td>
 			<td class="icon-column"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), send("edit_product_and_service_datum_path", iterator) %></td>
+			<td class="admin-only table_icon" style="display:none;">
+					<%= image_tag("destroy.png", title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %>
+					</td>
 		</tr>
 		<% end %>
 	</tbody>

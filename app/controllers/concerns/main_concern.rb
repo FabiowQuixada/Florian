@@ -59,6 +59,32 @@ module MainConcern extend ActiveSupport::Concern
     end
   end
 
+  def destroy
+    if request.xhr?
+      if current_user.admin?
+        begin
+          model_class.find(params[:id]).destroy
+        rescue => exc
+          return render :json => { message: t('errors.deletion'), success: false }
+        end
+        return render :json => { message: @model.was('destroyed'), success: true }
+      else
+        return render :json => { message: t('errors.unpermitted_action'), success: false }
+      end
+    else
+      if current_user.admin?
+        begin
+          model_class.find(params[:id]).destroy
+        rescue => exc
+          return render :json => { message: t('errors.deletion'), success: false }
+        end
+        redirect_to send(@model.model_name.route_key + "_path"), notice: @model.was('destroyed')
+      else
+        redirect_to send(@model.model_name.route_key + "_path"), alert: t('errors.unpermitted_action')
+      end
+    end
+  end
+
   private
 
   def model_class
@@ -69,7 +95,7 @@ module MainConcern extend ActiveSupport::Concern
     before_action :before_new, only: [:new, :create]
     before_action :before_edit, only: [:edit, :update]
     before_action :before_show, only: [:show]
-    before_action :before_index, only: [:index]
+    before_action :before_index, only: [:index, :destroy]
     before_action :authenticate_user!
   end
 

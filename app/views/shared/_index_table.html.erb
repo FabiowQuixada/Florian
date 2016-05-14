@@ -14,7 +14,7 @@
 	<thead>
 		<tr>
 			<% I18n.with_options(scope: 'activerecord.attributes.' + @model.class.name.underscore) do |i18n| %>
-				<th></th>
+				<th class="admin-only"></th>
 				<th style="display: none;"></th>
 				<% columns.each_with_index do |a, i| %>
 					<th style="<%= columns[i][:style] %>" class="<%= columns[i][:class] %>"><%= i18n.t columns[i][:header] %></th>
@@ -34,6 +34,7 @@
 				<% if model.class.column_names.include? 'active' %>
 					<th class="hidden-xs sorter-false" style="width: 16px;"></th>
 				<% end %>
+				<th class="admin-only sorter-false" style="display:none;"></th>
 			<% end %>
 		</tr>
 	</thead>
@@ -55,7 +56,7 @@
 		<tbody>
 			<% @list.each do |iterator| %>
 				<tr id='model_<%= iterator.id %>' class="model_row">
-					<td class="model_id"><%= iterator.id %></td>
+					<td class="model_id admin-only"><%= iterator.id %></td>
 					<% columns.each_with_index do |a, i| %>
 						<td style="<%= columns[i][:style] %>" class="<%= columns[i][:class] %>">
 						<%=
@@ -84,6 +85,9 @@
 							<% end %>
 						</td>
 					<% end %>
+					<td class="admin-only table_icon" style="display:none;">
+					<%= image_tag("destroy.png", title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %>
+					</td>
 				</tr>
 			<% end %>
 		</tbody>

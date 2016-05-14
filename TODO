@@ -10,8 +10,6 @@ Nao deixar urls como http://localhost:3000/product_and_service_weeks/update_and_
 A pagina cai se ficar parada por um tempo;
 Competencia da conta (dia 1o);
 
-Delecao: admin, valdiacao no serv, fializacao no cliente;
-
 
 =====================================================================
 
@@ -33,6 +31,7 @@ Interno:
  - Reusar _e-mail_address: tem coisa q poderia tar nele;
  - PDF: Não precisar salvar arquivo;
  - Checagem de competencia nos controllers;
+ - Deletar grupos e usuarios, alem de voltar na edicao;
 
 
 Frescurinha:
