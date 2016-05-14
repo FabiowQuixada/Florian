@@ -1,6 +1,5 @@
 Quando cai em alguma validacao, os dados nao sao recarregados;
 Eliminar historico git;
-Competencia da conta (dia 1o);
 Nao deixar urls como http://localhost:3000/product_and_service_weeks/update_and_send
 
 Auditoria de produtos e servicos: submodelos;

@@ -16,6 +16,7 @@ class Bill < ActiveRecord::Base
   # Validations
   validates :competence, :presence => true, uniqueness: true
   validates :water, :energy, :telephone, :numericality => { :greater_than_or_equal_to => 0 }
+  validate :validate_model
 
 
   # Methods
@@ -26,8 +27,14 @@ class Bill < ActiveRecord::Base
     'f'
   end
 
+  private
   def default_values
     self.competence ||= Date.today
+  end
+
+  def validate_model
+    byebug
+    self.competence = self.competence.change(:day => 1)
   end
 
 end
