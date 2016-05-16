@@ -1,4 +1,4 @@
 <% @number_of_columns = 2 %>
 
-<td class="hidden-xs icon-column"><%= link_to image_tag("send_email.png", :title => t('description.email.resend')), '#', :class => 'resend_btn' %></td>
-<td class="hidden-xs icon-column"><%= link_to image_tag("test_email.png", :title => t('description.email.send_test') + " '" + current_user.email + "'"), '#', :remote => true, :class => 'send_test_btn' %></td>
+<td class="hidden-xs icon-column"><%= link_to image_tag("send_email.png", :title => t('description.email.resend')), 'javascript:void(0)', :class => 'resend_btn' %></td>
+<td class="hidden-xs icon-column"><%= link_to image_tag("test_email.png", :title => t('description.email.send_test') + " '" + current_user.email + "'"), 'javascript:void(0)', :remote => true, :class => 'send_test_btn' %></td>
