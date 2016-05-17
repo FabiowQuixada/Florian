@@ -25,12 +25,15 @@ class ProductAndServiceWeek < ActiveRecord::Base
   after_initialize do
     unless persisted?
       if self.service_data.empty?
-      for i in 0..1
-         self.service_data.new
+        for i in 0..1
+           self.service_data.new
+        end
       end
-    end
 
       self.product_data ||= ProductData.new
+
+      self.start_date ||= Date.today
+      self.end_date ||= Date.today
 
       self.number ||= -1
     end
@@ -38,10 +41,11 @@ class ProductAndServiceWeek < ActiveRecord::Base
 
   def validate_model
 
-    errors.add(:start_date, 'Período inválido - Semana ' + number.to_s + ';') if self.end_date < self.start_date
+    errors.add(:start_date, 'O campo de periodo da semana eh obrigatorio: Semana ' + number.to_s + ';') if !self.end_date or !self.start_date
+    errors.add(:start_date, 'Período inválido: Semana ' + number.to_s + ';') if self.end_date < self.start_date
 
-    errors.add(:attendance_data, 'Todos os atendimentos são obrigatórios - Semana ' + number.to_s + ';') if self.service_data[0].validate_model
-    errors.add(:return_data, 'Todos os retornos são obrigatórios - Semana ' + number.to_s + ';') if self.service_data[1].validate_model
+    errors.add(:attendance_data, 'Todos os atendimentos são obrigatórios: Semana ' + number.to_s + ';') if self.service_data[0].validate_model
+    errors.add(:return_data, 'Todos os retornos são obrigatórios: Semana ' + number.to_s + ';') if self.service_data[1].validate_model
     errors.add(:product_data, 'Todos os produtos são obrigatórios;') if self.product_data.validate_model
   end
 

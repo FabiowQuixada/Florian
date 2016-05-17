@@ -1,6 +1,7 @@
-Quando cai em alguma validacao, os dados nao sao recarregados;
+Quando cai em alguma validacao, os dados dos prod e servs nao sao recarregados;
 Eliminar historico git;
-Nao deixar urls como http://localhost:3000/product_and_service_weeks/update_and_send
+"Adicionar" semanas dinamicamente (da persp. do usuario);
+Validacao de atributo aninhados;
 
 Auditoria de produtos e servicos: submodelos;
 Testes de mailing;

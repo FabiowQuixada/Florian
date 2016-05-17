@@ -74,12 +74,12 @@
 					<div class="input-group">
 						<span class="input-group-addon"><%= t 'helpers.from' %></span>
 						<div class="date" data-behaviour='datepicker' >
-							<span></span><%= week_form.text_field :start_date, value: Date.today, format: :competence_i, :class => 'form-control', readonly: @model.finalized? %><span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+							<span></span><%= week_form.text_field :start_date, format: :competence_i, :class => 'form-control', readonly: @model.finalized? %><span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 						</div>
 						<span class="input-group-addon" style="border-left: 0; border-right: 0;"><%= t 'helpers.to' %></span>
 						<div class="date" data-behaviour='datepicker'>
 							<span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-							<%= week_form.text_field :end_date, value: Date.today, format: :competence_i, :class => 'form-control', readonly: @model.finalized? %>
+							<%= week_form.text_field :end_date, format: :competence_i, :class => 'form-control', readonly: @model.finalized? %>
 						</div>
 					</div>
 					</div>
