@@ -49,19 +49,19 @@
 				</td>
 				<td>
 				<% if index != -1 %>
-					<%= text_field_tag 'product_and_service_datum[product_and_service_weeks_attributes][' + index.to_s + '][service_data_attributes][0][' + name +']', (week.persisted? ? week.service_data[0].instance_eval(name) : 0), class: 'form-control ' + name + ' attendance attendance_week_' + index.to_s + ' week_' + index.to_s + ' numbers_only service_input service_checkup input-sm service_row_' + service_row.to_s + '_col_0' + (index >= totals_week_number-1 ? ' extra_tab temp_field' : ' '), readonly: fields_readonly?(week) %>
+					<%= text_field_tag 'product_and_service_datum[product_and_service_weeks_attributes][' + index.to_s + '][service_data_attributes][0][' + name +']', week.service_data[0].instance_eval(name), class: 'form-control ' + name + ' attendance attendance_week_' + index.to_s + ' week_' + index.to_s + ' numbers_only service_input service_checkup input-sm service_row_' + service_row.to_s + '_col_0' + (index >= totals_week_number-1 ? ' extra_tab temp_field' : ' '), readonly: fields_readonly?(week) %>
 
 					<% else %>
-					<%= text_field_tag 'product_and_service_week[service_data_attributes][0][' + name +']', (week.persisted? ? week.service_data[0].instance_eval(name) : 0), class: 'form-control ' + name + ' week_' + index.to_s + ' attendance service_week_' + index.to_s + ' numbers_only service_input service_checkup input-sm service_row_' + service_row.to_s + '_col_0' + (index >= totals_week_number ? ' extra_tab temp_field' : ' '), disabled: index == totals_week_number-1 %>
+					<%= text_field_tag 'product_and_service_week[service_data_attributes][0][' + name +']', week.service_data[0].instance_eval(name), class: 'form-control ' + name + ' week_' + index.to_s + ' attendance service_week_' + index.to_s + ' numbers_only service_input service_checkup input-sm service_row_' + service_row.to_s + '_col_0' + (index >= totals_week_number ? ' extra_tab temp_field' : ' '), disabled: index == totals_week_number-1 %>
 					<% end %>
 				</td>
 				<td>
 					<% if index != -1 %>
 
-					<%= text_field_tag 'product_and_service_datum[product_and_service_weeks_attributes][' + index.to_s + '][service_data_attributes][1][' + name +']', (week.persisted? ? week.service_data[1].instance_eval(name) : 0), class: 'form-control ' + name + ' return return_week_' + index.to_s + ' service_input numbers_only service_return input-sm service_row_' + service_row.to_s + '_col_1 week_' + index.to_s + (index >= totals_week_number-1 ? ' extra_tab temp_field' : ' '), readonly: fields_readonly?(week) %>
+					<%= text_field_tag 'product_and_service_datum[product_and_service_weeks_attributes][' + index.to_s + '][service_data_attributes][1][' + name +']', week.service_data[1].instance_eval(name), class: 'form-control ' + name + ' return return_week_' + index.to_s + ' service_input numbers_only service_return input-sm service_row_' + service_row.to_s + '_col_1 week_' + index.to_s + (index >= totals_week_number-1 ? ' extra_tab temp_field' : ' '), readonly: fields_readonly?(week) %>
 
 					<% else %>
-					<%= text_field_tag 'product_and_service_week[service_data_attributes][1][' + name +']', (week.persisted? ? week.service_data[1].instance_eval(name) : 0), class: 'form-control ' + name + ' week_' + index.to_s + ' attendance attendance_week_' + index.to_s + ' numbers_only service_input service_checkup input-sm service_row_' + service_row.to_s + '_col_1' + (index >= totals_week_number ? ' extra_tab temp_field' : ' '), disabled: index >= totals_week_number-1 %>
+					<%= text_field_tag 'product_and_service_week[service_data_attributes][1][' + name +']', week.service_data[1].instance_eval(name), class: 'form-control ' + name + ' week_' + index.to_s + ' attendance attendance_week_' + index.to_s + ' numbers_only service_input service_checkup input-sm service_row_' + service_row.to_s + '_col_1' + (index >= totals_week_number ? ' extra_tab temp_field' : ' '), disabled: index >= totals_week_number-1 %>
 					<% end %>
 				</td>
 				<td>

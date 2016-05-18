@@ -1,8 +1,3 @@
-Quando cai em alguma validacao, os dados dos prod e servs nao sao recarregados;
-Eliminar historico git;
-"Adicionar" semanas dinamicamente (da persp. do usuario);
-Validacao de atributo aninhados;
-
 Auditoria de produtos e servicos: submodelos;
 Testes de mailing;
 eliminacao do index_table;
