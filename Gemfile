@@ -60,6 +60,8 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem "minitest-rails-capybara"
+  gem 'rspec-rails', '~> 3.0'
+  gem 'shoulda-matchers', '~> 3.1'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
