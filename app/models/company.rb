@@ -51,23 +51,22 @@ class Company < ActiveRecord::Base
     'f'
   end
 
-def contact_qty
-  #  TODO
-  if contacts.size < 1 or contacts.size > 3
-    errors.add(:contacts, 'Número de contatos inválidos: ' + contacts.size)
+  def contact_qty
+    if contacts.size < 1 or contacts.size > 3
+      errors.add(:contacts, I18n.t('errors.company.contacts', contacts: contacts.size))
+    end
   end
-end
 
-def person?
-  self.entity_type == 2
-end
+  def person?
+    self.entity_type == 2
+  end
 
-def company?
-  self.entity_type == 1
-end
+  def company?
+    self.entity_type == 1
+  end
 
-def group_desc
-  GROUPS[group-1].first unless GROUPS[group-1].nil?
+  def group_desc
+    GROUPS[group-1].first unless GROUPS[group-1].nil?
   end
 
   def category_desc
@@ -102,17 +101,16 @@ def group_desc
   end
 
   def unique_name_message
-    # TODO
     if person?
-      "O campo 'Nome' é obrigatório;"
+      I18n.t('errors.company.name')
     else
-      "O campo 'Nome fantasia' é obrigatório;"
+      I18n.t('errors.company.registration_name')
     end
   end
 
   def default_values
-    self.city = "Fortaleza"
-    self.state = "CE"
+    self.city = DEFAULT_COMPANY_CITY
+    self.state = DEFAULT_COMPANY_STATE
   end
 
 end

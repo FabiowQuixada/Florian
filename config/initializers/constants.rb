@@ -32,3 +32,6 @@ NUMBER_OF_BILLS = 3
 NUMBER_OF_WEEKS = 5
 
 ANALYSIS_EMAIL = (Rails.env == "production" ? "ftquixada@gmail.com" : "ftquixada@gmail.com")
+
+DEFAULT_COMPANY_CITY = "Fortaleza"
+DEFAULT_COMPANY_STATE = "CE"

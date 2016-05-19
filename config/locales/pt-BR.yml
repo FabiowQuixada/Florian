@@ -587,6 +587,9 @@ pt-BR:
     company:
       unique_cnpj: "Este CNPJ já está sendo usado;"
       unique_cpf: "Este CPF já está sendo usado;"
+      contacts: "Número de contatos inválido: %{contacts};"
+      name: "O campo 'Nome' é obrigatório;"
+      registration_name: "O campo 'Nome fantasia' é obrigatório;"
     donation:
       date_mandatory: "O campo 'Data' é obrigatório;"
       value_or_remark: "Preencha pelo menos um dos seguintes campos: 'Valor' ou 'Observação';"

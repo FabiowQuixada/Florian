@@ -3,6 +3,9 @@ Testes de mailing;
 eliminacao do index_table;
 E-mail assincrono: Resque;
 A pagina cai se ficar parada por um tempo;
+Show case;
+Verificacao de TODOs, BYEBUGs e <<<<<;
+Genero: def model_gender 'f' end
 
 
 =====================================================================
