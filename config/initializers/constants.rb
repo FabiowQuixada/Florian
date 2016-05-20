@@ -35,3 +35,5 @@ ANALYSIS_EMAIL = (Rails.env == "production" ? "ftquixada@gmail.com" : "ftquixada
 
 DEFAULT_COMPANY_CITY = "Fortaleza"
 DEFAULT_COMPANY_STATE = "CE"
+
+PHONE_FORMAT = /(\(\d{2}\))? \d{4,5}-\d{4}/
