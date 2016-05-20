@@ -600,6 +600,11 @@ pt-BR:
       cant_send: "Não é possível enviar estes dados;"
       cant_send_to_analysis: "Não é possível enviar estes dados para análise;"
       cant_send_to_clients: "Não é possível enviar estes dados para os clientes;"
+      period_is_mandatory: "O campo de período da semana é obrigatório: Semana %{week_number};"
+      invalid_period: "Período inválido: Semana %{week_number};"
+      all_attendances_are_mandatory: "Todos os atendimentos são obrigatórios: Semana %{week_number};"
+      all_returns_are_mandatory: "Todos os retornos são obrigatórios: Semana %{week_number};"
+      all_products_are_mandatory: "Todos os produtos são obrigatórios: Semana %{week_number};"
     format: "%{message}"
     messages:
       accepted: "O campo '%{attribute}' deve ser aceito;"

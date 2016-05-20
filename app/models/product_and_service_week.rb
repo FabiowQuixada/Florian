@@ -41,12 +41,12 @@ class ProductAndServiceWeek < ActiveRecord::Base
 
   def validate_model
 
-    errors.add(:start_date, 'O campo de periodo da semana eh obrigatorio: Semana ' + number.to_s + ';') if !self.end_date or !self.start_date
-    errors.add(:start_date, 'Período inválido: Semana ' + number.to_s + ';') if self.end_date < self.start_date
+    errors.add(:start_date, I18n.t('errors.product_and_service_datum.period_is_mandatory', week_number: number.to_s)) if !self.end_date or !self.start_date
+    errors.add(:start_date, I18n.t('errors.product_and_service_datum.invalid_period', week_number: number.to_s)) if self.end_date < self.start_date
 
-    errors.add(:attendance_data, 'Todos os atendimentos são obrigatórios: Semana ' + number.to_s + ';') if self.service_data[0].validate_model
-    errors.add(:return_data, 'Todos os retornos são obrigatórios: Semana ' + number.to_s + ';') if self.service_data[1].validate_model
-    errors.add(:product_data, 'Todos os produtos são obrigatórios;') if self.product_data.validate_model
+    errors.add(:attendance_data, I18n.t('errors.product_and_service_datum.all_attendances_are_mandatory', week_number: number.to_s)) if self.service_data[0].validate_model
+    errors.add(:return_data, I18n.t('errors.product_and_service_datum.all_returns_are_mandatory', week_number: number.to_s)) if self.service_data[1].validate_model
+    errors.add(:product_data, I18n.t('errors.product_and_service_datum.all_products_are_mandatory', week_number: number.to_s)) if self.product_data.validate_model
   end
 
   def service_qty
