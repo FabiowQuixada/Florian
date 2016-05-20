@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
       return false
     end
 
-    self.role.name == "Admin"
+    self.role.name == ADMIN_ROLE
   end
 
   def active_for_authentication?
@@ -47,12 +47,12 @@ class User < ActiveRecord::Base
   # The foreign key to the owning User model is set automatically
   build_system_setting
 
-  system_setting.pse_recipients_array = '(Preencha)'
-  system_setting.pse_day_of_month = '(Preencha)'
-  system_setting.pse_title = '(Preencha)'
-  system_setting.pse_body = '(Preencha)'
-  system_setting.re_title = '(Preencha)'
-  system_setting.re_body = '(Preencha)'
+  system_setting.pse_recipients_array = SSETTINGS_PSE_RECIPIENTS
+  system_setting.pse_day_of_month = SSETTINGS_PSE_DAY
+  system_setting.pse_title = SSETTINGS_PSE_TITLE
+  system_setting.pse_body = SSETTINGS_PSE_BODY
+  system_setting.re_title = SSETTINGS_RE_TITLE
+  system_setting.re_body = SSETTINGS_RE_BODY
 
   system_setting.valid?
 end

@@ -37,3 +37,12 @@ DEFAULT_COMPANY_CITY = "Fortaleza"
 DEFAULT_COMPANY_STATE = "CE"
 
 PHONE_FORMAT = /(\(\d{2}\))? \d{4,5}-\d{4}/
+
+ADMIN_ROLE = "Admin"
+
+SSETTINGS_PSE_RECIPIENTS = 'exemplo@gmail.com'
+SSETTINGS_PSE_DAY = 1
+SSETTINGS_PSE_TITLE = 'Relatório de Produtos e Serviços - ' + '#competencia'.capitalize
+SSETTINGS_PSE_BODY = 'Segue em anexo o relatório de produtos e serviços referente a #competencia.'
+SSETTINGS_RE_TITLE = 'Recibo de Doação IAQ #mantenedora - ' + '#competencia'.capitalize
+SSETTINGS_RE_BODY = 'Prezados, segue em anexo o recibo de doação da #mantenedora, no valor de #valor referente a #competencia.'
