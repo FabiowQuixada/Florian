@@ -17,9 +17,11 @@ class IaqMailer < ApplicationMailer
       ProductAndServiceReport.new("/tmp/prod_serv.pdf", week).save
       attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
 
+      period = week.start_date.to_s + ' ' + I18n.t('helpers.to') + ' ' + week.end_date.to_s
+
       mail(to: user.system_setting.pse_private_recipients_array,
-        body: user.system_setting.pse_processed_body(week.product_and_service_datum.competence),
-        subject: user.system_setting.pse_processed_title(week.product_and_service_datum.competence))
+        subject: SSETTINGS_PSE_TITLE_PREFIX + period,
+        body: SSETTINGS_PSE_BODY_WEEK.gsub(I18n.t('tags.competence'), period))
   end
 
   def send_prod_and_serv_to_analysis(week, user)

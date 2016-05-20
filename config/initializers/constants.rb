@@ -42,7 +42,9 @@ ADMIN_ROLE = "Admin"
 
 SSETTINGS_PSE_RECIPIENTS = 'exemplo@gmail.com'
 SSETTINGS_PSE_DAY = 1
-SSETTINGS_PSE_TITLE = 'Relatório de Produtos e Serviços - ' + '#competencia'.capitalize
+SSETTINGS_PSE_TITLE_PREFIX = 'Relatório de Produtos e Serviços - '
+SSETTINGS_PSE_TITLE = SSETTINGS_PSE_TITLE_PREFIX + '#competencia'
 SSETTINGS_PSE_BODY = 'Segue em anexo o relatório de produtos e serviços referente a #competencia.'
-SSETTINGS_RE_TITLE = 'Recibo de Doação IAQ #mantenedora - ' + '#competencia'.capitalize
+SSETTINGS_PSE_BODY_WEEK = 'Segue em anexo o relatório de produtos e serviços referente ao período #competencia.'
+SSETTINGS_RE_TITLE = 'Recibo de Doação IAQ #mantenedora - #competencia'
 SSETTINGS_RE_BODY = 'Prezados, segue em anexo o recibo de doação da #mantenedora, no valor de #valor referente a #competencia.'
