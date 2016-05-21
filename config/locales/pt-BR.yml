@@ -584,6 +584,7 @@ pt-BR:
     contact:
       invalid_telephone: "O campo 'Telefone' é inválido;"
       invalid_celphone: "O campo 'Celular' é inválido;"
+      invalid_fax: "O campo 'Fax' é inválido;"
     company:
       unique_cnpj: "Este CNPJ já está em uso;"
       unique_cpf: "Este CPF já está em uso;"
