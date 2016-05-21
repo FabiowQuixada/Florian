@@ -585,8 +585,8 @@ pt-BR:
       invalid_telephone: "O campo 'Telefone' é inválido;"
       invalid_celphone: "O campo 'Celular' é inválido;"
     company:
-      unique_cnpj: "Este CNPJ já está sendo usado;"
-      unique_cpf: "Este CPF já está sendo usado;"
+      unique_cnpj: "Este CNPJ já está em uso;"
+      unique_cpf: "Este CPF já está em uso;"
       contacts: "Número de contatos inválido: %{contacts};"
       name: "O campo 'Nome' é obrigatório;"
       registration_name: "O campo 'Nome fantasia' é obrigatório;"

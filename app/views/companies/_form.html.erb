@@ -246,9 +246,9 @@
 		$('.person_area').hide();
 		$('.company_area').hide();	
 
-		if($('#company_entity_type').val() == '1') {
+		if($('#company_entity_type').val() == 0) {
 			$('.company_area').show();
-		} else if($('#company_entity_type').val() == '2') {
+		} else if($('#company_entity_type').val() == '1') {
 			$('.person_area').show();
 		}
 	}
