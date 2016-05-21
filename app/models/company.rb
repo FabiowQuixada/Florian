@@ -109,8 +109,8 @@ class Company < ActiveRecord::Base
   end
 
   def default_values
-    self.city = DEFAULT_COMPANY_CITY
-    self.state = DEFAULT_COMPANY_STATE
+    self.city ||= DEFAULT_COMPANY_CITY
+    self.state ||= DEFAULT_COMPANY_STATE
   end
 
 end
