@@ -22,6 +22,10 @@ uat:
   <<: *default
   database: db/uat
 
+showcase:
+  <<: *default
+  database: db/showcase
+
 production:
   <<: *default
   database: db/production

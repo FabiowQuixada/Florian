@@ -16,6 +16,10 @@ class RegistrationsController < Devise::RegistrationsController
 
   def edit
 
+    if current_user.guest?
+      return redirect_to root_path, alert: I18n.t('error_pages.not_found.title')
+    end
+
     @model = current_user
 
     @model.password = 'l'

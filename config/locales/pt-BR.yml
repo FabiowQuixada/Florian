@@ -6,6 +6,7 @@ pt-BR:
   development: Desenvolvimento
   test: Teste
   uat: Homologação
+  showcase: Showcase
   production: Produção
   attention: Atenção
   uat_mode_message: Você está em ambiente de teste.

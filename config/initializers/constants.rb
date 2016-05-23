@@ -39,6 +39,7 @@ DEFAULT_COMPANY_STATE = "CE"
 PHONE_FORMAT = /(\(\d{2}\))? \d{4,5}-\d{4}/
 
 ADMIN_ROLE = "Admin"
+GUEST_ROLE = "Visitante"
 
 SSETTINGS_PSE_RECIPIENTS = 'exemplo@gmail.com'
 SSETTINGS_PSE_DAY = 1

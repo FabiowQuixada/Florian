@@ -30,6 +30,14 @@ class User < ActiveRecord::Base
     self.role.name == ADMIN_ROLE
   end
 
+  def guest?
+    if self.role.nil?
+      return false
+    end
+
+    self.role.name == GUEST_ROLE
+  end
+
   def active_for_authentication?
     super && active?
   end

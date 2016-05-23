@@ -4,6 +4,7 @@ role2 = Role.create({name: "Usuário", description: 'Usuário comum'})
 role3 = Role.create({name: "Administração", description: 'Presidência'})
 role4 = Role.create({name: "Secretária 1", description: '(Renata)'})
 role5 = Role.create({name: "Secretária 2", description: '(Lucivania)'})
+role6 = Role.create({name: "Visitante", description: 'Visitante'})
 
 user1 = User.create({name: "Sistema",     email: SYSTEM_EMAIL, password: "fulano0123", password_confirmation: "fulano0123", bcc: 'teste@test.com', signature: '(Assinatura)', role: role1})
 user2 = User.create({name: "Fabiow",      email: ADMIN_EMAIL, password: "fulano0123", password_confirmation: "fulano0123", bcc: 'ftquixada@gmail.com', signature: '(Assinatura)', role: role1})
@@ -12,9 +13,10 @@ user4 = User.create({name: "Edmar",       email: "edmarmaciel@gmail.com", passwo
 user5 = User.create({name: "Márcia",       email: "marciattm@hotmail.com", password: "34578933", password_confirmation: "34578933", bcc: 'marciattm@hotmail.com', signature: '(Assinatura)', role: role3})
 user6 = User.create({name: "Renata",       email: "renata.sbq@gmail.com", password: "4453566486", password_confirmation: "4453566486", bcc: 'renata.sbq@gmail.com', signature: '(Assinatura)', role: role4})
 user7 = User.create({name: "Lucivânia",   email: "lucivania_nojosa@hotmail.com", password: "98574325298", password_confirmation: "98574325298", bcc: 'lucivania_nojosa@hotmail.com', signature: '(Assinatura)', role: role5})
+user8 = User.create({name: "Visitante",   email: "visitante@florian.com", password: "visitante", password_confirmation: "visitante", bcc: 'visitante@florian.com', signature: 'Visitante', role: role6})
 
 case Rails.env
-    when "development" then
+    when "development", "test", "showcase" then
         comp1 = Company.create(entity_type: 1, name: "Empresa I", registration_name: "Empresa I Ltda.", cnpj: "31162488000187", category: 1, address: "lala", group: 1)
         comp2 = Company.create(entity_type: 1, name: "Empresa II", registration_name: "Empresa II Ltda.", cnpj: "34.781.467/0001-38", category: 2, address: "lala",  group: 2)
         comp3 = Company.create(entity_type: 1, name: "Empresa III", registration_name: "Empresa III Ltda.", cnpj: "01.476.667/0001-28", category: 3, address: "lala",  group: 3)
