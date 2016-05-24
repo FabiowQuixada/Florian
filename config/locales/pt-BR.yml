@@ -70,9 +70,9 @@ pt-BR:
         company: "Mantenedora"
         recipients_array: "Destinatários"
         type_values:
-          test: Teste
-          resend: Reenvio
           auto: Automático
+          resend: Reenvio
+          test: Teste
       system_setting:
         user: Usuário
         re_title: "Título"
