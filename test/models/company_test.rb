@@ -6,13 +6,13 @@ class CompanyTest < ActiveSupport::TestCase
 
         company = Company.new
 
-        company.entity_type = 1
+        company.entity_type = Company.entity_types[:"Pessoa Jurídica"]
         company.name = 'Exemplo'
         company.registration_name = 'Exemplo2'
         company.cnpj = '60.712.334/0001-10'
         company.address = 'Aqui'
-        company.category = 1
-        company.group = 1
+        company.category = Company.categories[:"1 (Abaixo de R$ 300,00)"]
+        company.group = Company.groups[:"Mantenedora"]
 
         assert company.save, company.errors.first
 

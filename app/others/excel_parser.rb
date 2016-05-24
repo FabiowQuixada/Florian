@@ -40,9 +40,9 @@ class ExcelParser
       company = Company.new
 
       if row[col] == 'PF'
-        company.entity_type = 2
+        company.entity_type = Company.entity_types[:"Pessoa Física"]
       else
-        company.entity_type = 1
+        company.entity_type = Company.entity_types[:"Pessoa Jurídica"]
       end
 
       col += 1
@@ -52,11 +52,11 @@ class ExcelParser
       cat = 0
       col += 1
       if row[col] == 'I'
-        cat = 1
+        cat = Company.categories[:"1 (Abaixo de R$ 300,00)"]
         elsif row[col] == 'II'
-          cat = 2
+          cat = Company.categories[:"2 (Entre R$ 300,00 e R$ 600,00)"]
       elsif row[col] == 'III'
-        cat = 3
+        cat = Company.categories[:"3 (Acima de R$ 600,00)"]
       end
 
       
@@ -132,19 +132,19 @@ class ExcelParser
 
       temp = row[col += 1]
       if temp == "Mensal"
-        company.payment_frequency = 3
+        company.payment_frequency = Company.payment_frequencies[:"Mensal"]
       elsif temp == "Diariamente"
-        company.payment_frequency = 1
+        company.payment_frequency = Company.payment_frequencies[:"Diário"]
       elsif temp == "Bimestral"
-        company.payment_frequency = 4
+        company.payment_frequency = Company.payment_frequencies[:"Bimestral"]
       elsif temp == "Semanal"
-        company.payment_frequency = 2
+        company.payment_frequency = Company.payment_frequencies[:"Semanal"]
       elsif temp == "Indeterminado"
-        company.payment_frequency = 8
+        company.payment_frequency = Company.payment_frequencies[:"Indeterminado"]
       elsif temp == "Anual"
-        company.payment_frequency = 6
+        company.payment_frequency = Company.payment_frequencies[:"Anual"]
       elsif temp == "Semestral"
-        company.payment_frequency = 5
+        company.payment_frequency = Company.payment_frequencies[:"Semestral"]
       else
       end
 
@@ -163,9 +163,9 @@ class ExcelParser
 
       temp = row[col += 1]
       if temp == "Contrato"
-        company.contract = 1
+        company.contract = Company.contracts[:"Com contrato"]
       elsif temp == "Sem contrato"
-        company.contract = 2
+        company.contract = Company.contracts[:"Sem contrato"]
       end
 
       company

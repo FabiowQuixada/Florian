@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="form-group col-md-6">
 				<%= f.label :entity_type %>
-				<%= f.select :entity_type, CompaniesHelper::ENTITY_TYPE, {}, { :class => 'form-control', :disabled => f.object.persisted? } %>
+				<%= f.select :entity_type, Company.entity_types.keys, {}, { :class => 'form-control', :disabled => f.object.persisted? } %>
 			</div>
 
 			<div class="form-group col-md-6 company_area">
@@ -87,12 +87,12 @@
 </div><div class="row">
 <div class="form-group col-md-6">
 	<%= f.label :category %>
-	<%= f.select :category, CompaniesHelper::CATEGORIES, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+	<%= f.select :category, Company.categories.keys, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
 </div>
 
 <div class="form-group col-md-6">
 	<%= f.label :group %>
-	<%= f.select :group, CompaniesHelper::GROUPS, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+	<%= f.select :group, Company.groups.keys, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
 </div>
 </div><div class="row">
 
@@ -124,7 +124,7 @@
 		</div><div class="row">
 		<div class="form-group col-md-4">
 			<%= f.label :payment_frequency %>
-			<%= f.select :payment_frequency, CompaniesHelper::PARCEL_FREQUENCIES, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+			<%= f.select :payment_frequency, Company.payment_frequencies.keys, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
 		</div>
 		<div class="form-group col-md-4">
 			<%= f.label :payment_period, :class => 'asterisk' %>
@@ -132,7 +132,7 @@
 		</div>
 		<div class="form-group col-md-4">
 			<%= f.label :contract %>
-			<%= f.select :contract, CompaniesHelper::CONTRACTS, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+			<%= f.select :contract, Company.contracts.keys, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
 		</div>
 
 		<div class="form-group col-md-12 asterisk-description">* Digite 0 para "Indeterminado".</div>
@@ -246,9 +246,9 @@
 		$('.person_area').hide();
 		$('.company_area').hide();	
 
-		if($('#company_entity_type').val() == 0) {
+		if($('#company_entity_type').val() == "Pessoa Jurídica") {
 			$('.company_area').show();
-		} else if($('#company_entity_type').val() == '1') {
+		} else if($('#company_entity_type').val() == "Pessoa Física") {
 			$('.person_area').show();
 		}
 	}

@@ -20,7 +20,7 @@
 
 			<div class="col-md-6 form-group">
 				<%= f.label :company %>
-				<%= f.collection_select(:company_id, Company.where(group: 1), :id, :name, {:include_blank => t('helpers.select.prompt')}, {class: "form-control", :disabled => f.object.persisted?}) %>
+				<%= f.collection_select(:company_id, Company.where(group: Company.groups[:"Mantenedora"]), :id, :name, {:include_blank => t('helpers.select.prompt')}, {class: "form-control", :disabled => f.object.persisted?}) %>
 			</div>
 		</div>
 	</div>

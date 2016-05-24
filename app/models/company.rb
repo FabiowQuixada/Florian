@@ -1,14 +1,18 @@
-require './lib/modules/company_module'
-
 class Company < ActiveRecord::Base
 
   # Configuration
   audited
   include ModelHelper
-  include CompanyModule
   usar_como_cnpj :cnpj
   usar_como_cpf :cpf
   after_initialize :default_values
+
+  
+  enum entity_type: [:"Pessoa Jurídica", :"Pessoa Física"]
+  enum category: [:"1 (Abaixo de R$ 300,00)", :"2 (Entre R$ 300,00 e R$ 600,00)", :"3 (Acima de R$ 600,00)"]
+  enum group: [:"Mantenedora", :"Pontual", :"Negativa", :"Desativada"]
+  enum payment_frequency: [:"Indeterminado", :"Diário", :"Semanal", :"Mensal", :"Bimestral", :"Semestral", :"Anual", :"Outro (Observações)"]
+  enum contract: [:"Com contrato", :"Sem contrato", :"Contrato + Aditivo"]
 
 
   # Relationships
@@ -30,12 +34,13 @@ class Company < ActiveRecord::Base
   validates :cpf, :presence => true, if: :person?
   validates :name, :presence => true
   validates :address, :category, :group, :presence => true
-  #validates :category, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 3, only_integer: true }
-  #validates :group, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 4, only_integer: true }
-  #validates :contract, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 3, only_integer: true }, allow_nil: true
-  validates :payment_frequency, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 8, only_integer: true }, allow_nil: true
 
-
+  validates :entity_type, inclusion: {in: entity_types.keys}, :allow_nil => true
+  validates :category, inclusion: {in: categories.keys}, :allow_nil => true
+  validates :group, inclusion: {in: groups.keys}, :allow_nil => true
+  validates :contract, inclusion: {in: contracts.keys}, :allow_nil => true
+  validates :payment_frequency, inclusion: {in: payment_frequencies.keys}, :allow_nil => true
+  
 
   # Methods
   after_initialize do
@@ -58,23 +63,11 @@ class Company < ActiveRecord::Base
   end
 
   def person?
-    self.entity_type == 2
+    self.entity_type == "Pessoa Física"
   end
 
   def company?
-    self.entity_type == 1
-  end
-
-  def group_desc
-    GROUPS[group-1].first unless GROUPS[group-1].nil?
-  end
-
-  def category_desc
-    CATEGORIES[category-1].first unless CATEGORIES[category-1].nil?
-  end
-
-  def payment_frequency_desc
-    PARCEL_FREQUENCIES[parcel_frequency-1].first unless PARCEL_FREQUENCIES[parcel_frequency-1].nil?
+    self.entity_type == "Pessoa Jurídica"
   end
 
   def donation_rejectable?(att)
@@ -86,7 +79,6 @@ class Company < ActiveRecord::Base
   end
 
   private 
-
 
   def unique_cnpj
       if self.cnpj and !self.cnpj.to_s.empty? and Company.where(cnpj: self.cnpj).where('id <> ?', self.id || 0).first
