@@ -26,7 +26,7 @@ class ReceiptEmailsController < ApplicationController
         return render json: email.errors, status: :unprocessable_entity
       end
 
-      IaqMailer.resend_receipt_email(email, date, current_user).deliver_now
+      FlorianMailer.resend_receipt_email(email, date, current_user).deliver_now
 
       return render history_as_json(email, 'resent')
 
@@ -48,7 +48,7 @@ class ReceiptEmailsController < ApplicationController
         return render json: email.errors, status: :unprocessable_entity
       end
 
-      IaqMailer.send_test_receipt_email(email, date, current_user).deliver_now
+      FlorianMailer.send_test_receipt_email(email, date, current_user).deliver_now
 
       return render history_as_json(email, 'test_sent')
 
@@ -64,7 +64,7 @@ class ReceiptEmailsController < ApplicationController
     emails = ReceiptEmail.where(day_of_month: Date.today.day, active: true)
 
     emails.each do |email|
-        IaqMailer.send_automatic_receipt_email(email).deliver_now
+        FlorianMailer.send_automatic_receipt_email(email).deliver_now
     end
   end
 
@@ -117,7 +117,7 @@ class ReceiptEmailsController < ApplicationController
     begin
       date = Date.strptime("{ 1, " + params[:competence][0..1] + ", " + params[:competence][3,6] + "}", "{ %d, %m, %Y }")
     rescue Exception => exc
-      raise IaqException.new(I18n.t('alert.email.invalid_competence'))
+      raise FlorianException.new(I18n.t('alert.email.invalid_competence'))
     end
   end
 

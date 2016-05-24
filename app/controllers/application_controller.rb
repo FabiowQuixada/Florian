@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
       if(exc.message.starts_with? '553-5.1.2')
          return I18n.t('exception.invalid_recipient')
       end
-    elsif exc.instance_of? IaqException
+    elsif exc.instance_of? FlorianException
       return exc.message
     end
 

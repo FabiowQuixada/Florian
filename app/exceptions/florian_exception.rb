@@ -1,4 +1,4 @@
-class IaqException < StandardError
+class FlorianException < StandardError
   attr_reader :message
   
   def initialize(data)

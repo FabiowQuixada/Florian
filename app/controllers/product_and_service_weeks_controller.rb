@@ -13,7 +13,7 @@ class ProductAndServiceWeeksController < ApplicationController
       end
 
       if @week.update product_and_service_week_params
-        IaqMailer.send_weekly_prod_and_serv_email(@week, current_user).deliver_now
+        FlorianMailer.send_weekly_prod_and_serv_email(@week, current_user).deliver_now
         else
         @week.errors.messages.map { |key, value| @model.errors[key] << @week.errors.messages[key].first }
         return render 'product_and_service_data/_form'
@@ -39,7 +39,7 @@ class ProductAndServiceWeeksController < ApplicationController
       @model.on_analysis!
 
       if @week.update product_and_service_week_params and @model.save
-        IaqMailer.send_prod_and_serv_to_analysis(@week, current_user).deliver_now        
+        FlorianMailer.send_prod_and_serv_to_analysis(@week, current_user).deliver_now        
       else
         @week.errors.messages.map { |key, value| @model.errors[key] << @week.errors.messages[key].first }
         return render 'product_and_service_data/_form'
@@ -66,7 +66,7 @@ class ProductAndServiceWeeksController < ApplicationController
       @model.finalized!
 
       if @week.update product_and_service_week_params and @model.save
-        IaqMailer.send_monthly_prod_and_serv_email(@week, current_user).deliver_now
+        FlorianMailer.send_monthly_prod_and_serv_email(@week, current_user).deliver_now
       else
         @week.errors.messages.map { |key, value| @model.errors[key] << @week.errors.messages[key].first }
         return render 'product_and_service_data/_form'

@@ -1,4 +1,4 @@
-class ProductAndServiceReport < IaqReport
+class ProductAndServiceReport < FlorianReport
 
   def initialize(path = nil, week)
       @path = path

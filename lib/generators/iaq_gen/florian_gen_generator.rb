@@ -1,4 +1,4 @@
-class IaqGenGenerator < Rails::Generators::NamedBase
+class FlorianGenGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
   argument :name, type: :string
   class_option :singular

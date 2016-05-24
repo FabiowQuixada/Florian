@@ -1,4 +1,4 @@
-class IaqMailer < ApplicationMailer
+class FlorianMailer < ApplicationMailer
 
   def send_test_receipt_email(email, date = nil, user)
     send_email(email, date, user, EmailHistory.send_types[:test], I18n.t('helpers.test_email_prefix'), user.email)

@@ -1,4 +1,4 @@
-class IaqReport < Prawn::Document
+class FlorianReport < Prawn::Document
   attr_accessor :path
 
   PDF_OPTIONS = {
