@@ -1,12 +1,8 @@
-require './lib/modules/prod_serv_module'
-
 class ProductAndServiceWeek < ActiveRecord::Base
 
   # Configuration
   audited
   include ModelHelper
-  include ProdServModule
-  enum status: [ :created, :on_analysis, :finalized ]
 
 
   # Relationships

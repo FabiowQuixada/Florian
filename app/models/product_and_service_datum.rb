@@ -16,6 +16,7 @@ class ProductAndServiceDatum < ActiveRecord::Base
   validates :status, :competence, :presence => true
   validates :competence, uniqueness: true
   validate :validate_model
+  validates :status, inclusion: {in: statuses.keys}
   
 
   # Methods
