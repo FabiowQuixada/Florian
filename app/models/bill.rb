@@ -9,20 +9,13 @@ class Bill < ActiveRecord::Base
 	after_initialize :default_values
 
 
-  # Relationships
-
-
-
   # Validations
   validates :competence, :presence => true, uniqueness: true
-  validates :water, :energy, :telephone, :numericality => { :greater_than_or_equal_to => 0 }
+  validates :water, :energy, :telephone, :numericality => { :greater_than_or_equal_to => 0 }, :presence => true
   validate :validate_model
 
 
   # Methods
-  # def breadcrumb_path
-  #   Hash[I18n.t('menu.XXX') => '', I18n.t('menu.XXX.YYY') => '']
-  # end
   def model_gender 
     'f'
   end
@@ -30,11 +23,12 @@ class Bill < ActiveRecord::Base
   private
   def default_values
     self.competence ||= Date.today
+    self.water ||= 0.00
+    self.energy ||= 0.00
+    self.telephone ||= 0.00
   end
 
   def validate_model
-    byebug
-    self.competence = self.competence.change(:day => 1)
+    self.competence = self.competence.change(:day => 1) if self.competence
   end
-
 end
