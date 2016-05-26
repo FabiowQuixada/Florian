@@ -57,9 +57,7 @@ class Company < ActiveRecord::Base
   end
 
   def contact_qty
-    if contacts.size < 1 or contacts.size > 3
-      errors.add(:contacts, I18n.t('errors.company.contacts', contacts: contacts.size))
-    end
+    errors.add(:contacts, I18n.t('errors.company.contacts', contacts: contacts.size)) if contacts.size != 3
   end
 
   def person?
