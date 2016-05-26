@@ -4,6 +4,8 @@ class Role < ActiveRecord::Base
   audited
   include ModelHelper
 
+  # Relationships
+  has_many :users
 
   # Validations
   validates :name, uniqueness: true
