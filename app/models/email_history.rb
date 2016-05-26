@@ -11,6 +11,7 @@ class EmailHistory < ActiveRecord::Base
 
 
   # Validations
+  validates :value, :body, :recipients_array, :presence => true
   validates :send_type, inclusion: {in: send_types.keys}
 
 

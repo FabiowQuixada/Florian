@@ -18,7 +18,6 @@ class ReceiptEmail < ActiveRecord::Base
   # Validations
   validates :recipients_array, presence: {message: I18n.t('errors.email.one_recipient')}
   validate :validate_model
-  validates :company, uniqueness: true
   validates :value, :day_of_month, :company, :body, :presence => true
 
 
