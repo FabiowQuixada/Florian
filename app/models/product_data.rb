@@ -11,12 +11,24 @@ class ProductData < ActiveRecord::Base
 
   # Validations
   validate :validate_model
-  #validates :mesh, :cream, :protector, :silicon, :mask, :foam, :skin_expander, :cervical_collar, :presence => "true"
+  #validates :mesh, :cream, :protector, :silicon, :mask, :foam, :skin_expander, :cervical_collar, :presence => true
 
 
   # Methods
   def validate_model
-    mesh.blank? or cream.blank? or protector.blank? or silicon.blank? or mask.blank? or foam.blank? or skin_expander.blank? or cervical_collar.blank?
+
+    self.is_valid = true
+
+    ProductData.products.each do |product|
+      if send(product).nil? or send(product).blank?
+        # errors.add(product, I18n.t('errors.messages.blank', attribute: I18n.t('activerecord.attributes.product_datum.' + product)))
+        self.is_valid = false
+        return false  
+      end
+    end
+
+    true
+
   end
 
   def self.products
@@ -32,5 +44,15 @@ class ProductData < ActiveRecord::Base
     self.class.products.each {|product| sum += (self[product] ? self[product] : 0)}
     sum
   end
+
+  def valid?(context = nil)
+    context ||= (new_record? ? :create : :update)
+    output = super(context)
+    errors.empty? && output && is_valid
+  end
+
+
+  private 
+    attr_accessor :is_valid
 
 end

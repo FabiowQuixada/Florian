@@ -97,6 +97,7 @@ pt-BR:
         start_date: Data de início
         end_date: Data de término
       service_datum:
+        service_type: Tipo de serviço
         psychology: Psicologia
         physiotherapy: Fisioterapia
         plastic_surgery: Cirurgia plástica
@@ -607,6 +608,7 @@ pt-BR:
       all_attendances_are_mandatory: "Todos os atendimentos são obrigatórios: Semana %{week_number};"
       all_returns_are_mandatory: "Todos os retornos são obrigatórios: Semana %{week_number};"
       all_products_are_mandatory: "Todos os produtos são obrigatórios: Semana %{week_number};"
+      weeks_qty: "Número de semanas inválido: %{weeks};"
     format: "%{message}"
     messages:
       accepted: "O campo '%{attribute}' deve ser aceito;"

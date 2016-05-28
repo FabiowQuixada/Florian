@@ -11,12 +11,31 @@ class ServiceData < ActiveRecord::Base
 
   # Validations
   validate :validate_model
-  #validates :psychology, :physiotherapy, :plastic_surgery, :mesh, :gynecology, :occupational_therapy, :presence => true
-  
+  #validates :service_type, presence: true
+  #validates :psychology, :physiotherapy, :plastic_surgery, :mesh, :gynecology, :occupational_therapy, :presence => true  
+
 
   # Methods
   def validate_model
-    psychology.blank? or physiotherapy.blank? or plastic_surgery.blank? or mesh.blank? or gynecology.blank? or occupational_therapy.blank?
+
+    self.is_valid = true
+
+    ServiceData.services.each do |service|
+      if send(service).nil? or send(service).blank?
+        # errors.add(service, I18n.t('errors.messages.blank', attribute: I18n.t('activerecord.attributes.service_datum.' + service)))
+        self.is_valid = false
+        return false
+      end
+    end
+
+    if self.service_type.nil? or self.service_type.blank?
+      # errors.add(:service_type, I18n.t('errors.messages.blank', attribute: I18n.t('activerecord.attributes.service_datum.service_type')))
+      self.is_valid = false
+      return false
+    end
+
+    true
+
   end
 
   def self.services
@@ -32,5 +51,15 @@ class ServiceData < ActiveRecord::Base
     self.class.services.each {|service| sum += (self[service] ? self[service] : 0)}
     sum
   end
+
+  def valid?(context = nil)
+    context ||= (new_record? ? :create : :update)
+    output = super(context)
+    errors.empty? && output && is_valid
+  end
+
+
+  private 
+    attr_accessor :is_valid
 
 end
