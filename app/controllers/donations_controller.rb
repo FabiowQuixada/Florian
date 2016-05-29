@@ -27,8 +27,6 @@ class DonationsController < ApplicationController
 
     # @list = Donation.search params[:search]
 
-    # byebug
-
     # @month = params[:month]
     # @company_id = params[:company_id]
 

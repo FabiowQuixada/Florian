@@ -26,7 +26,6 @@ class ProductAndServiceDataController < ApplicationController
     begin
       Date.strptime("{ 1, " + competence[0..1] + ", " + competence[3,6] + "}", "{ %d, %m, %Y }")
     rescue Exception => exc
-      byebug
       raise FlorianException.new(I18n.t('alert.email.invalid_competence'))
     end
   end
