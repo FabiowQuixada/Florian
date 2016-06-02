@@ -62,6 +62,9 @@ group :development, :test do
   gem "minitest-rails-capybara"
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'database_cleaner'
+  gem 'faker', '~> 1.4', '>= 1.4.3'
+  gem 'blabla', '~> 0.0.2'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'

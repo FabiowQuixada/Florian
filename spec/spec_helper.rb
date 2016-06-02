@@ -21,38 +21,14 @@ RSpec.configure do |config|
   ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'support/factory_girl'
 
 # Add this to load Capybara integration:
 require 'capybara/rspec'
 require 'capybara/rails'
 
 Capybara.default_driver = :selenium
-
-    def login_as_admin
-
-    visit root_path
-
-    email = 'ftquixada@gmail.com'
-
-     fill_in 'E-mail', :with => email
-     fill_in 'Senha', :with => 'fulano0123'
-     check 'Manter-me logado'
-
-     click_on 'Login'
-  end
-
-  def login_as_common_user
-    
-    visit root_path
-
-   email = 'renata.sbq@gmail.com'
-
-    fill_in 'E-mail', :with => email
-    fill_in 'Senha', :with => '4453566486'
-    check 'Manter-me logado'
-
-    click_on 'Login'
-  end
+config.include FactoryGirl::Syntax::Methods
 
   require 'capybara/rspec'
   # rspec-expectations config goes here. You can use an alternate
