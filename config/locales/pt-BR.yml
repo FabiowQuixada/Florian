@@ -137,10 +137,6 @@ pt-BR:
         remark: Anotações gerais
         payment_frequency: Frequência
         payment_period: No. parcelas
-        contacts:
-          contact_0: Responsável
-          contact_1: Secretária
-          contact_2: Setor Financeiro
       contact:
         name: Nome
         position: Cargo
@@ -148,6 +144,8 @@ pt-BR:
         celphone: Celular
         fax: FAX
         email_address: E-mail
+        company: Mantenedora
+        contact_type: Tipo de Contato
       donation:
         company: Mantenedora
         date: Data
