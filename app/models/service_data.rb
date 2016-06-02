@@ -16,6 +16,12 @@ class ServiceData < ActiveRecord::Base
 
 
   # Methods
+  after_initialize do
+    ServiceData.services.each do |service|
+      self.send("#{service}=", 0)
+    end
+  end
+
   def validate_model
 
     self.is_valid = true

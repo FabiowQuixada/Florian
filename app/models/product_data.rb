@@ -15,6 +15,12 @@ class ProductData < ActiveRecord::Base
 
 
   # Methods
+  after_initialize do
+    ProductData.products.each do |product|
+      self.send("#{product}=", 0)
+    end
+  end
+
   def validate_model
 
     self.is_valid = true
