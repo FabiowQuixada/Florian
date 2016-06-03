@@ -29,8 +29,8 @@ describe Company, :type => :model do
 
   # it { should validate_uniqueness_of(:cpf) }
   # it { should validate_uniqueness_of(:cnpj) }
-  it { should validate_uniqueness_of(:registration_name) }
-  it { should validate_uniqueness_of(:name) }
+  # it { should validate_uniqueness_of(:registration_name) }
+  # it { should validate_uniqueness_of(:name) }
 
 
   # Relationships
