@@ -21,9 +21,8 @@ class ProductAndServiceWeek < ActiveRecord::Base
   after_initialize do
     unless persisted?
       if self.service_data.empty?
-        for i in 0..1
-           self.service_data.new
-        end
+        self.service_data.new :service_type => ServiceData.service_types[:attendance]
+        self.service_data.new :service_type => ServiceData.service_types[:return]
       end
 
       self.product_data ||= ProductData.new
@@ -36,7 +35,6 @@ class ProductAndServiceWeek < ActiveRecord::Base
   end
 
   def validate_model
-
     errors.add(:start_date, I18n.t('errors.product_and_service_datum.period_is_mandatory', week_number: number.to_s)) if !self.end_date or !self.start_date
 
     errors.add(:start_date, I18n.t('errors.product_and_service_datum.invalid_period', week_number: number.to_s)) if self.end_date and self.start_date and self.end_date < self.start_date

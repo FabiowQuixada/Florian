@@ -25,17 +25,23 @@ describe ProductAndServiceWeek, :type => :model do
   end
 
   it "should display a general product data message" do
-    week = ProductAndServiceWeek.create(number: week_number)
+    week = build(:product_and_service_week, number: week_number)
+    week.product_data.mesh = nil
+    week.save
     expect(week.errors.full_messages).to include I18n.t('errors.product_and_service_datum.all_products_are_mandatory', week_number: week_number)
   end
 
   it "should display a general attendance data message" do
-    week = ProductAndServiceWeek.create(number: week_number)
+    week = build(:product_and_service_week, number: week_number)
+    week.service_data[0].mesh = nil
+    week.save
     expect(week.errors.full_messages).to include I18n.t('errors.product_and_service_datum.all_attendances_are_mandatory', week_number: week_number)
   end
 
   it "should display a general return data message" do
-    week = ProductAndServiceWeek.create(number: week_number)
+    week = build(:product_and_service_week, number: week_number)
+    week.service_data[1].mesh = nil
+    week.save
     expect(week.errors.full_messages).to include I18n.t('errors.product_and_service_datum.all_returns_are_mandatory', week_number: week_number)
   end
 
