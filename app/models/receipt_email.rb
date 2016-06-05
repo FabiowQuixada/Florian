@@ -79,7 +79,7 @@ class ReceiptEmail < ActiveRecord::Base
     result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
     result = result.gsub(I18n.t('tags.company'), company.name)
     result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
-    result += " \n \n-- \n" + user.signature
+    result += user.signature
     result
   end
 

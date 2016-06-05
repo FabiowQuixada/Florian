@@ -61,7 +61,7 @@ class SystemSetting < ActiveRecord::Base
 
     result = pse_body
     result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
-    result += " \n \n-- \n" + user.signature
+    result += user.signature
     result
   end
 
