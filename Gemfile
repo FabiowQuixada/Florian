@@ -21,6 +21,8 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 gem 'bootstrap-datepicker-rails'
 gem 'jquery-tablesorter'
 gem 'jquery-turbolinks'
+gem 'rubocop', require: false
+gem 'rubocop-rspec'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
