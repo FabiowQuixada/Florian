@@ -41,6 +41,8 @@ PHONE_FORMAT = /(\(\d{2}\))? \d{4,5}-\d{4}/
 ADMIN_ROLE = "Admin"
 GUEST_ROLE = "Visitante"
 
+SAMPLE_RECIPIENTS = 'exemplo@gmail.com,exemplo2@yahoo.com.br'
+
 SSETTINGS_PSE_RECIPIENTS = 'exemplo@gmail.com'
 SSETTINGS_PSE_DAY = 1
 SSETTINGS_PSE_TITLE_PREFIX = 'Relatório de Produtos e Serviços - '
