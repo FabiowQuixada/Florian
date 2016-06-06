@@ -24,8 +24,7 @@ class Company < ActiveRecord::Base
 
 
   # Validations
-  validates :registration_name, uniqueness: true, :allow_blank => true, if: :company?
-  validates :name, uniqueness: true, :allow_blank => true
+  validates :registration_name, uniqueness: true, if: :company?, :allow_blank => true
   validate :unique_cnpj
   validate :unique_cpf
   validate :contact_qty
@@ -46,7 +45,7 @@ class Company < ActiveRecord::Base
   after_initialize do
     if self.contacts.empty?
       for i in 0..2
-         self.contacts.new(contact_type: i)
+         self.contacts.new(contact_type: i, company: self)
       end
     end
   end
