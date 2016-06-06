@@ -158,9 +158,9 @@
 
 			<input type="hidden" name="product_and_service_week[service_data_attributes][1][id]" id="product_and_service_week_service_data_attributes_1_id">
 
-			<input type="hidden" value="0" name="product_and_service_week[service_data_attributes][0][service_type]" id="product_and_service_week_service_data_attributes_1_service_type">
+			<input type="hidden" value="attendance" name="product_and_service_week[service_data_attributes][0][service_type]" id="product_and_service_week_service_data_attributes_1_service_type">
 
-			<input type="hidden" value="1" name="product_and_service_week[service_data_attributes][1][service_type]" id="product_and_service_week_service_data_attributes_1_service_type">
+			<input type="hidden" value="return" name="product_and_service_week[service_data_attributes][1][service_type]" id="product_and_service_week_service_data_attributes_1_service_type">
 		</div>
 
 		<%= render partial: "service_data/form", locals: {week: ProductAndServiceWeek.new, index: -1, week_form: hidden_f}%>
@@ -325,9 +325,9 @@
 
 
 		// Service types;
-		$('#product_and_service_week_service_data_0_service_type').val(0);
+		$('#product_and_service_week_service_data_0_service_type').val('<%= :attendance %>');
 
-		$('#product_and_service_week_service_data_1_service_type').val(1);
+		$('#product_and_service_week_service_data_1_service_type').val('<%= :return %>');
 
 		// The final data will be sent to the the institute's clients. Else, the partial data will be sent to the collaborators;
 		if(week_number == <%= final_week_number-1 %>) {
