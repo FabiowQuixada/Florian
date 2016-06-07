@@ -2,55 +2,51 @@ require 'test_helper'
 
 class ReceiptEmailFlowTest < Capybara::Rails::TestCase
 
-        test "resend e-mail through listing page" do
+  test 'resend e-mail through listing page' do
+    login_as_admin
 
-            login_as_admin
+    visit receipt_emails_path
 
-            visit receipt_emails_path
+    all('.resend_btn').first.click
+    fill_in 'resend_competence', with: '10/2015' + "\n"
+    click_on 'Enviar'
 
-            all(".resend_btn").first.click()
-            fill_in 'resend_competence', :with => '10/2015' + "\n"
-            click_on 'Enviar'
+    assert_content page, 'sucesso'
+  end
 
-            assert_content page, "sucesso"
-      end
+  test 'resend e-mail through update page' do
+    login_as_admin
 
-      test "resend e-mail through update page" do
+    visit edit_receipt_email_path ReceiptEmail.first.id
 
-            login_as_admin
+    all('.resend_btn').first.click
+    fill_in 'resend_competence', with: '10/2015' + "\n"
+    click_on 'Enviar'
 
-            visit edit_receipt_email_path ReceiptEmail.first.id
+    assert_content page, 'sucesso'
+  end
 
-            all(".resend_btn").first.click()
-            fill_in 'resend_competence', :with => '10/2015' + "\n"
-            click_on 'Enviar'
+  test 'send test e-mail through listing page' do
+    login_as_admin
 
-            assert_content page, "sucesso"
-      end
+    visit receipt_emails_path
 
-      test "send test e-mail through listing page" do
+    all('.send_test_btn').first.click
+    fill_in 'send_test_competence', with: '10/2015' + "\n"
+    click_on 'Enviar'
 
-            login_as_admin
+    assert_content page, 'sucesso'
+  end
 
-            visit receipt_emails_path
+  test 'send test e-mail through update page' do
+    login_as_admin
 
-            all(".send_test_btn").first.click()
-            fill_in 'send_test_competence', :with => '10/2015' + "\n"
-            click_on 'Enviar'
+    visit edit_receipt_email_path ReceiptEmail.first.id
 
-            assert_content page, "sucesso"
-      end
+    all('.send_test_btn').first.click
+    fill_in 'send_test_competence', with: '10/2015' + "\n"
+    click_on 'Enviar'
 
-      test "send test e-mail through update page" do
-
-            login_as_admin
-
-            visit edit_receipt_email_path ReceiptEmail.first.id
-
-            all(".send_test_btn").first.click()
-            fill_in 'send_test_competence', :with => '10/2015' + "\n"
-            click_on 'Enviar'
-
-            assert_content page, "sucesso"
-      end
+    assert_content page, 'sucesso'
+  end
 end

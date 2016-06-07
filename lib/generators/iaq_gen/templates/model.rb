@@ -3,7 +3,7 @@ class ModelName < ActiveRecord::Base
   # Configuration
   audited
   include ModelHelper
-  #extra_conf
+  # extra_conf
 
 
   # Relationships

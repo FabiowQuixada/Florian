@@ -1,7 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-describe ServiceData, :type => :model do
-
+describe ServiceData, type: :model do
   # it { should validate_presence_of(:psychology) }
   # it { should validate_presence_of(:physiotherapy) }
   # it { should validate_presence_of(:plastic_surgery) }
@@ -11,5 +10,4 @@ describe ServiceData, :type => :model do
 
   # Relationships
   it { should belong_to :product_and_service_week }
-
 end

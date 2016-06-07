@@ -1,7 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-describe SystemSetting, :type => :model do
-
+describe SystemSetting, type: :model do
   it { should validate_presence_of(:pse_recipients_array).with_message I18n.t('errors.system_setting.recipients') }
   it { should validate_presence_of(:pse_private_recipients_array).with_message I18n.t('errors.system_setting.private_recipients') }
   it { should validate_presence_of(:re_title) }
@@ -13,5 +12,4 @@ describe SystemSetting, :type => :model do
 
   # Relationships
   it { should belong_to :user }
-
 end

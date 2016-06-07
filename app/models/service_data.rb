@@ -13,14 +13,14 @@ class ServiceData < ActiveRecord::Base
   # Validations
   validate :validate_model
   validates :service_type, presence: true
-  validates :service_type, inclusion: {in: service_types.keys}, :allow_nil => true
-  #validates :psychology, :physiotherapy, :plastic_surgery, :mesh, :gynecology, :occupational_therapy, :presence => true  
+  validates :service_type, inclusion: { in: service_types.keys }, allow_nil: true
+  # validates :psychology, :physiotherapy, :plastic_surgery, :mesh, :gynecology, :occupational_therapy, :presence => true
 
 
   # Methods
   after_initialize do
     ServiceData.services.each do |service|
-      self.send("#{service}=", 0)
+      send("#{service}=", 0)
     end
   end
 
@@ -29,14 +29,13 @@ class ServiceData < ActiveRecord::Base
     self.is_valid = true
 
     ServiceData.services.each do |service|
-      if send(service).nil? or send(service).blank?
-        errors.add(service, I18n.t('errors.messages.blank', attribute: I18n.t('activerecord.attributes.service_datum.' + service)))
-        self.is_valid = false
-        return false
-      end
+      next unless send(service).nil? || send(service).blank?
+      errors.add(service, I18n.t('errors.messages.blank', attribute: I18n.t('activerecord.attributes.service_datum.' + service)))
+      self.is_valid = false
+      return false
     end
 
-    if self.service_type.nil? or self.service_type.blank?
+    if service_type.nil? || service_type.blank?
       errors.add(:service_type, I18n.t('errors.messages.blank', attribute: I18n.t('activerecord.attributes.service_datum.service_type')))
       self.is_valid = false
       return false
@@ -47,7 +46,7 @@ class ServiceData < ActiveRecord::Base
   end
 
   def self.services
-    ['psychology', 'physiotherapy', 'plastic_surgery', 'mesh', 'gynecology', 'occupational_therapy']
+    %w(psychology physiotherapy plastic_surgery mesh gynecology occupational_therapy)
   end
 
   def self.number_of_services
@@ -56,7 +55,7 @@ class ServiceData < ActiveRecord::Base
 
   def qty
     sum = 0
-    self.class.services.each {|service| sum += (self[service] ? self[service] : 0)}
+    self.class.services.each { |service| sum += (self[service] ? self[service] : 0) }
     sum
   end
 
@@ -67,7 +66,8 @@ class ServiceData < ActiveRecord::Base
   end
 
 
-  private 
-    attr_accessor :is_valid
+  private
+
+  attr_accessor :is_valid
 
 end

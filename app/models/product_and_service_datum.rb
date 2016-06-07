@@ -3,27 +3,27 @@ class ProductAndServiceDatum < ActiveRecord::Base
   # Configuration
   audited
   include ModelHelper
-  enum status: [ :created, :on_analysis, :finalized ]
+  enum status: [:created, :on_analysis, :finalized]
 
 
   # Relationships
-  has_many :product_and_service_weeks, -> { order("number") }, :dependent => :destroy
+  has_many :product_and_service_weeks, -> { order('number') }, dependent: :destroy
   alias_attribute :weeks, :product_and_service_weeks
   accepts_nested_attributes_for :product_and_service_weeks
-  
+
 
   # Validations
-  validates :status, :competence, :presence => true
+  validates :status, :competence, presence: true
   validates :competence, uniqueness: true
   validate :validate_model
-  validates :status, inclusion: {in: statuses.keys}
-  
+  validates :status, inclusion: { in: statuses.keys }
+
 
   # Methods
   after_initialize do
-    if self.product_and_service_weeks.empty?
-      for i in 1..NUMBER_OF_WEEKS+2
-         self.product_and_service_weeks.new :number => i
+    if product_and_service_weeks.empty?
+      for i in 1..NUMBER_OF_WEEKS + 2
+        product_and_service_weeks.new number: i
       end
     end
 
@@ -41,16 +41,16 @@ class ProductAndServiceDatum < ActiveRecord::Base
   def service_qty
     sum = 0
 
-    weeks.each {|week| sum += week.service_qty if week.number <= 5 }
-    
+    weeks.each { |week| sum += week.service_qty if week.number <= 5 }
+
     sum
   end
 
   def product_qty
     sum = 0
 
-    weeks.each {|week| sum += week.product_qty if week.number <= 5 }
-    
+    weeks.each { |week| sum += week.product_qty if week.number <= 5 }
+
     sum
   end
 
@@ -65,7 +65,7 @@ class ProductAndServiceDatum < ActiveRecord::Base
   private
 
   def validate_model
-    self.competence = self.competence.change(:day => 1) if self.competence
+    self.competence = self.competence.change(day: 1) if self.competence
 
     errors.add(:weeks, I18n.t('errors.product_and_service_datum.weeks_qty', weeks: weeks.size)) if weeks.length != 7
   end

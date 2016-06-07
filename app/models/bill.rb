@@ -4,23 +4,24 @@ class Bill < ActiveRecord::Base
   audited
   include ModelHelper
   usar_como_dinheiro :water
-	usar_como_dinheiro :energy
-	usar_como_dinheiro :telephone
-	after_initialize :default_values
+  usar_como_dinheiro :energy
+  usar_como_dinheiro :telephone
+  after_initialize :default_values
 
 
   # Validations
-  validates :competence, :presence => true, uniqueness: true
-  validates :water, :energy, :telephone, :numericality => { :greater_than_or_equal_to => 0 }, :presence => true
+  validates :competence, presence: true, uniqueness: true
+  validates :water, :energy, :telephone, numericality: { greater_than_or_equal_to: 0 }, presence: true
   validate :validate_model
 
 
   # Methods
-  def model_gender 
+  def model_gender
     'f'
   end
 
   private
+
   def default_values
     self.competence ||= Date.today
     self.water ||= 0.00
@@ -29,6 +30,6 @@ class Bill < ActiveRecord::Base
   end
 
   def validate_model
-    self.competence = self.competence.change(:day => 1) if self.competence
+    self.competence = self.competence.change(day: 1) if self.competence
   end
 end

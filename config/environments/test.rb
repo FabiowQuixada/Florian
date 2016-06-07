@@ -2,13 +2,14 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              ENV["address"],
-    port:                 ENV["port"],
-    domain:               ENV["domain"],
-    user_name:            ENV["user_name"],
-    password:             ENV["password"],
-    authentication:       ENV["authentication"],
-    enable_starttls_auto: true  }
+    address:              ENV['address'],
+    port:                 ENV['port'],
+    domain:               ENV['domain'],
+    user_name:            ENV['user_name'],
+    password:             ENV['password'],
+    authentication:       ENV['authentication'],
+    enable_starttls_auto: true
+  }
 
   config.action_mailer.perform_deliveries = false
 

@@ -3,7 +3,7 @@ class CreateRoles < ActiveRecord::Migration
     create_table :roles do |t|
       t.string :name,                         null: false, unique: true
       t.string :description,                  null: false
-      t.boolean :active,      default: true,  null: false
+      t.boolean :active, default: true, null: false
 
       t.timestamps null: false
     end

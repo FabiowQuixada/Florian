@@ -1,7 +1,6 @@
 class CreateContacts < ActiveRecord::Migration
   def change
     create_table :contacts do |t|
-
       t.string :name
       t.string :position
       t.string :email_address
@@ -9,7 +8,7 @@ class CreateContacts < ActiveRecord::Migration
       t.string :celphone
       t.string :fax
 
-      t.integer :contact_type,           null: false
+      t.integer :contact_type, null: false
 
       t.timestamps null: false
     end

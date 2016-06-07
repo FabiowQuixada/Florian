@@ -16,27 +16,23 @@ class User < ActiveRecord::Base
 
 
   # Validations
-  validates :name, :email, :role, :presence => true
-  validates :signature, :bcc, :presence => true
-  validates :name, :email, :uniqueness => true
+  validates :name, :email, :role, presence: true
+  validates :signature, :bcc, presence: true
+  validates :name, :email, uniqueness: true
 
 
   # Methods
   def admin?
 
-    if self.role.nil?
-      return false
-    end
+    return false if role.nil?
 
-    self.role.name == ADMIN_ROLE
+    role.name == ADMIN_ROLE
   end
 
   def guest?
-    if self.role.nil?
-      return false
-    end
+    return false if role.nil?
 
-    self.role.name == GUEST_ROLE
+    role.name == GUEST_ROLE
   end
 
   def active_for_authentication?
@@ -52,18 +48,18 @@ class User < ActiveRecord::Base
   end
 
   def build_default_system_setting
-  # build default profile instance. Will use default params.
-  # The foreign key to the owning User model is set automatically
-  build_system_setting
+    # build default profile instance. Will use default params.
+    # The foreign key to the owning User model is set automatically
+    build_system_setting
 
-  system_setting.pse_recipients_array = SSETTINGS_PSE_RECIPIENTS
-  system_setting.pse_day_of_month = SSETTINGS_PSE_DAY
-  system_setting.pse_title = SSETTINGS_PSE_TITLE
-  system_setting.pse_body = SSETTINGS_PSE_BODY
-  system_setting.re_title = SSETTINGS_RE_TITLE
-  system_setting.re_body = SSETTINGS_RE_BODY
+    system_setting.pse_recipients_array = SSETTINGS_PSE_RECIPIENTS
+    system_setting.pse_day_of_month = SSETTINGS_PSE_DAY
+    system_setting.pse_title = SSETTINGS_PSE_TITLE
+    system_setting.pse_body = SSETTINGS_PSE_BODY
+    system_setting.re_title = SSETTINGS_RE_TITLE
+    system_setting.re_body = SSETTINGS_RE_BODY
 
-  system_setting.valid?
+    system_setting.valid?
 end
 
 end

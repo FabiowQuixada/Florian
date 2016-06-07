@@ -6,7 +6,7 @@ class AddPessoaFisicaDataToCompany < ActiveRecord::Migration
     add_column :companies, :cpf, :string
     add_column :companies, :entity_type, :integer
 
-    change_column :companies, :cnpj, :string, :null => true
-    change_column :companies, :registration_name, :string, :null => true
+    change_column :companies, :cnpj, :string, null: true
+    change_column :companies, :registration_name, :string, null: true
   end
 end

@@ -13,10 +13,10 @@ module IaqProject
 
     Prawn::Font::AFM.hide_m17n_warning = true
 
-    config.exceptions_app = self.routes
+    config.exceptions_app = routes
 
     # Avoids insertion of a error message div in the forms, which would break the layout
-    config.action_view.field_error_proc = Proc.new { |html_tag, instance|
+    config.action_view.field_error_proc = proc { |html_tag, _instance|
       html_tag
     }
 

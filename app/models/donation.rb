@@ -14,12 +14,12 @@ class Donation < ActiveRecord::Base
 
   # Validations
   validate :validate_model
-  validates :donation_date, :company, :presence => true
+  validates :donation_date, :company, presence: true
 
 
   # Methods
   def init
-      self.donation_date ||= Time.now
+    self.donation_date ||= Time.now
   end
 
   def default_values
@@ -28,9 +28,9 @@ class Donation < ActiveRecord::Base
 
   def validate_model
 
-    if ((value.nil? or value != '0,00') or (!remark.nil? or !remark.empty?)) and !donation_date.is_a?(Date)
+    if ((value.nil? || value != '0,00') || (!remark.nil? || !remark.empty?)) && !donation_date.is_a?(Date)
       errors.add :donation_date, I18n.t('errors.donation.date_mandatory')
-    elsif (value.nil? or value == '0,00') and (remark.nil? or remark.empty?) and donation_date.is_a?(Date)
+    elsif (value.nil? || value == '0,00') && (remark.nil? || remark.empty?) && donation_date.is_a?(Date)
       errors.add :donation_date, I18n.t('errors.donation.value_or_remark')
     end
   end

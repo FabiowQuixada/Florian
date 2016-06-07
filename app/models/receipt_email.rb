@@ -16,27 +16,27 @@ class ReceiptEmail < ActiveRecord::Base
 
 
   # Validations
-  validates :recipients_array, presence: {message: I18n.t('errors.email.one_recipient')}
+  validates :recipients_array, presence: { message: I18n.t('errors.email.one_recipient') }
   validate :validate_model
-  validates :value, :day_of_month, :company, :body, :presence => true
+  validates :value, :day_of_month, :company, :body, presence: true
 
 
   # Methods
   def validate_model
 
-    if !value.blank?
+    unless value.blank?
 
       if value == 0
         errors.add :value, I18n.t('errors.email.value_mandatory')
       elsif value < 0
         errors.add :value, I18n.t('errors.email.value_positive')
-      elsif value > 1000000
+      elsif value > 1_000_000
         errors.add :value, I18n.t('errors.email.value_max')
       end
     end
 
-    if !day_of_month.blank?
-      if day_of_month < 1 or !day_of_month.is_a? Integer
+    unless day_of_month.blank?
+      if day_of_month < 1 || !day_of_month.is_a?(Integer)
         errors.add(:day_of_month, I18n.t('errors.email.month_mandatory'))
       elsif day_of_month > 28
         errors.add(:day_of_month, I18n.t('errors.email.month_max'))
@@ -58,36 +58,30 @@ class ReceiptEmail < ActiveRecord::Base
 
   def processed_title(user, date = nil)
 
-    if date.nil?
-      date = Date.today
-    end
+    date = Date.today if date.nil?
 
     result = user.system_setting.re_title
     result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
     result = result.gsub(I18n.t('tags.company'), company.name)
-    result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
+    result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + ' (' + value.real.por_extenso + ')')
     result
   end
 
   def processed_body(user, date = nil)
 
-    if date.nil?
-      date = Date.today
-    end
+    date = Date.today if date.nil?
 
     result = body
     result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
     result = result.gsub(I18n.t('tags.company'), company.name)
-    result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
+    result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + ' (' + value.real.por_extenso + ')')
     result += user.signature
     result
   end
 
   def processed_receipt_text(date = nil)
 
-    if date.nil?
-      date = Date.today
-    end
+    date = Date.today if date.nil?
 
     if company.person?
       result = I18n.t('report.other.receipt_text.person', name: company.name, cpf: company.cpf.to_s, address: company.address, value_tag: I18n.t('tags.value'), competence_tag: I18n.t('tags.competence'))
@@ -97,7 +91,7 @@ class ReceiptEmail < ActiveRecord::Base
 
     result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
     result = result.gsub(I18n.t('tags.company'), company.name)
-    result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + " (" + value.real.por_extenso + ")")
+    result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + ' (' + value.real.por_extenso + ')')
     result
 
   end
@@ -120,25 +114,21 @@ class ReceiptEmail < ActiveRecord::Base
   end
 
   def recipients_as_array
-    if recipients_array.nil? || recipients_array.empty?
-      return Array.new
-    end
+    return [] if recipients_array.nil? || recipients_array.empty?
 
-    recipients_array.split(/,/);
+    recipients_array.split(/,/)
   end
 
   def current_month
-    if day_of_month > Date.today.strftime("%e").to_f
+    if day_of_month > Date.today.strftime('%e').to_f
       return true
     else
-      if day_of_month == Date.today.strftime("%e").to_f
-        if Time.now.hour < ReceiptEmail.daily_send_hour
-          return true
-        end
+      if day_of_month == Date.today.strftime('%e').to_f
+        return true if Time.now.hour < ReceiptEmail.daily_send_hour
       end
     end
 
-    return false
+    false
   end
 
   def breadcrumb_path

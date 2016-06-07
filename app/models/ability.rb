@@ -2,20 +2,20 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-      user ||= User.new # guest user (not logged in)
+    user ||= User.new # guest user (not logged in)
 
-      if user.admin?
-        can :manage, :all
-      else
+    if user.admin?
+      can :manage, :all
+    else
 
-        can :manage, Company
-        can :manage, Bill
-        can :manage, Donation
-        can :manage, SystemSetting
-        can :manage, ReceiptEmail
-        can :manage, ProductAndServiceDatum
+      can :manage, Company
+      can :manage, Bill
+      can :manage, Donation
+      can :manage, SystemSetting
+      can :manage, ReceiptEmail
+      can :manage, ProductAndServiceDatum
 
-      end
+    end
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.

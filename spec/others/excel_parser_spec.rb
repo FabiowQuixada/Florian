@@ -1,9 +1,7 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe ExcelParser do
-
   it 'loads the companies appropriately from excel file' do
-    expect(ExcelParser.parse).to be_empty
+    expect(described_class.parse).to be_empty
   end
-
 end

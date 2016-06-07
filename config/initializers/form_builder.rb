@@ -1,5 +1,5 @@
 class ActionView::Helpers::FormBuilder
-  alias :orig_label :label
+  alias orig_label label
 
   # add a 'required' CSS class to the field label if the field is required
   def label(method, content_or_options = nil, options = nil, &block)
@@ -10,15 +10,15 @@ class ActionView::Helpers::FormBuilder
     end
 
     if object.class.respond_to?(:validators_on) &&
-      object.class.validators_on(method).map(&:class).include?(ActiveRecord::Validations::PresenceValidator)
+       object.class.validators_on(method).map(&:class).include?(ActiveRecord::Validations::PresenceValidator)
 
       if options.class != Hash
-        options = {:class => "required"}
+        options = { class: 'required' }
       else
-        options[:class] = ((options[:class] || "") + " required").split(" ").uniq.join(" ")
+        options[:class] = ((options[:class] || '') + ' required').split(' ').uniq.join(' ')
       end
     end
 
-    self.orig_label(method, content, options || {}, &block)
+    orig_label(method, content, options || {}, &block)
   end
 end

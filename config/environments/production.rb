@@ -3,14 +3,15 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              ENV["address"],
-    port:                 ENV["port"],
-    domain:               ENV["domain"],
-    user_name:            ENV["user_name"],
-    password:             ENV["password"],
-    authentication:       ENV["authentication"],
+    address:              ENV['address'],
+    port:                 ENV['port'],
+    domain:               ENV['domain'],
+    user_name:            ENV['user_name'],
+    password:             ENV['password'],
+    authentication:       ENV['authentication'],
     tls: true,
-    enable_starttls_auto: true  }
+    enable_starttls_auto: true
+  }
 
   config.action_mailer.perform_deliveries = true
 
@@ -45,7 +46,7 @@ Rails.application.configure do
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true
-  config.assets.precompile =  ['*.js', '*.css', '*.css.erb']
+  config.assets.precompile = ['*.js', '*.css', '*.css.erb']
 
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.

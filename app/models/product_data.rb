@@ -11,13 +11,13 @@ class ProductData < ActiveRecord::Base
 
   # Validations
   validate :validate_model
-  #validates :mesh, :cream, :protector, :silicon, :mask, :foam, :skin_expander, :cervical_collar, :presence => true
+  # validates :mesh, :cream, :protector, :silicon, :mask, :foam, :skin_expander, :cervical_collar, :presence => true
 
 
   # Methods
   after_initialize do
     ProductData.products.each do |product|
-      self.send("#{product}=", 0)
+      send("#{product}=", 0)
     end
   end
 
@@ -26,11 +26,10 @@ class ProductData < ActiveRecord::Base
     self.is_valid = true
 
     ProductData.products.each do |product|
-      if send(product).nil? or send(product).blank?
-        errors.add(product, I18n.t('errors.messages.blank', attribute: I18n.t('activerecord.attributes.product_datum.' + product)))
-        self.is_valid = false
-        return false  
-      end
+      next unless send(product).nil? || send(product).blank?
+      errors.add(product, I18n.t('errors.messages.blank', attribute: I18n.t('activerecord.attributes.product_datum.' + product)))
+      self.is_valid = false
+      return false
     end
 
     true
@@ -38,7 +37,7 @@ class ProductData < ActiveRecord::Base
   end
 
   def self.products
-    ['mesh', 'cream', 'protector', 'silicon', 'mask', 'foam', 'skin_expander', 'cervical_collar']
+    %w(mesh cream protector silicon mask foam skin_expander cervical_collar)
   end
 
   def self.number_of_products
@@ -47,7 +46,7 @@ class ProductData < ActiveRecord::Base
 
   def qty
     sum = 0
-    self.class.products.each {|product| sum += (self[product] ? self[product] : 0)}
+    self.class.products.each { |product| sum += (self[product] ? self[product] : 0) }
     sum
   end
 
@@ -58,7 +57,8 @@ class ProductData < ActiveRecord::Base
   end
 
 
-  private 
-    attr_accessor :is_valid
+  private
+
+  attr_accessor :is_valid
 
 end

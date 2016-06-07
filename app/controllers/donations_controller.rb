@@ -10,15 +10,12 @@ class DonationsController < ApplicationController
     @month_list = []
 
     @list.each do |donation|
-
       month = I18n.localize(donation.donation_date, format: :competence).capitalize
 
-      unless @month_list.include?(month)
-        @month_list << month
-      end
+      @month_list << month unless @month_list.include?(month)
     end
 
-    @month = "Dezembro/2015"
+    @month = 'Dezembro/2015'
   end
 
   def filter
@@ -37,7 +34,7 @@ class DonationsController < ApplicationController
 
     @model = model_class.new donation_params
 
-    @breadcrumbs = Hash[@model.model_name.human(:count => 2) => send(@model.model_name.route_key + "_path"), t(@model.genderize('helpers.action.new')) => ""]
+    @breadcrumbs = Hash[@model.model_name.human(count: 2) => send(@model.model_name.route_key + '_path'), t(@model.genderize('helpers.action.new')) => '']
 
     if @model.save
       redirect_to new_donation_path, notice: genderize_tag(@model, 'created')
@@ -53,6 +50,6 @@ class DonationsController < ApplicationController
   end
 
   def order_attribute
-    "donation_date DESC"
+    'donation_date DESC'
   end
 end

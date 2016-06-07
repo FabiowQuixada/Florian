@@ -14,65 +14,64 @@ class FlorianMailer < ApplicationMailer
 
   def send_weekly_prod_and_serv_email(week, user)
 
-      ProductAndServiceReport.new("/tmp/prod_serv.pdf", week).save
-      attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
+    ProductAndServiceReport.new('/tmp/prod_serv.pdf', week).save
+    attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
 
-      period = week.start_date.to_s + ' ' + I18n.t('helpers.to') + ' ' + week.end_date.to_s
+    period = week.start_date.to_s + ' ' + I18n.t('helpers.to') + ' ' + week.end_date.to_s
 
-      mail(to: user.system_setting.pse_private_recipients_array,
-        subject: SSETTINGS_PSE_TITLE_PREFIX + period,
-        body: SSETTINGS_PSE_BODY_WEEK.gsub(I18n.t('tags.competence'), period))
+    mail(to: user.system_setting.pse_private_recipients_array,
+         subject: SSETTINGS_PSE_TITLE_PREFIX + period,
+         body: SSETTINGS_PSE_BODY_WEEK.gsub(I18n.t('tags.competence'), period))
   end
 
   def send_prod_and_serv_to_analysis(week, user)
 
-      ProductAndServiceReport.new("/tmp/prod_serv.pdf", week).save
-      attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
+    ProductAndServiceReport.new('/tmp/prod_serv.pdf', week).save
+    attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
 
-      mail(to: ANALYSIS_EMAIL,
-        body: user.system_setting.pse_processed_body(week.product_and_service_datum.competence),
-        subject: user.system_setting.pse_processed_title(week.product_and_service_datum.competence))
+    mail(to: ANALYSIS_EMAIL,
+         body: user.system_setting.pse_processed_body(week.product_and_service_datum.competence),
+         subject: user.system_setting.pse_processed_title(week.product_and_service_datum.competence))
   end
 
   def send_monthly_prod_and_serv_email(week, user)
 
-      ProductAndServiceReport.new("/tmp/prod_serv.pdf", week).save
-      attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
+    ProductAndServiceReport.new('/tmp/prod_serv.pdf', week).save
+    attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
 
-      mail(to: user.system_setting.pse_recipients_array,
-        body: user.system_setting.pse_processed_body(week.product_and_service_datum.competence),
-        subject: user.system_setting.pse_processed_title(week.product_and_service_datum.competence))
+    mail(to: user.system_setting.pse_recipients_array,
+         body: user.system_setting.pse_processed_body(week.product_and_service_datum.competence),
+         subject: user.system_setting.pse_processed_title(week.product_and_service_datum.competence))
   end
 
 
   private
 
-    def send_email(email, date, user, type, prefix = '', recipients = nil)
+  def send_email(email, date, user, type, prefix = '', recipients = nil)
 
-      if recipients.nil?
-        recipients = email.recipients_array
-      end
+    recipients = email.recipients_array if recipients.nil?
 
-      ReceiptReport.new("/tmp/recibo.pdf", email, date).save
-      attachments['recibo_de_doacao.pdf'] = File.read('/tmp/recibo.pdf')
+    ReceiptReport.new('/tmp/recibo.pdf', email, date).save
+    attachments['recibo_de_doacao.pdf'] = File.read('/tmp/recibo.pdf')
 
-      mail(to: recipients,
-        body: email.processed_body(user, date),
-        subject: prefix + email.processed_title(user, date))
+    mail(to: recipients,
+         body: email.processed_body(user, date),
+         subject: prefix + email.processed_title(user, date))
 
-      email.email_histories.create(
-          receipt_email: email,
-          body: email.body,
-          value: email.value,
-          recipients_array: email.recipients_array,
-          user: user,
-          send_type: type)
-    end
+    email.email_histories.create(
+      receipt_email: email,
+      body: email.body,
+      value: email.value,
+      recipients_array: email.recipients_array,
+      user: user,
+      send_type: type
+    )
+  end
 
-    def send_test_email(email, date, user)
-      mail(to: user.email,
-        body: email.processed_body(user, date),
-        subject: I18n.t('helpers.test_email_prefix') + email.processed_title(user, date))
-    end
+  def send_test_email(email, date, user)
+    mail(to: user.email,
+         body: email.processed_body(user, date),
+         subject: I18n.t('helpers.test_email_prefix') + email.processed_title(user, date))
+  end
 
 end

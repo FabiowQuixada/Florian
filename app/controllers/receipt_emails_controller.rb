@@ -9,8 +9,8 @@ class ReceiptEmailsController < ApplicationController
 
     @list = order_emails_by_date
 
-    @recent_emails = EmailHistory.where("created_at >= :start_date AND send_type != :send_type",
-      {start_date: Date.new - ReceiptEmail.recent_emails_days.days, send_type: EmailHistory.send_types[:test]})
+    @recent_emails = EmailHistory.where('created_at >= :start_date AND send_type != :send_type',
+                                        start_date: Date.new - ReceiptEmail.recent_emails_days.days, send_type: EmailHistory.send_types[:test])
 
   end
 
@@ -22,7 +22,7 @@ class ReceiptEmailsController < ApplicationController
 
       date = check_competence
 
-      if !email.valid?
+      unless email.valid?
         return render json: email.errors, status: :unprocessable_entity
       end
 
@@ -44,7 +44,7 @@ class ReceiptEmailsController < ApplicationController
 
       date = check_competence
 
-      if !email.valid?
+      unless email.valid?
         return render json: email.errors, status: :unprocessable_entity
       end
 
@@ -64,7 +64,7 @@ class ReceiptEmailsController < ApplicationController
     emails = ReceiptEmail.where(day_of_month: Date.today.day, active: true)
 
     emails.each do |email|
-        FlorianMailer.send_automatic_receipt_email(email).deliver_now
+      FlorianMailer.send_automatic_receipt_email(email).deliver_now
     end
   end
 
@@ -78,8 +78,8 @@ class ReceiptEmailsController < ApplicationController
 
     emails = ReceiptEmail.all
 
-    this_month_emails = Array.new
-    next_month_emails = Array.new
+    this_month_emails = []
+    next_month_emails = []
 
     emails.each do |email|
       if email.current_month
@@ -89,8 +89,8 @@ class ReceiptEmailsController < ApplicationController
       end
     end
 
-    this_month_emails.sort! { |a,b| a.day_of_month <=> b.day_of_month }
-    next_month_emails.sort! { |a,b| a.day_of_month <=> b.day_of_month }
+    this_month_emails.sort! { |a, b| a.day_of_month <=> b.day_of_month }
+    next_month_emails.sort! { |a, b| a.day_of_month <=> b.day_of_month }
 
     next_month_emails = next_month_emails.sort_by do |item|
       item[:day_of_month]
@@ -106,33 +106,31 @@ class ReceiptEmailsController < ApplicationController
     # Else, load it from the database
     email = ReceiptEmail.find params[:id]
 
-    if !params[:email_id]
-      email.assign_attributes receipt_email_params
-    end
+    email.assign_attributes receipt_email_params unless params[:email_id]
 
     email
   end
 
   def check_competence
-    begin
-      date = Date.strptime("{ 1, " + params[:competence][0..1] + ", " + params[:competence][3,6] + "}", "{ %d, %m, %Y }")
-    rescue Exception => exc
-      raise FlorianException.new(I18n.t('alert.email.invalid_competence'))
-    end
+
+    date = Date.strptime('{ 1, ' + params[:competence][0..1] + ', ' + params[:competence][3, 6] + '}', '{ %d, %m, %Y }')
+  rescue Exception => exc
+    raise FlorianException, I18n.t('alert.email.invalid_competence')
+
   end
 
   def history_as_json(email, type)
 
     history = email.email_histories.last
 
-    return :json => {
-        :message => genderize_tag(email, type),
-        :date => l(history.created_at, format: :really_short),
-        :company => email.company.name,
-        :value => ActionController::Base.helpers.number_to_currency(history.value),
-        :type => history.send_type_desc,
-        :user => history.user.name
-      }
+    { json: {
+      message: genderize_tag(email, type),
+      date: l(history.created_at, format: :really_short),
+      company: email.company.name,
+      value: ActionController::Base.helpers.number_to_currency(history.value),
+      type: history.send_type_desc,
+      user: history.user.name
+    } }
   end
 
 end

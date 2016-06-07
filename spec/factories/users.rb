@@ -1,13 +1,13 @@
 FactoryGirl.define do
   factory :user do
-  	sequence(:name, 1) { |n| "Usuario #{n}" }
-  	email {Faker::Internet.email}
-  	signature 'Att,\nJoao'
-  	bcc {Faker::Internet.email}
-  	password {Faker::Internet.password}
-  	role
+    sequence(:name, 1) { |n| "Usuario #{n}" }
+    email { Faker::Internet.email }
+    signature 'Att,\nJoao'
+    bcc { Faker::Internet.email }
+    password { Faker::Internet.password }
+    role
 
-  	after(:build) do |user, evaluator|
+    after(:build) do |user, _evaluator|
       user.system_setting ||= build(:system_setting, user: user)
     end
 

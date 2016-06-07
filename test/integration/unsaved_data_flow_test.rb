@@ -2,69 +2,62 @@ require 'test_helper'
 
 class UnsavedDataFlowTest < Capybara::Rails::TestCase
 
-       DATA = [Company, Role, User, ReceiptEmail]
+  DATA = [Company, Role, User, ReceiptEmail].freeze
 
-        test "Should display unsaved data warning" do
+  test 'Should display unsaved data warning' do
+    login_as_admin
 
-           login_as_admin
+    DATA.each do |data|
+      begin
 
-            DATA.each do |data|
+            @model = data.new
 
-              begin
+            visit send('edit_' + @model.class.name.singularize.underscore + '_path', data.first.id)
 
-                  @model = data.new
+            all('input').each do |input|
+              unless input[:readonly]
+                input.set 'whatever'
+                break
+              end
+            end
 
-                  visit send("edit_" + @model.class.name.singularize.underscore + "_path", data.first.id)
+            page.find('#form_back_btn').click
 
-                  all("input").each do |input|
+            sleep(inspection_time = 2)
 
-                    if !input[:readonly]
-                      input.set 'whatever'
-                      break
-                    end
-                  end
+            assert page.has_content?('Dados não salvos'), data
 
-                  page.find("#form_back_btn").click
+          rescue Capybara::ElementNotFound => e
 
-                  sleep(inspection_time=2)
+            raise Capybara::ElementNotFound, e.message + ': ' + data.name
+          end
+    end
+  end
 
-                  assert page.has_content?('Dados não salvos'), data
+  test 'Should NOT display unsaved data warning' do
+    login_as_admin
 
-                rescue Capybara::ElementNotFound => e
+    DATA.each do |data|
+      begin
 
-                  raise Capybara::ElementNotFound, e.message + ': ' + data.name
-                 end
+            @model = data.new
 
-           end
-         end
+            visit send('edit_' + @model.class.name.singularize.underscore + '_path', data.first.id)
 
-         test "Should NOT display unsaved data warning" do
+            all('.temp_field').each do |input|
+              input.set 'whatever'
+            end
 
-           login_as_admin
+            page.find('#form_back_btn').click
 
-            DATA.each do |data|
+            sleep(inspection_time = 1)
 
-              begin
+            assert_not page.has_content?('Dados não salvos'), data
+          rescue Capybara::ElementNotFound => e
 
-                  @model = data.new
-
-                  visit send("edit_" + @model.class.name.singularize.underscore + "_path", data.first.id)
-
-                  all(".temp_field").each do |input|
-                      input.set 'whatever'
-                  end
-
-                  page.find("#form_back_btn").click
-
-                  sleep(inspection_time=1)
-
-                  assert_not page.has_content?('Dados não salvos'), data
-                rescue Capybara::ElementNotFound => e
-
-                  raise Capybara::ElementNotFound, e.message + ': ' + data.name
-                 end
-
-           end
-     end
+            raise Capybara::ElementNotFound, e.message + ': ' + data.name
+          end
+    end
+  end
 
 end

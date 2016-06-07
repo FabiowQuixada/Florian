@@ -1,7 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-describe ProductAndServiceDatum, :type => :model do
-
+describe ProductAndServiceDatum, type: :model do
   it { should define_enum_for(:status) }
   # it { should validate_inclusion_of(:status), in: ProductAndServiceDatum.statuses.keys }
 
@@ -14,6 +13,5 @@ describe ProductAndServiceDatum, :type => :model do
 
   # Relationships
   it { should have_many :product_and_service_weeks }
-  #it { should validate_length_of(:product_and_service_weeks).is_equal_to(7) }
-
+  # it { should validate_length_of(:product_and_service_weeks).is_equal_to(7) }
 end

@@ -1,10 +1,9 @@
 class CreateProductAndServiceWeek < ActiveRecord::Migration
   def change
     create_table :product_and_service_weeks do |t|
-
-      t.integer :number,									null: false
-      t.date :start_date,                                   null: false
-      t.date :end_date,                                   null: false
+      t.integer :number,	null: false
+      t.date :start_date, null: false
+      t.date :end_date, null: false
 
       t.timestamps null: false
     end

@@ -11,12 +11,12 @@ class UsersController < ApplicationController
     params.require(:user).permit(:id, :name, :email, :password, :role_id)
   end
 
-  def needs_password?(user, params)
+  def needs_password?(_user, params)
     params[:password].present?
   end
 
   def order_attribute
-    "name"
+    'name'
   end
 
 end

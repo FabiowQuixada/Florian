@@ -11,40 +11,38 @@ class BillsController < ApplicationController
   end
 
   def order_attribute
-    "competence DESC"
+    'competence DESC'
   end
 
   def index_sorting_method
 
     list = Bill.order(:competence)
 
-    @listOfLists = Hash.new
+    @listOfLists = {}
 
-    list.each_with_index do |it, index|
-
+    list.each_with_index do |it, _index|
       year = it.competence.year
       month = it.competence.month
 
-      if !@listOfLists[year]
-        
-        @listOfLists[year] = Array.new 
+      unless @listOfLists[year]
+
+        @listOfLists[year] = []
 
         for i in 0..11 do
-          @listOfLists[year][i] = Array.new 
-          @listOfLists[year][i][0] = "0,00"
-          @listOfLists[year][i][1] = "0,00"
-          @listOfLists[year][i][2] = "0,00"
+          @listOfLists[year][i] = []
+          @listOfLists[year][i][0] = '0,00'
+          @listOfLists[year][i][1] = '0,00'
+          @listOfLists[year][i][2] = '0,00'
         end
       end
 
-      @listOfLists[year][month-1][0] = it.water.to_s
-      @listOfLists[year][month-1][1] = it.energy.to_s
-      @listOfLists[year][month-1][2] = it.telephone.to_s
-
+      @listOfLists[year][month - 1][0] = it.water.to_s
+      @listOfLists[year][month - 1][1] = it.energy.to_s
+      @listOfLists[year][month - 1][2] = it.telephone.to_s
     end
 
     list
 
-  end 
+  end
 
 end

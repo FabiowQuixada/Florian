@@ -1,13 +1,12 @@
 class ProductAndServiceReport < FlorianReport
 
   def initialize(path = nil, week)
-      @path = path
-      @week = week
+    @path = path
+    @week = week
   end
 
   def pdf
     Prawn::Document.new(PDF_OPTIONS) do |pdf|
-
       if @week.number != 7
         title = I18n.t('report.title.weekly_prod_and_service')
         subtitle = (@week.start_date.to_s + ' - ' + @week.end_date.to_s)
@@ -31,7 +30,7 @@ class ProductAndServiceReport < FlorianReport
         total_a += a
         total_b += b
 
-        table << [I18n.t('activerecord.attributes.service_datum.' + service), a.to_s, b.to_s, (a+b).to_s]
+        table << [I18n.t('activerecord.attributes.service_datum.' + service), a.to_s, b.to_s, (a + b).to_s]
       end
 
       table << [I18n.t('helpers.total'), total_a, total_b, total_a + total_b]
@@ -58,7 +57,6 @@ class ProductAndServiceReport < FlorianReport
       print_table pdf, table
 
       footer pdf
-
     end
   end
 

@@ -1,7 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-describe Company, :type => :model do
-
+describe Company, type: :model do
   it { should define_enum_for(:entity_type) }
   it { should define_enum_for(:category) }
   it { should define_enum_for(:group) }
@@ -36,6 +35,5 @@ describe Company, :type => :model do
   # Relationships
   it { should have_many :contacts }
   it { should have_many :donations }
-  #it { should validate_length_of(:contacts).is_equal_to(3) }
-
+  # it { should validate_length_of(:contacts).is_equal_to(3) }
 end

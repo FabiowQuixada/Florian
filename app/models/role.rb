@@ -9,6 +9,6 @@ class Role < ActiveRecord::Base
 
   # Validations
   validates :name, uniqueness: true
-  validates :name, :description, :presence => true
+  validates :name, :description, presence: true
 
 end

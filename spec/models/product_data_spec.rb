@@ -1,7 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-describe ProductData, :type => :model do
-
+describe ProductData, type: :model do
   # it { should validate_presence_of(:mesh) }
   # it { should validate_presence_of(:cream) }
   # it { should validate_presence_of(:protector) }
@@ -13,5 +12,4 @@ describe ProductData, :type => :model do
 
   # Relationships
   it { should belong_to :product_and_service_week }
-
 end

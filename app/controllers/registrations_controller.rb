@@ -1,7 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
 
 
-  #load_and_authorize_resource
+  # load_and_authorize_resource
   before_filter :authenticate_user!
 
   def create
@@ -24,14 +24,14 @@ class RegistrationsController < Devise::RegistrationsController
 
     @model.password = 'l'
 
-    @breadcrumbs = Hash[t('helpers.profile') => ""]
+    @breadcrumbs = Hash[t('helpers.profile') => '']
   end
 
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
 
-    @breadcrumbs = Hash[t('helpers.profile') => ""]
+    @breadcrumbs = Hash[t('helpers.profile') => '']
 
     resource_updated = update_resource(resource, account_update_params)
     yield resource if block_given?
@@ -55,7 +55,7 @@ class RegistrationsController < Devise::RegistrationsController
     params.require(:user).permit(:id, :name, :email, :role_id, :password, :password_confirmation, :signature, :current_password)
   end
 
-  def needs_password?(user, params)
+  def needs_password?(_user, params)
     params[:password].present?
   end
 

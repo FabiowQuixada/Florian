@@ -1,7 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-describe User, :type => :model do
-
+describe User, type: :model do
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:email) }
   it { should validate_presence_of(:role) }
@@ -13,5 +12,4 @@ describe User, :type => :model do
   # Relationships
   it { should belong_to :role }
   it { should have_one :system_setting }
-
 end
