@@ -3,6 +3,7 @@ class ServiceData < ActiveRecord::Base
   # Configuration
   audited
   include ModelHelper
+  enum service_type: [:attendance, :return]
 
 
   # Relationships
@@ -11,7 +12,8 @@ class ServiceData < ActiveRecord::Base
 
   # Validations
   validate :validate_model
-  #validates :service_type, presence: true
+  validates :service_type, presence: true
+  validates :service_type, inclusion: {in: service_types.keys}, :allow_nil => true
   #validates :psychology, :physiotherapy, :plastic_surgery, :mesh, :gynecology, :occupational_therapy, :presence => true  
 
 
@@ -28,14 +30,14 @@ class ServiceData < ActiveRecord::Base
 
     ServiceData.services.each do |service|
       if send(service).nil? or send(service).blank?
-        # errors.add(service, I18n.t('errors.messages.blank', attribute: I18n.t('activerecord.attributes.service_datum.' + service)))
+        errors.add(service, I18n.t('errors.messages.blank', attribute: I18n.t('activerecord.attributes.service_datum.' + service)))
         self.is_valid = false
         return false
       end
     end
 
     if self.service_type.nil? or self.service_type.blank?
-      # errors.add(:service_type, I18n.t('errors.messages.blank', attribute: I18n.t('activerecord.attributes.service_datum.service_type')))
+      errors.add(:service_type, I18n.t('errors.messages.blank', attribute: I18n.t('activerecord.attributes.service_datum.service_type')))
       self.is_valid = false
       return false
     end
