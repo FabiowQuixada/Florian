@@ -64,6 +64,7 @@ group :development, :test do
   gem "minitest-rails-capybara"
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'rspec-collection_matchers'
   gem 'database_cleaner'
   gem 'faker', '~> 1.4', '>= 1.4.3'
   gem 'blabla', '~> 0.0.2'
