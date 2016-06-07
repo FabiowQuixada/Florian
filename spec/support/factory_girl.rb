@@ -11,5 +11,9 @@ RSpec.configure do |config|
     ensure
       DatabaseCleaner.clean
     end
+
+    # Rails.application.load_seed
+    role1 = Role.create(name: 'Admin', description: 'Administrador')
+    User.create(name: 'Sistema', email: SYSTEM_EMAIL, password: 'fulano0123', password_confirmation: 'fulano0123', bcc: 'teste@test.com', signature: '(Assinatura)', role: role1)
   end
 end

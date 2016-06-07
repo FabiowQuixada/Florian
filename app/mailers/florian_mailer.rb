@@ -21,7 +21,7 @@ class FlorianMailer < ApplicationMailer
 
     mail(to: user.system_setting.pse_private_recipients_array,
          subject: SSETTINGS_PSE_TITLE_PREFIX + period,
-         body: SSETTINGS_PSE_BODY_WEEK.gsub(I18n.t('tags.competence'), period))
+         body: SSETTINGS_PSE_BODY_WEEK.gsub(I18n.t('tags.competence'), period) + user.signature)
   end
 
   def send_prod_and_serv_to_analysis(week, user)
