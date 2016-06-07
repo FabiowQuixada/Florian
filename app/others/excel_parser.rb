@@ -30,6 +30,8 @@ class ExcelParser
           end 
 
          end
+
+         inconsistent_companies
     end
 
     private
@@ -119,6 +121,9 @@ class ExcelParser
       company.contacts.push contact1
       company.contacts.push contact2
       company.contacts.push contact3
+      contact1.company = company
+      contact2.company = company
+      contact3.company = company
 
       # Donation
       donation = Donation.new
