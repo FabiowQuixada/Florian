@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :system_settings, only: [:index, :new, :edit, :update]
-  post '/donations/filter'
 
   resources :donations, except: [:show] do
     collection do
@@ -40,9 +39,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :product_and_service_data
+  resources :product_and_service_data, except: [:show]
 
-  resources :product_and_service_weeks do
+  resources :product_and_service_weeks, only: [] do
     collection do
       post 'update_and_send'
       post 'send_to_analysis'

@@ -18,18 +18,6 @@ class DonationsController < ApplicationController
     @month = 'Dezembro/2015'
   end
 
-  def filter
-
-    before_index
-
-    # @list = Donation.search params[:search]
-
-    # @month = params[:month]
-    # @company_id = params[:company_id]
-
-    # redirect_to donations_path, :info => t('alert.query_results', :count => @list.size)
-  end
-
   def create_and_new
 
     @model = model_class.new donation_params
