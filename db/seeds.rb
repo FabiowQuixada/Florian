@@ -4,16 +4,20 @@ role2 = Role.create(name: "Usuário", description: 'Usuário comum')
 role3 = Role.create(name: "Administração", description: 'Presidência')
 role4 = Role.create(name: "Secretária 1", description: '(Renata)')
 role5 = Role.create(name: "Secretária 2", description: '(Lucivania)')
-role6 = Role.create(name: 'Visitante', description: 'Visitante')
 
 user1 = User.create(name: 'Sistema',     email: SYSTEM_EMAIL, password: 'fulano0123', password_confirmation: 'fulano0123', bcc: 'teste@test.com', signature: '(Assinatura)', role: role1)
 user2 = User.create(name: 'Fabiow',      email: ADMIN_EMAIL, password: 'fulano0123', password_confirmation: 'fulano0123', bcc: 'ftquixada@gmail.com', signature: '(Assinatura)', role: role1)
 user3 = User.create(name: 'Inativo', email: 'teste_inativo@yahoo.com.br', password: 'usuario_teste', password_confirmation: 'usuario_teste', bcc: 'teste@test.com', signature: '(Assinatura)', role: role2, active: false)
+user3 = User.create(name: 'Comum', email: 'teste_comum@yahoo.com.br', password: 'usuario_comum', password_confirmation: 'usuario_comum', bcc: 'teste@test.com', signature: '(Assinatura)', role: role2)
 user4 = User.create(name: 'Edmar', email: 'edmarmaciel@gmail.com', password: '35348456456', password_confirmation: '35348456456', bcc: 'edmarmaciel@gmail.com', signature: '(Assinatura)', role: role3)
 user5 = User.create(name: "Márcia",       email: 'marciattm@hotmail.com', password: '34578933', password_confirmation: '34578933', bcc: 'marciattm@hotmail.com', signature: '(Assinatura)', role: role3)
 user6 = User.create(name: 'Renata',       email: 'renata.sbq@gmail.com', password: '4453566486', password_confirmation: '4453566486', bcc: 'renata.sbq@gmail.com', signature: '(Assinatura)', role: role4)
 user7 = User.create(name: "Lucivânia",   email: 'lucivania_nojosa@hotmail.com', password: '98574325298', password_confirmation: '98574325298', bcc: 'lucivania_nojosa@hotmail.com', signature: '(Assinatura)', role: role5)
-user8 = User.create(name: 'Visitante',   email: 'visitante@florian.com', password: 'visitante', password_confirmation: 'visitante', bcc: 'visitante@florian.com', signature: 'Visitante', role: role6)
+
+if Rails.env == 'showcase'
+  role6 = Role.create(name: 'Visitante', description: 'Visitante')
+  user8 = User.create(name: 'Visitante', email: 'visitante@florian.com', password: 'visitante', password_confirmation: 'visitante', bcc: 'visitante@florian.com', signature: 'Visitante', role: role6)
+end
 
 case Rails.env
 when 'development', 'test', 'showcase' then
