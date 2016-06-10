@@ -70,6 +70,8 @@ group :development, :test do
   gem 'blabla', '~> 0.0.2'
   gem 'simplecov', require: false, group: :test
   gem 'brakeman', :require => false
+  gem 'dawnscanner', :require=>false
+  gem 'bundler-audit'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
