@@ -24,7 +24,7 @@ class ProductAndServiceWeeksController < ApplicationController
       return render 'product_and_service_data/_form'
     end
 
-    redirect_to send(@model.model_name.route_key + '_path'), notice: genderize_tag(@model, 'sent')
+    redirect_to send(@model.model_name.route_key + '_path').path, notice: genderize_tag(@model, 'sent')
   end
 
   def send_to_analysis
@@ -50,7 +50,7 @@ class ProductAndServiceWeeksController < ApplicationController
       return render 'product_and_service_data/_form'
     end
 
-    redirect_to send(@model.model_name.route_key + '_path'), notice: genderize_tag(@model, 'sent')
+    redirect_to send(@model.model_name.route_key + '_path').path, notice: genderize_tag(@model, 'sent')
 
   end
 
@@ -77,7 +77,7 @@ class ProductAndServiceWeeksController < ApplicationController
       return render 'product_and_service_data/_form'
     end
 
-    redirect_to send(@model.model_name.route_key + '_path'), notice: genderize_tag(@model, 'sent')
+    redirect_to send(@model.model_name.route_key + '_path').path, notice: genderize_tag(@model, 'sent')
 
   end
 
