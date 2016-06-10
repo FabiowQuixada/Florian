@@ -10,5 +10,9 @@ FactoryGirl.define do
     after(:create) do |product_and_service_datum, evaluator|
       create_list(:product_and_service_week, evaluator.product_and_service_weeks_count, product_and_service_datum: product_and_service_datum)
     end
+
+    trait :invalid do
+      competence nil
+    end
   end
 end

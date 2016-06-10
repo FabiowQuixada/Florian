@@ -8,5 +8,9 @@ FactoryGirl.define do
     pse_day_of_month 4
     pse_body SSETTINGS_PSE_BODY
     user
+
+    trait :invalid do
+      pse_recipients_array nil
+    end
   end
 end

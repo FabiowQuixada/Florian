@@ -22,5 +22,9 @@ FactoryGirl.define do
     trait :admin do
       email ADMIN_EMAIL
     end
+
+    trait :invalid do
+      email nil
+    end
   end
 end

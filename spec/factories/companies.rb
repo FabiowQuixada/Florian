@@ -15,5 +15,10 @@ FactoryGirl.define do
     after(:create) do |company, evaluator|
       create_list(:contact, evaluator.contacts_count, company: company)
     end
+
+    trait :invalid do
+      entity_type nil
+      cnpj nil
+    end
   end
 end

@@ -5,5 +5,9 @@ FactoryGirl.define do
     company
     body SSETTINGS_RE_BODY
     recipients_array SAMPLE_RECIPIENTS
+
+    trait :invalid do
+      value nil
+    end
   end
 end

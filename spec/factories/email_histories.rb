@@ -6,5 +6,9 @@ FactoryGirl.define do
     recipients_array Faker::Internet.email
     user
     receipt_email
+
+    trait :invalid do
+      recipients_array nil
+    end
   end
 end

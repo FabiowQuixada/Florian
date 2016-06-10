@@ -10,5 +10,10 @@ FactoryGirl.define do
       build_list(:service_data, evaluator.service_data_count, product_and_service_week: product_and_service_week)
       product_and_service_week.product_data ||= build(:product_data, product_and_service_week: product_and_service_week)
     end
+
+    trait :invalid do
+      service_data nil
+      product_data nil
+    end
   end
 end
