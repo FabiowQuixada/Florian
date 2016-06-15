@@ -5,6 +5,18 @@ class SystemSettingsController < ApplicationController
   load_and_authorize_resource
   before_action :before_all
 
+  def update
+
+
+    return redirect_to url_for(controller: :errors, action: :not_found) if !current_user.admin? && params[:id].to_i != current_user.system_setting.id
+
+    if @model.update send(@model.model_name.singular + '_params')
+      redirect_to send(@model.model_name.route_key + '_path'), notice: @model.was('updated')
+    else
+      render '_form'
+    end
+   end
+
   private ###########################
 
   def system_setting_params
