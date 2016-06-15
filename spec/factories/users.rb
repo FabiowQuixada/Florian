@@ -4,7 +4,8 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     signature 'Att,\nJoao'
     bcc { Faker::Internet.email }
-    password { Faker::Internet.password }
+    password { 'Faker::Internet.password' }
+    password_confirmation { 'Faker::Internet.password' }
     role
 
     after(:build) do |user, _evaluator|

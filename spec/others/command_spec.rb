@@ -18,10 +18,4 @@ describe ApplicationController do
     command = `git grep ">>>>>" ./app > tmp/#{filename}.txt && wc -l tmp/#{filename}.txt`
     expect(command).to be_empty
   end
-
-  it 'searches for TODO occurrences' do
-    filename = 'TODO'
-    command = `git grep TODO ./app > tmp/#{filename}.txt && wc -l tmp/#{filename}.txt`
-    # expect(command).to be_empty
-  end
 end

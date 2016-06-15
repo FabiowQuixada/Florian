@@ -504,6 +504,7 @@ pt-BR:
     - sábado
     formats:
       default: "%d/%m/%Y"
+      default_i: "%d/%m/%y"
       long: "%d de %B de %Y"
       short: "%d de %B"
       competence: "%B/%Y"

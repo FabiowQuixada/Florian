@@ -12,8 +12,10 @@ RSpec.configure do |config|
       DatabaseCleaner.clean
     end
 
-    # Rails.application.load_seed
     role1 = Role.create(name: 'Admin', description: 'Administrador')
     User.create(name: 'Sistema', email: SYSTEM_EMAIL, password: 'fulano0123', password_confirmation: 'fulano0123', bcc: 'teste@test.com', signature: '(Assinatura)', role: role1)
+
+    role2 = Role.create(name: "Usuário", description: 'Usuário comum')
+    User.create(name: 'Comum', email: 'teste_comum@yahoo.com.br', password: 'usuario_comum', password_confirmation: 'usuario_comum', bcc: 'teste@test.com', signature: '(Assinatura)', role: role2)
   end
 end
