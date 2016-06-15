@@ -9,22 +9,22 @@ class ProductAndServiceWeeksController < ApplicationController
 
       if @model.on_analysis? || @model.finalized?
         @model.errors[:base] << I18n.t('errors.product_and_service_datum.cant_send')
-        return render 'product_and_service_data/_form'
+        return render 'product_and_service_data/_form', status: :unprocessable_entity
       end
 
       if @week.update product_and_service_week_params
         FlorianMailer.send_weekly_prod_and_serv_email(@week, current_user).deliver_now
       else
         @week.errors.messages.map { |key, _value| @model.errors[key] << @week.errors.messages[key].first }
-        return render 'product_and_service_data/_form'
+        return render 'product_and_service_data/_form', status: :unprocessable_entity
       end
 
     rescue => exc
       @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
-      return render 'product_and_service_data/_form'
+      return render 'product_and_service_data/_form', status: :internal_server_error
     end
 
-    redirect_to send(@model.model_name.route_key + '_path').path, notice: genderize_tag(@model, 'sent')
+    redirect_to send(@model.model_name.route_key + '_path'), notice: genderize_tag(@model, 'sent')
   end
 
   def send_to_analysis
@@ -33,7 +33,7 @@ class ProductAndServiceWeeksController < ApplicationController
 
       unless @model.created?
         @model.errors[:base] << I18n.t('errors.product_and_service_datum.cant_send_to_analysis')
-        return render 'product_and_service_data/_form'
+        return render 'product_and_service_data/_form', status: :unprocessable_entity
       end
 
       @model.on_analysis!
@@ -42,15 +42,15 @@ class ProductAndServiceWeeksController < ApplicationController
         FlorianMailer.send_prod_and_serv_to_analysis(@week, current_user).deliver_now
       else
         @week.errors.messages.map { |key, _value| @model.errors[key] << @week.errors.messages[key].first }
-        return render 'product_and_service_data/_form'
+        return render 'product_and_service_data/_form', status: :unprocessable_entity
       end
 
     rescue => exc
       @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
-      return render 'product_and_service_data/_form'
+      return render 'product_and_service_data/_form', status: :internal_server_error
     end
 
-    redirect_to send(@model.model_name.route_key + '_path').path, notice: genderize_tag(@model, 'sent')
+    redirect_to send(@model.model_name.route_key + '_path'), notice: genderize_tag(@model, 'sent')
 
   end
 
@@ -60,7 +60,7 @@ class ProductAndServiceWeeksController < ApplicationController
 
       unless @model.on_analysis?
         @model.errors[:base] << I18n.t('errors.product_and_service_datum.cant_send_to_clients')
-        return render 'product_and_service_data/_form'
+        return render 'product_and_service_data/_form', status: :unprocessable_entity
       end
 
       @model.finalized!
@@ -69,15 +69,15 @@ class ProductAndServiceWeeksController < ApplicationController
         FlorianMailer.send_monthly_prod_and_serv_email(@week, current_user).deliver_now
       else
         @week.errors.messages.map { |key, _value| @model.errors[key] << @week.errors.messages[key].first }
-        return render 'product_and_service_data/_form'
+        return render 'product_and_service_data/_form', status: :unprocessable_entity
       end
 
     rescue => exc
       @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
-      return render 'product_and_service_data/_form'
+      return render 'product_and_service_data/_form', status: :internal_server_error
     end
 
-    redirect_to send(@model.model_name.route_key + '_path').path, notice: genderize_tag(@model, 'sent')
+    redirect_to send(@model.model_name.route_key + '_path'), notice: genderize_tag(@model, 'sent')
 
   end
 
