@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
 
 
   # Validations
+  validate :validate_model
   validates :name, :email, :role, presence: true
   validates :signature, :bcc, presence: true
   validates :name, :email, uniqueness: true
@@ -60,6 +61,12 @@ class User < ActiveRecord::Base
     system_setting.re_body = SSETTINGS_RE_BODY
 
     system_setting.valid?
-end
+  end
+
+  def validate_model
+    name ||= ''
+    self.bcc = email
+    self.signature = '--\n\n' + name
+  end
 
 end
