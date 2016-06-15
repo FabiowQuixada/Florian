@@ -1,12 +1,29 @@
-Auditoria de produtos e servicos: submodelos;
-Testes de mailing;
-eliminacao do index_table;
-E-mail assincrono: Resque;
+Eliminacao do index_table;
 A pagina cai se ficar parada por um tempo;
-Show case;
-Verificacao de TODOs, BYEBUGs e <<<<<;
-Genero: def model_gender 'f' end
+product_and_service_weeks/update_and_send quando da erro no envio de e-mail 
+Voltar em algumas telas;
+Ilimitacao de contatos na empresa;
+Validacoes: Company should validate that :registration_name is case-sensitively unique
+Gems: Resque, Sidekiq, (integracao continua)
 
+bundle exec...
+git ignore: no primeiro commit;
+Status de respostas do servidor;
+
+PROBLEMAS parse: doacoes e telefones;
+
+
+Principais:
+ - Acesso externo (SAGECOM);
+ - Adicionar meu notebook la no SSH do servidor;
+ - Stub, pra eliminar paredao de e-mail;
+
+
+EM ANDAMENTO:
+ - Copia de producao pra desenvolvimento;
+   - Usuario e senha postgres: comandos etc;
+ - Genero e numero de modelos em arquivo proprio;
+ - Testes de controllers;
 
 =====================================================================
 
@@ -29,6 +46,11 @@ Interno:
  - PDF: Não precisar salvar arquivo;
  - Checagem de competencia nos controllers;
  - Deletar grupos e usuarios, alem de voltar na edicao;
+ - Auditoria de produtos e servicos: submodelos;
+ - Teste do corpo e assinatura do e-mail;
+ - Alteracoes Rubocop;
+ - Warnings das gems de seguanca;
+ - Exclusao de usuario;
 
 
 Frescurinha:
