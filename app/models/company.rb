@@ -99,6 +99,8 @@ class Company < ActiveRecord::Base
   def default_values
     self.city ||= DEFAULT_COMPANY_CITY
     self.state ||= DEFAULT_COMPANY_STATE
+
+    entity_type ||= Company.entity_types[:"Pessoa Jurídica"]
   end
 
 end
