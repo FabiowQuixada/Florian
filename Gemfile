@@ -72,6 +72,7 @@ group :development, :test do
   gem 'brakeman', :require => false
   gem 'dawnscanner', :require=>false
   gem 'bundler-audit'
+  gem 'pdf-inspector', :require => "pdf/inspector"
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
