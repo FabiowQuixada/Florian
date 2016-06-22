@@ -27,5 +27,11 @@ FactoryGirl.define do
       cnpj nil
       registration_name nil
     end
+
+    trait :with_donations do
+      after(:create) do |company|
+        create_list(:donation, 3, company: company)
+      end
+    end
   end
 end
