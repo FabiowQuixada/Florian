@@ -18,31 +18,31 @@ class BillsController < ApplicationController
 
     list = Bill.order(:competence)
 
-    @listOfLists = {}
+    @list_of_lists = {}
 
-    list.each_with_index do |it, _index|
+    list.each do |it|
       year = it.competence.year
       month = it.competence.month
 
-      unless @listOfLists[year]
-
-        @listOfLists[year] = []
-
-        for i in 0..11 do
-          @listOfLists[year][i] = []
-          @listOfLists[year][i][0] = '0,00'
-          @listOfLists[year][i][1] = '0,00'
-          @listOfLists[year][i][2] = '0,00'
-        end
-      end
-
-      @listOfLists[year][month - 1][0] = it.water.to_s
-      @listOfLists[year][month - 1][1] = it.energy.to_s
-      @listOfLists[year][month - 1][2] = it.telephone.to_s
+      initialize_year year
+      populate_month month, year
     end
 
     list
+  end
 
+  def initialize_year(year)
+    @list_of_lists[year] = []
+
+    [0..11].each do |i|
+      @list_of_lists[year][i] = []
+      @list_of_lists[year][i] += ['0,00', '0,00', '0,00']
+    end
+  end
+
+  def populate_month(month, year)
+    @list_of_lists[year][month - 1] = []
+    @list_of_lists[year][month - 1] += [it.water.to_s, it.energy.to_s, it.telephone.to_s]
   end
 
 end

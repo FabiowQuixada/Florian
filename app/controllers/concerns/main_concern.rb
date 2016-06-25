@@ -64,7 +64,7 @@ module MainConcern extend ActiveSupport::Concern
                        if current_user.admin?
                          begin
                            model_class.find(params[:id]).destroy
-                         rescue => exc
+                         rescue
                            return render json: { message: t('errors.deletion'), success: false }
                          end
                          return render json: { message: @model.was('destroyed'), success: true }
@@ -75,7 +75,7 @@ module MainConcern extend ActiveSupport::Concern
                        if current_user.admin?
                          begin
                            model_class.find(params[:id]).destroy
-                         rescue => exc
+                         rescue
                            return render json: { message: t('errors.deletion'), success: false }
                          end
                          redirect_to send(@model.model_name.route_key + '_path'), notice: @model.was('destroyed')

@@ -7,15 +7,14 @@ class SystemSettingsController < ApplicationController
 
   def update
 
+    return redirect_to url_for(controller: :errors, action: :not_found) if user_can_edit_settings current_user, params[:id].to_i
 
-    return redirect_to url_for(controller: :errors, action: :not_found) if !current_user.admin? && params[:id].to_i != current_user.system_setting.id
-
-    if @model.update send(@model.model_name.singular + '_params')
-      redirect_to send(@model.model_name.route_key + '_path'), notice: @model.was('updated')
+    if @model.update system_setting_params
+      redirect_to system_settings_path, notice: @model.was('updated')
     else
       render '_form'
     end
-   end
+  end
 
   private ###########################
 
@@ -25,12 +24,19 @@ class SystemSettingsController < ApplicationController
 
   def before_all
 
-    unless current_user.admin?
-      if params[:action] == 'edit' && params[:id] != SystemSetting.find_by_user_id(current_user.id).id.to_s
-        redirect_to url_for(controller: :errors, action: :not_found)
-      elsif params[:action] == 'index'
-        redirect_to(edit_system_setting_path(SystemSetting.find_by_user_id(current_user.id))) && return
-      end
-    end
+    return if current_user.admin?
+
+    settings = SystemSetting.find_by_user_id(current_user.id)
+
+    return redirect_to url_for(controller: :errors, action: :not_found) if invalid_edition? params[:action], settings, params[:id]
+    return redirect_to edit_system_setting_path(settings) if params[:action] == 'index'
+  end
+
+  def invalid_edition?(action, settings, target_id)
+    action == 'edit' && target_id != settings.id.to_s
+  end
+
+  def user_can_edit_settings(user, settings_id)
+    !user.admin? && settings_id != user.system_setting.id
   end
 end

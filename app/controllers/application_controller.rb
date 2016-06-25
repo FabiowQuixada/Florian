@@ -31,17 +31,13 @@ class ApplicationController < ActionController::Base
 
   def handle_exception(exc, default_message = nil)
 
-    logger.error('Exception catch [' + DateTime.now.strftime('%d/%m/%Y :: %H:%M:%S') + '] ==> ' + exc.message + '\n' + exc.backtrace.join("\n"))
+    log_error exc
 
-    if exc.message. == 'getaddrinfo: Name or service not known'
-      return I18n.t('exception.no_internet_connection')
-    elsif exc.instance_of? Net::SMTPFatalError
-      if exc.message.starts_with? '553-5.1.2'
-        return I18n.t('exception.invalid_recipient')
-      end
-    elsif exc.instance_of? FlorianException
-      return exc.message
-    end
+    return I18n.t('exception.no_internet_connection') if exc.message == 'getaddrinfo: Name or service not known'
+
+    return I18n.t('exception.invalid_recipient') if exc.instance_of?(Net::SMTPFatalError) && exc.message.starts_with?('553-5.1.2')
+
+    return exc.message if exc.instance_of? FlorianException
 
     default_message
   end
@@ -58,5 +54,9 @@ class ApplicationController < ActionController::Base
 
   def after_sign_out_path_for(_resource_or_scope)
     new_user_session_path
+  end
+
+  def log_error(exc)
+    logger.error('Exception catch [' + DateTime.now.strftime('%d/%m/%Y :: %H:%M:%S') + '] ==> ' + exc.message + '\n' + exc.backtrace.join("\n"))
   end
 end

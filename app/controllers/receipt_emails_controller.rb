@@ -20,17 +20,12 @@ class ReceiptEmailsController < ApplicationController
 
     begin
 
-      date = check_competence
+      return render json: email.errors, status: :unprocessable_entity unless email.valid?
 
-      unless email.valid?
-        return render json: email.errors, status: :unprocessable_entity
-      end
-
-      FlorianMailer.resend_receipt_email(email, date, current_user).deliver_now
-
+      FlorianMailer.resend_receipt_email(email, check_competence, current_user).deliver_now
       return render history_as_json(email, 'resent')
 
-    rescue => exc
+    rescue StandardError => exc
       exception_message = handle_exception exc, I18n.t('alert.email.error_resending')
       return render json: exception_message, status: :unprocessable_entity
     end
@@ -42,22 +37,17 @@ class ReceiptEmailsController < ApplicationController
 
     begin
 
-      date = check_competence
+      return render json: email.errors, status: :unprocessable_entity unless email.valid?
 
-      unless email.valid?
-        return render json: email.errors, status: :unprocessable_entity
-      end
-
-      FlorianMailer.send_test_receipt_email(email, date, current_user).deliver_now
+      FlorianMailer.send_test_receipt_email(email, current_user, check_competence).deliver_now
 
       return render history_as_json(email, 'test_sent')
 
-    rescue Exception => exc
+    rescue StandardError => exc
       exception_message = handle_exception exc, I18n.t('alert.email.error_sending_test')
       return render json: exception_message, status: :unprocessable_entity
     end
   end
-
 
   def self.send_email_daily
 
@@ -112,11 +102,9 @@ class ReceiptEmailsController < ApplicationController
   end
 
   def check_competence
-
-    date = Date.strptime('{ 1, ' + params[:competence][0..1] + ', ' + params[:competence][3, 6] + '}', '{ %d, %m, %Y }')
-  rescue Exception => exc
+    Date.strptime('{ 1, ' + params[:competence][0..1] + ', ' + params[:competence][3, 6] + '}', '{ %d, %m, %Y }')
+  rescue
     raise FlorianException, I18n.t('alert.email.invalid_competence')
-
   end
 
   def history_as_json(email, type)

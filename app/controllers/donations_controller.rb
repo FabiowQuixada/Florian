@@ -22,7 +22,7 @@ class DonationsController < ApplicationController
 
     @model = model_class.new donation_params
 
-    @breadcrumbs = Hash[@model.model_name.human(count: 2) => send(@model.model_name.route_key + '_path'), t(@model.genderize('helpers.action.new')) => '']
+    @breadcrumbs = Hash[@model.model_name.human(count: 2) => donations_path, t(@model.genderize('helpers.action.new')) => '']
 
     if @model.save
       redirect_to new_donation_path, notice: genderize_tag(@model, 'created')
