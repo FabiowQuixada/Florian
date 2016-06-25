@@ -1,249 +1,246 @@
-class FlorianGenGenerator < Rails::Generators::NamedBase
-  source_root File.expand_path('../templates', __FILE__)
-  argument :name, type: :string
-  class_option :singular
-  class_option :plural
+# class FlorianGenGenerator < Rails::Generators::NamedBase
+#   source_root File.expand_path('../templates', __FILE__)
+#   argument :name, type: :string
+#   class_option :singular
+#   class_option :plural
 
-  def create_model
+#   def create_model
 
-    copy_file 'model.rb', "app/models/#{file_name}.rb"
+#     copy_file 'model.rb', "app/models/#{file_name}.rb"
 
-    text = File.read("app/models/#{file_name}.rb")
-    new_contents = text.gsub('ModelName', file_name.to_s.capitalize)
+#     text = File.read("app/models/#{file_name}.rb")
+#     new_contents = text.gsub('ModelName', file_name.to_s.capitalize)
 
-    if any_mandatory? args
+#     if any_mandatory? args
 
-      args2 = split args
+#       args2 = split args
 
-      validation_line = "# Validations\n  validates "
-      args2.each do |arg|
-        validation_line += ':' + arg[0] + ', ' if mandatory? arg
-      end
+#       validation_line = "# Validations\n  validates "
+#       args2.each do |arg|
+#         validation_line += ':' + arg[0] + ', ' if mandatory? arg
+#       end
 
-      validation_line += ' :presence => true'
+#       validation_line += ' :presence => true'
 
-      extra_conf = ''
-      args2.each do |arg|
-        if arg[1] == 'money'
-          extra_conf += 'usar_como_dinheiro :' + arg[0] + "\n\t"
-        end
-      end
+#       extra_conf = ''
+#       args2.each do |arg|
+#         if arg[1] == 'money'
+#           extra_conf += 'usar_como_dinheiro :' + arg[0] + "\n\t"
+#         end
+#       end
 
 
-      new_contents = new_contents.gsub('#extra_conf', extra_conf)
-      new_contents = new_contents.gsub('# Validations', validation_line)
+#       new_contents = new_contents.gsub('#extra_conf', extra_conf)
+#       new_contents = new_contents.gsub('# Validations', validation_line)
 
-    end
+#     end
 
-    File.open("app/models/#{file_name}.rb", 'w') { |file| file.puts new_contents }
-  end
+#     File.open("app/models/#{file_name}.rb", 'w') { |file| file.puts new_contents }
+#   end
 
-  def generate_migration
+#   def generate_migration
 
-    create_file 'db/migrate/' + DateTime.now.strftime('%Y%m%d%H%M%S').to_s + '_create_' + file_name.to_s.pluralize + '.rb'
+#     create_file 'db/migrate/' + DateTime.now.strftime('%Y%m%d%H%M%S').to_s + '_create_' + file_name.to_s.pluralize + '.rb'
 
-    args2 = split args
+#     args2 = split args
 
-    temp = 'class Create' + file_name.to_s.capitalize.pluralize + " < ActiveRecord::Migration
-  def change
-    create_table :" + file_name.to_s.pluralize + " do |t|\n"
+#     temp = 'class Create' + file_name.to_s.capitalize.pluralize + " < ActiveRecord::Migration
+#     def change
+#       create_table :" + file_name.to_s.pluralize + " do |t|\n"
 
-    args2.each do |arg|
-      temp += "\tt." + arg_db_type(arg) + ' :' + arg.first
+#     args2.each do |arg|
+#       temp += "\tt." + arg_db_type(arg) + ' :' + arg.first
 
 
-      if arg[1] == 'money'
-        temp += ', :precision => 8, :scale => 2'
-      elsif arg[1] == ''
-      end
+#       if arg[1] == 'money'
+#         temp += ', :precision => 8, :scale => 2'
+#       elsif arg[1] == ''
+#       end
 
-      temp += ', null: false' if mandatory? arg
+#       temp += ', null: false' if mandatory? arg
 
-      temp += "\n"
-    end
+#       temp += "\n"
+#     end
 
-    temp += "\tt.timestamps null: false
-      end
-    end
-  end"
+#     temp += "\tt.timestamps null: false\nend\nend\nend"
 
-    File.open('db/migrate/' + DateTime.now.strftime('%Y%m%d%H%M%S').to_s + '_create_' + file_name.to_s.pluralize + '.rb', 'w') { |file| file.puts temp }
+#     File.open('db/migrate/' + DateTime.now.strftime('%Y%m%d%H%M%S').to_s + '_create_' + file_name.to_s.pluralize + '.rb', 'w') { |file| file.puts temp }
 
 
-  end
+# end
 
-  def create_controller
-    copy_file 'controller.rb', 'app/controllers/' + file_name.to_s.pluralize + '_controller.rb'
+#   def create_controller
+#     copy_file 'controller.rb', 'app/controllers/' + file_name.to_s.pluralize + '_controller.rb'
 
-    text = File.read('app/controllers/' + file_name.to_s.pluralize + '_controller.rb')
-    new_contents = text.gsub('ControllerName', file_name.to_s.capitalize.pluralize).gsub('ModelName', file_name.to_s.capitalize).gsub('model_name', file_name.to_s)
+#     text = File.read('app/controllers/' + file_name.to_s.pluralize + '_controller.rb')
+#     new_contents = text.gsub('ControllerName', file_name.to_s.capitalize.pluralize).gsub('ModelName', file_name.to_s.capitalize).gsub('model_name', file_name.to_s)
 
-    temp = ':id'
+#     temp = ':id'
 
-    args2 = split args
+#     args2 = split args
 
-    args2.each do |arg|
-      temp += ', :' + arg.first
-    end
+#     args2.each do |arg|
+#       temp += ', :' + arg.first
+#     end
 
-    new_contents = new_contents.gsub('<< attributes >>', temp)
+#     new_contents = new_contents.gsub('<< attributes >>', temp)
 
-    File.open('app/controllers/' + file_name.to_s.pluralize + '_controller.rb', 'w') { |file| file.puts new_contents }
-    end
+#     File.open('app/controllers/' + file_name.to_s.pluralize + '_controller.rb', 'w') { |file| file.puts new_contents }
+#   end
 
-  def create_index
-    copy_file 'index.html.erb', 'app/views/' + file_name.to_s.pluralize + '/index.html.erb'
+#   def create_index
+#     copy_file 'index.html.erb', 'app/views/' + file_name.to_s.pluralize + '/index.html.erb'
 
-    text = File.read('app/views/' + file_name.to_s.pluralize + '/index.html.erb')
+#     text = File.read('app/views/' + file_name.to_s.pluralize + '/index.html.erb')
 
-    temp = ''
-    args2 = split args
-    args2.each_with_index do |arg, index|
-      temp += "\tHash[:header => '" + arg.first + "', :model_attr => '" + arg.first + (arg[1] == 'money' ? "', :type => 'money" : '') + "']"
-
-      temp += ',' + "\n" if index != (args.size - 1)
-    end
-
-    text = text.gsub(' << attributes >>', temp)
-
-    File.open('app/views/' + file_name.to_s.pluralize + '/index.html.erb', 'w') { |file| file.puts text }
-  end
-
-  def create_form
-    copy_file '_form.html.erb', 'app/views/' + file_name.to_s.pluralize + '/_form.html.erb'
+#     temp = ''
+#     args2 = split args
+#     args2.each_with_index do |arg, index|
+#       temp += "\tHash[:header => '" + arg.first + "', :model_attr => '" + arg.first + (arg[1] == 'money' ? "', :type => 'money" : '') + "']"
 
-    text = File.read('app/views/' + file_name.to_s.pluralize + '/_form.html.erb')
+#       temp += ',' + "\n" if index != (args.size - 1)
+#     end
+
+#     text = text.gsub(' << attributes >>', temp)
+
+#     File.open('app/views/' + file_name.to_s.pluralize + '/index.html.erb', 'w') { |file| file.puts text }
+#   end
+
+#   def create_form
+#     copy_file '_form.html.erb', 'app/views/' + file_name.to_s.pluralize + '/_form.html.erb'
 
-    temp = ''
+#     text = File.read('app/views/' + file_name.to_s.pluralize + '/_form.html.erb')
 
-    args2 = split args
+#     temp = ''
 
-    args2.each do |arg|
-      temp += if arg[1] == 'money'
-                "
-        \t\t<div class='row'>
-        \t\t\t<div class='form-group col-md-12'>
-        \t\t\t\t<%= f.label :" + arg.first + " %>
-        \t\t\t\t<div class=\"input-group\">
-        \t\t\t\t\t<span class=\"input-group-addon\">R$</span>
-        \t\t\t\t\t<%= f.text_field :" + arg.first + ", :class => 'form-control money' %>
-        \t\t\t\t</div>
-        \t\t\t</div>
-        \t\t</div>\n"
-              elsif  arg[1] == 'date'
-                "
-        \t\t<div class='row'>
-        \t\t\t<div class='form-group col-md-12'>
-        \t\t\t\t<%= f.label :" + arg.first + " %>
-        \t\t\t\t<div class=\"input-group date\" data-behaviour='datepicker' >
-        \t\t\t\t\t<%= f.text_field :" + arg.first + ", {:class => 'form-control'} %><span class=\"input-group-addon\"><i class=\"glyphicon glyphicon-th\"></i></span>
-        \t\t\t\t</div>
-        \t\t\t</div>
-        \t\t</div>\n"
-              elsif  arg[1] == 'text'
-                "
-        \t\t<div class='row'>
-        \t\t\t<div class='form-group col-md-12'>
-        \t\t\t\t<%= f.label :" + arg.first + " %>
-        \t\t\t\t<%= f.text_area :" + arg.first + ", size: '24x6', :class => 'form-control' %>
-        \t\t\t</div>
-        \t\t</div>\n"
+#     args2 = split args
 
+#     args2.each do |arg|
+#       temp += if arg[1] == 'money'
+#                 "
+#                 \t\t<div class='row'>
+#                 \t\t\t<div class='form-group col-md-12'>
+#                 \t\t\t\t<%= f.label :" + arg.first + " %>
+#                 \t\t\t\t<div class=\"input-group\">
+#                 \t\t\t\t\t<span class=\"input-group-addon\">R$</span>
+#                 \t\t\t\t\t<%= f.text_field :" + arg.first + ", :class => 'form-control money' %>
+#                 \t\t\t\t</div>
+#                 \t\t\t</div>
+#                 \t\t</div>\n"
+#               elsif  arg[1] == 'date'
+#                 "
+#                 \t\t<div class='row'>
+#                 \t\t\t<div class='form-group col-md-12'>
+#                 \t\t\t\t<%= f.label :" + arg.first + " %>
+#                 \t\t\t\t<div class=\"input-group date\" data-behaviour='datepicker' >
+#                 \t\t\t\t\t<%= f.text_field :" + arg.first + ", {:class => 'form-control'} %><span class=\"input-group-addon\"><i class=\"glyphicon glyphicon-th\"></i></span>
+#                 \t\t\t\t</div>
+#                 \t\t\t</div>
+#                 \t\t</div>\n"
+#               elsif  arg[1] == 'text'
+#                 "
+#                 \t\t<div class='row'>
+#                 \t\t\t<div class='form-group col-md-12'>
+#                 \t\t\t\t<%= f.label :" + arg.first + " %>
+#                 \t\t\t\t<%= f.text_area :" + arg.first + ", size: '24x6', :class => 'form-control' %>
+#                 \t\t\t</div>
+#                 \t\t</div>\n"
 
-              else
 
-                "
-        \t\t<div class='row'>
-        \t\t\t<div class='form-group col-md-12'>
-        \t\t\t\t<%= f.label :" + arg.first + " %>
-        \t\t\t\t<%= f.text_field :" + arg.first + ", :class => 'form-control' %>
-        \t\t\t</div>
-        \t\t</div>\n"
-              end
-    end
+#               else
 
-    text = text.gsub('<< fields >>', temp)
+#                 "
+#                 \t\t<div class='row'>
+#                 \t\t\t<div class='form-group col-md-12'>
+#                 \t\t\t\t<%= f.label :" + arg.first + " %>
+#                 \t\t\t\t<%= f.text_field :" + arg.first + ", :class => 'form-control' %>
+#                 \t\t\t</div>
+#                 \t\t</div>\n"
+#       end
+#     end
 
-    File.open('app/views/' + file_name.to_s.pluralize + '/_form.html.erb', 'w') { |file| file.puts text }
-  end
+#     text = text.gsub('<< fields >>', temp)
 
-  def update_locale_file
+#     File.open('app/views/' + file_name.to_s.pluralize + '/_form.html.erb', 'w') { |file| file.puts text }
+#   end
 
-    text = File.read('config/locales/pt-BR.yml')
+#   def update_locale_file
 
-    temp = "    attributes:\n      #{file_name}:\n"
-    args2 = split args
-    args2.each_with_index do |arg, index|
-      temp += '        ' + arg.first + ': ' + arg.first
+#     text = File.read('config/locales/pt-BR.yml')
 
-      temp += "\n" if index != (args.size - 1)
-    end
+#     temp = "    attributes:\n      #{file_name}:\n"
+#     args2 = split args
+#     args2.each_with_index do |arg, index|
+#       temp += '        ' + arg.first + ': ' + arg.first
 
-    text = text.gsub('    attributes:', temp)
+#       temp += "\n" if index != (args.size - 1)
+#     end
 
-    singular = plural = file_name.to_s
-    singular = options[:singular].capitalize unless options[:singular].nil?
-    plural = options[:plural].capitalize unless options[:plural].nil?
+#     text = text.gsub('    attributes:', temp)
 
-    temp = "    models:\n      #{file_name}:\n        one: " + singular + "\n        other: " + plural
-    text = text.gsub('    models:', temp)
+#     singular = plural = file_name.to_s
+#     singular = options[:singular].capitalize unless options[:singular].nil?
+#     plural = options[:plural].capitalize unless options[:plural].nil?
 
-    File.open('config/locales/pt-BR.yml', 'w') { |file| file.puts text }
-  end
+#     temp = "    models:\n      #{file_name}:\n        one: " + singular + "\n        other: " + plural
+#     text = text.gsub('    models:', temp)
 
-  def update_menu
-    text = File.read('app/views/others/_menu.html.erb')
+#     File.open('config/locales/pt-BR.yml', 'w') { |file| file.puts text }
+#   end
 
-    temp = "<li>
-             <a href='/" + file_name.to_s.pluralize + "'><%= " + file_name.to_s.capitalize + ".new.model_name.human(:count => 2) %></a>
-         </li>
-         <!-- new_menus_here -->"
+#   def update_menu
+#     text = File.read('app/views/others/_menu.html.erb')
 
-    text = text.gsub('<!-- new_menus_here -->', temp)
+#     temp = "<li>
+#     <a href='/" + file_name.to_s.pluralize + "'><%= " + file_name.to_s.capitalize + ".new.model_name.human(:count => 2) %></a>
+#     </li>
+#     <!-- new_menus_here -->"
 
-    File.open('app/views/others/_menu.html.erb', 'w') { |file| file.puts text }
-  end
+#     text = text.gsub('<!-- new_menus_here -->', temp)
 
-  def update_routes
-    text = File.read('config/routes.rb')
+#     File.open('app/views/others/_menu.html.erb', 'w') { |file| file.puts text }
+#   end
 
-    new_routes = "# Automatic resources\n  resources :" + file_name.to_s.pluralize
+#   def update_routes
+#     text = File.read('config/routes.rb')
 
-    text = text.gsub('# Automatic resources', new_routes)
+#     new_routes = "# Automatic resources\n  resources :" + file_name.to_s.pluralize
 
-    File.open('config/routes.rb', 'w') { |file| file.puts text }
-  end
+#     text = text.gsub('# Automatic resources', new_routes)
 
-  private
+#     File.open('config/routes.rb', 'w') { |file| file.puts text }
+#   end
 
-  def arg_db_type(arg)
-    return 'decimal' if arg[1] == 'money'
+#   private
 
-    arg[1]
-  end
+#   def arg_db_type(arg)
+#     return 'decimal' if arg[1] == 'money'
 
-  def mandatory?(arg)
-    !arg[2].nil?
-  end
+#     arg[1]
+#   end
 
-  def split(args)
-    args2 = []
+#   def mandatory?(arg)
+#     !arg[2].nil?
+#   end
 
-    args.each do |arg|
-      args2 << arg.split(':')
-    end
+#   def split(args)
+#     args2 = []
 
-    args2
+#     args.each do |arg|
+#       args2 << arg.split(':')
+#     end
 
-  end
+#     args2
 
-  def any_mandatory?(args)
-    args2 = split args
+#   end
 
-    args2.each do |arg|
-      return true if mandatory? arg
-    end
+#   def any_mandatory?(args)
+#     args2 = split args
 
-    false
-  end
-end
+#     args2.each do |arg|
+#       return true if mandatory? arg
+#     end
+
+#     false
+#   end
+# end

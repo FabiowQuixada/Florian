@@ -43,7 +43,7 @@ describe 'users/index', type: :view do
 end
 
 describe 'users/_form', type: :view do
-  it 'displays the users location' do
+  it 'renders partials' do
     model = class_name.new
     assign :model, model
 

@@ -69,10 +69,10 @@ group :development, :test do
   gem 'faker', '~> 1.4', '>= 1.4.3'
   gem 'blabla', '~> 0.0.2'
   gem 'simplecov', require: false, group: :test
-  gem 'brakeman', :require => false
-  gem 'dawnscanner', :require=>false
+  gem 'brakeman', require: false
+  gem 'dawnscanner', require: false
   gem 'bundler-audit'
-  gem 'pdf-inspector', :require => "pdf/inspector"
+  gem 'pdf-inspector', require: 'pdf/inspector'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
