@@ -2,11 +2,6 @@ module DeviseHelper
   def devise_error_messages!
     return '' if resource.errors.empty?
 
-    messages = resource.errors.full_messages.map { |_msg| }.join
-    sentence = I18n.t('errors.messages.not_saved',
-                      count: resource.errors.count,
-                      resource: resource.class.model_name.human.downcase)
-
     model = ReceiptEmail.new
 
     resource.errors.full_messages.each do |msg|
@@ -17,7 +12,7 @@ module DeviseHelper
   end
 
   def devise_error_messages?
-    resource.errors.empty? ? false : true
+    !resource.errors.empty?
   end
 
 end
