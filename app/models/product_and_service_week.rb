@@ -35,9 +35,9 @@ class ProductAndServiceWeek < ActiveRecord::Base
   end
 
   def validate_model
-    errors.add(:start_date, I18n.t('errors.product_and_service_datum.period_is_mandatory', week_number: number.to_s)) if !self.end_date || !self.start_date
+    errors.add(:start_date, I18n.t('errors.product_and_service_datum.period_is_mandatory', week_number: number.to_s)) unless self.end_date && self.start_date
 
-    errors.add(:start_date, I18n.t('errors.product_and_service_datum.invalid_period', week_number: number.to_s)) if self.end_date && self.start_date && self.end_date < self.start_date
+    errors.add(:start_date, I18n.t('errors.product_and_service_datum.invalid_period', week_number: number.to_s)) if invalid_range?
 
     errors.add(:attendance_data, I18n.t('errors.product_and_service_datum.all_attendances_are_mandatory', week_number: number.to_s)) unless service_data[0].validate_model
     errors.add(:return_data, I18n.t('errors.product_and_service_datum.all_returns_are_mandatory', week_number: number.to_s)) unless service_data[1].validate_model
@@ -56,6 +56,12 @@ class ProductAndServiceWeek < ActiveRecord::Base
 
   def model_gender
     'f'
+  end
+
+  private
+
+  def invalid_range?
+    self.end_date && self.start_date && self.end_date < self.start_date
   end
 
 end

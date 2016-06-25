@@ -44,7 +44,7 @@ class Company < ActiveRecord::Base
   # Methods
   after_initialize do
     if contacts.empty?
-      for i in 0..2
+      (0..2).each do |i|
         contacts.new(contact_type: i, company: self)
       end
     end
@@ -77,15 +77,11 @@ class Company < ActiveRecord::Base
   private
 
   def unique_cnpj
-    if cnpj && !cnpj.to_s.empty? && Company.where(cnpj: cnpj).where('id <> ?', id || 0).first
-      errors.add(:cnpj, I18n.t('errors.company.unique_cnpj'))
-    end
+    errors.add(:cnpj, I18n.t('errors.company.unique_cnpj')) if cnpj && !cnpj.to_s.empty? && Company.where(cnpj: cnpj).where('id <> ?', id || 0).first
   end
 
   def unique_cpf
-    if cpf && !cpf.to_s.empty? && Company.where(cpf: cpf).where('id <> ?', id || 0).first
-      errors.add(:cpf, I18n.t('errors.company.unique_cpf'))
-    end
+    errors.add(:cpf, I18n.t('errors.company.unique_cpf')) if cpf && !cpf.to_s.empty? && Company.where(cpf: cpf).where('id <> ?', id || 0).first
   end
 
   def unique_name_message
@@ -100,7 +96,7 @@ class Company < ActiveRecord::Base
     self.city ||= DEFAULT_COMPANY_CITY
     self.state ||= DEFAULT_COMPANY_STATE
 
-    entity_type ||= Company.entity_types[:"Pessoa Jurídica"]
+    entity_type || Company.entity_types[:"Pessoa Jurídica"]
   end
 
 end

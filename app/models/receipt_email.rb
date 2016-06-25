@@ -23,25 +23,7 @@ class ReceiptEmail < ActiveRecord::Base
 
   # Methods
   def validate_model
-
-    unless value.blank?
-
-      if value == 0
-        errors.add :value, I18n.t('errors.email.value_mandatory')
-      elsif value < 0
-        errors.add :value, I18n.t('errors.email.value_positive')
-      elsif value > 1_000_000
-        errors.add :value, I18n.t('errors.email.value_max')
-      end
-    end
-
-    unless day_of_month.blank?
-      if day_of_month < 1 || !day_of_month.is_a?(Integer)
-        errors.add(:day_of_month, I18n.t('errors.email.month_mandatory'))
-      elsif day_of_month > 28
-        errors.add(:day_of_month, I18n.t('errors.email.month_max'))
-      end
-    end
+    validate_value && validate_day_of_month
   end
 
   def self.daily_send_hour
@@ -56,60 +38,26 @@ class ReceiptEmail < ActiveRecord::Base
     user.system_setting.re_title
   end
 
-  def processed_title(user, date = nil)
-
-    date = Date.today if date.nil?
-
-    result = user.system_setting.re_title
-    result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
-    result = result.gsub(I18n.t('tags.company'), company.name)
-    result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + ' (' + value.real.por_extenso + ')')
-    result
+  def processed_title(user, date = Date.today)
+    apply_all_tags_to user.system_setting.re_title, date
   end
 
-  def processed_body(user, date = nil)
-
-    date = Date.today if date.nil?
-
-    result = body
-    result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
-    result = result.gsub(I18n.t('tags.company'), company.name)
-    result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + ' (' + value.real.por_extenso + ')')
-    result += user.signature
-    result
+  def processed_body(user, date = Date.today)
+    apply_all_tags_to(body, date) + user.signature
   end
 
-  def processed_receipt_text(date = nil)
-
-    date = Date.today if date.nil?
-
-    if company.person?
-      result = I18n.t('report.other.receipt_text.person', name: company.name, cpf: company.cpf.to_s, address: company.address, value_tag: I18n.t('tags.value'), competence_tag: I18n.t('tags.competence'))
-    elsif company.company?
-      result = I18n.t('report.other.receipt_text.company', name: company.registration_name, cnpj: company.cnpj.to_s, address: company.address, value_tag: I18n.t('tags.value'), competence_tag: I18n.t('tags.competence'))
-    end
-
-    result = result.gsub(I18n.t('tags.competence'), competence(date).capitalize)
-    result = result.gsub(I18n.t('tags.company'), company.name)
-    result = result.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + ' (' + value.real.por_extenso + ')')
-    result
-
+  def processed_receipt_text(date = Date.today)
+    apply_all_tags_to receipt_text, date
   end
 
   def competence(date = nil)
 
-    if date.nil?
+    return I18n.localize(date, format: :competence) unless date.nil?
 
-      result = ''
-
-      if current_month
-        I18n.localize(Date.today, format: :competence)
-      else
-        I18n.localize(Date.today.next_month, format: :competence)
-      end
+    if current_month?
+      I18n.localize(Date.today, format: :competence)
     else
-      I18n.localize(date, format: :competence)
-
+      I18n.localize(Date.today.next_month, format: :competence)
     end
   end
 
@@ -119,14 +67,10 @@ class ReceiptEmail < ActiveRecord::Base
     recipients_array.split(/,/)
   end
 
-  def current_month
-    if day_of_month > Date.today.strftime('%e').to_f
-      return true
-    else
-      if day_of_month == Date.today.strftime('%e').to_f
-        return true if Time.now.hour < ReceiptEmail.daily_send_hour
-      end
-    end
+  def current_month?
+
+    return true if day_of_month > Date.today.strftime('%e').to_f
+    return true if Time.now.hour < ReceiptEmail.daily_send_hour && day_of_month == Date.today.strftime('%e').to_f
 
     false
   end
@@ -135,4 +79,55 @@ class ReceiptEmail < ActiveRecord::Base
     Hash[I18n.t('menu.emails') => '', I18n.t('menu.email.receipt') => '']
   end
 
+  private
+
+  def receipt_text
+    pf_text if company.person?
+    pj_text if company.company?
+  end
+
+  def pf_text
+    I18n.t('report.other.receipt_text.person', name: company.name, cpf: company.cpf.to_s, address: company.address, value_tag: I18n.t('tags.value'), competence_tag: I18n.t('tags.competence'))
+  end
+
+  def pj_text
+    I18n.t('report.other.receipt_text.company', name: company.registration_name, cnpj: company.cnpj.to_s, address: company.address, value_tag: I18n.t('tags.value'), competence_tag: I18n.t('tags.competence'))
+  end
+
+  def apply_competence_tag_to(text, date)
+    text.gsub(I18n.t('tags.competence'), competence(date).capitalize)
+  end
+
+  def apply_company_tag_to(text)
+    text.gsub(I18n.t('tags.company'), company.name)
+  end
+
+  def apply_value_tag_to(text)
+    text.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + ' (' + value.real.por_extenso + ')')
+  end
+
+  def apply_all_tags_to(text, date = Date.today)
+    apply_value_tag_to apply_company_tag_to apply_competence_tag_to(text, date)
+  end
+
+  def validate_value
+
+    return if value.blank?
+
+    if value == 0
+      errors.add :value, I18n.t('errors.email.value_mandatory')
+    elsif value < 0
+      errors.add :value, I18n.t('errors.email.value_positive')
+    elsif value > 1_000_000
+      errors.add :value, I18n.t('errors.email.value_max')
+    end
+  end
+
+  def validate_day_of_month
+
+    return if day_of_month.blank?
+
+    errors.add(:day_of_month, I18n.t('errors.email.month_mandatory')) if day_of_month < 1
+    errors.add(:day_of_month, I18n.t('errors.email.month_max')) if day_of_month > 28
+  end
 end

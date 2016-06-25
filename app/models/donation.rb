@@ -27,16 +27,23 @@ class Donation < ActiveRecord::Base
   end
 
   def validate_model
-
-    if ((value.nil? || value != '0,00') || (!remark.nil? || !remark.empty?)) && !donation_date.is_a?(Date)
-      errors.add :donation_date, I18n.t('errors.donation.date_mandatory')
-    elsif (value.nil? || value == '0,00') && (remark.nil? || remark.empty?) && donation_date.is_a?(Date)
-      errors.add :donation_date, I18n.t('errors.donation.value_or_remark')
-    end
+    errors.add :donation_date, I18n.t('errors.donation.date_mandatory') unless donation_date.is_a?(Date)
+    errors.add :donation_date, I18n.t('errors.donation.value_or_remark') if value_present? && remark_present?
   end
 
   def model_gender
     'f'
   end
+
+  private
+
+  def value_present?
+    value.nil? || value == '0,00'
+  end
+
+  def remark_present?
+    (remark.nil? || remark.empty?)
+  end
+
 
 end

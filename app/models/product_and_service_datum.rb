@@ -22,7 +22,7 @@ class ProductAndServiceDatum < ActiveRecord::Base
   # Methods
   after_initialize do
     if product_and_service_weeks.empty?
-      for i in 1..NUMBER_OF_WEEKS + 2
+      (1..(NUMBER_OF_WEEKS + 2)).each do |i|
         product_and_service_weeks.new number: i
       end
     end

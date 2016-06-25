@@ -4,18 +4,10 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
 
-    if user.admin?
-      can :manage, :all
-    else
+    can :manage, :all if user.admin?
 
-      can :manage, Company
-      can :manage, Bill
-      can :manage, Donation
-      can :manage, SystemSetting
-      can :manage, ReceiptEmail
-      can :manage, ProductAndServiceDatum
+    common_user_managment
 
-    end
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.
@@ -34,5 +26,14 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
+  end
+
+  def common_user_managment
+    can :manage, Company
+    can :manage, Bill
+    can :manage, Donation
+    can :manage, SystemSetting
+    can :manage, ReceiptEmail
+    can :manage, ProductAndServiceDatum
   end
 end
