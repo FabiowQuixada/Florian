@@ -39,6 +39,7 @@
 		</tr>
 	</thead>
 
+	<tbody>
 	<% if @list.empty? %>
 		<tr>
 			<%
@@ -53,9 +54,8 @@
 		</tr>
 
 	<% else %>
-		<tbody>
 			<% @list.each do |iterator| %>
-				<tr id='model_<%= iterator.id %>' class="model_row">
+				<tr id="model_<%= iterator.id %>" class="model_row">
 					<td class="model_id admin-only"><%= iterator.id %></td>
 					<% columns.each_with_index do |a, i| %>
 						<td style="<%= columns[i][:style] %>" class="<%= columns[i][:class] %>">
@@ -90,9 +90,9 @@
 					</td>
 				</tr>
 			<% end %>
-		</tbody>
 
 	<% end %>
+	</tbody>
 </table>
 
 <%= render partial: "shared/index_commons", locals: {model: @model} %>

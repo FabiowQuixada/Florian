@@ -21,16 +21,16 @@
 		</tr>
 	</thead>
 
+	<tbody>
 	<% if @list.empty? %>
 		<tr>
 			<td colspan="6" bgcolor="#E0E0F4" align="center"><%= genderize_tag(@model, 'helpers.none_registered') %></td>
 		</tr>
 
 	<% else %>
-		<tbody>
 			<% @list.each do |iterator| %>
-				<tr id='model_<%= iterator.id %>' class="model_row">
-					<td class="model_id admin-only" style="display: none;"><%= iterator.id %></td>
+				<tr id="model_<%= iterator.id %>" class="model_row">
+					<td class="model_id admin-only"><%= iterator.id %></td>
 					<td><%=	I18n.localize(iterator.competence, format: :competence).capitalize %></td>
 					<td style="display: none;" class="model_id"><%= iterator.id %></td>
 					<td><%=	number_to_currency(iterator.public_send('water')) %></td>
@@ -42,9 +42,9 @@
 					</td>
 				</tr>
 			<% end %>
-		</tbody>
 
 	<% end %>
+	</tbody>
 </table>
 
 <script>

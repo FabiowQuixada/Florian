@@ -1,6 +1,6 @@
 <%= link_to genderize_full_tag(@model, 'helpers.action.new'), send("new_product_and_service_datum_path"), :class => "btn btn-primary" %>
 
-</p>
+<br/>
 
 <table id="index_table" class="table table-striped table-hover table-bordered table-condensed tablesorter tablesorter-blue">
 	<thead>
@@ -17,15 +17,15 @@
 		</tr>
 	</thead>
 
+	<tbody>
 	<% if @list.empty? %>
 	<tr>
 		<td colspan="7" bgcolor="#E0E0F4" align="center"><%= genderize_tag(@model, 'helpers.none_registered') %></td>
 	</tr>
 
 	<% else %>
-	<tbody>
 		<% @list.each do |iterator| %>
-		<tr id='model_<%= iterator.id %>' class="model_row">
+		<tr id="model_<%= iterator.id %>" class="model_row">
 			<td class="model_id admin-only" style="display: none;"><%= iterator.id %></td>
 			<td><%=	I18n.localize(iterator.competence, format: :competence).capitalize %></td>
 			<td><%= iterator.service_qty %></td>
@@ -37,9 +37,9 @@
 					</td>
 		</tr>
 		<% end %>
-	</tbody>
 
 	<% end %>
+	</tbody>
 </table>
 
 <%= render partial: "shared/index_commons", locals: {model: @model} %>

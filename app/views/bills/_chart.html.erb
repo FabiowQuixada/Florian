@@ -8,7 +8,7 @@
       function drawCharts() {
         
         // For each year...
-        <% @listOfLists.each do |month_list| %>
+        <% @list_of_lists.each do |month_list| %>
 
         year = <%= month_list[0] %>;
         months_array0 = new Array();
@@ -67,12 +67,12 @@
   </head>
   <body>
     <ul class="nav nav-tabs">
-    <% @listOfLists.each_with_index do |bill, i| %>
+    <% @list_of_lists.each_with_index do |bill, i| %>
         <li id="bill_tab_<%= i %>_title" class="clickable"><a><%= bill[0] %></a></li>
     <% end %>
     </ul>
 
-    <% @listOfLists.each_with_index do |bill, i| %>
+    <% @list_of_lists.each_with_index do |bill, i| %>
 
       <div id="bill_tab_<%= i %>" class="container-fluid tab_body">
 
@@ -97,5 +97,5 @@
       <% end %>
   </body>
 
-  <%= render partial: "shared/tab_commons", locals: {number_of_tabs: @listOfLists.length, tab_type: 'bill', title: Time.now.year} %>
+  <%= render partial: "shared/tab_commons", locals: {number_of_tabs: @list_of_lists.length, tab_type: 'bill', title: Time.now.year} %>
 </html>

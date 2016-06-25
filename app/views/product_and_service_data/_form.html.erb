@@ -107,10 +107,11 @@
 
 			<br/>
 
+			<% if @model.persisted? %>
 			<!-- Weeks tab's footer -->
 			<% if week.number < totals_week_number %>
 			<!-- Weeks -->
-			<% if @model.persisted? and !@model.finalized? and !@model.on_analysis? %>
+			<% if !@model.finalized? and !@model.on_analysis? %>
 			<div class="row">
 				<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.week_footer') %></div></div>
 
@@ -136,8 +137,9 @@
 					<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.final_footer') %></div>
 				</div>
 
-				<% end # if persisted %>
+				<% end  %>
 				<% end # if common week %>
+				<% end # if persisted %>
 			</div>
 		</div></div>
 		<% end # fields_for %>
