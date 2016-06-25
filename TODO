@@ -1,3 +1,12 @@
+Servidor:
+ - Acesso externo (SAGECOM);
+ - Acesso browser sem senha;
+ - Adicionar meu notebook la no SSH do servidor;
+ - Queda frequente de internet;
+ - Tem que atualizar noip de tempos em tempos;
+
+Testar data do system_seetings
+
 Eliminacao do index_table;
 A pagina cai se ficar parada por um tempo;
 product_and_service_weeks/update_and_send quando da erro no envio de e-mail 
@@ -5,32 +14,21 @@ Voltar em algumas telas;
 Ilimitacao de contatos na empresa;
 Validacoes: Company should validate that :registration_name is case-sensitively unique
 Gems: Resque, Sidekiq, (integracao continua)
-
+Copia de producao pra desenvolvimento;
 bundle exec...
 git ignore: no primeiro commit;
 Status de respostas do servidor;
+Testes e mais testes
 
 PROBLEMAS parse: doacoes e telefones;
-
-
-Principais:
- - Acesso externo (SAGECOM);
- - Adicionar meu notebook la no SSH do servidor;
- - Stub, pra eliminar paredao de e-mail;
-
-
-EM ANDAMENTO:
- - Copia de producao pra desenvolvimento;
-   - Usuario e senha postgres: comandos etc;
- - Genero e numero de modelos em arquivo proprio;
- - Testes de controllers;
+Stub, pra eliminar paredao de e-mail;
 
 =====================================================================
 
 Depois:
  - Filtros de doações;
  - Ordenador de colunas: Dinheiro;
- - Acesso browser sem senha;
+
  - Adição de doações à empresa no mobile;
  - Teste de validação de telefones;
  - Voltar pelo browser: history API;
