@@ -69,29 +69,31 @@ describe UsersController, type: :controller do
 
     describe 'PUT #update' do
       context 'with valid attributes' do
+        let(:model) { create :user }
+
         before(:each) do
-          @model = create :user
-          put :update, id: @model.id, user: attributes_for(:user, name: 'Joao')
-          @model.reload
+          put :update, id: model.id, user: attributes_for(:user, name: 'Joao')
+          model.reload
         end
 
         it { expect(response).to have_http_status(:found) }
         it { expect(response).to redirect_to users_path }
-        it { expect(assigns(:user)).to eq(@model) }
-        it { expect(@model.name).to eq('Joao') }
+        it { expect(assigns(:user)).to eq(model) }
+        it { expect(model.name).to eq('Joao') }
       end
 
       context 'with invalid attributes' do
+        let(:model) { create :user }
+
         before(:each) do
-          @model = create :user
-          put :update, id: @model.id, user: attributes_for(:user, name: nil)
-          @model.reload
+          put :update, id: model.id, user: attributes_for(:user, name: nil)
+          model.reload
         end
 
         it { expect(response).to have_http_status(:ok) }
         it { expect(response).to render_template('_form') }
-        it { expect(assigns(:user)).to eq(@model) }
-        it { expect(@model.name).not_to be_nil }
+        it { expect(assigns(:user)).to eq(model) }
+        it { expect(model.name).not_to be_nil }
       end
     end
   end

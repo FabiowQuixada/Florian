@@ -8,7 +8,7 @@ describe 'bills/index', type: :view do
     create :bill
     assign :model, model
     assign :list, class_name.all
-    assign :listOfLists, [] # TODO
+    assign :list_of_lists, [] # TODO
 
     render
 
@@ -27,7 +27,7 @@ describe 'bills/index', type: :view do
     model = class_name.new
     assign :model, model
     assign :list, []
-    assign :listOfLists, [] # TODO
+    assign :list_of_lists, [] # TODO
 
     render
 
@@ -45,7 +45,7 @@ describe 'bills/index', type: :view do
 end
 
 describe 'bills/_form', type: :view do
-  it 'displays the bills location' do
+  it 'renders partials' do
     model = class_name.new
     assign :model, model
 

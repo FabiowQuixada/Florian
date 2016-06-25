@@ -8,14 +8,6 @@ FactoryGirl.define do
     category '2 (Entre R$ 300,00 e R$ 600,00)'
     group 'Mantenedora'
 
-    # transient do
-    #   contacts_count 7
-    # end
-
-    # after(:create) do |company, evaluator|
-    #   create_list(:contact, evaluator.contacts_count, company: company)
-    # end
-
     trait :invalid do
       entity_type nil
       cnpj nil
@@ -29,8 +21,14 @@ FactoryGirl.define do
     end
 
     trait :with_donations do
-      after(:create) do |company|
+      after(:build) do |company|
         create_list(:donation, 3, company: company)
+      end
+    end
+
+    trait :with_contacts do
+      after(:build) do |company|
+        create_list(:contact, 3, company: company)
       end
     end
   end

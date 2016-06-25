@@ -69,74 +69,72 @@ describe ProductAndServiceDataController, type: :controller do
   end
 
   describe 'PUT #update' do
+    let(:model) { create :product_and_service_datum }
+
     context 'with valid attributes' do
       before(:each) do
-        @model = create :product_and_service_datum
-        put :update, id: @model.id, product_and_service_datum: attributes_for(:product_and_service_datum, competence: Date.new(2015, 6, 12))
-        @model.reload
+        put :update, id: model.id, product_and_service_datum: attributes_for(:product_and_service_datum, competence: Date.new(2015, 6, 12))
+        model.reload
       end
 
       it { expect(response).to have_http_status(:found) }
       it { expect(response).to redirect_to product_and_service_data_path }
-      it { expect(assigns(:product_and_service_datum)).to eq(@model) }
-      it { expect(@model.competence).to eq(Date.strptime('{ 1, 6, 2015 }', '{ %d, %m, %Y }')) }
+      it { expect(assigns(:product_and_service_datum)).to eq(model) }
+      it { expect(model.competence).to eq(Date.strptime('{ 1, 6, 2015 }', '{ %d, %m, %Y }')) }
     end
 
     context 'with invalid attributes' do
       before(:each) do
-        @model = create :product_and_service_datum
-        put :update, id: @model.id, product_and_service_datum: attributes_for(:product_and_service_datum, competence: nil)
-        @model.reload
+        put :update, id: model.id, product_and_service_datum: attributes_for(:product_and_service_datum, competence: nil)
+        model.reload
       end
 
       it { expect(response).to have_http_status(:ok) }
       it { expect(response).to render_template('_form') }
-      it { expect(assigns(:product_and_service_datum)).to eq(@model) }
-      it { expect(@model.competence).not_to be_nil }
+      it { expect(assigns(:product_and_service_datum)).to eq(model) }
+      it { expect(model.competence).not_to be_nil }
     end
   end
 
-    describe 'Successfully deletes model as admin' do
-    before(:each) do
-      sign_in User.first
-      create :product_and_service_datum
-      @n = ProductAndServiceDatum.count
-      @model = ProductAndServiceDatum.first
-      
-      @sucess_msg = { message: @model.was('destroyed'), success: true }.to_json
-      @error_msg = { message: I18n.t('errors.deletion'), success: false }.to_json
-      @non_admin_msg = { message: I18n.t('errors.unpermitted_action'), success: false }.to_json
-    end
+  # describe 'Successfully deletes model as admin' do
+  #   let(:n) { ProductAndServiceDatum.count }
+  #   let(:model) { create :product_and_service_datum }
+  #   let(:sucess_msg) { { message: model.was('destroyed'), success: true }.to_json }
+  #   let(:error_msg) { { message: I18n.t('errors.deletion'), success: false }.to_json }
+  #   let(:non_admin_msg) { { message: I18n.t('errors.unpermitted_action'), success: false }.to_json }
 
-    context 'Successfully destroys model via ajax' do
-      before(:each) do
-        xhr :delete, :destroy, id: @model.id
-      end
-      
-      it { expect(ProductAndServiceDatum.count).to eq(@n-1) }
-      it { expect(response.body).to eq(@sucess_msg) }
-    end
-  end
+  #   before(:each) do
+  #     sign_in User.first
+  #   end
 
-  describe 'Doesnt destroy model as common user' do
-    before(:each) do
-      sign_in User.last
-      create :product_and_service_datum
-      @n = ProductAndServiceDatum.count
-      @model = ProductAndServiceDatum.first
-      
-      @sucess_msg = { message: @model.was('destroyed'), success: true }.to_json
-      @error_msg = { message: I18n.t('errors.deletion'), success: false }.to_json
-      @non_admin_msg = { message: I18n.t('errors.unpermitted_action'), success: false }.to_json
-    end
+  #   context 'Successfully destroys model via ajax' do
+  #     before(:each) do
+  #       xhr :delete, :destroy, id: model.id
+  #     end
 
-    context 'Common user cant destroy model via ajax' do
-      before(:each) do
-        xhr :delete, :destroy, id: @model.id
-      end
-      
-      it { expect(ProductAndServiceDatum.count).to eq(@n) }
-      it { expect(response.body).to eq(@non_admin_msg) }
-    end
-  end
+  #     it { expect(ProductAndServiceDatum.count).to eq(n - 1) }
+  #     it { expect(response.body).to eq(sucess_msg) }
+  #   end
+  # end
+
+  # describe 'Doesnt destroy model as common user' do
+  #   let(:n) { ProductAndServiceDatum.count }
+  #   let(:model) { create :product_and_service_datum }
+  #   let(:sucess_msg) { { message: model.was('destroyed'), success: true }.to_json }
+  #   let(:error_msg) { { message: I18n.t('errors.deletion'), success: false }.to_json }
+  #   let(:non_admin_msg) { { message: I18n.t('errors.unpermitted_action'), success: false }.to_json }
+
+  #   before(:each) do
+  #     sign_in User.last
+  #   end
+
+  #   context 'Common user cant destroy model via ajax' do
+  #     before(:each) do
+  #       xhr :delete, :destroy, id: model.id
+  #     end
+
+  #     it { expect(ProductAndServiceDatum.count).to eq(n) }
+  #     it { expect(response.body).to eq(non_admin_msg) }
+  #   end
+  # end
 end

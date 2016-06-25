@@ -63,7 +63,7 @@ describe 'product_and_service_data/_form', type: :view do
 
     # Tabs
     expect(rendered).not_to include 'Semana 0'
-    for i in 1..5 do
+    (1..5).each do |i|
       expect(rendered).to include 'Semana ' + i.to_s
     end
     expect(rendered).to include 'Total'
@@ -96,7 +96,7 @@ describe 'product_and_service_data/_form', type: :view do
 
     # Tabs
     expect(rendered).not_to include 'Semana 0'
-    for i in 1..5 do
+    (1..5).each do |i|
       expect(rendered).to include 'Semana ' + i.to_s
     end
     expect(rendered).to include 'Total'
@@ -129,7 +129,7 @@ describe 'product_and_service_data/_form', type: :view do
 
     # Tabs
     expect(rendered).not_to include 'Semana 0'
-    for i in 1..5 do
+    (1..5).each do |i|
       expect(rendered).to include 'Semana ' + i.to_s
     end
     expect(rendered).to include 'Total'
@@ -162,7 +162,7 @@ describe 'product_and_service_data/_form', type: :view do
 
     # Tabs
     expect(rendered).not_to include 'Semana 0'
-    for i in 1..5 do
+    (1..5).each do |i|
       expect(rendered).to include 'Semana ' + i.to_s
     end
     expect(rendered).to include 'Total'

@@ -39,7 +39,7 @@ describe ReceiptEmail, type: :mailer do
     let(:current_month) { Date.today }
     let(:user) { create :user, :common }
     let(:receipt) { create :receipt_email }
-    let(:mail) { FlorianMailer.send_test_receipt_email(receipt, current_month, user).deliver_now }
+    let(:mail) { FlorianMailer.send_test_receipt_email(receipt, user, current_month).deliver_now }
 
     it 'renders the receiver email' do
       expect(mail.to).to eq([user.email])
@@ -70,7 +70,7 @@ describe ReceiptEmail, type: :mailer do
     let(:future_month) { Date.today.to_time.advance(months: 6).to_date }
     let(:user) { build :user, :common }
     let(:receipt) { create :receipt_email }
-    let(:mail) { FlorianMailer.send_test_receipt_email(receipt, future_month, user).deliver_now }
+    let(:mail) { FlorianMailer.send_test_receipt_email(receipt, user, future_month).deliver_now }
 
     it 'renders the receiver email' do
       expect(mail.to).to eq([user.email])

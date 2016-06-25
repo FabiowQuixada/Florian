@@ -32,6 +32,8 @@ RSpec.configure do |config|
   require 'capybara/rails'
 
   config.include ControllerHelpers, type: :controller
+  config.include ControllerHelpers, type: :view
+
   Warden.test_mode!
 
   config.after do

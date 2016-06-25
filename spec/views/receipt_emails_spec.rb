@@ -5,8 +5,8 @@ class_name = ReceiptEmail
 describe 'receipt_emails/index', type: :view do
   it 'renders index page when list is not empty' do
     model = class_name.new
+    sign_in User.first
     create :receipt_email
-    assign :current_user, User.first
     assign :model, model
     assign :list, class_name.all
 
@@ -25,7 +25,8 @@ describe 'receipt_emails/index', type: :view do
 
   it 'renders index page when list is empty' do
     model = class_name.new
-    assign :current_user, User.first
+    sign_in User.first
+
     assign :model, model
     assign :list, []
 
@@ -47,7 +48,8 @@ end
 describe 'receipt_emails/_form', type: :view do
   it 'renders partials' do
     model = class_name.new
-    assign :current_user, User.first
+    sign_in User.first
+
     assign :model, model
 
     render

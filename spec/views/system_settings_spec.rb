@@ -43,7 +43,8 @@ describe 'system_settings/index', type: :view do
 end
 
 describe 'system_settings/_form', type: :view do
-  it 'displays the system_settings location' do
+  it 'renders partials' do
+    sign_in User.first
     model = class_name.new
     assign :model, model
 

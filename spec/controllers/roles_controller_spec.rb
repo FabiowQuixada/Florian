@@ -68,29 +68,31 @@ describe RolesController, type: :controller do
 
     describe 'PUT #update' do
       context 'with valid attributes' do
+        let(:model) { create :role }
+
         before(:each) do
-          @model = create :role
-          put :update, id: @model.id, role: attributes_for(:role, name: 'Joao')
-          @model.reload
+          put :update, id: model.id, role: attributes_for(:role, name: 'Joao')
+          model.reload
         end
 
         it { expect(response).to have_http_status(:found) }
         it { expect(response).to redirect_to roles_path }
-        it { expect(assigns(:role)).to eq(@model) }
-        it { expect(@model.name).to eq('Joao') }
+        it { expect(assigns(:role)).to eq(model) }
+        it { expect(model.name).to eq('Joao') }
       end
 
       context 'with invalid attributes' do
+        let(:model) { create :role }
+
         before(:each) do
-          @model = create :role
-          put :update, id: @model.id, role: attributes_for(:role, name: nil)
-          @model.reload
+          put :update, id: model.id, role: attributes_for(:role, name: nil)
+          model.reload
         end
 
         it { expect(response).to have_http_status(:ok) }
         it { expect(response).to render_template('_form') }
-        it { expect(assigns(:role)).to eq(@model) }
-        it { expect(@model.name).not_to be_nil }
+        it { expect(assigns(:role)).to eq(model) }
+        it { expect(model.name).not_to be_nil }
       end
     end
   end

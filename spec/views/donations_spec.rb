@@ -44,7 +44,7 @@ end
 
 describe 'donations/_form', type: :view do
   it 'renders partials' do
-    model = Donation.new
+    model = class_name.new
     assign :model, model
 
     render

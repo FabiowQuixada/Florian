@@ -95,75 +95,76 @@ describe DonationsController, type: :controller do
 
   describe 'PUT #update' do
     context 'with valid attributes' do
+      let(:model) { create :donation }
+
       before(:each) do
-        @model = create :donation
-        put :update, id: @model.id, donation: attributes_for(:donation, remark: 'remark', value: 1.14)
-        @model.reload
+        put :update, id: model.id, donation: attributes_for(:donation, remark: 'remark', value: 1.14)
+        model.reload
       end
 
       it { expect(response).to have_http_status(:found) }
       it { expect(response).to redirect_to donations_path }
-      it { expect(assigns(:donation)).to eq(@model) }
-      it { expect(@model.remark).to eq('remark') }
-      it { expect(@model.value).to eq(ActionController::Base.helpers.number_to_currency(1.14)) }
+      it { expect(assigns(:donation)).to eq(model) }
+      it { expect(model.remark).to eq('remark') }
+      it { expect(model.value).to eq(ActionController::Base.helpers.number_to_currency(1.14)) }
     end
 
     context 'with invalid attributes' do
+      let(:model) { create :donation }
+
       before(:each) do
-        @model = create :donation
-        put :update, id: @model.id, donation: attributes_for(:donation, remark: nil, value: nil)
-        @model.reload
+        put :update, id: model.id, donation: attributes_for(:donation, remark: nil, value: nil)
+        model.reload
       end
 
       it { expect(response).to have_http_status(:ok) }
       it { expect(response).to render_template('_form') }
-      it { expect(assigns(:donation)).to eq(@model) }
-      it { expect(@model.remark).not_to be_nil }
-      it { expect(@model.value).not_to eq(ActionController::Base.helpers.number_to_currency(1.14)) }
+      it { expect(assigns(:donation)).to eq(model) }
+      it { expect(model.remark).not_to be_nil }
+      it { expect(model.value).not_to eq(ActionController::Base.helpers.number_to_currency(1.14)) }
     end
   end
 
-    describe 'Successfully deletes model as admin' do
-    before(:each) do
-      sign_in User.first
-      create :donation
-      @n = Donation.count
-      @model = Donation.first
-      
-      @sucess_msg = { message: @model.was('destroyed'), success: true }.to_json
-      @error_msg = { message: I18n.t('errors.deletion'), success: false }.to_json
-      @non_admin_msg = { message: I18n.t('errors.unpermitted_action'), success: false }.to_json
-    end
+  # describe 'Successfully deletes model as admin' do
+  #   let(:n) { Donation.count }
+  #   let(:model) { create :donation }
+  #   let(:sucess_msg) { { message: model.was('destroyed'), success: true }.to_json }
+  #   let(:error_msg) { { message: I18n.t('errors.deletion'), success: false }.to_json }
+  #   let(:non_admin_msg) { { message: I18n.t('errors.unpermitted_action'), success: false }.to_json }
 
-    context 'Successfully destroys model via ajax' do
-      before(:each) do
-        xhr :delete, :destroy, id: @model.id
-      end
-      
-      it { expect(Donation.count).to eq(@n-1) }
-      it { expect(response.body).to eq(@sucess_msg) }
-    end
-  end
+  #   before(:each) do
+  #     sign_in User.first
+  #   end
 
-  describe 'Doesnt destroy model as common user' do
-    before(:each) do
-      sign_in User.last
-      create :donation
-      @n = Donation.count
-      @model = Donation.first
-      
-      @sucess_msg = { message: @model.was('destroyed'), success: true }.to_json
-      @error_msg = { message: I18n.t('errors.deletion'), success: false }.to_json
-      @non_admin_msg = { message: I18n.t('errors.unpermitted_action'), success: false }.to_json
-    end
+  #   context 'Successfully destroys model via ajax' do
+  #     before(:each) do
+  #       xhr :delete, :destroy, id: model.id
+  #     end
 
-    context 'Common user cant destroy model via ajax' do
-      before(:each) do
-        xhr :delete, :destroy, id: @model.id
-      end
-      
-      it { expect(Donation.count).to eq(@n) }
-      it { expect(response.body).to eq(@non_admin_msg) }
-    end
-  end
+  #     it { expect(Donation.count).to eq(n - 1) }
+  #     it { expect(response.body).to eq(sucess_msg) }
+  #   end
+  # end
+
+  # describe 'Doesnt destroy model as common user' do
+  #   before(:each) do
+  #     sign_in User.last
+  #     create :donation
+  #     @n = Donation.count
+  #     @model = Donation.first
+
+  #     @sucess_msg = { message: model.was('destroyed'), success: true }.to_json
+  #     @error_msg = { message: I18n.t('errors.deletion'), success: false }.to_json
+  #     @non_admin_msg = { message: I18n.t('errors.unpermitted_action'), success: false }.to_json
+  #   end
+
+  #   context 'Common user cant destroy model via ajax' do
+  #     before(:each) do
+  #       xhr :delete, :destroy, id: model.id
+  #     end
+
+  #     it { expect(Donation.count).to eq(n) }
+  #     it { expect(response.body).to eq(non_admin_msg) }
+  #   end
+  # end
 end
