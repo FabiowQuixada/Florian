@@ -8,7 +8,7 @@ FactoryGirl.define do
     password_confirmation { 'Faker::Internet.password' }
     role
 
-    after(:build) do |user, _evaluator|
+    after(:build) do |user|
       user.system_setting ||= build(:system_setting, user: user)
     end
 
@@ -17,11 +17,18 @@ FactoryGirl.define do
     end
 
     trait :common do
-      email ADMIN_EMAIL
+    end
+
+    trait :guest do
+      after(:build) do |user|
+        user.role = build(:role, name: GUEST_ROLE, description: GUEST_ROLE)
+      end
     end
 
     trait :admin do
-      email ADMIN_EMAIL
+      after(:build) do |user|
+        user.role = build(:role, name: ADMIN_ROLE, description: ADMIN_ROLE)
+      end
     end
 
     trait :invalid do

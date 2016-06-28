@@ -1,11 +1,39 @@
 require 'rails_helper'
 
 describe Donation, type: :model do
-  it 'does not save if there is no value and no observation' do
-    before_count = described_class.count
-    described_class.create(donation_date: Date.new(2001, 2, 3))
-    expect(described_class.count).to eq(before_count)
+  it 'does not save if there is no value and no remark' do
+    model = build(:donation, value: nil, remark: nil)
+    model.valid?
+    expect(model.errors).not_to be_empty
   end
+
+  it 'saves if there is a remark' do
+    model = build(:donation, value: nil, remark: 'remark')
+    model.valid?
+    expect(model.errors).to be_empty
+  end
+
+  it 'does not save if there is a empty remark' do
+    model = build(:donation, value: nil, remark: '')
+    model.valid?
+    expect(model.errors).not_to be_empty
+  end
+
+  it 'saves if there is a value' do
+    model = build(:donation, value: 4.00, remark: nil)
+    model.valid?
+    expect(model.errors).to be_empty
+  end
+
+  it 'does not save if there is a 0.00 value' do
+    model = build(:donation, value: 0.00, remark: nil)
+    model.valid?
+    expect(model.errors).not_to be_empty
+  end
+
+  it { expect(build(:donation, value: 0.00).send(:no_value?)).to be true }
+
+  it { should belong_to :company }
 
   it { should validate_presence_of(:donation_date) }
   it { should validate_presence_of(:company) }

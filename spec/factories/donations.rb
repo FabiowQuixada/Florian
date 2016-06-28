@@ -7,5 +7,9 @@ FactoryGirl.define do
       remark nil
       value nil
     end
+
+    before(:create) do |donation|
+      donation.company.save
+    end
   end
 end

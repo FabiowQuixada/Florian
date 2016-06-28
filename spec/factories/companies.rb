@@ -14,7 +14,7 @@ FactoryGirl.define do
     end
 
     trait :pessoa_fisica do
-      entity_type "Pessoa Jurídica"
+      entity_type "Pessoa Física"
       cpf { BlaBla::CPF.formatado }
       cnpj nil
       registration_name nil
@@ -22,14 +22,20 @@ FactoryGirl.define do
 
     trait :with_donations do
       after(:build) do |company|
-        create_list(:donation, 3, company: company)
+        company.donations = build_list(:donation, 3, company: company)
+      end
+    end
+
+    trait :with_invalid_donations do
+      after(:build) do |company|
+        company.donations = build_list(:donation, 3, company: company, donation_date: nil)
       end
     end
 
     trait :with_contacts do
-      after(:build) do |company|
-        create_list(:contact, 3, company: company)
-      end
+      # after(:build) do |company|
+      #   build_list(:contact, 3, company: company)
+      # end
     end
   end
 end

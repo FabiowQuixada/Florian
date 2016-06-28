@@ -9,5 +9,17 @@ FactoryGirl.define do
     trait :invalid do
       value nil
     end
+
+    trait :pf_company do
+      company { build(:company, :pessoa_fisica) }
+    end
+
+    trait :pj_company do
+      company { build(:company) }
+    end
+
+    before(:create) do |receipt_email|
+      receipt_email.company.save
+    end
   end
 end

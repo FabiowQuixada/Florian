@@ -28,7 +28,7 @@ class Donation < ActiveRecord::Base
 
   def validate_model
     errors.add :donation_date, I18n.t('errors.donation.date_mandatory') unless donation_date.is_a?(Date)
-    errors.add :donation_date, I18n.t('errors.donation.value_or_remark') if value_present? && remark_present?
+    errors.add :donation_date, I18n.t('errors.donation.value_or_remark') if no_value? && no_remark?
   end
 
   def model_gender
@@ -37,12 +37,12 @@ class Donation < ActiveRecord::Base
 
   private
 
-  def value_present?
+  def no_value?
     value.nil? || value == '0,00'
   end
 
-  def remark_present?
-    (remark.nil? || remark.empty?)
+  def no_remark?
+    remark.nil? || remark.empty?
   end
 
 

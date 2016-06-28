@@ -40,17 +40,13 @@ class ProductAndServiceDatum < ActiveRecord::Base
 
   def service_qty
     sum = 0
-
     weeks.each { |week| sum += week.service_qty if week.number <= 5 }
-
     sum
   end
 
   def product_qty
     sum = 0
-
     weeks.each { |week| sum += week.product_qty if week.number <= 5 }
-
     sum
   end
 

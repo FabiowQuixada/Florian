@@ -35,5 +35,12 @@ describe Company, type: :model do
   # Relationships
   it { should have_many :contacts }
   it { should have_many :donations }
-  # it { should validate_length_of(:contacts).is_equal_to(3) }
+  it { expect(build(:company, :with_donations).valid?).to be true }
+  it { expect(build(:company, :with_contacts).valid?).to be true }
+
+  it 'does not save if it has an invalid donation' do
+    company = build :company, :with_invalid_donations
+    company.valid?
+    expect(company.errors).not_to be_empty
+  end
 end

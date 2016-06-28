@@ -71,7 +71,6 @@ class ServiceData < ActiveRecord::Base
     errors.empty? && output && is_valid
   end
 
-
   private
 
   attr_accessor :is_valid

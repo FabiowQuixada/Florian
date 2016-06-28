@@ -24,7 +24,6 @@ class User < ActiveRecord::Base
 
   # Methods
   def admin?
-
     return false if role.nil?
 
     role.name == ADMIN_ROLE
@@ -49,8 +48,6 @@ class User < ActiveRecord::Base
   end
 
   def build_default_system_setting
-    # build default profile instance. Will use default params.
-    # The foreign key to the owning User model is set automatically
     build_system_setting
 
     system_setting.pse_recipients_array = SSETTINGS_PSE_RECIPIENTS

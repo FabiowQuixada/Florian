@@ -8,6 +8,8 @@ describe ServiceData, type: :model do
   # it { should validate_presence_of(:gynecology) }
   # it { should validate_presence_of(:occupational_therapy) }
 
+  # it { should validate_inclusion_of(:service_type).in_array(ServiceData.service_types.values) }
+
   # Relationships
   it { should belong_to :product_and_service_week }
 end

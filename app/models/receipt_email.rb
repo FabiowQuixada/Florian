@@ -82,8 +82,8 @@ class ReceiptEmail < ActiveRecord::Base
   private
 
   def receipt_text
-    pf_text if company.person?
-    pj_text if company.company?
+    return pf_text if company.person?
+    return pj_text if company.company?
   end
 
   def pf_text

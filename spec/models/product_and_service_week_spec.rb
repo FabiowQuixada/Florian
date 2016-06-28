@@ -65,6 +65,26 @@ describe ProductAndServiceWeek, type: :model do
     end
   end
 
+  it 'returns the correct number of services' do
+    week = build :product_and_service_week
+    week.service_data[0].psychology = 4
+    week.service_data[0].mesh = 3
+
+    sum = 0
+    week.service_data.each { |service| sum += service.qty }
+
+    expect(week.service_qty).to eq sum
+    expect(week.service_qty).to eq 7
+  end
+
+  it 'returns the correct number of products' do
+    week = build :product_and_service_week
+    week.product_data.cervical_collar = 4
+    week.product_data.mesh = 3
+
+    expect(week.product_qty).to eq 7
+  end
+
   it { should validate_presence_of(:number) }
   it { should validate_presence_of(:start_date) }
   it { should validate_presence_of(:end_date) }
