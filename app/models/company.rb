@@ -45,7 +45,7 @@ class Company < ActiveRecord::Base
   after_initialize do
     if contacts.empty?
       (0..2).each do |i|
-        contacts.new(contact_type: i, company: self)
+        contacts.new(contact_type: i, company: self, name: 'Contato ' + i.to_s)
       end
     end
   end

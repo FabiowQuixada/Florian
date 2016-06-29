@@ -332,6 +332,8 @@ pt-BR:
       final_footer: 'Estes serão os dados enviados por e-mail para os mantenedores.'
     company:
       new_donation: Nova doação
+      new_contact: Novo contato
+      edit_contact: Editar contato
     action:
       login: Login
       signup: Cadastrar
@@ -583,6 +585,7 @@ pt-BR:
       month_mandatory: "O campo 'Dia do mês' é inválido;"
       month_max: "O campo 'Dia do mês' deve ser menor que 28;"
     contact:
+      all_empty: "Preencha pelo menos um dos campos."
       invalid_telephone: "O campo 'Telefone' é inválido;"
       invalid_celphone: "O campo 'Celular' é inválido;"
       invalid_fax: "O campo 'Fax' é inválido;"
