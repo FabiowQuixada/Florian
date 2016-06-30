@@ -18,7 +18,7 @@ class Company < ActiveRecord::Base
   # Relationships
   has_one :email
   has_many :donations, -> { order('donation_date') }, dependent: :destroy
-  has_many :contacts, -> { order('contact_type') }, dependent: :destroy
+  has_many :contacts, -> { order('id') }, dependent: :destroy
   accepts_nested_attributes_for :donations, allow_destroy: true, reject_if: :donation_rejectable?
   accepts_nested_attributes_for :contacts
 
@@ -27,7 +27,6 @@ class Company < ActiveRecord::Base
   validates :registration_name, uniqueness: true, if: :company?, allow_blank: true
   validate :unique_cnpj
   validate :unique_cpf
-  validate :contact_qty
   validates :entity_type, presence: true
   validates :registration_name, :cnpj, presence: true, if: :company?
   validates :cpf, presence: true, if: :person?
@@ -42,20 +41,8 @@ class Company < ActiveRecord::Base
 
 
   # Methods
-  after_initialize do
-    if contacts.empty?
-      (0..2).each do |i|
-        contacts.new(contact_type: i, company: self, name: 'Contato ' + i.to_s)
-      end
-    end
-  end
-
   def model_gender
     'f'
-  end
-
-  def contact_qty
-    errors.add(:contacts, I18n.t('errors.company.contacts', contacts: contacts.size)) if contacts.size != 3
   end
 
   def person?
