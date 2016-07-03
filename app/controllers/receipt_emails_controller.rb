@@ -72,7 +72,7 @@ class ReceiptEmailsController < ApplicationController
     next_month_emails = []
 
     emails.each do |email|
-      if email.current_month
+      if email.current_month?
         this_month_emails << email
       else
         next_month_emails << email

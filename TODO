@@ -1,27 +1,29 @@
-Servidor:
+Servidor ou AWS:
  - Acesso externo (SAGECOM);
  - Acesso browser sem senha;
  - Adicionar meu notebook la no SSH do servidor;
  - Queda frequente de internet;
  - Tem que atualizar noip de tempos em tempos;
 
-Testar data do system_seetings
+TESTES:
+Testes comentados;
+Stub, pra eliminar paredao de e-mail;
+request & feature;
+Feature: paginas com admin e nao admin;
 
 Eliminacao do index_table;
 A pagina cai se ficar parada por um tempo;
 product_and_service_weeks/update_and_send quando da erro no envio de e-mail 
 Voltar em algumas telas;
-Ilimitacao de contatos na empresa;
-Validacoes: Company should validate that :registration_name is case-sensitively unique
 Gems: Resque, Sidekiq, (integracao continua)
 Copia de producao pra desenvolvimento;
 bundle exec...
 git ignore: no primeiro commit;
 Status de respostas do servidor;
-Testes e mais testes
-
+Validacao de html;
 PROBLEMAS parse: doacoes e telefones;
-Stub, pra eliminar paredao de e-mail;
+Rubocop views?
+
 
 =====================================================================
 

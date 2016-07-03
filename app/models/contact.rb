@@ -9,7 +9,7 @@ class Contact < ActiveRecord::Base
 
   # Relationships
   belongs_to :company
-  
+
 
   # Validations
   validate :validate_model
