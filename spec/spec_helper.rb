@@ -29,7 +29,6 @@ RSpec.configure do |config|
 
   # Add this to load Capybara integration:
   require 'capybara/rspec'
-  require 'capybara/rails'
 
   config.include ControllerHelpers, type: :controller
   config.include ControllerHelpers, type: :view
@@ -44,7 +43,6 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include Rails.application.routes.url_helpers
 
-  require 'capybara/rspec'
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -67,6 +65,8 @@ RSpec.configure do |config|
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
   end
+
+  config.include Capybara::DSL
 
   # The settings below are suggested to provide a good initial experience
   # with RSpec, but feel free to customize to your heart's content.
