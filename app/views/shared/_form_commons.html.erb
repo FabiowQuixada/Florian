@@ -45,7 +45,7 @@
 			// Saves the values of the model on page load, so it can be compared to the values when the user goes back, allowing a 'not-saved data' pop-up to display;
 			window.attr_values = new Array();
 			$('input, textarea, select').each(function(){
-				if(!$(this).hasClass('btn') && !(typeof $(this).attr('id') === 'undefined') && !$(this).hasClass('temp_field'))
+				if(!$(this).hasClass('btn') && !(typeof $(this).attr('id') === 'undefined') && !$(this).hasClass('temp_field') && $(this).attr('type') !== 'hidden')
 			   		attr_values[$(this).attr('id')] = $(this).val();
 			})
 
@@ -63,6 +63,15 @@
 			<% end %>
 		});
 
+		function has_changed(key) {
+
+			if($('#' + key).hasClass("numbers_only") && attr_values[key] === "" && $('#' + key).val() === "0")
+				return false;
+
+
+			return attr_values[key] != $('#' + key).val();
+		}
+
 		function handle_back_on_edit() {
 
 			window.any_change = false;
@@ -73,7 +82,7 @@
 
 			if(!window.any_change) {
 				for (var key in attr_values) {
-				    if(attr_values[key] != $('#' + key).val()) {
+				    if(has_changed(key)) {
 				    	changed_values_list += ' ' + key;
 				    	any_change = true;
 				    }
