@@ -7,11 +7,10 @@ Servidor ou AWS:
 
 TESTES:
 Testes comentados;
-Stub, pra eliminar paredao de e-mail;
-request & feature;
+Stubs;
+Request;
 Feature: paginas com admin e nao admin;
 
-Eliminacao do index_table;
 A pagina cai se ficar parada por um tempo;
 product_and_service_weeks/update_and_send quando da erro no envio de e-mail 
 Voltar em algumas telas;

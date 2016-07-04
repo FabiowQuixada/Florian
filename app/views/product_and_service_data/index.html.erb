@@ -1,4 +1,5 @@
-<%= link_to genderize_full_tag(@model, 'helpers.action.new'), send("new_product_and_service_datum_path"), :class => "btn btn-primary" %>
+
+<%= link_to genderize_full_tag(@model, 'helpers.action.new'), new_product_and_service_datum_path, :class => "btn btn-primary" %>
 
 <br/>
 
@@ -6,13 +7,13 @@
 	<thead>
 		<tr>
 			<% I18n.with_options(scope: 'activerecord.attributes.product_and_service_datum') do |i18n| %>
-			<th class="admin-only id-column" style="display: none;"></th>
-			<th class="sorter-false"><%= i18n.t 'competence' %></th>
-			<th class="sorter-false"><%= i18n.t 'services' %></th>
-			<th class="sorter-false"><%= i18n.t 'products' %></th>
-			<th class="sorter-false"><%= i18n.t 'status' %></th>
+			<th class="admin-only id-column"></th>
+			<th class="sorter-false"><%= i18n.t :competence %></th>
+			<th class="sorter-false"><%= i18n.t :services %></th>
+			<th class="sorter-false"><%= i18n.t :products %></th>
+			<th class="sorter-false"><%= i18n.t :status %></th>
 			<th class="sorter-false icon-column"></th>
-			<th class="admin-only sorter-false" style="display:none;"></th>
+			<th class="admin-only sorter-false"></th>
 			<% end %>
 		</tr>
 	</thead>
@@ -20,21 +21,21 @@
 	<tbody>
 	<% if @list.empty? %>
 	<tr>
-		<td colspan="7" bgcolor="#E0E0F4" align="center"><%= genderize_tag(@model, 'helpers.none_registered') %></td>
+		<td colspan="20" bgcolor="#E0E0F4" align="center"><%= genderize_tag(@model, 'helpers.none_registered') %></td>
 	</tr>
 
 	<% else %>
 		<% @list.each do |iterator| %>
 		<tr id="model_<%= iterator.id %>" class="model_row">
-			<td class="model_id admin-only" style="display: none;"><%= iterator.id %></td>
+			<td class="model_id admin-only"><%= iterator.id %></td>
 			<td><%=	I18n.localize(iterator.competence, format: :competence).capitalize %></td>
 			<td><%= iterator.service_qty %></td>
 			<td><%= iterator.product_qty %></td>
 			<td><%= iterator.status_desc %></td>
-			<td class="icon-column"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), send("edit_product_and_service_datum_path", iterator) %></td>
-			<td class="admin-only icon-column" style="display:none;">
-					<%= image_tag("destroy.png", title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %>
-					</td>
+			<td class="icon-column"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')),edit_product_and_service_datum_path(iterator) %></td>
+			<td class="admin-only icon-column">
+				<%= image_tag("destroy.png", title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %>
+			</td>
 		</tr>
 		<% end %>
 

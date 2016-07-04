@@ -1,3 +1,48 @@
-<%= render partial: "shared/index_table", locals: {model: @model, columns: Array.[](
-    Hash[:header => "name", :model_attr => 'name']
-  )} %>
+
+<%= link_to genderize_full_tag(@model, 'helpers.action.new'), new_role_path, :class => "btn btn-primary" %>
+
+<br/>
+
+<table id="index_table" class="table table-striped table-hover table-bordered table-condensed tablesorter tablesorter-blue">
+	<thead>
+		<tr>
+			<% I18n.with_options(scope: 'activerecord.attributes.role') do |i18n| %>
+				<th class="admin-only id-column"></th>
+				<th><%= i18n.t :name %></th>
+				<th class="sorter-false icon-column"></th>
+				<th class="hidden-xs sorter-false icon-column"></th>
+				<th class="admin-only sorter-false icon-column"></th>
+			<% end %>
+		</tr>
+	</thead>
+
+	<tbody>
+	<% if @list.empty? %>
+		<tr>
+			<td colspan="20" bgcolor="#E0E0F4" align="center"><%= genderize_tag(@model, 'helpers.none_registered') %></td>
+		</tr>
+
+	<% else %>
+			<% @list.each do |iterator| %>
+				<tr id="model_<%= iterator.id %>" class="model_row">
+					<td class="model_id admin-only"><%= iterator.id %></td>
+					<td><%= iterator.name %></td>
+					<td class="icon-column"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), edit_role_path(iterator) %></td>
+					<td class="hidden-xs status icon-column">
+						<% if iterator.active %>
+							<%= link_to image_tag("activate.png", :title => genderize_tag(iterator, 'is_active'), :class => 'deactivate_btn status_btn'), deactivate_role_path(iterator), method: :post, :remote => true, :id => 'change_status_' + iterator.id.to_s, "data-type" => :json, :class => 'deactivate_btn' %>
+						<% else %>
+							<%= link_to image_tag("deactivate.png", :title => genderize_tag(iterator, 'is_inactive'), :class => 'activate_btn status_btn'), activate_role_path(iterator), method: :post, :remote => true, :id => 'change_status_' + iterator.id.to_s, "data-type" => :json, :class => 'activate_btn' %>
+						<% end %>
+					</td>
+					<td class="admin-only icon-column">
+					<%= image_tag("destroy.png", title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %>
+					</td>
+				</tr>
+			<% end %>
+
+	<% end %>
+	</tbody>
+</table>
+
+<%= render partial: "shared/index_commons", locals: {model: @model} %>

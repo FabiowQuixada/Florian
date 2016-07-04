@@ -1,22 +1,20 @@
 
-
-<%= link_to genderize_full_tag(@model, 'helpers.action.new'), send("new_bill_path"), :class => "btn btn-primary" %>
+<%= link_to genderize_full_tag(@model, 'helpers.action.new'), new_bill_path, :class => "btn btn-primary" %>
 <%= link_to t('other.graph.other'), 'javascript:void(0)', :id => "graphs_btn", :class => "btn btn-primary" %>
 
-</p>
+<br/>
 
 <table id="index_table" class="table table-striped table-hover table-bordered table-condensed tablesorter tablesorter-blue">
 	<thead>
 		<tr>
 			<% I18n.with_options(scope: 'activerecord.attributes.bill') do |i18n| %>
-				<th style="display: none;"></th>
-					<th class="admin-only id-column" style="display: none;"></th>
-					<th class="sorter-false"><%= i18n.t 'competence' %></th>
-					<th class="sorter-false"><%= i18n.t 'water' %></th>
-					<th class="sorter-false"><%= i18n.t 'energy' %></th>
-					<th class="sorter-false"><%= i18n.t 'telephone' %></th>
-					<th class="sorter-false icon-column"></th>
-					<th class="admin-only sorter-false" style="display:none;"></th>
+				<th class="admin-only id-column"></th>
+				<th class="sorter-false"><%= i18n.t 'competence' %></th>
+				<th class="sorter-false"><%= i18n.t 'water' %></th>
+				<th class="sorter-false"><%= i18n.t 'energy' %></th>
+				<th class="sorter-false"><%= i18n.t 'telephone' %></th>
+				<th class="sorter-false icon-column"></th>
+				<th class="admin-only sorter-false"></th>
 			<% end %>
 		</tr>
 	</thead>
@@ -24,7 +22,7 @@
 	<tbody>
 	<% if @list.empty? %>
 		<tr>
-			<td colspan="6" bgcolor="#E0E0F4" align="center"><%= genderize_tag(@model, 'helpers.none_registered') %></td>
+			<td colspan="20" bgcolor="#E0E0F4" align="center"><%= genderize_tag(@model, 'helpers.none_registered') %></td>
 		</tr>
 
 	<% else %>
@@ -32,12 +30,11 @@
 				<tr id="model_<%= iterator.id %>" class="model_row">
 					<td class="model_id admin-only"><%= iterator.id %></td>
 					<td><%=	I18n.localize(iterator.competence, format: :competence).capitalize %></td>
-					<td style="display: none;" class="model_id"><%= iterator.id %></td>
-					<td><%=	number_to_currency(iterator.public_send('water')) %></td>
-					<td><%=	number_to_currency(iterator.public_send('energy')) %></td></td>
-					<td><%=	number_to_currency(iterator.public_send('telephone')) %></td>
-					<td class="icon-column"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), send("edit_bill_path", iterator) %></td>
-					<td class="admin-only icon-column" style="display:none;">
+					<td><%=	number_to_currency(iterator.water) %></td>
+					<td><%=	number_to_currency(iterator.energy) %></td></td>
+					<td><%=	number_to_currency(iterator.telephone) %></td>
+					<td class="icon-column"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), edit_bill_path(iterator) %></td>
+					<td class="admin-only icon-column">
 					<%= image_tag("destroy.png", title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %>
 					</td>
 				</tr>
@@ -49,9 +46,9 @@
 
 <script>
 
-$('#graphs_btn').click(function(ev) {
-			$('#graphs_modal').modal('show');
-		});
+	$('#graphs_btn').click(function(ev) {
+		$('#graphs_modal').modal('show');
+	});
 
 </script>
 
