@@ -36,7 +36,8 @@ ANALYSIS_EMAIL = (Rails.env == 'production' ? 'edmarmaciel@gmail.com' : 'ftquixa
 DEFAULT_COMPANY_CITY = 'Fortaleza'.freeze
 DEFAULT_COMPANY_STATE = 'CE'.freeze
 
-PHONE_FORMAT = /\A(\(\d{2}\))? \d{4,5}-\d{4}\Z/
+PHONE_FORMAT = /\A(\(\d{2}\))? \d{4}-\d{4}\Z/
+CELPHONE_FORMAT = /\A(\(\d{2}\))? (\d )?\d{4}-\d{4}\Z/
 
 ADMIN_ROLE = 'Admin'.freeze
 GUEST_ROLE = 'Visitante'.freeze
