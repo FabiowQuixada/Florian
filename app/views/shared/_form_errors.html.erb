@@ -3,7 +3,7 @@
 	<div id="form_error_messages">
 		<ul>
 			<% model.errors.full_messages.each do |msg| %>
-				<li><%= msg %></li>
+			<li><%= msg %></li>
 			<% end %>
 		</ul>
 	</div>
@@ -12,6 +12,6 @@
 <script>
 
 	<% if model.errors.any? %>
-		$('#form_error_box').show();
+	$('#form_error_box').show();
 	<% end %>
 </script>

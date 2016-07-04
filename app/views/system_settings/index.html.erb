@@ -1,5 +1,5 @@
 
-<%= link_to genderize_full_tag(@model, 'helpers.action.new'), new_system_setting_path, :class => "btn btn-primary" %>
+<%= link_to genderize_full_tag(@model, 'helpers.action.new'), new_system_setting_path, class: 'btn btn-primary' %>
 
 <br/>
 
@@ -26,9 +26,9 @@
 		<tr id="model_<%= iterator.id %>" class="model_row">
 			<td class="model_id admin-only"><%= iterator.id %></td>
 			<td class="hidden-xs"><%= iterator.user.name %></td>
-			<td class="icon-column"><%= link_to image_tag("edit.png", :title => t('helpers.action.edit')), edit_system_setting_path(iterator) %></td>
+			<td class="icon-column"><%= link_to image_tag('edit.png', title: t('helpers.action.edit')), edit_system_setting_path(iterator) %></td>
 			<td class="admin-only icon-column">
-				<%= image_tag("destroy.png", title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %>
+				<%= image_tag('destroy.png', title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %>
 			</td>
 		</tr>
 		<% end %>
@@ -37,4 +37,4 @@
 	</tbody>
 </table>
 
-<%= render partial: "shared/index_commons", locals: {model: @model} %>
+<%= render partial: 'shared/index_commons', locals: {model: @model} %>

@@ -1,11 +1,11 @@
-<%= form_for @model, :html=> {:id => 'main_form'} do |f| %>
+<%= form_for @model, html: {id: 'main_form'} do |f| %>
 
-<%= render partial: "shared/form_errors", locals: {model: @model} %>
+<%= render partial: 'shared/form_errors', locals: {model: @model} %>
 
 <ul class="nav nav-tabs">
 	<li id="main_tab_0_title" class="active clickable"><a><%= I18n.t('helpers.general') %></a></li>
-	<li id="main_tab_1_title" class="clickable"><a><%= Donation.new.model_name.human(:count => 2) %></a></li>
-	<li id="main_tab_2_title" class="clickable"><a><%= Contact.new.model_name.human(:count => 2) %></a></li>
+	<li id="main_tab_1_title" class="clickable"><a><%= Donation.new.model_name.human(count: 2) %></a></li>
+	<li id="main_tab_2_title" class="clickable"><a><%= Contact.new.model_name.human(count: 2) %></a></li>
 </ul>
 
 <div id="main_tab_0" class="general_tab">
@@ -14,37 +14,37 @@
 		<div class="row">
 			<div class="form-group col-md-6">
 				<%= f.label :entity_type %>
-				<%= f.select :entity_type, Company.entity_types.keys, {}, { :class => 'form-control', :disabled => f.object.persisted? } %>
+				<%= f.select :entity_type, Company.entity_types.keys, {}, { class: 'form-control', disabled: f.object.persisted? } %>
 			</div>
 
 			<div class="form-group col-md-6 company_area">
 				<%= f.label :registration_name %>
-				<%= f.text_field :registration_name, :class => 'form-control', :readonly => f.object.persisted? %>
+				<%= f.text_field :registration_name, class: 'form-control', readonly: f.object.persisted? %>
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group col-md-6 person_area">
 				<%= f.label :cpf %>
-				<%= f.text_field :cpf, :class => 'form-control cpf', :readonly => f.object.persisted? %>
+				<%= f.text_field :cpf, class: 'form-control cpf', readonly: f.object.persisted? %>
 			</div>
 
 
 			<div class="form-group col-md-6 company_area">
 				<%= f.label :cnpj %>
-				<%= f.text_field :cnpj, :class => 'form-control cnpj', :readonly => f.object.persisted? %>
+				<%= f.text_field :cnpj, class: 'form-control cnpj', readonly: f.object.persisted? %>
 			</div>
 
 
 			<div class="form-group col-md-6">
 				<%= f.label :name %>
-				<%= f.text_field :name, :class => 'form-control', :readonly => f.object.persisted? %>
+				<%= f.text_field :name, class: 'form-control', readonly: f.object.persisted? %>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="form-group col-md-12">
 				<%= f.label :address %>
-				<%= f.text_field :address, :class => 'form-control' %>
+				<%= f.text_field :address, class: 'form-control' %>
 			</div>
 
 		</div>
@@ -53,22 +53,22 @@
 		<div class="row">
 			<div class="form-group col-md-6">
 				<%= f.label :cep %>
-				<%= f.text_field :cep, :class => 'form-control cep' %>
+				<%= f.text_field :cep, class: 'form-control cep' %>
 			</div>
 
 			<div class="form-group col-md-6">
 				<%= f.label :neighborhood %>
-				<%= f.text_field :neighborhood, :class => 'form-control' %>
+				<%= f.text_field :neighborhood, class: 'form-control' %>
 			</div>
 		</div><div class="row">
 		<div class="form-group col-md-6">
 			<%= f.label :city %>
-			<%= f.text_field :city, :class => 'form-control' %>
+			<%= f.text_field :city, class: 'form-control' %>
 		</div>
 
 		<div class="form-group col-md-6">
 			<%= f.label :state %>
-			<%= f.select :state, BR_STATES, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+			<%= f.select :state, BR_STATES, {include_blank: t('helpers.select.prompt')}, { class: 'form-control' } %>
 
 		</div>
 	</div><div class="row">
@@ -76,29 +76,29 @@
 		<%= f.label :email_address %>
 		<div class="input-group">
 			<span class="input-group-addon">@</span>
-			<%= f.text_field :email_address, :class => 'form-control' %>
+			<%= f.text_field :email_address, class: 'form-control' %>
 		</div>
 	</div>
 
 	<div class="form-group col-md-6">
 		<%= f.label :website %>
-		<%= f.text_field :website, :class => 'form-control' %>
+		<%= f.text_field :website, class: 'form-control' %>
 	</div>
 </div><div class="row">
 <div class="form-group col-md-6">
 	<%= f.label :category %>
-	<%= f.select :category, Company.categories.keys, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+	<%= f.select :category, Company.categories.keys, {include_blank: t('helpers.select.prompt')}, { class: 'form-control' } %>
 </div>
 
 <div class="form-group col-md-6">
 	<%= f.label :group %>
-	<%= f.select :group, Company.groups.keys, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+	<%= f.select :group, Company.groups.keys, {include_blank: t('helpers.select.prompt')}, { class: 'form-control' } %>
 </div>
 </div><div class="row">
 
 <div class="form-group col-md-12">
 	<%= f.label :remark %>
-	<%= f.text_area :remark, :rows => 6, :class => 'form-control' %>
+	<%= f.text_area :remark, rows: 6, class: 'form-control' %>
 </div>
 </div>
 </div>
@@ -115,24 +115,24 @@
 
 					<%= f.label :first_parcel %>
 					<div class="input-group date" data-behaviour='datepicker' >
-						<%= f.text_field :first_parcel, {:class => 'form-control'} %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+						<%= f.text_field :first_parcel, {class: 'form-control'} %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 					</div>
 				</div><div class="form-group col-md-6">
 				<%= label_tag t('activerecord.attributes.company.last_parcel')%>
-				<%= text_field_tag :last_parcel, '', {:id => 'company_last_parcel', :class => 'form-control', readonly: true} %>
+				<%= text_field_tag :last_parcel, '', {id: 'company_last_parcel', class: 'form-control', readonly: true} %>
 			</div>
 		</div><div class="row">
 		<div class="form-group col-md-4">
 			<%= f.label :payment_frequency %>
-			<%= f.select :payment_frequency, Company.payment_frequencies.keys, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+			<%= f.select :payment_frequency, Company.payment_frequencies.keys, {include_blank: t('helpers.select.prompt')}, { class: 'form-control' } %>
 		</div>
 		<div class="form-group col-md-4">
-			<%= f.label :payment_period, :class => 'asterisk' %>
-			<%= f.text_field :payment_period, :class => 'form-control numbers_only' %>
+			<%= f.label :payment_period, class: 'asterisk' %>
+			<%= f.text_field :payment_period, class: 'form-control numbers_only' %>
 		</div>
 		<div class="form-group col-md-4">
 			<%= f.label :contract %>
-			<%= f.select :contract, Company.contracts.keys, {:include_blank => t('helpers.select.prompt')}, { :class => 'form-control' } %>
+			<%= f.select :contract, Company.contracts.keys, {include_blank: t('helpers.select.prompt')}, { class: 'form-control' } %>
 		</div>
 
 		<div class="form-group col-md-12 asterisk-description">* Digite 0 para "Indeterminado".</div>
@@ -147,17 +147,17 @@
 				<div class="row">
 					<div class="form-group col-md-4">
 						<div class="input-group date" data-behaviour='datepicker' >
-							<%= text_field_tag :donation_date, '', :id => 'new_donation_date', :class => 'form-control datepicker temp_field' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+							<%= text_field_tag :donation_date, '', id: 'new_donation_date', class: 'form-control datepicker temp_field' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 						</div>
 					</div>
 					<div class="form-group col-md-3">
 						<div class="input-group">
 							<span class="input-group-addon">R$</span>
-							<%= text_field_tag :value, '', :id => 'new_donation_value', :class => 'form-control money temp_field' %>
+							<%= text_field_tag :value, '', id: 'new_donation_value', class: 'form-control money temp_field' %>
 						</div>
 					</div>
 					<div class="form-group col-md-5">
-						<%= text_field_tag :remark, '', :id => 'new_donation_remark', :placeholder => t('activerecord.attributes.donation.remark'), :class => 'form-control temp_field' %>
+						<%= text_field_tag :remark, '', id: 'new_donation_remark', placeholder: t('activerecord.attributes.donation.remark'), class: 'form-control temp_field' %>
 					</div>
 				</div>
 
@@ -203,18 +203,18 @@
 <!-- Contacts -->
 <div id="main_tab_2" style="display: none;">
 	<div class="container-fluid tab_body">
-		<%= render partial: "contact_form", locals: {model: @model, f: f} %>
+		<%= render partial: 'contact_form', locals: {model: @model, f: f} %>
 	</div>
 </div>
 
 </div>
 
-<%= render partial: "shared/form_buttons", locals: {model: @model, f: f} -%>
+<%= render partial: 'shared/form_buttons', locals: {model: @model, f: f} -%>
 
 <%end%>
 
-<%= render partial: "shared/tab_commons", locals: {tab_type: 'main', number_of_tabs: 3} %>
-<%= render partial: "shared/form_commons", locals: {model: @model} %>
+<%= render partial: 'shared/tab_commons', locals: {tab_type: 'main', number_of_tabs: 3} %>
+<%= render partial: 'shared/form_commons', locals: {model: @model} %>
 
 <script>
 
@@ -334,10 +334,10 @@
 				'<td class="donation_date">' + date + '</td>' +
 				'<td class="donation_value">' + value + '</td>'+
 				'<td style="width: 50%" class="donation_remark">' + remark + '</td>' +
-				'<td class="button-wrapper"><%= link_to image_tag("delete.png", :title =>  t('helpers.action.remove'), :class => 'remove_donation_btn remove_btn'), 'javascript:void(0)', :class => 'remove_donation_btn remove_btn' %></td>' +
-					donation_field(temp_id, 'donation_date', to_rails_date(date)) +
-					donation_field(temp_id, 'value', value) +
-					donation_field(temp_id, 'remark', remark) +
+				'<td class="button-wrapper"><%= link_to image_tag('delete.png', title:  t('helpers.action.remove'), class: 'remove_donation_btn remove_btn'), 'javascript:void(0)', class: 'remove_donation_btn remove_btn' %></td>' +
+				donation_field(temp_id, 'donation_date', to_rails_date(date)) +
+				donation_field(temp_id, 'value', value) +
+				donation_field(temp_id, 'remark', remark) +
 				'</tr>';
 
 				$('#donations_table > tbody:last-child').append(line);

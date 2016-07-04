@@ -9,7 +9,7 @@
 				<div class="row">
 					<div class="form-group col-md-12">
 						<div id="contact_data">
-							<%= render partial: "contacts/contact" %>
+							<%= render partial: 'contacts/contact' %>
 						</div>
 					</div>
 				</div>
@@ -56,8 +56,8 @@
 					<td class="contact_telephone"><%= contact.telephone %></td>
 					<td class="contact_celphone"><%= contact.celphone %></td>
 					<td class="contact_fax" style="display:none;"><%= contact.fax %></td>
-					<td class="icon-column"><%= image_tag("edit.png", :title => t('helpers.action.edit'), class: 'edit_contact_btn clickable') %></td>
-					<!-- <td class="icon-column"><%#= image_tag("destroy.png", title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %></td> -->
+					<td class="icon-column"><%= image_tag('edit.png', title: t('helpers.action.edit'), class: 'edit_contact_btn clickable') %></td>
+					<!-- <td class="icon-column"><%#= image_tag('destroy.png', title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %></td> -->
 
 					<input class="form-control" value="<%= contact.id %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][id]" id="company_contacts_attributes_<%= contact.id %>_id">
 					<input class="form-control" value="<%= contact.name %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][name]" id="company_contacts_attributes_<%= contact.id %>_name">
@@ -123,7 +123,7 @@
 				'<td class="contact_telephone">' + telephone + '</td>' +
 				'<td class="contact_celphone">' + celphone + '</td>' +
 				'<td class="contact_fax" style="display:none;">' + fax + '</td>' +
-				'<td class="icon-column"><%= image_tag("edit.png", :title => t('helpers.action.edit'), class: 'edit_contact_btn clickable') %></td>' +
+				'<td class="icon-column"><%= image_tag('edit.png', title: t('helpers.action.edit'), class: 'edit_contact_btn clickable') %></td>' +
 
 				contact_field(temp_id, 'contact_type', "Responsável") +
 				contact_field(temp_id, 'name', name) +

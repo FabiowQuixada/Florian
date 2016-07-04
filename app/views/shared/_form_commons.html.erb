@@ -23,71 +23,71 @@
 	</div>
 </div>
 
-<%= render partial: "shared/audit_commons", locals: {model: model} %>
+<%= render partial: 'shared/audit_commons', locals: {model: model} %>
 
 <script>
 	<% if model.persisted? %>
-		$(document).ready(function() {
+	$(document).ready(function() {
 
-			jQuery(document).ready(function($) {
+		jQuery(document).ready(function($) {
 
-				$("#remove_company_form").on("ajax:success", function(e, data, status, xhr) {
-					display_notice('<%= t('alert.email.test_sent') %>');
-					$('#remove_company_modal').modal('hide');
+			$("#remove_company_form").on("ajax:success", function(e, data, status, xhr) {
+				display_notice('<%= t('alert.email.test_sent') %>');
+				$('#remove_company_modal').modal('hide');
 
-				}).on("ajax:error", function(e, xhr, status, error) {
-					display_error('<%= t('alert.email.error_sending_test') %>');
-					$('#remove_company_modal').modal('hide');
-				});
+			}).on("ajax:error", function(e, xhr, status, error) {
+				display_error('<%= t('alert.email.error_sending_test') %>');
+				$('#remove_company_modal').modal('hide');
 			});
+		});
 
 
 			// Saves the values of the model on page load, so it can be compared to the values when the user goes back, allowing a 'not-saved data' pop-up to display;
 			window.attr_values = new Array();
 			$('input, textarea, select').each(function(){
 				if(!$(this).hasClass('btn') && !(typeof $(this).attr('id') === 'undefined') && !$(this).hasClass('temp_field') && $(this).attr('type') !== 'hidden')
-			   		attr_values[$(this).attr('id')] = $(this).val();
+					attr_values[$(this).attr('id')] = $(this).val();
 			})
 
 			$('#form_back_btn').on('click', handle_back_on_edit);
 
 			<% if model.class.column_names.include? 'active' %>
 
-				if(<%= model.active? %>) {
-					activate();
-				}
-				else {
-					inactivate();
-				}
+			if(<%= model.active? %>) {
+				activate();
+			}
+			else {
+				inactivate();
+			}
 
 			<% end %>
 		});
 
-		function has_changed(key) {
+	function has_changed(key) {
 
-			if($('#' + key).hasClass("numbers_only") && attr_values[key] === "" && $('#' + key).val() === "0")
-				return false;
+		if($('#' + key).hasClass("numbers_only") && attr_values[key] === "" && $('#' + key).val() === "0")
+			return false;
 
 
-			return attr_values[key] != $('#' + key).val();
-		}
+		return attr_values[key] != $('#' + key).val();
+	}
 
-		function handle_back_on_edit() {
+	function handle_back_on_edit() {
 
-			window.any_change = false;
+		window.any_change = false;
 
-			preprocess_data();
+		preprocess_data();
 
-			var changed_values_list = "";
+		var changed_values_list = "";
 
-			if(!window.any_change) {
-				for (var key in attr_values) {
-				    if(has_changed(key)) {
-				    	changed_values_list += ' ' + key;
-				    	any_change = true;
-				    }
+		if(!window.any_change) {
+			for (var key in attr_values) {
+				if(has_changed(key)) {
+					changed_values_list += ' ' + key;
+					any_change = true;
 				}
 			}
+		}
 
 			//alert(changed_values_list);
 
@@ -130,11 +130,11 @@
 		//     }
 		// }
 
-	<% else %>
+		<% else %>
 
 		$(document).ready(function() {
 			<% if model.class.column_names.include? 'active' %>
-				activate();
+			activate();
 			<% end %>
 
 			$('.back_btn').on('click', function() {
@@ -142,34 +142,34 @@
 			});
 		});
 
-	<% end %>
+		<% end %>
 
-	$('#modal_confirm_btn').on('click', function() {
-		document.getElementById("main_form").submit();
-	});
+		$('#modal_confirm_btn').on('click', function() {
+			document.getElementById("main_form").submit();
+		});
 
-	function display_form_errors(message) {
-		var result = '';
+		function display_form_errors(message) {
+			var result = '';
 
-		if (Object.prototype.toString.call(message) === '[object Array]')
-		{
-			result += '<ul>';
+			if (Object.prototype.toString.call(message) === '[object Array]')
+			{
+				result += '<ul>';
 
-			for (var i = 0; i < message.length; i++)
-				result += '<li>' + message[i] + '</li>';
+				for (var i = 0; i < message.length; i++)
+					result += '<li>' + message[i] + '</li>';
 
-			result += '</ul>';
-		} else {
-			result = message;
+				result += '</ul>';
+			} else {
+				result = message;
+			}
+
+			hide_all_messages();
+			to_top();
+			$('#form_error_messages').html(result);
+			$('#form_error_box').show();
 		}
 
-		hide_all_messages();
-		to_top();
-		$('#form_error_messages').html(result);
-		$('#form_error_box').show();
-	}
-
-	<% if model.class.column_names.include? 'active' %>
+		<% if model.class.column_names.include? 'active' %>
 
 		function inactivate() {
 			$('#active_img').hide();
@@ -196,16 +196,16 @@
 			}
 		}
 
-	<% end %>
+		<% end %>
 
-    function add_tag_to_field(field, tag) {
-        var caretPos = document.getElementById(field).selectionStart;
-        var textAreaTxt = jQuery("#" + field).val();
-        jQuery("#" + field).val(textAreaTxt.substring(0, caretPos) + ' ' + tag + ' ' + textAreaTxt.substring(caretPos) );
-     }
+		function add_tag_to_field(field, tag) {
+			var caretPos = document.getElementById(field).selectionStart;
+			var textAreaTxt = jQuery("#" + field).val();
+			jQuery("#" + field).val(textAreaTxt.substring(0, caretPos) + ' ' + tag + ' ' + textAreaTxt.substring(caretPos) );
+		}
 
-     function go_back() {
-     	window.location = '/<%= model.model_name.route_key %>';
-     }
+		function go_back() {
+			window.location = '/<%= model.model_name.route_key %>';
+		}
 
-</script>
+	</script>

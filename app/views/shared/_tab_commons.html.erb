@@ -1,9 +1,9 @@
 <script>
 
     <% 
-        focus = 0 if local_assigns[:focus].nil?
-        title = 2016 if local_assigns[:title].nil?
-     %>
+    focus = 0 if local_assigns[:focus].nil?
+    title = 2016 if local_assigns[:title].nil?
+    %>
 
     function hide_all_<%= tab_type %>_tabs_except(tab_id)
     {
@@ -24,12 +24,12 @@
         $('#<%= tab_type %>_tab_' + tab_id + '_title').addClass('active');
     };
 
-    <% for i in 0..(number_of_tabs-1) do %>
+    <% (0..(number_of_tabs-1)).each do |i| %>
 
-        $('#<%= tab_type %>_tab_<%= i %>_title').on('click', function()
-        {
-            hide_all_<%= tab_type %>_tabs_except(<%= i %>);
-        });
+    $('#<%= tab_type %>_tab_<%= i %>_title').on('click', function()
+    {
+        hide_all_<%= tab_type %>_tabs_except(<%= i %>);
+    });
 
     <% end %>
 
@@ -45,11 +45,11 @@
 
         <%# if !title.nil? %>
             //hide_all_<%= tab_type %>_tabs_except_with_title('<%= title %>');
-        <%# elsif !focus.nil? %>
+            <%# elsif !focus.nil? %>
             //hide_all_<%= tab_type %>_tabs_except('<%= focus %>');
-        <%# else %>
+            <%# else %>
             hide_all_<%= tab_type %>_tabs_except(0);
-        <%# end %>
-    })
+            <%# end %>
+        })
 
 </script>

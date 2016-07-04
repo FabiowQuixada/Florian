@@ -1,175 +1,175 @@
 <html>
-	<head>
+<head>
 
-		<title><%= t('app_title') %></title>
+	<title><%= t('app_title') %></title>
 
-		<link rel="icon" type="image/png" href="/assets/app_logo.png" sizes="32x32">
-		<link href='https://fonts.googleapis.com/css?family=Metamorphous' rel='stylesheet' type='text/css'>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/pt-br.js"></script>
+	<link rel="icon" type="image/png" href="/assets/app_logo.png" sizes="32x32">
+	<link href='https://fonts.googleapis.com/css?family=Metamorphous' rel='stylesheet' type='text/css'>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/pt-br.js"></script>
 
-		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-		<%= stylesheet_link_tag "application", :media => "all" %>
-		<%= csrf_meta_tags %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= stylesheet_link_tag 'application', media: 'all' %>
+	<%= csrf_meta_tags %>
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
-		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes">
-		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.0/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes">
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.0/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 
-	</head>
+</head>
 
-	<body data-no-turbolink="true">
-		<div class="container-fluid padless">
-			<div class="row">
-				<div class="hidden-xs col-md-2"></div>
-		    		<div class="col-xs-12 col-md-8">
-					<div class="main_box">
+<body data-no-turbolink="true">
+	<div class="container-fluid padless">
+		<div class="row">
+			<div class="hidden-xs col-md-2"></div>
+			<div class="col-xs-12 col-md-8">
+				<div class="main_box">
 
-						<!-- MENU -->
-						<% if user_signed_in? %>
-							<%= render partial: "others/menu" %>
+					<!-- MENU -->
+					<% if user_signed_in? %>
+					<%= render partial: 'others/menu' %>
 
-							<!-- Breadcrumbs -->
-							<div class="row non-menu" style="vertical-align: middle; ">
-								<div class="col-xs-12 col-md-7 col-lg-7">
-									<ol class = "breadcrumb">
-										<% @breadcrumbs.each_with_index do |u, index| %>
+					<!-- Breadcrumbs -->
+					<div class="row non-menu" style="vertical-align: middle; ">
+						<div class="col-xs-12 col-md-7 col-lg-7">
+							<ol class = "breadcrumb">
+								<% @breadcrumbs.each_with_index do |u, index| %>
 
-										  <% if index == (@breadcrumbs.size - 1) %>
-											<li class = "active"><b><%= u.first %></b></li>
-										  <% else %>
-										  	<li><%= u.first %></li>
-										  <% end %>
-										<% end %>
+								<% if index == (@breadcrumbs.size - 1) %>
+								<li class = "active"><b><%= u.first %></b></li>
+								<% else %>
+								<li><%= u.first %></li>
+								<% end %>
+								<% end %>
 
-										<li class="pull-right visible-xs">
-										<%= (link_to image_tag("key.png", :title => t('helpers.action.show_admin_private_data')), 'javascript:void(0)', class: 'admin_key_btn') if current_user.admin? %>
-								 </li>
-									</ol>
+								<li class="pull-right visible-xs">
+									<%= (link_to image_tag('key.png', title: t('helpers.action.show_admin_private_data')), 'javascript:void(0)', class: 'admin_key_btn') if current_user.admin? %>
+								</li>
+							</ol>
 
-									
-								</div>
-								<div class="hidden-xs col-md-1 col-lg-1"></div>
-								<div class="hidden-xs col-md-4 col-lg-4" style="margin-top: 10px; margin-bottom: 10px;">
-									<div align="right" style="vertical-align: middle;">
-										<% if current_user.guest? %>
-											<%= t('helpers.logged_as') + current_user.name %> 
-										<% else %>
-											<%= t('helpers.logged_as') %> <%= link_to current_user.name, edit_user_registration_path %> 
-											<% end %>
-										<%= (link_to image_tag("key.png", :title => t('helpers.action.show_admin_private_data')), 'javascript:void(0)', class: 'admin_key_btn') if current_user.admin? %> 
+							
+						</div>
+						<div class="hidden-xs col-md-1 col-lg-1"></div>
+						<div class="hidden-xs col-md-4 col-lg-4" style="margin-top: 10px; margin-bottom: 10px;">
+							<div align="right" style="vertical-align: middle;">
+								<% if current_user.guest? %>
+								<%= t('helpers.logged_as') + current_user.name %> 
+								<% else %>
+								<%= t('helpers.logged_as') %> <%= link_to current_user.name, edit_user_registration_path %> 
+								<% end %>
+								<%= (link_to image_tag('key.png', title: t('helpers.action.show_admin_private_data')), 'javascript:void(0)', class: 'admin_key_btn') if current_user.admin? %> 
 
-										<%= link_to(t('helpers.action.logout'), destroy_user_session_path, :method => :delete, :style => "margin-left: 5px;", :class => "btn btn-primary btn-xs") %>
-									</div>
-								</div>
+								<%= link_to(t('helpers.action.logout'), destroy_user_session_path, method: :delete, style: 'margin-left: 5px;', class: 'btn btn-primary btn-xs') %>
 							</div>
-
-						<% else %>
-							<div class="centre">
-								<img  style="width: 70px; height: 70px; margin-bottom: -10px; margin-top: 10px;" src="/assets/app_logo.png">
-								<h2><span class="app_title"><%= t('app_title') %></span></h2>
-							</div>
-
-						<% end %>
-
-						<!-- MESSAGES -->
-						<div class="non-menu">
-
-							<% if Rails.env.uat? %>
-								<div class="alert alert-warning">
-									<div>
-										<strong><%= t('attention') %>:</strong> <%= t('uat_mode_message') %>
-									</div>
-								</div>
-							<% end %>
-
-							<div id="global_notice_box" class="alert alert-success fade in" style="display: none;">
-								<a href="javascript:void(0)" class="close" data-hide="alert">&times;</a>
-								<div id="global_notice_massages">
-									<%= notice %>
-								</div>
-							</div>
-
-							<div id="global_info_box" class="alert alert-info fade in" style="display: none;">
-								<div id="global_info_massages">
-									<%= info %>
-								</div>
-							</div>
-
-							<div id="global_error_box" class="alert alert-danger fade in" style="display: none;">
-								<a href="javascript:void(0)" class="close" data-hide="alert">&times;</a>
-								<div id="global_error_messages">
-									<%= alert %>
-								</div>
-							</div>
-
-							<!-- BODY -->
-							<%= yield -%>
-
-							<% if user_signed_in? %>
-								<div id="app_footer" class="navbar navbar-default" align="center">
-									<%= t('app_title') + ' ' + Time.now.year.to_s %>
-
-									<% if !current_user.nil? && current_user.admin? %>
-										(<%= t(Rails.env) %>)
-									<% end %>
-
-									<br/>
-									<%= t('by_author')%>
-								</div>
-							<% end %>
 						</div>
 					</div>
-				</div>
-				<div class="hidden-xs col-md-2"></div>
-			</div>
-		</div>
 
-		<!-- Modals -->
-		<div id="confirm_modal" class="modal fade" role="dialog">
-			<div class="modal-dialog modal-sm">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title"></h4>
+					<% else %>
+					<div class="centre">
+						<img  style="width: 70px; height: 70px; margin-bottom: -10px; margin-top: 10px;" src="/assets/app_logo.png">
+						<h2><span class="app_title"><%= t('app_title') %></span></h2>
 					</div>
-					<div class="modal-body"></div>
-					<div class="modal-footer">
-						<button type="button" id="confirm_btn" class="btn btn-default" data-dismiss="modal"><%= t('helpers.action.confirm') %></button>
-						<button type="button" id="cancel_btn" class="btn btn-default" data-dismiss="modal"><%= t('helpers.action.cancel') %></button>
+
+					<% end %>
+
+					<!-- MESSAGES -->
+					<div class="non-menu">
+
+						<% if Rails.env.uat? %>
+						<div class="alert alert-warning">
+							<div>
+								<strong><%= t('attention') %>:</strong> <%= t('uat_mode_message') %>
+							</div>
+						</div>
+						<% end %>
+
+						<div id="global_notice_box" class="alert alert-success fade in" style="display: none;">
+							<a href="javascript:void(0)" class="close" data-hide="alert">&times;</a>
+							<div id="global_notice_massages">
+								<%= notice %>
+							</div>
+						</div>
+
+						<div id="global_info_box" class="alert alert-info fade in" style="display: none;">
+							<div id="global_info_massages">
+								<%= info %>
+							</div>
+						</div>
+
+						<div id="global_error_box" class="alert alert-danger fade in" style="display: none;">
+							<a href="javascript:void(0)" class="close" data-hide="alert">&times;</a>
+							<div id="global_error_messages">
+								<%= alert %>
+							</div>
+						</div>
+
+						<!-- BODY -->
+						<%= yield -%>
+
+						<% if user_signed_in? %>
+						<div id="app_footer" class="navbar navbar-default" align="center">
+							<%= t('app_title') + ' ' + Time.now.year.to_s %>
+
+							<% if !current_user.nil? && current_user.admin? %>
+							(<%= t(Rails.env) %>)
+							<% end %>
+
+							<br/>
+							<%= t('by_author')%>
+						</div>
+						<% end %>
 					</div>
 				</div>
 			</div>
+			<div class="hidden-xs col-md-2"></div>
 		</div>
-	</body>
+	</div>
+
+	<!-- Modals -->
+	<div id="confirm_modal" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title"></h4>
+				</div>
+				<div class="modal-body"></div>
+				<div class="modal-footer">
+					<button type="button" id="confirm_btn" class="btn btn-default" data-dismiss="modal"><%= t('helpers.action.confirm') %></button>
+					<button type="button" id="cancel_btn" class="btn btn-default" data-dismiss="modal"><%= t('helpers.action.cancel') %></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 
 <script>
 
-       function set_month_datepicker() {
-       	$('.datepicker-competence').datepicker()
-      	$('[data-behaviour~=datepickercompetence]').datepicker({
-		minViewMode: 1,
-  		format: "mm/yyyy",
-  		autoclose: true,
-	 	language: "pt-BR"
-	 });
+	function set_month_datepicker() {
+		$('.datepicker-competence').datepicker()
+		$('[data-behaviour~=datepickercompetence]').datepicker({
+			minViewMode: 1,
+			format: "mm/yyyy",
+			autoclose: true,
+			language: "pt-BR"
+		});
 
 
-       }
+	}
 
-       function set_datepicker() {
+	function set_datepicker() {
 
-	$('.datepicker').datepicker()
-   	$('[data-behaviour~=datepicker]').datepicker({
-  		format: "dd/mm/yyyy",
-		autoclose: true,
-	 	language: "pt-BR",
-	 	daysOfWeekDisabled: [0,6],
-	 	setDate: new Date()
-	 });
-   }
+		$('.datepicker').datepicker()
+		$('[data-behaviour~=datepicker]').datepicker({
+			format: "dd/mm/yyyy",
+			autoclose: true,
+			language: "pt-BR",
+			daysOfWeekDisabled: [0,6],
+			setDate: new Date()
+		});
+	}
 
-   function toogle_admin_data() {		
+	function toogle_admin_data() {		
 
 		if(display_admin_data) {
 			$('.admin-only').show();
@@ -180,214 +180,214 @@
 		display_admin_data = !display_admin_data;
 	}
 
-   function display_confirm_modal(title, message, confirm_callback, cancel_callback) {
+	function display_confirm_modal(title, message, confirm_callback, cancel_callback) {
 		$("#confirm_modal .modal-title").html(title);
 		$("#confirm_modal .modal-body").html(message);
 		$("#confirm_btn").on("click", confirm_callback);
 		
 		if(cancel_callback !== 'undefined')
 			$("#cancel_btn").on("click", cancel_callback);
-				
+		
 		$("#confirm_modal").modal("show");
 	}
 
-   var display_admin_data = false;
+	var display_admin_data = false;
 
-		$(function() {
+	$(function() {
 
-			$('.admin_key_btn').on('click', toogle_admin_data);
+		$('.admin_key_btn').on('click', toogle_admin_data);
 
-			toogle_admin_data();
+		toogle_admin_data();
 
-			set_month_datepicker();
-			set_datepicker();
+		set_month_datepicker();
+		set_datepicker();
 
-			$(".datepicker-switch").html("Meses");
+		$(".datepicker-switch").html("Meses");
 
-			<% if notice %>
-			$('#global_notice_box').show();
-			<% end %>
+		<% if notice %>
+		$('#global_notice_box').show();
+		<% end %>
 
-			<% if flash[:info] %>
-			$('#global_info_box').show();
-			<% end %>
+		<% if flash[:info] %>
+		$('#global_info_box').show();
+		<% end %>
 
-			<% if alert %>
-			$('#global_error_box').show();
-			<% end %>
+		<% if alert %>
+		$('#global_error_box').show();
+		<% end %>
 
-			$('.day_of_month').mask('99');
+		$('.day_of_month').mask('99');
 
-			$(".money").each(function(){
-				if(!$(this).val() || $(this).val() == '0.0')
+		$(".money").each(function(){
+			if(!$(this).val() || $(this).val() == '0.0')
 				$(this).val('0,00');
-			});
+		});
 
-			$('.numbers_only').each(function(){
-				if(!$(this).val())
-					$(this).val('0');
-			});
+		$('.numbers_only').each(function(){
+			if(!$(this).val())
+				$(this).val('0');
+		});
 
-			$('.numbers_only').on('blur', function(){
-				if(!$(this).val())
-					$(this).val('0');
-			});
+		$('.numbers_only').on('blur', function(){
+			if(!$(this).val())
+				$(this).val('0');
+		});
 
-			$(".cnpj").mask("99.999.999/9999-99", {
-				placeholder : "__.___.___/____-__"
-			});
+		$(".cnpj").mask("99.999.999/9999-99", {
+			placeholder : "__.___.___/____-__"
+		});
 
-			$(".cpf").mask("999.999.999-99", {
-				placeholder : "___.___.___-__"
-			});
+		$(".cpf").mask("999.999.999-99", {
+			placeholder : "___.___.___-__"
+		});
 
-			$(".cep").mask("99.999-999", {
-				placeholder : "_____-___"
-			});
+		$(".cep").mask("99.999-999", {
+			placeholder : "_____-___"
+		});
 
-			$(".telephone").mask("(99) 9999-9999", {
-				placeholder : "(__) ____-____"
-			});
+		$(".telephone").mask("(99) 9999-9999", {
+			placeholder : "(__) ____-____"
+		});
 
-			$(".fax").mask("(99) 9999-9999", {
-				placeholder : "(__) ____-____"
-			});
+		$(".fax").mask("(99) 9999-9999", {
+			placeholder : "(__) ____-____"
+		});
 
 
-			var celphone_mask_behavior = function (val) {
-			  return val.replace(/\D/g, '').length === 11 ? '(00) 0 0000-0000' : '(00) 0000-00009';
+		var celphone_mask_behavior = function (val) {
+			return val.replace(/\D/g, '').length === 11 ? '(00) 0 0000-0000' : '(00) 0000-00009';
+		},
+		celphone_mask_ptions = {
+			onKeyPress: function(val, e, field, options) {
+				field.mask(celphone_mask_behavior.apply({}, arguments), options);
 			},
-			celphone_mask_ptions = {
-			  onKeyPress: function(val, e, field, options) {
-			      field.mask(celphone_mask_behavior.apply({}, arguments), options);
-			    },
-			    placeholder : "(__) _ ____-____"
-			};
+			placeholder : "(__) _ ____-____"
+		};
 
-			$('.celphone').mask(celphone_mask_behavior, celphone_mask_ptions);
+		$('.celphone').mask(celphone_mask_behavior, celphone_mask_ptions);
 
-			$('.money').mask('000.000.000,00', {
-				reverse : true
-			});
-		})
+		$('.money').mask('000.000.000,00', {
+			reverse : true
+		});
+	})
 
-		function display_error(message) {
+	function display_error(message) {
 
-			var result = '';
+		var result = '';
 
-			if (Object.prototype.toString.call(message) === '[object Array]') {
+		if (Object.prototype.toString.call(message) === '[object Array]') {
 
-				result += '<ul>';
+			result += '<ul>';
 
-				for (var i = 0; i < message.length; i++)
-					result += '<li>' + message[i] + '</li>';
+			for (var i = 0; i < message.length; i++)
+				result += '<li>' + message[i] + '</li>';
 
-				result += '</ul>';
-			} else {
-				result = message;
-			}
-
-			hide_all_messages();
-			to_top();
-			$('#global_error_messages').html(result);
-			$('#global_error_box').show();
+			result += '</ul>';
+		} else {
+			result = message;
 		}
 
-		function display_error(message, error_box_id) {
+		hide_all_messages();
+		to_top();
+		$('#global_error_messages').html(result);
+		$('#global_error_box').show();
+	}
 
-			var result = '';
+	function display_error(message, error_box_id) {
 
-			if(!error_box_id)
-				error_box_id = 'global';
+		var result = '';
 
-			if (Object.prototype.toString.call(message) === '[object Array]') {
+		if(!error_box_id)
+			error_box_id = 'global';
 
-				result += '<ul>';
+		if (Object.prototype.toString.call(message) === '[object Array]') {
 
-				for (var i = 0; i < message.length; i++)
-					result += '<li>' + message[i] + '</li>';
+			result += '<ul>';
 
-				result += '</ul>';
-			} else {
-				result = message;
-			}
+			for (var i = 0; i < message.length; i++)
+				result += '<li>' + message[i] + '</li>';
 
-			hide_all_messages();
-			$('#' + error_box_id + '_error_messages').html(result);
-			$('#' + error_box_id + '_error_box').show();
+			result += '</ul>';
+		} else {
+			result = message;
 		}
 
-		function display_info(message) {
+		hide_all_messages();
+		$('#' + error_box_id + '_error_messages').html(result);
+		$('#' + error_box_id + '_error_box').show();
+	}
 
-			hide_all_messages();
-			to_top();
-			$('#global_info_massages').html(message);
-			$('#global_info_box').show();
-		}
+	function display_info(message) {
 
-		function display_notice(message) {
+		hide_all_messages();
+		to_top();
+		$('#global_info_massages').html(message);
+		$('#global_info_box').show();
+	}
 
-			hide_all_messages();
-			to_top();
-			$('#global_notice_massages').html(message);
-			$('#global_notice_box').show();
-		}
+	function display_notice(message) {
 
-		function hide_info()
+		hide_all_messages();
+		to_top();
+		$('#global_notice_massages').html(message);
+		$('#global_notice_box').show();
+	}
+
+	function hide_info()
+	{
+		$('#global_info_massages').html('');
+		$('#global_info_box').hide();
+	}
+
+	function hide_notice()
+	{
+		$('#global_notice_massages').html('');
+		$('#global_notice_box').hide();
+	}
+
+	function hide_errors_from_box(error_box_id)
+	{
+		$('#' + error_box_id + '_error_messages').html('');
+		$('#' + error_box_id + '_error_box').hide();
+	}
+
+	function hide_errors()
+	{
+		$('#global_error_messages').html('');
+		$('#global_error_box').hide();
+
+		if($("#form_error_messages").length && $("#form_error_box").length)
 		{
-			$('#global_info_massages').html('');
-			$('#global_info_box').hide();
+			$('#form_error_messages').html('');
+			$('#form_error_box').hide();
 		}
+	}
 
-		function hide_notice()
+	function hide_all_messages()
+	{
+		hide_info();
+		hide_notice();
+		hide_errors();
+	}
+
+	function parse_json_errors(xhr)
+	{
+		try
 		{
-			$('#global_notice_massages').html('');
-			$('#global_notice_box').hide();
+			var json_obj = jQuery.parseJSON(xhr);
+
+			var output = new Array();
+			for (var i in json_obj)
+				output.push(json_obj[i]);
+
+			display_error(output);
 		}
-
-		function hide_errors_from_box(error_box_id)
+		catch(e)
 		{
-			$('#' + error_box_id + '_error_messages').html('');
-			$('#' + error_box_id + '_error_box').hide();
+			if (typeof xhr === 'string' || xhr instanceof String)
+				return display_error(xhr);
 		}
-
-		function hide_errors()
-		{
-			$('#global_error_messages').html('');
-			$('#global_error_box').hide();
-
-			if($("#form_error_messages").length && $("#form_error_box").length)
-			{
-				$('#form_error_messages').html('');
-				$('#form_error_box').hide();
-			}
-		}
-
-		function hide_all_messages()
-		{
-			hide_info();
-			hide_notice();
-			hide_errors();
-		}
-
-		function parse_json_errors(xhr)
-		{
-			try
-			{
-				var json_obj = jQuery.parseJSON(xhr);
-
-		        var output = new Array();
-		        for (var i in json_obj)
-		        	output.push(json_obj[i]);
-
-		        display_error(output);
-			}
-			catch(e)
-			{
-				if (typeof xhr === 'string' || xhr instanceof String)
-					return display_error(xhr);
-			}
-	    }
+	}
 
 		// Handles alert hide, instead of dismiss;
 		$(function() {
@@ -400,15 +400,15 @@
 
 		function to_top()
 		{
-		  $('html, body').animate({
-			    scrollTop: $("body").offset().top
+			$('html, body').animate({
+				scrollTop: $("body").offset().top
 			}, 1000);
 		}
 
 		function add_fields(link, association, content) {
-		  var new_id = new Date().getTime();
-		  var regexp = new RegExp("new_" + association, "g")
-		  $(link).parent().parent().parent().before(content.replace(regexp, new_id));
+			var new_id = new Date().getTime();
+			var regexp = new RegExp("new_" + association, "g")
+			$(link).parent().parent().parent().before(content.replace(regexp, new_id));
 		}
 
 		function formatted_today()
@@ -419,15 +419,15 @@
 			var yyyy = today.getFullYear();
 
 			if(dd<10) {
-			    dd='0'+dd
+				dd='0'+dd
 			}
 
 			if(mm<10) {
-			    mm='0'+mm
+				mm='0'+mm
 			}
 
 			today = dd+'/'+mm +'/'+yyyy;
-			 return today;
+			return today;
 		}
 
 		function current_competence()
@@ -437,10 +437,10 @@
 			var yyyy = today.getFullYear();
 
 			if(mm<10) {
-			    mm='0'+mm
+				mm='0'+mm
 			}
 
-			 return mm +'/'+yyyy;
+			return mm +'/'+yyyy;
 		}
 
 		function to_rails_date(date_string) {
@@ -449,12 +449,12 @@
 			return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
 		}
 
-			var entityMap = {
-		"&": "&amp;",
-		"<": "&lt;",
-		">": "&gt;",
-		'"': '&quot;',
-		"'": '&#39;',
+		var entityMap = {
+			"&": "&amp;",
+			"<": "&lt;",
+			">": "&gt;",
+			'"': '&quot;',
+			"'": '&#39;',
 		"/": '/' // &#x2F;
 	};
 
@@ -464,5 +464,5 @@
 		});
 	}
 
-	</script>
+</script>
 </html>

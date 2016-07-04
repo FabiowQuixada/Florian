@@ -1,10 +1,10 @@
-<% @title = model.model_name.human(:count => 2) %>
+<% @title = model.model_name.human(count: 2) %>
 
 <!-- Remove modal -->
 <div class="modal fade" id="remove_modal" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
-			<%= form_tag({:url => '#'}, method: "delete", :remote => true, :id => 'remove_form') do %>
+			<%= form_tag({url: '#'}, method: 'delete', remote: true, id: 'remove_form') do %>
 			<div class="modal-header">
 				<%= genderize_tag(model, 'modal.remove_title') %>
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -19,15 +19,15 @@
 				<button type="button" class="btn btn-primary" data-dismiss="modal">
 					<%= t('helpers.action.cancel') %>
 				</button>
-				<%= submit_tag t('helpers.action.remove'), :class => "btn btn-primary btn-ok" %>
+				<%= submit_tag t('helpers.action.remove'), class: 'btn btn-primary btn-ok' %>
 			</div>
 			<% end %>
 		</div>
 	</div>
 </div>
 
-<% if lookup_context.find_all(ActiveModel::Naming.plural(model) + "/_modals").any? %>
-	<%= render partial: "modals" %>
+<% if lookup_context.find_all(ActiveModel::Naming.plural(model) + '/_modals').any? %>
+<%= render partial: 'modals' %>
 <% end %>
 
 <script>
@@ -35,50 +35,50 @@
 	var id_to_be_deleted = -1;
 
 	$(document).ready(function() {
-	  return $(function() {
-	    $.extend($.tablesorter.defaults, {
-	      widgets: ["zebra"]
-	    });
-	    $("#index_table").tablesorter();
-	  });
+		return $(function() {
+			$.extend($.tablesorter.defaults, {
+				widgets: ["zebra"]
+			});
+			$("#index_table").tablesorter();
+		});
 	});
 
 	<% if model.class.column_names.include? 'active' %>
 
-		jQuery(function($) {
+	jQuery(function($) {
 
-		    $('.status').on('ajax:success', function(event, data, status, xhr) {
-		        display_notice(data.message);
-		        update_status(data.id, data.activated);
-		    }).on("ajax:error", function(e, xhr, status, error) {
-				parse_json_errors(xhr.responseText);
-			});
-
-			function update_status(id, is_now_active)
-			{
-				var target = "#model_" + id + " .status > a";
-
-				if(is_now_active)
-				{
-					$(target).attr("href", change_status_path(id, is_now_active));
-					$(target).html('<%= image_tag("activate.png", :title => genderize_tag(model, "is_active"), :class => "deactivate_btn status_btn") %>');
-				}
-				else
-				{
-					$(target).attr("href", change_status_path(id, is_now_active));
-					$(target).html('<%= image_tag("deactivate.png", :title => genderize_tag(model, "is_inactive"), :class => "activate_btn status_btn") %>');
-				}
-			}
+		$('.status').on('ajax:success', function(event, data, status, xhr) {
+			display_notice(data.message);
+			update_status(data.id, data.activated);
+		}).on("ajax:error", function(e, xhr, status, error) {
+			parse_json_errors(xhr.responseText);
 		});
 
-		function change_status_path(id, is_now_active) {
-			<% model_name = model.class.to_s.underscore %>
+		function update_status(id, is_now_active)
+		{
+			var target = "#model_" + id + " .status > a";
 
 			if(is_now_active)
-				return '<%= send("deactivate_#{model_name}_path", -1) %>'.replace("-1", id);
+			{
+				$(target).attr("href", change_status_path(id, is_now_active));
+				$(target).html('<%= image_tag('activate.png', title: genderize_tag(model, 'is_active'), class: 'deactivate_btn status_btn') %>');
+			}
 			else
-				return '<%= send("activate_#{model_name}_path", -1) %>'.replace("-1", id);
+			{
+				$(target).attr("href", change_status_path(id, is_now_active));
+				$(target).html('<%= image_tag('deactivate.png', title: genderize_tag(model, 'is_inactive'), class: 'activate_btn status_btn') %>');
+			}
 		}
+	});
+
+	function change_status_path(id, is_now_active) {
+		<% model_name = model.class.to_s.underscore %>
+
+		if(is_now_active)
+			return '<%= send("deactivate_#{model_name}_path", -1) %>'.replace("-1", id);
+		else
+			return '<%= send("activate_#{model_name}_path", -1) %>'.replace("-1", id);
+	}
 
 	<% end %>
 
@@ -113,28 +113,28 @@
 		id_to_be_deleted = id;
 
 		$.ajax({
-	        type: "DELETE",
-	        url: "/<%= model.model_name.route_key %>/" + id,
-	        dataType: "json",
-	        success: function(response) {
-	        	var message = response.message;
+			type: "DELETE",
+			url: "/<%= model.model_name.route_key %>/" + id,
+			dataType: "json",
+			success: function(response) {
+				var message = response.message;
 
-		        	if(response.success) {
-		        		display_notice(message);
+				if(response.success) {
+					display_notice(message);
 
-		        		$('#model_' + id_to_be_deleted).remove();
+					$('#model_' + id_to_be_deleted).remove();
 
-		        		if(!$('#index_table tbody tr').length) {
-		        			$('#index_table tbody').html('<td colspan="' + $('#index_table thead th').length + '" bgcolor="#E0E0F4" align="center"><%= genderize_tag(@model, 'helpers.none_registered') %></td>');
-		        		}
-		        	} else {
-		        		display_error(message);
-		        	}
-	        },
-	        error: function(response) {
-	        	display_error("<%= t('error_pages.internal_server_error.title') %>");
-	        }
-	    });
+					if(!$('#index_table tbody tr').length) {
+						$('#index_table tbody').html('<td colspan="' + $('#index_table thead th').length + '" bgcolor="#E0E0F4" align="center"><%= genderize_tag(@model, 'helpers.none_registered') %></td>');
+					}
+				} else {
+					display_error(message);
+				}
+			},
+			error: function(response) {
+				display_error("<%= t('error_pages.internal_server_error.title') %>");
+			}
+		});
 	}
 
 </script>

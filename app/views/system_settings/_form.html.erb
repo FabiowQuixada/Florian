@@ -1,145 +1,145 @@
-<%= form_for @model, :html=> {:id => 'main_form'} do |f| %>
+<%= form_for @model, html: {id: 'main_form'} do |f| %>
 
-	<%= render partial: "shared/form_errors", locals: {model: @model} %>
+<%= render partial: 'shared/form_errors', locals: {model: @model} %>
 
-	<ul class="nav nav-tabs">
-		<% if can? :manage, ReceiptEmail.new %>
-			<li id="tab_0_title" class="clickable"><a><%= t('activerecord.models.receipt_email.one') %></a></li>
-		<% end %>
-		<% if can? :manage, ProductAndServiceDatum.new %>
-			<li id="tab_1_title" class="clickable"><a><%= t('activerecord.models.product_and_service_datum.one') %></a></li>
-		<% end %>
-	</ul>
+<ul class="nav nav-tabs">
+	<% if can? :manage, ReceiptEmail.new %>
+	<li id="tab_0_title" class="clickable"><a><%= t('activerecord.models.receipt_email.one') %></a></li>
+	<% end %>
+	<% if can? :manage, ProductAndServiceDatum.new %>
+	<li id="tab_1_title" class="clickable"><a><%= t('activerecord.models.product_and_service_datum.one') %></a></li>
+	<% end %>
+</ul>
 
-	<div class="container-fluid tab_body">
+<div class="container-fluid tab_body">
 
-		<% if can? :manage, ReceiptEmail.new %>
-			<div id="tab_0" class="receipt_email_tab">
-				<div class="form-group">
-					<%= f.label :re_title %>
-					<span style="float:right">
-						<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
-						            <div class="btn-group">
-						                <button type="button" class="btn btn-primary btn-xs" id="add_company_to_re_title_btn"><%= i18n.t :company %></button>
-						                <button type="button" class="btn btn-primary btn-xs" id="add_value_to_re_title_btn"><%= i18n.t :value %></button>
-						                <button type="button" class="btn btn-primary btn-xs" id="add_competence_to_re_title_btn"><%= i18n.t :competence %></button>
-						            </div>
-						<% end %>
-					</span>
-					<%= f.text_field :re_title, :class => "form-control" %>
+	<% if can? :manage, ReceiptEmail.new %>
+	<div id="tab_0" class="receipt_email_tab">
+		<div class="form-group">
+			<%= f.label :re_title %>
+			<span style="float:right">
+				<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary btn-xs" id="add_company_to_re_title_btn"><%= i18n.t :company %></button>
+					<button type="button" class="btn btn-primary btn-xs" id="add_value_to_re_title_btn"><%= i18n.t :value %></button>
+					<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_re_title_btn"><%= i18n.t :competence %></button>
 				</div>
+				<% end %>
+			</span>
+			<%= f.text_field :re_title, class: 'form-control' %>
+		</div>
 
-				
-			</div>
-		<% end %>
-		<% if can? :manage, ProductAndServiceDatum.new %>
-			<div id="tab_1" class="prod_serv_email_tab">
+		
+	</div>
+	<% end %>
+	<% if can? :manage, ProductAndServiceDatum.new %>
+	<div id="tab_1" class="prod_serv_email_tab">
 
-				<div class="container-fluid padless">
-					<div class="row">
-						<div class="col-md-6">
-							<%= render partial: 'shared/email_address_table', locals: {f: f, model: @model, field_name: 'pse_recipients_array'} %>
-						</div>
-						<div class="col-md-6">
-							<%= render partial: 'shared/email_address_table', locals: {f: f, model: @model, field_name: 'pse_private_recipients_array', method_name: 'private_recipients_as_array'} %>
-						</div>
-						<!-- <div class="col-md-7"> -->
+		<div class="container-fluid padless">
+			<div class="row">
+				<div class="col-md-6">
+					<%= render partial: 'shared/email_address_table', locals: {f: f, model: @model, field_name: 'pse_recipients_array'} %>
+				</div>
+				<div class="col-md-6">
+					<%= render partial: 'shared/email_address_table', locals: {f: f, model: @model, field_name: 'pse_private_recipients_array', method_name: 'private_recipients_as_array'} %>
+				</div>
+				<!-- <div class="col-md-7"> -->
 
 							<!-- <div class="container-fluid padless">
 								<div class="row">
 
 									<div class="col-sm-5 form-group">
 										<%= f.label :pse_day_of_month %>
-										<%= f.text_field :pse_day_of_month, :class => 'form-control day_of_month' %>
+										<%= f.text_field :pse_day_of_month, class: 'form-control day_of_month' %>
 									</div>
 
 								</div>
 							</div> -->
-						<!-- </div> -->
+							<!-- </div> -->
+						</div>
+					</div>
+
+					<div class="form-group">
+						<%= f.label :pse_title %>
+						<span style="float:right">
+							<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
+							<div class="btn-group">
+								<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_pse_title_btn"><%= i18n.t :competence %></button>
+							</div>
+							<% end %>
+						</span>
+						<%= f.text_field :pse_title, class: 'form-control' %>
+					</div>
+
+					<div class="form-group">
+						<%= f.label :pse_body %>
+						<span style="float:right">
+							<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
+							<div class="btn-group">
+								<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_pse_body_btn"><%= i18n.t :competence %></button>
+							</div>
+							<% end %>
+						</span>
+						<%= f.text_area :pse_body, size: '24x6', class: 'form-control' %>
 					</div>
 				</div>
-
-				<div class="form-group">
-					<%= f.label :pse_title %>
-					<span style="float:right">
-						<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
-						<div class="btn-group">
-							<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_pse_title_btn"><%= i18n.t :competence %></button>
-						</div>
-						<% end %>
-					</span>
-					<%= f.text_field :pse_title, :class => "form-control" %>
-				</div>
-
-				<div class="form-group">
-					<%= f.label :pse_body %>
-					<span style="float:right">
-						<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
-						<div class="btn-group">
-							<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_pse_body_btn"><%= i18n.t :competence %></button>
-						</div>
-						<% end %>
-					</span>
-					<%= f.text_area :pse_body, size: "24x6", :class => 'form-control' %>
-				</div>
+				<% end %>
 			</div>
-		<% end %>
-	</div>
 
-	<%= render partial: "shared/form_buttons", locals: {model: @model, f: f} -%>
+			<%= render partial: 'shared/form_buttons', locals: {model: @model, f: f} -%>
 
-<% end %>
+			<% end %>
 
-<%= render partial: "shared/form_commons", locals: {model: @model} %>
+			<%= render partial: 'shared/form_commons', locals: {model: @model} %>
 
-<script>
+			<script>
 
-	<% tabs_qty = 2 %>
+				<% tabs_qty = 2 %>
 
-	function preprocess_data()
-	{
-		if(transient_recipients > 0) {
-			window.any_changes = true;
-		}
+				function preprocess_data()
+				{
+					if(transient_recipients > 0) {
+						window.any_changes = true;
+					}
 
-		$('#system_setting_pse_recipients_array').val(formated_recipients('pse_recipients_array'));
-		$('#system_setting_pse_private_recipients_array').val(formated_recipients('pse_private_recipients_array'));
-	}
+					$('#system_setting_pse_recipients_array').val(formated_recipients('pse_recipients_array'));
+					$('#system_setting_pse_private_recipients_array').val(formated_recipients('pse_private_recipients_array'));
+				}
 
-	<% for t in 0..(tabs_qty-1) do %>
-		$('#tab_<%= t %>_title').on('click', function()
-		{
-			hide_all_tabs_except(<%= t %>);
-		});
-	<% end %>
+				<% (0..(tabs_qty-1)).each do |t| %>
+				$('#tab_<%= t %>_title').on('click', function()
+				{
+					hide_all_tabs_except(<%= t %>);
+				});
+				<% end %>
 
-	function hide_all_tabs_except(tab_id)
-	{
-		for(i = 0; i <= <%= tabs_qty-1 %>; ++i) {
-			$('#tab_' + i + '_title').removeClass('active');
-			$('#tab_' + i).hide();
-		}
+				function hide_all_tabs_except(tab_id)
+				{
+					for(i = 0; i <= <%= tabs_qty-1 %>; ++i) {
+						$('#tab_' + i + '_title').removeClass('active');
+						$('#tab_' + i).hide();
+					}
 
-		$('#tab_' + tab_id).show();
-		$('#tab_' + tab_id + '_title').addClass('active');
-	};
+					$('#tab_' + tab_id).show();
+					$('#tab_' + tab_id + '_title').addClass('active');
+				};
 
-	$(function() {
-		$("#add_company_to_re_title_btn").on('click', function() {add_tag_to_field('system_setting_re_title', '<%= t('tags.company') %>')});
-		$("#add_value_to_re_title_btn").on('click', function() {add_tag_to_field('system_setting_re_title', '<%= t('tags.value') %>')});
-		$("#add_competence_to_re_title_btn").on('click', function() {add_tag_to_field('system_setting_re_title', '<%= t('tags.competence') %>')});
-		$("#add_company_to_re_body_btn").on('click', function() {add_tag_to_field('system_setting_re_body', '<%= t('tags.company') %>')});
-		$("#add_value_to_re_body_btn").on('click', function() {add_tag_to_field('system_setting_re_body', '<%= t('tags.value') %>')});
-		$("#add_competence_to_re_body_btn").on('click', function() {add_tag_to_field('system_setting_re_body', '<%= t('tags.competence') %>')});
+				$(function() {
+					$("#add_company_to_re_title_btn").on('click', function() {add_tag_to_field('system_setting_re_title', '<%= t('tags.company') %>')});
+					$("#add_value_to_re_title_btn").on('click', function() {add_tag_to_field('system_setting_re_title', '<%= t('tags.value') %>')});
+					$("#add_competence_to_re_title_btn").on('click', function() {add_tag_to_field('system_setting_re_title', '<%= t('tags.competence') %>')});
+					$("#add_company_to_re_body_btn").on('click', function() {add_tag_to_field('system_setting_re_body', '<%= t('tags.company') %>')});
+					$("#add_value_to_re_body_btn").on('click', function() {add_tag_to_field('system_setting_re_body', '<%= t('tags.value') %>')});
+					$("#add_competence_to_re_body_btn").on('click', function() {add_tag_to_field('system_setting_re_body', '<%= t('tags.competence') %>')});
 
-		$("#add_competence_to_pse_body_btn").on('click', function() {add_tag_to_field('system_setting_pse_body', '<%= t('tags.competence') %>')});
-		$("#add_competence_to_pse_title_btn").on('click', function() {add_tag_to_field('system_setting_pse_title', '<%= t('tags.competence') %>')});
+					$("#add_competence_to_pse_body_btn").on('click', function() {add_tag_to_field('system_setting_pse_body', '<%= t('tags.competence') %>')});
+					$("#add_competence_to_pse_title_btn").on('click', function() {add_tag_to_field('system_setting_pse_title', '<%= t('tags.competence') %>')});
 
-		hide_all_tabs_except(0);
-	});
+					hide_all_tabs_except(0);
+				});
 
-	$('#main_form').on('submit', function(evt) {
+				$('#main_form').on('submit', function(evt) {
 
-		preprocess_data();
-	});
-</script>
+					preprocess_data();
+				});
+			</script>

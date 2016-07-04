@@ -1,41 +1,44 @@
 <% if !model.new_record? && !current_user.nil? && current_user.admin? %>
-	<p/></p>
-	<div class="panel-group hidden-xs">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h4 class="panel-title"><a data-toggle="collapse" href="#collapse_audit"><%= t('audit.title') %></a></h4>
-			</div>
-			<div id="collapse_audit" class="panel-collapse collapse">
-				<div class="panel-body" style="margin: 0; padding: 0;">
-					<table id="audit_table" class="table table-striped table-condensed unbreakable-table">
+
+<br/>
+<br/>
+
+<div class="panel-group hidden-xs">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title"><a data-toggle="collapse" href="#collapse_audit"><%= t('audit.title') %></a></h4>
+		</div>
+		<div id="collapse_audit" class="panel-collapse collapse">
+			<div class="panel-body" style="margin: 0; padding: 0;">
+				<table id="audit_table" class="table table-striped table-condensed unbreakable-table">
+					<tr>
+						<th><%= t('audit.who') %></th>
+						<th style="width: 15%;"><%= t('audit.when') %></th>
+						<th><%= t('audit.where') %></th>
+						<th style="width: 70%;"><%= t('audit.what') %></th>
+					</tr>
+
+					<tbody>
+						<% model.audits.each do |audit| %>
 						<tr>
-							<th><%= t('audit.who') %></th>
-							<th style="width: 15%;"><%= t('audit.when') %></th>
-							<th><%= t('audit.where') %></th>
-							<th style="width: 70%;"><%= t('audit.what') %></th>
+							<td><%= audit.user.name unless audit.user.nil? %></td>
+							<td style="width: 15%;"><%= l(audit.created_at, format: :long_2) %></td>
+							<td><%= audit.remote_address %></td>
+							<td style="width: 70%;">
+
+								<% audit.audited_changes.each do |key, array| %>
+								<li><b><%= t('activerecord.attributes.' + model.model_name.singular + '.' + key) %>:</b> <%= array %><br/></li>
+								<% end %>
+
+							</td>
 						</tr>
-
-						<tbody>
-							<% model.audits.each do |audit| %>
-								<tr>
-									<td><%= audit.user.name unless audit.user.nil? %></td>
-									<td style="width: 15%;"><%= l(audit.created_at, format: :long_2) %></td>
-									<td><%= audit.remote_address %></td>
-									<td style="width: 70%;">
-
-										<% audit.audited_changes.each do |key, array| %>
-											<li><b><%= t('activerecord.attributes.' + model.model_name.singular + '.' + key) %>:</b> <%= array %><br/></li>
-										<% end %>
-
-									</td>
-								</tr>
-							<% end %>
-						</tbody>
-					</table>
-				</div>
-				<div class="panel-footer">
-				</div>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+			<div class="panel-footer">
 			</div>
 		</div>
 	</div>
+</div>
 <% end %>

@@ -5,8 +5,8 @@
 
 	<legend><%= t 'activerecord.models.service_datum.other' %><span class="admin-only"> (<%= week.service_data[0].id.to_s + ',' + week.service_data[1].id.to_s %>)</span></legend>
 
-		<%= hidden_field_tag '', week.service_data[0].id %>
-		<%= hidden_field_tag '', week.service_data[1].id %>
+	<%= hidden_field_tag '', week.service_data[0].id %>
+	<%= hidden_field_tag '', week.service_data[1].id %>
 
 	<!-- Service header row -->
 	<table class="input-table">
@@ -48,7 +48,7 @@
 					<%= label_tag t('activerecord.attributes.service_datum.' + name) %>
 				</td>
 				<td>
-				<% if index != -1 %>
+					<% if index != -1 %>
 					<%= text_field_tag 'product_and_service_datum[product_and_service_weeks_attributes][' + index.to_s + '][service_data_attributes][0][' + name +']', week.service_data[0].instance_eval(name), class: 'form-control ' + name + ' attendance attendance_week_' + index.to_s + ' week_' + index.to_s + ' numbers_only service_input service_checkup input-sm service_row_' + service_row.to_s + '_col_0' + (index >= totals_week_number-1 ? ' extra_tab temp_field' : ' '), readonly: fields_readonly?(week) %>
 
 					<% else %>
@@ -84,7 +84,7 @@
 					<%= text_field_tag 'total_service_checkup', 0, id: 'total_service_checkup_week_' + index.to_s, class: 'form-control input-sm temp_field', readonly: true, disabled: true %>
 				</td>
 				<td class="col-md-2">
-				<%= text_field_tag 'total_service_return', 0, id: 'total_service_return_week_' + index.to_s, class: 'form-control input-sm temp_field', readonly: true, disabled: true %>
+					<%= text_field_tag 'total_service_return', 0, id: 'total_service_return_week_' + index.to_s, class: 'form-control input-sm temp_field', readonly: true, disabled: true %>
 				</td>
 				<td class="col-md-2">
 					<%= text_field_tag 'total_service', 0, id: 'total_service_week_' + index.to_s, class: 'form-control input-sm temp_field', readonly: true, disabled: true %>

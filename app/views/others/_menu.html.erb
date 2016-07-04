@@ -14,37 +14,37 @@
     <div class="collapse navbar-collapse" id="main_menu">
         <ul class="nav navbar-nav">
             <li>
-                <a href="/companies"><%= Company.new.model_name.human(:count => 2) %></a>
+                <a href="/companies"><%= Company.new.model_name.human(count: 2) %></a>
             </li>
             <li>
-                <a href="/donations"><%= Donation.new.model_name.human(:count => 2) %></a>
+                <a href="/donations"><%= Donation.new.model_name.human(count: 2) %></a>
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="/receipt_emails"><%= t('menu.emails') %></a>
                 <ul class="dropdown-menu">
 
-                <% if can? :manage, ReceiptEmail.new %>
+                    <% if can? :manage, ReceiptEmail.new %>
                     <li><a href="/receipt_emails"><%= t('menu.email.receipt') %></a></li>
-                <% end %>
-                <% if can? :manage, ProductAndServiceDatum.new %>
+                    <% end %>
+                    <% if can? :manage, ProductAndServiceDatum.new %>
                     <li><a href="/product_and_service_data"><%= t('menu.email.prod_serv') %></a></li>
-                <% end %>
+                    <% end %>
                 </ul>
             </li>
             <li>
-                <a href="/system_settings"><%= SystemSetting.new.model_name.human(:count => 2) %></a>
+                <a href="/system_settings"><%= SystemSetting.new.model_name.human(count: 2) %></a>
             </li>
             <li>
-                <a href='/bills'><%= Bill.new.model_name.human(:count => 2) %></a>
+                <a href='/bills'><%= Bill.new.model_name.human(count: 2) %></a>
             </li>
             <!-- new_menus_here -->
             <% if !current_user.nil? && current_user.admin? %>
-                <li>
-                    <a href="/admin/users"><%= User.new.model_name.human(:count => 2) %></a>
-                </li>
-                <li>
-                    <a href="/admin/roles"><%= Role.new.model_name.human(:count => 2) %></a>
-                </li>
+            <li>
+                <a href="/admin/users"><%= User.new.model_name.human(count: 2) %></a>
+            </li>
+            <li>
+                <a href="/admin/roles"><%= Role.new.model_name.human(count: 2) %></a>
+            </li>
             <% end %>
             <li class="visible-xs">
                 <a data-method="delete" href="/users/sign_out"><%= t('helpers.action.logout') + ' (' + current_user.name + ')' %></a>
