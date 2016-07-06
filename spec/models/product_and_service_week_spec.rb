@@ -85,17 +85,17 @@ describe ProductAndServiceWeek, type: :model do
     expect(week.product_qty).to eq 7
   end
 
-  it { should validate_presence_of(:number) }
-  it { should validate_presence_of(:start_date) }
-  it { should validate_presence_of(:end_date) }
+  it { is_expected.to validate_presence_of(:number) }
+  it { is_expected.to validate_presence_of(:start_date) }
+  it { is_expected.to validate_presence_of(:end_date) }
 
   # TODO: start before end
-  it { should accept_nested_attributes_for :service_data }
-  it { should accept_nested_attributes_for :product_data }
+  it { is_expected.to accept_nested_attributes_for :service_data }
+  it { is_expected.to accept_nested_attributes_for :product_data }
 
-  it { should accept_nested_attributes_for :service_data }
-  it { should accept_nested_attributes_for :product_data }
+  it { is_expected.to accept_nested_attributes_for :service_data }
+  it { is_expected.to accept_nested_attributes_for :product_data }
 
   # Relationships
-  it { should belong_to :product_and_service_datum }
+  it { is_expected.to belong_to :product_and_service_datum }
 end

@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 describe ProductAndServiceDatum, type: :model do
-  it { should define_enum_for(:status) }
-  # it { should validate_inclusion_of(:status), in: ProductAndServiceDatum.statuses.keys }
+  it { is_expected.to define_enum_for(:status) }
+  # it { is_expected.to validate_inclusion_of(:status), in: ProductAndServiceDatum.statuses.keys }
 
-  it { should accept_nested_attributes_for :product_and_service_weeks }
+  it { is_expected.to accept_nested_attributes_for :product_and_service_weeks }
 
-  it { should validate_presence_of(:competence) }
-  it { should validate_presence_of(:status) }
+  it { is_expected.to validate_presence_of(:competence) }
+  it { is_expected.to validate_presence_of(:status) }
 
-  it { should validate_uniqueness_of(:competence) }
+  it { is_expected.to validate_uniqueness_of(:competence) }
 
   it { expect(build(:product_and_service_datum).can_edit?).to be true }
   it { expect(build(:product_and_service_datum, :created).can_edit?).to be true }
@@ -17,7 +17,7 @@ describe ProductAndServiceDatum, type: :model do
   it { expect(build(:product_and_service_datum, :finalized).can_edit?).to be false }
 
   # Relationships
-  it { should have_many :product_and_service_weeks }
+  it { is_expected.to have_many :product_and_service_weeks }
   it { expect(build(:product_and_service_datum).weeks).to have(7).items }
   it { expect(build(:product_and_service_datum).final_week.number).to eq 7 }
 

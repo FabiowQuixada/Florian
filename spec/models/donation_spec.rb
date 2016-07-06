@@ -33,11 +33,11 @@ describe Donation, type: :model do
 
   it { expect(build(:donation, value: 0.00).send(:no_value?)).to be true }
 
-  it { should belong_to :company }
+  it { is_expected.to belong_to :company }
 
-  it { should validate_presence_of(:donation_date) }
-  it { should validate_presence_of(:company) }
+  it { is_expected.to validate_presence_of(:donation_date) }
+  it { is_expected.to validate_presence_of(:company) }
 
   # Relationships
-  it { should belong_to :company }
+  it { is_expected.to belong_to :company }
 end

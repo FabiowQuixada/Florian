@@ -6,10 +6,10 @@ describe Bill, type: :model do
     expect(bill.competence.day).to eq 1
   end
 
-  it { should validate_presence_of :competence }
-  it { should validate_presence_of :water }
-  it { should validate_presence_of :energy }
-  it { should validate_presence_of :telephone }
+  it { is_expected.to validate_presence_of :competence }
+  it { is_expected.to validate_presence_of :water }
+  it { is_expected.to validate_presence_of :energy }
+  it { is_expected.to validate_presence_of :telephone }
 
-  it { should validate_uniqueness_of :competence }
+  it { is_expected.to validate_uniqueness_of :competence }
 end
