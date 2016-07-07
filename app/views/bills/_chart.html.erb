@@ -1,101 +1,97 @@
-<html>
-  <head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawCharts);
-      
-      function drawCharts() {
-        
-        // For each year...
-        <% @list_of_lists.each do |month_list| %>
 
-        year = <%= month_list[0] %>;
-        months_array0 = new Array();
-        months_array1 = new Array();
-        months_array2 = new Array();
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(draw_charts);
+  
+  function draw_charts() {
 
-        // For each month...
-        <% month_list[1].each_with_index do |month, i| %>
+    // For each year...
+    <% @graph_data.each do |year_data| %>
 
-        <% for kk in 0..(NUMBER_OF_BILLS-1) do %>
+    // year_data is an array with the following structure: [[2016, [....]], [2017, [....]]];
+    year = <%= year_data[0] %>;
 
-        <% m = Array.new %>
-
-          // TODO Rewrite the whoel thing
-         <% m[kk] = ("['" + (I18n.t :abbr_month_names, :scope => :date)[i+1].to_s + "', " + month[kk].to_s.gsub('.', '').gsub(',', '.') + "]") %>
-
-         months_array<%= kk %>.push(<%= m[kk].html_safe %>);
-
-        <% end %>
-
-       
-
-        <% end %>
-        
-        draw_chart_by_year(year, months_array0, 0);
-        draw_chart_by_year(year, months_array1, 1);
-        draw_chart_by_year(year, months_array2, 2);
-
-        <% end %>
-      }
-
-      function draw_chart_by_year(year, months_array, type) {
-
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', '<%= t('datetime.prompts.month') %>');
-        data.addColumn('number', '<%= t('number.value') %>');
-        data.addRows(months_array);
-
-        var options = {
-          hAxis: {titleTextStyle: {color: '#333'}},
-          vAxis: {minValue: 0, viewWindowMode: "explicit", viewWindow:{ min: 0 }, format: '0'},
-          'width': 500,
-          legend: {position: 'none'}
-        };
-
-        { format:'#,###%'}
-
-        var formatter = new google.visualization.NumberFormat({decimalSymbol: ',',groupingSymbol: '.', negativeColor: 'red', negativeParens: true, prefix: 'R$ '});
-        formatter.format(data, 1);
-
-        var chart = new google.visualization.AreaChart(document.getElementById('chart_div_' + year + '_' + type));
-        chart.draw(data, options);
-      }
-
-    </script>
-  </head>
-  <body>
-    <ul class="nav nav-tabs">
-    <% @list_of_lists.each_with_index do |bill, i| %>
-        <li id="bill_tab_<%= i %>_title" class="clickable"><a><%= bill[0] %></a></li>
+    <% (0..(NUMBER_OF_BILLS-1)).each do |bill_code| %>
+      months_array<%= bill_code %> = new Array();
     <% end %>
+
+    // For each month...
+    <% year_data[1].each_with_index do |month_data, i| %>
+
+    // For each bill (water, energy etc)...
+    <% (0..(NUMBER_OF_BILLS-1)).each do |bill| %>
+
+    <% month = Array.new %>
+
+    <% month[bill] = ("['" + (I18n.t :abbr_month_names, scope: :date)[i+1].to_s + "', " + month_data[bill].to_s.gsub('.', '').gsub(',', '.') + "]") %>
+
+    months_array<%= bill %>.push(<%= month[bill].html_safe %>);
+
+    <% end # each bill %>
+
+    <% end # each month %>
+
+    <% (0..(NUMBER_OF_BILLS-1)).each do |bill_code| %>
+    draw_chart_by_year(year, months_array<%= bill_code %>, <%= bill_code %>);
+    <% end %>
+
+    <% end # each year %>
+  }
+
+  function draw_chart_by_year(year, months_array, type) {
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', '<%= t('datetime.prompts.month') %>');
+    data.addColumn('number', '<%= t('number.value') %>');
+    data.addRows(months_array);
+
+    var options = {
+      hAxis: {titleTextStyle: {color: '#333'}},
+      vAxis: {minValue: 0, viewWindowMode: "explicit", viewWindow:{ min: 0 }, format: '0'},
+      'width': 500,
+      legend: {position: 'none'}
+    };
+
+    { format:'#,###%'}
+
+    var formatter = new google.visualization.NumberFormat({decimalSymbol: ',',groupingSymbol: '.', negativeColor: 'red', negativeParens: true, prefix: 'R$ '});
+    formatter.format(data, 1);
+
+    var chart = new google.visualization.AreaChart(document.getElementById('chart_div_' + year + '_' + type));
+    chart.draw(data, options);
+  }
+
+</script>
+
+<ul class="nav nav-tabs">
+<% @graph_data.each_with_index do |bill, i| %>
+    <li id="bill_tab_<%= i %>_title" class="clickable"><a><%= bill[0] %></a></li>
+<% end %>
+</ul>
+
+<% @graph_data.each_with_index do |bill, i| %>
+
+  <div id="bill_tab_<%= i %>" class="container-fluid tab_body">
+
+    <!-- Year's bills (titles) -->
+    <ul class="nav nav-pills">
+      <li id="<%= bill[0].to_s %>_tab_0_title" class="active clickable"><a><%= t('activerecord.attributes.bill.water') %></a></li>
+      <li id="<%= bill[0].to_s %>_tab_1_title" class="clickable"><a><%= t('activerecord.attributes.bill.energy') %></a></li>
+      <li id="<%= bill[0].to_s %>_tab_2_title" class="clickable"><a><%= t('activerecord.attributes.bill.telephone') %></a></li>
     </ul>
 
-    <% @list_of_lists.each_with_index do |bill, i| %>
+    <!-- Year's bills (bodies) -->
+    <% (0..(NUMBER_OF_BILLS-1)).each do |bill_code| %>
+    <div id="<%= bill[0].to_s %>_tab_<%= bill_code %>">
+        <div id="chart_div_<%= bill[0].to_s %>_<%= bill_code %>" style="display: block; margin: 0 auto"></div>
+    </div>
+    <% end %>
 
-      <div id="bill_tab_<%= i %>" class="container-fluid tab_body">
+  </div>
 
-        <!-- Year's bills (titles) -->
-        <ul class="nav nav-pills">
-          <li id="<%= bill[0].to_s %>_tab_0_title" class="active clickable"><a><%= t('activerecord.attributes.bill.water') %></a></li>
-          <li id="<%= bill[0].to_s %>_tab_1_title" class="clickable"><a><%= t('activerecord.attributes.bill.energy') %></a></li>
-          <li id="<%= bill[0].to_s %>_tab_2_title" class="clickable"><a><%= t('activerecord.attributes.bill.telephone') %></a></li>
-        </ul>
+  <%= render partial: 'shared/tab_commons', locals: {number_of_tabs: NUMBER_OF_BILLS, tab_type: bill[0].to_s} %>
+  
+<% end %>
 
-        <!-- Year's bills (bodies) -->
-        <% for kk in 0..(NUMBER_OF_BILLS-1) do %>
-        <div id="<%= bill[0].to_s %>_tab_<%= kk %>">
-            <div id="chart_div_<%= bill[0].to_s %>_<%= kk %>" style="display: block; margin: 0 auto"></div>
-        </div>
-        <% end %>
-
-      </div>
-
-      <%= render partial: "shared/tab_commons", locals: {number_of_tabs: NUMBER_OF_BILLS, tab_type: bill[0].to_s} %>
-      
-      <% end %>
-  </body>
-
-  <%= render partial: "shared/tab_commons", locals: {number_of_tabs: @list_of_lists.length, tab_type: 'bill', title: Time.now.year} %>
-</html>
+<%= render partial: 'shared/tab_commons', locals: {number_of_tabs: @graph_data.length, tab_type: 'bill', title: Time.now.year} %>

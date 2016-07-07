@@ -8,7 +8,7 @@ describe 'bills/index', type: :view do
     create :bill
     assign :model, model
     assign :list, class_name.all
-    assign :list_of_lists, [] # TODO
+    assign :graph_data, [] # TODO
 
     render
 
@@ -27,7 +27,7 @@ describe 'bills/index', type: :view do
     model = class_name.new
     assign :model, model
     assign :list, []
-    assign :list_of_lists, [] # TODO
+    assign :graph_data, [] # TODO
 
     render
 

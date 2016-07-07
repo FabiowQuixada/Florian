@@ -18,31 +18,32 @@ class BillsController < ApplicationController
 
     list = Bill.order(:competence)
 
-    @list_of_lists = {}
+    @graph_data = {}
 
-    list.each do |it|
-      year = it.competence.year
-      month = it.competence.month
+    list.each do |bill|
+      year = bill.competence.year
+      month = bill.competence.month
 
       initialize_year year
-      populate_month month, year
+      populate_month bill, month, year
     end
 
     list
   end
 
   def initialize_year(year)
-    @list_of_lists[year] = []
 
-    [0..11].each do |i|
-      @list_of_lists[year][i] = []
-      @list_of_lists[year][i] += ['0,00', '0,00', '0,00']
+    return unless @graph_data[year].nil?
+
+    @graph_data[year] = []
+
+    (0..11).each do |month|
+      @graph_data[year][month] ||= ['0,00', '0,00', '0,00']
     end
   end
 
-  def populate_month(month, year)
-    @list_of_lists[year][month - 1] = []
-    @list_of_lists[year][month - 1] += [it.water.to_s, it.energy.to_s, it.telephone.to_s]
+  def populate_month(bill, month, year)
+    @graph_data[year][month - 1] = [bill.water.to_s, bill.energy.to_s, bill.telephone.to_s]
   end
 
 end
