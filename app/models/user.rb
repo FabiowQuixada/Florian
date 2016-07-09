@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   audited
   include ModelHelper
   before_create :build_default_system_setting
+  after_initialize :default_values
 
 
   # Include default devise modules. Others available are:
@@ -16,7 +17,6 @@ class User < ActiveRecord::Base
 
 
   # Validations
-  validate :validate_model
   validates :name, :email, :role, presence: true
   validates :signature, :bcc, presence: true
   validates :name, :email, uniqueness: true
@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
     system_setting.valid?
   end
 
-  def validate_model
+  def default_values
     name ||= ''
     self.bcc = email
     self.signature = '--\n\n' + name
