@@ -6,6 +6,6 @@ describe 'General', type: :request do
 
     # visit root_path
 
-    # expect(page).to have_no_content('já está')
+    # expect(page).to have_no_content('')
   end
 end

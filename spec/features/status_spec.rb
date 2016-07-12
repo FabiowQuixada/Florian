@@ -12,79 +12,67 @@ describe 'Status', type: :request do
 
   STATUS_DATA = [Role, ReceiptEmail].freeze
 
-  it "[Admin] change models' status" do
-    login_as_admin
+  context 'admin' do
+    before :each do
+      login_as_admin
+    end
 
-    STATUS_DATA.each do |data|
-      begin
-
-        @model = data.new
-
-        visit send(@model.model_name.route_key + '_path')
-
-        if page.has_css?('.model_row')
-
-          if @model.is_a? User
-
-            page.all('.model_row').each do |row|
-
-              email = row.find('.user_email').text
-              if email != SYSTEM_EMAIL && email != 'teste_comum@yahoo.com.br'
-                row.find('.status_btn').click
-                break
-              end
-            end
-          else
-            all('.model_row').first.all('.status_btn')[0].click
-          end
-        end
-
+    it "changes models' status" do
+      STATUS_DATA.each do |data|
+        visit send(data.model_name.route_key + '_path')
+        click_first_valid_status_btn data.new
         expect(page).to have_content('sucesso'), ('Expected to include "sucesso": ' + data.to_s)
-
-      rescue Capybara::ElementNotFound => e
-
-        raise Capybara::ElementNotFound, e.message + ': ' + data.name
       end
     end
   end
 
-  it "change models' status" do
+  context 'common user' do
+    before :each do
+      login_as_common_user
+    end
 
-    login_as_common_user
-
-    [ReceiptEmail].each do |data|
-      begin
-
-        @model = data.new
-
-        visit send(@model.model_name.route_key + '_path')
-
-        if @model.is_a?(User) || @model.is_a?(Role)
-          expect(page).to have_content('negado'), data.to_s
-        end
-
-        if page.has_css?('.model_row')
-
-          if @model.is_a? User
-
-            page.all('.model_row').each do |row|
-              if row.find('.user_email').text != email
-                row.find('.status_btn').click
-                break
-              end
-            end
-          else
-            all('.model_row').first.all('.status_btn')[0].click
-          end
-        end
-
+    it "change models' status" do
+      [ReceiptEmail].each do |data|
+        toogle_status_of data.new
         expect(page).to have_content('sucesso'), ('Expected to include "sucesso": ' + data.to_s)
-
-
-      rescue Capybara::ElementNotFound => e
-
-        raise Capybara::ElementNotFound, e.message + ': ' + data.name
       end
     end
+
+    it 'does not change private area' do
+      [User, Role].each do |data|
+        visit send(data.model_name.route_key + '_path')
+        expect(page).to have_content('negado'), data.to_s
+      end
+    end
+  end
+
+  # == Helper methods =============================================================
+
+  def click_first_valid_status_btn(model)
+    return unless page.has_css?('.model_row')
+
+    if model.is_a? User
+      handle_user_model
+    else
+      all('.model_row').first.all('.status_btn')[0].click
+    end
+  end
+
+  def handle_user_model
+    page.all('.model_row').each do |row|
+      email = row.find('.user_email').text
+      if email != SYSTEM_EMAIL && email != 'teste_comum@yahoo.com.br'
+        row.find('.status_btn').click
+        break
+      end
+    end
+  end
+
+  def toogle_status_of(model)
+    visit send(model.model_name.route_key + '_path')
+
+    return unless page.has_css?('.model_row')
+
+    all('.model_row').first.all('.status_btn')[0].click
   end
 end

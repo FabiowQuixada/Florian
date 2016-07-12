@@ -3,31 +3,24 @@ require 'rails_helper'
 describe 'Locale', type: :request do
   DATA = [Company, Donation, ReceiptEmail, ProductAndServiceDatum, User, Role].freeze
 
-  it 'contains no translation missing' do
+  before :each do
     login_as_admin
+  end
 
+  it 'contains no translation missing' do
     DATA.each do |data|
-      begin
+      visit send(data.model_name.route_key + '_path')
+      expect(page).to have_no_content('translation_missing'), data
+    end
+  end
 
-            @model = data.new
+  it 'contains no translation missing' do
+    DATA.each do |data|
+      next unless data.new.insertable
 
-            visit send(@model.model_name.route_key + '_path')
+      visit send('new_' + data.name.singularize.underscore + '_path')
 
-            expect(page).to have_no_content('translation_missing'), data
-
-            visit send('new_' + @model.class.name.singularize.underscore + '_path')
-
-            if @model.insertable
-              click_on 'Salvar'
-
-              expect(page).to have_no_content('translation_missing'), data
-
-           end
-
-          rescue Capybara::ElementNotFound => e
-
-            raise Capybara::ElementNotFound, e.message + ': ' + data.name
-          end
+      expect(page).to have_no_content('translation_missing'), data
     end
   end
 end
