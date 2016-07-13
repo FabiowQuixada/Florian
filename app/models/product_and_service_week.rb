@@ -39,10 +39,16 @@ class ProductAndServiceWeek < ActiveRecord::Base
 
     errors.add(:start_date, I18n.t('errors.product_and_service_datum.invalid_period', week_number: number.to_s)) if invalid_range?
 
+    validate_prod_and_servs
+  end
+
+  # rubocop:disable all
+  def validate_prod_and_servs
     errors.add(:attendance_data, I18n.t('errors.product_and_service_datum.all_attendances_are_mandatory', week_number: number.to_s)) unless service_data[0].validate_model
     errors.add(:return_data, I18n.t('errors.product_and_service_datum.all_returns_are_mandatory', week_number: number.to_s)) unless service_data[1].validate_model
     errors.add(:product_data, I18n.t('errors.product_and_service_datum.all_products_are_mandatory', week_number: number.to_s)) unless self.product_data.validate_model
   end
+  # rubocop:enable all
 
   def service_qty
     sum = 0
@@ -52,6 +58,14 @@ class ProductAndServiceWeek < ActiveRecord::Base
 
   def product_qty
     self.product_data.qty
+  end
+
+  def attendances
+    service_data[0]
+  end
+
+  def returns
+    service_data[1]
   end
 
   def model_gender

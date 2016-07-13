@@ -65,11 +65,16 @@ class ReceiptEmailsController < ApplicationController
   end
 
   def order_emails_by_date
+    this_month_emails, next_month_emails = receipts_by_month
+    receipts_by_day this_month_emails, next_month_emails
+  end
 
-    emails = ReceiptEmail.all
+  def receipts_by_month
 
     this_month_emails = []
     next_month_emails = []
+
+    emails = ReceiptEmail.all
 
     emails.each do |email|
       if email.current_month?
@@ -79,6 +84,10 @@ class ReceiptEmailsController < ApplicationController
       end
     end
 
+    [this_month_emails, next_month_emails]
+  end
+
+  def receipts_by_day(this_month_emails, next_month_emails)
     this_month_emails.sort! { |a, b| a.day_of_month <=> b.day_of_month }
     next_month_emails.sort! { |a, b| a.day_of_month <=> b.day_of_month }
 
@@ -87,7 +96,6 @@ class ReceiptEmailsController < ApplicationController
     end
 
     this_month_emails + next_month_emails
-
   end
 
   def load_email

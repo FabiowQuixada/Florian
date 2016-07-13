@@ -16,7 +16,7 @@ describe ProductAndServiceWeek, type: :model do
     expect(week.errors.full_messages).to include I18n.t('errors.product_and_service_datum.period_is_mandatory', week_number: week_number)
   end
 
-  it 'has a end date' do
+  it 'has an end date' do
     week = described_class.new(number: week_number)
     week.end_date = nil
     week.save

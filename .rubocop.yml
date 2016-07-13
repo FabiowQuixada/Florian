@@ -4,6 +4,8 @@ AllCops:
   Exclude:
     - db/schema.rb
     - db/migrate/**
+    - lib/generators/iaq_gen/templates/**
+    - bin/**
 
 Metrics/LineLength:
   Max: 400
@@ -12,6 +14,9 @@ Style/EmptyLinesAroundModuleBody:
   Enabled: false
 
 Style/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
   Enabled: false
 
 Style/EmptyLines:

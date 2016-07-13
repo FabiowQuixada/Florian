@@ -28,8 +28,8 @@ class SystemSettingsController < ApplicationController
 
     settings = SystemSetting.find_by_user_id(current_user.id)
 
-    return redirect_to url_for(controller: :errors, action: :not_found) if invalid_edition? params[:action], settings, params[:id]
-    return redirect_to edit_system_setting_path(settings) if params[:action] == 'index'
+    block_access?(settings) && return
+    go_to_current_user_configs?(settings) && return
   end
 
   def invalid_edition?(action, settings, target_id)
@@ -38,5 +38,19 @@ class SystemSettingsController < ApplicationController
 
   def user_can_edit_settings(user, settings_id)
     !user.admin? && settings_id != user.system_setting.id
+  end
+
+  def go_to_current_user_configs?(settings)
+    if params[:action] == 'index'
+      redirect_to edit_system_setting_path(settings)
+      true
+    end
+  end
+
+  def block_access?(settings)
+    if invalid_edition? params[:action], settings, params[:id]
+      redirect_to url_for(controller: :errors, action: :not_found)
+      true
+    end
   end
 end

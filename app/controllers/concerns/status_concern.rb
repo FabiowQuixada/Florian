@@ -9,15 +9,20 @@ module StatusConcern extend ActiveSupport::Concern
                          @arguable_opts = opts
                        end
 
+                       # rubocop:disable all
                        def get_arguable_opts
-                         opts = if self.class.arguable_opts.blank? && self.class.superclass.arguable_opts.present?
-                                  self.class.superclass.arguable_opts
-                                elsif self.class.arguable_opts.present? && self.class.superclass.arguable_opts.present?
-                                  self.class.superclass.arguable_opts.merge(self.class.arguable_opts)
-                                else
-                                  self.class.arguable_opts
-                                end
-                         opts || {}
+                         return self.class.superclass.arguable_opts if parent_class_args_only?
+                         return self.class.superclass.arguable_opts.merge(self.class.arguable_opts) if parent_and_self_args?
+                         self.class.arguable_opts
+                       end
+                       # rubocop:enable all
+
+                       def parent_class_args_only?
+                         self.class.arguable_opts.blank? && self.class.superclass.arguable_opts.present?
+                       end
+
+                       def parent_and_self_args?
+                         self.class.arguable_opts.present? && self.class.superclass.arguable_opts.present?
                        end
 
                      end

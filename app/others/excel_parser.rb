@@ -1,3 +1,4 @@
+# rubocop:disable all
 class ExcelParser
   def self.parse
 
@@ -168,3 +169,4 @@ class ExcelParser
     company.category = cat
   end
 end
+# rubocop:enable all

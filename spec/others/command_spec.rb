@@ -1,6 +1,7 @@
 require 'rails_helper'
 
-describe ApplicationController do
+# rubocop:disable all
+describe 'Commands' do
   it 'searches for byebug occurrences' do
     filename = 'byebug'
     command = `git grep byebug ./app > tmp/#{filename}.txt && wc -l tmp/#{filename}.txt`
@@ -19,3 +20,4 @@ describe ApplicationController do
     expect(command).to be_empty
   end
 end
+# rubocop:enable all

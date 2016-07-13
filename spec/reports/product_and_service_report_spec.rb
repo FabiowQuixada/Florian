@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe ProductAndServiceReport do
-  context 'Weekly report' do
+  describe 'weekly report' do
     let(:week) { create :product_and_service_week }
     let(:rendered_pdf) { described_class.new('/tmp/prod_serv.pdf', week).pdf.render }
     let(:text_analysis) { PDF::Inspector::Text.analyze(rendered_pdf) }
@@ -20,7 +20,7 @@ describe ProductAndServiceReport do
     it { expect(page_analysis.pages.size).to eq(1) }
   end
 
-  context 'Monthly report' do
+  describe 'monthly report' do
     let(:psd) { create :product_and_service_datum }
     let(:week) { psd.final_week }
     let(:rendered_pdf) { described_class.new('/tmp/prod_serv.pdf', week).pdf.render }
@@ -42,47 +42,59 @@ describe ProductAndServiceReport do
 
   def validates_services
 
-    total_attendances = 0
-    total_returns = 0
-    index = 0
+    total_attendances = total_returns = 0
 
     ServiceData.services.each do |service|
-      index = text_analysis.strings.index { |o| o == I18n.t('activerecord.attributes.service_datum.' + service) }
-
-      expected_attendance = week.service_data[0].send(service).to_s
-      expected_return = week.service_data[0].send(service).to_s
-      actual_attendance = text_analysis.strings[index + 1]
-      actual_return = text_analysis.strings[index + 2]
-      expected_total = expected_attendance.to_i + expected_return.to_i
-      actual_total = actual_attendance.to_i + actual_return.to_i
-      total_attendances += expected_attendance.to_i
-      total_returns += expected_return.to_i
-
-      expect(actual_attendance).to eq(expected_attendance), (service + ' attendance: expected ' + expected_attendance + ', got ' + actual_attendance)
-      expect(actual_return).to eq(expected_return), (service + ' return: expected ' + expected_return + ', got ' + actual_return)
-      expect(actual_total).to eq(expected_total), (service + ' return: expected ' + expected_total.to_s + ', got ' + actual_total.to_s)
+      attendances, returns = validates_service(service)
+      total_attendances += attendances
+      total_returns += returns
     end
 
     # Totals
-    expect(text_analysis.strings[index + 5]).to eq(total_attendances.to_s)
-    expect(text_analysis.strings[index + 6]).to eq(total_returns.to_s)
-    expect(text_analysis.strings[index + 7]).to eq((total_attendances + total_returns).to_s)
+    expect(service_array[-3]).to eq(total_attendances.to_s)
+    expect(service_array[-2]).to eq(total_returns.to_s)
+    expect(service_array[-1]).to eq((total_attendances + total_returns).to_s)
+  end
+
+  def validates_service(service)
+    index = text_analysis.strings.index { |o| o == I18n.t('activerecord.attributes.service_datum.' + service) }
+
+    expected_attendance = week.service_data[0].send(service).to_s
+    expected_return = week.service_data[0].send(service).to_s
+    actual_attendance = text_analysis.strings[index + 1]
+    actual_return = text_analysis.strings[index + 2]
+    expected_total = expected_attendance.to_i + expected_return.to_i
+    actual_total = actual_attendance.to_i + actual_return.to_i
+
+    expect(actual_attendance).to eq(expected_attendance), service
+    expect(actual_return).to eq(expected_return), service
+    expect(actual_total).to eq(expected_total), service
+
+    [expected_attendance.to_i, expected_return.to_i]
   end
 
   def validates_products
     total = 0
-    index = 0
-
-    product_array = text_analysis.strings[36, 53]
 
     ProductData.products.each do |product|
-      index = product_array.index { |o| o == I18n.t('activerecord.attributes.product_datum.' + product) }
-
-      expect(product_array[index + 1]).to eq(week.product_data.send(product).to_s), (product + ': expected ' + week.product_data.send(product).to_s + ', got ' + product_array[index + 1])
-      total += week.product_data.send(product)
+      total += validate_product(product)
     end
 
     # Total
-    expect(product_array[index + 3]).to eq(total.to_s)
+    expect(product_array.last).to eq(total.to_s)
+  end
+
+  def validate_product(product)
+    index = product_array.index { |o| o == I18n.t('activerecord.attributes.product_datum.' + product) }
+    expect(product_array[index + 1]).to eq(week.product_data.send(product).to_s), product
+    week.product_data.send(product)
+  end
+
+  def product_array
+    text_analysis.strings[36..55]
+  end
+
+  def service_array
+    text_analysis.strings[3..34]
   end
 end

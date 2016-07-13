@@ -1,7 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
 
-
-  # load_and_authorize_resource
   before_filter :authenticate_user!
 
   def create
@@ -15,36 +13,45 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def edit
-
-    if current_user.guest?
-      return redirect_to root_path, alert: I18n.t('error_pages.not_found.title')
-    end
+    return redirect_to root_path, alert: I18n.t('error_pages.not_found.title') if current_user.guest?
 
     @model = current_user
-
-    @model.password = 'l'
-
     @breadcrumbs = Hash[t('helpers.profile') => '']
   end
 
   def update
+    @breadcrumbs = Hash[t('helpers.profile') => '']
+
+    something set_up_for_something
+  end
+
+  private
+
+  def set_up_for_something
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
-
-    @breadcrumbs = Hash[t('helpers.profile') => '']
 
     resource_updated = update_resource(resource, account_update_params)
     yield resource if block_given?
 
+    [resource_updated, resource, prev_unconfirmed_email]
+  end
+
+  def set_custom_flash_key_message
+    return unless is_flashing_format?
+
+    flash_key = if update_needs_confirmation?(resource, prev_unconfirmed_email)
+                  :update_needs_confirmation
+                else
+                  :updated
+                end
+    set_flash_message :notice, flash_key
+  end
+
+  # TODO: Understand and rename this method!
+  def something(resource_updated, resource, prev_unconfirmed_email)
     if resource_updated
-      if is_flashing_format?
-        flash_key = if update_needs_confirmation?(resource, prev_unconfirmed_email)
-                      :update_needs_confirmation
-                    else
-                      :updated
-                    end
-        set_flash_message :notice, flash_key
-      end
+      set_custom_flash_key_message resource, prev_unconfirmed_email
       sign_in resource_name, resource, bypass: true
       respond_with resource, location: after_update_path_for(resource)
     else
@@ -52,8 +59,6 @@ class RegistrationsController < Devise::RegistrationsController
       respond_with resource
     end
   end
-
-  private
 
   def user_params
     params.require(:user).permit(:id, :name, :email, :role_id, :password, :password_confirmation, :signature, :current_password)

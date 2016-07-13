@@ -14,7 +14,7 @@ describe SystemSetting, type: :model do
   it { is_expected.to belong_to :user }
 
 
-  context 'tags' do
+  describe 'tags' do
     let(:setting) { build(:system_setting) }
     let(:date) { Date.yesterday }
 

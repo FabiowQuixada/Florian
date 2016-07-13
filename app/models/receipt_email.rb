@@ -110,18 +110,14 @@ class ReceiptEmail < ActiveRecord::Base
     apply_value_tag_to apply_company_tag_to apply_competence_tag_to(text, date)
   end
 
+  # rubocop:disable all
   def validate_value
-
     return if value.blank?
-
-    if value == 0
-      errors.add :value, I18n.t('errors.email.value_mandatory')
-    elsif value < 0
-      errors.add :value, I18n.t('errors.email.value_positive')
-    elsif value > 1_000_000
-      errors.add :value, I18n.t('errors.email.value_max')
-    end
+    return errors.add :value, I18n.t('errors.email.value_mandatory') if value == 0
+    return errors.add :value, I18n.t('errors.email.value_positive') if value < 0
+    return errors.add :value, I18n.t('errors.email.value_max') if value > 1_000_000
   end
+  # rubocop:enable all
 
   def validate_day_of_month
 

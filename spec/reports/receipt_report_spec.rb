@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe ReceiptReport do
-  context 'Weekly report' do
+  describe 'weekly report' do
     let(:receipt) { create :receipt_email }
     let(:date) { Date.yesterday }
     let(:rendered_pdf) { described_class.new('/tmp/prod_serv.pdf', receipt, date).pdf.render }

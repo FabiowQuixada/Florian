@@ -9,15 +9,20 @@ module MainConcern extend ActiveSupport::Concern
                        @arguable_opts = opts
                      end
 
+                     # rubocop:disable all
                      def get_arguable_opts
-                       opts = if self.class.arguable_opts.blank? && self.class.superclass.arguable_opts.present?
-                                self.class.superclass.arguable_opts
-                              elsif self.class.arguable_opts.present? && self.class.superclass.arguable_opts.present?
-                                self.class.superclass.arguable_opts.merge(self.class.arguable_opts)
-                              else
-                                self.class.arguable_opts
-                              end
-                       opts || {}
+                       return self.class.superclass.arguable_opts if parent_class_args_only?
+                       return self.class.superclass.arguable_opts.merge(self.class.arguable_opts) if parent_and_self_args?
+                       self.class.arguable_opts
+                     end
+                     # rubocop:enable all
+
+                     def parent_class_args_only?
+                       self.class.arguable_opts.blank? && self.class.superclass.arguable_opts.present?
+                     end
+
+                     def parent_and_self_args?
+                       self.class.arguable_opts.present? && self.class.superclass.arguable_opts.present?
                      end
 
                    end
@@ -61,31 +66,41 @@ module MainConcern extend ActiveSupport::Concern
 
                    def destroy
                      if request.xhr?
-                       if current_user.admin?
-                         begin
-                           model_class.find(params[:id]).destroy
-                         rescue
-                           return render json: { message: t('errors.deletion'), success: false }
-                         end
-                         return render json: { message: @model.was('destroyed'), success: true }
-                       else
-                         return render json: { message: t('errors.unpermitted_action'), success: false }
-                       end
+                       handle_xhr_destroy && return
                      else
-                       if current_user.admin?
-                         begin
-                           model_class.find(params[:id]).destroy
-                         rescue
-                           return render json: { message: t('errors.deletion'), success: false }
-                         end
-                         redirect_to send(@model.model_name.route_key + '_path'), notice: @model.was('destroyed')
-                       else
-                         redirect_to send(@model.model_name.route_key + '_path'), alert: t('errors.unpermitted_action')
-                       end
+                       handle_common_request_destroy && return
                      end
                    end
 
   private
+
+                   def handle_xhr_destroy
+                     return render json: { message: t('errors.unpermitted_action'), success: false } unless current_user.admin?
+
+                     destroy_model || return
+
+                     render json: { message: @model.was('destroyed'), success: true }
+                   end
+
+                   def handle_common_request_destroy
+
+                     path = send(@model.model_name.route_key + '_path')
+
+                     return redirect_to path, alert: t('errors.unpermitted_action') unless current_user.admin?
+
+                     destroy_model || return
+
+                     redirect_to path, notice: @model.was('destroyed')
+
+                   end
+
+                   def destroy_model
+
+                     model_class.find(params[:id]).destroy
+                   rescue
+                     render json: { message: t('errors.deletion'), success: false }
+
+                   end
 
                    def model_class
                      self.class.arguable_opts[:model_class]
