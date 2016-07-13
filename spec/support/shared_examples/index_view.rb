@@ -1,12 +1,6 @@
-require 'rails_helper'
-
-class_name = ReceiptEmail
-
-describe 'receipt_emails/index', type: :view do
-  it 'renders index page when list is not empty' do
+shared_examples 'an index view' do
+  it 'when list is not empty' do
     model = class_name.new
-    sign_in User.first
-    create :receipt_email
     assign :model, model
     assign :list, class_name.all
 
@@ -23,10 +17,8 @@ describe 'receipt_emails/index', type: :view do
     expect(rendered).to include '<tbody>'
   end
 
-  it 'renders index page when list is empty' do
+  it 'when list is empty' do
     model = class_name.new
-    sign_in User.first
-
     assign :model, model
     assign :list, []
 
@@ -42,20 +34,5 @@ describe 'receipt_emails/index', type: :view do
     expect(rendered).not_to include '<td class="model_id admin-only" style="display: none;">'
     expect(rendered).to include '<thead>'
     expect(rendered).to include '<tbody>'
-  end
-end
-
-describe 'receipt_emails/_form', type: :view do
-  it 'renders partials' do
-    model = class_name.new
-    sign_in User.first
-
-    assign :model, model
-
-    render
-
-    # Partials
-    expect(view).to render_template(partial: 'shared/form_errors', locals: { model: model })
-    expect(view).to render_template(partial: 'shared/form_commons', locals: { model: model })
   end
 end
