@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 describe 'Unsaved data', type: :request do
-  DATA = [Company, Bill, ProductAndServiceDatum, Donation, Role, User, ReceiptEmail].freeze
+  UNSAVED_DATA = [Company, Bill, ProductAndServiceDatum, Donation, Role, User, ReceiptEmail].freeze
 
   it 'displays unsaved data warning' do
     login_as_admin
 
-    DATA.each do |data|
+    UNSAVED_DATA.each do |data|
       fill_non_temp_data_and_return data.new
       expect(page).to have_content('Dados não salvos'), data.name
     end
@@ -55,7 +55,7 @@ describe 'Unsaved data', type: :request do
 
   def fill_temp_inputs
     all('.temp_field').each do |input|
-      input.set 'whatever'
+      input.set 'whatever' unless input[:readonly]
     end
   end
 

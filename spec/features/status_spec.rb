@@ -41,7 +41,7 @@ describe 'Status', type: :request do
     it 'does not change private area' do
       [User, Role].each do |data|
         visit send(data.model_name.route_key + '_path')
-        expect(page).to have_content('negado'), data.to_s
+        expect(page).to have_content('negado'), data.name
       end
     end
   end
