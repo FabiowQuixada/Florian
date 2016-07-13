@@ -33,9 +33,9 @@ FactoryGirl.define do
     end
 
     trait :with_contacts do
-      # after(:build) do |company|
-      #   build_list(:contact, 3, company: company)
-      # end
+      after(:build) do |company|
+        company.contacts = build_list(:contact, 3, company: company)
+      end
     end
   end
 end
