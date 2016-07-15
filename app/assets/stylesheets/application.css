@@ -224,6 +224,10 @@ td.button-wrapper {
    cursor: pointer;
 }
 
+.admin-only {
+  display: none;
+}
+
 #app_footer{
 	margin-top: 20px;
 	padding-top: 5px;
