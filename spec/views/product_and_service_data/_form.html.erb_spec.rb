@@ -79,7 +79,6 @@ describe 'product_and_service_data/_form', type: :view do
     expect(rendered).not_to include 'Enviar para análise'
     # expect(rendered).to include 'Copiar de "Total"'
     # expect(rendered).not_to include '>Enviar'
-    
   end
 
   it 'renders all the services and products (Finalized)' do
@@ -88,7 +87,7 @@ describe 'product_and_service_data/_form', type: :view do
 
     render
 
-    # Partials    
+    # Partials
     expect_to_render_partials(model)
 
     # P&S data
@@ -106,7 +105,6 @@ describe 'product_and_service_data/_form', type: :view do
     expect(rendered).not_to include 'Enviar para análise'
     # expect(rendered).not_to include 'Copiar de "Total"'
     # expect(rendered).not_to include '>Enviar'
-
   end
 
   def expect_to_render_partials(model)
@@ -118,6 +116,7 @@ describe 'product_and_service_data/_form', type: :view do
   end
 
   def expect_to_render_week_tabs
+    expect(rendered).not_to include 'Semana -1'
     expect(rendered).not_to include 'Semana 0'
     (1..5).each do |i|
       expect(rendered).to include 'Semana ' + i.to_s
