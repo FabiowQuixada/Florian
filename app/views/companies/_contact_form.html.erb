@@ -15,11 +15,9 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-12">
-						<div align="right">
-							<a id="add_contact_btn" class="btn btn-primary btn-xs add_btn"><%= t('helpers.action.add') %></a>
-							<a id="cancel_contact_edition_btn" style="display:none;" class="btn btn-primary btn-xs add_btn"><%= t('helpers.action.cancel') %></a>
-						</div>
+					<div class="col-md-12 right">
+						<a id="add_contact_btn" class="btn btn-primary btn-xs add_btn"><%= t('helpers.action.add') %></a>
+						<a id="cancel_contact_edition_btn" style="display:none;" class="btn btn-primary btn-xs add_btn"><%= t('helpers.action.cancel') %></a>
 					</div>
 				</div>
 			</div>
@@ -44,7 +42,7 @@
 			</tr>
 			<tbody>
 				<% if @model.contacts.empty? %>
-				<tr id="no_contacts_row"><td colspan="5"><%= genderize_tag(Contact.new, 'helpers.none_registered') %></td></tr>
+				<tr id="no_contacts_row"><td colspan="6"><%= genderize_tag(Contact.new, 'helpers.none_registered') %></td></tr>
 				<% end %>
 
 				<% @model.contacts.each do |contact| %>

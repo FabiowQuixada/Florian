@@ -14,7 +14,7 @@
 					<a href="#" class="close" data-hide="alert">&times;</a>
 				</div>
 				<div class="form-group">
-					<%= label_tag t('activerecord.attributes.receipt_email.competence') %>
+					<%= label_tag 'resend_competence', t('activerecord.attributes.receipt_email.competence') %>
 					<div class="input-group date" data-behaviour='datepickercompetence' >
 						<%= text_field_tag 'competence', '', id: 'resend_competence', class: 'form-control' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 					</div>
@@ -46,11 +46,11 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<div id="resend_email_error_box" class="alert alert-danger fade in" style="display: none;">
+				<div id="test_email_error_box" class="alert alert-danger fade in" style="display: none;">
 					<a href="#" class="close" data-hide="alert">&times;</a>
 				</div>
 				<div class="form-group">
-					<%= label_tag t('activerecord.attributes.receipt_email.competence') %>
+					<%= label_tag 'send_test_competence', t('activerecord.attributes.receipt_email.competence') %>
 					<div class="input-group date" data-behaviour='datepickercompetence' >
 						<%= text_field_tag 'competence', '', id: 'send_test_competence', class: 'form-control' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 					</div>
@@ -100,7 +100,6 @@
 <div class="modal fade" id="recent_emails_modal" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-md">
 		<div class="modal-content">
-			<%= form_tag 'javascript:void(0)', remote: true, id: 'resend_email_form' do %>
 			<div class="modal-header">
 				<%= t('modal.email.title.recent_emails', days: ReceiptEmail.recent_emails_days) %>
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -130,7 +129,6 @@
 					<% end %>
 				</table>
 			</div>
-			<% end %>
 		</div>
 	</div>
 </div>

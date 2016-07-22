@@ -17,7 +17,7 @@
 	<div id="tab_0" class="receipt_email_tab">
 		<div class="form-group">
 			<%= f.label :re_title %>
-			<span style="float:right">
+			<div style="float:right">
 				<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
 				<div class="btn-group">
 					<button type="button" class="btn btn-primary btn-xs" id="add_company_to_re_title_btn"><%= i18n.t :company %></button>
@@ -25,7 +25,7 @@
 					<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_re_title_btn"><%= i18n.t :competence %></button>
 				</div>
 				<% end %>
-			</span>
+			</div>
 			<%= f.text_field :re_title, class: 'form-control' %>
 		</div>
 
@@ -61,25 +61,25 @@
 
 					<div class="form-group">
 						<%= f.label :pse_title %>
-						<span style="float:right">
+						<div style="float:right">
 							<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
 							<div class="btn-group">
 								<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_pse_title_btn"><%= i18n.t :competence %></button>
 							</div>
 							<% end %>
-						</span>
+						</div>
 						<%= f.text_field :pse_title, class: 'form-control' %>
 					</div>
 
 					<div class="form-group">
 						<%= f.label :pse_body %>
-						<span style="float:right">
+						<div style="float:right">
 							<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
 							<div class="btn-group">
 								<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_pse_body_btn"><%= i18n.t :competence %></button>
 							</div>
 							<% end %>
-						</span>
+						</div>
 						<%= f.text_area :pse_body, size: '24x6', class: 'form-control' %>
 					</div>
 				</div>

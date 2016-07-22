@@ -26,9 +26,10 @@
 							<td><%= audit.remote_address %></td>
 							<td style="width: 70%;">
 
-								<% audit.audited_changes.each do |key, array| %>
+								<ul><% audit.audited_changes.each do |key, array| %>
 								<li><b><%= t('activerecord.attributes.' + model.model_name.singular + '.' + key) %>:</b> <%= array %><br/></li>
 								<% end %>
+								</ul>
 
 							</td>
 						</tr>

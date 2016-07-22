@@ -6,27 +6,28 @@
 	<legend><%= t 'activerecord.models.product_datum.other' %><span class="admin-only"> (<%= week.product_data.id.to_s %>)</span></legend>
 
 	<!-- Product empty header row -->
+	<%= week_form.fields_for :product_data do |product_form| %>
+
+	<% product_row = 0 %>
 	<table class="input-table">
 		<thead>
-			<th scope="col" class="col-md-2">
-			</th>
-			<th scope="col"></th>
+			<tr>
+				<th scope="col" class="col-md-2">
+				</th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+			</tr>
 		</thead>
 
-		<%= week_form.fields_for :product_data do |product_form| %>
-
-		<%= product_form.hidden_field :id, class: 'form-control' %>
-
-		<% product_row = 0 %>
 
 		<!-- Product body rows -->
 		<% ProductData.products.each do |name| %>
 
 		<tr>
-			<td scope="row" class="col-xs-7 col-md-7 form-group">
-				<%= label_tag t('activerecord.attributes.product_datum.' + name) %>
-			</td>
-			<td class="col-xs-1 col-md-1 nopadding form-group">
+			<th scope="row" class="col-xs-7 col-md-7">
+				<span class="label"><%= t('activerecord.attributes.product_datum.' + name) %></span>
+			</th>
+			<td class="col-xs-1 col-md-1">
 			</td>
 			<td>
 				<%= product_form.text_field name, class: 'form-control product_input numbers_only product_row_' + product_row.to_s + ' product_week_' + index.to_s + ' input-sm week_' + index.to_s + (index >= totals_week_number ? ' extra_tab temp_field' : ''), readonly: fields_readonly?(week) %>
@@ -36,15 +37,14 @@
 		<% product_row += 1 %>
 
 		<% end %>
-		<% end %>
 
 		<!-- Product total row -->
 		<tfoot>
 			<tr>
-				<td>
-					<%= label_tag t 'helpers.total' %>
-				</td>
-				<td>
+				<th scope="row" class="col-xs-7 col-md-7">
+					<span class="label"><%= t 'helpers.total' %></span>
+				</th>
+				<td class="col-xs-1 col-md-1">
 				</td>
 				<td>
 					<%= text_field_tag 'total_product', 0, id: 'total_product_week_' + index.to_s, class: 'form-control input-sm temp_field', readonly: true, disabled: true %>
@@ -52,4 +52,5 @@
 			</tr>
 		</tfoot>
 	</table>
+	<% end %>
 </fieldset>

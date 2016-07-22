@@ -111,7 +111,6 @@ tr th.icon-column{
 tr td.icon-column{
     width:16px;
     white-space:nowrap;
-    display: block;
     margin-left: auto;
     margin-right: auto;
     align-content: center;
@@ -235,4 +234,32 @@ td.button-wrapper {
     justify-content: center;
     width: auto;
     bottom:-2;
+}
+
+.center {
+    text-align: center
+}
+
+.right {
+  text-align: right;
+}
+
+.white-background {
+  background-color: #FFFFFF;
+}
+
+.gray-background {
+  background-color: #F9F9F9;
+}
+
+.label {
+  display:inline-block;
+  max-width:100%;
+  margin-bottom:5px;
+  font-weight:bold;
+      font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    /*font-size: 14px;*/
+    color: #333;
+    background-color: #fff;
+
 }

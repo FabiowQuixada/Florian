@@ -1,9 +1,4 @@
-Servidor ou AWS:
- - Acesso externo (SAGECOM);
- - Acesso browser sem senha;
- - Adicionar meu notebook la no SSH do servidor;
- - Queda frequente de internet;
- - Tem que atualizar noip de tempos em tempos;
+Servidor AWS;
 
 TESTES:
 Testes comentados;
@@ -17,11 +12,14 @@ Voltar em algumas telas;
 Gems: Resque, Sidekiq, (integracao continua)
 Copia de producao pra desenvolvimento;
 bundle exec...
-git ignore: no primeiro commit;
 Status de respostas do servidor;
 Validacao de html;
 PROBLEMAS parse: doacoes e telefones;
-Rubocop views?
+
+Html:
+edicao de conta;
+
+pop-up - Reenvio de e-mail para
 
 
 =====================================================================

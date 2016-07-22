@@ -11,7 +11,7 @@
 
 		<%= f.label :competence %>
 		<% if @model.persisted? %>
-		<%= text_field_tag :competence, I18n.localize(@model.competence, format: :competence).capitalize, {class: 'form-control', id: 'competence_text', readonly: true} %>
+		<%= text_field_tag :competence, I18n.localize(@model.competence, format: :competence).capitalize, {class: 'form-control', id: 'product_and_service_datum_competence', readonly: true} %>
 		<% else %>
 		<div class="input-group date" data-behaviour='datepickercompetence' >
 			<%= text_field_tag 'aux_competence', I18n.localize(@model.competence, format: :competence_i), class: 'form-control' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
@@ -23,7 +23,7 @@
 	<% if f.object.persisted? %>
 	<div class="col-md-4 form-group">
 		<%= f.label :status %>
-		<%= f.text_field :status_desc, {class: 'form-control', readonly: true} %>
+		<%= f.text_field :status_desc, {id: 'product_and_service_datum_status', class: 'form-control', readonly: true} %>
 	</div>
 	<div class="col-md-2 form-group admin-only">
 		<%= f.label :id %>
@@ -53,13 +53,10 @@
 
 <!-- Tabs' body -->
 <% f.object.product_and_service_weeks.each_with_index do |week, index| %>
-<%= f.fields_for :product_and_service_weeks, week do |week_form| %>
+<%= f.fields_for :product_and_service_weeks, week, {include_id: false} do |week_form| %>
 
 <div id="prod_serv_data_tab_<%= index %>" style="display:none;">
 	<div class="tab_body">
-
-		<%= week_form.hidden_field :id %>
-		<%= week_form.hidden_field :number %>
 
 		<!-- Week range -->
 		<div class="container-fluid" <%= 'style=display:none' if week.number >= totals_week_number %>>
@@ -74,12 +71,12 @@
 					<div class="input-group">
 						<span class="input-group-addon"><%= t 'helpers.from' %></span>
 						<div class="date" data-behaviour='datepicker' >
-							<span></span><%= week_form.text_field :start_date, format: :competence_i, class: 'form-control', readonly: @model.finalized? %><span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+							<span></span><%= week_form.text_field :start_date, class: 'form-control', readonly: @model.finalized? %><span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 						</div>
 						<span class="input-group-addon" style="border-left: 0; border-right: 0;"><%= t 'helpers.to' %></span>
 						<div class="date" data-behaviour='datepicker'>
 							<span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-							<%= week_form.text_field :end_date, format: :competence_i, class: 'form-control', readonly: @model.finalized? %>
+							<%= week_form.text_field :end_date, class: 'form-control', readonly: @model.finalized? %>
 						</div>
 					</div>
 				</div>
@@ -115,7 +112,6 @@
 		<div class="row">
 			<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.week_footer') %></div></div>
 
-
 			<div class="form-group">
 				<%= link_to t('helpers.action.email.save_and_send'), 'javascript:void(0)', id: 'update_and_send_btn_' + index.to_s, class: 'btn btn-primary resend_btn' %>
 			</div>
@@ -141,7 +137,8 @@
 			<% end # if common week %>
 			<% end # if persisted %>
 		</div>
-	</div></div>
+	</div>
+</div>
 	<% end # fields_for %>
 	<% end # week loop %>
 
@@ -160,7 +157,7 @@
 
 		<input type="hidden" name="product_and_service_week[service_data_attributes][1][id]" id="product_and_service_week_service_data_attributes_1_id">
 
-		<input type="hidden" value="attendance" name="product_and_service_week[service_data_attributes][0][service_type]" id="product_and_service_week_service_data_attributes_1_service_type">
+		<input type="hidden" value="attendance" name="product_and_service_week[service_data_attributes][0][service_type]" id="product_and_service_week_service_data_attributes_0_service_type">
 
 		<input type="hidden" value="return" name="product_and_service_week[service_data_attributes][1][service_type]" id="product_and_service_week_service_data_attributes_1_service_type">
 	</div>

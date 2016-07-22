@@ -7,7 +7,7 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
 
 <div class="form-group">
 
-    <%= f.label field_name, class: 'required' %>
+    <%= label_tag field_name + '_new_recipient_field', t('activerecord.attributes.' + 'system_setting' + '.' + field_name), class: 'required' %>
 
     <div class="input-group">
         <span class="input-group-addon">@</span>
@@ -19,7 +19,7 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
 <table id="<%= field_name %>_recipients_table" class="table table-striped table-condensed table-bordered unbreakable-table">
     <tbody>
         <% @model.public_send(method_name).each_with_index do |email_address, index| %>
-        <%= render partial: 'shared/email_address', locals: {email_address: email_address, index: index} %>
+        <%= render partial: 'shared/email_address', locals: {email_address: email_address, index: index, field_name: field_name} %>
         <% end %>
     </tbody>
 </table>
@@ -53,8 +53,8 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
     $('body').on('click', '.remove_recipient_btn', function() {
         id = $(this).parent().parent().find('.recipient_id').text();
 
-        $('#email_address_' + id).fadeOut('slow', function() {
-            $('#email_address_' + id).remove();
+        $('#<%= field_name %>_email_address_' + id).fadeOut('slow', function() {
+            $('#<%= field_name %>_email_address_' + id).remove();
         });
 
         transient_recipients -= 1;

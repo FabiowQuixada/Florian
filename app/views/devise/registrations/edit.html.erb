@@ -24,7 +24,7 @@
 </div><div class="row">
 <div class="col-sm-6">
 	<div class="form-group">
-		<%= f.label t('activerecord.attributes.user.new_password') %> <i><%= t('devise.leave_blank_if') %></i>
+		<%= f.label :password, t('activerecord.attributes.user.new_password') %> <i><%= t('devise.leave_blank_if') %></i>
 		<%= f.password_field :password, autocomplete: 'off', class: 'form-control' %>
 	</div>
 
@@ -53,7 +53,7 @@
 
 <div class="">
 	<%= f.submit t('helpers.action.update'), class: 'btn btn-primary save_btn' %>
-	<a class="btn btn-primary back_btn"></span><%= t('helpers.action.back') %></a>
+	<a class="btn btn-primary back_btn"><%= t('helpers.action.back') %></a>
 </div>
 
 <% end %>

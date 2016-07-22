@@ -1,10 +1,9 @@
-<p/><p/>
+<br/>
+<br/>
 
 <% if controller_name != 'sessions' %>
 <%= link_to t('helpers.action.login'), new_session_path(resource_name), class: 'btn btn-primary' %><br />
 <% end %>
-
-<p/><p/>
 
 <% if devise_mapping.registerable? && controller_name != 'registrations' %>
 <%# link_to t('helpers.action.signup'), new_registration_path(resource_name) %>
