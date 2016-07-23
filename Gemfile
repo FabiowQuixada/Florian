@@ -12,11 +12,7 @@ gem 'audited-activerecord', '~> 4.0'
 gem 'pg'
 gem 'whenever', require: false
 gem 'figaro'
-gem 'factory_girl_rails', '~> 4.0'
-gem 'selenium-webdriver'
-gem 'launchy'
 gem 'twitter-bootstrap-rails', git: 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
-# gem 'bootstrap-sass'
 gem 'bootstrap-datepicker-rails'
 gem 'jquery-tablesorter'
 gem 'jquery-turbolinks'
@@ -59,14 +55,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'capybara'
-  gem 'rspec-rails', '~> 3.0'
-  gem 'shoulda-matchers', '~> 3.1'
-  gem 'rspec-collection_matchers'
-  gem 'database_cleaner'
   gem 'faker', '~> 1.4', '>= 1.4.3'
-  gem 'blabla', '~> 0.0.2'
+  gem 'binding_of_caller'
   gem 'simplecov', require: false, group: :test
   gem 'brakeman', require: false
   gem 'dawnscanner', require: false
@@ -78,4 +68,16 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'rspec-collection_matchers'
+  gem 'database_cleaner'
+  gem 'blabla', '~> 0.0.2'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'selenium-webdriver'
+  gem 'launchy'
 end
