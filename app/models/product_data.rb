@@ -16,8 +16,10 @@ class ProductData < ActiveRecord::Base
 
   # Methods
   after_initialize do
-    ProductData.products.each do |product|
-      send("#{product}=", 0)
+    unless persisted?
+      ProductData.products.each do |product|
+        send("#{product}=", 0)
+      end
     end
   end
 

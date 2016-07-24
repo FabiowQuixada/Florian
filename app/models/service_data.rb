@@ -19,8 +19,10 @@ class ServiceData < ActiveRecord::Base
 
   # Methods
   after_initialize do
-    ServiceData.services.each do |service|
-      send("#{service}=", 0)
+    unless persisted?
+      ServiceData.services.each do |service|
+        send("#{service}=", 0)
+      end
     end
   end
 
