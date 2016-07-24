@@ -53,7 +53,7 @@
 
 <!-- Tabs' body -->
 <% f.object.product_and_service_weeks.each_with_index do |week, index| %>
-<%= f.fields_for :product_and_service_weeks, week, {include_id: false} do |week_form| %>
+<%= f.fields_for :product_and_service_weeks, week do |week_form| %>
 
 <div id="prod_serv_data_tab_<%= index %>" style="display:none;">
 	<div class="tab_body">
@@ -174,8 +174,10 @@
 		function preprocess_data() {}
 
 		$('#main_form').submit(function() {
+			<% unless @model.persisted? %>
 			$("#aux_competence").prop("disabled", true);
 			$('#product_and_service_datum_competence').val('01/' + $('#aux_competence').val());
+			<% end %>
 		});
 
 		function sum_services_for_each_tab() {
