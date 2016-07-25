@@ -1,10 +1,9 @@
-Servidor AWS;
-
 TESTES:
 Testes comentados;
 Stubs;
 Request;
 Feature: paginas com admin e nao admin;
+Validacao de html;
 
 A pagina cai se ficar parada por um tempo;
 product_and_service_weeks/update_and_send quando da erro no envio de e-mail 
@@ -13,14 +12,7 @@ Gems: Resque, Sidekiq, (integracao continua)
 Copia de producao pra desenvolvimento;
 bundle exec...
 Status de respostas do servidor;
-Validacao de html;
 PROBLEMAS parse: doacoes e telefones;
-
-Html:
-edicao de conta;
-
-pop-up - Reenvio de e-mail para
-
 
 =====================================================================
 
