@@ -15,7 +15,7 @@ class ProductAndServiceDataController < ApplicationController
   end
 
   def order_attribute
-    'created_at DESC'
+    'competence DESC'
   end
 
 
