@@ -80,7 +80,7 @@ class ProductAndServiceWeeksController < ApplicationController
 
   def perform_update_and_send
     if @week.update product_and_service_week_params
-      FlorianMailer.send_weekly_prod_and_serv_email(@week, current_user).deliver_now
+      ProdServMailer.send_weekly_email(@week, current_user).deliver_now
       redirect_to product_and_service_data_path, notice: @model.was('sent')
     else
       add_week_errors_to_datum
@@ -92,7 +92,7 @@ class ProductAndServiceWeeksController < ApplicationController
     @model.on_analysis!
 
     if @week.update(product_and_service_week_params) && @model.save
-      FlorianMailer.send_prod_and_serv_to_analysis(@week, current_user).deliver_now
+      ProdServMailer.send_to_analysis(@week, current_user).deliver_now
       redirect_to product_and_service_data_path, notice: @model.was('sent')
     else
       add_week_errors_to_datum
@@ -104,7 +104,7 @@ class ProductAndServiceWeeksController < ApplicationController
     @model.finalized!
 
     if @week.update(product_and_service_week_params) && @model.save
-      FlorianMailer.send_monthly_prod_and_serv_email(@week, current_user).deliver_now
+      ProdServMailer.send_monthly_email(@week, current_user).deliver_now
       redirect_to product_and_service_data_path, notice: @model.was('sent')
     else
       add_week_errors_to_datum

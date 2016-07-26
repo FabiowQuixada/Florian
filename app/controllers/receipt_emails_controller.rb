@@ -22,7 +22,7 @@ class ReceiptEmailsController < ApplicationController
 
       return render json: email.errors, status: :unprocessable_entity unless email.valid?
 
-      FlorianMailer.resend_receipt_email(email, check_competence, current_user).deliver_now
+      ReceiptMailer.resend_receipt_email(email, check_competence, current_user).deliver_now
       return render history_as_json(email, 'resent')
 
     rescue StandardError => exc
@@ -39,7 +39,7 @@ class ReceiptEmailsController < ApplicationController
 
       return render json: email.errors, status: :unprocessable_entity unless email.valid?
 
-      FlorianMailer.send_test_receipt_email(email, current_user, check_competence).deliver_now
+      ReceiptMailer.send_test_receipt_email(email, current_user, check_competence).deliver_now
 
       return render history_as_json(email, 'test_sent')
 
@@ -54,7 +54,7 @@ class ReceiptEmailsController < ApplicationController
     emails = ReceiptEmail.where(day_of_month: Date.today.day, active: true)
 
     emails.each do |email|
-      FlorianMailer.send_automatic_receipt_email(email).deliver_now
+      ReceiptMailer.send_automatic_receipt_email(email).deliver_now
     end
   end
 

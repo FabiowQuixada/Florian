@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-describe ReceiptEmail, type: :mailer do
+describe ReceiptMailer, type: :mailer do
   let(:receipt) { create :receipt_email }
   let(:user) { User.first }
 
   describe 'autosend' do
     let(:competence) { Date.today }
-    let(:mail) { FlorianMailer.send_automatic_receipt_email(receipt).deliver_now }
+    let(:mail) { described_class.send_automatic_receipt_email(receipt).deliver_now }
 
     it_behaves_like 'an receipt e-mail'
     it { expect(mail.to).to eq(SAMPLE_RECIPIENTS.split(/,/)) }
@@ -17,7 +17,7 @@ describe ReceiptEmail, type: :mailer do
   describe 'test' do
     context 'with present competence' do
       let(:competence) { Date.today }
-      let(:mail) { FlorianMailer.send_test_receipt_email(receipt, user, competence).deliver_now }
+      let(:mail) { described_class.send_test_receipt_email(receipt, user, competence).deliver_now }
 
       it_behaves_like 'an receipt e-mail'
       it { expect(mail.to).to eq([user.email]) }
@@ -27,7 +27,7 @@ describe ReceiptEmail, type: :mailer do
 
     context 'with future competence' do
       let(:competence) { Date.today.to_time.advance(months: 6).to_date }
-      let(:mail) { FlorianMailer.send_test_receipt_email(receipt, user, competence).deliver_now }
+      let(:mail) { described_class.send_test_receipt_email(receipt, user, competence).deliver_now }
 
       it_behaves_like 'an receipt e-mail'
       it { expect(mail.to).to eq([user.email]) }
@@ -39,7 +39,7 @@ describe ReceiptEmail, type: :mailer do
   describe 'resend' do
     context 'with present competence' do
       let(:competence) { Date.today }
-      let(:mail) { FlorianMailer.resend_receipt_email(receipt, competence, user).deliver_now }
+      let(:mail) { described_class.resend_receipt_email(receipt, competence, user).deliver_now }
 
       it_behaves_like 'an receipt e-mail'
       it { expect(mail.to).to eq(SAMPLE_RECIPIENTS.split(/,/)) }
@@ -49,7 +49,7 @@ describe ReceiptEmail, type: :mailer do
 
     context 'with future competence' do
       let(:competence) { Date.today.to_time.advance(months: 6).to_date }
-      let(:mail) { FlorianMailer.resend_receipt_email(receipt, competence, user).deliver_now }
+      let(:mail) { described_class.resend_receipt_email(receipt, competence, user).deliver_now }
 
       it_behaves_like 'an receipt e-mail'
       it { expect(mail.to).to eq(SAMPLE_RECIPIENTS.split(/,/)) }
