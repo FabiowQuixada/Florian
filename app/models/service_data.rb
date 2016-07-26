@@ -21,7 +21,7 @@ class ServiceData < ActiveRecord::Base
   after_initialize do
     unless persisted?
       ServiceData.services.each do |service|
-        send("#{service}=", 0)
+        send("#{service}=", 0) if send(service).nil?
       end
     end
   end

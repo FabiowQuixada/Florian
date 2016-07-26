@@ -18,7 +18,7 @@ class ProductData < ActiveRecord::Base
   after_initialize do
     unless persisted?
       ProductData.products.each do |product|
-        send("#{product}=", 0)
+        send("#{product}=", 0) if send(product).nil?
       end
     end
   end
