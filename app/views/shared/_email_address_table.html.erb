@@ -7,7 +7,7 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
 
 <div class="form-group">
 
-    <%= label_tag field_name + '_new_recipient_field', t('activerecord.attributes.' + 'system_setting' + '.' + field_name), class: 'required' %>
+    <%= label_tag field_name + '_new_recipient_field', t('activerecord.attributes.' + @model.class.name.underscore + '.' + field_name), class: 'required' %>
 
     <div class="input-group">
         <span class="input-group-addon">@</span>
