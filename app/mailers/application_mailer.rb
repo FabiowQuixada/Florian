@@ -4,8 +4,7 @@ class ApplicationMailer < ActionMailer::Base
 
   def send_backup_email
 
-    # TODO: Endereco dinamico q tem no server_up.sh
-    attachments['backup.tar'] = File.read(Dir['/home/fabiow/backups/db_backup/*'].sort.reverse[1] + '/db_backup.tar')
+    attachments['backup.tar'] = File.read(Dir[Rails.root_to_s + '/backups/db_backup/*'].sort.reverse[1] + '/db_backup.tar')
 
     # TODO: Porque deliver now da erro aqui?
     mail(to: ADMIN_EMAIL,
