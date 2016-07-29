@@ -80,4 +80,5 @@ group :test do
   gem 'factory_girl_rails', '~> 4.0'
   gem 'selenium-webdriver'
   gem 'launchy'
+  gem 'whenever-test'
 end
