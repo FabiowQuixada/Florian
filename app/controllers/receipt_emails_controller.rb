@@ -49,15 +49,6 @@ class ReceiptEmailsController < ApplicationController
     end
   end
 
-  def self.send_email_daily
-
-    emails = ReceiptEmail.where(day_of_month: Date.today.day, active: true)
-
-    emails.each do |email|
-      ReceiptMailer.send_automatic_receipt_email(email).deliver_now
-    end
-  end
-
   private ###########################################################################################
 
   def receipt_email_params

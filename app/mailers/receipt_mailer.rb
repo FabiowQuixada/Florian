@@ -1,5 +1,14 @@
 class ReceiptMailer < ApplicationMailer
 
+  def send_email_daily
+
+    emails = ReceiptEmail.where(day_of_month: Date.today.day, active: true)
+
+    emails.each do |email|
+      send_automatic_receipt_email(email).deliver_now
+    end
+  end
+
   def send_test_receipt_email(email, user, date = nil)
     send_email(email, date, user, EmailHistory.send_types[:test], user.email)
   end

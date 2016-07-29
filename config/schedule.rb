@@ -4,7 +4,7 @@ env :PATH, '/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims
 set :output, RAILS_ROOT + '/log/cron.log'
 
 every 1.day, at: '7:00 am' do
-  runner 'ReceiptEmailsController.send_email_daily', environment: 'production'
+  runner 'ReceiptMailer.send_email_daily', environment: 'production'
 end
 
 every :sunday, at: '7:00 am' do
