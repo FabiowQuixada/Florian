@@ -16,5 +16,11 @@ FactoryGirl.define do
       celphone nil
       fax nil
     end
+
+    trait :with_phones do
+      telephone '(35) 5475-6875'
+      celphone '(54) 3 6475-6846'
+      fax '(35) 5475-6875'
+    end
   end
 end
