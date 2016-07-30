@@ -5,6 +5,10 @@ module HelperUtility
     sleep(inspection_time = 0.5)
   end
   # rubocop:enable all
+
+  def input_blur
+    page.find('body').click
+  end
 end
 
 RSpec.configure do |config|

@@ -63,7 +63,7 @@
 					<% end %>
 				</td>
 				<td class="col-md-2">
-					<%= text_field_tag name, '', id: 'week_' + week.id.to_s + '_service_' + name, class: 'form-control input-sm service_total temp_field', readonly: true, disabled: true %>
+					<%= text_field_tag name, '', id: 'week_' + week.number.to_s + '_service_' + name + '_total', class: 'form-control input-sm service_total temp_field week_' + index.to_s, readonly: true, disabled: true %>
 				</td>
 			</tr>
 
