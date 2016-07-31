@@ -14,7 +14,7 @@ class ServiceData < ActiveRecord::Base
   validate :validate_model
   validates :service_type, presence: true
   validates :service_type, inclusion: { in: service_types.keys }, allow_nil: true
-  # validates :psychology, :physiotherapy, :plastic_surgery, :mesh, :gynecology, :occupational_therapy, :presence => true
+  validates :psychology, :physiotherapy, :plastic_surgery, :mesh, :gynecology, :occupational_therapy, presence: true
 
 
   # Methods

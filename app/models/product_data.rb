@@ -11,7 +11,7 @@ class ProductData < ActiveRecord::Base
 
   # Validations
   validate :validate_model
-  # validates :mesh, :cream, :protector, :silicon, :mask, :foam, :skin_expander, :cervical_collar, :presence => true
+  validates :mesh, :cream, :protector, :silicon, :mask, :foam, :skin_expander, :cervical_collar, presence: true
 
 
   # Methods

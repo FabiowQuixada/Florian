@@ -30,7 +30,7 @@ class Company < ActiveRecord::Base
   validates :entity_type, presence: true
   validates :registration_name, :cnpj, presence: true, if: :company?
   validates :cpf, presence: true, if: :person?
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :address, :category, :group, presence: true
 
   validates :entity_type, inclusion: { in: entity_types.keys }, allow_nil: true

@@ -4,7 +4,7 @@ describe User, type: :model do
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_presence_of(:email) }
   it { is_expected.to validate_presence_of(:role) }
-  # it { is_expected.to validate_presence_of(:signature) }
+  it { is_expected.to validate_presence_of(:signature) }
   it { is_expected.to validate_presence_of(:bcc) }
 
   it { expect(build(:user, :admin).admin?).to be true }
@@ -14,7 +14,7 @@ describe User, type: :model do
 
   it { expect(build(:user, :guest).admin?).to be false }
 
-  # it { is_expected.to validate_uniqueness_of(:name) }
+  it { is_expected.to validate_uniqueness_of(:name) }
 
   # Relationships
   it { is_expected.to belong_to :role }

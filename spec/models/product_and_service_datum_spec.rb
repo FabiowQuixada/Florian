@@ -2,7 +2,6 @@ require 'rails_helper'
 
 describe ProductAndServiceDatum, type: :model do
   it { is_expected.to define_enum_for(:status) }
-  # it { is_expected.to validate_inclusion_of(:status), in: ProductAndServiceDatum.statuses.keys }
 
   it { is_expected.to accept_nested_attributes_for :product_and_service_weeks }
 

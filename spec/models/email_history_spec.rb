@@ -11,6 +11,4 @@ describe EmailHistory, type: :model do
   # Relationships
   it { is_expected.to belong_to :user }
   it { is_expected.to belong_to :receipt_email }
-
-  # it { is_expected.to validate_inclusion_of(:send_type), in: EmailHistory.send_types.keys }
 end

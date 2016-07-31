@@ -8,13 +8,6 @@ describe Company, type: :model do
   it { is_expected.to define_enum_for(:payment_frequency) }
 
 
-  # it { is_expected.to validate_inclusion_of(:entity_type).in_array(Company.entity_types.keys) }
-  # it { is_expected.to validate_inclusion_of(:category).in_array(Company.categories.keys) }
-  # it { is_expected.to validate_inclusion_of(:group).in_array(Company.groups.keys) }
-  # it { is_expected.to validate_inclusion_of(:contract).in_array(Company.contracts.keys).allow_nil }
-  # it { is_expected.to validate_inclusion_of(:payment_frequency).in_array(Company.payment_frequencies.keys).allow_nil }
-
-
   it { is_expected.to accept_nested_attributes_for :contacts }
   it { is_expected.to accept_nested_attributes_for :donations }
 
@@ -28,8 +21,8 @@ describe Company, type: :model do
 
   # it { is_expected.to validate_uniqueness_of(:cpf) }
   # it { is_expected.to validate_uniqueness_of(:cnpj) }
-  # it { is_expected.to validate_uniqueness_of(:registration_name) }
-  # it { is_expected.to validate_uniqueness_of(:name) }
+  it { is_expected.to validate_uniqueness_of(:registration_name) }
+  it { is_expected.to validate_uniqueness_of(:name) }
 
 
   # Relationships

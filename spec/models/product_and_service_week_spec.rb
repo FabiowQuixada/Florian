@@ -89,9 +89,13 @@ describe ProductAndServiceWeek, type: :model do
   it { is_expected.to validate_presence_of(:start_date) }
   it { is_expected.to validate_presence_of(:end_date) }
 
-  # TODO: start before end
   it { is_expected.to accept_nested_attributes_for :service_data }
   it { is_expected.to accept_nested_attributes_for :product_data }
+
+  it 'has a valid period' do
+    week = build :product_and_service_week
+    expect(week.start_date <= week.end_date).to be true
+  end
 
   it { is_expected.to accept_nested_attributes_for :service_data }
   it { is_expected.to accept_nested_attributes_for :product_data }
