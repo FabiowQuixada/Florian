@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'bills/index', type: :view do
   before :all do
-    assign :graph_data, [] # TODO
+    assign :graph_data, []
   end
 
   let(:class_name) { Bill }

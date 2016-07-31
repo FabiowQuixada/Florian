@@ -25,8 +25,8 @@ describe 'product_and_service_data/_form', type: :view do
     # Buttons
     expect(rendered).not_to include 'Salvar e enviar'
     expect(rendered).not_to include 'Enviar para análise'
-    # expect(rendered).not_to include 'Copiar de "Total"'
-    # expect(rendered).not_to include 'Enviar'
+    expect(rendered).not_to include 'Copiar de &quot;Total&quot;'
+    expect(rendered).not_to include '>Enviar<'
   end
 
   it 'renders all the services and products (Created)' do
@@ -51,8 +51,8 @@ describe 'product_and_service_data/_form', type: :view do
     # Buttons
     expect(rendered).to include 'Salvar e enviar'
     expect(rendered).to include 'Enviar para análise'
-    # expect(rendered).not_to include 'Copiar de "Total"'
-    # expect(rendered).not_to include '>Enviar'
+    expect(rendered).not_to include 'Copiar de &quot;Total&quot;'
+    expect(rendered).not_to include '>Enviar<'
   end
 
   it 'renders all the services and products (On analysis)' do
@@ -77,8 +77,8 @@ describe 'product_and_service_data/_form', type: :view do
     # Buttons
     expect(rendered).not_to include 'Salvar e enviar'
     expect(rendered).not_to include 'Enviar para análise'
-    # expect(rendered).to include 'Copiar de "Total"'
-    # expect(rendered).not_to include '>Enviar'
+    expect(rendered).to include 'Copiar de &quot;Total&quot;'
+    expect(rendered).to include '>Enviar<'
   end
 
   it 'renders all the services and products (Finalized)' do
@@ -103,8 +103,8 @@ describe 'product_and_service_data/_form', type: :view do
     # Buttons
     expect(rendered).not_to include 'Salvar e enviar'
     expect(rendered).not_to include 'Enviar para análise'
-    # expect(rendered).not_to include 'Copiar de "Total"'
-    # expect(rendered).not_to include '>Enviar'
+    expect(rendered).not_to include 'Copiar de &quot;Total&quot;'
+    expect(rendered).not_to include '>Enviar<'
   end
 
   def expect_to_render_partials(model)

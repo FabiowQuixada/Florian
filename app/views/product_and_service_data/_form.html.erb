@@ -123,7 +123,7 @@
 			<% elsif week.number == totals_week_number and !@model.finalized? and !@model.on_analysis? %>
 			<div class="form-group"><%= link_to t('helpers.action.send_to_analysis'), 'javascript:void(0)', id: 'update_and_send_btn_5', class: 'btn btn-primary send_btn' %></div>
 			<!-- Final Week -->
-			<% elsif week.number == final_week_number and !@model.finalized? %>
+			<% elsif week.number == final_week_number and @model.on_analysis? %>
 
 			<div class="form-group">
 				<%= link_to t('helpers.action.product_and_service.update_final_data'), 'javascript:void(0)', id: 'update_final_data_btn', class: 'btn btn-primary' %>

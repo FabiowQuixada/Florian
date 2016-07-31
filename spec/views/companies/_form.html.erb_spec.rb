@@ -11,7 +11,6 @@ describe 'companies/_form', type: :view do
 
     expect(view).to render_template(partial: 'shared/error_alert', locals: { id: 'donation' })
     expect(view).to render_template(partial: 'shared/tab_commons', locals: { tab_type: 'main', number_of_tabs: 3 })
-    # expect(view).to render_template(partial: "shared/form_buttons", locals: {model: @model, f: f})
   end
 
   describe 'donation' do
