@@ -24,13 +24,13 @@ describe ReceiptEmail, type: :model do
 
   describe 'tags' do
     let(:receipt) { build(:receipt_email, :pj_company) }
-    let(:date) { Date.yesterday }
+    let(:date) { Date.new(2007, 5, 12) }
 
     it { expect(receipt.send(:apply_competence_tag_to, receipt.send(:receipt_text), date)).to include receipt.competence(date).capitalize }
     it { expect(receipt.send(:apply_company_tag_to, receipt.send(:receipt_text))).to include receipt.company.registration_name }
     it { expect(receipt.send(:apply_value_tag_to, receipt.send(:receipt_text))).to include ActionController::Base.helpers.number_to_currency(receipt.value) + ' (' + receipt.value.real.por_extenso + ')' }
 
-    it { expect(receipt.send(:apply_all_tags_to, receipt.send(:receipt_text))).to include receipt.competence(date).capitalize }
+    it { expect(receipt.send(:apply_all_tags_to, receipt.send(:receipt_text))).to include receipt.competence(Date.today).capitalize }
     it { expect(receipt.send(:apply_all_tags_to, receipt.send(:receipt_text))).to include receipt.company.registration_name }
     it { expect(receipt.send(:apply_all_tags_to, receipt.send(:receipt_text))).to include ActionController::Base.helpers.number_to_currency(receipt.value) + ' (' + receipt.value.real.por_extenso + ')' }
   end
