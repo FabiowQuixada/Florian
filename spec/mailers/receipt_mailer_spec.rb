@@ -11,7 +11,7 @@ describe ReceiptMailer, type: :mailer do
     it_behaves_like 'an receipt e-mail'
     it { expect(mail.to).to eq(SAMPLE_RECIPIENTS.split(/,/)) }
     it { expect(mail.subject).to eq(receipt.processed_title(user, competence)) }
-    # it {expect(mail.body.encoded).to eq(receipt.processed_body(user, Date.today))}
+    it { expect(body_text(mail)).to eq(receipt.processed_body(user, Date.today)) }
   end
 
   describe 'test' do
@@ -22,7 +22,7 @@ describe ReceiptMailer, type: :mailer do
       it_behaves_like 'an receipt e-mail'
       it { expect(mail.to).to eq([user.email]) }
       it { expect(mail.subject).to eq(I18n.t('helpers.test_email_prefix') + receipt.processed_title(user, competence)) }
-      # it { expect(mail.body.encoded).to eq(receipt.processed_body(user, competence))}
+      it { expect(body_text(mail)).to eq(receipt.processed_body(user, competence)) }
     end
 
     context 'with future competence' do
@@ -32,7 +32,7 @@ describe ReceiptMailer, type: :mailer do
       it_behaves_like 'an receipt e-mail'
       it { expect(mail.to).to eq([user.email]) }
       it { expect(mail.subject).to include(I18n.localize(competence, format: :competence).capitalize) }
-      # it { expect(mail.body.encoded).to include(I18n.localize(competence, format: :competence).capitalize)}
+      it { expect(body_text(mail)).to include(I18n.localize(competence, format: :competence).capitalize) }
     end
   end
 
@@ -44,7 +44,7 @@ describe ReceiptMailer, type: :mailer do
       it_behaves_like 'an receipt e-mail'
       it { expect(mail.to).to eq(SAMPLE_RECIPIENTS.split(/,/)) }
       it { expect(mail.subject).to eq(receipt.processed_title(user, competence)) }
-      # it { expect(mail.body.encoded).to eq(receipt.processed_body(user, competence))}
+      it { expect(body_text(mail)).to eq(receipt.processed_body(user, competence)) }
     end
 
     context 'with future competence' do
@@ -53,7 +53,7 @@ describe ReceiptMailer, type: :mailer do
 
       it_behaves_like 'an receipt e-mail'
       it { expect(mail.to).to eq(SAMPLE_RECIPIENTS.split(/,/)) }
-      # it {expect(mail.body.encoded).to include(I18n.localize(competence, format: :competence).capitalize)}
+      it { expect(body_text(mail)).to include(I18n.localize(competence, format: :competence).capitalize) }
     end
   end
 end
