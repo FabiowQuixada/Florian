@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ReceiptEmail, type: :request do
+describe ReceiptEmail, js: true, type: :request do
   context 'in listing page' do
     before :each do
       login_as_admin
@@ -43,7 +43,7 @@ describe ReceiptEmail, type: :request do
     end
 
     after :each do
-      expect(page).to have_content'sucesso'
+      expect(page).to have_content 'sucesso'
     end
   end
 end

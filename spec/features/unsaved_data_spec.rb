@@ -29,9 +29,7 @@ describe 'Unsaved data', js: true, type: :request do
     visit edit_path(model)
     go_somewhere_with_a_temp_field model
 
-    unless all('.temp_field').empty?
-      fill_temp_inputs
-    end
+    fill_temp_inputs unless all('.temp_field').empty?
   rescue Capybara::ElementNotFound => e
     raise Capybara::ElementNotFound, e.message + ': ' + model.class.name
   end

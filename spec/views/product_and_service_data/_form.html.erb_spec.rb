@@ -1,112 +1,122 @@
 require 'rails_helper'
 
-class_name = ProductAndServiceDatum
+# class_name =
 
 describe 'product_and_service_data/_form', type: :view do
-  it 'renders all the services and products (Statusless)' do
-    model = class_name.new
-    assign :model, model
+  describe 'renders all the services and products (Statusless)' do
+    let(:model) { ProductAndServiceDatum.new }
 
-    render
-
-    # Partials
-    expect_to_render_partials(model)
-
-    # P&S data
-    expect(rendered).to include I18n.localize(model.competence, format: :competence_i)
-    expect(rendered).not_to include 'Status'
-    expect(rendered).not_to include 'De ' + Date.today.to_s + ' a ' + Date.today.to_s
-
-    # Tabs
-    expect_to_render_week_tabs
-    expect(rendered).to include 'Total'
-    expect(rendered).not_to include 'Dados finais'
-
-    # Buttons
-    expect(rendered).not_to include 'Salvar e enviar'
-    expect(rendered).not_to include 'Enviar para análise'
-    expect(rendered).not_to include 'Copiar de &quot;Total&quot;'
-    expect(rendered).not_to include '>Enviar<'
-  end
-
-  it 'renders all the services and products (Created)' do
-    model = create(:product_and_service_datum, :created)
-    assign :model, model
-
-    render
+    before :each do
+      assign :model, model
+      render
+    end
 
     # Partials
-    expect_to_render_partials(model)
+    it { expect_to_render_partials(model) }
 
     # P&S data
-    expect(rendered).to include I18n.localize(model.competence, format: :competence).capitalize
-    expect(rendered).to include 'Status'
-    expect(rendered).not_to include 'De ' + Date.today.to_s + ' a ' + Date.today.to_s
+    it { expect(rendered).to include I18n.localize(model.competence, format: :competence_i) }
+    it { expect(rendered).not_to include 'Status' }
+    it { expect(rendered).not_to include 'De ' + Date.today.to_s + ' a ' + Date.today.to_s }
 
-    # Tabs
-    expect_to_render_week_tabs
-    expect(rendered).to include 'Total'
-    expect(rendered).not_to include 'Dados finais'
+    # # Tabs
+    it { expect_to_render_week_tabs }
+    it { expect(rendered).to include 'Total' }
+    it { expect(rendered).not_to include 'Dados finais' }
 
-    # Buttons
-    expect(rendered).to include 'Salvar e enviar'
-    expect(rendered).to include 'Enviar para análise'
-    expect(rendered).not_to include 'Copiar de &quot;Total&quot;'
-    expect(rendered).not_to include '>Enviar<'
+    # # Buttons
+    it { expect(rendered).not_to include 'Salvar e enviar' }
+    it { expect(rendered).not_to include 'Enviar para análise' }
+    it { expect(rendered).not_to include 'Copiar de &quot;Total&quot;' }
+    it { expect(rendered).not_to include '>Enviar<' }
   end
 
-  it 'renders all the services and products (On analysis)' do
-    model = create(:product_and_service_datum, :on_analysis)
-    assign :model, model
+  describe 'renders all the services and products (Created)' do
+    let(:model) { create(:product_and_service_datum, :created) }
+    before :each do
+      assign :model, model
 
-    render
+      render
+    end
 
     # Partials
-    expect_to_render_partials(model)
+    it { expect_to_render_partials(model) }
 
     # P&S data
-    expect(rendered).to include I18n.localize(model.competence, format: :competence).capitalize
-    expect(rendered).to include 'Status'
-    expect(rendered).to include 'De ' + Date.today.to_s + ' a ' + Date.today.to_s
+    it { expect(rendered).to include I18n.localize(model.competence, format: :competence).capitalize }
+    it { expect(rendered).to include 'Status' }
+    it { expect(rendered).not_to include 'De ' + Date.today.to_s + ' a ' + Date.today.to_s }
 
     # Tabs
-    expect_to_render_week_tabs
-    expect(rendered).to include 'Total'
-    expect(rendered).to include 'Dados finais'
+    it { expect_to_render_week_tabs }
+    it { expect(rendered).to include 'Total' }
+    it { expect(rendered).not_to include 'Dados finais' }
 
     # Buttons
-    expect(rendered).not_to include 'Salvar e enviar'
-    expect(rendered).not_to include 'Enviar para análise'
-    expect(rendered).to include 'Copiar de &quot;Total&quot;'
-    expect(rendered).to include '>Enviar<'
+    it { expect(rendered).to include 'Salvar e enviar' }
+    it { expect(rendered).to include 'Enviar para análise' }
+    it { expect(rendered).not_to include 'Copiar de &quot;Total&quot;' }
+    it { expect(rendered).not_to include '>Enviar<' }
   end
 
-  it 'renders all the services and products (Finalized)' do
-    model = create(:product_and_service_datum, :finalized)
-    assign :model, model
+  describe 'renders all the services and products (On analysis)' do
+    let(:model) { create(:product_and_service_datum, :on_analysis) }
 
-    render
+    before :each do
+      assign :model, model
+
+      render
+    end
 
     # Partials
-    expect_to_render_partials(model)
+    it { expect_to_render_partials(model) }
 
     # P&S data
-    expect(rendered).to include I18n.localize(model.competence, format: :competence).capitalize
-    expect(rendered).to include 'Status'
-    expect(rendered).to include 'De ' + Date.today.to_s + ' a ' + Date.today.to_s
+    it { expect(rendered).to include I18n.localize(model.competence, format: :competence).capitalize }
+    it { expect(rendered).to include 'Status' }
+    it { expect(rendered).to include 'De ' + Date.today.to_s + ' a ' + Date.today.to_s }
 
     # Tabs
-    expect_to_render_week_tabs
-    expect(rendered).to include 'Total'
-    expect(rendered).to include 'Dados finais'
+    it { expect_to_render_week_tabs }
+    it { expect(rendered).to include 'Total' }
+    it { expect(rendered).to include 'Dados finais' }
 
     # Buttons
-    expect(rendered).not_to include 'Salvar e enviar'
-    expect(rendered).not_to include 'Enviar para análise'
-    expect(rendered).not_to include 'Copiar de &quot;Total&quot;'
-    expect(rendered).not_to include '>Enviar<'
+    it { expect(rendered).not_to include 'Salvar e enviar' }
+    it { expect(rendered).not_to include 'Enviar para análise' }
+    it { expect(rendered).to include 'Copiar de &quot;Total&quot;' }
+    it { expect(rendered).to include '>Enviar<' }
   end
 
+  describe 'renders all the services and products (Finalized)' do
+    let(:model) { create(:product_and_service_datum, :finalized) }
+    before :each do
+      assign :model, model
+
+      render
+    end
+
+    # Partials
+    it { expect_to_render_partials(model) }
+
+    # P&S data
+    it { expect(rendered).to include I18n.localize(model.competence, format: :competence).capitalize }
+    it { expect(rendered).to include 'Status' }
+    it { expect(rendered).to include 'De ' + Date.today.to_s + ' a ' + Date.today.to_s }
+
+    # Tabs
+    it { expect_to_render_week_tabs }
+    it { expect(rendered).to include 'Total' }
+    it { expect(rendered).to include 'Dados finais' }
+
+    # Buttons
+    it { expect(rendered).not_to include 'Salvar e enviar' }
+    it { expect(rendered).not_to include 'Enviar para análise' }
+    it { expect(rendered).not_to include 'Copiar de &quot;Total&quot;' }
+    it { expect(rendered).not_to include '>Enviar<' }
+  end
+
+  # rubocop:disable all
   def expect_to_render_partials(model)
     expect(view).to render_template(partial: 'shared/form_errors', locals: { model: model })
     expect(view).to render_template(partial: 'shared/form_commons', locals: { model: model })
@@ -114,7 +124,9 @@ describe 'product_and_service_data/_form', type: :view do
     expect(view).to render_template(partial: 'product_data/_form', count: 8)
     expect(view).to render_template(partial: 'service_data/_form', count: 8)
   end
+  # rubocop:enable all
 
+  # rubocop:disable all
   def expect_to_render_week_tabs
     expect(rendered).not_to include 'Semana -1'
     expect(rendered).not_to include 'Semana 0'
@@ -123,4 +135,5 @@ describe 'product_and_service_data/_form', type: :view do
     end
     expect(rendered).not_to include 'Semana 6'
   end
+  # rubocop:enable all
 end

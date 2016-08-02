@@ -70,10 +70,6 @@ describe ProductAndServiceWeek, type: :model do
     week.service_data[0].psychology = 4
     week.service_data[0].mesh = 3
 
-    sum = 0
-    week.service_data.each { |service| sum += service.qty }
-
-    expect(week.service_qty).to eq sum
     expect(week.service_qty).to eq 7
   end
 

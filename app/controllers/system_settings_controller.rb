@@ -41,16 +41,14 @@ class SystemSettingsController < ApplicationController
   end
 
   def go_to_current_user_configs?(settings)
-    if params[:action] == 'index'
-      redirect_to edit_system_setting_path(settings)
-      true
-    end
+    return unless params[:action] == 'index'
+    redirect_to edit_system_setting_path(settings)
+    true
   end
 
   def block_access?(settings)
-    if invalid_edition? params[:action], settings, params[:id]
-      redirect_to url_for(controller: :errors, action: :not_found)
-      true
-    end
+    return unless invalid_edition? params[:action], settings, params[:id]
+    redirect_to url_for(controller: :errors, action: :not_found)
+    true
   end
 end

@@ -27,6 +27,8 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
 
+  # TODO: Understand and rename this method!
+  # rubocop:disable all
   def set_up_for_something
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
@@ -36,6 +38,7 @@ class RegistrationsController < Devise::RegistrationsController
 
     [resource_updated, resource, prev_unconfirmed_email]
   end
+  # rubocop:enable all
 
   def set_custom_flash_key_message
     return unless is_flashing_format?
@@ -48,7 +51,7 @@ class RegistrationsController < Devise::RegistrationsController
     set_flash_message :notice, flash_key
   end
 
-  # TODO: Understand and rename this method!
+  # TODO: Understand, refactor and rename this method!
   def something(resource_updated, resource, prev_unconfirmed_email)
     if resource_updated
       set_custom_flash_key_message resource, prev_unconfirmed_email
