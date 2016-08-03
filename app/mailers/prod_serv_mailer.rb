@@ -32,8 +32,9 @@ class ProdServMailer < ApplicationMailer
   private
 
   def attach_report(week)
-    ProductAndServiceReport.new('/tmp/prod_serv.pdf', week).save
-    attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read('/tmp/prod_serv.pdf')
+    ProductAndServiceReport.new(file_name, week).save
+    attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read(file_name)
+    File.delete(file_name)
   end
 
   def week_period(week)

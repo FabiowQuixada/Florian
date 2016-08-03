@@ -47,8 +47,9 @@ class ReceiptMailer < ApplicationMailer
   end
 
   def attach_receipt(email, date)
-    ReceiptReport.new('/tmp/recibo.pdf', email, date).save
-    attachments['recibo_de_doacao.pdf'] = File.read('/tmp/recibo.pdf')
+    ReceiptReport.new(file_name, email, date).save
+    attachments['recibo_de_doacao.pdf'] = File.read(file_name)
+    File.delete(file_name)
   end
 
   def save_to_history(email, type, user)

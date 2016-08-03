@@ -12,4 +12,8 @@ class ApplicationMailer < ActionMailer::Base
          subject: I18n.t('helpers.email_tag') + ' Backup Semanal') # .deliver_now
   end
 
+  def file_name
+    '/tmp/report.pdf'
+  end
+
 end
