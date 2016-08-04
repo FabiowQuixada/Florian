@@ -18,16 +18,4 @@ class ProductAndServiceDataController < ApplicationController
     'competence DESC'
   end
 
-
-  def check_competence
-
-    competence = params[:product_and_service_datum][:competence]
-
-    begin
-      Date.strptime('{ 1, ' + competence[0..1] + ', ' + competence[3, 6] + '}', '{ %d, %m, %Y }')
-    rescue
-      raise FlorianException, I18n.t('alert.email.invalid_competence')
-    end
-  end
-
 end

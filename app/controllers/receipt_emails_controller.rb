@@ -22,7 +22,7 @@ class ReceiptEmailsController < ApplicationController
 
       return render json: email.errors, status: :unprocessable_entity unless email.valid?
 
-      ReceiptMailer.resend_receipt_email(email, check_competence, current_user).deliver_now
+      ReceiptMailer.resend_receipt_email(email, convert_competence, current_user).deliver_now
       return render history_as_json(email, 'resent')
 
     rescue StandardError => exc
@@ -39,7 +39,7 @@ class ReceiptEmailsController < ApplicationController
 
       return render json: email.errors, status: :unprocessable_entity unless email.valid?
 
-      ReceiptMailer.send_test_receipt_email(email, current_user, check_competence).deliver_now
+      ReceiptMailer.send_test_receipt_email(email, current_user, convert_competence).deliver_now
 
       return render history_as_json(email, 'test_sent')
 
@@ -98,8 +98,8 @@ class ReceiptEmailsController < ApplicationController
     email
   end
 
-  def check_competence
-    Date.strptime('{ 1, ' + params[:competence][0..1] + ', ' + params[:competence][3, 6] + '}', '{ %d, %m, %Y }')
+  def convert_competence
+    FlorianDateHelper.competence_to_date params[:competence]
   rescue
     raise FlorianException, I18n.t('alert.email.invalid_competence')
   end
