@@ -41,27 +41,48 @@
 			});
 		});
 
+		function button(elem) {
+			return elem.hasClass('btn');
+		}
 
-			// Saves the values of the model on page load, so it can be compared to the values when the user goes back, allowing a 'not-saved data' pop-up to display;
-			window.attr_values = new Array();
-			$('input, textarea, select').each(function(){
-				if(!$(this).hasClass('btn') && !(typeof $(this).attr('id') === 'undefined') && !$(this).hasClass('temp_field') && $(this).attr('type') !== 'hidden')
-					attr_values[$(this).attr('id')] = $(this).val();
-			})
+		function temp_field(elem) {
+			return elem.hasClass('temp_field');
+		}
 
-			$('#form_back_btn').on('click', handle_back_on_edit);
+		function hidden_field(elem) {
+			return elem.attr('type') !== 'hidden';
+		}
 
-			<% if model.class.column_names.include? 'active' %>
+		function status_attr(elem) {
+			return elem.attr('id') === 'model_status';
+		}
 
-			if(<%= model.active? %>) {
-				activate();
-			}
-			else {
-				inactivate();
-			}
+		function has_id(elem) {
+			return typeof elem.attr('id') !== 'undefined';
+		}
 
-			<% end %>
-		});
+
+		// Saves the values of the model on page load, so it can be compared to the values when the user goes back, allowing a 'not-saved data' pop-up to display;
+		window.attr_values = new Array();
+		$('input, textarea, select').each(function(){
+			elem = $(this);
+			if(!button(elem) && has_id(elem) && !temp_field(elem) && (status_attr(elem) || hidden_field(elem)))
+				attr_values[$(this).attr('id')] = $(this).val();
+		})
+
+		$('#form_back_btn').on('click', handle_back_on_edit);
+
+		<% if model.class.column_names.include? 'active' %>
+
+		if(<%= model.active? %>) {
+			activate();
+		}
+		else {
+			inactivate();
+		}
+
+		<% end %>
+	});
 
 	function has_changed(key) {
 

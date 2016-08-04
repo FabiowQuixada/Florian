@@ -23,7 +23,22 @@ describe 'Unsaved data', js: true, type: :request do
     end
   end
 
+  it 'displays unsaved data warning also for status change' do
+    [ReceiptEmail, User, Role].each do |data|
+      change_status_and_go_back data
+    end
+  end
+
   # == Helper methods =============================================================
+
+  def change_status_and_go_back(data)
+    visit send('edit_' + data.name.underscore + '_path', data.first)
+
+    first('.form_status_box img').click
+
+    go_back
+    expect(page).to have_content('Dados não salvos'), data.name
+  end
 
   def fill_temp_data(model)
     visit edit_path(model)
