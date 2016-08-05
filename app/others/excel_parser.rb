@@ -4,6 +4,13 @@ class ExcelParser
   CPF_CNPJ_POS = 4
   CONTACTS_POS = 12
   CONTACT_LEN = 6
+  CATEGORY_POS = 3
+  GENERAL_INFO_POS = 4
+  BASIC_INFO_POS = 0
+  PAY_FREQ_POS = 29
+  PAY_PERIOD_POS = 30
+  FIRST_PARCEL_POS = 31
+  CONTRACT_POS = 32
 
   def self.parse
 
@@ -36,6 +43,7 @@ class ExcelParser
     inconsistent_companies.each do |company|
       # puts company
 
+
       company.errors.full_messages.each do |error_message|
         puts error_message
       end
@@ -46,30 +54,22 @@ class ExcelParser
 
     company = Company.new group: 1
 
-    parse_basic_info company, row, col = 0
-    parse_general_info company, row, col
-    parse_category company, row[col += 1]
+    parse_basic_info company, row
+    parse_general_info company, row
+    parse_category company, row
     parse_cpf_cnpj company, row
-    parse_general_info company, row, col
+    parse_general_info company, row
     # parse_contacts company, row
-    # parse_donation company, row[col += 1]
-    parse_payment_frequency company, row[col += 1]
-    parse_payment_period(company, row[col += 1])
-    company.first_parcel = row[col += 1]
-    parse_contract company, row[col + 1]
+    # parse_donation company, row
+    parse_payment_frequency company, row
+    parse_payment_period company, row
+    parse_first_parcel = company, row
+    parse_contract company, row
 
     company
   end
 
-  def self.parse_contract(company, val)
-    if val == 'Contrato'
-      company.contract = Company.contracts[:"Com contrato"]
-    elsif val == 'Sem contrato'
-      company.contract = Company.contracts[:"Sem contrato"]
-    end
-  end
-
-  def self.parse_donation(_company, val)
+  def self.parse_donation(company, row)
     donation = Donation.new
 
     if val.is_a? Numeric
@@ -77,9 +77,13 @@ class ExcelParser
     else
       donation.remark = val
     end
+
+    company.donations << donation
   end
 
-  def self.parse_basic_info(company, row, col)
+  def self.parse_basic_info(company, row)
+
+    col = BASIC_INFO_POS
     company.entity_type = if row[col] == 'PF'
                             Company.entity_types[:"Pessoa Física"]
                           else
@@ -89,9 +93,13 @@ class ExcelParser
 
     company.registration_name = row[col += 1]
     company.name = row[col + 1]
+
+    company
   end
 
-  def self.parse_general_info(company, row, col)
+  def self.parse_general_info(company, row)
+
+    col = GENERAL_INFO_POS
     company.address = row[col += 1]
     company.neighborhood = row[col += 1]
     company.cep = row[col += 1]
@@ -99,10 +107,14 @@ class ExcelParser
     company.state = row[col += 1]
     company.email_address = row[col += 1]
     company.website = row[col + 1]
+
+    company
   end
 
 
-  def self.parse_category(company, val)
+  def self.parse_category(company, row)
+
+    val = row[CATEGORY_POS]
     cat = 0
 
     if val == 'I'
@@ -114,6 +126,8 @@ class ExcelParser
     end
 
     company.category = cat
+
+    company
   end
 
   def self.parse_cpf_cnpj(company, row)
@@ -124,6 +138,8 @@ class ExcelParser
     else
       company.cnpj = val
     end
+
+    company
   end
 
   def self.parse_contacts(company, row)
@@ -132,6 +148,8 @@ class ExcelParser
     parse_contact company, 0, row
     parse_contact company, 1, row
     parse_contact company, 2, row
+
+    company
   end
 
   def self.parse_contact(company, type, row)
@@ -142,8 +160,6 @@ class ExcelParser
 
     contact.name = row[col += 1]
     contact.position = row[col += 1]
-    contact.position = 'Secretária' if type == 1
-    contact.position = 'Setor financeiro' if type == 2
     col += 1
     contact.telephone = '85' + row[col].to_s unless row[col].nil?
     col += 1
@@ -151,13 +167,16 @@ class ExcelParser
     col += 1
     contact.celphone = '85' + row[col].to_s unless row[col].nil?
     contact.email_address = row[col + 1]
-    contact.contact_type = type
 
     company.contacts.push contact
 
+    company
   end
 
-  def self.parse_payment_frequency(company, val)
+  def self.parse_payment_frequency(company, row)
+
+    val = row[PAY_FREQ_POS]
+  
     if val == 'Mensal'
       company.payment_frequency = Company.payment_frequencies[:Mensal]
     elsif val == 'Diariamente'
@@ -173,14 +192,40 @@ class ExcelParser
     elsif val == 'Semestral'
       company.payment_frequency = Company.payment_frequencies[:Semestral]
     end
+
+    company
   end
 
-  def self.parse_payment_period(company, val)
+  def self.parse_payment_period(company, row)
+
+    val = row[PAY_PERIOD_POS]
+
     if val == 'Indeterminado'
       company.payment_period = 0
     elsif val.is_a? Numeric
       company.payment_period = val
     end
+
+    company
+  end
+
+  def self.parse_contract(company, row)
+
+    val = row[CONTRACT_POS]
+    if val == 'Contrato'
+      company.contract = Company.contracts[:"Com contrato"]
+    elsif val == 'Sem contrato'
+      company.contract = Company.contracts[:"Sem contrato"]
+    end
+
+    company
+  end
+
+  def self.parse_first_parcel(company, row)
+      val = row[FIRST_PARCEL_POS]
+      company.first_parcel = val
+
+    company
   end
 
 end

@@ -1,7 +1,92 @@
 require 'rails_helper'
 
+# rubocop:disable all
 describe ExcelParser do
+  let(:file) { Roo::Excel.new(Rails.root.join('app', 'assets', 'empresas_2016.xls')) }
+  let(:row) { file.worksheets[0].rows[4] }
+  let(:row_2) { file.worksheets[0].rows[29] }
+
   it 'loads the companies appropriately from excel file' do
-    # expect(described_class.parse).to be_empty
+    expect(described_class.parse).to be_empty
+  end
+
+  it 'parses a contact' do
+    described_class.parse_contact(Company.new, 0, 0)
+  end
+
+  it 'parses general info' do
+    company = described_class.parse_general_info Company.new, row
+
+    expect(company.address).to eq 'Av. Santos Dumont, nº 3060 - Sobreloja'
+    expect(company.neighborhood).to eq 'Aldeota'
+    expect(company.cep).to eq '60150-161'
+    expect(company.city).to eq 'Fortaleza'
+    expect(company.state).to eq 'CE'
+    expect(company.email_address).to be_nil
+    expect(company.website).to be_nil
+  end
+
+  it 'parses basic info' do
+    company = described_class.parse_basic_info Company.new, row
+
+    expect(company.entity_type).to eq "Pessoa Jurídica"
+    expect(company.name).to eq 'Casa Blanca'
+    expect(company.registration_name).to eq 'Casa Blanca Imóveis Ltda.'
+
+    company = described_class.parse_basic_info Company.new, row_2
+
+    expect(company.entity_type).to eq "Pessoa Física"
+  end
+
+  it 'parses category' do
+    company = described_class.parse_category Company.new, row
+    expect(company.category).to eq '2 (Entre R$ 300,00 e R$ 600,00)'
+  end
+
+  it 'parses CPF / CNPJ' do
+    company = described_class.parse_basic_info Company.new, row
+    company = described_class.parse_cpf_cnpj company, row
+    expect(company.cnpj.numero).to eq '06.056.204/0001-20'
+
+    company = described_class.parse_basic_info Company.new, row_2
+    company = described_class.parse_cpf_cnpj company, row_2
+    expect(company.cpf.numero).to eq '229.915.813-87'
+  end
+
+  it 'parses all contacts' do
+    company = described_class.parse_contacts Company.new, row
+    expect(company.contacts.length).to eq 3
+  end
+
+  it 'parses a single contact' do
+    company = described_class.parse_contact Company.new, 0, row
+
+    expect(company.contacts[0].name).to eq 'Sandra Brasil'
+    expect(company.contacts[0].position).to eq 'Dona'
+    expect(company.contacts[0].telephone).to eq '854006-8090'
+    expect(company.contacts[0].fax).to eq '854006-8097'
+    expect(company.contacts[0].celphone).to be_nil
+    expect(company.contacts[0].email_address).to eq 'sandrabrasil@me.com'
+  end
+
+  it 'parses payment frequency' do
+    company = described_class.parse_payment_frequency Company.new, row
+    expect(company.payment_frequency).to eq 'Mensal'
+  end
+
+  it 'parses payment period' do
+    company = described_class.parse_payment_period Company.new, row
+    expect(company.payment_period).to eq 0
+  end
+
+  it 'parses contract' do
+    company = described_class.parse_contract Company.new, row
+    expect(company.contract).to eq 'Sem contrato'
+  end
+
+  it 'parses first parcel' do
+    company = described_class.parse_first_parcel Company.new, row
+    expect(company.first_parcel).to eq Date.new(2010, 04, 15)
   end
 end
+# rubocop:enable all
