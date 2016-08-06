@@ -55,9 +55,6 @@
 <% f.object.product_and_service_weeks.each_with_index do |week, index| %>
 <%= f.fields_for :product_and_service_weeks, week do |week_form| %>
 
-<%= week_form.hidden_field :id %>
-<%= week_form.hidden_field :number %>
-
 <div id="prod_serv_data_tab_<%= index %>" style="display:none;">
 	<div class="tab_body">
 
@@ -86,9 +83,9 @@
 				<% end %>
 
 				<div class="form-group col-md-2 admin-only">
-					<%= week_form.text_field :id, class: 'form-control', disabled: true %>
+					<%= week_form.text_field :id, id: 'admin-id-' + index.to_s, class: 'form-control', readonly: true %>
 				</div><div class="form-group col-md-2 admin-only">
-				<%= week_form.text_field :number, class: 'form-control', disabled: true %>
+				<%= week_form.text_field :number, class: 'form-control', readonly: true %>
 			</div>
 		</div>
 	</div>

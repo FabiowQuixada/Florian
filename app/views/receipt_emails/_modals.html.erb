@@ -19,7 +19,7 @@
 						<%= text_field_tag 'competence', '', id: 'resend_competence', class: 'form-control' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 					</div>
 					<% if  params[:action]  == 'index' %>
-					<%= hidden_field_tag 'email_id', id: 'resend_email_id' %>
+					<%= hidden_field_tag 'email_id', '',id: 'resend_email_id' %>
 					<% end %>
 				</div>
 			</div>
@@ -55,7 +55,7 @@
 						<%= text_field_tag 'competence', '', id: 'send_test_competence', class: 'form-control' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 					</div>
 					<% if  params[:action]  == 'index' %>
-					<%= hidden_field_tag 'email_id', id: 'send_test_email_id' %>
+					<%= hidden_field_tag 'email_id', '', id: 'send_test_email_id' %>
 					<% end %>
 				</div>
 			</div>

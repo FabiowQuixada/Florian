@@ -7,11 +7,6 @@
 
 	<% if index >= 0 and index <= final_week_number %>
 
-	<!-- Service ids -->
-	<input type="hidden" value="<%= week.service_data[0].id %>" name="product_and_service_datum[product_and_service_weeks_attributes][<%= index %>][service_data_attributes][0][id]" id="product_and_service_datum_product_and_service_weeks_attributes_<%= index %>_service_data_attributes_0_id">
-
-	<input type="hidden" value="<%= week.service_data[1].id %>" name="product_and_service_datum[product_and_service_weeks_attributes][<%= index %>][service_data_attributes][1][id]" id="product_and_service_datum_product_and_service_weeks_attributes_<%= index %>_service_data_attributes_1_id">
-
 	<!-- Service types -->
 	<input type="hidden" value="attendance" name="product_and_service_datum[product_and_service_weeks_attributes][<%= index %>][service_data_attributes][0][service_type]" id="product_and_service_datum_product_and_service_weeks_attributes_<%= index %>_service_data_attributes_0_service_type">
 
