@@ -26,6 +26,10 @@ RSpec.configure do |config|
   require File.expand_path('../../config/environment', __FILE__)
   require 'rspec/rails'
   require 'support/factory_girl'
+  require 'html_validation'
+  include PageValidations
+
+  HTMLValidation.ignored_errors = ['proprietary attribute']
 
   # Add this to load Capybara integration:
   require 'capybara/rspec'

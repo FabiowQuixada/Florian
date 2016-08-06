@@ -81,4 +81,5 @@ group :test do
   gem 'selenium-webdriver'
   gem 'launchy'
   gem 'whenever-test'
+  gem 'html_validation'
 end
