@@ -37,10 +37,8 @@
 
 <script>
 
-	var transient_donations = 0;
-
 	function preprocess_data() {
-		if(transient_donations > 0) {
+		if(new_donations()) {
 			window.any_change = true;
 		}
 
@@ -131,79 +129,6 @@
 				last_date.val(moment(first_date, "DD/MM/YYYY").add((temp-1), frequency_type).format("DD/MM/YYYY"));
 			}
 		}
-
-		$('body').on('click', '#new_donation_btn', function() {
-			set_datepicker();
-		});
-
-		$('#add_donation_btn').on('click', function add_donation() {
-
-			if(validate_donation()) {
-
-				transient_donations += 1;
-
-				date = $('#new_donation_date').val();
-				value = 'R$ ' + $('#new_donation_value').val();
-				remark = $('#new_donation_remark').val();
-
-				temp_id = (new Date).getTime();
-
-				line = 	'<tr class="transient_donation" id="donation_' + temp_id + '">'+
-				'<td class="donation_id" style="display:none;">' + temp_id + '</td>' +
-				'<td class="donation_date">' + date + '</td>' +
-				'<td class="donation_value">' + value + '</td>'+
-				'<td style="width: 50%" class="donation_remark">' + remark + '</td>' +
-				'<td class="button-wrapper"><%= link_to image_tag('delete.png', title:  t('helpers.action.remove'), class: 'remove_donation_btn remove_btn'), 'javascript:void(0)', class: 'remove_donation_btn remove_btn' %></td>' +
-				donation_field(temp_id, 'donation_date', to_rails_date(date)) +
-				donation_field(temp_id, 'value', value) +
-				donation_field(temp_id, 'remark', remark) +
-				'</tr>';
-
-				$('#donations_table > tbody:last-child').append(line);
-
-				$('#new_donation_date').val('');
-				$('#new_donation_value').val('0,00');
-				$('#new_donation_remark').val('');
-
-				$('#no_donations_row').hide();
-
-				hide_errors_from_box('donation');
-			}
-		});
-
-		function validate_donation() {
-
-			var errors = new Array();
-
-			if(!$('#new_donation_date').val()) {
-				errors.push('<%= I18n.t('errors.donation.date_mandatory') %>');
-			}
-
-			if((!$('#new_donation_value').val() || $('#new_donation_value').val() == '0,00') && !$('#new_donation_remark').val()) {
-				errors.push('<%= I18n.t('errors.donation.value_or_remark') %>');
-			}
-
-			if(errors.length > 0) {
-				display_error(errors, 'donation');
-			}
-
-			return errors.length == 0;
-		}
-
-		$('body').on('click', '.remove_donation_btn', function() {
-			id = $(this).parent().parent().find('.donation_id').text();
-
-			$('#donation_' + id).remove();
-
-			transient_donations -= 1;
-
-			if(document.getElementById("donations_table").rows.length == 2)
-				$('#no_donations_row').show();
-		});
-
-		function donation_field(id, field, value) {
-			return '<input class="form-control" value="' + value + '" type="hidden" name="company[donations_attributes][' + id + '][' + field + ']" id="company_donations_attributes_' + id + '_' + field + '">'
-		}
-
 	});
+
 </script>
