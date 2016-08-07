@@ -240,6 +240,8 @@ GEM
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     logger-colors (1.0.0)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -444,6 +446,7 @@ DEPENDENCIES
   jquery-tablesorter
   jquery-turbolinks
   launchy
+  letter_opener
   pdf-inspector
   pg
   prawn
