@@ -18,6 +18,7 @@ gem 'jquery-tablesorter'
 gem 'jquery-turbolinks'
 gem 'rubocop', require: false
 gem 'rubocop-rspec'
+gem 'puma'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
