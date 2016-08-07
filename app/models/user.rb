@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   def default_values
     name ||= ''
     self.bcc = email
-    self.signature = '--\n\n' + name
+    self.signature ||= '--\n\n' + name
   end
 
 end
