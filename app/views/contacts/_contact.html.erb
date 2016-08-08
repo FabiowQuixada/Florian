@@ -1,37 +1,24 @@
-<% I18n.with_options(scope: 'activerecord.attributes.contact') do |i18n| %>
-<div class="row">
-    <div class="form-group col-md-4">
-        <%= label_tag 'temp_contact_name', i18n.t(:name) %>
-        <%= text_field_tag :name, '', id: 'temp_contact_name', class: 'form-control contact_name temp_field' %>
-    </div>
+<tr class="contact_row" id="contact_<%= contact.id %>">
+    <td class="contact_id admin-only"><%= contact.id %></td>
+    <td class="contact_name"><%= contact.name %></td>
+    <td class="contact_position"><%= contact.position %></td>
+    <td class="contact_email_address" style="display:none;"><%= contact.email_address %></td>
+    <td class="contact_telephone"><%= contact.telephone %></td>
+    <td class="contact_celphone"><%= contact.celphone %></td>
+    <td class="contact_fax" style="display:none;"><%= contact.fax %></td>
+    <td class="icon-column"><%= image_tag('edit.png', title: t('helpers.action.edit'), class: 'edit_contact_btn clickable') %></td>
+    <!-- <td class="icon-column"><%#= image_tag('destroy.png', title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %></td> -->
 
-    <div class="form-group col-md-4">
-        <%= label_tag 'temp_contact_position', i18n.t(:position) %>
-        <%= text_field_tag :position, '', id: 'temp_contact_position', class: 'form-control contact_position temp_field' %>
-    </div>
+    <td style="display:none;"><% if contact.id && contact.id > 0 %>   
+    <input class="form-control" value="<%= contact.id %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][id]" id="company_contacts_attributes_<%= contact.id %>_id">
+    <% end %>
 
-    <div class="form-group col-md-4">
-        <%= label_tag 'temp_contact_email_address', i18n.t(:email_address) %>
-        <div class="input-group">
-            <span class="input-group-addon">@</span>
-            <%= text_field_tag :email_address, '', id: 'temp_contact_email_address', class: 'form-control temp_field' %>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="form-group col-md-4">
-        <%= label_tag 'temp_contact_telephone', i18n.t(:telephone) %>
-        <%= text_field_tag :telephone, '', id: 'temp_contact_telephone', class: 'form-control telephone temp_field' %>
-    </div>
-
-    <div class="form-group col-md-4">
-        <%= label_tag 'temp_contact_celphone', i18n.t(:celphone) %>
-        <%= text_field_tag :celphone, '', id: 'temp_contact_celphone', class: 'form-control celphone temp_field' %>
-    </div>
-
-    <div class="form-group col-md-4">
-        <%= label_tag 'temp_contact_fax', i18n.t(:fax) %>
-        <%= text_field_tag :fax, '', id: 'temp_contact_fax', class: 'form-control fax temp_field' %>
-    </div>
-</div>
-<% end %>
+    <input class="form-control" value="<%= contact.name %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][name]" id="company_contacts_attributes_<%= contact.id %>_name">
+    <input class="form-control" value="<%= contact.position %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][position]" id="company_contacts_attributes_<%= contact.id %>_position">
+    <input class="form-control" value="<%= contact.email_address %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][email_address]" id="company_contacts_attributes_<%= contact.id %>_email_address">
+    <input class="form-control" value="<%= contact.telephone %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][telephone]" id="company_contacts_attributes_<%= contact.id %>_telephone">
+    <input class="form-control" value="<%= contact.celphone %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][celphone]" id="company_contacts_attributes_<%= contact.id %>_celphone">
+    <input class="form-control" value="<%= contact.fax %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][fax]" id="company_contacts_attributes_<%= contact.id %>_fax">
+    <input class="form-control" value="Responsável" type="hidden" name="company[contacts_attributes][<%= contact.id %>][contact_type]" id="company_contacts_attributes_<%= contact.id %>_contact_type">
+    </td>
+</tr>

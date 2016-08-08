@@ -9,7 +9,7 @@
 				<div class="row">
 					<div class="form-group col-md-12">
 						<div id="contact_data">
-							<%= render partial: 'contacts/contact' %>
+							<%= render partial: 'contacts/contact_form' %>
 						</div>
 					</div>
 				</div>
@@ -29,44 +29,29 @@
 	<div class="col-md-12">
 
 		<table id="contacts_table" class="table table-striped table-condensed table-bordered unbreakable-table">
-			<tr class="hidden-xs">
-				<% I18n.with_options(scope: 'activerecord.attributes.contact') do |i18n| %>
-				<th class="id-column admin-only"></th>
-				<th><%= i18n.t :name %></th>
-				<th><%= i18n.t :position %></th>
-				<th><%= i18n.t :telephone %></th>
-				<th><%= i18n.t :celphone %></th>
-				<th style="width: 32px;"></th>
-				<!-- <th style="width: 32px;"></th> -->
-				<% end %>
-			</tr>
+			<thead>
+				<tr class="hidden-xs">
+					<% I18n.with_options(scope: 'activerecord.attributes.contact') do |i18n| %>
+					<th class="id-column admin-only"></th>
+					<th><%= i18n.t :name %></th>
+					<th><%= i18n.t :position %></th>
+					<th style="display:none;"></th>
+					<th><%= i18n.t :telephone %></th>
+					<th><%= i18n.t :celphone %></th>
+					<th style="display:none;"></th>
+					<th style="width: 32px;"></th>
+					<th style="display:none;"></th>
+					<% end %>
+				</tr>
+			</thead>
 			<tbody>
 				<% if @model.contacts.empty? %>
-				<tr id="no_contacts_row"><td colspan="6"><%= genderize_tag(Contact.new, 'helpers.none_registered') %></td></tr>
+				<tr id="no_contacts_row"><td colspan="5"><%= genderize_tag(Contact.new, 'helpers.none_registered') %></td></tr>
 				<% end %>
 
 				<% @model.contacts.each do |contact| %>
-				<tr class="contact_row" id="contact_<%= contact.id %>">
-					<td class="contact_id admin-only"><%= contact.id %></td>
-					<td class="contact_name"><%= contact.name %></td>
-					<td class="contact_position"><%= contact.position %></td>
-					<td class="contact_email_address" style="display:none;"><%= contact.email_address %></td>
-					<td class="contact_telephone"><%= contact.telephone %></td>
-					<td class="contact_celphone"><%= contact.celphone %></td>
-					<td class="contact_fax" style="display:none;"><%= contact.fax %></td>
-					<td class="icon-column"><%= image_tag('edit.png', title: t('helpers.action.edit'), class: 'edit_contact_btn clickable') %></td>
-					<!-- <td class="icon-column"><%#= image_tag('destroy.png', title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %></td> -->
-
-					<input class="form-control" value="<%= contact.id %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][id]" id="company_contacts_attributes_<%= contact.id %>_id">
-					<input class="form-control" value="<%= contact.name %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][name]" id="company_contacts_attributes_<%= contact.id %>_name">
-					<input class="form-control" value="<%= contact.position %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][position]" id="company_contacts_attributes_<%= contact.id %>_position">
-					<input class="form-control" value="<%= contact.email_address %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][email_address]" id="company_contacts_attributes_<%= contact.id %>_email_address">
-					<input class="form-control" value="<%= contact.telephone %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][telephone]" id="company_contacts_attributes_<%= contact.id %>_telephone">
-					<input class="form-control" value="<%= contact.celphone %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][celphone]" id="company_contacts_attributes_<%= contact.id %>_celphone">
-					<input class="form-control" value="<%= contact.fax %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][fax]" id="company_contacts_attributes_<%= contact.id %>_fax">
-				</tr>
+					<%= render partial: contact %>
 				<% end %>
-
 			</tbody>
 		</table>
 	</div>
@@ -75,6 +60,7 @@
 <script>
 
 	var transient_contacts = 0;
+	var contact_temp_id = -1;
 	loaded_contact_id = null;
 
 	$(function() {
@@ -94,54 +80,38 @@
 
 				if(loaded_contact_id) {
 
-				// View;
-				$('#contact_' + loaded_contact_id + ' .contact_name').text(name);
-				$('#contact_' + loaded_contact_id + ' .contact_position').text(position);
-				$('#contact_' + loaded_contact_id + ' .contact_email').text(email);
-				$('#contact_' + loaded_contact_id + ' .contact_telephone').text(telephone);
-				$('#contact_' + loaded_contact_id + ' .contact_celphone').text(celphone);
-				$('#contact_' + loaded_contact_id + ' .contact_fax').text(fax);
+					// View;
+					$('#contact_' + loaded_contact_id + ' .contact_name').text(name);
+					$('#contact_' + loaded_contact_id + ' .contact_position').text(position);
+					$('#contact_' + loaded_contact_id + ' .contact_email').text(email);
+					$('#contact_' + loaded_contact_id + ' .contact_telephone').text(telephone);
+					$('#contact_' + loaded_contact_id + ' .contact_celphone').text(celphone);
+					$('#contact_' + loaded_contact_id + ' .contact_fax').text(fax);
 
-				// Params;
-				$('#company_contacts_attributes_' + loaded_contact_id + '_name').val(name);
-				$('#company_contacts_attributes_' + loaded_contact_id + '_position').val(position);
-				$('#company_contacts_attributes_' + loaded_contact_id + '_email_address').val(email);
-				$('#company_contacts_attributes_' + loaded_contact_id + '_telephone').val(telephone);
-				$('#company_contacts_attributes_' + loaded_contact_id + '_celphone').val(celphone);
-				$('#company_contacts_attributes_' + loaded_contact_id + '_fax').val(fax);
+					// Params;
+					$('#company_contacts_attributes_' + loaded_contact_id + '_name').val(name);
+					$('#company_contacts_attributes_' + loaded_contact_id + '_position').val(position);
+					$('#company_contacts_attributes_' + loaded_contact_id + '_email_address').val(email);
+					$('#company_contacts_attributes_' + loaded_contact_id + '_telephone').val(telephone);
+					$('#company_contacts_attributes_' + loaded_contact_id + '_celphone').val(celphone);
+					$('#company_contacts_attributes_' + loaded_contact_id + '_fax').val(fax);
 
-			} else {
-				temp_id = (new Date).getTime();
+				} else {
+					$.ajax({
+						url: '<%= url_for(action: 'contact_row', controller: 'companies', only_path: false, protocol: 'http') %>', 
+						data: {contact: {id: contact_temp_id, name: name, position: position, email_address: email, telephone: telephone, celphone: celphone, fax: fax}},
+						success: function(result) {
+							$('#contacts_table > tbody:last-child').append(result);
+				    	}
+					});
 
-				line = 	'<tr class="contact_row" id="contact_' + temp_id + '">' +
-				'<td class="contact_id" style="display:none;">' + temp_id + '</td>' +
-				'<td class="contact_name">' + name + '</td>' +
-				'<td class="contact_position">' + position + '</td>' +
-				'<td class="contact_email_address" style="display:none;">' + email + '</td>' +
-				'<td class="contact_telephone">' + telephone + '</td>' +
-				'<td class="contact_celphone">' + celphone + '</td>' +
-				'<td class="contact_fax" style="display:none;">' + fax + '</td>' +
-				'<td class="icon-column"><%= image_tag('edit.png', title: t('helpers.action.edit'), class: 'edit_contact_btn clickable') %></td>' +
+					contact_temp_id -= 1;
+				}
 
-				contact_field(temp_id, 'contact_type', "Responsável") +
-				contact_field(temp_id, 'name', name) +
-				contact_field(temp_id, 'position', position) +
-				contact_field(temp_id, 'email_address', email) +
-				contact_field(temp_id, 'telephone', telephone) +
-				contact_field(temp_id, 'celphone', celphone) +
-				contact_field(temp_id, 'fax', fax) +
-				'</tr>';
-
-				$('#contacts_table > tbody:last-child').append(line);
+				clean_contact_fields();
+				$('#no_contacts_row').hide();
 			}
-
-			clean_fields();
-
-			$('#no_contacts_row').hide();
-
-			hide_errors_from_box('contact');
-		}
-	});
+		});
 
 		function validate_contact() {
 
@@ -185,7 +155,7 @@
 			$('#temp_contact_fax').val($('#contact_' + id + ' .contact_fax').text());
 		}
 
-		function clean_fields() {
+		function clean_contact_fields() {
 			$('#temp_contact_name').val('');
 			$('#temp_contact_position').val('');
 			$('#temp_contact_email_address').val('');
@@ -217,7 +187,7 @@
 			load_contact(id);
 		});
 
-		$('#cancel_contact_edition_btn').on('click', clean_fields);
+		$('#cancel_contact_edition_btn').on('click', clean_contact_fields);
 
 		function contact_field(id, field, value) {
 			return '<input class="form-control" value="' + value + '" type="hidden" name="company[contacts_attributes][' + id + '][' + field + ']" id="company_contacts_attributes_' + id + '_' + field + '">'

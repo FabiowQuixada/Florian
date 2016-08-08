@@ -27,7 +27,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :companies, except: [:show]
+  resources :companies, except: [:show] do
+    collection do
+      get 'contact_row'
+    end
+  end
+
   resources :bills, except: [:show]
 
   resources :receipt_emails, except: [:show] do

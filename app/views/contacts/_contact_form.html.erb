@@ -1,0 +1,37 @@
+<% I18n.with_options(scope: 'activerecord.attributes.contact') do |i18n| %>
+<div class="row">
+    <div class="form-group col-md-4">
+        <%= label_tag 'temp_contact_name', i18n.t(:name) %>
+        <%= text_field_tag :name, '', id: 'temp_contact_name', class: 'form-control contact_name temp_field' %>
+    </div>
+
+    <div class="form-group col-md-4">
+        <%= label_tag 'temp_contact_position', i18n.t(:position) %>
+        <%= text_field_tag :position, '', id: 'temp_contact_position', class: 'form-control contact_position temp_field' %>
+    </div>
+
+    <div class="form-group col-md-4">
+        <%= label_tag 'temp_contact_email_address', i18n.t(:email_address) %>
+        <div class="input-group">
+            <span class="input-group-addon">@</span>
+            <%= text_field_tag :email_address, '', id: 'temp_contact_email_address', class: 'form-control temp_field' %>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-4">
+        <%= label_tag 'temp_contact_telephone', i18n.t(:telephone) %>
+        <%= text_field_tag :telephone, '', id: 'temp_contact_telephone', class: 'form-control telephone temp_field' %>
+    </div>
+
+    <div class="form-group col-md-4">
+        <%= label_tag 'temp_contact_celphone', i18n.t(:celphone) %>
+        <%= text_field_tag :celphone, '', id: 'temp_contact_celphone', class: 'form-control celphone temp_field' %>
+    </div>
+
+    <div class="form-group col-md-4">
+        <%= label_tag 'temp_contact_fax', i18n.t(:fax) %>
+        <%= text_field_tag :fax, '', id: 'temp_contact_fax', class: 'form-control fax temp_field' %>
+    </div>
+</div>
+<% end %>
