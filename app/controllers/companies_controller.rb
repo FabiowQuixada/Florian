@@ -7,6 +7,7 @@ class CompaniesController < ApplicationController
   def update
     if @model.update send(@model.model_name.singular + '_params')
       destroy_donations
+      destroy_contacts
       redirect_to send(@model.model_name.route_key + '_path'), notice: @model.was('updated')
     else
       render '_form'
@@ -48,6 +49,15 @@ class CompaniesController < ApplicationController
 
     params[:donations_to_be_deleted].split(',').each do |id|
       @model.donations.find(id).destroy
+    end
+  end
+
+  def destroy_contacts
+
+    return if params[:contacts_to_be_deleted].nil?
+
+    params[:contacts_to_be_deleted].split(',').each do |id|
+      @model.contacts.find(id).destroy
     end
   end
 

@@ -39,14 +39,15 @@
 					<th><%= i18n.t :telephone %></th>
 					<th><%= i18n.t :celphone %></th>
 					<th style="display:none;"></th>
-					<th style="width: 32px;"></th>
+					<th class="icon-column" style="width: 32px;"></th>
+					<th class="icon-column" style="width: 32px;"></th>
 					<th style="display:none;"></th>
 					<% end %>
 				</tr>
 			</thead>
 			<tbody>
 				<% if @model.contacts.empty? %>
-				<tr id="no_contacts_row"><td colspan="5"><%= genderize_tag(Contact.new, 'helpers.none_registered') %></td></tr>
+				<tr id="no_contacts_row"><td colspan="6"><%= genderize_tag(Contact.new, 'helpers.none_registered') %></td></tr>
 				<% end %>
 
 				<% @model.contacts.each do |contact| %>
@@ -56,6 +57,8 @@
 		</table>
 	</div>
 </div>
+
+<%= hidden_field_tag 'contacts_to_be_deleted' %>
 
 <script>
 
@@ -174,12 +177,18 @@
 		$('body').on('click', '.remove_contact_btn', function() {
 			id = $(this).parent().parent().find('.contact_id').text();
 
-			$('#contact_' + id).remove();
+			$('#contact_' + id).fadeOut('slow', function() {
+	            $('#contact_' + id).remove();
+	        });
 
 			transient_contacts -= 1;
 
 			if(document.getElementById("contacts_table").rows.length == 2)
 				$('#no_contacts_row').show();
+
+			if(id > 0) {
+				$('#contacts_to_be_deleted').val($('#contacts_to_be_deleted').val() + id + ',');
+			}
 		});
 
 		$('body').on('click', '.edit_contact_btn', function() {

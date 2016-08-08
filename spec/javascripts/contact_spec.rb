@@ -49,6 +49,16 @@ describe Contact, type: :request do
   end
 
   it 'deletes a contact from an entity' do
+    deleted_name = first('td.contact_name')['innerHTML']
+    
+    first('.remove_contact_btn').click
+
+    find('.save_btn').click
+    visit edit_company_path Company.first
+    page.find('#main_tab_2_title').click
+
+
+    expect(first('td.contact_name')['innerHTML']).not_to eq deleted_name
   end
 
 
