@@ -87,16 +87,25 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
             display_form_errors('<%= t('alert.email.duplicated_recipient') %>');
         } else if (validate_recipient_email(email_address))
         {
-            line = '<tr id="<%= field_name %>_email_address_' + temp_id + '"><td class="recipient_id" style="display:none;">' + temp_id + '</td><td class="recipient_email">' + email_address + '</td><td class="button-wrapper"><%= link_to image_tag('delete.png', title: t('helpers.action.remove'), class: 'remove_btn'), 'javascript:void(0)', class: field_name + '_remove_recipient_btn remove_btn' %></td></tr>';
-            $('#<%= field_name %>_recipients_table > tbody:last-child').append(line);
-            temp_id = temp_id - 1;
+            $.ajax({
+                url: "<%= url_for(action: 'email_row', controller: 'helpers', only_path: false, protocol: 'http') %>", 
+                data: {email_address: email_address, index: temp_id, field_name: '<%= field_name %>'},
+                success: function(result) {
+                    $('#<%= field_name %>_recipients_table > tbody:last-child').append(result);
+                }
+            });
 
+            temp_id = temp_id - 1;
             hide_all_messages();
-            $('#<%= field_name %>_new_recipient_field').val('');
+            clean_email_fields();
         } else
         {
             display_form_errors('<%= t('alert.email.invalid_recipient') %>');
         }
     });
+
+    function clean_email_fields() {
+        $('#<%= field_name %>_new_recipient_field').val('');
+    }
 
 </script>

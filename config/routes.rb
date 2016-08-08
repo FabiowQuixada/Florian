@@ -49,6 +49,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :helpers, only: [] do
+    collection do
+      get 'email_row'
+    end
+  end
+
   get '/404' => 'errors#not_found'
   get '/500' => 'errors#internal_server_error'
 

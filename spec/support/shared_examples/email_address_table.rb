@@ -37,7 +37,7 @@ shared_examples 'an e-mail address table' do |fields|
 
   def remove_last_email_address(field_name)
     within('tr#' + field_name + '_email_address_' + (@id + 1).to_s) do
-      first('a.' + field_name + '_remove_recipient_btn').click
+      first('img.' + field_name + '_remove_recipient_btn').click
     end
     
     sleep(inspection_time = 1)

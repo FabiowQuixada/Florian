@@ -157,28 +157,6 @@
 
 			$('#receipt_email_recipients_array').val(formated_recipients());
 		}
-
-		$('#add_recipient_btn').on('click', function() {
-
-			email_address = $('#new_recipient_field').val();
-
-			if (!$('#new_recipient_field').val()) {
-				display_form_errors('<%= t('alert.email.fill_a_recipient') %>');
-
-			} else if(already_present(email_address)) {
-				display_form_errors('<%= t('alert.email.duplicated_recipient') %>');
-			} else if (validate_recipient_email(email_address)) {
-				line = '<tr id="email_address_' + temp_id + '"><td class="recipient_id" style="display:none;">' + temp_id + '</td><td class="recipient_email">' + email_address + '</td><td class="button-wrapper"><%= link_to image_tag('delete.png', title:  t('helpers.action.remove'), class: 'remove_btn'), 'javascript:void(0)', class: 'remove_recipient_btn remove_btn' %></td></tr>';
-				$('#recipients_table > tbody:last-child').append(line);
-				temp_id = temp_id - 1;
-				transient_recipients += 1;
-
-				hide_all_messages();
-				$('#new_recipient_field').val('');
-			} else {
-				display_form_errors('<%= t('alert.email.invalid_recipient') %>');
-			}
-		});
 	});
 
 </script>
