@@ -8,6 +8,11 @@ class CompaniesController < ApplicationController
     contact = Contact.new contact_params
 
     render partial: 'contacts/contact', locals: { contact: contact }
+
+  def donation_row
+    donation = Donation.new donation_params
+
+    render partial: 'donations/donation', locals: { donation: donation }
   end
 
   private #############################################
@@ -21,6 +26,9 @@ class CompaniesController < ApplicationController
 
   def contact_params
     params.require(:contact).permit(:id, :name, :position, :email_address, :telephone, :celphone, :fax)
+
+  def donation_params
+    params.require(:donation).permit(:id, :value, :donation_date, :remark)
   end
 
   def order_attribute

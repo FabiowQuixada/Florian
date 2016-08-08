@@ -69,6 +69,10 @@
     padding: 0px;
 }
 
+.marginless {
+    margin: 0px;
+}
+
 .table-hover tbody tr.model_row:hover td {
   background-color: #8FAEEE;
 }

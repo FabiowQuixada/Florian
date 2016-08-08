@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :companies, except: [:show] do
     collection do
       get 'contact_row'
+      get 'donation_row'
     end
   end
 
