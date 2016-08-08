@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :donation do
-    remark 'Observacao'
+    sequence(:remark, 1) { |n| "Observacao #{n}" }
     company
 
     trait :invalid do

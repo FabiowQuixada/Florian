@@ -4,10 +4,20 @@ class CompaniesController < ApplicationController
   arguable model_class: Company
   load_and_authorize_resource
 
+  def update
+    if @model.update send(@model.model_name.singular + '_params')
+      destroy_donations
+      redirect_to send(@model.model_name.route_key + '_path'), notice: @model.was('updated')
+    else
+      render '_form'
+    end
+  end
+
   def contact_row
     contact = Contact.new contact_params
 
     render partial: 'contacts/contact', locals: { contact: contact }
+  end
 
   def donation_row
     donation = Donation.new donation_params
@@ -26,9 +36,19 @@ class CompaniesController < ApplicationController
 
   def contact_params
     params.require(:contact).permit(:id, :name, :position, :email_address, :telephone, :celphone, :fax)
+  end
 
   def donation_params
     params.require(:donation).permit(:id, :value, :donation_date, :remark)
+  end
+
+  def destroy_donations
+
+    return if params[:donations_to_be_deleted].nil?
+
+    params[:donations_to_be_deleted].split(',').each do |id|
+      @model.donations.find(id).destroy
+    end
   end
 
   def order_attribute

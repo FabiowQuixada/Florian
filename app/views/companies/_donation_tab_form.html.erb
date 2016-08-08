@@ -67,11 +67,11 @@
 							<thead class="hidden-xs">
 								<tr>
 									<% I18n.with_options(scope: 'activerecord.attributes.donation') do |i18n| %>
-									<th class="admin-only" style="display:none;"><%= i18n.t :id %></th>
+									<th class="admin-only id-column" style="display:none;"></th>
 									<th><%= i18n.t :date %></th>
 									<th><%= i18n.t :value %></th>
-									<th style="width: 50%;"><%= i18n.t :remark %></th>
-									<th class="icon-column"></th>
+									<th style="width: 50%;" class="hidden-xs"><%= i18n.t :remark %></th>
+									<th class="icon-column" style="width: 32px;"></th>
 									<% end %>
 								</tr>
 							</thead>
@@ -88,9 +88,12 @@
 			</div>
 		</div>
 
+		<%= hidden_field_tag 'donations_to_be_deleted' %>
+
 <script>
 
 	var transient_donations = 0;
+	var temp_donation_id = -1;
 
 	function new_donations() {
 		return transient_donations > 0;
@@ -112,17 +115,17 @@
 				value = 'R$ ' + $('#new_donation_value').val();
 				remark = $('#new_donation_remark').val();
 
-				temp_id = (new Date).getTime();
-
 				$.ajax({
 					url: '<%= url_for(action: 'donation_row', controller: 'companies', only_path: false, protocol: 'http') %>', 
-					data: {donation: {id: temp_id, donation_date: date, value: value, remark: remark}},
+					data: {donation: {id: temp_donation_id, donation_date: date, value: value, remark: remark}},
 					success: function(result) {
 			        	$('#donations_table > tbody:last-child').append(result);
 			    	}
 				});
 
 				clean_donation_fields();
+
+				temp_donation_id -= 1;
 
 				$('#no_donations_row').hide();
 
@@ -163,7 +166,6 @@
 		$('body').on('click', '.remove_donation_btn', function() {
 			id = $(this).parent().parent().parent().find('.donation_id').text();
 
-
 			$('.donation_' + id + '_row').fadeOut('slow', function() {
          	   $('.donation_' + id + '_row').remove();
       	  	});
@@ -172,6 +174,10 @@
 
 			if(document.getElementById("donations_table").rows.length == 2)
 				$('#no_donations_row').show();
+
+			if(id > 0) {
+				$('#donations_to_be_deleted').val($('#donations_to_be_deleted').val() + id + ',');
+			}
 		});
 	})
 
