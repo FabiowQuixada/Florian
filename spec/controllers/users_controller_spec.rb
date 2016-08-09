@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe UsersController, type: :controller do
+  # include_examples 'destroy tests', User
+
   # == Admin ================================================================================================
   context 'Admin' do
     before(:each) do

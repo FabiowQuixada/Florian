@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe RolesController, type: :controller do
+  # include_examples 'destroy tests', Role
+
   # == Admin ================================================================================================
   context 'Admin' do
     before(:each) do

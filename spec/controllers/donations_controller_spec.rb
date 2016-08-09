@@ -5,6 +5,8 @@ describe DonationsController, type: :controller do
     sign_in User.first
   end
 
+  include_examples 'destroy tests', Donation
+
   describe 'GET #index' do
     before(:each) do
       get :index
@@ -124,47 +126,4 @@ describe DonationsController, type: :controller do
       it { expect(model.value).not_to eq(ActionController::Base.helpers.number_to_currency(1.14)) }
     end
   end
-
-  # describe 'Successfully deletes model as admin' do
-  #   let(:n) { Donation.count }
-  #   let(:model) { create :donation }
-  #   let(:sucess_msg) { { message: model.was('destroyed'), success: true }.to_json }
-  #   let(:error_msg) { { message: I18n.t('errors.deletion'), success: false }.to_json }
-  #   let(:non_admin_msg) { { message: I18n.t('errors.unpermitted_action'), success: false }.to_json }
-
-  #   before(:each) do
-  #     sign_in User.first
-  #   end
-
-  #   context 'Successfully destroys model via ajax' do
-  #     before(:each) do
-  #       xhr :delete, :destroy, id: model.id
-  #     end
-
-  #     it { expect(Donation.count).to eq(n - 1) }
-  #     it { expect(response.body).to eq(sucess_msg) }
-  #   end
-  # end
-
-  # describe 'Doesnt destroy model as common user' do
-  #   before(:each) do
-  #     sign_in User.last
-  #     create :donation
-  #     @n = Donation.count
-  #     @model = Donation.first
-
-  #     @sucess_msg = { message: model.was('destroyed'), success: true }.to_json
-  #     @error_msg = { message: I18n.t('errors.deletion'), success: false }.to_json
-  #     @non_admin_msg = { message: I18n.t('errors.unpermitted_action'), success: false }.to_json
-  #   end
-
-  #   context 'Common user cant destroy model via ajax' do
-  #     before(:each) do
-  #       xhr :delete, :destroy, id: model.id
-  #     end
-
-  #     it { expect(Donation.count).to eq(n) }
-  #     it { expect(response.body).to eq(non_admin_msg) }
-  #   end
-  # end
 end

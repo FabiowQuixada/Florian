@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe SystemSettingsController, type: :controller do
+  # include_examples 'destroy tests', SystemSetting
+
   # == Admin ====================================================================================================
   context 'access as admin user' do
     let(:user) { User.first }
