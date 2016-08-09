@@ -9,7 +9,7 @@ class ReceiptEmail < ActiveRecord::Base
 
 
   # Relationships
-  has_many :email_histories
+  has_many :email_histories, dependent: :destroy
   accepts_nested_attributes_for :email_histories
   belongs_to :company
   alias_attribute :history, :email_histories

@@ -18,6 +18,12 @@ FactoryGirl.define do
       company { build(:company) }
     end
 
+    trait :with_history do
+      after(:build) do |receipt_email|
+        receipt_email.email_histories = build_list(:email_history, 3, receipt_email: receipt_email)
+      end
+    end
+
     before(:create) do |receipt_email|
       receipt_email.company.save
     end
