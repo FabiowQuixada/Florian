@@ -76,9 +76,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<% if @model.donations.empty? %>
-								<tr id="no_donations_row"><td colspan="4"><%= genderize_tag(Donation.new, 'helpers.none_registered') %></td></tr>
-								<% end %>
+								<tr id="no_donations_row" <%= ' style=display:none' if @model.donations.any? %>><td colspan="5"><%= genderize_tag(Donation.new, 'helpers.none_registered') %></td></tr>
 
 								<%= render @model.donations %>
 							</tbody>
@@ -166,9 +164,7 @@
 		$('body').on('click', '.remove_donation_btn', function() {
 			id = $(this).parent().parent().parent().find('.donation_id').text();
 
-			$('.donation_' + id + '_row').fadeOut('slow', function() {
-         	   $('.donation_' + id + '_row').remove();
-      	  	});
+         	$('.donation_' + id + '_row').remove();
 
 			transient_donations -= 1;
 

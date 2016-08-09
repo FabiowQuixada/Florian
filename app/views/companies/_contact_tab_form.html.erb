@@ -16,8 +16,8 @@
 
 				<div class="row">
 					<div class="col-md-12 right">
-						<a id="add_contact_btn" class="btn btn-primary btn-xs add_btn"><%= t('helpers.action.add') %></a>
-						<a id="cancel_contact_edition_btn" style="display:none;" class="btn btn-primary btn-xs add_btn"><%= t('helpers.action.cancel') %></a>
+						<a href="javascript:void(0)" id="add_contact_btn" class="btn btn-primary btn-xs add_btn"><%= t('helpers.action.add') %></a>
+						<a href="javascript:void(0)" id="cancel_contact_edition_btn" style="display:none;" class="btn btn-primary btn-xs add_btn"><%= t('helpers.action.cancel') %></a>
 					</div>
 				</div>
 			</div>
@@ -46,9 +46,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<% if @model.contacts.empty? %>
-				<tr id="no_contacts_row"><td colspan="6"><%= genderize_tag(Contact.new, 'helpers.none_registered') %></td></tr>
-				<% end %>
+				<tr id="no_contacts_row"<%= ' style=display:none' if @model.contacts.any? %>><td colspan="10"><%= genderize_tag(Contact.new, 'helpers.none_registered') %></td></tr>
 
 				<% @model.contacts.each do |contact| %>
 					<%= render partial: contact %>
@@ -177,9 +175,7 @@
 		$('body').on('click', '.remove_contact_btn', function() {
 			id = $(this).parent().parent().find('.contact_id').text();
 
-			$('#contact_' + id).fadeOut('slow', function() {
-	            $('#contact_' + id).remove();
-	        });
+	        $('#contact_' + id).remove();
 
 			transient_contacts -= 1;
 

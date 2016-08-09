@@ -19,7 +19,7 @@ describe 'companies/_form', type: :view do
       assign :model, model
       render
 
-      expect(rendered).to include genderize_tag(Donation.new, 'helpers.none_registered')
+      expect(rendered).not_to have_selector('tr#no_donations_row', visible: true)
     end
 
     it 'does not display a no-donation message if it has donations' do
@@ -27,7 +27,7 @@ describe 'companies/_form', type: :view do
       assign :model, model
       render
 
-      expect(rendered).not_to include genderize_tag(Donation.new, 'helpers.none_registered')
+      expect(rendered).to have_selector('tr#no_donations_row', visible: false)
     end
   end
 
@@ -37,7 +37,7 @@ describe 'companies/_form', type: :view do
       assign :model, model
       render
 
-      expect(rendered).to include genderize_tag(Contact.new, 'helpers.none_registered')
+      expect(rendered).not_to have_selector('tr#no_contacts_row', visible: true)
     end
 
     it 'does not display a no-contact message if it has contacts' do
@@ -45,7 +45,7 @@ describe 'companies/_form', type: :view do
       assign :model, model
       render
 
-      expect(rendered).not_to include genderize_tag(Contact.new, 'helpers.none_registered')
+      expect(rendered).to have_selector('tr#no_contacts_row', visible: false)
     end
   end
 end

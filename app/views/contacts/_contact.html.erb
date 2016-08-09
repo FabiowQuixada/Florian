@@ -1,5 +1,5 @@
 <tr class="contact_row" id="contact_<%= contact.id %>">
-    <td class="contact_id admin-only"><%= contact.id %></td>
+    <td class="contact_id admin-only" style="display:none;"><%= contact.id %></td>
     <td class="contact_name"><%= contact.name %></td>
     <td class="contact_position"><%= contact.position %></td>
     <td class="contact_email_address" style="display:none;"><%= contact.email_address %></td>
@@ -9,16 +9,18 @@
     <td class="icon-column" style="width: 32px;"><%= image_tag('edit.png', title: t('helpers.action.edit'), class: 'edit_contact_btn clickable') %></td>
     <td class="icon-column" style="width: 32px;"><%= link_to image_tag('delete.png', title:  t('helpers.action.remove')), 'javascript:void(0)', class: 'remove_contact_btn remove_btn' %></td>
 
-    <td style="display:none;"><% if contact.id && contact.id > 0 %>   
-    <input class="form-control" value="<%= contact.id %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][id]" id="company_contacts_attributes_<%= contact.id %>_id">
-    <% end %>
+    <!-- Server communication data -->
+    <td style="display:none;">
+        <% if contact.id && contact.id > 0 %>   
+        <input value="<%= contact.id %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][id]" id="company_contacts_attributes_<%= contact.id %>_id">
+        <% end %>
 
-    <input class="form-control" value="<%= contact.name %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][name]" id="company_contacts_attributes_<%= contact.id %>_name">
-    <input class="form-control" value="<%= contact.position %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][position]" id="company_contacts_attributes_<%= contact.id %>_position">
-    <input class="form-control" value="<%= contact.email_address %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][email_address]" id="company_contacts_attributes_<%= contact.id %>_email_address">
-    <input class="form-control" value="<%= contact.telephone %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][telephone]" id="company_contacts_attributes_<%= contact.id %>_telephone">
-    <input class="form-control" value="<%= contact.celphone %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][celphone]" id="company_contacts_attributes_<%= contact.id %>_celphone">
-    <input class="form-control" value="<%= contact.fax %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][fax]" id="company_contacts_attributes_<%= contact.id %>_fax">
-    <input class="form-control" value="Responsável" type="hidden" name="company[contacts_attributes][<%= contact.id %>][contact_type]" id="company_contacts_attributes_<%= contact.id %>_contact_type">
+        <input value="<%= contact.name %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][name]" id="company_contacts_attributes_<%= contact.id %>_name">
+        <input value="<%= contact.position %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][position]" id="company_contacts_attributes_<%= contact.id %>_position">
+        <input value="<%= contact.email_address %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][email_address]" id="company_contacts_attributes_<%= contact.id %>_email_address">
+        <input value="<%= contact.telephone %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][telephone]" id="company_contacts_attributes_<%= contact.id %>_telephone">
+        <input value="<%= contact.celphone %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][celphone]" id="company_contacts_attributes_<%= contact.id %>_celphone">
+        <input value="<%= contact.fax %>" type="hidden" name="company[contacts_attributes][<%= contact.id %>][fax]" id="company_contacts_attributes_<%= contact.id %>_fax">
+        <input value="Responsável" type="hidden" name="company[contacts_attributes][<%= contact.id %>][contact_type]" id="company_contacts_attributes_<%= contact.id %>_contact_type">
     </td>
 </tr>

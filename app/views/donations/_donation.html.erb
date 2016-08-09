@@ -3,7 +3,7 @@
 	<td class="donation_date col-xs-6 col-md-3"><%= donation.donation_date %></td>
 	<td class="donation_value col-xs-6 col-md-3"><%= number_to_currency(donation.value) %></td>
 	<td class="donation_remark col-xs-12 col-md-6"><%= donation.remark %></td>
-	<td class="icon-column"><%= link_to image_tag('delete.png', title:  t('helpers.action.remove'), class: 'remove_donation_btn remove_btn'), 'javascript:void(0)' %></td></td>
+	<td class="icon-column"><%= link_to image_tag('delete.png', title:  t('helpers.action.remove'), class: 'remove_donation_btn remove_btn'), 'javascript:void(0)' %></td>
 </tr>
 <tr class="donation_<%= donation.id %>_row visible-xs">
 	<td colspan="5">
@@ -20,7 +20,11 @@
 			</tbody>
 		</table>
 	</td>
-	<td style="display:none;"><% if donation.id && donation.id > 0 %>   
+</tr>
+
+<!-- Server communication data -->
+<tr>
+	<td style="display:none;" colspan="5"><% if donation.id && donation.id > 0 %>
 	    <input class="form-control" value="<%= donation.id %>" type="hidden" name="company[donations_attributes][<%= donation.id %>][id]" id="company_donations_attributes_<%= donation.id %>_id">
 	    <% end %>
 
