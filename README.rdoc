@@ -1,28 +1,28 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+** General Info ***********************************************************************************
+ Ruby version: 2.2.2p95 (2015-04-13 revision 50295) [x86_64-linux]
+ Rails version: 4.2.7
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+** Tests ******************************************************************************************
+ To run tests, just run './rubospec' on the project root directory, it will run Rubocop, then run the tests and if everything went fine, will open a Git window;
+
+
+** Deployment Dependencies ************************************************************************
+ # 1 Tidy;
+ # 2 Plsql;
+ # 3 Backup;
+
+ # 1 https://github.com/htacg/tidy-html5/blob/master/README/README.md 
+ # 2.1 sudo apt-get install libpq-dev
+   2.2 https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-04
+ # 3.1 On psql: SHOW hba_file;
+       Postgres: local   all             all                                     trust
+       ('trust' instead of 'peer')
+       and then run: sudo service postgresql restart
+   3.2 Change '/home/ubuntu/' on schedule.rb: env :PATH, '/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games'
+
+
+ ** Deploy instructions ***************************************************************************
+  Production: Just run './server_up' on the project root directory;
