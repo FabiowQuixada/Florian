@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'HTML', type: :request do
-  MENU_MODELS = [Company, Donation, ReceiptEmail, ProductAndServiceDatum, Bill, SystemSetting, User, Role].freeze
+  MENU_MODELS = [Company, Donation, ReceiptEmail, ProductAndServiceDatum, Bill, User, Role].freeze
 
   it 'has consistent login html code' do
     visit new_user_session_path
@@ -32,7 +32,6 @@ describe 'HTML', type: :request do
 
     it 'has consistent new html code' do
       MENU_MODELS.each do |model|
-        next if model == SystemSetting
         visit send 'new_' + model.name.underscore + '_path'
         expect(page).to have_valid_html
       end

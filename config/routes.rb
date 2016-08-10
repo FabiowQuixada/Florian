@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :system_settings, only: [:index, :edit, :update]
-
   resources :donations, except: [:show] do
     collection do
       post 'create_and_new'

@@ -12,14 +12,10 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def edit
-    @model = current_user
-  end
-
   def update
     prev_unconfirmed_email = current_user.unconfirmed_email if current_user.respond_to?(:unconfirmed_email)
 
-    resource_updated = update_resource(current_user, account_update_params)
+    resource_updated = current_user.system_setting.update(system_setting_params) && update_resource(current_user, account_update_params)
     yield current_user if block_given?
 
     something resource_updated, prev_unconfirmed_email
@@ -51,8 +47,8 @@ class RegistrationsController < Devise::RegistrationsController
     set_flash_message :notice, flash_key
   end
 
-  def user_params
-    params.require(:user).permit(:id, :name, :email, :role_id, :password, :password_confirmation, :signature, :current_password)
+  def system_setting_params
+    params[:user].require(:system_setting).permit(:id, :user_id, :re_title, :re_body, :pse_recipients_array, :pse_private_recipients_array, :pse_day_of_month, :pse_title, :pse_body)
   end
 
   def needs_password?(params)
@@ -68,6 +64,7 @@ class RegistrationsController < Devise::RegistrationsController
   def before_edit
     return redirect_to root_path, alert: I18n.t('error_pages.not_found.title') if current_user.guest?
 
+    @model = current_user
     @breadcrumbs = Hash[t('helpers.profile') => '']
   end
 

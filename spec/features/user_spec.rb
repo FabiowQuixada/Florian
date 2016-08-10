@@ -2,6 +2,8 @@ require 'rails_helper'
 
 describe User, type: :request do
   let(:signature) { 'lalala' }
+  let(:re_title) { 're lalala' }
+  let(:pse_title) { 'pse lalala' }
 
   it 'is not allowed to login if it is not active' do
     visit root_path
@@ -24,9 +26,9 @@ describe User, type: :request do
     it 'updates profile info' do
       visit edit_user_registration_path
       fill_admin_profile_fields
+      fill_settings_fields
       click_on 'Atualizar'
-      visit edit_user_registration_path
-      expect(first('#user_signature').value).to eq signature
+      check_if_changes_persisted
     end
   end
 
@@ -82,4 +84,25 @@ describe User, type: :request do
 
     click_on 'Login'
   end
+
+  def fill_settings_fields
+    page.find('#main_tab_1_title').click
+    first('#user_system_setting_re_title').set re_title
+
+    page.find('#main_tab_2_title').click
+    first('#user_system_setting_pse_title').set pse_title
+  end
+
+  # rubocop:disable all
+  def check_if_changes_persisted
+    visit edit_user_registration_path
+    expect(first('#user_signature').value).to eq signature
+
+    page.find('#main_tab_1_title').click
+    expect(first('#user_system_setting_re_title').value).to eq re_title
+
+    page.find('#main_tab_2_title').click
+    expect(first('#user_system_setting_pse_title').value).to eq pse_title
+  end
+  # rubocop:enable all
 end
