@@ -33,7 +33,7 @@ class SystemSettingsController < ApplicationController
   end
 
   def invalid_edition?(action, settings, target_id)
-    action == 'edit' && target_id != settings.id.to_s
+    action == 'new' || (action == 'edit' && target_id != settings.id.to_s)
   end
 
   def user_can_edit_settings(user, settings_id)
@@ -48,7 +48,7 @@ class SystemSettingsController < ApplicationController
 
   def block_access?(settings)
     return unless invalid_edition? params[:action], settings, params[:id]
-    redirect_to url_for(controller: :errors, action: :not_found)
+    redirect_to root_path, alert: I18n.t('error_pages.not_found.title')
     true
   end
 end

@@ -162,7 +162,7 @@ describe SystemSettingsController, type: :controller do
       end
 
       it { expect(response).to have_http_status(:found) }
-      it { expect(response).to redirect_to url_for(controller: :errors, action: :not_found) }
+      it { expect(response).to redirect_to root_path }
     end
 
     describe 'PUT #update - other users settings' do

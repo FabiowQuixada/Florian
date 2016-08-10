@@ -3,9 +3,12 @@ module ValidUserRequestHelper
 
     visit root_path
 
-    fill_in 'E-mail', with: 'teste_comum@yahoo.com.br'
+    email = 'teste_comum@yahoo.com.br'
+
+    fill_in 'E-mail', with: email
     fill_in 'Senha', with: 'usuario_comum'
-    check 'Manter-me logado'
+
+    @logged_user = User.where(email: email).first
 
     click_on 'Login'
   end
@@ -13,11 +16,22 @@ module ValidUserRequestHelper
   def login_as_admin
     visit root_path
 
-    fill_in 'E-mail', with: SYSTEM_EMAIL
+    email = SYSTEM_EMAIL
+
+    fill_in 'E-mail', with: email
     fill_in 'Senha', with: 'fulano0123'
-    check 'Manter-me logado'
+
+    @logged_user = User.where(email: email).first
 
     click_on 'Login'
+  end
+
+  def logged_user
+    @logged_user
+  end
+
+  def non_logged_user
+    User.where('email != ?', @logged_user.email).first
   end
 end
 

@@ -32,6 +32,7 @@ describe 'HTML', type: :request do
 
     it 'has consistent new html code' do
       MENU_MODELS.each do |model|
+        next if model == SystemSetting
         visit send 'new_' + model.name.underscore + '_path'
         expect(page).to have_valid_html
       end
