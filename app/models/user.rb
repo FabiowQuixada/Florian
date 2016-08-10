@@ -13,12 +13,11 @@ class User < ActiveRecord::Base
 
   # Relationships
   belongs_to :role
-  has_one :system_setting
+  has_one :system_setting, dependent: :destroy
 
 
   # Validations
-  validates :name, :email, :role, presence: true
-  validates :signature, :bcc, presence: true
+  validates :name, :email, :role, :signature, :bcc, presence: true
   validates :name, :email, uniqueness: true
 
 
@@ -44,7 +43,6 @@ class User < ActiveRecord::Base
     raise I18n.t('errors.user.cannot_deactivate_admin') if admin?
 
     write_attribute(:active, value)
-
   end
 
   def build_default_system_setting
@@ -62,7 +60,7 @@ class User < ActiveRecord::Base
 
   def default_values
     name ||= ''
-    self.bcc = email
+    self.bcc ||= email
     self.signature ||= '--\n\n' + name
   end
 
