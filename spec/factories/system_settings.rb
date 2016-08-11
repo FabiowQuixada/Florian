@@ -5,7 +5,6 @@ FactoryGirl.define do
     re_title SSETTINGS_RE_TITLE
     re_body SSETTINGS_RE_BODY
     pse_title SSETTINGS_PSE_TITLE
-    pse_day_of_month 4
     pse_body SSETTINGS_PSE_BODY
     user
 

@@ -49,7 +49,6 @@ class User < ActiveRecord::Base
     build_system_setting
 
     system_setting.pse_recipients_array = SSETTINGS_PSE_RECIPIENTS
-    system_setting.pse_day_of_month = SSETTINGS_PSE_DAY
     system_setting.pse_title = SSETTINGS_PSE_TITLE
     system_setting.pse_body = SSETTINGS_PSE_BODY
     system_setting.re_title = SSETTINGS_RE_TITLE

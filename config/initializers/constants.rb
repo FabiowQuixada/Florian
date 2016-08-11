@@ -45,7 +45,6 @@ GUEST_ROLE = 'Visitante'.freeze
 SAMPLE_RECIPIENTS = 'exemplo@gmail.com,exemplo2@yahoo.com.br'.freeze
 
 SSETTINGS_PSE_RECIPIENTS = 'exemplo@gmail.com'.freeze
-SSETTINGS_PSE_DAY = 1
 SSETTINGS_PSE_TITLE_PREFIX = 'Relatório de Produtos e Serviços - '.freeze
 SSETTINGS_PSE_TITLE = SSETTINGS_PSE_TITLE_PREFIX + '#competencia'
 SSETTINGS_PSE_BODY = 'Segue em anexo o relatório de produtos e serviços referente a #competencia.'.freeze

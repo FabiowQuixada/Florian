@@ -17,7 +17,7 @@ class SystemSetting < ActiveRecord::Base
   validates :pse_recipients_array, presence: { message: I18n.t('errors.system_setting.recipients') }
   validates :pse_private_recipients_array, presence: { message: I18n.t('errors.system_setting.private_recipients') }
   validates :re_title, :re_body, presence: true
-  validates :pse_title, :pse_day_of_month, :pse_body, presence: true
+  validates :pse_title, :pse_body, presence: true
 
 
   # Methods

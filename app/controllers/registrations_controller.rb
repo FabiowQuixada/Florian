@@ -48,7 +48,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def system_setting_params
-    params[:user].require(:system_setting).permit(:id, :user_id, :re_title, :re_body, :pse_recipients_array, :pse_private_recipients_array, :pse_day_of_month, :pse_title, :pse_body)
+    params[:user].require(:system_setting).permit(:id, :user_id, :re_title, :re_body, :pse_recipients_array, :pse_private_recipients_array, :pse_title, :pse_body)
   end
 
   def needs_password?(params)

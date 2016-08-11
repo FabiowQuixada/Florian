@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :contact do
-    contact_type Contact.contact_types[:"Responsável"]
     sequence(:name, 1) { |n| "Contact #{n}" }
     company
 

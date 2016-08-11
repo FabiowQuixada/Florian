@@ -7,7 +7,6 @@ describe SystemSetting, type: :model do
   it { is_expected.to validate_presence_of(:re_body) }
   it { is_expected.to validate_presence_of(:pse_title) }
   it { is_expected.to validate_presence_of(:pse_body) }
-  it { is_expected.to validate_presence_of(:pse_day_of_month) }
 
 
   # Relationships
