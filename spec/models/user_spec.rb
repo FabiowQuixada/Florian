@@ -5,7 +5,6 @@ describe User, type: :model do
   it { is_expected.to validate_presence_of(:email) }
   it { is_expected.to validate_presence_of(:role) }
   it { is_expected.to validate_presence_of(:signature) }
-  it { is_expected.to validate_presence_of(:bcc) }
 
   it { expect(build(:user, :admin).admin?).to be true }
   it { expect(build(:user, :guest).guest?).to be true }
