@@ -13,7 +13,6 @@
 			<th class="hidden-xs"><%= i18n.t :role %></th>
 			<th class="sorter-false icon-column"></th>
 			<th class="hidden-xs sorter-false icon-column"></th>
-			<th class="admin-only sorter-false icon-column"></th>
 			<% end %>
 		</tr>
 	</thead>
@@ -38,9 +37,6 @@
 				<% else %>
 				<%= link_to image_tag('deactivate.png', title: genderize_tag(iterator, 'is_inactive'), class: 'activate_btn status_btn'), activate_user_path(iterator), method: :post, remote: true, id: 'change_status_' + iterator.id.to_s, 'data-type' => :json, class: 'activate_btn' %>
 				<% end %>
-			</td>
-			<td class="admin-only icon-column">
-				<%= image_tag('destroy.png', title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %>
 			</td>
 		</tr>
 		<% end %>

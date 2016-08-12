@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :roles, except: [:show, :destroy] do
+    resources :roles, except: [:show] do
       member do
         post 'activate'
         post 'deactivate'

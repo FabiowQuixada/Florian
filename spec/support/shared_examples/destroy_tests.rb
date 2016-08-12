@@ -1,5 +1,4 @@
 shared_examples 'destroy tests' do |class_name|
-  
   let(:sucess_msg) { { message: class_name.new.was('destroyed'), success: true }.to_json }
   let(:error_msg) { { message: I18n.t('errors.deletion'), success: false }.to_json }
   let(:non_admin_msg) { { message: I18n.t('errors.unpermitted_action'), success: false }.to_json }

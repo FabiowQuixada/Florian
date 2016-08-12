@@ -5,7 +5,7 @@ class Role < ActiveRecord::Base
   include ModelHelper
 
   # Relationships
-  has_many :users
+  has_many :users, dependent: :restrict_with_error
 
   # Validations
   validates :name, uniqueness: true

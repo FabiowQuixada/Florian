@@ -114,7 +114,7 @@
 
 		$.ajax({
 			type: "DELETE",
-			url: "/<%= model.model_name.route_key %>/" + id,
+			url: "<%= model_full_path(@model) %>/" + id,
 			dataType: "json",
 			success: function(response) {
 				var message = response.message;

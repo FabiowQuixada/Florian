@@ -16,6 +16,7 @@ RSpec.configure do |config|
     User.create(name: 'Sistema', email: SYSTEM_EMAIL, password: 'fulano0123', password_confirmation: 'fulano0123', bcc: 'teste@test.com', signature: '(Assinatura)', role: role1)
 
     role2 = Role.create(name: "Usuário", description: 'Usuário comum')
+    Role.create(name: 'Grupo sem usuario', description: 'desc')
     User.create(name: 'Inativo', email: 'teste_inativo@yahoo.com.br', password: 'usuario_teste', password_confirmation: 'usuario_teste', bcc: 'teste@test.com', signature: '(Assinatura)', role: role2, active: false)
     User.create(name: 'Comum', email: 'teste_comum@yahoo.com.br', password: 'usuario_comum', password_confirmation: 'usuario_comum', bcc: 'teste@test.com', signature: '(Assinatura)', role: role2)
 

@@ -65,41 +65,19 @@ module MainConcern extend ActiveSupport::Concern
                    end
 
                    def destroy
-                     if request.xhr?
-                       handle_xhr_destroy && return
-                     else
-                       handle_common_request_destroy && return
-                     end
+                     destroy_model
+
+                     redirect_to send(@model.model_name.route_key + '_path'), notice: @model.was('destroyed') unless request.xhr?
                    end
 
   private
 
-                   def handle_xhr_destroy
-                     return render json: { message: t('errors.unpermitted_action'), success: false } unless current_user.admin?
-
-                     destroy_model || return
-
-                     render json: { message: @model.was('destroyed'), success: true }
-                   end
-
-                   def handle_common_request_destroy
-
-                     path = send(@model.model_name.route_key + '_path')
-
-                     return redirect_to path, alert: t('errors.unpermitted_action') unless current_user.admin?
-
-                     destroy_model || return
-
-                     redirect_to path, notice: @model.was('destroyed')
-
-                   end
-
                    def destroy_model
-
-                     model_class.find(params[:id]).destroy
-                   rescue
-                     render json: { message: t('errors.deletion'), success: false }
-
+                     if @model.destroy
+                       render json: { message: @model.was('destroyed'), success: true }
+                     else
+                       render json: { message: @model.errors.full_messages[0], success: false }
+                     end
                    end
 
                    def model_class
@@ -110,7 +88,8 @@ module MainConcern extend ActiveSupport::Concern
                      before_action :before_new, only: [:new, :create]
                      before_action :before_edit, only: [:edit, :update]
                      before_action :before_show, only: [:show]
-                     before_action :before_index, only: [:index, :destroy]
+                     before_action :before_index, only: [:index]
+                     before_action :before_destroy, only: [:destroy]
                      before_action :authenticate_user!
                    end
 
@@ -134,6 +113,28 @@ module MainConcern extend ActiveSupport::Concern
                    def before_show
                      @model = model_class.find(params[:id])
                      @breadcrumbs = @model.breadcrumb_path.merge Hash[t('helpers.action.show') => '']
+                   end
+
+                   def before_destroy
+                     return render json: { message: t('errors.undestroyable_user'), success: false } if model_class == User
+
+                     return unless can_destroy?
+
+                     @model = model_class.find(params[:id])
+                     @breadcrumbs = @model.breadcrumb_path
+
+                   end
+
+                   def can_destroy?
+                     unless current_user.admin?
+                       if request.xhr?
+                         render json: { message: t('errors.unpermitted_action'), success: false }
+                       else
+                         redirect_to send(@model.model_name.route_key + '_path'), alert: t('errors.unpermitted_action')
+                       end
+                     end
+
+                     current_user.admin?
                    end
 
                    def order_attribute

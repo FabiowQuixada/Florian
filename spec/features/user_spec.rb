@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe User, type: :request do
   let(:signature) { 'lalala' }
-  let(:re_title) { 're lalala' }
-  let(:pse_title) { 'pse lalala' }
+  let(:re_title) { 're #competencia lalala' }
+  let(:pse_title) { 'pse #competencia lalala' }
 
   it 'is not allowed to login if it is not active' do
     visit root_path

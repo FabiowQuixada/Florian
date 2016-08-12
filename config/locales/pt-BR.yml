@@ -573,6 +573,7 @@ pt-BR:
       second: Segundo
       year: Ano
   errors:
+    undestroyable_user: 'Nenhum usuário pode ser deletado.'
     deletion: A deleção não pôde ser efetuada por algum motivo. Verifique o log.
     unpermitted_action: Desculpe, você não tem permissão para realizar esta ação.
     user:

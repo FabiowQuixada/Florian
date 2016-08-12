@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe UsersController, type: :controller do
-  # include_examples 'destroy tests', User
+  
+  # Users cannot be destroyed
 
   # == Admin ================================================================================================
   context 'Admin' do
