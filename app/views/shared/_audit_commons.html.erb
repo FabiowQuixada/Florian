@@ -11,12 +11,14 @@
 		<div id="collapse_audit" class="panel-collapse collapse">
 			<div class="panel-body" style="margin: 0; padding: 0;">
 				<table id="audit_table" class="table table-striped table-condensed unbreakable-table">
+					<thead>
 					<tr>
 						<th><%= t('audit.who') %></th>
 						<th style="width: 15%;"><%= t('audit.when') %></th>
 						<th><%= t('audit.where') %></th>
 						<th style="width: 70%;"><%= t('audit.what') %></th>
 					</tr>
+					</thead>
 
 					<tbody>
 						<% model.audits.each do |audit| %>

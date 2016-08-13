@@ -67,21 +67,25 @@
 		<div id="collapse_history" class="panel-collapse collapse">
 			<div class="panel-body" style="margin: 0; padding: 0;">
 				<table id="history_table" class="table table-striped table-condensed">
-					<tr>
-						<th><%= t('audit.when') %></th>
-						<th><%= t('audit.value') %></th>
-						<th><%= t('audit.type') %></th>
-						<th><%= t('audit.who') %></th>
-					</tr>
+					<thead>
+						<tr>
+							<th><%= t('audit.when') %></th>
+							<th><%= t('audit.value') %></th>
+							<th><%= t('audit.type') %></th>
+							<th><%= t('audit.who') %></th>
+						</tr>
+					</thead>
 
-					<% @model.history.each do |history| %>
-					<tr>
-						<td><%= l(history.created_at, format: :really_short) %></td>
-						<td><%= ActionController::Base.helpers.number_to_currency(history.value) %></td>
-						<td><%= history.send_type_desc %></td>
-						<td><%= history.user.name %></td>
-					</tr>
-					<% end %>
+					<tbody>
+						<% @model.history.each do |history| %>
+						<tr>
+							<td><%= l(history.created_at, format: :really_short) %></td>
+							<td><%= ActionController::Base.helpers.number_to_currency(history.value) %></td>
+							<td><%= history.send_type_desc %></td>
+							<td><%= history.user.name %></td>
+						</tr>
+						<% end %>
+					</tbody>
 				</table>
 			</div>
 			<div class="panel-footer">
