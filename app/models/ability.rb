@@ -35,5 +35,6 @@ class Ability
     can :manage, SystemSetting
     can :manage, ReceiptEmail
     can :manage, ProductAndServiceDatum
+    can :manage, ProductAndServiceWeek
   end
 end
