@@ -36,4 +36,18 @@ describe Company, type: :model do
     company.valid?
     expect(company.errors).not_to be_empty
   end
+
+  it 'does not save a `Company` without CNPJ' do
+    company = build :company
+    company.cnpj = nil
+    company.valid?
+    expect(company.errors.full_messages).to include "O campo 'CNPJ' é obrigatório;"
+  end
+
+  it 'does not save a `Person` without CPF' do
+    company = build :company, :pessoa_fisica
+    company.cpf = nil
+    company.valid?
+    expect(company.errors.full_messages).to include "O campo 'CPF' é obrigatório;"
+  end
 end
