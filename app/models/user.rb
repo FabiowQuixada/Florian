@@ -58,9 +58,9 @@ class User < ActiveRecord::Base
   end
 
   def default_values
-    name ||= ''
+    self.name ||= ''
     self.bcc ||= email
-    self.signature ||= '--\n\n' + name
+    self.signature ||= "\n\n--\n\n" + self.name
   end
 
 end
