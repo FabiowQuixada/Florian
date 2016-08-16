@@ -3,11 +3,12 @@ pt-BR:
   app_title: Flórian
   by_author: por Fabiow Quixadá
   main_page: Página Principal
-  development: Desenvolvimento
-  test: Teste
-  uat: Homologação
-  showcase: Showcase
-  production: Produção
+  environments:
+    development: Desenvolvimento
+    test: Teste
+    uat: Homologação
+    showcase: Showcase
+    production: Produção
   attention: Atenção
   uat_mode_message: Você está em ambiente de teste.
   menu:
@@ -270,6 +271,11 @@ pt-BR:
     president_name: "Dr. Edmar Maciel Lima Júnior"
     president_description: "Presidente do Instituto de Apoio ao Queimado – I.A.Q."
     other:
+      banking:
+        deposit_data: 'Dados para depósito'
+        bank: 'Banco'
+        agency: 'Agência'
+        account: 'Conta Corrente'
       receipt_text:
         company: 'A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu da %{name}, inscrito sob o CNPJ/MF nº %{cnpj}, situada na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
         person: 'A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu de %{name}, CPF nº %{cpf}, residente na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
@@ -749,3 +755,14 @@ pt-BR:
     buttons:
       forgot_password: Esqueceu sua senha?
       send_reset_password: Enviar instruções
+  showcase: 
+    login_info: 'Você está em ambiente de portfólio. Os dados aqui apresentados são fictícios e reinicializados semanalmente. Para fazer login, utilize as seguintes credenciais: %{showcase_email} para login e %{showcase_password} para senha.'
+    report:
+      president_name: "Dr. Carl Sagan"
+      president_description: "Presidente do Instituto Sirius"
+      footer: 
+        address: 'Rua Canis Major, 1743 - CEP 55.555-555 - Fortaleza, Ceará'
+        phone: '(85) 0000-0000 / (85) 9 9999-9999'
+        email: 'contato@sirius.com.br'
+      pf_receipt_text: 'A empresa Sirius, inscrita sob o CNPJ/MF nº 00.000.000/0000-00, situada à Rua Canis Major, recebeu de %{name}, CPF nº %{cpf}, residente na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
+      pj_receipt_text: 'A empresa Sirius, inscrita sob o CNPJ/MF nº 00.000.000/0000-00, situada à Rua Manis Major, recebeu da %{name}, inscrito sob o CNPJ/MF nº %{cnpj}, situada na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'

@@ -13,7 +13,7 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
-  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :letter_opener
 
   config.serve_static_files = true
 

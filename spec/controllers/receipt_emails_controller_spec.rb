@@ -150,7 +150,7 @@ describe ReceiptEmailsController, type: :controller do
 
     describe 'POST #send_test' do
       context 'with valid attributes' do
-        let(:model) { create :receipt_email }
+        let(:model) { create :receipt_email, :with_history }
         let(:expected) do
           {
             message: 'E-mail de recibo de teste enviado com sucesso!',

@@ -15,7 +15,7 @@ describe ReceiptReport do
     # Because of paragraph breaks
     it { expect(text_analysis.strings[2..6] * ' ').to eq(receipt.processed_receipt_text(date)) }
 
-    it { expect(text_analysis.strings).to include("DADOS PARA DEPÓSITO") }
+    it { expect(text_analysis.strings).to include("Dados para depósito") }
     it { expect(text_analysis.strings).to include("Banco: Itaú (341)") }
     it { expect(text_analysis.strings).to include("Agência: 8373") }
     it { expect(text_analysis.strings).to include('Conta Corrente: 14373-7') }

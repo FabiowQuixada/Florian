@@ -84,6 +84,20 @@
 						</div>
 						<% end %>
 
+						<div id="global_warning_box" class="alert alert-warning fade in" style="display: none;">
+							<a href="javascript:void(0)" class="close" data-hide="alert">&times;</a>
+							<div id="global_warning_massages">
+								
+							</div>
+						</div>
+
+						<div id="global_hideless_warning_box" class="alert alert-warning fade in" style="display: none;">
+							<a href="javascript:void(0)" class="close" data-hide="alert">&times;</a>
+							<div id="global_hideless_warning_massages">
+								
+							</div>
+						</div>
+
 						<div id="global_notice_box" class="alert alert-success fade in" style="display: none;">
 							<a href="javascript:void(0)" class="close" data-hide="alert">&times;</a>
 							<div id="global_notice_massages">
@@ -112,7 +126,7 @@
 							<%= t('app_title') + ' ' + Time.now.year.to_s %>
 
 							<% if !current_user.nil? && current_user.admin? %>
-							(<%= t(Rails.env) %>)
+							(<%= t('environments.' + Rails.env) %>)
 							<% end %>
 
 							<br/>
@@ -194,6 +208,8 @@
 	var display_admin_data = false;
 
 	$(function() {
+
+		<%= ('display_hideless_warning(\'' + t('showcase.login_info', showcase_email: bold('visitante' + GUEST_USERS_NUMBERS.sample.to_s + '@florian.com'), showcase_password: bold(SHOWCASE_PASSWORD)) + '\');').html_safe if Rails.env == 'showcase' && request.env['PATH_INFO'] == '/users/sign_in' %>
 
 		$('.admin_key_btn').on('click', toogle_admin_data);
 
@@ -331,6 +347,19 @@
 		to_top();
 		$('#global_notice_massages').html(message);
 		$('#global_notice_box').show();
+	}
+
+	function display_warning(message) {
+
+		hide_all_messages();
+		to_top();
+		$('#global_warning_massages').html(message);
+		$('#global_warning_box').show();
+	}
+
+	function display_hideless_warning(message) {
+		$('#global_hideless_warning_massages').html(message);
+		$('#global_hideless_warning_box').show();
 	}
 
 	function hide_info()

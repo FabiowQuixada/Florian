@@ -17,7 +17,7 @@ class FlorianReport < Prawn::Document
     end
 
     # Logo and full title box
-    pdf.table [[{ image: "#{Rails.root}/app/assets/images/logo_text.jpg", scale: 0.4, position: :center }, two_dimensional_array]], position: :left do
+    pdf.table [[{ image: EnvironmentContentHandler.logo_path, scale: 0.4, position: :center }, two_dimensional_array]], position: :left do
       cells.column(0).row(0).style(width: 60)
       cells.borders = []
     end
@@ -27,9 +27,7 @@ class FlorianReport < Prawn::Document
   def footer(pdf)
     pdf.bounding_box [pdf.bounds.left, pdf.bounds.bottom + 40], width: pdf.bounds.width do
       pdf.font 'Helvetica'
-      pdf.text I18n.t('report.footer.address'), size: 10, align: :center
-      pdf.text I18n.t('report.footer.phone'), size: 10, align: :center
-      pdf.text I18n.t('report.footer.email'), size: 10, align: :center
+      EnvironmentContentHandler.report_footer pdf
     end
   end
 

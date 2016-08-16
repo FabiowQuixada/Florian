@@ -87,11 +87,11 @@ class ReceiptEmail < ActiveRecord::Base
   end
 
   def pf_text
-    I18n.t('report.other.receipt_text.person', name: company.name, cpf: company.cpf.to_s, address: company.address, value_tag: I18n.t('tags.value'), competence_tag: I18n.t('tags.competence'))
+    EnvironmentContentHandler.receipt_report_pf_main_text company
   end
 
   def pj_text
-    I18n.t('report.other.receipt_text.company', name: company.registration_name, cnpj: company.cnpj.to_s, address: company.address, value_tag: I18n.t('tags.value'), competence_tag: I18n.t('tags.competence'))
+    EnvironmentContentHandler.receipt_report_pj_main_text company
   end
 
   def apply_competence_tag_to(text, date)
