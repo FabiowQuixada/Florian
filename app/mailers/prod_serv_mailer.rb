@@ -33,8 +33,13 @@ class ProdServMailer < ApplicationMailer
 
   def attach_report(week)
     ProductAndServiceReport.new(file_name, week).save
-    attachments['relatorio_de_produtos_e_servicos.pdf'] = File.read(file_name)
+    attachments[attachment_name(week)] = File.read(file_name)
     File.delete(file_name)
+  end
+
+  def attachment_name(week)
+    date = week.product_and_service_datum.competence
+    'relatorio_de_produtos_e_servicos_' + l(date, format: '%B').downcase + '_' + date.year.to_s + '.pdf'
   end
 
   def week_period(week)
