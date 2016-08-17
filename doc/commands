@@ -1,0 +1,22 @@
+DATABASE:
+  rake db:migrate VERSION=0 && rake db:migrate && rake db:seed && rails s
+  rake db:migrate VERSION=0 RAILS_ENV=test && rake db:migrate RAILS_ENV=test && rake db:seed RAILS_ENV=test
+  bundle exec rake db:drop db:create db:migrate db:seed RAILS_ENV=production
+  bundle exec rake db:rollback STEP=1 && rake db:migrate
+
+
+FLORIAN GENERATOR:
+  rails g iaq_gen Bill competence:date:m water:money energy:money telephone:money
+
+
+PROCESS KILL:
+  ps aux | grep rails
+  kill -9 {process_id}
+
+
+DONT KNOW, GOTTA REMEBER :x
+  psql -U postgres -h localhost -d my_database -f "/home/fabiow/backups/db_backup/2015.12.27.14.54.56/db_backup/databases/PostgreSQL.sql"
+
+
+OTHERS:
+  save_and_open_page

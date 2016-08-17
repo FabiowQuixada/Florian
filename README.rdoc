@@ -13,6 +13,7 @@
  # 1 Tidy;
  # 2 Plsql;
  # 3 Backup;
+ # 4 Bundler (global);
 
  # 1 https://github.com/htacg/tidy-html5/blob/master/README/README.md 
  # 2.1 sudo apt-get install libpq-dev
@@ -22,7 +23,16 @@
        ('trust' instead of 'peer')
        and then run: sudo service postgresql restart
    3.2 Change '/home/ubuntu/' on schedule.rb: env :PATH, '/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games'
+ # 4 gem install bundler
 
 
  ** Deploy instructions ***************************************************************************
-  Production: Just run './server_up' on the project root directory;
+  Configuration:
+    - Change environment variables;
+    - Backup gem paths;
+    - Variables in `config/env/prod`;
+
+  To ascend the server to production: 
+    - Just run './server_up' on the project root directory;
+
+
