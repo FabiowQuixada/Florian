@@ -113,17 +113,15 @@ class ReceiptEmail < ActiveRecord::Base
   # rubocop:disable all
   def validate_value
     return if value.blank?
-    return errors.add :value, I18n.t('errors.email.value_mandatory') if value == 0
+    return errors.add :value, blank_error_message('value') if value == 0
     return errors.add :value, I18n.t('errors.email.value_positive') if value < 0
     return errors.add :value, I18n.t('errors.email.value_max') if value > 1_000_000
   end
   # rubocop:enable all
 
   def validate_day_of_month
-
     return if day_of_month.blank?
-
-    errors.add(:day_of_month, I18n.t('errors.email.month_mandatory')) if day_of_month < 1
-    errors.add(:day_of_month, I18n.t('errors.email.month_max')) if day_of_month > 28
+    return errors.add(:day_of_month, blank_error_message('day_of_month')) if day_of_month < 1
+    return errors.add(:day_of_month, I18n.t('errors.email.month_max')) if day_of_month > 28
   end
 end

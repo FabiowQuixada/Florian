@@ -36,4 +36,9 @@ module ModelHelper
 
   def breadcrumb_suffix
   end
+
+  def blank_error_message(field)
+    attribute = I18n.t('activerecord.attributes.' + self.class.name.underscore + '.' + field)
+    I18n.t('errors.messages.blank', attribute: attribute)
+  end
 end

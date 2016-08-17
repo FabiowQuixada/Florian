@@ -71,19 +71,11 @@ class Company < ActiveRecord::Base
     errors.add(:cpf, I18n.t('errors.company.unique_cpf')) if cpf && !cpf.to_s.empty? && Company.where(cpf: cpf).where('id <> ?', id || 0).first
   end
 
-  def unique_name_message
-    if person?
-      I18n.t('errors.company.name')
-    else
-      I18n.t('errors.company.registration_name')
-    end
-  end
-
   def default_values
     self.city ||= DEFAULT_COMPANY_CITY
     self.state ||= DEFAULT_COMPANY_STATE
 
-    entity_type || Company.entity_types[:"Pessoa Jurídica"]
+    self.entity_type ||= Company.entity_types[:"Pessoa Jurídica"]
   end
 
 end

@@ -586,10 +586,8 @@ pt-BR:
       cannot_deactivate_admin: 'Não é possível desativar um administrador;'
     email:
       one_recipient: "O e-mail deve ter pelo menos um destinatário;"
-      value_mandatory: "O campo 'Valor' é obrigatório;"
       value_positive: "O campo 'Valor' deve ser positivo;"
       value_max: "O campo 'Valor' deve ser no máximo R$ 1.000.000,00;"
-      month_mandatory: "O campo 'Dia do mês' é inválido;"
       month_max: "O campo 'Dia do mês' deve ser menor que 28;"
     contact:
       all_empty: "Preencha pelo menos um dos campos."
@@ -600,10 +598,7 @@ pt-BR:
       unique_cnpj: "Este CNPJ já está em uso;"
       unique_cpf: "Este CPF já está em uso;"
       contacts: "Número de contatos inválido: %{contacts};"
-      name: "O campo 'Nome' é obrigatório;"
-      registration_name: "O campo 'Nome fantasia' é obrigatório;"
     donation:
-      date_mandatory: "O campo 'Data' é obrigatório;"
       value_or_remark: "Preencha pelo menos um dos seguintes campos: 'Valor' ou 'Observação';"
     system_setting:
       recipients: "Adicione pelo menos um destinatario;"
