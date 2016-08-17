@@ -158,7 +158,7 @@ describe ReceiptEmailsController, type: :controller do
             company: model.company.name,
             value: ActionController::Base.helpers.number_to_currency(model.value),
             type: 'Teste',
-            user: model.history.last.user.name
+            user: User.first.name
           }.to_json
         end
 
