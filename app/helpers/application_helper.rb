@@ -3,6 +3,7 @@ require './lib/modules/locale'
 module ApplicationHelper
 
   include Locale
+  include ActionView::Helpers::TagHelper
 
   def genderize_full_tag(model, full_tag)
     t(model.genderize(full_tag))

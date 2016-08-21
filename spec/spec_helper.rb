@@ -18,8 +18,15 @@ require 'devise'
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-# require 'simplecov'
-# SimpleCov.start
+require 'simplecov'
+SimpleCov.start
+
+SimpleCov.start do
+  add_filter '/gems/'
+  add_filter '/spec/'
+  add_filter '/app/others/environment_content_handler.rb'
+end
+SimpleCov.minimum_coverage 95
 
 RSpec.configure do |config|
   ENV['RAILS_ENV'] ||= 'test'

@@ -33,10 +33,10 @@ describe Donation, type: :model do
 
   it { expect(build(:donation, value: 0.00).send(:no_value?)).to be true }
 
-  it { is_expected.to belong_to :company }
-
   it { is_expected.to validate_presence_of(:donation_date) }
   it { is_expected.to validate_presence_of(:company) }
+
+  it { expect(build(:donation).model_gender).to eq 'f' }
 
   # Relationships
   it { is_expected.to belong_to :company }

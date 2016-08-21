@@ -56,6 +56,21 @@ describe User, type: :request do
     end
   end
 
+  it '#active_for_authentication?' do
+    user = build :user
+    expect(user.active_for_authentication?).to be true
+    user.active = false
+    expect(user.active_for_authentication?).to be false
+  end
+
+  it '#guest?' do
+    user = build :user, :guest
+    expect(user.guest?).to be true
+
+    user = build :user
+    expect(user.guest?).to be false
+  end
+
 
   # == Helper methods =============================================================
 

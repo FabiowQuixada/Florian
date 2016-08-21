@@ -7,8 +7,13 @@ AllCops:
     - lib/generators/iaq_gen/templates/**
     - bin/**
 
+RSpec/DescribedClass:
+  Exclude:
+    - spec/helpers/**
+    - spec/lib_modules/**
+
 Metrics/LineLength:
-  Max: 400
+  Max: 500
 
 Style/EmptyLinesAroundModuleBody:
   Enabled: false

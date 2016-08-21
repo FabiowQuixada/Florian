@@ -10,5 +10,17 @@ FactoryGirl.define do
     trait :invalid do
       recipients_array nil
     end
+
+    trait :auto do
+      send_type EmailHistory.send_types[:auto]
+    end
+
+    trait :resend do
+      send_type EmailHistory.send_types[:resend]
+    end
+
+    trait :test do
+      send_type EmailHistory.send_types[:test]
+    end
   end
 end

@@ -69,18 +69,6 @@ class ExcelParser
     company
   end
 
-  def self.parse_donation(company, row)
-    donation = Donation.new
-
-    if val.is_a? Numeric
-      donation.value = val
-    else
-      donation.remark = val
-    end
-
-    company.donations << donation
-  end
-
   def self.parse_basic_info(company, row)
 
     col = BASIC_INFO_POS

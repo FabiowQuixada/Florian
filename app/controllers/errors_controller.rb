@@ -5,7 +5,7 @@ class ErrorsController < ApplicationController
 
     @breadcrumbs = Hash[I18n.t('helpers.error') => '']
 
-    render 'error', status: 404
+    render 'error', status: :not_found
   end
 
   def internal_server_error
@@ -14,6 +14,6 @@ class ErrorsController < ApplicationController
 
     @breadcrumbs = Hash[I18n.t('helpers.error') => '']
 
-    render 'error', status: 500
+    render 'error', status: :internal_server_error
   end
 end

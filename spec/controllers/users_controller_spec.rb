@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe UsersController, type: :controller do
-  
   # Users cannot be destroyed
 
   # == Admin ================================================================================================

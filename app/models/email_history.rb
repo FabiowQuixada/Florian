@@ -16,11 +16,6 @@ class EmailHistory < ActiveRecord::Base
 
 
   # Methods
-  def self.types(hash = {})
-    type_values.keys.each { |key| hash[key] = I18n.t("activerecord.attributes.email.type_values.#{key}") }
-    hash
-  end
-
   def send_type_desc
     I18n.t('activerecord.attributes.receipt_email.type_values.' + send_type.to_s)
   end

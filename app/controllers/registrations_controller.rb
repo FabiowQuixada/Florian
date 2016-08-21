@@ -2,16 +2,6 @@ class RegistrationsController < Devise::RegistrationsController
 
   before_filter :authenticate_user!
 
-  def create
-    user = User.new user_params
-
-    if user.save
-      redirect_to users_path, notice: genderize_tag(user, 'created')
-    else
-      render 'new'
-    end
-  end
-
   def update
     prev_unconfirmed_email = current_user.unconfirmed_email if current_user.respond_to?(:unconfirmed_email)
 
@@ -49,10 +39,6 @@ class RegistrationsController < Devise::RegistrationsController
 
   def system_setting_params
     params[:user].require(:system_setting).permit(:id, :user_id, :re_title, :re_body, :pse_recipients_array, :pse_private_recipients_array, :pse_title, :pse_body)
-  end
-
-  def needs_password?(params)
-    params[:password].present?
   end
 
   def account_update_params

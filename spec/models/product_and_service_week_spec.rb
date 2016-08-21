@@ -98,4 +98,6 @@ describe ProductAndServiceWeek, type: :model do
 
   # Relationships
   it { is_expected.to belong_to :product_and_service_datum }
+
+  it { expect(build(:product_and_service_week).model_gender).to eq 'f' }
 end

@@ -12,6 +12,9 @@ describe SystemSetting, type: :model do
   # Relationships
   it { is_expected.to belong_to :user }
 
+  it { expect(build(:system_setting).model_gender).to eq 'f' }
+  it { expect(build(:system_setting, pse_private_recipients_array: nil).private_recipients_as_array).to eq [] }
+
 
   describe 'tags' do
     let(:setting) { build(:system_setting) }
