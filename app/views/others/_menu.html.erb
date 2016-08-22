@@ -44,7 +44,7 @@
             </li>
             <% end %>
             <li class="visible-xs">
-                <a data-method="delete" href="/users/sign_out"><%= t('helpers.action.logout') + ' (' + current_user.name + ')' %></a>
+                <a href="<%= edit_user_registration_path %>"><%= current_user.name + ' (' + t('helpers.action.logout') + ')' %></a>
             </li>
 
         </ul>

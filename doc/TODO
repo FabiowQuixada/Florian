@@ -1,11 +1,12 @@
 Graficos e mais graficos;
 Script ambientes paralelos ativos no servidor (uat, showcase);
 Backup servidor;
+AWS: Porta 80;
 
 Showcase: Reinicializacao semanal do BD: p isso precisa parar o servidor;
 
 Mensagem "vc ja ta logado!" -> "bem vindo de volta!"
-Deixa salva PF sem cpf;
+Deixa salvar PF sem cpf;
 Auto login e senha do github;
 Testes: Stubs;
 Session do db: destruicao de contatos de entidade quando atualiza a entidade;
@@ -19,7 +20,6 @@ Teste Whenever;
 Shared examples controllers;
 Formatacao HTML (ERB) - Sublime
 SASS;
-Edicao de perfil no mobile;
 
 =====================================================================
 

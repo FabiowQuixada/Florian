@@ -1,3 +1,6 @@
+<span class="visible-xs logout-xs-btn-box"><%= link_to(t('helpers.action.logout'), destroy_user_session_path, method: :delete, class: 'btn btn-primary btn-xs logout-xs-btn') %>
+</span>
+
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 	<%= devise_error_messages! %>
 

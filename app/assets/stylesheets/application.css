@@ -271,3 +271,12 @@ td.button-wrapper {
 .thick {
     font-weight: bold;
 }
+
+.logout-xs-btn-box {
+  margin-bottom: 15px;
+}
+
+.logout-xs-btn {
+  margin-top: -20px;
+  float:right;
+}
