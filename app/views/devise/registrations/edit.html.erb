@@ -142,7 +142,8 @@
 	<br/>
 
 	<div class="">
-		<%= f.submit t('helpers.action.update'), class: 'btn btn-primary save_btn' %>
+		<%= f.submit t('helpers.action.update'), class: 'btn btn-primary save_btn' unless Rails.env.showcase? %>
+		<div class="asterisk-description"><%= t('showcase.cant_edit') if Rails.env.showcase? %></div>
 	</div>
 
 <% end %>

@@ -752,6 +752,7 @@ pt-BR:
       send_reset_password: Enviar instruções
   showcase: 
     login_info: 'Você está em ambiente de portfólio. Os dados aqui apresentados são fictícios e reinicializados semanalmente. Para fazer login, utilize as seguintes credenciais: %{showcase_email} para login e %{showcase_password} para senha.'
+    cant_edit: 'Não é possível alterar estas configurações em ambiente de portfólio.'
     report:
       president_name: "Dr. Carl Sagan"
       president_description: "Presidente do Instituto Sirius"

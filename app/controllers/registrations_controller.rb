@@ -2,7 +2,10 @@ class RegistrationsController < Devise::RegistrationsController
 
   before_filter :authenticate_user!
 
+  # rubocop:disable all
   def update
+    return redirect_to root_path, alert: t('errors.unpermitted_action') if Rails.env.showcase?
+
     prev_unconfirmed_email = current_user.unconfirmed_email if current_user.respond_to?(:unconfirmed_email)
 
     resource_updated = current_user.system_setting.update(system_setting_params) && update_resource(current_user, account_update_params)
@@ -10,6 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
 
     something resource_updated, prev_unconfirmed_email
   end
+  # rubocop:enable all
 
   private
 
@@ -48,8 +52,6 @@ class RegistrationsController < Devise::RegistrationsController
   before_action :before_edit, only: [:edit, :update]
 
   def before_edit
-    return redirect_to root_path, alert: I18n.t('error_pages.not_found.title') if current_user.guest?
-
     @model = current_user
     @breadcrumbs = Hash[t('helpers.profile') => '']
   end

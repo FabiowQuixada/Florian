@@ -53,11 +53,7 @@
 						<div class="hidden-xs col-md-1 col-lg-1"></div>
 						<div class="hidden-xs col-md-4 col-lg-4" style="margin-top: 10px; margin-bottom: 10px;">
 							<div class="right">
-								<% if current_user.guest? %>
-								<%= t('helpers.logged_as') + current_user.name %> 
-								<% else %>
-								<%= t('helpers.logged_as') %> <%= link_to current_user.name, edit_user_registration_path %> 
-								<% end %>
+								<%= link_to current_user.name, edit_user_registration_path %> 
 								<%= (link_to image_tag('key.png', title: t('helpers.action.show_admin_private_data')), 'javascript:void(0)', class: 'admin_key_btn') if current_user.admin? %> 
 
 								<%= link_to(t('helpers.action.logout'), destroy_user_session_path, method: :delete, style: 'margin-left: 5px;', class: 'btn btn-primary btn-xs') %>
