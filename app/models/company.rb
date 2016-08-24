@@ -6,6 +6,8 @@ class Company < ActiveRecord::Base
   usar_como_cnpj :cnpj
   usar_como_cpf :cpf
   after_initialize :default_values
+  attr_accessor :donations_to_be_deleted
+  attr_accessor :contacts_to_be_deleted
 
 
   enum entity_type: [:"Pessoa Jurídica", :"Pessoa Física"]
@@ -61,6 +63,14 @@ class Company < ActiveRecord::Base
     Hash[name => 'send(self.model_name.route_key + "_path")']
   end
 
+  def update(params)
+    result = update_attributes params
+    destroy_donations params
+    destroy_contacts params
+
+    result
+  end
+
   private
 
   def unique_cnpj
@@ -74,8 +84,23 @@ class Company < ActiveRecord::Base
   def default_values
     self.city ||= DEFAULT_COMPANY_CITY
     self.state ||= DEFAULT_COMPANY_STATE
-
     self.entity_type ||= Company.entity_types[:"Pessoa Jurídica"]
+  end
+
+  def destroy_donations(params)
+    return if params[:donations_to_be_deleted].nil?
+
+    params[:donations_to_be_deleted].split(',').each do |id|
+      donations.find(id).destroy
+    end
+  end
+
+  def destroy_contacts(params)
+    return if params[:contacts_to_be_deleted].nil?
+
+    params[:contacts_to_be_deleted].split(',').each do |id|
+      contacts.find(id).destroy
+    end
   end
 
 end

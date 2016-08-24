@@ -46,7 +46,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr id="no_contacts_row"<%= ' style=display:none' if @model.contacts.any? %>><td colspan="10"><%= genderize_tag(Contact.new, 'helpers.none_registered') %></td></tr>
+				<tr id="no_contacts_row"<%= ' style=display:none' if @model.contacts.any? %>><td colspan="6"><%= genderize_tag(Contact.new, 'helpers.none_registered') %></td></tr>
 
 				<% @model.contacts.each do |contact| %>
 					<%= render partial: contact %>
@@ -56,10 +56,11 @@
 	</div>
 </div>
 
-<%= hidden_field_tag 'contacts_to_be_deleted' %>
+<%= f.hidden_field 'contacts_to_be_deleted' %>
 
 <script>
 
+	// Temporary contacts have negative id;
 	var transient_contacts = 0;
 	var contact_temp_id = -1;
 	loaded_contact_id = null;
@@ -183,7 +184,7 @@
 				$('#no_contacts_row').show();
 
 			if(id > 0) {
-				$('#contacts_to_be_deleted').val($('#contacts_to_be_deleted').val() + id + ',');
+				$('#company_contacts_to_be_deleted').val($('#company_contacts_to_be_deleted').val() + id + ',');
 			}
 		});
 

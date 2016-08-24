@@ -6,8 +6,6 @@ class CompaniesController < ApplicationController
 
   def update
     if @model.update send(@model.model_name.singular + '_params')
-      destroy_donations
-      destroy_contacts
       redirect_to send(@model.model_name.route_key + '_path'), notice: @model.was('updated')
     else
       render '_form'
@@ -15,15 +13,11 @@ class CompaniesController < ApplicationController
   end
 
   def contact_row
-    contact = Contact.new contact_params
-
-    render partial: 'contacts/contact', locals: { contact: contact }
+    render partial: 'contacts/contact', locals: { contact: Contact.new(contact_params) }
   end
 
   def donation_row
-    donation = Donation.new donation_params
-
-    render partial: 'donations/donation', locals: { donation: donation }
+    render partial: 'donations/donation', locals: { donation: Donation.new(donation_params) }
   end
 
   private #############################################
@@ -31,6 +25,7 @@ class CompaniesController < ApplicationController
   def company_params
     params.require(:company).permit(:id, :entity_type, :name, :registration_name, :cpf, :cnpj, :address, :cep,
                                     :neighborhood, :city, :state, :email_address, :website, :category, :donation, :first_parcel, :payment_frequency, :contract, :remark, :payment_period, :group,
+                                    :donations_to_be_deleted, :contacts_to_be_deleted,
                                     donations_attributes: [:id, :value, :donation_date, :remark],
                                     contacts_attributes: [:id, :name, :position, :telephone, :celphone, :email, :fax])
   end
@@ -41,24 +36,6 @@ class CompaniesController < ApplicationController
 
   def donation_params
     params.require(:donation).permit(:id, :value, :donation_date, :remark)
-  end
-
-  def destroy_donations
-
-    return if params[:donations_to_be_deleted].nil?
-
-    params[:donations_to_be_deleted].split(',').each do |id|
-      @model.donations.find(id).destroy
-    end
-  end
-
-  def destroy_contacts
-
-    return if params[:contacts_to_be_deleted].nil?
-
-    params[:contacts_to_be_deleted].split(',').each do |id|
-      @model.contacts.find(id).destroy
-    end
   end
 
   def order_attribute
