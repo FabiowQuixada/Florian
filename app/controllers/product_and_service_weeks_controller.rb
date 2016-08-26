@@ -1,9 +1,5 @@
 class ProductAndServiceWeeksController < ApplicationController
 
-  include MainConcern
-  arguable model_class: ProductAndServiceDatum
-  load_and_authorize_resource
-
   def update_and_send
     ok_to_update_and_send? || return
     perform_update_and_send && return

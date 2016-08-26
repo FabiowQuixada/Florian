@@ -1,52 +1,41 @@
 class ReceiptEmailsController < ApplicationController
 
-  include MainConcern
-  include StatusConcern
-  arguable model_class: ReceiptEmail
-  load_and_authorize_resource
+  include IndexAction
+  include CreationActions
+  include ModificationActions
+  include DestroyAction
+  include StatusActions
 
   def index
-
     @list = order_emails_by_date
 
     @recent_emails = EmailHistory.where('created_at >= :start_date AND send_type != :send_type',
-                                        start_date: Date.new - ReceiptEmail.recent_emails_days.days, send_type: EmailHistory.send_types[:test])
-
+                                        start_date: Date.new - ReceiptEmail.recent_emails_days.days,
+                                        send_type: EmailHistory.send_types[:test])
   end
 
   def resend
-
     email = load_email
+    return render json: email.errors, status: :unprocessable_entity unless email.valid?
 
-    begin
+    ReceiptMailer.resend_receipt_email(email, convert_competence, current_user).deliver_now
+    return render history_as_json(email, 'resent')
 
-      return render json: email.errors, status: :unprocessable_entity unless email.valid?
-
-      ReceiptMailer.resend_receipt_email(email, convert_competence, current_user).deliver_now
-      return render history_as_json(email, 'resent')
-
-    rescue StandardError => exc
-      exception_message = handle_exception exc, I18n.t('alert.email.error_resending')
-      return render json: exception_message, status: :unprocessable_entity
-    end
+  rescue StandardError => exc
+    exception_message = handle_exception exc, I18n.t('alert.email.error_resending')
+    return render json: exception_message, status: :unprocessable_entity
   end
 
   def send_test
-
     email = load_email
+    return render json: email.errors, status: :unprocessable_entity unless email.valid?
 
-    begin
+    ReceiptMailer.send_test_receipt_email(email, current_user, convert_competence).deliver_now
+    return render history_as_json(email, 'test_sent')
 
-      return render json: email.errors, status: :unprocessable_entity unless email.valid?
-
-      ReceiptMailer.send_test_receipt_email(email, current_user, convert_competence).deliver_now
-
-      return render history_as_json(email, 'test_sent')
-
-    rescue StandardError => exc
-      exception_message = handle_exception exc, I18n.t('alert.email.error_sending_test')
-      return render json: exception_message, status: :unprocessable_entity
-    end
+  rescue StandardError => exc
+    exception_message = handle_exception exc, I18n.t('alert.email.error_sending_test')
+    return render json: exception_message, status: :unprocessable_entity
   end
 
   private ###########################################################################################
@@ -61,7 +50,6 @@ class ReceiptEmailsController < ApplicationController
   end
 
   def receipts_by_month
-
     this_month_emails = []
     next_month_emails = []
 

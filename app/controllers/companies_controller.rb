@@ -1,12 +1,13 @@
 class CompaniesController < ApplicationController
 
-  include MainConcern
-  arguable model_class: Company
-  load_and_authorize_resource
+  include IndexAction
+  include CreationActions
+  include ModificationActions
+  include DestroyAction
 
   def update
-    if @model.update send(@model.model_name.singular + '_params')
-      redirect_to send(@model.model_name.route_key + '_path'), notice: @model.was('updated')
+    if @model.update company_params
+      redirect_to companies_path, notice: @model.was('updated')
     else
       render '_form'
     end

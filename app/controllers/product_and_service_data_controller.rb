@@ -1,8 +1,9 @@
 class ProductAndServiceDataController < ApplicationController
 
-  include MainConcern
-  arguable model_class: ProductAndServiceDatum
-  load_and_authorize_resource
+  include IndexAction
+  include CreationActions
+  include ModificationActions
+  include DestroyAction
 
   private ###########################################################################################
 

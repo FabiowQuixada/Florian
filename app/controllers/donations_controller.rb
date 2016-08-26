@@ -1,17 +1,16 @@
 class DonationsController < ApplicationController
 
-  include MainConcern
-  arguable model_class: Donation
-  load_and_authorize_resource
+  include IndexAction
+  include CreationActions
+  include ModificationActions
+  include DestroyAction
 
   def index
-    @list = model_class.order order_attribute
-
+    @list = Donation.order order_attribute
     @month_list = []
 
     @list.each do |donation|
       month = I18n.localize(donation.donation_date, format: :competence).capitalize
-
       @month_list << month unless @month_list.include?(month)
     end
 
@@ -19,9 +18,7 @@ class DonationsController < ApplicationController
   end
 
   def create_and_new
-
-    @model = model_class.new donation_params
-
+    @model = Donation.new donation_params
     @breadcrumbs = Hash[@model.model_name.human(count: 2) => donations_path, t(@model.genderize('helpers.action.new')) => '']
 
     if @model.save

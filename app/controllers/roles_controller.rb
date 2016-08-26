@@ -1,9 +1,10 @@
 class RolesController < ApplicationController
 
-  include MainConcern
-  include StatusConcern
-  arguable model_class: Role
-  load_and_authorize_resource
+  include IndexAction
+  include CreationActions
+  include ModificationActions
+  include DestroyAction
+  include StatusActions
 
   private #################################################
 

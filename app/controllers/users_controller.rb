@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
 
-  include MainConcern
-  include StatusConcern
-  arguable model_class: User
-  load_and_authorize_resource
+  include IndexAction
+  include CreationActions
+  include ModificationActions
+  include StatusActions
 
   private ###################################################
 

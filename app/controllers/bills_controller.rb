@@ -1,8 +1,9 @@
 class BillsController < ApplicationController
 
-  include MainConcern
-  arguable model_class: Bill
-  load_and_authorize_resource
+  include IndexAction
+  include CreationActions
+  include ModificationActions
+  include DestroyAction
 
   private
 
