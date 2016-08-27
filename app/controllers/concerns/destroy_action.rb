@@ -22,7 +22,7 @@ module DestroyAction extend ActiveSupport::Concern
                          if request.xhr?
                            render json: { message: t('errors.unpermitted_action'), success: false }
                          else
-                           redirect_to model_index_path, alert: t('errors.unpermitted_action')
+                           render 'index', alert: t('errors.unpermitted_action'), status: :unauthorized
                          end
                        end
 
@@ -34,7 +34,7 @@ module DestroyAction extend ActiveSupport::Concern
                      end
 
                      def before_destruction
-                       return render json: { message: t('errors.undestroyable_user'), success: false } if model_class == User
+                       return render json: { message: t('errors.undestroyable_user'), success: false }, status: :unprocessable_entity if model_class == User
                        return unless can_destroy?
 
                        @model = model_class.find(params[:id])

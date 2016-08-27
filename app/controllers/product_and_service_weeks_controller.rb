@@ -1,24 +1,24 @@
 class ProductAndServiceWeeksController < ApplicationController
 
   def update_and_send
-    ok_to_update_and_send? || return
-    perform_update_and_send && return
+    return unless ok_to_update_and_send?
+    perform_update_and_send
   rescue => exc
     @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
     return render 'product_and_service_data/_form', status: :internal_server_error
   end
 
   def send_to_analysis
-    ok_to_send_to_analysis? || return
-    perform_send_to_analysis && return
+    return unless ok_to_send_to_analysis?
+    perform_send_to_analysis
   rescue => exc
     @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
     return render 'product_and_service_data/_form', status: :internal_server_error
   end
 
   def send_clients
-    ok_to_send_clients? || return
-    perform_send_clients && return
+    return unless ok_to_send_clients?
+    perform_send_clients
   rescue => exc
     @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
     return render 'product_and_service_data/_form', status: :internal_server_error
@@ -42,10 +42,9 @@ class ProductAndServiceWeeksController < ApplicationController
   end
 
   def ok_to_update_and_send?
-
     if @model.on_analysis? || @model.finalized?
       @model.errors[:base] << I18n.t('errors.product_and_service_datum.cant_send')
-      render 'product_and_service_data/_form', status: :unprocessable_entity
+      render 'product_and_service_data/_form', status: :precondition_failed
       return false
     end
 
@@ -56,7 +55,7 @@ class ProductAndServiceWeeksController < ApplicationController
 
     unless @model.created?
       @model.errors[:base] << I18n.t('errors.product_and_service_datum.cant_send_to_analysis')
-      render 'product_and_service_data/_form', status: :unprocessable_entity
+      render 'product_and_service_data/_form', status: :precondition_failed
       return false
     end
 
@@ -67,7 +66,7 @@ class ProductAndServiceWeeksController < ApplicationController
 
     unless @model.on_analysis?
       @model.errors[:base] << I18n.t('errors.product_and_service_datum.cant_send_to_clients')
-      render 'product_and_service_data/_form', status: :unprocessable_entity
+      render 'product_and_service_data/_form', status: :precondition_failed
       return false
     end
 

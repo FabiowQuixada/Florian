@@ -20,14 +20,14 @@ describe ProductAndServiceWeeksController, type: :controller do
     it 'does not send if its on analysis' do
       post :update_and_send, product_and_service_week: { id: datum_on_analysis.weeks.first.id }
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:precondition_failed)
       expect(response).to render_template('product_and_service_data/_form')
     end
 
     it 'does not send if its finalized' do
       post :update_and_send, product_and_service_week: { id: datum_finalized.weeks.first.id }
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:precondition_failed)
       expect(response).to render_template('product_and_service_data/_form')
     end
   end
@@ -45,14 +45,14 @@ describe ProductAndServiceWeeksController, type: :controller do
     it 'does not send if its on analysis' do
       post :send_to_analysis, product_and_service_week: { id: datum_on_analysis.weeks.first.id }
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:precondition_failed)
       expect(response).to render_template('product_and_service_data/_form')
     end
 
     it 'does not send if its finalized' do
       post :send_to_analysis, product_and_service_week: { id: datum_finalized.weeks.first.id }
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:precondition_failed)
       expect(response).to render_template('product_and_service_data/_form')
     end
   end
@@ -63,7 +63,7 @@ describe ProductAndServiceWeeksController, type: :controller do
     it 'does not send e-mail if its started' do
       post :send_clients, product_and_service_week: { id: datum_created.weeks.first.id }
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:precondition_failed)
       expect(response).to render_template('product_and_service_data/_form')
     end
 
@@ -77,7 +77,7 @@ describe ProductAndServiceWeeksController, type: :controller do
     it 'does not send if its finalized' do
       post :send_clients, product_and_service_week: { id: datum_finalized.weeks.first.id }
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:precondition_failed)
       expect(response).to render_template('product_and_service_data/_form')
     end
   end

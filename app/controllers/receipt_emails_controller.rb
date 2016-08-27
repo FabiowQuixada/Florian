@@ -23,7 +23,7 @@ class ReceiptEmailsController < ApplicationController
 
   rescue StandardError => exc
     exception_message = handle_exception exc, I18n.t('alert.email.error_resending')
-    return render json: exception_message, status: :unprocessable_entity
+    return render json: exception_message, status: :internal_server_error
   end
 
   def send_test
@@ -35,7 +35,7 @@ class ReceiptEmailsController < ApplicationController
 
   rescue StandardError => exc
     exception_message = handle_exception exc, I18n.t('alert.email.error_sending_test')
-    return render json: exception_message, status: :unprocessable_entity
+    return render json: exception_message, status: :internal_server_error
   end
 
   private ###########################################################################################
