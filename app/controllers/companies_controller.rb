@@ -5,14 +5,6 @@ class CompaniesController < ApplicationController
   include ModificationActions
   include DestroyAction
 
-  def update
-    if @model.update company_params
-      redirect_to companies_path, notice: @model.was('updated')
-    else
-      render '_form'
-    end
-  end
-
   def contact_row
     render partial: 'contacts/contact', locals: { contact: Contact.new(contact_params) }
   end
@@ -39,7 +31,7 @@ class CompaniesController < ApplicationController
     params.require(:donation).permit(:id, :value, :donation_date, :remark)
   end
 
-  def order_attribute
-    'name'
+  def index_sorting_method
+    Company.order :name
   end
 end

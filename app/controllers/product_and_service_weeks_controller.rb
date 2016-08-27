@@ -54,7 +54,6 @@ class ProductAndServiceWeeksController < ApplicationController
   end
 
   def ok_to_send_to_analysis?
-
     unless @model.created?
       @model.errors[:base] << I18n.t('errors.product_and_service_datum.cant_send_to_analysis')
       render 'product_and_service_data/_form', status: :precondition_failed
@@ -65,7 +64,6 @@ class ProductAndServiceWeeksController < ApplicationController
   end
 
   def ok_to_send_clients?
-
     unless @model.on_analysis?
       @model.errors[:base] << I18n.t('errors.product_and_service_datum.cant_send_to_clients')
       render 'product_and_service_data/_form', status: :precondition_failed

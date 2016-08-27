@@ -8,6 +8,10 @@ class ReceiptEmail < ActiveRecord::Base
   usar_como_dinheiro :value
 
 
+  DAILY_SEND_HOUR = 7
+  RECENT_EMAILS_DAYS = 7
+
+
   # Relationships
   has_many :email_histories, dependent: :destroy
   accepts_nested_attributes_for :email_histories
@@ -24,14 +28,6 @@ class ReceiptEmail < ActiveRecord::Base
   # Methods
   def validate_model
     validate_value && validate_day_of_month
-  end
-
-  def self.daily_send_hour
-    7
-  end
-
-  def self.recent_emails_days
-    7
   end
 
   def title(user)
@@ -51,7 +47,6 @@ class ReceiptEmail < ActiveRecord::Base
   end
 
   def competence(date = nil)
-
     return I18n.localize(date, format: :competence) unless date.nil?
 
     if current_month?
@@ -63,23 +58,57 @@ class ReceiptEmail < ActiveRecord::Base
 
   def recipients_as_array
     return [] if recipients_array.nil? || recipients_array.empty?
-
     recipients_array.split(/,/)
-  end
-
-  def current_month?
-
-    return true if day_of_month > Date.today.strftime('%e').to_f
-    return true if Time.now.hour < ReceiptEmail.daily_send_hour && day_of_month == Date.today.strftime('%e').to_f
-
-    false
   end
 
   def breadcrumb_path
     Hash[I18n.t('menu.emails') => '', I18n.t('menu.email.receipt') => '']
   end
 
-  private
+  # Query methods
+  def self.all_by_delivery_date
+    this_month_emails, next_month_emails = receipts_by_month
+    receipts_by_day this_month_emails, next_month_emails
+  end
+
+  def self.receipts_by_month
+    this_month_emails = []
+    next_month_emails = []
+
+    all.each do |email|
+      if email.current_month?
+        this_month_emails << email
+      else
+        next_month_emails << email
+      end
+    end
+
+    [this_month_emails, next_month_emails]
+  end
+
+  def self.receipts_by_day(this_month_emails, next_month_emails)
+    this_month_emails.sort! { |a, b| a.day_of_month <=> b.day_of_month }
+    next_month_emails.sort! { |a, b| a.day_of_month <=> b.day_of_month }
+
+    next_month_emails = next_month_emails.sort_by do |item|
+      item[:day_of_month]
+    end
+
+    this_month_emails + next_month_emails
+  end
+
+  def current_month?
+    return true if day_of_month > Date.today.strftime('%e').to_f
+    return true if Time.now.hour < DAILY_SEND_HOUR && day_of_month == Date.today.strftime('%e').to_f
+
+    false
+  end
+
+
+  private ###############################################################################################################
+
+  private_class_method :receipts_by_month
+  private_class_method :receipts_by_day
 
   def receipt_text
     return pf_text if company.person?

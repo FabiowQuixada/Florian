@@ -15,7 +15,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
   # rubocop:enable all
 
-  private
+  private ################################
 
   # TODO: Understand, refactor and rename this method!
   def something(resource_updated, prev_unconfirmed_email)

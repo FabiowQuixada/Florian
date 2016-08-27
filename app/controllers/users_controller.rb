@@ -11,8 +11,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:id, :name, :email, :password, :role_id)
   end
 
-  def order_attribute
-    'name'
+  def index_sorting_method
+    User.order :name
   end
-
 end

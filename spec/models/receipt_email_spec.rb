@@ -11,8 +11,8 @@ describe ReceiptEmail, type: :model do
   it { is_expected.to belong_to :company }
   it { is_expected.to have_many :email_histories }
 
-  it { expect(described_class.daily_send_hour).to eq 7 }
-  it { expect(described_class.recent_emails_days).to eq 7 }
+  it { expect(described_class::DAILY_SEND_HOUR).to eq 7 }
+  it { expect(described_class::RECENT_EMAILS_DAYS).to eq 7 }
 
   describe 'processed texts' do
     let(:user) { User.first }

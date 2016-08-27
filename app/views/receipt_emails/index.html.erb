@@ -57,7 +57,7 @@
 
 <%= render partial: 'shared/index_commons', locals: {model: @model} %>
 
-<div class="asterisk-description"><%= t('helpers.receipt_email.index_footer', time: ReceiptEmail.daily_send_hour.to_s) %></div>
+<div class="asterisk-description"><%= t('helpers.receipt_email.index_footer', time: ReceiptEmail::DAILY_SEND_HOUR.to_s) %></div>
 
 <script>
 

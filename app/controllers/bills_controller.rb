@@ -5,20 +5,14 @@ class BillsController < ApplicationController
   include ModificationActions
   include DestroyAction
 
-  private
+  private #########################################################################################
 
   def bill_params
     params.require(:bill).permit(:id, :competence, :water, :energy, :telephone)
   end
 
-  def order_attribute
-    'competence DESC'
-  end
-
   def index_sorting_method
-
     list = Bill.order(:competence)
-
     @graph_data = {}
 
     list.each do |bill|
@@ -33,7 +27,6 @@ class BillsController < ApplicationController
   end
 
   def initialize_year(year)
-
     return unless @graph_data[year].nil?
 
     @graph_data[year] = []

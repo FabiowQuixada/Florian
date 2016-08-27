@@ -5,8 +5,6 @@ describe BillsController, type: :controller do
     sign_in User.first
   end
 
-  it { expect(described_class.new.send(:order_attribute)).to eq 'competence DESC' }
-
   include_examples 'destroy tests', Bill
 
   describe 'GET #index' do

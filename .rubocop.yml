@@ -32,3 +32,6 @@ Style/Documentation:
 
 Style/EmptyLinesAroundMethodBody:
   Enabled: false
+
+Metrics/ClassLength:
+  Max: 150

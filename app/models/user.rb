@@ -24,13 +24,11 @@ class User < ActiveRecord::Base
   # Methods
   def admin?
     return false if role.nil?
-
     role.name == ADMIN_ROLE
   end
 
   def guest?
     return false if role.nil?
-
     role.name == GUEST_ROLE
   end
 
@@ -39,11 +37,12 @@ class User < ActiveRecord::Base
   end
 
   def active=(value)
-
     raise I18n.t('errors.user.cannot_deactivate_admin') if admin?
-
     write_attribute(:active, value)
   end
+
+
+  private #####################################
 
   def build_default_system_setting
     build_system_setting
@@ -62,5 +61,4 @@ class User < ActiveRecord::Base
     self.bcc ||= email
     self.signature ||= "\n\n--\n\n" + self.name
   end
-
 end

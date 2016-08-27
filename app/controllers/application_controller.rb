@@ -16,7 +16,6 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
 
   def set_locale
-
     # if I18n.locale == :'pt-BR'
     # I18n.locale = 'en'
     # else
@@ -30,15 +29,10 @@ class ApplicationController < ActionController::Base
   end
 
   def handle_exception(exc, default_message = nil)
-
     log_error exc
-
     return I18n.t('exception.no_internet_connection') if exc.message == 'getaddrinfo: Name or service not known'
-
     return I18n.t('exception.invalid_recipient') if exc.instance_of?(Net::SMTPFatalError) && exc.message.starts_with?('553-5.1.2')
-
     return exc.message if exc.instance_of? FlorianException
-
     default_message
   end
 

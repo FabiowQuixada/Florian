@@ -12,7 +12,7 @@ class RolesController < ApplicationController
     params.require(:role).permit(:name, :description)
   end
 
-  def order_attribute
-    'name'
+  def index_sorting_method
+    Role.order :name
   end
 end

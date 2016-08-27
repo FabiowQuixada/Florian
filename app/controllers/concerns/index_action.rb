@@ -4,14 +4,10 @@ module IndexAction extend ActiveSupport::Concern
 
                    def index
                      @list = index_sorting_method
-                     @list = model_class.order order_attribute unless @list
+                     @list = model_class.order 'created_at ASC' unless @list
                    end
 
   private
-
-                   def order_attribute
-                     'created_at ASC'
-                   end
 
                    def index_sorting_method
                    end
