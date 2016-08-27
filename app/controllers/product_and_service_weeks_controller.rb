@@ -1,11 +1,13 @@
 class ProductAndServiceWeeksController < ApplicationController
 
+  # TODO: When exception is raised, input data is not reloaded
+
   def update_and_send
     return unless ok_to_update_and_send?
     perform_update_and_send
   rescue => exc
     @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
-    return render 'product_and_service_data/_form', status: :internal_server_error
+    redirect_to edit_product_and_service_datum_path @model
   end
 
   def send_to_analysis
@@ -13,7 +15,7 @@ class ProductAndServiceWeeksController < ApplicationController
     perform_send_to_analysis
   rescue => exc
     @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
-    return render 'product_and_service_data/_form', status: :internal_server_error
+    redirect_to edit_product_and_service_datum_path @model
   end
 
   def send_clients
@@ -21,7 +23,7 @@ class ProductAndServiceWeeksController < ApplicationController
     perform_send_clients
   rescue => exc
     @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
-    return render 'product_and_service_data/_form', status: :internal_server_error
+    redirect_to edit_product_and_service_datum_path @model
   end
 
   private ###########################################################################################
