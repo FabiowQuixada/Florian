@@ -5,28 +5,12 @@ describe BillsController, type: :controller do
     sign_in User.first
   end
 
+  # TODO: Check list to graphs
+  include_examples 'index request tests'
+  include_examples 'new request tests'
+  include_examples 'edit request tests', Bill
   include_examples 'destroy tests', Bill
 
-  describe 'GET #index' do
-    before(:each) do
-      get :index
-    end
-
-    # TODO: Check list to graphs
-    it { expect(response).to have_http_status(:ok) }
-    it { expect(response).to render_template('index') }
-    it { expect(response).to be_success }
-  end
-
-  describe 'GET #new' do
-    before(:each) do
-      get :new
-    end
-
-    it { expect(response).to have_http_status(:ok) }
-    it { expect(response).to render_template '_form' }
-    it { expect(response).to be_success }
-  end
 
   describe 'POST #create' do
     context 'with valid attributes' do
@@ -55,16 +39,6 @@ describe BillsController, type: :controller do
         # expect(response).to redirect_to new_bill_path
       end
     end
-  end
-
-  describe 'GET #edit' do
-    before(:each) do
-      get :edit, id: create(:bill)
-    end
-
-    it { expect(response).to have_http_status(:ok) }
-    it { expect(response).to render_template('_form') }
-    it { expect(response).to be_success }
   end
 
   describe 'PUT #update' do

@@ -5,27 +5,10 @@ describe ReceiptEmailsController, type: :controller do
     sign_in User.first
   end
 
+  include_examples 'index request tests'
+  include_examples 'new request tests'
+  include_examples 'edit request tests', ReceiptEmail
   include_examples 'destroy tests', ReceiptEmail
-
-  describe 'GET #index' do
-    before(:each) do
-      get :index
-    end
-
-    it { expect(response).to have_http_status(:ok) }
-    it { expect(response).to render_template('index') }
-    it { expect(response).to be_success }
-  end
-
-  describe 'GET #new' do
-    before(:each) do
-      get :new
-    end
-
-    it { expect(response).to have_http_status(:ok) }
-    it { expect(response).to render_template '_form' }
-    it { expect(response).to be_success }
-  end
 
   describe 'POST #create' do
     context 'with valid attributes' do
@@ -53,15 +36,6 @@ describe ReceiptEmailsController, type: :controller do
         expect(response).to render_template('_form')
       end
     end
-  end
-
-  describe 'GET #edit' do
-    before(:each) do
-      get :edit, id: create(:receipt_email)
-    end
-
-    it { expect(response).to have_http_status(:ok) }
-    it { expect(response).to be_success }
   end
 
   describe 'PUT #update' do
