@@ -521,6 +521,9 @@ pt-BR:
       short: "%d de %B"
       competence: "%B/%Y"
       competence_i: "%m/%Y"
+      javascript_format:
+        competence: "mm/yyyy"
+        date: "dd/mm/yyyy"
     month_names:
     -
     - janeiro

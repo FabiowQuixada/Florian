@@ -175,9 +175,9 @@
 		$('.datepicker-competence').datepicker()
 		$('[data-behaviour~=datepickercompetence]').datepicker({
 			minViewMode: 1,
-			format: "mm/yyyy",
+			format: "<%= I18n.t('date.formats.javascript_format.competence') %>",
 			autoclose: true,
-			language: "pt-BR"
+			language: "<%= I18n.locale %>"
 		});
 	}
 
@@ -185,9 +185,9 @@
 
 		$('.datepicker').datepicker()
 		$('[data-behaviour~=datepicker]').datepicker({
-			format: "dd/mm/yyyy",
+			format: "<%= I18n.t('date.formats.javascript_format.date') %>",
 			autoclose: true,
-			language: "pt-BR",
+			language: "<%= I18n.locale %>",
 			daysOfWeekDisabled: [0,6],
 			setDate: new Date()
 		});
@@ -455,42 +455,28 @@
 			$(link).parent().parent().parent().before(content.replace(regexp, new_id));
 		}
 
-		function formatted_today()
-		{
-			var today = new Date();
-			var dd = today.getDate();
-			var mm = today.getMonth()+1; //January is 0!
-			var yyyy = today.getFullYear();
-
-			if(dd<10) {
-				dd='0'+dd
-			}
-
-			if(mm<10) {
-				mm='0'+mm
-			}
-
-			today = dd+'/'+mm +'/'+yyyy;
-			return today;
-		}
-
 		function current_competence()
 		{
 			var today = new Date();
-			var mm = today.getMonth()+1; //January is 0!
+			var mm = today.getMonth() + 1; //January is 0!
 			var yyyy = today.getFullYear();
 
-			if(mm<10) {
-				mm='0'+mm
+			if(mm < 10) {
+				mm = '0' + mm;
 			}
 
-			return mm +'/'+yyyy;
+			// TODO Date format (internationalization);
+			return mm + '/' + yyyy;
 		}
 
 		function to_rails_date(date_string) {
 			var temp = date_string.split("/");
 			var date = new Date(temp[2], temp[1] - 1, temp[0]);
-			return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+			year = date.getFullYear();
+			month = ('0' + (date.getMonth() + 1)).slice(-2);
+			day = ('0' + date.getDate()).slice(-2)
+
+			return year + '-' + month + '-' + day;
 		}
 
 		var entityMap = {
