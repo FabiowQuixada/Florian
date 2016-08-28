@@ -357,7 +357,7 @@ pt-BR:
       edit: Editar
       show: Visualizar
       save: Salvar
-      show_admin_private_data: Exibir dados de administrador
+      show_admin_private_data: Exibir dados de administrador. Opção disponível também no ambiente de portfólio para fins de ilustração, sem permissão para ações administrativas.
       update: Atualizar
       update_and_new:
         m:
