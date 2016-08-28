@@ -125,6 +125,8 @@
 							(<%= t('environments.' + Rails.env) %>)
 							<% end %>
 
+							<%= link_to image_tag('info.png', title: t('helpers.about.title')), 'javascript:void(0)', id: 'app_about_btn' %> 
+
 							<br/>
 							<%= t('by_author')%>
 						</div>
@@ -153,6 +155,20 @@
 		</div>
 	</div>
 
+	<div id="app_about_modal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div  style="min-height: 190px;">
+						<%= image_tag('st_florian.png', title: t('helpers.about.st_florian'), class: 'pull-right rounded-image left-image') %>
+						<p><%= t('helpers.about.main_description') %></p>
+						<p><%= t('helpers.about.showcase_description') %></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 <script>
 
 	function set_month_datepicker() {
@@ -163,8 +179,6 @@
 			autoclose: true,
 			language: "pt-BR"
 		});
-
-
 	}
 
 	function set_datepicker() {
@@ -201,6 +215,10 @@
 		$("#confirm_modal").modal("show");
 	}
 
+	function display_about_modal() {
+		$("#app_about_modal").modal("show");
+	}
+
 	var display_admin_data = false;
 
 	$(function() {
@@ -208,6 +226,7 @@
 		<%= ('display_hideless_warning(\'' + t('showcase.login_info', showcase_email: bold('visitante' + GUEST_USERS_NUMBERS.sample.to_s + '@florian.com'), showcase_password: bold(SHOWCASE_PASSWORD)) + '\');').html_safe if Rails.env == 'showcase' && request.env['PATH_INFO'] == '/users/sign_in' %>
 
 		$('.admin_key_btn').on('click', toogle_admin_data);
+		$('#app_about_btn').on('click', display_about_modal);
 
 		toogle_admin_data();
 

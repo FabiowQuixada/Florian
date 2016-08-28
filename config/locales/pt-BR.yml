@@ -1,4 +1,3 @@
-
 pt-BR:
   app_title: Flórian
   by_author: por Fabiow Quixadá
@@ -282,6 +281,11 @@ pt-BR:
   helpers:
     main_page: Página Principal
     error: Erro
+    about: 
+      title: Sobre...
+      st_florian: São Floriano
+      main_description: 'O nome "Florian" é uma variação do nome de São Floriano, santo da Igreja Católica padroeiro dos bombeiros e dos limpadores de chaminés e protetor das pessoas envolvidas em incêndios. Tem como um de seus símbolos a "Cruz Floriana", utilizada como logotipo deste sistema.'
+      showcase_description: 'São Floriano foi escolhido como referência para este sistema por ele ter sido desenvolvido para uma ONG que trata de pessoas vítimas de queimaduras.'
     general: Geral
     email_tag: "[Florian] "
     changelog: Changelog
