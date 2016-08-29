@@ -231,6 +231,9 @@ GEM
     json (1.8.3)
     json_pure (1.8.3)
     justify (1.0.2)
+    kaminari (0.17.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     less (2.6.0)
@@ -441,6 +444,7 @@ DEPENDENCIES
   jquery-rails
   jquery-tablesorter
   jquery-turbolinks
+  kaminari
   launchy
   letter_opener
   modularity (~> 2.0, >= 2.0.1)
