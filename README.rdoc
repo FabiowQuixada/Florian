@@ -5,25 +5,40 @@
  Rails version: 4.2.7
 
 
+** Extra Directories ******************************************************************************
+ - /external/   Configuration files that should be put somewhere outside project directory (see below);
+ - /doc/        Auxiliar text files;
+ - /scripts/    Helper shell scripts;
+
+
 ** Tests ******************************************************************************************
- To run tests, just run './rubospec' on the project root directory, it will run Rubocop, then run the tests and if everything went fine, will open a Git window;
+ To run tests, just run './scripts/rubospec' on the project root directory, it will run Rubocop, then run the tests and if everything went fine, will open a Git window;
 
 
 ** Deployment Dependencies ************************************************************************
  # 1 Tidy;
  # 2 Plsql;
  # 3 Backup;
- # 4 Bundler (global);
+ # 4 Externals;
 
- # 1 https://github.com/htacg/tidy-html5/blob/master/README/README.md 
- # 2.1 sudo apt-get install libpq-dev
-   2.2 https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-04
- # 3.1 On psql: SHOW hba_file;
-       Postgres: local   all             all                                     trust
-       ('trust' instead of 'peer')
-       and then run: sudo service postgresql restart
-   3.2 Change '/home/ubuntu/' on schedule.rb: env :PATH, '/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games'
- # 4 gem install bundler
+ # 1    https://github.com/htacg/tidy-html5/blob/master/README/README.md 
+ # 2.1  sudo apt-get install libpq-dev
+   2.2  https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-04
+ # 3.1  gem install backup
+   3.2  backup dependencies --install net-ssh net-scp mail
+   3.3  backup generate:model --trigger db_backup
+   3.3  Edit the file /external/db_backup.rb, changing the PROJECT_ROOT variable properly
+   3.4  Cut and paste the file /external/db_backup.rb into ~/Backup/models/ overriding the file there
+   3.5  On psql: SHOW hba_file;
+        Postgres: local   all             all                                     trust
+        ('trust' instead of 'peer')
+        and then run: sudo service postgresql restart
+   3.6  Change '/home/ubuntu/' on schedule.rb: env :PATH, '/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games'
+ # 4.1  Copy the code snippet in #{Rails.root}/external/brdata.rb and paste it into...
+          #{Rails.root}/vendor/cache/ruby/2.2.0/gems/brdata-3.3.0/brdara.rb
+        ...substituting its FERIADO_PATH variable definition to eliminate a warning;
+   4.2  Copy /external/isbn.rb into...
+          #{Rails.root}/vendor/cache/ruby/2.2.0/gems/blabla-0.0.2/lib/ (this is a gem error);
 
 
  ** Deploy instructions ***************************************************************************
@@ -33,6 +48,6 @@
     - Variables in `config/env/prod`;
 
   To ascend the server to production: 
-    - Just run './server_up' on the project root directory;
+    - Just run './scripts/server_up' on the project root directory;
 
 
