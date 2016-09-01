@@ -11,7 +11,7 @@ gem 'audited-activerecord', '~> 4.0'
 gem 'pg'
 gem 'whenever', require: false
 gem 'figaro'
-gem 'twitter-bootstrap-rails', git: 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'twitter-bootstrap-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'jquery-tablesorter'
 gem 'jquery-turbolinks'
