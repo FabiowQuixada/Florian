@@ -32,6 +32,6 @@ class CompaniesController < ApplicationController
   end
 
   def index_sorting_method
-    Company.order :name
+    Company.order(:name).page(params[:page])
   end
 end

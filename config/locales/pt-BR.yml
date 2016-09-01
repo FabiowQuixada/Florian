@@ -392,6 +392,13 @@ pt-BR:
       login: Login
       sign_up: Registrar-se
       logout: Sair
+  views:
+    pagination:
+      first: "&laquo; Primeira"
+      last: "Última &raquo;"
+      previous: "&lsaquo; Anterior"
+      next: "Próxima &rsaquo;"
+      truncate: "&hellip;"
   is_active:
     m:
       s: '%{model} está ativo, clique para inativá-lo'

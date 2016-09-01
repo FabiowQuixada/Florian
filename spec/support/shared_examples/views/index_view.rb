@@ -4,7 +4,7 @@ shared_examples 'an index view' do
 
     before :each do
       assign :model, model
-      assign :list, class_name.all
+      assign :list, class_name.all.page(1)
       render
     end
 
@@ -24,7 +24,7 @@ shared_examples 'an index view' do
 
     before :each do
       assign :model, model
-      assign :list, []
+      assign :list, Kaminari.paginate_array([]).page(1)
       render
     end
 

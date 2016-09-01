@@ -23,6 +23,6 @@ class DonationsController < ApplicationController
   end
 
   def index_sorting_method
-    Donation.order 'donation_date DESC'
+    Donation.order('donation_date DESC').page(params[:page])
   end
 end

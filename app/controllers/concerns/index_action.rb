@@ -4,7 +4,7 @@ module IndexAction extend ActiveSupport::Concern
 
                    def index
                      @list = index_sorting_method
-                     @list = model_class.order 'created_at ASC' unless @list
+                     @list = model_class.order('created_at ASC').page(params[:page]) unless @list
                    end
 
   private

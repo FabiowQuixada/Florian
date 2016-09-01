@@ -12,7 +12,7 @@ class BillsController < ApplicationController
   end
 
   def index_sorting_method
-    list = Bill.order(:competence)
+    list = Bill.order(:competence).page(params[:page])
     @graph_data = {}
 
     list.each do |bill|

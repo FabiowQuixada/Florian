@@ -12,6 +12,6 @@ class UsersController < ApplicationController
   end
 
   def index_sorting_method
-    User.order :name
+    User.order(:name).page(params[:page])
   end
 end

@@ -13,6 +13,6 @@ class RolesController < ApplicationController
   end
 
   def index_sorting_method
-    Role.order :name
+    Role.order(:name).page(params[:page])
   end
 end

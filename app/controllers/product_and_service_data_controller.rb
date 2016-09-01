@@ -15,7 +15,7 @@ class ProductAndServiceDataController < ApplicationController
   end
 
   def index_sorting_method
-    ProductAndServiceDatum.order 'competence DESC'
+    ProductAndServiceDatum.order('competence DESC').page(params[:page])
   end
 
 end
