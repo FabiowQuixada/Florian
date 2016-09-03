@@ -21,6 +21,11 @@ module ApplicationHelper
     klass.new.model_name.human(count: 2)
   end
 
+  def new_btn(model)
+    path = send "new_#{model.class.to_s.underscore}_path", model
+    link_to genderize_full_tag(model, 'helpers.action.new'), path, class: 'btn btn-primary'
+  end
+
   def edit_btn(iterator)
     edit_path = send("edit_#{iterator.class.to_s.underscore}_path", iterator)
     link_to image_tag('edit.png', title: t('helpers.action.edit')), edit_path

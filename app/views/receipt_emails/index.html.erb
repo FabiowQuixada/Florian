@@ -1,6 +1,6 @@
 
-<%= link_to genderize_full_tag(@model, 'helpers.action.new'), new_receipt_email_path, class: 'btn btn-primary' %>
-<%= link_to t('helpers.receipt_email.recent'), 'javascript:void(0)', id: 'recent_emails_btn', class: 'btn btn-primary' %>
+<%= new_btn @model %>
+<%= recent_emails_btn %>
 
 <br/>
 
