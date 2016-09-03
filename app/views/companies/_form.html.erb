@@ -4,8 +4,8 @@
 
 	<ul class="nav nav-tabs">
 		<li id="main_tab_0_title" class="active clickable"><a><%= I18n.t('helpers.general') %></a></li>
-		<li id="main_tab_1_title" class="clickable"><a><%= Donation.new.model_name.human(count: 2) %></a></li>
-		<li id="main_tab_2_title" class="clickable"><a><%= Contact.new.model_name.human(count: 2) %></a></li>
+		<li id="main_tab_1_title" class="clickable"><a><%= plural_of Donation %></a></li>
+		<li id="main_tab_2_title" class="clickable"><a><%= plural_of Contact %></a></li>
 	</ul>
 
 	<div id="main_tab_0" class="general_tab">

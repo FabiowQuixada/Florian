@@ -13,10 +13,10 @@
     <div class="collapse navbar-collapse" id="main_menu">
         <ul class="nav navbar-nav">
             <li>
-                <a href="/companies"><%= Company.new.model_name.human(count: 2) %></a>
+                <a href="/companies"><%= plural_of Company %></a>
             </li>
             <li>
-                <a href="/donations"><%= Donation.new.model_name.human(count: 2) %></a>
+                <a href="/donations"><%= plural_of Donation %></a>
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="/receipt_emails"><%= t('menu.emails') %></a>
@@ -26,20 +26,20 @@
                         <li><a href="/receipt_emails"><%= t('menu.email.receipt') %></a></li>
                     <% end %>
                     <% if can? :manage, ProductAndServiceDatum.new %>
-                        <li><a href="/product_and_service_data"><%= t('menu.email.prod_serv') %></a></li>
+                        <li><a href="/product_and_service_data"><%= plural_of ProductAndServiceDatum %></a></li>
                     <% end %>
                 </ul>
             </li>
             <li>
-                <a href='/bills'><%= Bill.new.model_name.human(count: 2) %></a>
+                <a href='/bills'><%= plural_of Bill %></a>
             </li>
             <!-- new_menus_here -->
             <% if !current_user.nil? && current_user.admin? %>
             <li>
-                <a href="/admin/users"><%= User.new.model_name.human(count: 2) %></a>
+                <a href="/admin/users"><%= plural_of User %></a>
             </li>
             <li>
-                <a href="/admin/roles"><%= Role.new.model_name.human(count: 2) %></a>
+                <a href="/admin/roles"><%= plural_of Role %></a>
             </li>
             <% end %>
             <li class="visible-xs">

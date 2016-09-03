@@ -16,4 +16,8 @@ module ApplicationHelper
   def bold(name)
     content_tag(:span, name, class: 'thick')
   end
+
+  def plural_of(klass)
+    klass.new.model_name.human(count: 2)
+  end
 end
