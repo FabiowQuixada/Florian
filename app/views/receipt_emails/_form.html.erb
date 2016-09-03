@@ -1,106 +1,104 @@
-<%= form_for @model, html: {id: 'main_form'} do |f| %>
+<%= form_for @model, html: { id: 'main_form' } do |f| %>
 
-<%= render partial: 'shared/form_errors', locals: {model: @model} %>
+	<%= render partial: 'shared/form_errors', locals: { model: @model } %>
 
-<%= f.hidden_field :id %>
+	<div class="container-fluid padless">
+		<div class="row">
+			<div class="col-md-5">
+				<%= render partial: 'shared/email_address_table', locals: { f: f, model: @model } %>
+			</div>
+			<div class="col-md-7">
 
-<div class="container-fluid padless">
-	<div class="row">
-		<div class="col-md-5">
-			<%= render partial: 'shared/email_address_table', locals: {f: f, model: @model} %>
-		</div>
-		<div class="col-md-7">
-
-			<div class="container-fluid padless">
-				<div class="row">
-					<div class="col-sm-12 form-group">
-						<%= f.label :company %>
-						<% if f.object.persisted? %>
-						<%= f.collection_select(:company_id, Company.where(id: f.object.company_id), :id, :name, {}, {id: 'receipt_email_company', class: 'form-control', disabled: true}) %>
-						<% else %>
-						<%= f.collection_select(:company_id, Company.where(group: 1), :id, :name, {include_blank: t('helpers.select.prompt')}, {id: 'receipt_email_company', class: 'form-control'}) %>
-						<% end %>
+				<div class="container-fluid padless">
+					<div class="row">
+						<div class="col-sm-12 form-group">
+							<%= f.label :company %>
+							<% if f.object.persisted? %>
+								<%= f.collection_select(:company_id, Company.where(id: f.object.company_id), :id, :name, {}, {id: 'receipt_email_company', class: 'form-control', disabled: true}) %>
+							<% else %>
+								<%= f.collection_select(:company_id, Company.where(group: 1), :id, :name, {include_blank: t('helpers.select.prompt')}, {id: 'receipt_email_company', class: 'form-control'}) %>
+							<% end %>
+						</div>
+					</div><div class="row">
+					<div class="col-sm-5 form-group">
+						<%= f.label :value %>
+						<div class="input-group">
+							<span class="input-group-addon">R$</span>
+							<%= f.text_field :value, class: 'form-control money' %>
+						</div>
 					</div>
-				</div><div class="row">
-				<div class="col-sm-5 form-group">
-					<%= f.label :value %>
-					<div class="input-group">
-						<span class="input-group-addon">R$</span>
-						<%= f.text_field :value, class: 'form-control money' %>
+					<div class="col-sm-4 form-group">
+						<%= f.label :day_of_month %>
+						<%= f.text_field :day_of_month, class: 'form-control day_of_month' %>
 					</div>
 				</div>
-				<div class="col-sm-4 form-group">
-					<%= f.label :day_of_month %>
-					<%= f.text_field :day_of_month, class: 'form-control day_of_month' %>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :title %>
+		<%= text_field_tag :title, @model.title(current_user), id: 'receipt_email_title', disabled: true, class: 'form-control' %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :body %>
+		<div style="float:right">
+			<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary btn-xs" id="add_company_to_body_btn"><%= i18n.t :company %></button>
+					<button type="button" class="btn btn-primary btn-xs" id="add_value_to_body_btn"><%= i18n.t :value %></button>
+					<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_body_btn"><%= i18n.t :competence %></button>
+				</div>
+			<% end %>
+		</div>
+		<%= f.text_area :body, size: '24x6', class: 'form-control' %>
+	</div>
+
+	<% if !@model.new_record? %>
+		<div class="panel-group">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title"><a data-toggle="collapse" href="#collapse_history"><%= t('audit.history') %></a></h4>
+				</div>
+				<div id="collapse_history" class="panel-collapse collapse">
+					<div class="panel-body" style="margin: 0; padding: 0;">
+						<table id="history_table" class="table table-striped table-condensed">
+							<thead>
+								<tr>
+									<th><%= t('audit.when') %></th>
+									<th><%= t('audit.value') %></th>
+									<th><%= t('audit.type') %></th>
+									<th><%= t('audit.who') %></th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<% @model.history.each do |history| %>
+								<tr>
+									<td><%= l(history.created_at, format: :really_short) %></td>
+									<td><%= ActionController::Base.helpers.number_to_currency(history.value) %></td>
+									<td><%= history.send_type_desc %></td>
+									<td><%= history.user.name %></td>
+								</tr>
+								<% end %>
+							</tbody>
+						</table>
+					</div>
+					<div class="panel-footer">
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
-</div>
+	<% end #new_record? %>
 
-<div class="form-group">
-	<%= f.label :title %>
-	<%= text_field_tag :title, @model.title(current_user), id: 'receipt_email_title', disabled: true, class: 'form-control' %>
-</div>
+	<%= render partial: 'shared/form_buttons', locals: { model: @model, f: f } -%>
 
-<div class="form-group">
-	<%= f.label :body %>
-	<div style="float:right">
-		<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
-		<div class="btn-group">
-			<button type="button" class="btn btn-primary btn-xs" id="add_company_to_body_btn"><%= i18n.t :company %></button>
-			<button type="button" class="btn btn-primary btn-xs" id="add_value_to_body_btn"><%= i18n.t :value %></button>
-			<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_body_btn"><%= i18n.t :competence %></button>
-		</div>
-		<% end %>
-	</div>
-	<%= f.text_area :body, size: '24x6', class: 'form-control' %>
-</div>
-
-<% if !@model.new_record? %>
-<div class="panel-group">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h4 class="panel-title"><a data-toggle="collapse" href="#collapse_history"><%= t('audit.history') %></a></h4>
-		</div>
-		<div id="collapse_history" class="panel-collapse collapse">
-			<div class="panel-body" style="margin: 0; padding: 0;">
-				<table id="history_table" class="table table-striped table-condensed">
-					<thead>
-						<tr>
-							<th><%= t('audit.when') %></th>
-							<th><%= t('audit.value') %></th>
-							<th><%= t('audit.type') %></th>
-							<th><%= t('audit.who') %></th>
-						</tr>
-					</thead>
-
-					<tbody>
-						<% @model.history.each do |history| %>
-						<tr>
-							<td><%= l(history.created_at, format: :really_short) %></td>
-							<td><%= ActionController::Base.helpers.number_to_currency(history.value) %></td>
-							<td><%= history.send_type_desc %></td>
-							<td><%= history.user.name %></td>
-						</tr>
-						<% end %>
-					</tbody>
-				</table>
-			</div>
-			<div class="panel-footer">
-			</div>
-		</div>
-	</div>
-</div>
-<% end %>
-
-<%= render partial: 'shared/form_buttons', locals: {model: @model, f: f} -%>
-
-<% end %>
+<% end #main_form %>
 
 
-<%= render partial: 'shared/form_commons', locals: {model: @model} %>
+<%= render partial: 'shared/form_commons', locals: { model: @model } %>
 <%= render partial: 'modals' %>
 
 <script>
@@ -111,21 +109,21 @@
 
 		<% if @model.persisted? %>
 
-		$('.resend_btn').click(function(ev) {
+			$('.resend_btn').click(function(ev) {
 
-			clean_resend_modal();
-			$('#resend_email_form').get(0).setAttribute('action', '/receipt_emails/' + <%= @model.id.to_s %> + '/resend');
-			$('.modal_company_name').text('<%= @model.company.name %>');
-			$('#resend_email_modal').modal('show');
-		});
+				clean_resend_modal();
+				$('#resend_email_form').get(0).setAttribute('action', '/receipt_emails/' + <%= @model.id.to_s %> + '/resend');
+				$('.modal_company_name').text('<%= @model.company.name %>');
+				$('#resend_email_modal').modal('show');
+			});
 
-		$('.send_test_btn').click(function(ev) {
+			$('.send_test_btn').click(function(ev) {
 
-			clean_send_test_modal();
-			$('#send_test_email_form').get(0).setAttribute('action', '/receipt_emails/' + <%= @model.id.to_s %> + '/send_test');
-			$('.modal_company_name').text('<%= @model.company.name %>');
-			$('#send_test_email_modal').modal('show');
-		});
+				clean_send_test_modal();
+				$('#send_test_email_form').get(0).setAttribute('action', '/receipt_emails/' + <%= @model.id.to_s %> + '/send_test');
+				$('.modal_company_name').text('<%= @model.company.name %>');
+				$('#send_test_email_modal').modal('show');
+			});
 
 		<% end %>
 

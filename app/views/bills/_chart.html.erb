@@ -65,33 +65,33 @@
 </script>
 
 <ul class="nav nav-tabs">
-<% @graph_data.each_with_index do |bill, i| %>
-    <li id="bill_tab_<%= i %>_title" class="clickable"><a><%= bill[0] %></a></li>
-<% end %>
+  <% @graph_data.each_with_index do |bill, i| %>
+      <li id="bill_tab_<%= i %>_title" class="clickable"><a><%= bill[0] %></a></li>
+  <% end %>
 </ul>
 
 <% @graph_data.each_with_index do |bill, i| %>
 
   <div id="bill_tab_<%= i %>" class="container-fluid tab_body">
 
-    <!-- Year's bills (titles) -->
-    <ul class="nav nav-pills">
-      <li id="<%= bill[0].to_s %>_tab_0_title" class="active clickable"><a><%= t('activerecord.attributes.bill.water') %></a></li>
-      <li id="<%= bill[0].to_s %>_tab_1_title" class="clickable"><a><%= t('activerecord.attributes.bill.energy') %></a></li>
-      <li id="<%= bill[0].to_s %>_tab_2_title" class="clickable"><a><%= t('activerecord.attributes.bill.telephone') %></a></li>
-    </ul>
+  <!-- Year's bills (titles) -->
+  <ul class="nav nav-pills">
+    <li id="<%= bill[0].to_s %>_tab_0_title" class="active clickable"><a><%= t('activerecord.attributes.bill.water') %></a></li>
+    <li id="<%= bill[0].to_s %>_tab_1_title" class="clickable"><a><%= t('activerecord.attributes.bill.energy') %></a></li>
+    <li id="<%= bill[0].to_s %>_tab_2_title" class="clickable"><a><%= t('activerecord.attributes.bill.telephone') %></a></li>
+  </ul>
 
-    <!-- Year's bills (bodies) -->
-    <% (0..(NUMBER_OF_BILLS-1)).each do |bill_code| %>
+  <!-- Year's bills (bodies) -->
+  <% (0..(NUMBER_OF_BILLS-1)).each do |bill_code| %>
     <div id="<%= bill[0].to_s %>_tab_<%= bill_code %>">
-        <div id="chart_div_<%= bill[0].to_s %>_<%= bill_code %>" style="display: block; margin: 0 auto"></div>
+    <div id="chart_div_<%= bill[0].to_s %>_<%= bill_code %>" style="display: block; margin: 0 auto"></div>
     </div>
-    <% end %>
+  <% end %>
 
   </div>
 
   <%= render partial: 'shared/tab_commons', locals: {number_of_tabs: NUMBER_OF_BILLS, tab_type: bill[0].to_s} %>
-  
+
 <% end %>
 
 <%= render partial: 'shared/tab_commons', locals: {number_of_tabs: @graph_data.length, tab_type: 'bill', title: Time.now.year} %>

@@ -3,32 +3,32 @@
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 			<%= form_tag 'javascript:void(0)', remote: true, id: 'resend_email_form' do %>
-			<div class="modal-header">
-				<%= t('modal.email.title.resend') %><span class="modal_company_name"></span>
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					&times;
-				</button>
-			</div>
-			<div class="modal-body">
-				<div id="resend_email_error_box" class="alert alert-danger fade in" style="display: none;">
-					<a href="#" class="close" data-hide="alert">&times;</a>
+				<div class="modal-header">
+					<%= t('modal.email.title.resend') %><span class="modal_company_name"></span>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
 				</div>
-				<div class="form-group">
-					<%= label_tag 'resend_competence', t('activerecord.attributes.receipt_email.competence') %>
-					<div class="input-group date" data-behaviour='datepickercompetence' >
-						<%= text_field_tag 'competence', '', id: 'resend_competence', class: 'form-control' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+				<div class="modal-body">
+					<div id="resend_email_error_box" class="alert alert-danger fade in" style="display: none;">
+						<a href="#" class="close" data-hide="alert">&times;</a>
 					</div>
-					<% if  params[:action]  == 'index' %>
-					<%= hidden_field_tag 'email_id', '',id: 'resend_email_id' %>
-					<% end %>
+					<div class="form-group">
+						<%= label_tag 'resend_competence', t('activerecord.attributes.receipt_email.competence') %>
+						<div class="input-group date" data-behaviour='datepickercompetence' >
+							<%= text_field_tag 'competence', '', id: 'resend_competence', class: 'form-control' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+						</div>
+						<% if  params[:action]  == 'index' %>
+						<%= hidden_field_tag 'email_id', '',id: 'resend_email_id' %>
+						<% end %>
+					</div>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">
-					<%= t('helpers.action.cancel') %>
-				</button>
-				<%= submit_tag t('helpers.action.email.send'), class: 'btn btn-primary btn-ok' %>
-			</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">
+						<%= t('helpers.action.cancel') %>
+					</button>
+					<%= submit_tag t('helpers.action.email.send'), class: 'btn btn-primary btn-ok' %>
+				</div>
 			<% end %>
 		</div>
 	</div>
@@ -55,7 +55,7 @@
 						<%= text_field_tag 'competence', '', id: 'send_test_competence', class: 'form-control' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 					</div>
 					<% if  params[:action]  == 'index' %>
-					<%= hidden_field_tag 'email_id', '', id: 'send_test_email_id' %>
+						<%= hidden_field_tag 'email_id', '', id: 'send_test_email_id' %>
 					<% end %>
 				</div>
 			</div>
@@ -97,45 +97,44 @@
 
 <!-- Recent e-mails modal -->
 <% if @recent_emails %>
-<div class="modal fade" id="recent_emails_modal" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-md">
-		<div class="modal-content">
-			<div class="modal-header">
-				<%= t('modal.email.title.recent_emails', days: ReceiptEmail::RECENT_EMAILS_DAYS) %>
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					&times;
-				</button>
-			</div>
-			<div class="modal-body">
-				<table id="recent_emails_table" class="table table-striped table-condensed">
-					<thead>
-						<tr>
-							<th><%= t('activerecord.attributes.email_history.created_at') %></th>
-							<th><%= t('activerecord.attributes.receipt_email.company') %></th>
-							<th><%= t('audit.type') %></th>
-						</tr>
-					</thead>
+	<div class="modal fade" id="recent_emails_modal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<%= t('modal.email.title.recent_emails', days: ReceiptEmail::RECENT_EMAILS_DAYS) %>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+				</div>
+				<div class="modal-body">
+					<table id="recent_emails_table" class="table table-striped table-condensed">
+						<thead>
+							<tr>
+								<th><%= t('activerecord.attributes.email_history.created_at') %></th>
+								<th><%= t('activerecord.attributes.receipt_email.company') %></th>
+								<th><%= t('audit.type') %></th>
+							</tr>
+						</thead>
 
-					<tbody>
-						<% if @recent_emails.empty? %>
-						<tr><td colspan="3"><%= t('helpers.none') %></td></tr>
-						<% end %>
-
-						<% @recent_emails.each do |history| %>
-						<tr>
-							<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
-							<td><%= l(history.created_at, format: :really_short) %></td>
-							<td class="email_company"><%= history.receipt_email.company.name %></td>
-							<td><%= history.send_type_desc %></td>
+						<tbody>
+							<% if @recent_emails.empty? %>
+								<tr><td colspan="3"><%= t('helpers.none') %></td></tr>
 							<% end %>
-						</tr>
-						<% end %>
-					</tbody>
-				</table>
+							<% @recent_emails.each do |history| %>
+								<tr>
+									<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
+										<td><%= l(history.created_at, format: :really_short) %></td>
+										<td class="email_company"><%= history.receipt_email.company.name %></td>
+										<td><%= history.send_type_desc %></td>
+									<% end %>
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 <% end %>
 
 <script>
