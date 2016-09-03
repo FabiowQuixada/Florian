@@ -1,39 +1,39 @@
-<%= form_for @model, html: {id: 'main_form'} do |f| %>
+<%= form_for @model, html: { id: 'main_form' } do |f| %>
 
-<%= render partial: 'shared/form_errors', locals: {model: @model} %>
+	<%= render partial: 'shared/form_errors', locals: { model: @model } %>
 
-<ul class="nav nav-tabs">
-	<li id="main_tab_0_title" class="active clickable"><a><%= I18n.t('helpers.general') %></a></li>
-	<li id="main_tab_1_title" class="clickable"><a><%= Donation.new.model_name.human(count: 2) %></a></li>
-	<li id="main_tab_2_title" class="clickable"><a><%= Contact.new.model_name.human(count: 2) %></a></li>
-</ul>
+	<ul class="nav nav-tabs">
+		<li id="main_tab_0_title" class="active clickable"><a><%= I18n.t('helpers.general') %></a></li>
+		<li id="main_tab_1_title" class="clickable"><a><%= Donation.new.model_name.human(count: 2) %></a></li>
+		<li id="main_tab_2_title" class="clickable"><a><%= Contact.new.model_name.human(count: 2) %></a></li>
+	</ul>
 
-<div id="main_tab_0" class="general_tab">
-	<div class="container-fluid tab_body">
-		<%= render partial: 'main_tab_form', locals: {model: @model, f: f} %>
+	<div id="main_tab_0" class="general_tab">
+		<div class="container-fluid tab_body">
+			<%= render partial: 'main_tab_form', locals: { model: @model, f: f } %>
+		</div>
 	</div>
-</div>
 
-<!-- Donations -->
-<div id="main_tab_1" style="display: none;">
-	<div class="container-fluid tab_body">
-		<%= render partial: 'donation_tab_form', locals: {model: @model, f: f} %>
+	<!-- Donations -->
+	<div id="main_tab_1" style="display: none;">
+		<div class="container-fluid tab_body">
+			<%= render partial: 'donation_tab_form', locals: { model: @model, f: f } %>
+		</div>
 	</div>
-</div>
 
-<!-- Contacts -->
-<div id="main_tab_2" style="display: none;">
-	<div class="container-fluid tab_body">
-		<%= render partial: 'contact_tab_form', locals: {model: @model, f: f} %>
+	<!-- Contacts -->
+	<div id="main_tab_2" style="display: none;">
+		<div class="container-fluid tab_body">
+			<%= render partial: 'contact_tab_form', locals: { model: @model, f: f }  %>
+		</div>
 	</div>
-</div>
 
-<%= render partial: 'shared/form_buttons', locals: {model: @model, f: f} -%>
+	<%= render partial: 'shared/form_buttons', locals: { model: @model, f: f } -%>
 
 <%end%>
 
-<%= render partial: 'shared/tab_commons', locals: {tab_type: 'main', number_of_tabs: 3} %>
-<%= render partial: 'shared/form_commons', locals: {model: @model} %>
+<%= render partial: 'shared/tab_commons', locals: { tab_type: 'main', number_of_tabs: 3 } %>
+<%= render partial: 'shared/form_commons', locals: { model: @model } %>
 
 <script>
 
@@ -47,7 +47,6 @@
 		}
 	}
 
-	$('#company_entity_type').on('change', update_fields_by_entity_type);
 
 	function update_fields_by_entity_type() {
 
@@ -68,12 +67,13 @@
 		update_number_parcels();
 		set_last_parcel_date();
 
-		$('#company_first_parcel').on('change', function (){
+	    $('#company_entity_type').on('change', update_fields_by_entity_type);
+
+		$('#company_first_parcel').on('change', function () {
 			set_last_parcel_date();
 		});
 
-		$('#company_payment_frequency').change(function()
-		{
+		$('#company_payment_frequency').change(function() {
 			update_number_parcels();
 		});
 

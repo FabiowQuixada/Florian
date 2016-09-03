@@ -32,16 +32,16 @@
 			<thead>
 				<tr class="hidden-xs">
 					<% I18n.with_options(scope: 'activerecord.attributes.contact') do |i18n| %>
-					<th class="id-column admin-only"></th>
-					<th><%= i18n.t :name %></th>
-					<th><%= i18n.t :position %></th>
-					<th style="display:none;"></th>
-					<th><%= i18n.t :telephone %></th>
-					<th><%= i18n.t :celphone %></th>
-					<th style="display:none;"></th>
-					<th class="icon-column" style="width: 32px;"></th>
-					<th class="icon-column" style="width: 32px;"></th>
-					<th style="display:none;"></th>
+						<th class="id-column admin-only"></th>
+						<th><%= i18n.t :name %></th>
+						<th><%= i18n.t :position %></th>
+						<th style="display:none;"></th>
+						<th><%= i18n.t :telephone %></th>
+						<th><%= i18n.t :celphone %></th>
+						<th style="display:none;"></th>
+						<th class="icon-column" style="width: 32px;"></th>
+						<th class="icon-column" style="width: 32px;"></th>
+						<th style="display:none;"></th>
 					<% end %>
 				</tr>
 			</thead>
@@ -49,7 +49,7 @@
 				<tr id="no_contacts_row"<%= ' style=display:none' if @model.contacts.any? %>><td colspan="6"><%= genderize_tag(Contact.new, 'helpers.none_registered') %></td></tr>
 
 				<% @model.contacts.each do |contact| %>
-					<%= render partial: contact %>
+					<%= render partial: contact, locals: {f: f} %>
 				<% end %>
 			</tbody>
 		</table>
@@ -194,10 +194,6 @@
 		});
 
 		$('#cancel_contact_edition_btn').on('click', clean_contact_fields);
-
-		function contact_field(id, field, value) {
-			return '<input class="form-control" value="' + value + '" type="hidden" name="company[contacts_attributes][' + id + '][' + field + ']" id="company_contacts_attributes_' + id + '_' + field + '">'
-		}
 
 	});
 </script>
