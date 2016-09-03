@@ -34,10 +34,8 @@
 			<td><%= iterator.service_qty %></td>
 			<td><%= iterator.product_qty %></td>
 			<td><%= iterator.status_desc %></td>
-			<td class="icon-column"><%= link_to image_tag('edit.png', title: t('helpers.action.edit')),edit_product_and_service_datum_path(iterator) %></td>
-			<td class="admin-only icon-column">
-				<%= image_tag('destroy.png', title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %>
-			</td>
+			<td class="icon-column"><%= edit_btn iterator %></td>
+			<td class="admin-only icon-column"><%= destroy_btn %></td>
 		</tr>
 		<% end %>
 

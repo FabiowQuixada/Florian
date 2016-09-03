@@ -61,12 +61,12 @@
 			if(is_now_active)
 			{
 				$(target).attr("href", change_status_path(id, is_now_active));
-				$(target).html('<%= image_tag('activate.png', title: genderize_tag(model, 'is_active'), class: 'deactivate_btn status_btn') %>');
+				$(target).html('<%= deactivate_img(model) %>');
 			}
 			else
 			{
 				$(target).attr("href", change_status_path(id, is_now_active));
-				$(target).html('<%= image_tag('deactivate.png', title: genderize_tag(model, 'is_inactive'), class: 'activate_btn status_btn') %>');
+				$(target).html('<%= activate_img(model) %>');
 			}
 		}
 	});

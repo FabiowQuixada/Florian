@@ -31,14 +31,8 @@
 					<td><%= iterator.name %></td>
 					<td class="hidden-xs"><%= iterator.email %></td>
 					<td class="hidden-xs"><%= iterator.role.name %></td>
-					<td class="icon-column"><%= link_to image_tag('edit.png', title: t('helpers.action.edit')), edit_user_path(iterator) %></td>
-					<td class="hidden-xs status icon-column">
-						<% if iterator.active %>
-						<%= link_to image_tag('activate.png', title: genderize_tag(iterator, 'is_active'), class: 'deactivate_btn status_btn'), deactivate_user_path(iterator), method: :post, remote: true, id: 'change_status_' + iterator.id.to_s, 'data-type' => :json, class: 'deactivate_btn' %>
-						<% else %>
-						<%= link_to image_tag('deactivate.png', title: genderize_tag(iterator, 'is_inactive'), class: 'activate_btn status_btn'), activate_user_path(iterator), method: :post, remote: true, id: 'change_status_' + iterator.id.to_s, 'data-type' => :json, class: 'activate_btn' %>
-						<% end %>
-					</td>
+					<td class="icon-column"><%= edit_btn iterator %></td>
+					<td class="hidden-xs status icon-column"><%= status_btn iterator %></td>
 				</tr>
 			<% end %>
 		<% end %>

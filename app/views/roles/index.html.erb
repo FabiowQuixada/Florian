@@ -28,20 +28,11 @@
 				<tr id="model_<%= iterator.id %>" class="model_row">
 					<td class="model_id admin-only"><%= iterator.id %></td>
 					<td><%= iterator.name %></td>
-					<td class="icon-column"><%= link_to image_tag('edit.png', title: t('helpers.action.edit')), edit_role_path(iterator) %></td>
-					<td class="hidden-xs status icon-column">
-						<% if iterator.active %>
-						<%= link_to image_tag('activate.png', title: genderize_tag(iterator, 'is_active'), class: 'deactivate_btn status_btn'), deactivate_role_path(iterator), method: :post, remote: true, id: 'change_status_' + iterator.id.to_s, 'data-type' => :json, class: 'deactivate_btn' %>
-						<% else %>
-						<%= link_to image_tag('deactivate.png', title: genderize_tag(iterator, 'is_inactive'), class: 'activate_btn status_btn'), activate_role_path(iterator), method: :post, remote: true, id: 'change_status_' + iterator.id.to_s, 'data-type' => :json, class: 'activate_btn' %>
-						<% end %>
-					</td>
-					<td class="admin-only icon-column">
-						<%= image_tag('destroy.png', title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %>
-					</td>
+					<td class="icon-column"><%= edit_btn iterator %></td>
+					<td class="hidden-xs status icon-column"><%= status_btn iterator %></td>
+					<td class="admin-only icon-column"><%= destroy_btn %></td>
 				</tr>
 			<% end%>
-
 		<% end %>
 	</tbody>
 </table>

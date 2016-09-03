@@ -33,10 +33,8 @@
 					<td class="hidden-xs"><%= number_to_currency(iterator.value) %></td>
 					<td><%= iterator.company.name %></td>
 					<td class="hidden-xs"><%= iterator.remark %></td>
-					<td class="icon-column"><%= link_to image_tag('edit.png', title: t('helpers.action.edit')), edit_donation_path(iterator) %></td>
-					<td class="admin-only icon-column">
-						<%= image_tag('destroy.png', title: t('helpers.action.destroy'), class: 'clickable destroy_btn') %>
-					</td>
+					<td class="icon-column"><%= edit_btn iterator %></td>
+					<td class="admin-only icon-column"><%= destroy_btn %></td>
 				</tr>
 			<% end %>
 		<% end %>
