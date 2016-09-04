@@ -38,7 +38,7 @@ class ReceiptEmailsController < ApplicationController
   private ###########################################################################################
 
   def receipt_email_params
-    params.require(:receipt_email).permit(:id, :body, :value, :day_of_month, :active, :company_id, :recipients_array)
+    params.require(:receipt_email).permit(:id, :body, :value, :day_of_month, :active, :company_id, :recipients_array, :active)
   end
 
   def load_email

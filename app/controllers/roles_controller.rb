@@ -9,7 +9,7 @@ class RolesController < ApplicationController
   private #################################################
 
   def role_params
-    params.require(:role).permit(:name, :description)
+    params.require(:role).permit(:name, :description, :active)
   end
 
   def index_sorting_method

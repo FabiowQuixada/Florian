@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   private ###################################################
 
   def user_params
-    params.require(:user).permit(:id, :name, :email, :password, :role_id)
+    params.require(:user).permit(:id, :name, :email, :password, :role_id, :active)
   end
 
   def index_sorting_method
