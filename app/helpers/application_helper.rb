@@ -26,6 +26,11 @@ module ApplicationHelper
     link_to genderize_full_tag(model, 'helpers.action.new'), path, class: 'btn btn-primary'
   end
 
+  def save_update_btn(model, form)
+    button_text = (@model.persisted? ? t('helpers.action.update') : t('helpers.action.save'))
+    form.submit button_text, class: 'btn btn-primary save_btn'
+  end
+
   def edit_btn(iterator)
     edit_path = send("edit_#{iterator.class.to_s.underscore}_path", iterator)
     link_to image_tag('edit.png', title: t('helpers.action.edit')), edit_path

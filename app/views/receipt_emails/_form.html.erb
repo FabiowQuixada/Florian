@@ -76,12 +76,12 @@
 
 							<tbody>
 								<% @model.history.each do |history| %>
-								<tr>
-									<td><%= l(history.created_at, format: :really_short) %></td>
-									<td><%= ActionController::Base.helpers.number_to_currency(history.value) %></td>
-									<td><%= history.send_type_desc %></td>
-									<td><%= history.user.name %></td>
-								</tr>
+									<tr>
+										<td><%= l(history.created_at, format: :really_short) %></td>
+										<td><%= ActionController::Base.helpers.number_to_currency(history.value) %></td>
+										<td><%= history.send_type_desc %></td>
+										<td><%= history.user.name %></td>
+									</tr>
 								<% end %>
 							</tbody>
 						</table>
@@ -93,6 +93,7 @@
 		</div>
 	<% end #new_record? %>
 
+	<%= render partial: 'shared/form_status_button', locals: { model: @model, f: f } %>
 	<%= render partial: 'shared/form_buttons', locals: { model: @model, f: f } -%>
 
 <% end #main_form %>

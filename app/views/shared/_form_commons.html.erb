@@ -29,18 +29,6 @@
 	<% if model.persisted? %>
 	$(document).ready(function() {
 
-		jQuery(document).ready(function($) {
-
-			$("#remove_company_form").on("ajax:success", function(e, data, status, xhr) {
-				display_notice('<%= t('alert.email.test_sent') %>');
-				$('#remove_company_modal').modal('hide');
-
-			}).on("ajax:error", function(e, xhr, status, error) {
-				display_error('<%= t('alert.email.error_sending_test') %>');
-				$('#remove_company_modal').modal('hide');
-			});
-		});
-
 		function button(elem) {
 			return elem.hasClass('btn');
 		}
@@ -71,17 +59,6 @@
 		})
 
 		$('#form_back_btn').on('click', handle_back_on_edit);
-
-		<% if model.class.column_names.include? 'active' %>
-
-		if(<%= model.active? %>) {
-			activate();
-		}
-		else {
-			inactivate();
-		}
-
-		<% end %>
 	});
 
 	function has_changed(key) {
@@ -154,10 +131,6 @@
 		<% else %>
 
 		$(document).ready(function() {
-			<% if model.class.column_names.include? 'active' %>
-			activate();
-			<% end %>
-
 			$('.back_btn').on('click', function() {
 				go_back();
 			});
@@ -189,35 +162,6 @@
 			$('#form_error_messages').html(result);
 			$('#form_error_box').show();
 		}
-
-		<% if model.class.column_names.include? 'active' %>
-
-		function inactivate() {
-			$('#active_img').hide();
-			$('#inactive_img').show();
-			$('#model_status').val('false');
-			$('#status_description').text('<%= genderize_tag(model, 'helpers.is_inactive') %>');
-		}
-
-		function activate() {
-			$('#active_img').show();
-			$('#inactive_img').hide();
-			$('#model_status').val('true');
-			$('#status_description').text('<%= genderize_tag(model, 'helpers.is_active') %>');
-		}
-
-		$('.status_btn').on('click', set_status_btn);
-
-		function set_status_btn() {
-			if($('#model_status').val() == 'true') {
-				inactivate();
-			}
-			else {
-				activate();
-			}
-		}
-
-		<% end %>
 
 		function add_tag_to_field(field, tag) {
 			var caretPos = document.getElementById(field).selectionStart;

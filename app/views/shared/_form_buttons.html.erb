@@ -1,23 +1,8 @@
-
-<% if !model.new_record? and model.class.column_names.include? 'active' %>
-
-	<div class="form_status_box clickable status_btn">
-		<%= image_tag('activate.png', id: 'active_img') %><%= image_tag('deactivate.png', id: 'inactive_img', style: 'display:none;') %>  <span id="status_description"><%= genderize_tag(model, 'helpers.is_inactive') %></span>
-
-	</div>
-
-	<%= f.hidden_field 'active', id: 'model_status', value: model.active %>
-<% end %>
-
 <br/>
 
 <div class="">
 
-    <% button_text = (@model.persisted? ? t('helpers.action.update') : t('helpers.action.save')) %>
-
-    <% if (!model.new_record? and model.updatable) or (model.new_record? and model.insertable) %>
-    	<%= f.submit button_text, class: 'btn btn-primary save_btn' %>
-    <% end %>
+    <%= save_update_btn @model, f %>
 
     <% if lookup_context.find_all(ActiveModel::Naming.plural(model) + '/_form_buttons').any? %>
     	<%= render partial: ActiveModel::Naming.plural(model).to_s + '/form_buttons', locals: { f: f } %>

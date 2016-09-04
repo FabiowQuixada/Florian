@@ -1,0 +1,47 @@
+
+<% if !model.new_record? %>
+
+	<div class="clickable status_btn">
+		<%= image_tag('activate.png', id: 'active_img') %><%= image_tag('deactivate.png', id: 'inactive_img', style: 'display:none;') %>  <span id="status_description"><%= genderize_tag(model, 'helpers.is_inactive') %></span>
+	</div>
+
+	<%= f.hidden_field 'active', id: 'model_status', value: model.active %>
+<% end %>
+
+<script>
+
+	function inactivate() {
+		$('#active_img').hide();
+		$('#inactive_img').show();
+		$('#model_status').val('false');
+		$('#status_description').text('<%= genderize_tag(model, 'helpers.is_inactive') %>');
+	}
+
+	function activate() {
+		$('#active_img').show();
+		$('#inactive_img').hide();
+		$('#model_status').val('true');
+		$('#status_description').text('<%= genderize_tag(model, 'helpers.is_active') %>');
+	}
+
+	function set_status_btn() {
+		if($('#model_status').val() == 'true') {
+			inactivate();
+		}
+		else {
+			activate();
+		}
+	}
+
+	$(document).ready(function() {
+		$('.status_btn').on('click', set_status_btn);
+
+		if(<%= model.active? %>) {
+			activate();
+		}
+		else {
+			inactivate();
+		}
+	});
+
+</script>
