@@ -30,7 +30,13 @@
 		<%= f.text_area :remark, size: '24x6', class: 'form-control' %>
 	</div>
 
-	<%= render partial: 'shared/form_buttons', locals: { model: @model, f: f } -%>
+	<br/>
+
+	<div class="form-buttons">
+	    <%= save_update_btn @model, f %>
+	    <%= save_and_new_btn @model, f %>
+	    <a id="form_back_btn" class="btn btn-primary back_btn"><%= t('helpers.action.back') %></a>
+	</div>
 
 <% end #main_form %>
 

@@ -28,7 +28,13 @@
 		</div>
 	</div>
 
-	<%= render partial: 'shared/form_buttons', locals: { model: @model, f: f } -%>
+	<br/>
+
+	<div class="form-buttons">
+	    <%= save_update_btn @model, f %>
+	    <a id="form_back_btn" class="btn btn-primary back_btn"><%= t('helpers.action.back') %></a>
+	</div>
+
 
 <%end%>
 

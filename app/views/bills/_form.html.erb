@@ -1,6 +1,6 @@
-<%= form_for @model, html: {id: 'main_form'} do |f| %>
+<%= form_for @model, html: { id: 'main_form' } do |f| %>
 
-	<%= render partial: 'shared/form_errors', locals: {model: @model} %>
+	<%= render partial: 'shared/form_errors', locals: { model: @model } %>
 
 	<%= f.hidden_field :id %>
 
@@ -45,11 +45,16 @@
 
 	</div>
 
-	<%= render partial: 'shared/form_buttons', locals: {model: @model, f: f} -%>
+	<br/>
+
+	<div class="form-buttons">
+	    <%= save_update_btn @model, f %>
+	    <a id="form_back_btn" class="btn btn-primary back_btn"><%= t('helpers.action.back') %></a>
+	</div>
 
 <% end #main form %>
 
-<%= render partial: 'shared/form_commons', locals: {model: @model} %>
+<%= render partial: 'shared/form_commons', locals: { model: @model } %>
 
 <script>
 

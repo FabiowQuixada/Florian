@@ -142,7 +142,13 @@
 	<% end # fields_for %>
 	<% end # week loop %>
 
-	<%= render partial: 'shared/form_buttons', locals: {model: @model, f: f} -%>
+	
+	<br/>
+
+	<div class="form-buttons">
+	    <%= save_update_btn @model, f unless @model.finalized? %>
+	    <a id="form_back_btn" class="btn btn-primary back_btn"><%= t('helpers.action.back') %></a>
+	</div>
 
 	<% end %>
 
@@ -166,7 +172,7 @@
 	<%= render partial: 'product_data/form', locals: {week: ProductAndServiceWeek.new, index: -1, week_form: hidden_f}%>
 	<% end %>
 
-	<%= render partial: 'shared/form_commons', locals: {model: @model} %>
+	<%= render partial: 'shared/form_commons', locals: { model: @model } %>
 	<%= render partial: 'shared/tab_commons', locals: {tab_type: 'prod_serv_data', number_of_tabs: 7} %>
 
 	<script>
