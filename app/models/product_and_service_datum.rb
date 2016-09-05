@@ -34,6 +34,10 @@ class ProductAndServiceDatum < ActiveRecord::Base
     !finalized?
   end
 
+  def breadcrumb_path
+    Hash[I18n.t('menu.emails') => '', I18n.t('menu.email.prod_serv') => '']
+  end
+
   def status_desc
     I18n.t('activerecord.enums.product_and_service_datum.status.' + status.to_s)
   end
