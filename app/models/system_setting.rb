@@ -45,7 +45,7 @@ class SystemSetting < ActiveRecord::Base
   end
 
   def pse_processed_body(date = Date.today)
-    apply_competence_tag_to(pse_body, date) + user.signature
+    apply_competence_tag_to(pse_body, date) + user.full_signature
   end
 
   def competence(date = Date.today)

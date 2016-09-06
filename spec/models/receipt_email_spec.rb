@@ -19,7 +19,7 @@ describe ReceiptEmail, type: :model do
     let(:date) { Date.today + 1.month }
     let(:receipt) { described_class.first }
     let(:expected_title) { "Recibo de Doação IAQ Company 7 Ltda. - " + I18n.localize(date, format: :competence).capitalize }
-    let(:expected_body) { "Prezados, segue em anexo o recibo de doação da Company 7 Ltda., no valor de R$ 3,00 (três reais) referente a " + I18n.localize(date, format: :competence).capitalize + '.' + user.signature }
+    let(:expected_body) { "Prezados, segue em anexo o recibo de doação da Company 7 Ltda., no valor de R$ 3,00 (três reais) referente a " + I18n.localize(date, format: :competence).capitalize + '.' + user.full_signature }
     let(:expected_receipt_text) { "A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu da Company 7, inscrito sob o CNPJ/MF nº " + receipt.company.cnpj.to_s + ", situada na Rua X, a importância supra de R$ 3,00 (três reais) como doação em " + I18n.localize(date, format: :competence).capitalize + '.' }
 
     it { expect(receipt.processed_title(user, date)).to eq expected_title }
@@ -39,7 +39,7 @@ describe ReceiptEmail, type: :model do
   end
 
   context '#competence' do
-    let(:current_month) { I18n.localize(Date.today, format: :competence) }
+    let(:current_month) { I18n.localize(Date.today.change(hour: 0, min: 0, sec: 0), format: :competence) }
     let(:next_month) { I18n.localize(Date.today + 1.month, format: :competence) }
 
     it { expect(build(:receipt_email, day_of_month: Date.yesterday.day).competence).to eq next_month }

@@ -13,12 +13,12 @@ RSpec.configure do |config|
     end
 
     role1 = Role.create(name: ADMIN_ROLE, description: 'Administrador')
-    User.create(name: 'Sistema', email: SYSTEM_EMAIL, password: 'fulano0123', password_confirmation: 'fulano0123', bcc: 'teste@test.com', signature: '(Assinatura)', role: role1)
+    User.create(name: 'Sistema', email: SYSTEM_EMAIL, password: 'fulano0123', password_confirmation: 'fulano0123', bcc: 'teste@test.com', role: role1)
 
     role2 = Role.create(name: "Usuário", description: 'Usuário comum')
     Role.create(name: 'Grupo sem usuario', description: 'desc')
-    User.create(name: 'Inativo', email: 'teste_inativo@yahoo.com.br', password: 'usuario_teste', password_confirmation: 'usuario_teste', bcc: 'teste@test.com', signature: '(Assinatura)', role: role2, active: false)
-    User.create(name: 'Comum', email: 'teste_comum@yahoo.com.br', password: 'usuario_comum', password_confirmation: 'usuario_comum', bcc: 'teste@test.com', signature: '(Assinatura)', role: role2)
+    User.create(name: 'Inativo', email: 'teste_inativo@yahoo.com.br', password: 'usuario_teste', password_confirmation: 'usuario_teste', bcc: 'teste@test.com', role: role2, active: false)
+    User.create(name: 'Comum', email: 'teste_comum@yahoo.com.br', password: 'usuario_comum', password_confirmation: 'usuario_comum', bcc: 'teste@test.com', role: role2)
 
     FactoryGirl.create :company, :with_contacts, :with_donations
     comp1 = Company.create(entity_type: Company.entity_types[:"Pessoa Jurídica"], name: 'Empresa I', registration_name: 'Empresa I Ltda.', cnpj: '31162488000187', category: Company.categories[:"2 (Entre R$ 300,00 e R$ 600,00)"], address: 'lala', group: Company.groups[:Mantenedora])

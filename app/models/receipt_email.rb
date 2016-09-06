@@ -43,7 +43,7 @@ class ReceiptEmail < ActiveRecord::Base
   end
 
   def processed_body(user, date = Date.today)
-    apply_all_tags_to(body, date) + user.signature
+    apply_all_tags_to(body, date) + user.full_signature
   end
 
   def processed_receipt_text(date = Date.today)

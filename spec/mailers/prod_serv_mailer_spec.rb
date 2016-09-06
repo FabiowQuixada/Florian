@@ -12,7 +12,7 @@ describe ProdServMailer, type: :mailer do
     it_behaves_like 'an psd e-mail'
     it { expect(mail.to).to eq(user.system_setting.private_recipients_as_array) }
     it { expect(mail.subject).to eq(SSETTINGS_PSE_TITLE_PREFIX + period) }
-    it { expect(body_text(mail)).to eq(SSETTINGS_PSE_BODY_WEEK.gsub(I18n.t('tags.competence'), period) + user.signature) }
+    it { expect(body_text(mail)).to eq(SSETTINGS_PSE_BODY_WEEK.gsub(I18n.t('tags.competence'), period) + user.full_signature) }
   end
 
 

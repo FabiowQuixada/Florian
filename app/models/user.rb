@@ -45,8 +45,11 @@ class User < ActiveRecord::Base
     write_attribute(:active, value)
   end
 
+  def full_signature
+    "\n\n--\n\n#{signature}"
+  end
 
-  private #####################################
+  private ##########################################################################################################
 
   def build_default_system_setting
     build_system_setting
@@ -61,8 +64,7 @@ class User < ActiveRecord::Base
   end
 
   def default_values
-    self.name ||= ''
     self.bcc ||= email
-    self.signature ||= "\n\n--\n\n" + self.name
+    self.signature ||= name
   end
 end

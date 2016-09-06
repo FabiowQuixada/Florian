@@ -8,7 +8,7 @@ class ProdServMailer < ApplicationMailer
 
     mail(to: user.system_setting.pse_private_recipients_array,
          subject: SSETTINGS_PSE_TITLE_PREFIX + period,
-         body: SSETTINGS_PSE_BODY_WEEK.gsub(I18n.t('tags.competence'), period) + user.signature)
+         body: SSETTINGS_PSE_BODY_WEEK.gsub(I18n.t('tags.competence'), period) + user.full_signature)
   end
 
   def send_to_analysis(week, user)
