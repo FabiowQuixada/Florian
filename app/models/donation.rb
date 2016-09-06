@@ -22,6 +22,10 @@ class Donation < ActiveRecord::Base
     self.donation_date ||= Time.now
   end
 
+  def alias
+    "#{company.name} (#{donation_date})"
+  end
+
   def default_values
     self.value ||= 0.00
   end

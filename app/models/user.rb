@@ -32,6 +32,10 @@ class User < ActiveRecord::Base
     role.name == GUEST_ROLE
   end
 
+  def alias
+    name
+  end
+
   def active_for_authentication?
     super && active?
   end

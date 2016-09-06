@@ -30,6 +30,10 @@ class ReceiptEmail < ActiveRecord::Base
     validate_value && validate_day_of_month
   end
 
+  def alias
+    company.name
+  end
+
   def title(user)
     user.system_setting.re_title
   end

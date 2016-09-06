@@ -20,7 +20,11 @@ class Bill < ActiveRecord::Base
     'f'
   end
 
-  #private #######################################################################################################
+  def alias
+    I18n.localize(competence, format: :competence).capitalize
+  end
+
+  private #######################################################################################################
 
   def default_values
     self.competence ||= Date.today
@@ -30,15 +34,14 @@ class Bill < ActiveRecord::Base
   end
 
   def validate_model
-    self.competence = self.competence.change(day: 1) if self.competence
+    self.competence ||= Date.today
+    self.competence = self.competence.change(day: 1)
 
     attribute = I18n.t('activerecord.attributes.bill.competence')
     errors.add(:competence, I18n.t('errors.messages.taken', attribute: attribute)) if competence_already_taken?
   end
 
   def competence_already_taken?
-   Bill.where("extract(month from competence) = #{competence.month} 
-    AND extract(year from competence) = #{competence.year} " +
-    ( id ? "AND id != #{id}" : "" )).any?
+    Bill.where("extract(month from competence) = #{competence.month} AND extract(year from competence) = #{competence.year} " + (id ? "AND id != #{id}" : '')).any?
   end
 end

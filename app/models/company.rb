@@ -47,6 +47,10 @@ class Company < ActiveRecord::Base
     'f'
   end
 
+  def alias
+    name
+  end
+
   def person?
     entity_type == "Pessoa Física"
   end
@@ -57,10 +61,6 @@ class Company < ActiveRecord::Base
 
   def donation_rejectable?(att)
     (att['value'].nil? || att['value'] == '0,00') && (att['donation_date'].nil? || !att['donation_date'].is_a?(Date)) && (att['remark'].nil? || att['remark'].blank?)
-  end
-
-  def breadcrumb_suffix
-    Hash[name => 'send(self.model_name.route_key + "_path")']
   end
 
   def update(params)

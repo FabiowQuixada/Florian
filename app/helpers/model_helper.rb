@@ -14,31 +14,16 @@ module ModelHelper
     's'
   end
 
-  def insertable
-    true
-  end
-
-  def updatable
-    true
-  end
-
   def was(verb)
-    I18n.t("#{verb}.#{model_gender}.#{model_number}", model: I18n.t('activerecord.models.' + self.class.model_name.param_key + '.one')).downcase.capitalize
-  end
-
-  def visualizable
-    false
+    I18n.t("#{verb}.#{model_gender}.#{model_number}", model: I18n.t("activerecord.models.#{self.class.model_name.param_key}.one")).downcase.capitalize
   end
 
   def breadcrumb_path
     Hash[model_name.human(count: 2) => 'send(self.model_name.route_key + "_path")']
   end
 
-  def breadcrumb_suffix
-  end
-
   def blank_error_message(field)
-    attribute = I18n.t('activerecord.attributes.' + self.class.name.underscore + '.' + field)
+    attribute = I18n.t("activerecord.attributes.#{self.class.name.underscore}.#{field}")
     I18n.t('errors.messages.blank', attribute: attribute)
   end
 end

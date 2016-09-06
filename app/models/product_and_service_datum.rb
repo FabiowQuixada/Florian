@@ -30,6 +30,10 @@ class ProductAndServiceDatum < ActiveRecord::Base
     self.competence ||= Date.today
   end
 
+  def alias
+    I18n.localize(competence, format: :competence).capitalize
+  end
+
   def can_edit?
     !finalized?
   end

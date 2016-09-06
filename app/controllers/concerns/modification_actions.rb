@@ -22,7 +22,6 @@ module ModificationActions extend ActiveSupport::Concern
 
                            def before_modification
                              @model = model_class.find(params[:id])
-                             @breadcrumbs = @model.breadcrumb_path.merge Hash[t('helpers.action.edit') => '']
-                             @breadcrumbs = @breadcrumbs.merge @model.breadcrumb_suffix unless @model.breadcrumb_suffix.nil?
+                             @breadcrumbs = @model.breadcrumb_path.merge Hash[@model.alias => '']
                            end
 end
