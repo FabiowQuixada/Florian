@@ -136,7 +136,7 @@
 
 		<% end %>
 
-		$('#receipt_email_title').val(escapeHtml('<%= current_user.system_setting.re_title %>'));
+		$('#receipt_email_title').val(escape_html('<%= current_user.system_setting.re_title %>'));
 
 		$('#main_form').on('submit', function(evt) {
 
