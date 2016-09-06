@@ -44,7 +44,7 @@
 								<% end %>
 
 								<li class="pull-right visible-xs">
-									<%= (link_to image_tag('key.png', title: t('helpers.action.show_admin_private_data')), 'javascript:void(0)', class: 'admin_key_btn') if current_user.admin? %>
+									<%= admin_info_btn %>
 								</li>
 							</ol>
 
@@ -53,17 +53,16 @@
 						<div class="hidden-xs col-md-1 col-lg-1"></div>
 						<div class="hidden-xs col-md-4 col-lg-4" style="margin-top: 10px; margin-bottom: 10px;">
 							<div class="right">
-								<%= link_to current_user.name, edit_user_registration_path %> 
-								<%= (link_to image_tag('key.png', title: t('helpers.action.show_admin_private_data')), 'javascript:void(0)', class: 'admin_key_btn') if current_user.admin? %> 
-
-								<%= link_to(t('helpers.action.logout'), destroy_user_session_path, method: :delete, style: 'margin-left: 5px;', class: 'btn btn-primary btn-xs') %>
+								<%= profile_btn %> 
+								<%= admin_info_btn %> 
+								<%= logout_btn %>
 							</div>
 						</div>
 					</div>
 
 					<% else %>
 					<div class="centre">
-						<img  style="width: 70px; height: 70px; margin-bottom: -10px; margin-top: 10px;" src="/assets/app_logo.png" alt="<%= t('app_title') %><">
+						<img  style="width: 70px; height: 70px; margin-bottom: -10px; margin-top: 10px;" src="/assets/app_logo.png" alt="<%= t('app_title') %>">
 						<h2><span class="app_title"><%= t('app_title') %></span></h2>
 					</div>
 
@@ -114,22 +113,19 @@
 							</div>
 						</div>
 
+
 						<!-- BODY -->
 						<%= yield -%>
 
+
+						<!-- FOOTER -->
 						<% if user_signed_in? %>
-						<div id="app_footer" class="navbar navbar-default center">
-							<%= t('app_title') + ' ' + Time.now.year.to_s %>
-
-							<% if !current_user.nil? && current_user.admin? %>
-							(<%= t('environments.' + Rails.env) %>)
-							<% end %>
-
-							<%= link_to image_tag('info.png', title: t('helpers.about.title')), 'javascript:void(0)', id: 'app_about_btn' %> 
-
-							<br/>
-							<%= t('by_author')%>
-						</div>
+							<div id="app_footer" class="navbar navbar-default center">
+								<%= app_footer %> 
+								<%= app_about_btn %> 
+								<br/>
+								<%= t('by_author') %>
+							</div>
 						<% end %>
 					</div>
 				</div>
@@ -223,7 +219,7 @@
 
 	$(function() {
 
-		<%= ('display_hideless_warning(\'' + t('showcase.login_info', showcase_email: bold('visitante' + GUEST_USERS_NUMBERS.sample.to_s + '@florian.com'), showcase_password: bold(SHOWCASE_PASSWORD)) + '\');').html_safe if Rails.env == 'showcase' && request.env['PATH_INFO'] == '/users/sign_in' %>
+		<%= showcase_login_msg %>
 
 		$('.admin_key_btn').on('click', toogle_admin_data);
 		$('#app_about_btn').on('click', display_about_modal);

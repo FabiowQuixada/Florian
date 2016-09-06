@@ -21,6 +21,16 @@ module ApplicationHelper
     klass.new.model_name.human(count: 2)
   end
 
+  ## Buttons ###################################################
+
+  def profile_btn
+    link_to current_user.name, edit_user_registration_path
+  end
+
+  def logout_btn
+    link_to t('helpers.action.logout'), destroy_user_session_path, method: :delete, style: 'margin-left: 5px;', class: 'btn btn-primary btn-xs'
+  end
+
   def new_btn(model)
     path = send "new_#{model.class.to_s.underscore}_path", model
     link_to genderize_full_tag(model, 'helpers.action.new'), path, class: 'btn btn-primary'
@@ -48,6 +58,16 @@ module ApplicationHelper
     image_tag('destroy.png', title: t('helpers.action.destroy'), class: 'clickable destroy_btn')
   end
 
+  def admin_info_btn
+    link_to image_tag('key.png', title: t('helpers.action.show_admin_private_data')), 'javascript:void(0)', class: 'admin_key_btn' if current_user.admin?
+  end
+
+  ## Images #########################################################################
+
+  def trash_img(field_name)
+    image_tag('delete.png', title: t('helpers.action.remove'), class: field_name + '_remove_recipient_btn remove_btn')
+  end
+
   def activate_img(iterator)
     image_tag('deactivate.png', title: genderize_tag(iterator, 'is_inactive'), class: 'activate_btn status_btn')
   end
@@ -55,6 +75,17 @@ module ApplicationHelper
   def deactivate_img(iterator)
     image_tag('activate.png', title: genderize_tag(iterator, 'is_active'), class: 'deactivate_btn status_btn')
   end
+
+  ## Other #######################################
+
+  def app_footer
+    t('app_title') + " #{Time.now.year} #{footer_env}"
+  end
+
+  def showcase_login_msg
+    ('display_hideless_warning(\'' + t('showcase.login_info', showcase_email: bold('visitante' + GUEST_USERS_NUMBERS.sample.to_s + '@florian.com'), showcase_password: bold(SHOWCASE_PASSWORD)) + '\');').html_safe if showcase_login_screen?
+  end
+
 
   private ############################################################################################
 
@@ -66,5 +97,17 @@ module ApplicationHelper
   def activation_btn(iterator)
     path = send("activate_#{iterator.class.to_s.underscore}_path", iterator)
     link_to activate_img(iterator), path, method: :post, remote: true, id: "change_status_#{iterator.id}", 'data-type' => :json, class: 'activate_btn'
+  end
+
+  def footer_env
+    '(' + t('environments.' + Rails.env) + ')' if !current_user.nil? && current_user.admin?
+  end
+
+  def app_about_btn
+    link_to image_tag('info.png', title: t('helpers.about.title')), 'javascript:void(0)', id: 'app_about_btn'
+  end
+
+  def showcase_login_screen?
+    Rails.env == 'showcase' && request.env['PATH_INFO'] == '/users/sign_in'
   end
 end
