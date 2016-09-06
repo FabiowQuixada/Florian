@@ -8,6 +8,7 @@ capybara-*.html
 /.validation/
 /spec/tmp
 /backups
+/vendor
 **.orig
 rerun.txt
 pickle-email-*.html

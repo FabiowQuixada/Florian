@@ -6,11 +6,18 @@ AllCops:
     - db/migrate/**
     - lib/generators/iaq_gen/templates/**
     - bin/**
+    - 'vendor/**/*'
+    - external/**
 
 RSpec/DescribedClass:
   Exclude:
+    - spec/support/**
     - spec/helpers/**
     - spec/lib_modules/**
+
+RSpec/DescribeClass:
+  Exclude:
+    - spec/support/shared_examples/requests/**
 
 Metrics/LineLength:
   Max: 500
