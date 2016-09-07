@@ -8,7 +8,7 @@ describe ProductAndServiceReport do
     let(:page_analysis) { PDF::Inspector::Page.analyze(rendered_pdf) }
 
     it { expect(text_analysis.strings[0]).to eq(I18n.t('report.title.weekly_prod_and_service')) }
-    it { expect(text_analysis.strings[1]).to eq(week.start_date.to_s + ' - ' + week.end_date.to_s) }
+    it { expect(text_analysis.strings[1]).to eq(week.period) }
 
     it { validates_services_footer_row }
     it { validates_products }
@@ -119,10 +119,10 @@ describe ProductAndServiceReport do
   end
 
   def product_index(product)
-    product_array.index { |o| o == I18n.t('activerecord.attributes.product_datum.' + product) }
+    product_array.index { |o| o == I18n.t('activerecord.attributes.product_data.' + product) }
   end
 
   def service_index(service)
-    text_analysis.strings.index { |o| o == I18n.t('activerecord.attributes.service_datum.' + service) }
+    text_analysis.strings.index { |o| o == I18n.t('activerecord.attributes.service_data.' + service) }
   end
 end

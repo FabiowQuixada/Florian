@@ -29,7 +29,7 @@ describe ProductAndServiceDatum, type: :model do
     datum = build :product_and_service_datum
     sum = 0
 
-    datum.weeks.each { |week| sum += week.service_qty if week.number <= 5 }
+    datum.weeks.each { |week| sum += week.service_qty if week.common? }
 
     expect(datum.service_qty).to eq sum
   end
@@ -38,7 +38,7 @@ describe ProductAndServiceDatum, type: :model do
     datum = build :product_and_service_datum
     sum = 0
 
-    datum.weeks.each { |week| sum += week.product_qty if week.number <= 5 }
+    datum.weeks.each { |week| sum += week.product_qty if week.common? }
 
     expect(datum.product_qty).to eq sum
   end

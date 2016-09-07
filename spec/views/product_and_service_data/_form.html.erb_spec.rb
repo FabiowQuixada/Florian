@@ -121,8 +121,8 @@ describe 'product_and_service_data/_form', type: :view do
     expect(view).to render_template(partial: 'shared/form_errors', locals: { model: model })
     expect(view).to render_template(partial: 'shared/form_commons', locals: { model: model })
     expect(view).to render_template(partial: 'shared/tab_commons', locals: { tab_type: 'prod_serv_data', number_of_tabs: 7 })
-    expect(view).to render_template(partial: 'product_data/_form', count: 8)
-    expect(view).to render_template(partial: 'service_data/_form', count: 8)
+    expect(view).to render_template(partial: 'product_data/_form', count: 7)
+    expect(view).to render_template(partial: 'service_data/_form', count: 7)
   end
   # rubocop:enable all
 

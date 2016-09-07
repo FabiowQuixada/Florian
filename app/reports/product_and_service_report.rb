@@ -20,12 +20,12 @@ class ProductAndServiceReport < FlorianReport
   end
 
   def title_and_subtitle(week)
-    if week.number != 7
-      title = I18n.t('report.title.weekly_prod_and_service')
-      subtitle = (week.start_date.to_s + ' - ' + week.end_date.to_s)
-    else
+    if week.totals? || week.final?
       title = I18n.t('report.title.monthly_prod_and_service')
       subtitle = I18n.localize(week.product_and_service_datum.competence, format: :competence).capitalize
+    else
+      title = I18n.t('report.title.weekly_prod_and_service')
+      subtitle = week.period
     end
 
     [title, subtitle]
@@ -56,7 +56,7 @@ class ProductAndServiceReport < FlorianReport
     ProductData.products.each do |product|
       product_qty = @week.product_data.instance_eval(product)
       total_products += product_qty
-      table << [I18n.t('activerecord.attributes.product_datum.' + product), product_qty.to_s]
+      table << [I18n.t("activerecord.attributes.product_data.#{product}"), product_qty.to_s]
     end
 
     table << [I18n.t('helpers.total'), total_products]
@@ -73,7 +73,7 @@ class ProductAndServiceReport < FlorianReport
       total_attendances += attd_qty
       total_returns += rtn_qty
 
-      table << [I18n.t('activerecord.attributes.service_datum.' + service), attd_qty.to_s, rtn_qty.to_s, (attd_qty + rtn_qty).to_s]
+      table << [I18n.t("activerecord.attributes.service_data.#{service}"), attd_qty.to_s, rtn_qty.to_s, (attd_qty + rtn_qty).to_s]
     end
 
     table << [I18n.t('helpers.total'), total_attendances, total_returns, total_attendances + total_returns]

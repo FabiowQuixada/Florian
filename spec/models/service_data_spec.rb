@@ -30,13 +30,4 @@ describe ServiceData, type: :model do
 
     expect(data.validate_model). to be false
   end
-
-  it '#validate_service_type' do
-    data = build :service_data
-
-    expect(data.validate_service_type). to be true
-    data.service_type = nil
-
-    expect(data.validate_service_type). to be false
-  end
 end

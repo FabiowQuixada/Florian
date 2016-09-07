@@ -96,7 +96,7 @@ pt-BR:
         number: Número
         start_date: Data de início
         end_date: Data de término
-      service_datum:
+      service_data:
         service_type: Tipo de serviço
         psychology: Psicologia
         physiotherapy: Fisioterapia
@@ -104,7 +104,7 @@ pt-BR:
         mesh: Malha
         gynecology: Ginecologia
         occupational_therapy: Ter. ocupacional
-      product_datum:
+      product_data:
         mesh: Malha
         cream: Creme
         protector: Protetor

@@ -5,6 +5,11 @@ class ProductAndServiceWeek < ActiveRecord::Base
   include ModelHelper
 
 
+  TOTALS_NUMBER = 6
+  FINAL_NUMBER = 7
+  HELPER_NUMBER = -1
+
+
   # Relationships
   belongs_to :product_and_service_datum
   has_many :service_data, -> { order('service_type') }, class_name: 'ServiceData', dependent: :destroy
@@ -18,37 +23,12 @@ class ProductAndServiceWeek < ActiveRecord::Base
 
 
   # Methods
-  after_initialize do
-    unless persisted?
-      if service_data.empty?
-        service_data.new service_type: ServiceData.service_types[:attendance]
-        service_data.new service_type: ServiceData.service_types[:return]
-      end
-
-      self.product_data ||= ProductData.new
-
-      self.start_date ||= Date.today
-      self.end_date ||= Date.today
-
-      self.number ||= -1
-    end
-  end
-
   def validate_model
-    errors.add(:start_date, I18n.t('errors.product_and_service_datum.period_is_mandatory', week_number: number.to_s)) unless self.end_date && self.start_date
-
-    errors.add(:start_date, I18n.t('errors.product_and_service_datum.invalid_period', week_number: number.to_s)) if invalid_range?
+    errors.add(:start_date, error_message('period_is_mandatory')) unless end_date && start_date
+    errors.add(:start_date, error_message('invalid_period')) if invalid_range?
 
     validate_prod_and_servs
   end
-
-  # rubocop:disable all
-  def validate_prod_and_servs
-    errors.add(:attendance_data, I18n.t('errors.product_and_service_datum.all_attendances_are_mandatory', week_number: number.to_s)) unless service_data[0].validate_model
-    errors.add(:return_data, I18n.t('errors.product_and_service_datum.all_returns_are_mandatory', week_number: number.to_s)) unless service_data[1].validate_model
-    errors.add(:product_data, I18n.t('errors.product_and_service_datum.all_products_are_mandatory', week_number: number.to_s)) unless self.product_data.validate_model
-  end
-  # rubocop:enable all
 
   def service_qty
     sum = 0
@@ -57,7 +37,7 @@ class ProductAndServiceWeek < ActiveRecord::Base
   end
 
   def product_qty
-    self.product_data.qty
+    product_data.qty
   end
 
   def attendances
@@ -72,10 +52,69 @@ class ProductAndServiceWeek < ActiveRecord::Base
     'f'
   end
 
+  def common?
+    0 <= number && number <= 5
+  end
+
+  def totals?
+    number == TOTALS_NUMBER
+  end
+
+  def final?
+    number == FINAL_NUMBER
+  end
+
+  def helper?
+    index == HELPER_NUMBER
+  end
+
+  def index
+    number - 1
+  end
+
+  def title
+    I18n.t('activerecord.models.product_and_service_week.one') + " #{number}"
+  end
+
+  def period
+    I18n.t('helpers.from') + " #{start_date} " + I18n.t('helpers.to') + " #{end_date}"
+  end
+
   private
+
+  after_initialize do
+    unless persisted?
+      if service_data.empty?
+        service_data.new
+        service_data.new
+      end
+
+      attendances.service_type ||= ServiceData.service_types[:attendance]
+      returns.service_type ||= ServiceData.service_types[:return]
+
+      self.product_data ||= ProductData.new
+
+      self.start_date ||= Date.today
+      self.end_date ||= Date.today
+
+      self.number ||= -1
+    end
+  end
 
   def invalid_range?
     self.end_date && self.start_date && self.end_date < self.start_date
+  end
+
+  # rubocop:disable all
+  def validate_prod_and_servs
+    errors.add(:attendance_data, error_message('all_attendances_are_mandatory')) unless attendances.validate_model
+    errors.add(:return_data, error_message('all_returns_are_mandatory')) unless returns.validate_model
+    errors.add(:product_data, error_message('all_products_are_mandatory')) unless self.product_data.validate_model
+  end
+  # rubocop:enable all
+
+  def error_message(tag)
+    I18n.t("errors.product_and_service_datum.#{tag}", week_number: number.to_s)
   end
 
 end

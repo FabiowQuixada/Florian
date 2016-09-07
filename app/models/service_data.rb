@@ -27,11 +27,6 @@ class ServiceData < ActiveRecord::Base
   end
 
   def validate_model
-    validate_services && validate_service_type
-  end
-
-  def validate_services
-
     self.is_valid = true
 
     ServiceData.services.each do |service|
@@ -42,15 +37,6 @@ class ServiceData < ActiveRecord::Base
     end
 
     true
-  end
-
-  def validate_service_type
-
-    return true unless service_type.nil? || service_type.blank?
-
-    errors.add(:service_type, I18n.t('errors.messages.blank', attribute: I18n.t('activerecord.attributes.service_datum.service_type')))
-    self.is_valid = false
-    false
   end
 
   def self.services

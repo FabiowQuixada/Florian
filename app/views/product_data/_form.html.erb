@@ -1,56 +1,53 @@
-<% totals_week_number = 6 %>
-<% final_week_number = 7 %>
+<% week = week_f.object %>
 
 <fieldset>
 
-	<legend><%= t 'activerecord.models.product_datum.other' %><span class="admin-only"> (<%= week.product_data.id.to_s %>)</span></legend>
+	<legend><%= t 'activerecord.models.product_datum.other' %><span class="admin-only"><%= product_id(week) %></span></legend>
 
-	<!-- Product empty header row -->
-	<%= week_form.fields_for :product_data do |product_form| %>
+	<%= week_f.fields_for :product_data do |product_f| %>
 
-	<% product_row = 0 %>
-	<table class="input-table">
-		<thead>
-			<tr>
-				<th scope="col" class="col-md-2">
-				</th>
-				<th scope="col"></th>
-				<th scope="col"></th>
-			</tr>
-		</thead>
+		<table class="input-table">
+			<!-- Product empty header row -->
+			<thead>
+				<tr>
+					<th scope="col" class="col-md-2"></th>
+					<th scope="col"></th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
 
 
-		<!-- Product body rows -->
-		<% ProductData.products.each do |name| %>
+			<!-- Product body rows -->
+			<tbody>
+				<% ProductData.products.each_with_index do |name, row| %>
 
-		<tr>
-			<th scope="row" class="col-xs-7 col-md-7">
-				<span class="label"><%= t('activerecord.attributes.product_datum.' + name) %></span>
-			</th>
-			<td class="col-xs-1 col-md-1">
-			</td>
-			<td>
-				<%= product_form.text_field name, class: 'form-control product_input numbers_only product_row_' + product_row.to_s + ' product_week_' + index.to_s + ' input-sm week_' + index.to_s + (index >= totals_week_number ? ' extra_tab temp_field' : ''), readonly: fields_readonly?(week) %>
-			</td>
-		</tr>
+				<tr>
+					<th scope="row" class="col-xs-7 col-md-7">
+						<span class="label"><%= t("activerecord.attributes.product_data.#{name}") %></span>
+					</th>
+					<td class="col-xs-1 col-md-1">
+					</td>
+					<td>
+						<%= product_f.text_field name, class: product_classes(week, row), readonly: fields_readonly?(week) %>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
 
-		<% product_row += 1 %>
 
-		<% end %>
-
-		<!-- Product total row -->
-		<tfoot>
-			<tr>
-				<th scope="row" class="col-xs-7 col-md-7">
-					<span class="label"><%= t 'helpers.total' %></span>
-				</th>
-				<td class="col-xs-1 col-md-1">
-				</td>
-				<td>
-					<%= text_field_tag 'total_product', 0, id: 'total_product_week_' + index.to_s, class: 'form-control input-sm temp_field', readonly: true, disabled: true %>
-				</td>
-			</tr>
-		</tfoot>
-	</table>
+			<!-- Product total row -->
+			<tfoot>
+				<tr>
+					<th scope="row" class="col-xs-7 col-md-7">
+						<span class="label"><%= t 'helpers.total' %></span>
+					</th>
+					<td class="col-xs-1 col-md-1">
+					</td>
+					<td>
+						<%= text_field_tag 'total_product', 0, id: "total_product_week_#{week.index}", class: 'form-control input-sm temp_field', readonly: true, disabled: true %>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
 	<% end %>
 </fieldset>
