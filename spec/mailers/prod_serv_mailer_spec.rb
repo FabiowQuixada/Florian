@@ -26,7 +26,7 @@ describe ProdServMailer, type: :mailer do
     it { expect(body_text(mail)).to eq(user.system_setting.pse_processed_body(competence)) }
   end
 
-  describe 'client e-mail' do
+  describe 'maintainers e-mail' do
     let(:competence) { week.product_and_service_datum.competence }
     let(:mail) { described_class.send_monthly_email(week, user).deliver_now }
 

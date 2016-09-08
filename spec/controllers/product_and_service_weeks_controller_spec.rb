@@ -61,21 +61,21 @@ describe ProductAndServiceWeeksController, type: :controller do
 
   describe 'POST #send_clients' do
     it 'does not send e-mail if its started' do
-      post :send_clients, product_and_service_week: { id: datum_created.weeks.first.id }
+      post :send_maintainers, product_and_service_week: { id: datum_created.weeks.first.id }
 
       expect(response).to have_http_status(:precondition_failed)
       expect(response).to render_template('product_and_service_data/_form')
     end
 
     it 'sends if its on analysis' do
-      post :send_clients, product_and_service_week: { id: datum_on_analysis.weeks.first.id }
+      post :send_maintainers, product_and_service_week: { id: datum_on_analysis.weeks.first.id }
 
       expect(response).to have_http_status(:found)
       expect(response).to redirect_to product_and_service_data_path
     end
 
     it 'does not send if its finalized' do
-      post :send_clients, product_and_service_week: { id: datum_finalized.weeks.first.id }
+      post :send_maintainers, product_and_service_week: { id: datum_finalized.weeks.first.id }
 
       expect(response).to have_http_status(:precondition_failed)
       expect(response).to render_template('product_and_service_data/_form')

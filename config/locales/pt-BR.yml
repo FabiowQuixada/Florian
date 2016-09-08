@@ -415,7 +415,7 @@ pt-BR:
       p: '%{model} estão inativas, clique para ativá-las'
   description:
     email:
-      resend: Reenviar e-mail para clientes
+      resend: Reenviar e-mail para mantenedoras
       send_test: Enviar e-mail teste apenas para
   modal:
     remove_title:
@@ -620,7 +620,7 @@ pt-BR:
     product_and_service_datum:
       cant_send: "Não é possível enviar estes dados;"
       cant_send_to_analysis: "Não é possível enviar estes dados para análise;"
-      cant_send_to_clients: "Não é possível enviar estes dados para os clientes;"
+      cant_send_to_maintainers: "Não é possível enviar estes dados para as mantenedoras;"
       period_is_mandatory: "O campo de período da semana é obrigatório: Semana %{week_number};"
       invalid_period: "Período inválido: Semana %{week_number};"
       all_attendances_are_mandatory: "Todos os atendimentos são obrigatórios: Semana %{week_number};"

@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     collection do
       post 'update_and_send'
       post 'send_to_analysis'
-      post 'send_clients'
+      post 'send_maintainers'
     end
   end
 

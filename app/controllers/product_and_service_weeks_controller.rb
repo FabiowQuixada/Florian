@@ -18,9 +18,9 @@ class ProductAndServiceWeeksController < ApplicationController
     redirect_to edit_product_and_service_datum_path @model
   end
 
-  def send_clients
-    return unless ok_to_send_clients?
-    perform_send_clients
+  def send_maintainers
+    return unless ok_to_send_maintainers?
+    perform_send_maintainers
   rescue => exc
     @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
     redirect_to edit_product_and_service_datum_path @model
@@ -34,7 +34,7 @@ class ProductAndServiceWeeksController < ApplicationController
                                                      product_data_attributes: [:id, :mesh, :cream, :protector, :silicon, :mask, :foam, :skin_expander, :cervical_collar])
   end
 
-  before_action :before_send_emails, only: [:update_and_send, :send_to_analysis, :send_clients]
+  before_action :before_send_emails, only: [:update_and_send, :send_to_analysis, :send_maintainers]
 
   def before_send_emails
     @week = ProductAndServiceWeek.find params[:product_and_service_week][:id]
@@ -62,9 +62,9 @@ class ProductAndServiceWeeksController < ApplicationController
     true
   end
 
-  def ok_to_send_clients?
+  def ok_to_send_maintainers?
     unless @model.on_analysis?
-      @model.errors[:base] << I18n.t('errors.product_and_service_datum.cant_send_to_clients')
+      @model.errors[:base] << I18n.t('errors.product_and_service_datum.cant_send_to_maintainers')
       render 'product_and_service_data/_form', status: :precondition_failed
       return false
     end
@@ -94,7 +94,7 @@ class ProductAndServiceWeeksController < ApplicationController
     end
   end
 
-  def perform_send_clients
+  def perform_send_maintainers
     @model.finalized!
 
     if @week.update(product_and_service_week_params) && @model.save
