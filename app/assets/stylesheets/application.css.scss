@@ -1,0 +1,192 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ * = require_tree .
+
+ * = require_self
+   *= require bootstrap-datepicker3
+    *= require jquery-tablesorter/theme.blue
+ */
+
+
+/** General ******************************************************************************/
+.app_title {
+    font-family: 'Metamorphous', cursive;
+}
+
+.main_box {
+    padding: 26px;
+    background-color: lavender;
+    min-height: 100%;
+}
+
+@media only screen and (max-width: 480px) {
+    .main_box {
+        padding: 0px;
+    }
+}
+
+#app_footer {
+    margin-top: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    justify-content: center;
+    width: auto;
+    bottom: -2;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+}
+
+/** Page header ***************************************************************************/
+#main_menu li.active {
+    background: white;
+}
+
+#submenu-line {
+    margin-top: -0.5em;
+}
+
+.profile-area {
+    font-size: 12px;
+    height: 27px;
+    line-height: 27px;
+}
+
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+}
+
+/** Buttons *******************************************************************************/
+.edit_btn {
+    cursor: pointer;
+}
+.remove_btn {
+    cursor: pointer;
+}
+
+.add_recipient_btn {
+    cursor: pointer;
+}
+
+.destroy_btn {
+    cursor: pointer;
+}
+
+.logout-xs-btn-box {
+    margin-bottom: 15px;
+}
+
+.logout-xs-btn {
+    margin-top: -20px;
+    float: right;
+}
+
+.admin_key_btn {
+  margin-left: 4px;
+}
+
+/** Other *********************************************************************************/
+.nav-tabs li {
+    cursor: pointer;
+}
+
+.tab_body {
+    background: white;
+    padding-top: 10px;
+    border-radius: 5px;
+}
+
+$footer-color: #428BCA;
+
+.asterisk::after {
+    color: $footer-color;
+    content: " *";
+}
+
+.asterisk-description {
+    font-size: 80%;
+    color: $footer-color;
+    font-weight: bold;
+}
+
+.rounded-image {
+    border-radius: 5px;
+}
+
+.left-image {
+    margin-right: 10px;
+    float: left;
+}
+
+.notice:empty {
+    display: none;
+}
+
+.padless {
+    padding: 0px;
+}
+
+.marginless {
+    margin: 0px;
+}
+
+.input-group-addon:first-child {
+    border-left-width: 1px;
+}
+
+.input-group-addon:last-child {
+    border-right-width: 1px;
+}
+
+#login_box {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #CDD0F6;
+    border-radius: 15px;
+    padding: 20px;
+    padding-bottom: 10px;
+    vertical-align: middle;
+}
+
+div.centre {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+    text-align: center;
+}
+
+.error_page_box {
+    background: #CDD0F6;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    padding: 5px;
+    padding-bottom: 10px;
+}
+
+.admin-only {
+    display: none;
+}
+
+.right {
+    text-align: right;
+}
+
+.thick {
+    font-weight: bold;
+}

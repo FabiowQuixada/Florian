@@ -1,0 +1,26 @@
+textarea {
+    resize: none;
+    height: 120px;
+}
+
+label.required:after {
+    content: " *";
+    color: red;
+}
+
+form {
+    display: inline;
+}
+
+.fixed-at-bottom {
+    display: block;
+    padding: 2px;
+    border-top: solid #000000;
+    background-color: #ffffff;
+    position: fixed;
+    bottom: -2;
+}
+
+.form_status_box {
+    cursor: pointer;
+}

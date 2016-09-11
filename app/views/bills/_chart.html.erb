@@ -66,7 +66,7 @@
 
 <ul class="nav nav-tabs">
   <% @graph_data.each_with_index do |bill, i| %>
-      <li id="bill_tab_<%= i %>_title" class="clickable"><a><%= bill[0] %></a></li>
+      <li id="bill_tab_<%= i %>_title"><a><%= bill[0] %></a></li>
   <% end %>
 </ul>
 
@@ -76,9 +76,9 @@
 
   <!-- Year's bills (titles) -->
   <ul class="nav nav-pills">
-    <li id="<%= bill[0].to_s %>_tab_0_title" class="active clickable"><a><%= t('activerecord.attributes.bill.water') %></a></li>
-    <li id="<%= bill[0].to_s %>_tab_1_title" class="clickable"><a><%= t('activerecord.attributes.bill.energy') %></a></li>
-    <li id="<%= bill[0].to_s %>_tab_2_title" class="clickable"><a><%= t('activerecord.attributes.bill.telephone') %></a></li>
+    <li id="<%= bill[0].to_s %>_tab_0_title" class="active"><a><%= t('activerecord.attributes.bill.water') %></a></li>
+    <li id="<%= bill[0].to_s %>_tab_1_title"><a><%= t('activerecord.attributes.bill.energy') %></a></li>
+    <li id="<%= bill[0].to_s %>_tab_2_title"><a><%= t('activerecord.attributes.bill.telephone') %></a></li>
   </ul>
 
   <!-- Year's bills (bodies) -->

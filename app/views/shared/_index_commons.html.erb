@@ -125,7 +125,7 @@
 					$('#model_' + id_to_be_deleted).remove();
 
 					if(!$('#index_table tbody tr').length) {
-						$('#index_table tbody').html('<td colspan="' + $('#index_table thead th').length + '" bgcolor="#E0E0F4" align="center"><%= genderize_tag(@model, 'helpers.none_registered') %></td>');
+						$('#index_table tbody').html('<td colspan="' + $('#index_table thead th').length + ' class="no-records"><%= genderize_tag(@model, 'helpers.none_registered') %></td>');
 					}
 				} else {
 					display_error(message);

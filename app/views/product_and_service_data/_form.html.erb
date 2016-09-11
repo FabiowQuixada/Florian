@@ -36,13 +36,13 @@
 
 		<% @model.weeks.each do |week| %>
 			<% if week.common? %>
-				<li id="prod_serv_data_tab_<%= week.index %>_title" class="clickable"><a><%= week.title %></a></li>
+				<li id="prod_serv_data_tab_<%= week.index %>_title"><a><%= week.title %></a></li>
 			<% end %>
 		<% end %>
 
-		<li id="prod_serv_data_tab_5_title" class="clickable"><a><%= t 'helpers.total' %></a></li>
+		<li id="prod_serv_data_tab_5_title"><a><%= t 'helpers.total' %></a></li>
 		<% if @model.on_analysis? or @model.finalized? %>
-			<li id="prod_serv_data_tab_6_title" class="clickable"><a><%= t 'helpers.final_data' %></a></li>
+			<li id="prod_serv_data_tab_6_title"><a><%= t 'helpers.final_data' %></a></li>
 		<% end %>
 	</ul>
 

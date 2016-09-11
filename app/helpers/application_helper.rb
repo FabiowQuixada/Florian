@@ -55,7 +55,7 @@ module ApplicationHelper
   end
 
   def destroy_btn
-    image_tag('destroy.png', title: t('helpers.action.destroy'), class: 'clickable destroy_btn')
+    image_tag('destroy.png', title: t('helpers.action.destroy'), class: 'destroy_btn')
   end
 
   def admin_info_btn

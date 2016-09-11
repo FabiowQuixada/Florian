@@ -3,29 +3,23 @@
 	<%= render partial: 'shared/form_errors', locals: { model: @model } %>
 
 	<ul class="nav nav-tabs">
-		<li id="main_tab_0_title" class="active clickable"><a><%= I18n.t('helpers.general') %></a></li>
-		<li id="main_tab_1_title" class="clickable"><a><%= plural_of Donation %></a></li>
-		<li id="main_tab_2_title" class="clickable"><a><%= plural_of Contact %></a></li>
+		<li id="main_tab_0_title" class="active"><a><%= I18n.t('helpers.general') %></a></li>
+		<li id="main_tab_1_title"><a><%= plural_of Donation %></a></li>
+		<li id="main_tab_2_title"><a><%= plural_of Contact %></a></li>
 	</ul>
 
-	<div id="main_tab_0" class="general_tab">
-		<div class="container-fluid tab_body">
-			<%= render partial: 'main_tab_form', locals: { model: @model, f: f } %>
-		</div>
+	<div id="main_tab_0" class="general_tab container-fluid tab_body">
+		<%= render partial: 'main_tab_form', locals: { model: @model, f: f } %>
 	</div>
 
 	<!-- Donations -->
-	<div id="main_tab_1" style="display: none;">
-		<div class="container-fluid tab_body">
-			<%= render partial: 'donation_tab_form', locals: { model: @model, f: f } %>
-		</div>
+	<div id="main_tab_1" style="display: none;" class="container-fluid tab_body">
+		<%= render partial: 'donation_tab_form', locals: { model: @model, f: f } %>
 	</div>
 
 	<!-- Contacts -->
-	<div id="main_tab_2" style="display: none;">
-		<div class="container-fluid tab_body">
-			<%= render partial: 'contact_tab_form', locals: { model: @model, f: f }  %>
-		</div>
+	<div id="main_tab_2" style="display: none;" class="container-fluid tab_body">
+		<%= render partial: 'contact_tab_form', locals: { model: @model, f: f }  %>
 	</div>
 
 	<br/>
@@ -34,7 +28,6 @@
 	    <%= save_update_btn @model, f %>
 	    <a id="form_back_btn" class="btn btn-primary back_btn"><%= t('helpers.action.back') %></a>
 	</div>
-
 
 <%end%>
 

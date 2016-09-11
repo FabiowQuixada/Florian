@@ -22,13 +22,13 @@
 			<tr>
 				<th scope="col" class="col-md-6"></th>
 				<th scope="col" class="col-md-2">
-					<span class="label"><%= t 'helpers.prod_and_serv_datum.checkup' %></span>
+					<%= t 'helpers.prod_and_serv_datum.checkup' %>
 				</th>
 				<th scope="col" class="col-md-2">
-					<span class="label"><%= t 'helpers.prod_and_serv_datum.return' %></span>
+					<%= t 'helpers.prod_and_serv_datum.return' %>
 				</th>
 				<th scope="col" class="col-md-2">
-					<span class="label"><%= t 'helpers.total' %></span>
+					<%= t 'helpers.total' %>
 				</th>
 			</tr>
 		</thead>
@@ -39,7 +39,7 @@
 			<% ServiceData.services.each_with_index do |serv, row| %>
 				<tr class="service-<%= week.index %>-row">
 					<th scope="row" class="col-md-6">
-						<span class="label"><%= t("activerecord.attributes.service_data.#{serv}") %></span>
+						<%= t("activerecord.attributes.service_data.#{serv}") %>
 					</th>
 					<td class="col-md-2">
 						<%= service_field_tag(week, serv, 0, row) %>
@@ -59,7 +59,7 @@
 		<tfoot>
 			<tr>
 				<th scope="row" class="col-md-6">
-					<span class="label"><%= t 'helpers.total' %></span>
+					<%= t 'helpers.total' %>
 				</th>
 				<td class="col-md-2">
 					<%= text_field_tag 'total_service_checkup', 0, id: "total_service_checkup_week_#{week.index}", class: 'form-control input-sm temp_field', readonly: true, disabled: true %>

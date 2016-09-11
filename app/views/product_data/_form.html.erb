@@ -20,17 +20,16 @@
 			<!-- Product body rows -->
 			<tbody>
 				<% ProductData.products.each_with_index do |name, row| %>
-
-				<tr>
-					<th scope="row" class="col-xs-7 col-md-7">
-						<span class="label"><%= t("activerecord.attributes.product_data.#{name}") %></span>
-					</th>
-					<td class="col-xs-1 col-md-1">
-					</td>
-					<td>
-						<%= product_f.text_field name, class: product_classes(week, row), readonly: fields_readonly?(week) %>
-					</td>
-				</tr>
+					<tr>
+						<th scope="row" class="col-xs-7 col-md-7">
+							<%= t("activerecord.attributes.product_data.#{name}") %>
+						</th>
+						<td class="col-xs-1 col-md-1">
+						</td>
+						<td>
+							<%= product_f.text_field name, class: product_classes(week, row), readonly: fields_readonly?(week) %>
+						</td>
+					</tr>
 				<% end %>
 			</tbody>
 
@@ -39,7 +38,7 @@
 			<tfoot>
 				<tr>
 					<th scope="row" class="col-xs-7 col-md-7">
-						<span class="label"><%= t 'helpers.total' %></span>
+						<%= t 'helpers.total' %>
 					</th>
 					<td class="col-xs-1 col-md-1">
 					</td>

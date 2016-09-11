@@ -6,12 +6,12 @@
 
 	<!-- Tabs headers -->
 	<ul class="nav nav-tabs">
-		<li id="main_tab_0_title" class="clickable"><a><%= t('activerecord.models.user.one') %></a></li>
+		<li id="main_tab_0_title"><a><%= t('activerecord.models.user.one') %></a></li>
 		<% if can? :manage, ReceiptEmail.new %>
-		<li id="main_tab_1_title" class="clickable"><a><%= t('activerecord.models.receipt_email.one') %></a></li>
+		<li id="main_tab_1_title"><a><%= t('activerecord.models.receipt_email.one') %></a></li>
 		<% end %>
 		<% if can? :manage, ProductAndServiceDatum.new %>
-		<li id="main_tab_2_title" class="clickable"><a><%= t('activerecord.models.product_and_service_datum.one') %></a></li>
+		<li id="main_tab_2_title"><a><%= t('activerecord.models.product_and_service_datum.one') %></a></li>
 		<% end %>
 	</ul>
 
