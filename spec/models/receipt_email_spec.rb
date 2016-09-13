@@ -46,14 +46,6 @@ describe ReceiptEmail, type: :model do
     it { expect(build(:receipt_email, day_of_month: Date.tomorrow.day).competence).to eq current_month }
   end
 
-  context '#validate_day_of_month' do
-    let(:receipt) { build(:receipt_email) }
-
-    it { expect(build(:receipt_email, day_of_month: nil).send(:validate_day_of_month)).to be_nil }
-    it { expect(build(:receipt_email, day_of_month: 0).send(:validate_day_of_month)).to include receipt.blank_error_message('day_of_month') }
-    it { expect(build(:receipt_email, day_of_month: 29).send(:validate_day_of_month)).to include I18n.t('errors.email.month_max') }
-  end
-
   describe 'tags' do
     let(:receipt) { build(:receipt_email, :pj_company) }
     let(:date) { Date.new(2007, 5, 12) }

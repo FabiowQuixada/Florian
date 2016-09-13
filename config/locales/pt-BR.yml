@@ -600,9 +600,6 @@ pt-BR:
       cannot_deactivate_admin: 'Não é possível desativar um administrador;'
     email:
       one_recipient: "O e-mail deve ter pelo menos um destinatário;"
-      value_positive: "O campo 'Valor' deve ser positivo;"
-      value_max: "O campo 'Valor' deve ser no máximo R$ 1.000.000,00;"
-      month_max: "O campo 'Dia do mês' deve ser menor que 28;"
     contact:
       all_empty: "Preencha pelo menos um dos campos."
       invalid_telephone: "O campo 'Telefone' é inválido;"

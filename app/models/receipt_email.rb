@@ -8,6 +8,7 @@ class ReceiptEmail < ActiveRecord::Base
   usar_como_dinheiro :value
 
 
+  # Constants
   DAILY_SEND_HOUR = 7
   RECENT_EMAILS_DAYS = 7
 
@@ -21,15 +22,12 @@ class ReceiptEmail < ActiveRecord::Base
 
   # Validations
   validates :recipients_array, presence: { message: I18n.t('errors.email.one_recipient') }
-  validate :validate_model
+  validates_numericality_of :value, greater_than: 0, less_than_or_equal_to: 1_000_000
+  validates_numericality_of :day_of_month, greater_than: 0, less_than_or_equal_to: 28
   validates :value, :day_of_month, :company, :body, presence: true
 
 
   # Methods
-  def validate_model
-    validate_value && validate_day_of_month
-  end
-
   def alias
     company.name
   end
@@ -141,20 +139,5 @@ class ReceiptEmail < ActiveRecord::Base
 
   def apply_all_tags_to(text, date = Date.today)
     apply_value_tag_to apply_company_tag_to apply_competence_tag_to(text, date)
-  end
-
-  # rubocop:disable all
-  def validate_value
-    return if value.blank?
-    return errors.add :value, blank_error_message('value') if value == 0
-    return errors.add :value, I18n.t('errors.email.value_positive') if value < 0
-    return errors.add :value, I18n.t('errors.email.value_max') if value > 1_000_000
-  end
-  # rubocop:enable all
-
-  def validate_day_of_month
-    return if day_of_month.blank?
-    return errors.add(:day_of_month, blank_error_message('day_of_month')) if day_of_month < 1
-    return errors.add(:day_of_month, I18n.t('errors.email.month_max')) if day_of_month > 28
   end
 end
