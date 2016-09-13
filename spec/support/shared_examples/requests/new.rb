@@ -1,8 +1,8 @@
-shared_examples 'new request tests' do |_class_name|
+shared_examples 'new request tests' do
   describe 'GET #new' do
     render_views
 
-    before(:each) do
+    before :each do
       get :new
     end
 

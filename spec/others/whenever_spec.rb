@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-# rubocop:disable all
 describe 'Whenever Schedule' do
   before :all do
     load 'Rakefile' # Makes sure rake tasks are loaded so you can assert in rake jobs
@@ -16,4 +15,3 @@ describe 'Whenever Schedule' do
     it { expect(jobs[1][:every].to_s).to eq '[:sunday, {:at=>"7:00 am"}]' }
   end
 end
-# rubocop:enable all

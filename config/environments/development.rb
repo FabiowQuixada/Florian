@@ -9,7 +9,7 @@ Rails.application.configure do
     authentication:       ENV['authentication'],
     enable_starttls_auto: true
   }
-  
+
   config.action_mailer.delivery_method = :letter_opener
 
 

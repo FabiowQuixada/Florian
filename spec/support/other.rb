@@ -1,14 +1,13 @@
 module HelperUtility
-  # rubocop:disable all
+
   def go_back
     page.find('#form_back_btn').click
     wait
   end
 
   def wait
-    sleep(inspection_time = 0.5)
+    sleep 0.5
   end
-  # rubocop:enable all
 
   def input_blur
     page.find('body').click

@@ -8,6 +8,7 @@ AllCops:
     - bin/**
     - 'vendor/**/*'
     - external/**
+    - lib/generators/iaq_gen/florian_gen_generator.rb
 
 RSpec/DescribedClass:
   Exclude:
@@ -18,6 +19,36 @@ RSpec/DescribedClass:
 RSpec/DescribeClass:
   Exclude:
     - spec/support/shared_examples/requests/**
+    - spec/others/**
+
+RSpec/InstanceVariable:
+  Exclude:
+    - spec/support/shared_examples/email_address_table.rb
+    - spec/support/shared_examples/requests/**
+    - spec/others/**
+
+Metrics/ClassLength:
+  Exclude:
+    - app/others/excel_parser.rb
+
+Metrics/MethodLength:
+  Exclude:
+    - app/others/excel_parser.rb
+
+Metrics/AbcSize:
+  Exclude:
+    - app/others/excel_parser.rb
+    - spec/reports/product_and_service_report_spec.rb
+    - spec/javascripts/product_and_service_datum_spec.rb
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - app/others/excel_parser.rb
+
+Lint/Eval:
+  Exclude:
+    - spec/support/shared_examples/email_address_table.rb
+    - spec/others/whenever_spec.rb
 
 Metrics/LineLength:
   Max: 500
@@ -39,6 +70,3 @@ Style/Documentation:
 
 Style/EmptyLinesAroundMethodBody:
   Enabled: false
-
-Metrics/ClassLength:
-  Max: 150

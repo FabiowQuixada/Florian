@@ -5,6 +5,7 @@ class ProductAndServiceWeek < ActiveRecord::Base
   include ModelHelper
 
 
+  # Constants
   TOTALS_NUMBER = 6
   FINAL_NUMBER = 7
   HELPER_NUMBER = -1
@@ -27,7 +28,8 @@ class ProductAndServiceWeek < ActiveRecord::Base
     errors.add(:start_date, error_message('period_is_mandatory')) unless end_date && start_date
     errors.add(:start_date, error_message('invalid_period')) if invalid_range?
 
-    validate_prod_and_servs
+    validate_prod
+    validate_servs
   end
 
   def service_qty
@@ -105,13 +107,14 @@ class ProductAndServiceWeek < ActiveRecord::Base
     self.end_date && self.start_date && self.end_date < self.start_date
   end
 
-  # rubocop:disable all
-  def validate_prod_and_servs
+  def validate_prod
+    errors.add(:product_data, error_message('all_products_are_mandatory')) unless product_data.validate_model
+  end
+
+  def validate_servs
     errors.add(:attendance_data, error_message('all_attendances_are_mandatory')) unless attendances.validate_model
     errors.add(:return_data, error_message('all_returns_are_mandatory')) unless returns.validate_model
-    errors.add(:product_data, error_message('all_products_are_mandatory')) unless self.product_data.validate_model
   end
-  # rubocop:enable all
 
   def error_message(tag)
     I18n.t("errors.product_and_service_datum.#{tag}", week_number: number.to_s)

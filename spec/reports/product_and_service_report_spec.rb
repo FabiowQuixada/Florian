@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe ProductAndServiceReport do
   describe 'weekly report' do
-    let(:week) { create :product_and_service_week }
+    let(:week) { build :product_and_service_week }
     let(:rendered_pdf) { described_class.new('/tmp/prod_serv.pdf', week).pdf.render }
     let(:text_analysis) { PDF::Inspector::Text.analyze(rendered_pdf) }
     let(:page_analysis) { PDF::Inspector::Page.analyze(rendered_pdf) }
@@ -21,7 +21,7 @@ describe ProductAndServiceReport do
   end
 
   describe 'monthly report' do
-    let(:psd) { create :product_and_service_datum }
+    let(:psd) { build :product_and_service_datum }
     let(:week) { psd.final_week }
     let(:rendered_pdf) { described_class.new('/tmp/prod_serv.pdf', week).pdf.render }
     let(:text_analysis) { PDF::Inspector::Text.analyze(rendered_pdf) }
@@ -40,9 +40,7 @@ describe ProductAndServiceReport do
     it { expect(page_analysis.pages.size).to eq(1) }
   end
 
-  # rubocop:disable all
   def validates_services_footer_row
-
     total_attendances, total_returns = service_totals
 
     # Totals
@@ -50,7 +48,6 @@ describe ProductAndServiceReport do
     expect(service_array[-2]).to eq(total_returns.to_s)
     expect(service_array[-1]).to eq((total_attendances + total_returns).to_s)
   end
-  # rubocop:enable all
 
   def service_totals
     total_attendances = total_returns = 0
@@ -64,34 +61,31 @@ describe ProductAndServiceReport do
     [total_attendances, total_returns]
   end
 
-  # rubocop:disable all
+
   def validates_service(service)
     index = service_index service
 
     expected_attendance, expected_return, actual_attendance,
     actual_return, expected_total, actual_total = expected_and_actual_service_values index, service
 
-    expect(actual_attendance).to eq(expected_attendance), service
-    expect(actual_return).to eq(expected_return), service
-    expect(actual_total).to eq(expected_total), service
+    expect(actual_attendance).to eq(expected_attendance.to_s), msg(service, actual_attendance, expected_attendance)
+    expect(actual_return).to eq(expected_return.to_s), msg(service, actual_return, expected_return)
+    expect(actual_total).to eq(expected_total), msg(service, actual_total, expected_total)
 
-    [expected_attendance.to_i, expected_return.to_i]
+    [expected_attendance, expected_return]
   end
-  # rubocop:enable all
 
-  # rubocop:disable all
   def expected_and_actual_service_values(index, service)
-    expected_attendance = week.service_data[0].send(service).to_s
-    expected_return = week.service_data[0].send(service).to_s
+    expected_attendance = week.attendances.send(service)
+    expected_return = week.attendances.send(service)
     actual_attendance = text_analysis.strings[index + 1]
     actual_return = text_analysis.strings[index + 2]
-    expected_total = expected_attendance.to_i + expected_return.to_i
+    expected_total = expected_attendance + expected_return
     actual_total = actual_attendance.to_i + actual_return.to_i
 
     [expected_attendance, expected_return, actual_attendance,
      actual_return, expected_total, actual_total]
   end
-  # rubocop:enable all
 
   def validates_products
     total = 0
@@ -106,7 +100,9 @@ describe ProductAndServiceReport do
 
   def validate_product(product)
     index = product_index(product)
-    expect(product_array[index + 1]).to eq(week.product_data.send(product).to_s), product
+    actual = product_array[index + 1]
+    expected = week.product_data.send(product).to_s
+    expect(actual).to eq(expected), msg(product, expected, actual)
     week.product_data.send(product)
   end
 
@@ -124,5 +120,9 @@ describe ProductAndServiceReport do
 
   def service_index(service)
     text_analysis.strings.index { |o| o == I18n.t('activerecord.attributes.service_data.' + service) }
+  end
+
+  def msg(attr_name, expected, actual)
+    "#{attr_name}: expected #{expected}, but got #{actual}."
   end
 end

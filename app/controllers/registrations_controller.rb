@@ -2,24 +2,20 @@ class RegistrationsController < Devise::RegistrationsController
 
   before_filter :authenticate_user!
 
-  # rubocop:disable all
   def update
     return redirect_to root_path, alert: t('errors.unpermitted_action'), status: :unauthorized if Rails.env.showcase?
 
     prev_unconfirmed_email = current_user.unconfirmed_email if current_user.respond_to?(:unconfirmed_email)
 
-    resource_updated = current_user.system_setting.update(system_setting_params) && update_resource(current_user, account_update_params)
     yield current_user if block_given?
 
-    something resource_updated, prev_unconfirmed_email
+    redirect prev_unconfirmed_email
   end
-  # rubocop:enable all
 
   private ################################
 
-  # TODO: Understand, refactor and rename this method!
-  def something(resource_updated, prev_unconfirmed_email)
-    if resource_updated
+  def redirect(prev_unconfirmed_email)
+    if resource_updated?
       custom_flash_key_message prev_unconfirmed_email
       sign_in resource_name, current_user, bypass: true
       respond_with current_user, location: after_update_path_for(current_user)
@@ -54,6 +50,10 @@ class RegistrationsController < Devise::RegistrationsController
   def before_edit
     @model = current_user
     @breadcrumbs = Hash[t('helpers.profile') => '']
+  end
+
+  def resource_updated?
+    current_user.system_setting.update(system_setting_params) && update_resource(current_user, account_update_params)
   end
 
 end

@@ -1,4 +1,3 @@
-# rubocop:disable all
 class FlorianGenGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
   argument :name, type: :string
@@ -30,7 +29,6 @@ class FlorianGenGenerator < Rails::Generators::NamedBase
         end
       end
 
-
       new_contents = new_contents.gsub('#extra_conf', extra_conf)
       new_contents = new_contents.gsub('# Validations', validation_line)
 
@@ -45,9 +43,9 @@ class FlorianGenGenerator < Rails::Generators::NamedBase
 
     args2 = split args
 
-    temp = 'class Create' + file_name.to_s.capitalize.pluralize + " < ActiveRecord::Migration
+    temp = "class Create#{file_name.to_s.capitalize.pluralize} < ActiveRecord::Migration
     def change
-      create_table :" + file_name.to_s.pluralize + " do |t|\n"
+      create_table :#{file_name.to_s.pluralize} do |t|\n"
 
     args2.each do |arg|
       temp += "\tt." + arg_db_type(arg) + ' :' + arg.first
@@ -66,14 +64,12 @@ class FlorianGenGenerator < Rails::Generators::NamedBase
     temp += "\tt.timestamps null: false\nend\nend\nend"
 
     File.open('db/migrate/' + DateTime.now.strftime('%Y%m%d%H%M%S').to_s + '_create_' + file_name.to_s.pluralize + '.rb', 'w') { |file| file.puts temp }
-
-
-end
+  end
 
   def create_controller
-    copy_file 'controller.rb', 'app/controllers/' + file_name.to_s.pluralize + '_controller.rb'
+    copy_file 'controller.rb', "app/controllers/#{file_name.to_s.pluralize}_controller.rb"
 
-    text = File.read('app/controllers/' + file_name.to_s.pluralize + '_controller.rb')
+    text = File.read("app/controllers/#{file_name.to_s.pluralize}_controller.rb")
     new_contents = text.gsub('ControllerName', file_name.to_s.capitalize.pluralize).gsub('ModelName', file_name.to_s.capitalize).gsub('model_name', file_name.to_s)
 
     temp = ':id'
@@ -81,36 +77,35 @@ end
     args2 = split args
 
     args2.each do |arg|
-      temp += ', :' + arg.first
+      temp += ", :#{arg.first}"
     end
 
     new_contents = new_contents.gsub('<< attributes >>', temp)
 
-    File.open('app/controllers/' + file_name.to_s.pluralize + '_controller.rb', 'w') { |file| file.puts new_contents }
+    File.open("app/controllers/#{file_name.to_s.pluralize}_controller.rb", 'w') { |file| file.puts new_contents }
   end
 
   def create_index
-    copy_file 'index.html.erb', 'app/views/' + file_name.to_s.pluralize + '/index.html.erb'
+    copy_file 'index.html.erb', "app/views/#{file_name.to_s.pluralize}/index.html.erb"
 
-    text = File.read('app/views/' + file_name.to_s.pluralize + '/index.html.erb')
+    text = File.read("app/views/#{file_name.to_s.pluralize}/index.html.erb")
 
     temp = ''
     args2 = split args
     args2.each_with_index do |arg, index|
-      temp += "\tHash[:header => '" + arg.first + "', :model_attr => '" + arg.first + (arg[1] == 'money' ? "', :type => 'money" : '') + "']"
-
-      temp += ',' + "\n" if index != (args.size - 1)
+      temp += "\tHash[:header => '#{arg.first}', :model_attr => '#{arg.first} + #{(arg[1] == 'money' ? "', :type => 'money" : '')}']"
+      temp += ",\n" if index != (args.size - 1)
     end
 
     text = text.gsub(' << attributes >>', temp)
 
-    File.open('app/views/' + file_name.to_s.pluralize + '/index.html.erb', 'w') { |file| file.puts text }
+    File.open("app/views/#{file_name.to_s.pluralize}/index.html.erb", 'w') { |file| file.puts text }
   end
 
   def create_form
-    copy_file '_form.html.erb', 'app/views/' + file_name.to_s.pluralize + '/_form.html.erb'
+    copy_file '_form.html.erb', "app/views/#{file_name.to_s.pluralize}/_form.html.erb"
 
-    text = File.read('app/views/' + file_name.to_s.pluralize + '/_form.html.erb')
+    text = File.read("app/views/#{file_name.to_s.pluralize}/_form.html.erb")
 
     temp = ''
 
@@ -146,10 +141,7 @@ end
                 \t\t\t\t<%= f.text_area :" + arg.first + ", size: '24x6', :class => 'form-control' %>
                 \t\t\t</div>
                 \t\t</div>\n"
-
-
               else
-
                 "
                 \t\t<div class='row'>
                 \t\t\t<div class='form-group col-md-12'>
@@ -157,12 +149,12 @@ end
                 \t\t\t\t<%= f.text_field :" + arg.first + ", :class => 'form-control' %>
                 \t\t\t</div>
                 \t\t</div>\n"
-      end
+              end
     end
 
     text = text.gsub('<< fields >>', temp)
 
-    File.open('app/views/' + file_name.to_s.pluralize + '/_form.html.erb', 'w') { |file| file.puts text }
+    File.open("app/views/#{file_name.to_s.pluralize}/_form.html.erb", 'w') { |file| file.puts text }
   end
 
   def update_locale_file
@@ -183,7 +175,7 @@ end
     singular = options[:singular].capitalize unless options[:singular].nil?
     plural = options[:plural].capitalize unless options[:plural].nil?
 
-    temp = "    models:\n      #{file_name}:\n        one: " + singular + "\n        other: " + plural
+    temp = "    models:\n      #{file_name}:\n        one: #{singular}\n        other: #{plural}"
     text = text.gsub('    models:', temp)
 
     File.open('config/locales/pt-BR.yml', 'w') { |file| file.puts text }
@@ -193,7 +185,7 @@ end
     text = File.read('app/views/others/_menu.html.erb')
 
     temp = "<li>
-    <a href='/" + file_name.to_s.pluralize + "'><%= " + file_name.to_s.capitalize + ".new.model_name.human(:count => 2) %></a>
+    <a href='/#{file_name.to_s.pluralize}'><%= #{file_name.to_s.capitalize}.new.model_name.human(:count => 2) %></a>
     </li>
     <!-- new_menus_here -->"
 
@@ -205,7 +197,7 @@ end
   def update_routes
     text = File.read('config/routes.rb')
 
-    new_routes = "# Automatic resources\n  resources :" + file_name.to_s.pluralize
+    new_routes = "# Automatic resources\n  resources : #{file_name.to_s.pluralize}"
 
     text = text.gsub('# Automatic resources', new_routes)
 
@@ -245,4 +237,3 @@ end
     false
   end
 end
-# rubocop:enable all
