@@ -1,6 +1,6 @@
 pt-BR:
   app_title: Flórian
-  by_author: por Fabiow Quixadá
+  author: Fabiow Quixadá
   main_page: Página Principal
   environments:
     development: Desenvolvimento
@@ -280,6 +280,7 @@ pt-BR:
         person: 'A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu de %{name}, CPF nº %{cpf}, residente na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
   helpers:
     main_page: Página Principal
+    by: por
     error: Erro
     about: 
       title: Sobre...

@@ -2,10 +2,15 @@ function display_about_modal() {
 	$("#app_about_modal").modal("show");
 }
 
+function display_author_email_modal() {
+	display_confirm_modal('<%= I18n.t('author') %>', '<%= ADMIN_EMAIL %>');
+}
+
 $(function() {
 
 	$('.admin_key_btn').on('click', toogle_admin_data);
 	$('#app_about_btn').on('click', display_about_modal);
+	$('#author_email_btn').on('click', display_author_email_modal);
 	$('.numbers_only').on('blur', function() {
 		if(!$(this).val())
 			$(this).val('0');

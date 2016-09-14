@@ -34,12 +34,23 @@ function toogle_admin_data() {
 }
 
 function display_confirm_modal(title, message, confirm_callback, cancel_callback) {
+	
+	$("#confirm_modal .modal-footer").show();
+	$("#cancel_btn").show();
+
 	$("#confirm_modal .modal-title").html(title);
 	$("#confirm_modal .modal-body").html(message);
 	$("#confirm_btn").on("click", confirm_callback);
 	
-	if(cancel_callback !== 'undefined')
+	if(cancel_callback !== undefined) {
 		$("#cancel_btn").on("click", cancel_callback);
+	} else {
+		$("#cancel_btn").hide();
+	}
+
+	if(confirm_callback === undefined && cancel_callback === undefined) {
+		$("#confirm_modal .modal-footer").hide();
+	}
 	
 	$("#confirm_modal").modal("show");
 }

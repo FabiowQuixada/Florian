@@ -62,6 +62,10 @@ module ApplicationHelper
     link_to image_tag('key.png', title: t('helpers.action.show_admin_private_data')), 'javascript:void(0)', class: 'admin_key_btn' if current_user.admin?
   end
 
+  def author_email_btn
+    link_to t('author'), 'javascript:void(0)', id: 'author_email_btn'
+  end
+
   ## Images #########################################################################
 
   def trash_img(field_name)
