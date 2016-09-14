@@ -190,3 +190,23 @@ div.centre {
 .thick {
     font-weight: bold;
 }
+
+.audit-when {
+    width: 12%;
+}
+
+.audit-where {
+    width: 18%;
+}
+
+.audit-what {
+    width: 55%;
+}
+
+#audit_table {
+    font-size: 12px;
+
+    th, td {
+        border: 1px solid #ddd;
+    }
+}
