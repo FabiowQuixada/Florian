@@ -7,8 +7,9 @@ class ApplicationMailer < ActionMailer::Base
 
     # TODO: Porque deliver now da erro aqui?
     mail(to: ADMIN_EMAIL,
-         body: 'Banco de Producao',
-         subject: I18n.t('helpers.email_tag') + ' Backup Semanal') # .deliver_now
+         subject: I18n.t('helpers.email_tag') + I18n.t('helpers.email.production_db_backup.subject'),
+         body: I18n.t('helpers.email.production_db_backup.body')
+    ) # .deliver_now
   end
 
   def file_name

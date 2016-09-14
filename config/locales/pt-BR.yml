@@ -288,6 +288,10 @@ pt-BR:
       showcase_description: 'São Floriano foi escolhido como referência para este sistema por ele ter sido desenvolvido para uma ONG que trata de pessoas vítimas de queimaduras.'
     general: Geral
     email_tag: "[Florian] "
+    email:
+      production_db_backup:
+        subject: 'Backup Semanal'
+        body: 'Banco de Produção'
     changelog: Changelog
     test_email_prefix: '[TESTE] '
     min_length: '(No mínimo %{min_length} caracteres)'
