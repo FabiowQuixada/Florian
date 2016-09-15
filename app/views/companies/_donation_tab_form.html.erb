@@ -1,91 +1,91 @@
 <div class="row">
-			<div class="form-group col-md-12">
-
-				<div class="row">
-					<div class="form-group col-md-6">
-
-						<%= f.label :first_parcel %>
-						<div class="input-group date" data-behaviour='datepicker' >
-							<%= f.text_field :first_parcel, {class: 'form-control'} %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-						</div>
-					</div><div class="form-group col-md-6">
-					<%= label_tag 'company_last_parcel', t('activerecord.attributes.company.last_parcel') %>
-					<%= text_field_tag :last_parcel, '', {id: 'company_last_parcel', class: 'form-control', readonly: true} %>
+	<div class="form-group col-md-12">
+		<div class="row">
+			<div class="form-group col-md-6">
+				<%= f.label :first_parcel %>
+				<div class="input-group date" data-behaviour='datepicker' >
+					<%= f.text_field :first_parcel, { class: 'form-control' } %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 				</div>
-			</div><div class="row">
-				<div class="form-group col-md-4">
-					<%= f.label :payment_frequency %>
-					<%= f.select :payment_frequency, Company.payment_frequencies.keys, {include_blank: t('helpers.select.prompt')}, { class: 'form-control' } %>
-				</div>
-				<div class="form-group col-md-4">
-					<%= f.label :payment_period, class: 'asterisk' %>
-					<%= f.text_field :payment_period, class: 'form-control numbers_only' %>
-				</div>
-				<div class="form-group col-md-4">
-					<%= f.label :contract %>
-					<%= f.select :contract, Company.contracts.keys, {include_blank: t('helpers.select.prompt')}, { class: 'form-control' } %>
-				</div>
+			</div>
+			<div class="form-group col-md-6">
+				<%= label_tag 'company_last_parcel', t('activerecord.attributes.company.last_parcel') %>
+				<%= text_field_tag :last_parcel, '', { id: 'company_last_parcel', class: 'form-control', readonly: true } %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-md-4">
+				<%= f.label :payment_frequency %>
+				<%= f.select :payment_frequency, Company.payment_frequencies.keys, { include_blank: t('helpers.select.prompt') }, { class: 'form-control' } %>
+			</div>
+			<div class="form-group col-md-4">
+				<%= f.label :payment_period %>
+				<%= f.text_field :payment_period, class: 'form-control numbers_only' %>
+			</div>
+			<div class="form-group col-md-4">
+				<%= f.label :contract %>
+				<%= f.select :contract, Company.contracts.keys, { include_blank: t('helpers.select.prompt') }, { class: 'form-control' } %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="container-fluid">
+				<div class="panel panel-default">
+					<div class="panel-heading"><%= t('helpers.company.new_donation') %></div>
+					<div class="panel-body">
 
-				<div class="form-group col-md-12 asterisk-description">* Digite 0 para "Indeterminado".</div>
-			</div><div class="row">
-				<div class="container-fluid">
-					<div class="panel panel-default">
-						<div class="panel-heading"><%= t('helpers.company.new_donation') %></div>
-						<div class="panel-body">
+						<%= render partial: 'shared/error_alert', locals: { id: 'donation' } %>
 
-							<%= render partial: 'shared/error_alert', locals: {id: 'donation'} %>
-
-							<div class="row">
-								<div class="form-group col-md-4">
-									<div class="input-group date" data-behaviour='datepicker' >
-										<%= text_field_tag :donation_date, '', id: 'new_donation_date', class: 'form-control datepicker temp_field' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-									</div>
-								</div>
-								<div class="form-group col-md-3">
-									<div class="input-group">
-										<span class="input-group-addon">R$</span>
-										<%= text_field_tag :value, '', id: 'new_donation_value', class: 'form-control money temp_field' %>
-									</div>
-								</div>
-								<div class="form-group col-md-5">
-									<%= text_field_tag :remark, '', id: 'new_donation_remark', placeholder: t('activerecord.attributes.donation.remark'), class: 'form-control temp_field' %>
+						<div class="row">
+							<div class="form-group col-md-4">
+								<div class="input-group date" data-behaviour='datepicker' >
+									<%= text_field_tag :donation_date, '', id: 'new_donation_date', class: 'form-control datepicker temp_field' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 								</div>
 							</div>
-
-							<div class="row">
-								<div class="col-md-12 right">
-									<a id="add_donation_btn" class="btn btn-primary btn-xs add_btn"><%= t('helpers.action.add') %></a>
-								</div></div>
+							<div class="form-group col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">R$</span>
+									<%= text_field_tag :value, '', id: 'new_donation_value', class: 'form-control money temp_field' %>
+								</div>
+							</div>
+							<div class="form-group col-md-5">
+								<%= text_field_tag :remark, '', id: 'new_donation_remark', placeholder: t('activerecord.attributes.donation.remark'), class: 'form-control temp_field' %>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<table id="donations_table" class="table table-striped table-condensed table-bordered unbreakable-table">
-							<thead class="hidden-xs">
-								<tr>
-									<% I18n.with_options(scope: 'activerecord.attributes.donation') do |i18n| %>
-									<th class="admin-only id-column" style="display:none;"></th>
-									<th><%= i18n.t :date %></th>
-									<th><%= i18n.t :value %></th>
-									<th style="width: 50%;" class="hidden-xs"><%= i18n.t :remark %></th>
-									<th class="icon-column" style="width: 32px;"></th>
-									<% end %>
-								</tr>
-							</thead>
-							<tbody>
-								<tr id="no_donations_row" <%= ' style=display:none' if @model.donations.any? %>><td colspan="4"><%= genderize_tag(Donation.new, 'helpers.none_registered') %></td></tr>
 
-								<%= render @model.donations %>
-							</tbody>
-						</table>
+						<div class="row">
+							<div class="col-md-12 right">
+								<a id="add_donation_btn" class="btn btn-primary btn-xs add_btn"><%= t('helpers.action.add') %></a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<table id="donations_table" class="table table-striped table-condensed table-bordered unbreakable-table">
+					<thead class="hidden-xs">
+						<tr>
+							<% I18n.with_options(scope: 'activerecord.attributes.donation') do |i18n| %>
+								<th class="admin-only id-column" style="display:none;"></th>
+								<th><%= i18n.t :date %></th>
+								<th><%= i18n.t :value %></th>
+								<th style="width: 50%;" class="hidden-xs"><%= i18n.t :remark %></th>
+								<th class="icon-column" style="width: 32px;"></th>
+							<% end %>
+						</tr>
+					</thead>
+					<tbody>
+						<tr id="no_donations_row" <%= ' style=display:none' if @model.donations.any? %>><td colspan="4"><%= genderize_tag(Donation.new, 'helpers.none_registered') %></td></tr>
 
-		<%= f.hidden_field 'donations_to_be_deleted' %>
+						<%= render @model.donations %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%= f.hidden_field 'donations_to_be_deleted' %>
 
 <script>
 
@@ -97,9 +97,98 @@
 		return transient_donations > 0;
 	}
 
+	function toogle_parcel_qty_field() {
+		if(cant_set_parcels()) {
+			$('#company_payment_period').prop('readonly', true);
+			$('#company_payment_period').val('');
+		} else {
+			$('#company_payment_period').prop('readonly', false);
+		}
+	}
+
+	function cant_set_parcels() {
+		frequency = $('#company_payment_frequency').val();
+
+		return !frequency || frequency === '' || frequency === "<%= Company.payment_frequencies.keys[0] %>" || frequency === "<%= Company.payment_frequencies.keys[7] %>";
+	}
+
+	function set_last_parcel_date() {
+		first_date = $('#company_first_parcel').val();
+		frequency = $('#company_payment_frequency').val();
+		parcel_qty = $('#company_payment_period').val();
+		last_date = $('#company_last_parcel');
+
+		if(!first_date || cant_set_parcels() || !parcel_qty) {
+			last_date.val('');
+			return;
+		}
+
+		var frequency_type;
+		var temp = parcel_qty;
+
+		if(frequency == "<%= Company.payment_frequencies.keys[1] %>") {
+			frequency_type = 'days';
+		} else if(frequency == "<%= Company.payment_frequencies.keys[2] %>") {
+			frequency_type = 'weeks';
+		} else if(frequency == "<%= Company.payment_frequencies.keys[3] %>") {
+			frequency_type = 'months';
+		} else if(frequency == "<%= Company.payment_frequencies.keys[4] %>") {
+			temp = 3;
+			frequency_type = 'months';
+		} else if(frequency == "<%= Company.payment_frequencies.keys[5] %>") {
+			temp = 6;
+			frequency_type = 'months';
+		} else if(frequency == "<%= Company.payment_frequencies.keys[6] %>") {
+			frequency_type = 'years';
+		}
+
+		if(parcel_qty != 0 || (frequency_type !== undefined && frequency_type !== '')) {
+			last_date.val(moment(first_date, "DD/MM/YYYY").add((temp-1), frequency_type).format("DD/MM/YYYY"));
+		} else {
+			last_date.val('');
+		}
+	}
+
+	function validate_donation() {
+
+		var errors = new Array();
+
+		if(!$('#new_donation_date').val()) {
+			errors.push('<%= I18n.t('errors.donation.date_mandatory') %>');
+		}
+
+		if((!$('#new_donation_value').val() || $('#new_donation_value').val() == '0,00') && !$('#new_donation_remark').val()) {
+			errors.push('<%= I18n.t('errors.donation.value_or_remark') %>');
+		}
+
+		if(errors.length > 0) {
+			display_error(errors, 'donation');
+		}
+
+		return errors.length == 0;
+	}
+
+	function clean_donation_fields() {
+		$('#new_donation_date').val('');
+		$('#new_donation_value').val('0,00');
+		$('#new_donation_remark').val('');
+
+		hide_errors_from_box('donation');
+	}
+
 	$(function() {
 
-		$('#add_donation_btn').on('click', function add_donation() {
+		toogle_parcel_qty_field();
+		set_last_parcel_date();
+
+	    $('#company_entity_type').on('change', update_fields_by_entity_type);
+		$('#company_first_parcel').on('change', set_last_parcel_date);
+		$('#company_payment_period').on('change', set_last_parcel_date);
+		$('#company_payment_frequency').on('change', set_last_parcel_date);
+		$('#company_payment_frequency').change(toogle_parcel_qty_field);
+		$('body').on('click', '#new_donation_btn', set_datepicker);
+
+		$('#add_donation_btn').on('click', function() {
 
 			if(validate_donation()) {
 
@@ -117,44 +206,10 @@
 			    	}
 				});
 
-				clean_donation_fields();
-
 				temp_donation_id -= 1;
-
+				clean_donation_fields();
 				$('#no_donations_row').hide();
-
 			}
-		});
-
-		function clean_donation_fields() {
-			$('#new_donation_date').val('');
-			$('#new_donation_value').val('0,00');
-			$('#new_donation_remark').val('');
-
-			hide_errors_from_box('donation');
-		}
-
-		function validate_donation() {
-
-			var errors = new Array();
-
-			if(!$('#new_donation_date').val()) {
-				errors.push('<%= I18n.t('errors.donation.date_mandatory') %>');
-			}
-
-			if((!$('#new_donation_value').val() || $('#new_donation_value').val() == '0,00') && !$('#new_donation_remark').val()) {
-				errors.push('<%= I18n.t('errors.donation.value_or_remark') %>');
-			}
-
-			if(errors.length > 0) {
-				display_error(errors, 'donation');
-			}
-
-			return errors.length == 0;
-		}
-
-		$('body').on('click', '#new_donation_btn', function() {
-			set_datepicker();
 		});
 
 		$('body').on('click', '.remove_donation_btn', function() {
@@ -164,8 +219,9 @@
 
 			transient_donations -= 1;
 
-			if(document.getElementById("donations_table").rows.length == 2)
+			if(document.getElementById("donations_table").rows.length == 2) {
 				$('#no_donations_row').show();
+			}
 
 			if(id > 0) {
 				$('#company_donations_to_be_deleted').val($('#company_donations_to_be_deleted').val() + id + ',');

@@ -17,6 +17,7 @@ $(function() {
     $(".telephone").mask("(99) 9999-9999", { placeholder : "(__) ____-____"	});
 	$(".fax").mask("(99) 9999-9999", { placeholder : "(__) ____-____" });
 	$('.day_of_month').mask('99');
+	$('.numbers_only').mask('9999999');
 	$('.money').mask('000.000.000,00', { reverse : true });
 
 	// Field initialization;
