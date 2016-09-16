@@ -9,5 +9,5 @@ end
 
 every :sunday, at: '7:00 am' do
   command "backup perform -t db_backup -d #{RAILS_ROOT}/backups/ -l #{RAILS_ROOT}/log/"
-  runner 'ApplicationMailer.send_backup_email.deliver_now', environment: 'production'
+  runner 'ApplicationMailer.send_backup_email', environment: 'production'
 end
