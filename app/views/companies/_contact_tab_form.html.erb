@@ -171,7 +171,7 @@
 		}
 
 		$('body').on('click', '.remove_contact_btn', function() {
-			id = $(this).parent().parent().find('.contact_id').text();
+			id = $(this).closest('.contact_row').find('.contact_id').text();
 
 	        $('#contact_' + id).remove();
 
@@ -186,7 +186,7 @@
 		});
 
 		$('body').on('click', '.edit_contact_btn', function() {
-			id = $(this).parent().parent().find('.contact_id').text();
+			id = $(this).closest('.contact_row').find('.contact_id').text();
 			load_contact(id);
 		});
 

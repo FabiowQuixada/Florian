@@ -53,10 +53,10 @@
 
 			clean_resend_modal();
 
-			id = $(this).parent().parent().find('.model_id').text();
+			id = $(this).closest('.model_row').find('.model_id').text();
 			$('#resend_email_id').val(id);
 			$('#resend_email_form').get(0).setAttribute('action', '/receipt_emails/' + id + '/resend');
-			$('.modal_company_name').text($(this).parent().parent().find('.receipt_company').text());
+			$('.modal_company_name').text($(this).closest('.model_row').find('.receipt_company').text());
 			$('#resend_email_modal').modal('show');
 		});
 
@@ -65,10 +65,10 @@
 
 			clean_send_test_modal();
 
-			id = $(this).parent().parent().find('.model_id').text();
+			id = $(this).closest('.model_row').find('.model_id').text();
 			$('#send_test_email_id').val(id);
 			$('#send_test_email_form').get(0).setAttribute('action', '/receipt_emails/' + id + '/send_test');
-			$('.modal_company_name').text($(this).parent().parent().find('.receipt_company').text());
+			$('.modal_company_name').text($(this).closest('.model_row').find('.receipt_company').text());
 			$('#send_test_email_modal').modal('show');
 		});
 

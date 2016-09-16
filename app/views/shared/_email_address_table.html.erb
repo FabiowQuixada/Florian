@@ -51,7 +51,7 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
 
 
     $('body').on('click', '.<%= field_name %>_remove_recipient_btn', function() {
-        id = $(this).parent().parent().find('.recipient_id').text();
+        id = $(this).closest('.email_recipient').find('.recipient_id').text();
 
         $('#<%= field_name %>_email_address_' + id).fadeOut('slow', function() {
             $('#<%= field_name %>_email_address_' + id).remove();

@@ -92,14 +92,14 @@
 
 		$('.remove_btn').click(function(ev) {
 
-			id = $(this).parent().parent().find('.<%= @model.model_name.param_key %>_id').text();
+			id = $(this).closest('.model_row').find('.<%= @model.model_name.param_key %>_id').text();
 			$('#remove_form').get(0).setAttribute('action', '/<%= @model.class.name.pluralize.downcase %>/' + id);
 			$('#remove_modal').modal('show');
 		});
 
 		$('.destroy_btn').on('click', function() {
 
-			id = $(this).parent().parent().find('.model_id').html();
+			id = $(this).closest('.model_row').find('.model_id').html();
 			display_confirm_modal("<%= t('modal.title.destroy') %>",
 				"<%= genderize_tag(@model, 'modal.destroy_model') %>", destroy_model.bind(self, id));
 		});
