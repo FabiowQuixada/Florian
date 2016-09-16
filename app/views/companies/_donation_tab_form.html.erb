@@ -212,9 +212,9 @@
 		});
 
 		$('body').on('click', '.remove_donation_btn', function() {
-			id = $(this).parent().parent().parent().find('.donation_id').text();
+			id = $(this).closest('.donation_row').find('.donation_id').text();
 
-         	$('.donation_' + id + '_row').remove();
+         	$('#donation_' + id + '_row').remove();
 
 			transient_donations -= 1;
 
