@@ -4,12 +4,12 @@
 			<div id="contact_panel_header" class="panel-heading"><%= t('helpers.company.new_contact') %></div>
 			<div class="panel-body">
 
-				<%= render partial: 'shared/error_alert', locals: {id: 'contact'} %>
+				<%= render partial: 'shared/error_alert', locals: { id: 'contact' } %>
 
 				<div class="row">
 					<div class="form-group col-md-12">
 						<div id="contact_data">
-							<%= render partial: 'contacts/contact_form' %>
+							<%= render 'contacts/contact_form' %>
 						</div>
 					</div>
 				</div>

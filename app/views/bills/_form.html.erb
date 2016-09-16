@@ -1,8 +1,6 @@
 <%= form_for @model, html: { id: 'main_form' } do |f| %>
 
-	<%= render partial: 'shared/form_errors', locals: { model: @model } %>
-
-	<%= f.hidden_field :id %>
+	<%= render 'shared/form_errors' %>
 
 	<div class="container-fluid padless">
 		
@@ -54,7 +52,7 @@
 
 <% end #main form %>
 
-<%= render partial: 'shared/form_commons', locals: { model: @model } %>
+<%= render 'shared/form_commons' %>
 
 <script>
 

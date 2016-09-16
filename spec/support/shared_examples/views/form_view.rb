@@ -6,8 +6,7 @@ shared_examples 'an form view' do
     render
 
     # Partials
-    expect(view).to render_template(partial: 'shared/form_errors', locals: { model: model })
-    expect(view).to render_template(partial: 'shared/form_commons', locals: { model: model })
-    # expect(view).to render_template(partial: "shared/form_buttons", locals: {model: @model, f: f})
+    expect(view).to render_template('shared/_form_errors')
+    expect(view).to render_template('shared/_form_commons')
   end
 end

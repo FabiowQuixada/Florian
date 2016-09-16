@@ -1,4 +1,5 @@
-<span class="visible-xs logout-xs-btn-box"><%= link_to(t('helpers.action.logout'), destroy_user_session_path, method: :delete, class: 'btn btn-primary btn-xs logout-xs-btn') %>
+<span class="visible-xs logout-xs-btn-box">
+	<%= logout_btn %>
 </span>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -8,10 +9,10 @@
 	<ul class="nav nav-tabs">
 		<li id="main_tab_0_title"><a><%= t('activerecord.models.user.one') %></a></li>
 		<% if can? :manage, ReceiptEmail.new %>
-		<li id="main_tab_1_title"><a><%= t('activerecord.models.receipt_email.one') %></a></li>
+			<li id="main_tab_1_title"><a><%= t('activerecord.models.receipt_email.one') %></a></li>
 		<% end %>
 		<% if can? :manage, ProductAndServiceDatum.new %>
-		<li id="main_tab_2_title"><a><%= t('activerecord.models.product_and_service_datum.one') %></a></li>
+			<li id="main_tab_2_title"><a><%= t('activerecord.models.product_and_service_datum.one') %></a></li>
 		<% end %>
 	</ul>
 
@@ -26,38 +27,36 @@
 						<%= f.label :name %>
 						<%= f.text_field :name, disabled: true, class: 'form-control' %>
 					</div>
-
-				</div><div class="col-sm-6">
-
+				</div>
+				<div class="col-sm-6">
 					<div class="form-group">
 						<%= f.label :email %>
 						<%= f.email_field :email, autofocus: true, disabled: true, class: 'form-control' %>
 					</div>
 
 					<% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-					<div>
-						<%= t('devise.waiting_for_confirmation') + resource.unconfirmed_email %>
-					</div>
+						<div>
+							<%= t('devise.waiting_for_confirmation') + resource.unconfirmed_email %>
+						</div>
 					<% end %>
 				</div>
-			</div><div class="row">
+			</div>
+			<div class="row">
 				<div class="col-sm-6">
 					<div class="form-group">
 						<%= f.label :password, t('activerecord.attributes.user.new_password') %> <i><%= t('devise.leave_blank_if') %></i>
 						<%= f.password_field :password, autocomplete: 'off', class: 'form-control' %>
 					</div>
-
-				</div><div class="col-sm-6">
-
-				<div class="form-group">
-					<%= f.label :password_confirmation %>
-					<%= f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control' %>
 				</div>
-
+				<div class="col-sm-6">
+					<div class="form-group">
+						<%= f.label :password_confirmation %>
+						<%= f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control' %>
+					</div>
 				</div>
-			</div><div class="row">
+			</div>
+			<div class="row">
 				<div class="col-sm-12">
-
 					<div class="form-group">
 						<%= f.label :signature %>
 						<%= f.text_area :signature, size: '24x6', class: 'form-control' %>
@@ -68,65 +67,65 @@
 
 		<%= f.fields_for @model.system_setting do |settings_form| %>
 
-		<!-- Receipt e-mail tab body -->
-		<% if can? :manage, ReceiptEmail.new %>
-		<div id="main_tab_1" class="receipt_email_tab">
-			<div class="form-group">
-				<%= settings_form.label :re_title %>
-				<div style="float:right">
-					<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
-					<div class="btn-group">
-						<button type="button" class="btn btn-primary btn-xs" id="add_company_to_re_title_btn"><%= i18n.t :company %></button>
-						<button type="button" class="btn btn-primary btn-xs" id="add_value_to_re_title_btn"><%= i18n.t :value %></button>
-						<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_re_title_btn"><%= i18n.t :competence %></button>
-					</div>
-					<% end %>
-				</div>
-				<%= settings_form.text_field :re_title, class: 'form-control' %>
-			</div>
-		</div>
-		<% end %>
-
-		<!-- Produd and service datum tab body -->
-		<% if can? :manage, ProductAndServiceDatum.new %>
-		<div id="main_tab_2" class="prod_serv_email_tab">
-
-			<div class="container-fluid padless">
-				<div class="row">
-					<div class="col-md-6">
-						<%= render partial: 'shared/email_address_table', locals: {f: settings_form, model: @model.system_setting, field_name: 'pse_recipients_array'} %>
-					</div>
-					<div class="col-md-6">
-						<%= render partial: 'shared/email_address_table', locals: {f: settings_form, model: @model.system_setting, field_name: 'pse_private_recipients_array', method_name: 'private_recipients_as_array'} %>
+			<!-- Receipt e-mail tab body -->
+			<% if can? :manage, ReceiptEmail.new %>
+				<div id="main_tab_1" class="receipt_email_tab">
+					<div class="form-group">
+						<%= settings_form.label :re_title %>
+						<div style="float:right">
+							<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
+								<div class="btn-group">
+									<button type="button" class="btn btn-primary btn-xs" id="add_company_to_re_title_btn"><%= i18n.t :company %></button>
+									<button type="button" class="btn btn-primary btn-xs" id="add_value_to_re_title_btn"><%= i18n.t :value %></button>
+									<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_re_title_btn"><%= i18n.t :competence %></button>
+								</div>
+							<% end %>
+						</div>
+						<%= settings_form.text_field :re_title, class: 'form-control' %>
 					</div>
 				</div>
-			</div>
+			<% end %>
 
-			<div class="form-group">
-				<%= settings_form.label :pse_title %>
-				<div style="float:right">
-					<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
-					<div class="btn-group">
-						<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_pse_title_btn"><%= i18n.t :competence %></button>
-					</div>
-					<% end %>
-				</div>
-				<%= settings_form.text_field :pse_title, class: 'form-control' %>
-			</div>
+			<!-- Product and service datum tab body -->
+			<% if can? :manage, ProductAndServiceDatum.new %>
+				<div id="main_tab_2" class="prod_serv_email_tab">
 
-			<div class="form-group">
-				<%= settings_form.label :pse_body %>
-				<div style="float:right">
-					<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
-					<div class="btn-group">
-						<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_pse_body_btn"><%= i18n.t :competence %></button>
+					<div class="container-fluid padless">
+						<div class="row">
+							<div class="col-md-6">
+								<%= render partial: 'shared/email_address_table', locals: {f: settings_form, model: @model.system_setting, field_name: 'pse_recipients_array'} %>
+							</div>
+							<div class="col-md-6">
+								<%= render partial: 'shared/email_address_table', locals: {f: settings_form, model: @model.system_setting, field_name: 'pse_private_recipients_array', method_name: 'private_recipients_as_array'} %>
+							</div>
+						</div>
 					</div>
-					<% end %>
+
+					<div class="form-group">
+						<%= settings_form.label :pse_title %>
+						<div style="float:right">
+							<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
+								<div class="btn-group">
+									<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_pse_title_btn"><%= i18n.t :competence %></button>
+								</div>
+							<% end %>
+						</div>
+						<%= settings_form.text_field :pse_title, class: 'form-control' %>
+					</div>
+
+					<div class="form-group">
+						<%= settings_form.label :pse_body %>
+						<div style="float:right">
+							<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
+								<div class="btn-group">
+									<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_pse_body_btn"><%= i18n.t :competence %></button>
+								</div>
+							<% end %>
+						</div>
+						<%= settings_form.text_area :pse_body, size: '24x6', class: 'form-control' %>
+					</div>
 				</div>
-				<%= settings_form.text_area :pse_body, size: '24x6', class: 'form-control' %>
-			</div>
-		</div>
-		<% end %>
+			<% end %>
 		<% end # System setting form %>
 	</div>
 
@@ -148,8 +147,8 @@
 
 <% end %>
 
-<%= render partial: 'shared/form_commons', locals: {model: @model.system_setting} %>
-<%= render partial: 'shared/tab_commons', locals: {tab_type: 'main', number_of_tabs: 3} %>
+<%= render partial: 'shared/form_commons', locals: { model: @model.system_setting } %>
+<%= render partial: 'shared/tab_commons', locals: { tab_type: 'main', number_of_tabs: 3 } %>
 
 <script>
 

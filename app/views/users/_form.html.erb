@@ -1,6 +1,6 @@
 <%= form_for @model, html: { id: 'main_form' } do |f| %>
 
-	<%= render partial: 'shared/form_errors', locals: { model: @model } %>
+	<%= render 'shared/form_errors' %>
 
 	<div class="container-fluid padless">
 		
@@ -35,7 +35,7 @@
 		</div>
 	</div>
 
-	<%= render partial: 'shared/form_status_button', locals: { model: @model, f: f } %>
+	<%= render partial: 'shared/form_status_button', locals: { f: f } %>
 	
 	<br/>
 
@@ -46,7 +46,7 @@
 
 <% end #main_form %>
 
-<%= render partial: 'shared/form_commons', locals: { model: @model } %>
+<%= render 'shared/form_commons' %>
 
 <script>
 

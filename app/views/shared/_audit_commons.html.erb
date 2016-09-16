@@ -1,4 +1,4 @@
-<% if !model.new_record? && !current_user.nil? && current_user.admin? %>
+<% if !@model.new_record? && !current_user.nil? && current_user.admin? %>
 
 	<br/>
 
@@ -21,14 +21,14 @@
 					</thead>
 
 					<tbody>
-						<% model.audits.each do |audit| %>
+						<% @model.audits.each do |audit| %>
 							<tr>
 								<td><%= audit.user.name unless audit.user.nil? %></td>
 								<td class="audit-when"><%= l(audit.created_at, format: :long_2) %></td>
 								<td class="audit-where"><%= audit.remote_address %></td>
 								<td class="audit-what">
 									<% audit.audited_changes.each do |key, array| %>
-										<b> - <%= t("activerecord.attributes.#{model.model_name.singular}.#{key}") %>:</b> <%= array %><br/>
+										<b> - <%= t("activerecord.attributes.#{@model.model_name.singular}.#{key}") %>:</b> <%= array %><br/>
 									<% end %>
 								</td>
 							</tr>

@@ -23,10 +23,10 @@
 	</div>
 </div>
 
-<%= render partial: 'shared/audit_commons', locals: {model: model} %>
+<%= render 'shared/audit_commons' %>
 
 <script>
-	<% if model.persisted? %>
+	<% if @model.persisted? %>
 	$(document).ready(function() {
 
 		function button(elem) {

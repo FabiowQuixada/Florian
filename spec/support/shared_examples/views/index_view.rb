@@ -9,7 +9,7 @@ shared_examples 'an index view' do
     end
 
     # Partials
-    it { expect(view).to render_template(partial: 'shared/index_commons', locals: { model: model }) }
+    it { expect(view).to render_template('shared/_index_commons') }
 
     # Others
     it { expect(rendered).to include 'class="table table-striped table-hover table-bordered table-condensed tablesorter tablesorter-blue"' }
@@ -29,7 +29,7 @@ shared_examples 'an index view' do
     end
 
     # Partials
-    it { expect(view).to render_template(partial: 'shared/index_commons', locals: { model: model }) }
+    it { expect(view).to render_template('shared/_index_commons') }
 
     # Others
     it { expect(rendered).to include genderize_tag(model, 'helpers.none_registered') }
