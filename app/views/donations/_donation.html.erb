@@ -1,7 +1,7 @@
 <tr class="donation_row hidden-xs donation_<%= donation.id %>_row">
 	<td class="donation_id admin-only" style="display:none;"><%= donation.id %></td>
 	<td class="donation_date col-xs-6 col-md-3"><%= donation.donation_date %></td>
-	<td class="donation_value col-xs-6 col-md-3"><%= number_to_currency(donation.value) %></td>
+	<td class="donation_value col-xs-6 col-md-3"><%= number_to_currency donation.value %></td>
 	<td class="donation_remark col-xs-12 col-md-6"><%= donation.remark %></td>
 	<td class="icon-column"><%= link_to image_tag('delete.png', title:  t('helpers.action.remove'), class: 'remove_donation_btn remove_btn'), 'javascript:void(0)' %></td>
 </tr>
@@ -12,7 +12,7 @@
 				<tr class="gray-background">
 					<td class="donation_id admin-only" style="display:none;"><%= donation.id %></td>
 					<td class="donation_date"><%= donation.donation_date %></td>
-					<td class="donation_value"><%= number_to_currency(donation.value) %></td>
+					<td class="donation_value"><%= number_to_currency donation.value %></td>
 					<td class="icon-column" style="width: 32px;"><%= link_to image_tag('delete.png', title:  t('helpers.action.remove'), class: 'remove_donation_btn remove_btn'), 'javascript:void(0)' %></td>
 				</tr><tr>
 					<td colspan="4" style="width: 50%" class="donation_remark white-background"><%= donation.remark %></td>

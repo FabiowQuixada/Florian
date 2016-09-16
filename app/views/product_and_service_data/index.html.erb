@@ -21,22 +21,17 @@
 	</thead>
 
 	<tbody>
-		<% if @list.empty? %>
-			<tr>
-				<td colspan="20" class="no-records"><%= genderize_tag(@model, 'helpers.none_registered') %></td>
-			</tr>
-		<% else %>
+		<%= no_records_row @model, @list %>
 			<% @list.each do |iterator| %>
-				<tr id="model_<%= iterator.id %>" class="model_row">
-					<td class="model_id admin-only"><%= iterator.id %></td>
-					<td><%=	I18n.localize(iterator.competence, format: :competence).capitalize %></td>
-					<td><%= iterator.service_qty %></td>
-					<td><%= iterator.product_qty %></td>
-					<td><%= iterator.status_desc %></td>
-					<td class="icon-column"><%= edit_btn iterator %></td>
-					<td class="admin-only icon-column"><%= destroy_btn %></td>
-				</tr>
-			<% end %>
+			<tr id="model_<%= iterator.id %>" class="model_row">
+				<td class="model_id admin-only"><%= iterator.id %></td>
+				<td><%=	I18n.localize(iterator.competence, format: :competence).capitalize %></td>
+				<td><%= iterator.service_qty %></td>
+				<td><%= iterator.product_qty %></td>
+				<td><%= iterator.status_desc %></td>
+				<td class="icon-column"><%= edit_btn iterator %></td>
+				<td class="admin-only icon-column"><%= destroy_btn %></td>
+			</tr>
 		<% end %>
 	</tbody>
 </table>

@@ -106,8 +106,6 @@
 
 	});
 
-	
-
 	function destroy_model(id) {
 
 		id_to_be_deleted = id;
@@ -124,8 +122,8 @@
 
 					$('#model_' + id_to_be_deleted).remove();
 
-					if(!$('#index_table tbody tr').length) {
-						$('#index_table tbody').html('<td colspan="' + $('#index_table thead th').length + ' class="no-records"><%= genderize_tag(@model, 'helpers.none_registered') %></td>');
+					if($('#index_table tbody tr').length == 1) {
+						$(<%= "no_#{@model.class.name.pluralize.underscore}_row" %>).show();
 					}
 				} else {
 					display_error(message);

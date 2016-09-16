@@ -46,11 +46,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr id="no_contacts_row"<%= ' style=display:none' if @model.contacts.any? %>><td colspan="6"><%= genderize_tag(Contact.new, 'helpers.none_registered') %></td></tr>
-
-				<% @model.contacts.each do |contact| %>
-					<%= render partial: contact, locals: {f: f} %>
-				<% end %>
+				<%= no_records_row Contact.new, @model.contacts, 6 %>
+				<%= render @model.contacts %>
 			</tbody>
 		</table>
 	</div>

@@ -90,6 +90,14 @@ module ApplicationHelper
     ('display_hideless_warning(\'' + t('showcase.login_info', showcase_email: bold('visitante' + GUEST_USERS_NUMBERS.sample.to_s + '@florian.com'), showcase_password: bold(SHOWCASE_PASSWORD)) + '\');').html_safe if showcase_login_screen?
   end
 
+  def no_records_row(model, list, colspan = 20)
+    style = list.any? ? 'display:none' : ''
+
+    content_tag :tr, id: "no_#{model.class.name.pluralize.underscore}_row", style: style do
+      content_tag(:td, genderize_tag(model, 'helpers.none_registered'), colspan: colspan)
+    end
+  end
+
 
   private ############################################################################################
 

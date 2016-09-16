@@ -75,8 +75,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr id="no_donations_row" <%= ' style=display:none' if @model.donations.any? %>><td colspan="4"><%= genderize_tag(Donation.new, 'helpers.none_registered') %></td></tr>
-
+						<%= no_records_row Donation.new, @model.donations, 4 %>
 						<%= render @model.donations %>
 					</tbody>
 				</table>

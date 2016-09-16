@@ -23,30 +23,25 @@
 	</thead>
 
 	<tbody>
-		<% if @list.empty? %>
-			<tr>
-				<td colspan="10" class="no-records"><%= genderize_tag(@model, 'helpers.none_registered') %></td>
+		<%= no_records_row @model, @list %>
+		<% @list.each do |iterator| %>
+			<tr id="model_<%= iterator.id %>" class="model_row">
+				<td class="model_id admin-only"><%= iterator.id %></td>
+				<td><%= iterator.day_of_month %></td>
+				<td class="hidden-xs receipt_company"><%= iterator.company.name %></td>
+				<td class="hidden-xs"><%= iterator.competence.capitalize %></td>
+				<td class="hidden-xs"><%= number_to_currency(iterator.value) %></td>
+				<td class="icon-column"><%= edit_btn iterator %></td>
+				<td class="hidden-xs icon-column"><%= resend_btn %></td>
+				<td class="hidden-xs icon-column"><%= send_test_btn %></td>
+				<td class="hidden-xs status icon-column"><%= status_btn iterator %></td>
+				<td class="admin-only icon-column"><%= destroy_btn %></td>
 			</tr>
-		<% else %>
-			<% @list.each do |iterator| %>
-				<tr id="model_<%= iterator.id %>" class="model_row">
-					<td class="model_id admin-only"><%= iterator.id %></td>
-					<td><%= iterator.day_of_month %></td>
-					<td class="hidden-xs receipt_company"><%= iterator.company.name %></td>
-					<td class="hidden-xs"><%= iterator.competence.capitalize %></td>
-					<td class="hidden-xs"><%= number_to_currency(iterator.value) %></td>
-					<td class="icon-column"><%= edit_btn iterator %></td>
-					<td class="hidden-xs icon-column"><%= resend_btn %></td>
-					<td class="hidden-xs icon-column"><%= send_test_btn %></td>
-					<td class="hidden-xs status icon-column"><%= status_btn iterator %></td>
-					<td class="admin-only icon-column"><%= destroy_btn %></td>
-				</tr>
-			<% end %>
 		<% end %>
 	</tbody>
 </table>
 
-<%= render partial: 'shared/index_commons', locals: {model: @model} %>
+<%= render partial: 'shared/index_commons', locals: { model: @model } %>
 
 <div class="asterisk-description"><%= t('helpers.receipt_email.index_footer', time: ReceiptEmail::DAILY_SEND_HOUR.to_s) %></div>
 
