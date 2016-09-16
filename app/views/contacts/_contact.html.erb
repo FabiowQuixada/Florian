@@ -6,8 +6,8 @@
     <td class="contact_telephone"><%= contact.telephone %></td>
     <td class="contact_celphone"><%= contact.celphone %></td>
     <td class="contact_fax" style="display:none;"><%= contact.fax %></td>
-    <td class="icon-column-2"><%= image_tag('edit.png', title: t('helpers.action.edit'), class: 'edit_contact_btn edit_btn') %></td>
-    <td class="icon-column-2"><%= link_to image_tag('delete.png', title:  t('helpers.action.remove')), 'javascript:void(0)', class: 'remove_contact_btn remove_btn' %></td>
+    <td class="icon-column-2"><%= sub_edit_btn Contact %></td>
+    <td class="icon-column-2"><%= sub_destroy_btn Contact %></td>
 
     <!-- Server communication data -->
     <td style="display:none;">

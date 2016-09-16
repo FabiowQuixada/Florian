@@ -66,6 +66,14 @@ module ApplicationHelper
     link_to t('author'), 'javascript:void(0)', id: 'author_email_btn'
   end
 
+  def sub_edit_btn(klass)
+    image_tag 'edit.png', title: t('helpers.action.edit'), class: "edit_#{klass.to_s.underscore}_btn edit_btn"
+  end
+
+  def sub_destroy_btn(klass)
+    link_to image_tag('delete.png', title: t('helpers.action.remove')), 'javascript:void(0)', class: "remove_#{klass.to_s.underscore}_btn remove_btn"
+  end
+
   ## Images #########################################################################
 
   def trash_img(field_name)
