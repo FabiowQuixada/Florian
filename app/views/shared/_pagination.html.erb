@@ -1,3 +1,5 @@
+<%= tag :br if top %>
+
 <div class="paginator pagination-<%= top ? 'top' : 'bottom' %>">
-<%= paginate @list %>
+	<%= paginate @list %>
 </div>

@@ -1,38 +1,36 @@
 
 <%= new_btn @model %>
 
-<br/>
-
 <%= render partial: 'shared/pagination', locals: { top: true } %>
 
-	<table id="index_table" class="table table-striped table-hover table-bordered table-condensed tablesorter tablesorter-blue">
-		<thead>
-			<tr>
-				<% I18n.with_options(scope: 'activerecord.attributes.company') do |i18n| %>
-					<th class="admin-only id-column"></th>
-					<th><%= i18n.t :name %></th>
-					<th class="hidden-xs"><%= i18n.t :category %></th>
-					<th class="hidden-xs"><%= i18n.t :group %></th>
-					<th class="sorter-false icon-column"></th>
-					<th class="admin-only sorter-false icon-column"></th>
-				<% end %>
-			</tr>
-		</thead>
-
-		<tbody>
-			<%= no_records_row @model, @list %>
-			<% @list.each do |iterator| %>
-				<tr id="model_<%= iterator.id %>" class="model_row">
-					<td class="model_id admin-only"><%= iterator.id %></td>
-					<td><%= iterator.name %></td>
-					<td class="hidden-xs"><%= iterator.category %></td>
-					<td class="hidden-xs"><%= iterator.group %></td>
-					<td class="icon-column"><%= edit_btn iterator %></td>
-					<td class="admin-only icon-column"><%= destroy_btn %></td>
-				</tr>
+<table id="index_table" class="table table-striped table-hover table-bordered table-condensed tablesorter tablesorter-blue">
+	<thead>
+		<tr>
+			<% I18n.with_options(scope: 'activerecord.attributes.company') do |i18n| %>
+				<th class="admin-only id-column"></th>
+				<th><%= i18n.t :name %></th>
+				<th class="hidden-xs"><%= i18n.t :category %></th>
+				<th class="hidden-xs"><%= i18n.t :group %></th>
+				<th class="sorter-false icon-column"></th>
+				<th class="admin-only sorter-false icon-column"></th>
 			<% end %>
-		</tbody>
-	</table>
+		</tr>
+	</thead>
+
+	<tbody>
+		<%= no_records_row @model, @list %>
+		<% @list.each do |iterator| %>
+			<tr id="model_<%= iterator.id %>" class="model_row">
+				<td class="model_id admin-only"><%= iterator.id %></td>
+				<td><%= iterator.name %></td>
+				<td class="hidden-xs"><%= iterator.category %></td>
+				<td class="hidden-xs"><%= iterator.group %></td>
+				<td class="icon-column"><%= edit_btn iterator %></td>
+				<td class="admin-only icon-column"><%= destroy_btn %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
 
 <%= render partial: 'shared/pagination', locals: { top: false } %>
 <%= render partial: 'shared/index_commons', locals: { model: @model } %>
