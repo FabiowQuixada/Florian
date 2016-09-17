@@ -1,0 +1,36 @@
+<% if user_signed_in? %>
+	<%= render 'others/menu' %>
+
+	<div id="submenu-line" class="container-fluid padless ">
+		<!-- Breadcrumbs -->
+		<div class="row">
+			<div class="col-xs-12 col-md-7 col-lg-7">
+				<ol class="breadcrumb">
+					<% @breadcrumbs.each do |bc| %>
+						<li <%= 'class="active thick"'.html_safe if bc == @breadcrumbs.to_a.last %>>
+							<%= bc.first %>
+						</li>
+					<% end %>
+
+					<li class="pull-right visible-xs">
+						<%= admin_info_btn %>
+					</li>
+				</ol>
+			</div>
+			<div class="hidden-xs col-md-1 col-lg-1"></div>
+			<div class="hidden-xs col-md-4 col-lg-4  profile-area">
+				<div class="right">
+					<%= profile_btn %> 
+					<%= admin_info_btn %> 
+					<%= logout_btn %>
+				</div>
+			</div>
+		</div>
+	</div>
+<% else %>
+	<!-- Login screen header -->
+	<div class="centre">
+		<img style="width: 70px; height: 70px; margin-bottom: -10px; margin-top: 10px;" src="/assets/app_logo.png" alt="<%= t('app_title') %>">
+		<h2><span class="app_title"><%= t('app_title') %></span></h2>
+	</div>
+<% end %>

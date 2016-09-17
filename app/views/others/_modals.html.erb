@@ -1,0 +1,56 @@
+<!-- MODALS -->
+<div id="confirm_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><%= t('attention') %></h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" id="confirm_btn" class="btn btn-default" data-dismiss="modal"><%= t('helpers.action.confirm') %></button>
+                <button type="button" id="cancel_btn" class="btn btn-default" data-dismiss="modal"><%= t('helpers.action.cancel') %></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="app_about_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div  style="min-height: 190px;">
+                    <%= image_tag('st_florian.png', title: t('helpers.about.st_florian'), class: 'pull-right rounded-image left-image') %>
+                    <p><%= t('helpers.about.main_description') %></p>
+                    <p><%= t('helpers.about.showcase_description') %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function display_confirm_modal(title, message, confirm_callback, cancel_callback) {
+        
+        $("#confirm_modal .modal-footer").show();
+        $("#cancel_btn").show();
+
+        $("#confirm_modal .modal-title").html(title);
+        $("#confirm_modal .modal-body").html(message);
+        $("#confirm_btn").on("click", confirm_callback);
+        
+        if(cancel_callback !== undefined) {
+            $("#cancel_btn").on("click", cancel_callback);
+        } else {
+            $("#cancel_btn").hide();
+        }
+
+        if(confirm_callback === undefined && cancel_callback === undefined) {
+            $("#confirm_modal .modal-footer").hide();
+        }
+        
+        $("#confirm_modal").modal("show");
+    }
+
+</script>

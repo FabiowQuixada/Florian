@@ -18,107 +18,13 @@
 	</head>
 
 	<body data-no-turbolink="true">
-		<div class="container-fluid padless">
-			<div class="row">
-				<div class="hidden-xs col-md-2">
-				</div>
-				<div class="col-xs-12 col-md-8">
-					<div class="main_box">
-
-						<!-- HEADER -->
-						<% if user_signed_in? %>
-							<%= render 'others/menu' %>
-
-							<div id="submenu-line" class="container-fluid padless ">
-								<!-- Breadcrumbs -->
-								<div class="row non-menu">
-									<div class="col-xs-12 col-md-7 col-lg-7">
-										<ol class="breadcrumb">
-											<% @breadcrumbs.each do |bc| %>
-												<li <%= 'class="active thick"'.html_safe if bc == @breadcrumbs.to_a.last %>>
-													<%= bc.first %>
-												</li>
-											<% end %>
-
-											<li class="pull-right visible-xs">
-												<%= admin_info_btn %>
-											</li>
-										</ol>
-									</div>
-									<div class="hidden-xs col-md-1 col-lg-1"></div>
-									<div class="hidden-xs col-md-4 col-lg-4  profile-area">
-										<div class="right">
-											<%= profile_btn %> 
-											<%= admin_info_btn %> 
-											<%= logout_btn %>
-										</div>
-									</div>
-								</div>
-							</div>
-						<% else %>
-							<!-- Login screen header -->
-							<div class="centre">
-								<img style="width: 70px; height: 70px; margin-bottom: -10px; margin-top: 10px;" src="/assets/app_logo.png" alt="<%= t('app_title') %>">
-								<h2><span class="app_title"><%= t('app_title') %></span></h2>
-							</div>
-						<% end %>
-						
-
-						<div class="non-menu">
-
-							<%= render 'others/message_area' %>
-
-							<!-- BODY -->
-							<%= yield -%>
-
-
-							<!-- FOOTER -->
-							<% if user_signed_in? %>
-								<div id="app_footer" class="navbar navbar-default centre">
-									<%= app_footer %> 
-									<%= app_about_btn %> 
-									<br/>
-									<%= I18n.t('helpers.by') %> <%= author_email_btn %>
-								</div>
-							<% end %>
-						</div>
-					</div>
-				</div>
-				<div class="hidden-xs col-md-2"></div>
-			</div>
+		<div class="main_box">
+			<%= render 'others/header' %>
+			<%= render 'others/message_area' %>
+			<%= yield -%>
+			<%= render 'others/footer' %>
 		</div>
 
-
-		<!-- MODALS -->
-		<div id="confirm_modal" class="modal fade" role="dialog">
-			<div class="modal-dialog modal-sm">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title"><%= t('attention') %></h4>
-					</div>
-					<div class="modal-body"></div>
-					<div class="modal-footer">
-						<button type="button" id="confirm_btn" class="btn btn-default" data-dismiss="modal"><%= t('helpers.action.confirm') %></button>
-						<button type="button" id="cancel_btn" class="btn btn-default" data-dismiss="modal"><%= t('helpers.action.cancel') %></button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div id="app_about_modal" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-body">
-						<div  style="min-height: 190px;">
-							<%= image_tag('st_florian.png', title: t('helpers.about.st_florian'), class: 'pull-right rounded-image left-image') %>
-							<p><%= t('helpers.about.main_description') %></p>
-							<p><%= t('helpers.about.showcase_description') %></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
+		<%= render 'others/modals' %>
 	</body>
 </html>

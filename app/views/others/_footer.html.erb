@@ -1,0 +1,8 @@
+<% if user_signed_in? %>
+    <div id="app_footer" class="navbar navbar-default centre">
+        <%= app_footer %> 
+        <%= app_about_btn %> 
+        <br/>
+        <%= I18n.t('helpers.by') %> <%= author_email_btn %>
+    </div>
+<% end %>
