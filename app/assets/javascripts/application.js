@@ -19,3 +19,52 @@
 //= require jquery.turbolinks
 //= require jquery-tablesorter
 //= require_tree .
+
+var display_admin_data = false;
+
+function toogle_admin_data() {		
+
+	if(display_admin_data) {
+		$('.admin-only').show();
+	} else {
+		$('.admin-only').hide();
+	}
+
+	display_admin_data = !display_admin_data;
+}
+
+function display_confirm_modal(title, message, confirm_callback, cancel_callback) {
+	$("#confirm_modal .modal-title").html(title);
+	$("#confirm_modal .modal-body").html(message);
+	$("#confirm_btn").on("click", confirm_callback);
+	
+	if(cancel_callback !== 'undefined')
+		$("#cancel_btn").on("click", cancel_callback);
+	
+	$("#confirm_modal").modal("show");
+}
+
+function to_top() {
+	$('html, body').animate({
+		scrollTop: $("body").offset().top
+	}, 1000);
+}
+
+var entityMap = {
+	"&": "&amp;",
+	"<": "&lt;",
+	">": "&gt;",
+	'"': '&quot;',
+	"'": '&#39;',
+	"/": '/' // &#x2F;
+};
+
+function escape_html(string) {
+	return String(string).replace(/[&<>"'\/]/g, function (s) {
+		return entityMap[s];
+	});
+}
+
+$(function() {
+	toogle_admin_data();
+})

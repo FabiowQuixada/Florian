@@ -1,0 +1,53 @@
+function set_month_datepicker() {
+	$('.datepicker-competence').datepicker()
+	$('[data-behaviour~=datepickercompetence]').datepicker({
+		minViewMode: 1,
+		format: "<%= I18n.t('date.formats.javascript_format.competence') %>",
+		autoclose: true,
+		language: "<%= I18n.locale %>"
+	});
+}
+
+function set_datepicker() {
+
+	$('.datepicker').datepicker()
+	$('[data-behaviour~=datepicker]').datepicker({
+		format: "<%= I18n.t('date.formats.javascript_format.date') %>",
+		autoclose: true,
+		language: "<%= I18n.locale %>",
+		daysOfWeekDisabled: [0,6],
+		setDate: new Date()
+	});
+}
+
+function current_competence() {
+	var today = new Date();
+	var mm = today.getMonth() + 1; //January is 0!
+	var yyyy = today.getFullYear();
+
+	if(mm < 10) {
+		mm = '0' + mm;
+	}
+
+	// TODO: Date format (internationalization);
+	return mm + '/' + yyyy;
+}
+
+function to_rails_date(date_string) {
+	var temp = date_string.split("/");
+	var date = new Date(temp[2], temp[1] - 1, temp[0]);
+	year = date.getFullYear();
+	month = ('0' + (date.getMonth() + 1)).slice(-2);
+	day = ('0' + date.getDate()).slice(-2)
+
+	return year + '-' + month + '-' + day;
+}
+
+$(function() {
+
+	set_month_datepicker();
+	set_datepicker();
+
+	$(".datepicker-switch").html("<%= I18n.t('datetime.prompts.month.other') %>");
+
+});

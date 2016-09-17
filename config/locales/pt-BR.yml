@@ -593,7 +593,9 @@ pt-BR:
       day: Dia
       hour: Hora
       minute: Minuto
-      month: Mês
+      month: 
+        one: Mês
+        other: Meses
       second: Segundo
       year: Ano
   errors:
