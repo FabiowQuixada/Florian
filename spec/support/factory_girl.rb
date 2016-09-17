@@ -26,7 +26,7 @@ RSpec.configure do |config|
     Donation.create(value: 0.00, donation_date: Time.now, remark: '02 potes de creme', company: comp1)
 
     FactoryGirl.create :receipt_email, :with_history
-    FactoryGirl.create :bill
+    FactoryGirl.create :bill, water: 4, energy: 5
     FactoryGirl.create :product_and_service_datum
     FactoryGirl.create :donation
   end
