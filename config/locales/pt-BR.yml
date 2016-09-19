@@ -168,6 +168,28 @@ pt-BR:
       role:
         name: Nome
         description: Descrição
+    gender:
+      bill: f
+      company: f
+      contact: m
+      donation: f
+      product_and_service_datum: m
+      product_and_service_week: f
+      receipt_email: m
+      system_setting: f
+      user: m
+      role: m
+    number:
+      bill: s
+      company: s
+      contact: s
+      donation: s
+      product_and_service_datum: p
+      product_and_service_week: s
+      receipt_email: s
+      system_setting: s
+      user: s
+      role: s
     enums:
       product_and_service_datum:
         status:

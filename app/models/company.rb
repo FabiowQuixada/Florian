@@ -43,10 +43,6 @@ class Company < ActiveRecord::Base
 
 
   # Methods
-  def model_gender
-    'f'
-  end
-
   def alias
     name
   end

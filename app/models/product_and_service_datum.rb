@@ -58,10 +58,6 @@ class ProductAndServiceDatum < ActiveRecord::Base
     sum
   end
 
-  def model_number
-    'p'
-  end
-
   def final_week
     weeks.last
   end

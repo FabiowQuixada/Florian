@@ -1,17 +1,17 @@
 module ModelHelper
 
-  # Gender: Male / Female
-  # Number: Singular / Plural
+  # Gender: (M)ale / (F)emale
+  # Number: (S)ingular / (P)lural
   def genderize(key)
     "#{key}.#{model_gender}.#{model_number}"
   end
 
   def model_gender
-    'm'
+    I18n.t "activerecord.gender.#{self.class.model_name.name.underscore}"
   end
 
   def model_number
-    's'
+    I18n.t "activerecord.number.#{self.class.model_name.name.underscore}"
   end
 
   def was(verb)

@@ -35,10 +35,6 @@ class Donation < ActiveRecord::Base
     errors.add :donation_date, I18n.t('errors.donation.value_or_remark') if no_value? && no_remark?
   end
 
-  def model_gender
-    'f'
-  end
-
   private
 
   def no_value?

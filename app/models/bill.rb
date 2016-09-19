@@ -16,10 +16,6 @@ class Bill < ActiveRecord::Base
 
 
   # Methods
-  def model_gender
-    'f'
-  end
-
   def alias
     I18n.localize(competence, format: :competence).capitalize
   end

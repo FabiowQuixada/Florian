@@ -21,10 +21,6 @@ class SystemSetting < ActiveRecord::Base
 
 
   # Methods
-  def model_gender
-    'f'
-  end
-
   def recipients_as_array
     return [] if pse_recipients_array.nil? || pse_recipients_array.empty?
 

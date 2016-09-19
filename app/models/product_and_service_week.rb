@@ -50,10 +50,6 @@ class ProductAndServiceWeek < ActiveRecord::Base
     service_data[1]
   end
 
-  def model_gender
-    'f'
-  end
-
   def common?
     0 <= number && number <= 5
   end
