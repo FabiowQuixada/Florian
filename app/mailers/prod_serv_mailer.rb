@@ -33,7 +33,9 @@ class ProdServMailer < ApplicationMailer
   end
 
   def attachment_name(week)
+    prefix = I18n.t('report.attachment.prod_serv_report')
     date = week.product_and_service_datum.competence
-    "relatorio_de_produtos_e_servicos_#{l(date, format: '%B').downcase}_#{date.year}.pdf"
+    month = l(date, format: '%B').downcase
+    "#{prefix}_#{month}_#{date.year}.pdf"
   end
 end

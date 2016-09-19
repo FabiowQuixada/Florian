@@ -291,6 +291,9 @@ pt-BR:
       email: "E-mail: apoioaoqueimado@yahoo.com.br"
     president_name: "Dr. Edmar Maciel Lima Júnior"
     president_description: "Presidente do Instituto de Apoio ao Queimado – I.A.Q."
+    attachment:
+      receipt_email: 'recibo_de_doacao'
+      prod_serv_report: 'relatorio_de_produtos_e_servicos'
     other:
       banking:
         deposit_data: 'Dados para depósito'
