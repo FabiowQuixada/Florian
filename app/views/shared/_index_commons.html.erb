@@ -45,40 +45,40 @@
 
 	<% if @model.class.column_names.include? 'active' %>
 
-	jQuery(function($) {
+		jQuery(function($) {
 
-		$('.status').on('ajax:success', function(event, data, status, xhr) {
-			display_notice(data.message);
-			update_status(data.id, data.activated);
-		}).on("ajax:error", function(e, xhr, status, error) {
-			parse_json_errors(xhr.responseText);
+			$('.status').on('ajax:success', function(event, data, status, xhr) {
+				display_notice(data.message);
+				update_status(data.id, data.activated);
+			}).on("ajax:error", function(e, xhr, status, error) {
+				parse_json_errors(xhr.responseText);
+			});
+
+			function update_status(id, is_now_active)
+			{
+				var target = "#model_" + id + " .status > a";
+
+				if(is_now_active)
+				{
+					$(target).attr("href", change_status_path(id, is_now_active));
+					$(target).html('<%= deactivate_img(@model) %>');
+				}
+				else
+				{
+					$(target).attr("href", change_status_path(id, is_now_active));
+					$(target).html('<%= activate_img(@model) %>');
+				}
+			}
 		});
 
-		function update_status(id, is_now_active)
-		{
-			var target = "#model_" + id + " .status > a";
+		function change_status_path(id, is_now_active) {
+			<% model_name = @model.class.to_s.underscore %>
 
 			if(is_now_active)
-			{
-				$(target).attr("href", change_status_path(id, is_now_active));
-				$(target).html('<%= deactivate_img(@model) %>');
-			}
+				return '<%= send("deactivate_#{model_name}_path", -1) %>'.replace("-1", id);
 			else
-			{
-				$(target).attr("href", change_status_path(id, is_now_active));
-				$(target).html('<%= activate_img(@model) %>');
-			}
+				return '<%= send("activate_#{model_name}_path", -1) %>'.replace("-1", id);
 		}
-	});
-
-	function change_status_path(id, is_now_active) {
-		<% model_name = @model.class.to_s.underscore %>
-
-		if(is_now_active)
-			return '<%= send("deactivate_#{model_name}_path", -1) %>'.replace("-1", id);
-		else
-			return '<%= send("activate_#{model_name}_path", -1) %>'.replace("-1", id);
-	}
 
 	<% end %>
 

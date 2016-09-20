@@ -144,17 +144,15 @@
 	});
 
 	function clean_resend_modal() {
-
-		competence_default = ("0" + (new Date().getMonth()+1)).slice(-2) + "/" + new Date().getFullYear();
-
-		$('#resend_competence').val(competence_default);
+		$('#resend_competence').val(default_competence());
 	}
 
 	function clean_send_test_modal() {
+		$('#send_test_competence').val(default_competence());
+	}
 
-		competence_default = ("0" + (new Date().getMonth()+1)).slice(-2) + "/" + new Date().getFullYear();
-
-		$('#send_test_competence').val(competence_default);
+	function default_competence() {
+		return ("0" + (new Date().getMonth()+1)).slice(-2) + "/" + new Date().getFullYear();
 	}
 
 	jQuery(document).ready(function($) {
@@ -180,13 +178,13 @@
 		display_info('<%= t('alert.email.resending') %>');
 		$('#resend_email_modal').modal('hide');
 
-		<% if  params[:action]  == 'edit' %>
+		<% if params[:action] == 'edit' %>
 
-		for (var key in attr_values) {
-			add_hidden_field('resend_email_form', key, $('#' + key).val());
-		}
+			for (var key in attr_values) {
+				add_hidden_field('resend_email_form', key, $('#' + key).val());
+			}
 
-		add_hidden_field('resend_email_form', 'active', $('#model_status').val());
+			add_hidden_field('resend_email_form', 'active', $('#model_status').val());
 
 		<% end %>
 	});
@@ -196,20 +194,19 @@
 		display_info('<%= t('alert.email.sending_test') %>');
 		$('#send_test_email_modal').modal('hide');
 
-		<% if  params[:action]  == 'edit' %>
+		<% if params[:action] == 'edit' %>
 
-		for (var key in attr_values) {
-			add_hidden_field('send_test_email_form', key, $('#' + key).val());
-		}
+			for (var key in attr_values) {
+				add_hidden_field('send_test_email_form', key, $('#' + key).val());
+			}
 
-		add_hidden_field('send_test_email_form', 'active', $('#model_status').val());
+			add_hidden_field('send_test_email_form', 'active', $('#model_status').val());
 
 		<% end %>
 
 	});
 
-	function add_history_item(response)
-	{
+	function add_history_item(response) {
 		line = '<tr><td>' + response.date + '<\/td>' +
 		'<td>' + response.value + '<\/td>' +
 		'<td>' + response.type + '<\/td>' +
@@ -217,8 +214,7 @@
 		$('#history_tablerecent_emails_table > tbody:last-child').append(line);
 	}
 
-	function add_recent_email(response)
-	{
+	function add_recent_email(response) {
 		line = '<tr><td>' + response.date + '<\/td>' +
 		'<td>' + response.company + '<\/td>' +
 		'<td>' + response.type + '<\/td>' +

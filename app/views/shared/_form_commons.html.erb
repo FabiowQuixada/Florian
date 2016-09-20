@@ -27,65 +27,64 @@
 
 <script>
 	<% if @model.persisted? %>
-	$(document).ready(function() {
+		$(document).ready(function() {
 
-		function button(elem) {
-			return elem.hasClass('btn');
+			function button(elem) {
+				return elem.hasClass('btn');
+			}
+
+			function temp_field(elem) {
+				return elem.hasClass('temp_field');
+			}
+
+			function hidden_field(elem) {
+				return elem.attr('type') !== 'hidden';
+			}
+
+			function status_attr(elem) {
+				return elem.attr('id') === 'model_status';
+			}
+
+			function has_id(elem) {
+				return typeof elem.attr('id') !== 'undefined';
+			}
+
+
+			// Saves the values of the model on page load, so it can be compared to the values when the user goes back, allowing a 'not-saved data' pop-up to display;
+			window.attr_values = new Array();
+			$('input, textarea, select').each(function(){
+				elem = $(this);
+				if(!button(elem) && has_id(elem) && !temp_field(elem) && (status_attr(elem) || hidden_field(elem)))
+					attr_values[$(this).attr('id')] = $(this).val();
+			})
+
+			$('#form_back_btn').on('click', handle_back_on_edit);
+		});
+
+		function has_changed(key) {
+			if($('#' + key).hasClass("numbers_only") && attr_values[key] === "" && $('#' + key).val() === "0")
+				return false;
+
+
+			return attr_values[key] != $('#' + key).val();
 		}
 
-		function temp_field(elem) {
-			return elem.hasClass('temp_field');
-		}
+		function handle_back_on_edit() {
 
-		function hidden_field(elem) {
-			return elem.attr('type') !== 'hidden';
-		}
+			window.any_change = false;
 
-		function status_attr(elem) {
-			return elem.attr('id') === 'model_status';
-		}
+			preprocess_data();
 
-		function has_id(elem) {
-			return typeof elem.attr('id') !== 'undefined';
-		}
+			var changed_values_list = "";
 
-
-		// Saves the values of the model on page load, so it can be compared to the values when the user goes back, allowing a 'not-saved data' pop-up to display;
-		window.attr_values = new Array();
-		$('input, textarea, select').each(function(){
-			elem = $(this);
-			if(!button(elem) && has_id(elem) && !temp_field(elem) && (status_attr(elem) || hidden_field(elem)))
-				attr_values[$(this).attr('id')] = $(this).val();
-		})
-
-		$('#form_back_btn').on('click', handle_back_on_edit);
-	});
-
-	function has_changed(key) {
-
-		if($('#' + key).hasClass("numbers_only") && attr_values[key] === "" && $('#' + key).val() === "0")
-			return false;
-
-
-		return attr_values[key] != $('#' + key).val();
-	}
-
-	function handle_back_on_edit() {
-
-		window.any_change = false;
-
-		preprocess_data();
-
-		var changed_values_list = "";
-
-		if(!window.any_change) {
-			for (var key in attr_values) {
-				if(has_changed(key)) {
-					changed_values_list += ' ' + key;
-					any_change = true;
+			if(!window.any_change) {
+				for (var key in attr_values) {
+					if(has_changed(key)) {
+						changed_values_list += ' ' + key;
+						any_change = true;
+					}
 				}
 			}
-		}
 
 			//alert(changed_values_list);
 
@@ -99,36 +98,7 @@
 			}
 		}
 
-		// window.onload = function (e) {
-		//     if (typeof history.pushState === "function") {
-		//         history.pushState("jibberish", null, null);
-		//         window.onpopstate = function () {
-		//             //history.pushState('newjibberish', null, null);
-		//             e.preventDefault();
-		//             handle_back_on_edit();
-		//             // Handle the back (or forward) buttons here
-		//             // Will NOT handle refresh, use onbeforeunload for this.
-		//         };
-		//     }
-		//     else {
-		//         var ignoreHashChange = true;
-		//         window.onhashchange = function () {
-		//             if (!ignoreHashChange) {
-		//                 ignoreHashChange = true;
-		//                 window.location.hash = Math.random();
-		//                 // Detect and redirect change here
-		//                 // Works in older FF and IE9
-		//                 // * it does mess with your hash symbol (anchor?) pound sign
-		//                 // delimiter on the end of the URL
-		//             }
-		//             else {
-		//                 ignoreHashChange = false;
-		//             }
-		//         };
-		//     }
-		// }
-
-		<% else %>
+	<% else %>
 
 		$(document).ready(function() {
 			$('.back_btn').on('click', function() {
@@ -136,35 +106,35 @@
 			});
 		});
 
-		<% end %>
+	<% end %>
 
-		$('#modal_confirm_btn').on('click', function() {
-			document.getElementById("main_form").submit();
-		});
+	$('#modal_confirm_btn').on('click', function() {
+		document.getElementById("main_form").submit();
+	});
 
-		function display_form_errors(message) {
-			var result = '';
+	function display_form_errors(message) {
+		var result = '';
 
-			if (Object.prototype.toString.call(message) === '[object Array]') {
-				result = msg_as_html_ul(message);
-			} else {
-				result = message;
-			}
-
-			hide_all_messages();
-			to_top();
-			$('#form_error_messages').html(result);
-			$('#form_error_box').show();
+		if (Object.prototype.toString.call(message) === '[object Array]') {
+			result = msg_as_html_ul(message);
+		} else {
+			result = message;
 		}
 
-		function add_tag_to_field(field, tag) {
-			var caretPos = document.getElementById(field).selectionStart;
-			var textAreaTxt = jQuery("#" + field).val();
-			jQuery("#" + field).val(textAreaTxt.substring(0, caretPos) + ' ' + tag + ' ' + textAreaTxt.substring(caretPos) );
-		}
+		hide_all_messages();
+		to_top();
+		$('#form_error_messages').html(result);
+		$('#form_error_box').show();
+	}
 
-		function go_back() {
-			window.location = '<%= model_full_path(@model) %>';
-		}
+	function add_tag_to_field(field, tag) {
+		var caretPos = document.getElementById(field).selectionStart;
+		var textAreaTxt = jQuery("#" + field).val();
+		jQuery("#" + field).val(textAreaTxt.substring(0, caretPos) + ' ' + tag + ' ' + textAreaTxt.substring(caretPos) );
+	}
 
-	</script>
+	function go_back() {
+		window.location = '<%= model_full_path(@model) %>';
+	}
+
+</script>

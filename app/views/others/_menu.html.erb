@@ -35,15 +35,15 @@
             </li>
             <!-- new_menus_here -->
             <% if !current_user.nil? && current_user.admin? %>
-            <li>
-                <a href="/admin/users"><%= plural_of User %></a>
-            </li>
-            <li>
-                <a href="/admin/roles"><%= plural_of Role %></a>
-            </li>
+                <li>
+                    <a href="/admin/users"><%= plural_of User %></a>
+                </li>
+                <li>
+                    <a href="/admin/roles"><%= plural_of Role %></a>
+                </li>
             <% end %>
             <li class="visible-xs">
-                <a href="<%= edit_user_registration_path %>"><%= current_user.name + ' (' + t('helpers.action.logout') + ')' %></a>
+                <a href="<%= edit_user_registration_path %>"><%= "#{current_user.name} (#{t('helpers.action.logout')})" %></a>
             </li>
         </ul>
     </div>

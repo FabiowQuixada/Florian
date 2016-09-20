@@ -58,81 +58,82 @@
 						<div class="row">
 							
 							<% if week_range_readonly?(week) %>
-							<div class="form-group col-md-5">
-								<%= f.text_field_tag 'week_range', week.period, class: 'form-control', readonly: true %>
-							</div>
+								<div class="form-group col-md-5">
+									<%= f.text_field_tag 'week_range', week.period, class: 'form-control', readonly: true %>
+								</div>
 							<% else %>
-							<div class="form-group col-md-6">
-								<div class="input-group">
-									<span class="input-group-addon"><%= t 'helpers.from' %></span>
-									<div class="date" data-behaviour='datepicker' >
-										<span></span><%= week_f.text_field :start_date, class: 'form-control', readonly: @model.finalized? %><span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-									</div>
-									<span class="input-group-addon" style="border-left: 0; border-right: 0;"><%= t 'helpers.to' %></span>
-									<div class="date" data-behaviour='datepicker'>
-										<span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-										<%= week_f.text_field :end_date, class: 'form-control', readonly: @model.finalized? %>
+								<div class="form-group col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon"><%= t 'helpers.from' %></span>
+										<div class="date" data-behaviour='datepicker' >
+											<span></span><%= week_f.text_field :start_date, class: 'form-control', readonly: @model.finalized? %><span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+										</div>
+										<span class="input-group-addon" style="border-left: 0; border-right: 0;"><%= t 'helpers.to' %></span>
+										<div class="date" data-behaviour='datepicker'>
+											<span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+											<%= week_f.text_field :end_date, class: 'form-control', readonly: @model.finalized? %>
+										</div>
 									</div>
 								</div>
-							</div>
 							<% end %>
 
 							<div class="form-group col-md-2 admin-only">
 								<%= week_f.text_field :id, id: "admin-id-#{week.index}", class: 'form-control', readonly: true %>
-							</div><div class="form-group col-md-2 admin-only">
-							<%= week_f.text_field :number, class: 'form-control', readonly: true %>
-						</div>
-					</div>
-				</div>
-
-				<div class="container-fluid">
-
-					<!-- Main data -->
-					<div class="row">
-						<div class="col-xs-12 col-md-7">
-							<%= render partial: 'service_data/form', locals: { week_f: week_f } %>
-						</div>
-						<div class="col-xs-12 col-md-5">
-							<%= render partial: 'product_data/form', locals: { week_f: week_f } %>
+							</div>
+							<div class="form-group col-md-2 admin-only">
+								<%= week_f.text_field :number, class: 'form-control', readonly: true %>
+							</div>
 						</div>
 					</div>
 
-					<br/>
+					<div class="container-fluid">
 
-					<!-- Weeks tab's footer -->
-					<% if @model.persisted? %>
-						<% if week.common? %>
-							<!-- Weeks -->
-							<% if !@model.finalized? and !@model.on_analysis? %>
-								<div class="row">
-									<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.week_footer') %>
+						<!-- Main data -->
+						<div class="row">
+							<div class="col-xs-12 col-md-7">
+								<%= render partial: 'service_data/form', locals: { week_f: week_f } %>
+							</div>
+							<div class="col-xs-12 col-md-5">
+								<%= render partial: 'product_data/form', locals: { week_f: week_f } %>
+							</div>
+						</div>
+
+						<br/>
+
+						<!-- Weeks tab's footer -->
+						<% if @model.persisted? %>
+							<% if week.common? %>
+								<!-- Weeks -->
+								<% if !@model.finalized? and !@model.on_analysis? %>
+									<div class="row">
+										<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.week_footer') %>
+										</div>
 									</div>
-								</div>
+
+									<div class="form-group">
+										<%= link_to t('helpers.action.email.save_and_send'), 'javascript:void(0)', id: "update_and_send_btn_#{week.index}", class: 'btn btn-primary resend_btn' %>
+									</div>
+								<% end %>
+							
+							<!-- Totals week -->
+							<% elsif week.totals? and !@model.finalized? and !@model.on_analysis? %>
+								<div class="form-group"><%= link_to t('helpers.action.send_to_analysis'), 'javascript:void(0)', id: 'update_and_send_btn_5', class: 'btn btn-primary send_btn' %></div>
+							
+							<!-- Final Week -->
+							<% elsif week.final? and @model.on_analysis? %>
 
 								<div class="form-group">
-									<%= link_to t('helpers.action.email.save_and_send'), 'javascript:void(0)', id: "update_and_send_btn_#{week.index}", class: 'btn btn-primary resend_btn' %>
+									<%= link_to t('helpers.action.product_and_service.update_final_data'), 'javascript:void(0)', id: 'update_final_data_btn', class: 'btn btn-primary' %>
+									<%= link_to t('helpers.action.email.send'), 'javascript:void(0)', id: 'update_and_send_btn_6', class: 'btn btn-primary send_btn' %>
 								</div>
-							<% end %>
-						
-						<!-- Totals week -->
-						<% elsif week.totals? and !@model.finalized? and !@model.on_analysis? %>
-							<div class="form-group"><%= link_to t('helpers.action.send_to_analysis'), 'javascript:void(0)', id: 'update_and_send_btn_5', class: 'btn btn-primary send_btn' %></div>
-						
-						<!-- Final Week -->
-						<% elsif week.final? and @model.on_analysis? %>
 
-							<div class="form-group">
-								<%= link_to t('helpers.action.product_and_service.update_final_data'), 'javascript:void(0)', id: 'update_final_data_btn', class: 'btn btn-primary' %>
-								<%= link_to t('helpers.action.email.send'), 'javascript:void(0)', id: 'update_and_send_btn_6', class: 'btn btn-primary send_btn' %>
-							</div>
-
-							<% if @model.persisted? %>
-								<div class="row">
-									<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.final_footer') %></div>
-								</div>
-							<% end  %>
-						<% end # if common week %>
-					<% end # if persisted %>
+								<% if @model.persisted? %>
+									<div class="row">
+										<div class="form-group col-md-12 asterisk-description"><%= t('helpers.prod_and_serv_datum.final_footer') %></div>
+									</div>
+								<% end  %>
+							<% end # if common week %>
+						<% end # if persisted %>
 					</div>
 				</div>
 			</div>

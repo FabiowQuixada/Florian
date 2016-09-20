@@ -7,7 +7,7 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
 
 <div class="form-group">
 
-    <%= label_tag field_name + '_new_recipient_field', t('activerecord.attributes.' + model.class.name.underscore + '.' + field_name), class: 'required' %>
+    <%= label_tag  "#{field_name}_new_recipient_field", t("activerecord.attributes.#{model.class.name.underscore}.#{field_name}"), class: 'required' %>
 
     <div class="input-group">
         <span class="input-group-addon">@</span>
@@ -19,7 +19,7 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
 <table id="<%= field_name %>_recipients_table" class="table table-striped table-condensed table-bordered unbreakable-table">
     <tbody>
         <% model.public_send(method_name).each_with_index do |email_address, index| %>
-        <%= render partial: 'shared/email_address', locals: {email_address: email_address, index: index, field_name: field_name} %>
+        <%= render partial: 'shared/email_address', locals: { email_address: email_address, index: index, field_name: field_name } %>
         <% end %>
     </tbody>
 </table>
@@ -31,8 +31,7 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
     var temp_id = -1;
     var transient_recipients = 0;
 
-    function already_present(email_address)
-    {
+    function already_present(email_address) {
         var result = false;
 
         $('#<%= field_name %>_recipients_table > tbody > tr').each(function() {
@@ -49,7 +48,6 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
         return regex.test(email);
     }
 
-
     $('body').on('click', '.<%= field_name %>_remove_recipient_btn', function() {
         id = $(this).closest('.email_recipient').find('.recipient_id').text();
 
@@ -60,8 +58,7 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
         transient_recipients -= 1;
     });
 
-    function formated_recipients(id)
-    {
+    function formated_recipients(id) {
         var array = '';
 
         if(!id)
@@ -78,18 +75,15 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
 
         email_address = $('#<%= field_name %>_new_recipient_field').val();
 
-        if (!$('#<%= field_name %>_new_recipient_field').val())
-        {
+        if (!$('#<%= field_name %>_new_recipient_field').val()) {
             display_form_errors('<%= t('alert.email.fill_a_recipient') %>');
 
-        } else if(already_present(email_address))
-        {
+        } else if(already_present(email_address)) {
             display_form_errors('<%= t('alert.email.duplicated_recipient') %>');
-        } else if (validate_recipient_email(email_address))
-        {
+        } else if (validate_recipient_email(email_address)) {
             $.ajax({
                 url: "<%= url_for(action: 'email_row', controller: 'helpers', only_path: false, protocol: 'http') %>", 
-                data: {email_address: email_address, index: temp_id, field_name: '<%= field_name %>'},
+                data: { email_address: email_address, index: temp_id, field_name: '<%= field_name %>' },
                 success: function(result) {
                     $('#<%= field_name %>_recipients_table > tbody:last-child').append(result);
                 }
@@ -98,8 +92,7 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
             temp_id = temp_id - 1;
             hide_all_messages();
             clean_email_fields();
-        } else
-        {
+        } else {
             display_form_errors('<%= t('alert.email.invalid_recipient') %>');
         }
     });
