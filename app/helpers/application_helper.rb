@@ -54,6 +54,10 @@ module ApplicationHelper
     end
   end
 
+  def form_back_btn
+    content_tag :a, t('helpers.action.back'), id: 'form_back_btn', class: 'btn btn-primary back_btn'
+  end
+
   def destroy_btn
     image_tag('destroy.png', title: t('helpers.action.destroy'), class: 'destroy_btn')
   end

@@ -144,7 +144,7 @@
 
 	<div class="form-buttons">
 	    <%= save_update_btn @model, f unless @model.finalized? %>
-	    <a id="form_back_btn" class="btn btn-primary back_btn"><%= t('helpers.action.back') %></a>
+	    <%= form_back_btn %>
 	</div>
 
 <% end # main_form %>
