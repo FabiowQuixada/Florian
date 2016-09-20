@@ -120,7 +120,7 @@
 			$('.resend_btn').click(function(ev) {
 
 				clean_resend_modal();
-				$('#resend_email_form').get(0).setAttribute('action', '/receipt_emails/' + <%= @model.id.to_s %> + '/resend');
+				$('#resend_email_form').get(0).setAttribute('action', '<%= resend_receipt_email_path @model %>');
 				$('.modal_company_name').text('<%= @model.company.name %>');
 				$('#resend_email_modal').modal('show');
 			});
@@ -128,7 +128,7 @@
 			$('.send_test_btn').click(function(ev) {
 
 				clean_send_test_modal();
-				$('#send_test_email_form').get(0).setAttribute('action', '/receipt_emails/' + <%= @model.id.to_s %> + '/send_test');
+				$('#send_test_email_form').get(0).setAttribute('action', '<%= send_test_receipt_email_path @model %>');
 				$('.modal_company_name').text('<%= @model.company.name %>');
 				$('#send_test_email_modal').modal('show');
 			});

@@ -55,7 +55,7 @@
 
 			id = $(this).closest('.model_row').find('.model_id').text();
 			$('#resend_email_id').val(id);
-			$('#resend_email_form').get(0).setAttribute('action', '/receipt_emails/' + id + '/resend');
+			$('#resend_email_form').get(0).setAttribute('action', resend_path(id));
 			$('.modal_company_name').text($(this).closest('.model_row').find('.receipt_company').text());
 			$('#resend_email_modal').modal('show');
 		});
@@ -67,7 +67,7 @@
 
 			id = $(this).closest('.model_row').find('.model_id').text();
 			$('#send_test_email_id').val(id);
-			$('#send_test_email_form').get(0).setAttribute('action', '/receipt_emails/' + id + '/send_test');
+			$('#send_test_email_form').get(0).setAttribute('action', send_test_path(id));
 			$('.modal_company_name').text($(this).closest('.model_row').find('.receipt_company').text());
 			$('#send_test_email_modal').modal('show');
 		});
@@ -76,5 +76,13 @@
 		$('#recent_emails_btn').click(function(ev) {
 			$('#recent_emails_modal').modal('show');
 		});
+
+		function resend_path(id) {
+			return '<%= resend_receipt_email_path -1 %>'.replace("-1", id);
+		}
+
+		function send_test_path(id) {
+			return '<%= send_test_receipt_email_path -1 %>'.replace("-1", id);
+		}
 	});
 </script>

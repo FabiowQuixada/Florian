@@ -336,9 +336,9 @@
 	function set_request_url(source_week_number) {
 		if(source_week_number == <%= ProductAndServiceWeek::FINAL_NUMBER-1 %>) {
 			// The final (monthly) data will be sent to the the institute's maintainers.
-			$('#hidden_week_form').attr('action', '/product_and_service_weeks/send_maintainers');
+			$('#hidden_week_form').attr('action', '<%= send_maintainers_product_and_service_weeks_path %>');
 		} else if(source_week_number == <%= ProductAndServiceWeek::TOTALS_NUMBER-1 %>) {
-			$('#hidden_week_form').attr('action', '/product_and_service_weeks/send_to_analysis');
+			$('#hidden_week_form').attr('action', '<%= send_to_analysis_product_and_service_weeks_path %>');
 		} else {
 			// The partial (weekly) data will be sent to the collaborators;
 			update_hidden_week_field('start_date', source_week_number);
