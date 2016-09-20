@@ -12,38 +12,23 @@
     </div>
     <div class="collapse navbar-collapse" id="main_menu">
         <ul class="nav navbar-nav">
-            <li>
-                <a href="/companies"><%= plural_of Company %></a>
-            </li>
-            <li>
-                <a href="/donations"><%= plural_of Donation %></a>
-            </li>
+            <%= render partial: 'others/menu_item', locals: { klass: Company } %>
+            <%= render partial: 'others/menu_item', locals: { klass: Donation } %>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="/receipt_emails"><%= t('menu.emails') %></a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)"><%= t('menu.emails') %></a>
                 <ul class="dropdown-menu">
-
-                    <% if can? :manage, ReceiptEmail.new %>
-                        <li><a href="/receipt_emails"><%= t('menu.email.receipt') %></a></li>
-                    <% end %>
-                    <% if can? :manage, ProductAndServiceDatum.new %>
-                        <li><a href="/product_and_service_data"><%= plural_of ProductAndServiceDatum %></a></li>
-                    <% end %>
+                    <%= render partial: 'others/menu_item', locals: { klass: ReceiptEmail, display_name: t('menu.email.receipt') } %>
+                    <%= render partial: 'others/menu_item', locals: { klass: ProductAndServiceDatum } %>
                 </ul>
             </li>
-            <li>
-                <a href='/bills'><%= plural_of Bill %></a>
-            </li>
-            <!-- new_menus_here -->
+            <%= render partial: 'others/menu_item', locals: { klass: Bill } %>
+
             <% if !current_user.nil? && current_user.admin? %>
-                <li>
-                    <a href="/admin/users"><%= plural_of User %></a>
-                </li>
-                <li>
-                    <a href="/admin/roles"><%= plural_of Role %></a>
-                </li>
+                <%= render partial: 'others/menu_item', locals: { klass: User } %>
+                <%= render partial: 'others/menu_item', locals: { klass: Role } %>
             <% end %>
             <li class="visible-xs">
-                <a href="<%= edit_user_registration_path %>"><%= "#{current_user.name} (#{t('helpers.action.logout')})" %></a>
+                <%= content_tag :a, "#{current_user.name} (#{t('helpers.action.logout')})", href: edit_user_registration_path %>
             </li>
         </ul>
     </div>

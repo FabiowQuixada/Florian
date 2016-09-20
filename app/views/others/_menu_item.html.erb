@@ -1,0 +1,7 @@
+<% display_name ||= plural_of klass %>
+
+<% if can? :manage, klass.new %>
+    <li>
+        <a href="<%= url_for(action: 'index', controller: klass.model_name.route_key, only_path: true, protocol: 'http') %>"><%= display_name %></a>
+    </li>
+<% end %>
