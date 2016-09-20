@@ -53,7 +53,7 @@ class ReceiptMailer < ApplicationMailer
   end
 
   def attachment_name(date)
-    'recibo_de_doacao_' + l(date, format: '%B').downcase + '_' + date.year.to_s + '.pdf'
+    "recibo_de_doacao_#{l(date, format: '%B').downcase}_#{date.year}.pdf"
   end
 
   def save_to_history(email, type, user)

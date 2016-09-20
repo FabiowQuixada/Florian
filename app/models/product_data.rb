@@ -29,7 +29,7 @@ class ProductData < ActiveRecord::Base
 
     ProductData.products.each do |product|
       next unless send(product).nil? || send(product).blank?
-      # errors.add(product, I18n.t('errors.messages.blank', attribute: I18n.t('activerecord.attributes.product_datum.' + product)))
+      # errors.add(product, I18n.t('errors.messages.blank', attribute: I18n.t("activerecord.attributes.product_datum.#{product}")))
       self.is_valid = false
       return false
     end

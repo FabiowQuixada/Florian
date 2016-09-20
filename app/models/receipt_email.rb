@@ -134,7 +134,7 @@ class ReceiptEmail < ActiveRecord::Base
   end
 
   def apply_value_tag_to(text)
-    text.gsub(I18n.t('tags.value'), ActionController::Base.helpers.number_to_currency(value) + ' (' + value.real.por_extenso + ')')
+    text.gsub(I18n.t('tags.value'), "#{ActionController::Base.helpers.number_to_currency(value)} (#{value.real.por_extenso})")
   end
 
   def apply_all_tags_to(text, date = Date.today)

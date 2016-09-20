@@ -34,6 +34,6 @@ class ProdServMailer < ApplicationMailer
 
   def attachment_name(week)
     date = week.product_and_service_datum.competence
-    'relatorio_de_produtos_e_servicos_' + l(date, format: '%B').downcase + '_' + date.year.to_s + '.pdf'
+    "relatorio_de_produtos_e_servicos_#{l(date, format: '%B').downcase}_#{date.year}.pdf"
   end
 end

@@ -31,7 +31,7 @@ class ServiceData < ActiveRecord::Base
 
     ServiceData.services.each do |service|
       next unless send(service).nil? || send(service).blank?
-      # errors.add(service, I18n.t('errors.messages.blank', attribute: I18n.t('activerecord.attributes.service_datum.' + service)))
+      # errors.add(service, I18n.t('errors.messages.blank', attribute: I18n.t("activerecord.attributes.service_datum.#{service}")))
       self.is_valid = false
       return false
     end

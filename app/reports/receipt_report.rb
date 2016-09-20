@@ -40,7 +40,7 @@ class ReceiptReport < FlorianReport
 
   def render_date_place(pdf)
     pdf.move_down 30
-    pdf.text NGO_HQ_CITY + ', ' + I18n.localize(Date.today, format: :long), inline_format: true, align: :center
+    pdf.text "#{NGO_HQ_CITY}, #{I18n.localize(Date.today, format: :long)}", inline_format: true, align: :center
   end
 
   def render_signature(pdf)
@@ -48,6 +48,6 @@ class ReceiptReport < FlorianReport
   end
 
   def bank_line(pdf, tag, value)
-    pdf.text I18n.t('report.other.banking.' + tag) + ': ' + value, inline_format: true
+    pdf.text "#{I18n.t('report.other.banking.' + tag.to_s)}: #{value}", inline_format: true
   end
 end

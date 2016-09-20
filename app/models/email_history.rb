@@ -17,7 +17,7 @@ class EmailHistory < ActiveRecord::Base
 
   # Methods
   def send_type_desc
-    I18n.t('activerecord.attributes.receipt_email.type_values.' + send_type.to_s)
+    I18n.t("activerecord.attributes.receipt_email.type_values.#{send_type}")
   end
 
   def self.recent_emails

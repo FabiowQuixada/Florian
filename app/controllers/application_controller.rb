@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exc|
-    logger.error('Exception catch [' + DateTime.now.strftime('%d/%m/%Y :: %H:%M:%S') + '] ==> ' + exc.message + '\n' + exc.backtrace.join("\n"))
+    logger.error "Exception catch [#{DateTime.now.strftime('%d/%m/%Y :: %H:%M:%S')}] ==> #{exc.message}\n" + exc.backtrace.join("\n")
     redirect_to root_url, alert: t('alert.access_denied')
   end
 
@@ -51,6 +51,6 @@ class ApplicationController < ActionController::Base
   end
 
   def log_error(exc)
-    logger.error('Exception catch [' + DateTime.now.strftime('%d/%m/%Y :: %H:%M:%S') + '] ==> ' + exc.message + '\n' + exc.backtrace.join("\n"))
+    logger.error "Exception catch [#{DateTime.now.strftime('%d/%m/%Y :: %H:%M:%S')}] ==> #{exc.message} \n" + exc.backtrace.join("\n")
   end
 end
