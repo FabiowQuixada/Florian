@@ -4,6 +4,8 @@
  Ruby version: 2.2.2p95 (2015-04-13 revision 50295) [x86_64-linux]
  Rails version: 4.2.7
 
+ Suggested RoR installation guideline: https://gorails.com/setup/ubuntu/14.10
+
 
 ** Extra Directories ******************************************************************************
  - /external/   Configuration files that should be put somewhere outside project directory (see below);
@@ -16,7 +18,7 @@
   - Run Rubocop;
   - Run the tests;
   - If everything went fine, will open a Git window;
-  - Display TODOs and Rubocop disables warnings;
+  - Display number of TODOs and Rubocop disables warnings;
 
 
 ** Deployment Dependencies ************************************************************************
@@ -32,7 +34,6 @@
         Postgres: local   all             all                                     trust
         ('trust' instead of 'peer')
         and then run: sudo service postgresql restart
-   3.3  Change '/home/ubuntu/' on schedule.rb: env :PATH, '/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games'
 
 
  ** Production Server Ascension ***************************************************************************

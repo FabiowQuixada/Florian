@@ -7,11 +7,12 @@ describe 'Whenever Schedule' do
 
   let(:jobs) { Whenever::Test::Schedule.new(file: 'config/schedule.rb').jobs[:runner] }
 
-  it { expect(jobs.count).to eq 2 }
+  it { expect(jobs.count).to eq 3 }
   it { jobs.each { |job| eval job[:task] } } # Executes each job ruby code
 
   describe 'schedules` runtime' do
     it { expect(jobs[0][:every].to_s).to eq '[1 day, {:at=>"7:00 am"}]' }
     it { expect(jobs[1][:every].to_s).to eq '[:sunday, {:at=>"7:00 am"}]' }
+    it { expect(jobs[2][:every].to_s).to eq '[:sunday, {:at=>"7:00 am"}]' }
   end
 end
