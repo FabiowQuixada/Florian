@@ -90,13 +90,6 @@
 			parse_json_errors(xhr.responseText);
 		});
 
-		$('.remove_btn').click(function(ev) {
-
-			id = $(this).closest('.model_row').find('.<%= @model.model_name.param_key %>_id').text();
-			$('#remove_form').get(0).setAttribute('action', '/<%= @model.class.name.pluralize.downcase %>/' + id);
-			$('#remove_modal').modal('show');
-		});
-
 		$('.destroy_btn').on('click', function() {
 
 			id = $(this).closest('.model_row').find('.model_id').html();

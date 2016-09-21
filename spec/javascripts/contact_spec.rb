@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Contact, type: :request do
+describe Contact, js: true, type: :request do
   before :each do
     login_as_admin
     visit edit_company_path Company.first

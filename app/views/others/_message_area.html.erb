@@ -45,13 +45,7 @@
         var result = '';
 
         if (Object.prototype.toString.call(message) === '[object Array]') {
-
-            result += '<ul>';
-
-            for (var i = 0; i < message.length; i++)
-                result += '<li>' + message[i] + '</li>';
-
-            result += '</ul>';
+            result = msg_as_html_ul(message);
         } else {
             result = message;
         }
@@ -70,13 +64,7 @@
             error_box_id = 'global';
 
         if (Object.prototype.toString.call(message) === '[object Array]') {
-
-            result += '<ul>';
-
-            for (var i = 0; i < message.length; i++)
-                result += '<li>' + message[i] + '</li>';
-
-            result += '</ul>';
+            result = msg_as_html_ul(message);
         } else {
             result = message;
         }
@@ -158,6 +146,17 @@
             if (typeof xhr === 'string' || xhr instanceof String)
                 return display_error(xhr);
         }
+    }
+
+    function msg_as_html_ul(message) {
+        result += '<ul>';
+
+        for (var i = 0; i < message.length; i++)
+            result += '<li>' + message + '<\/li>';
+
+        result += '<\/ul>';
+
+        return result;
     }
 
     $(function() {

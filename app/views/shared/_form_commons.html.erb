@@ -145,14 +145,8 @@
 		function display_form_errors(message) {
 			var result = '';
 
-			if (Object.prototype.toString.call(message) === '[object Array]')
-			{
-				result += '<ul>';
-
-				for (var i = 0; i < message.length; i++)
-					result += '<li>' + message[i] + '</li>';
-
-				result += '</ul>';
+			if (Object.prototype.toString.call(message) === '[object Array]') {
+				result = msg_as_html_ul(message);
 			} else {
 				result = message;
 			}

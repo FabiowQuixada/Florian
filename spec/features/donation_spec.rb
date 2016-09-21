@@ -29,5 +29,6 @@ describe Donation, type: :request do
     fill_in 'Data', with: '01/10/2015'
     fill_in 'Valor', with: '1234'
     select(Company.where(group: Company.groups[:Mantenedora]).first.name, from: 'donation_company_id')
+    input_blur
   end
 end

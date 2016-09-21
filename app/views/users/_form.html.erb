@@ -51,19 +51,10 @@
 <script>
 
 	$('#main_form').on('submit', function(evt) {
-
 		preprocess_data();
-
-		if(!validate_tag_fields())
-		{
-			$('#warning_save_modal').modal('show');
-			evt.preventDefault();
-			return;
-		}
 	});
 
-	function preprocess_data()
-	{
+	function preprocess_data() {
 	}
 
 </script>
