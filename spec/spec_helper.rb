@@ -46,7 +46,13 @@ RSpec.configure do |config|
     Warden.test_reset!
   end
 
-  Capybara.default_driver = :selenium
+  require 'capybara/poltergeist'
+  Capybara.default_driver = :poltergeist
+  options = { js_errors: false }
+  Capybara.register_driver :poltergeist do |app|
+    Capybara::Poltergeist::Driver.new(app, options)
+  end
+
   config.include FactoryGirl::Syntax::Methods
   config.include Rails.application.routes.url_helpers
 

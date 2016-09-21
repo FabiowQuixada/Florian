@@ -55,6 +55,7 @@ group :test do
   gem 'blabla', '~> 0.0.2'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'selenium-webdriver'
+  gem 'poltergeist'
   gem 'launchy'
   gem 'whenever-test'
   gem 'html_validation'
