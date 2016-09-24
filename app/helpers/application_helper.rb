@@ -21,6 +21,11 @@ module ApplicationHelper
     klass.new.model_name.human(count: 2)
   end
 
+  def menu(klass, display_name = nil)
+    display_name ||= plural_of(klass)
+    render partial: 'others/menu_item', locals: { klass: klass, display_name: display_name }
+  end
+
   ## Buttons ###################################################
 
   def profile_btn

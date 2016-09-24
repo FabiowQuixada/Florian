@@ -12,20 +12,20 @@
     </div>
     <div class="collapse navbar-collapse" id="main_menu">
         <ul class="nav navbar-nav">
-            <%= render partial: 'others/menu_item', locals: { klass: Company } %>
-            <%= render partial: 'others/menu_item', locals: { klass: Donation } %>
+            <%= menu Company %>
+            <%= menu Donation %>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)"><%= t('menu.emails') %></a>
                 <ul class="dropdown-menu">
-                    <%= render partial: 'others/menu_item', locals: { klass: ReceiptEmail, display_name: t('menu.email.receipt') } %>
-                    <%= render partial: 'others/menu_item', locals: { klass: ProductAndServiceDatum } %>
+                    <%= menu ReceiptEmail, t('menu.email.receipt') %>
+                    <%= menu ProductAndServiceDatum %>
                 </ul>
             </li>
-            <%= render partial: 'others/menu_item', locals: { klass: Bill } %>
+            <%= menu Bill %>
 
             <% if !current_user.nil? && current_user.admin? %>
-                <%= render partial: 'others/menu_item', locals: { klass: User } %>
-                <%= render partial: 'others/menu_item', locals: { klass: Role } %>
+                <%= menu User %>
+                <%= menu Role %>
             <% end %>
             <li class="visible-xs">
                 <%= content_tag :a, "#{current_user.name} (#{t('helpers.action.logout')})", href: edit_user_registration_path %>
