@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
     role.name == GUEST_ROLE
   end
 
-  def alias
+  def to_s
     name
   end
 

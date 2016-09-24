@@ -36,6 +36,10 @@ class SystemSetting < ActiveRecord::Base
     pse_private_recipients_array.split(/,/)
   end
 
+  def to_s
+    user.name
+  end
+
   def pse_processed_title(date = Date.today)
     apply_competence_tag_to user.system_setting.pse_title, date
   end

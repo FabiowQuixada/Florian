@@ -78,6 +78,10 @@ class ProductAndServiceWeek < ActiveRecord::Base
     I18n.t('helpers.from') + " #{start_date} " + I18n.t('helpers.to') + " #{end_date}"
   end
 
+  def to_s
+    title
+  end
+
   private
 
   after_initialize do

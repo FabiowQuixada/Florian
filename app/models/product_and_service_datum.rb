@@ -30,7 +30,7 @@ class ProductAndServiceDatum < ActiveRecord::Base
     self.competence ||= Date.today
   end
 
-  def alias
+  def to_s
     I18n.localize(competence, format: :competence).capitalize
   end
 

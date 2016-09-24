@@ -28,7 +28,7 @@ class ReceiptEmail < ActiveRecord::Base
 
 
   # Methods
-  def alias
+  def to_s
     company.name
   end
 

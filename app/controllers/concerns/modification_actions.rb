@@ -22,6 +22,6 @@ module ModificationActions extend ActiveSupport::Concern
 
                            def before_modification
                              @model = model_class.find(params[:id])
-                             @breadcrumbs = @model.breadcrumb_path.merge Hash[@model.alias => '']
+                             @breadcrumbs = @model.breadcrumb_path.merge Hash[@model => '']
                            end
 end

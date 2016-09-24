@@ -16,7 +16,7 @@ class Bill < ActiveRecord::Base
 
 
   # Methods
-  def alias
+  def to_s
     I18n.localize(competence, format: :competence).capitalize
   end
 

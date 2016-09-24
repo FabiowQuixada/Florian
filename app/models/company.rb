@@ -43,7 +43,7 @@ class Company < ActiveRecord::Base
 
 
   # Methods
-  def alias
+  def to_s
     name
   end
 

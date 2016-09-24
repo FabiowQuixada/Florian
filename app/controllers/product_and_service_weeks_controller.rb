@@ -39,7 +39,7 @@ class ProductAndServiceWeeksController < ApplicationController
   def before_send_emails
     @week = ProductAndServiceWeek.find params[:product_and_service_week][:id]
     @model = @week.product_and_service_datum
-    @breadcrumbs = @model.breadcrumb_path.merge Hash[@model.alias => '']
+    @breadcrumbs = @model.breadcrumb_path.merge Hash[@model => '']
   end
 
   def ok_to_update_and_send?

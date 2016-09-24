@@ -22,7 +22,7 @@ class Donation < ActiveRecord::Base
     self.donation_date ||= Time.now
   end
 
-  def alias
+  def to_s
     "#{company.name} (#{donation_date})"
   end
 

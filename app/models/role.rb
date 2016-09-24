@@ -12,7 +12,7 @@ class Role < ActiveRecord::Base
   validates :name, :description, presence: true
 
   # Methods
-  def alias
+  def to_s
     name
   end
 end
