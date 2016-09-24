@@ -155,21 +155,24 @@
 	<%= hidden_f.text_field :start_date, value: Date.today %>
 	<%= hidden_f.text_field :end_date, value: Date.today %>
 
-	<input type="hidden" name="product_and_service_week[service_data_attributes][0][id]" id="product_and_service_week_service_data_attributes_0_id">
-
-	<input type="hidden" name="product_and_service_week[service_data_attributes][1][id]" id="product_and_service_week_service_data_attributes_1_id">
-
-	<input type="hidden" name="product_and_service_week[product_data_attributes][id]" id="product_and_service_week_product_data_attributes_id">
-
-	<% ProductData.products.each do |name| %>
-		<input type="hidden" name="product_and_service_week[product_data_attributes][<%= name %>]" id="product_and_service_week_product_data_attributes_<%= name %>">
-	<% end %>
-
-	<% ServiceData.services.each do |name| %>
-		<% (0..1).each do |i| %>
-			<input type="hidden" name="product_and_service_week[service_data_attributes][<%= i %>][<%= name %>]" id="product_and_service_week_service_data_attributes_<%= i %>_<%= name %>">
+	<!-- Products -->
+	<%= hidden_f.fields_for :product_data_attributes do |prod_f| %>
+		<%= prod_f.hidden_field :id %>
+		<% ProductData.products.each do |name| %>
+			<%= prod_f.hidden_field name %>
 		<% end %>
 	<% end %>
+
+	<!-- Services -->
+	<% hidden_f.object.service_data.each do |serv| %>
+		<%= hidden_f.fields_for :service_data, serv do |serv_f| %>
+			<%= serv_f.hidden_field :id %>
+			<% ServiceData.services.each do |name| %>
+				<%= serv_f.hidden_field name %>
+			<% end %>
+		<% end %>
+	<% end %>
+
 <% end #hidden_form %>
 
 <%= render 'shared/form_commons' %>

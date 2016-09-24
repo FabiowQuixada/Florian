@@ -4,16 +4,11 @@
 
 	<legend><%= t 'activerecord.models.service_datum.other' %><span class="admin-only"><%= services_ids(week) %></span></legend>
 
-	<input type="hidden" value="<%= week.service_data[0].id %>" name="product_and_service_datum[product_and_service_weeks_attributes][<%= week.index %>][service_data_attributes][0][id]" id="product_and_service_datum_product_and_service_weeks_attributes_<%= week.index %>_service_data_attributes_0_id">
-
-	<input type="hidden" value="<%= week.service_data[1].id %>" name="product_and_service_datum[product_and_service_weeks_attributes][<%= week.index %>][service_data_attributes][1][id]" id="product_and_service_datum_product_and_service_weeks_attributes_<%= week.index %>_service_data_attributes_1_id">
-
-	<% if week.common? %>
-		<!-- Service types -->
-		<input type="hidden" value="attendance" name="product_and_service_datum[product_and_service_weeks_attributes][<%= week.index %>][service_data_attributes][0][service_type]" id="product_and_service_datum_product_and_service_weeks_attributes_<%= week.index %>_service_data_attributes_0_service_type">
-
-		<input type="hidden" value="return" name="product_and_service_datum[product_and_service_weeks_attributes][<%= week.index %>][service_data_attributes][1][service_type]" id="product_and_service_datum_product_and_service_weeks_attributes_<%= week.index %>_service_data_attributes_1_service_type">
-
+	<% week_f.object.service_data.each do |serv| %>
+		<%= week_f.fields_for :service_data, serv do |serv_f| %>
+			<%= serv_f.hidden_field :id %>
+			<%= serv_f.hidden_field :service_type if week.common? %>
+		<% end %>
 	<% end %>
 
 	<table class="input-table">
