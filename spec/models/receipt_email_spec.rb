@@ -11,6 +11,13 @@ describe ReceiptEmail, type: :model do
   it { is_expected.to belong_to :company }
   it { is_expected.to have_many :email_histories }
 
+  it { expect(build(:receipt_email, day_of_month: Date.today.day).competence).to eq I18n.localize(Date.today, format: :competence) }
+
+  it 'saves its competence as day 1 of the month' do
+    receipt = described_class.create
+    expect(receipt.day_of_month).to eq 1
+  end
+
   it { expect(described_class::DAILY_SEND_HOUR).to eq 7 }
   it { expect(described_class::RECENT_EMAILS_DAYS).to eq 7 }
 
@@ -36,14 +43,6 @@ describe ReceiptEmail, type: :model do
   it 'returns PJ text when its company is so' do
     receipt = build(:receipt_email, :pj_company)
     expect(receipt.send(:receipt_text)).to eq receipt.send(:pj_text)
-  end
-
-  context '#competence' do
-    let(:current_month) { I18n.localize(Date.today.change(hour: 0, min: 0, sec: 0), format: :competence) }
-    let(:next_month) { I18n.localize(Date.today + 1.month, format: :competence) }
-
-    it { expect(build(:receipt_email, day_of_month: Date.yesterday.day).competence).to eq next_month }
-    it { expect(build(:receipt_email, day_of_month: Date.tomorrow.day).competence).to eq current_month }
   end
 
   describe 'tags' do

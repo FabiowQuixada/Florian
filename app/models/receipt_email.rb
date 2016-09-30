@@ -6,6 +6,7 @@ class ReceiptEmail < ActiveRecord::Base
   audited
   include ModelHelper
   usar_como_dinheiro :value
+  after_initialize :init
 
 
   # Constants
@@ -50,12 +51,11 @@ class ReceiptEmail < ActiveRecord::Base
 
   def competence(date = nil)
     return I18n.localize(date, format: :competence) unless date.nil?
+    I18n.localize(Date.today, format: :competence)
+  end
 
-    if current_month?
-      I18n.localize(Date.today, format: :competence)
-    else
-      I18n.localize(Date.today.next_month, format: :competence)
-    end
+  def init
+    self.day_of_month = 1
   end
 
   def recipients_as_array
@@ -67,50 +67,7 @@ class ReceiptEmail < ActiveRecord::Base
     Hash[I18n.t('menu.emails') => '', I18n.t('menu.email.receipt') => '']
   end
 
-  # Query methods
-  def self.all_by_delivery_date
-    this_month_emails, next_month_emails = receipts_by_month
-    receipts_by_day this_month_emails, next_month_emails
-  end
-
-  def self.receipts_by_month
-    this_month_emails = []
-    next_month_emails = []
-
-    all.each do |email|
-      if email.current_month?
-        this_month_emails << email
-      else
-        next_month_emails << email
-      end
-    end
-
-    [this_month_emails, next_month_emails]
-  end
-
-  def self.receipts_by_day(this_month_emails, next_month_emails)
-    this_month_emails.sort! { |a, b| a.day_of_month <=> b.day_of_month }
-    next_month_emails.sort! { |a, b| a.day_of_month <=> b.day_of_month }
-
-    next_month_emails = next_month_emails.sort_by do |item|
-      item[:day_of_month]
-    end
-
-    this_month_emails + next_month_emails
-  end
-
-  def current_month?
-    return true if day_of_month > Date.today.strftime('%e').to_f
-    return true if Time.now.hour < DAILY_SEND_HOUR && day_of_month == Date.today.strftime('%e').to_f
-
-    false
-  end
-
-
   private ###############################################################################################################
-
-  private_class_method :receipts_by_month
-  private_class_method :receipts_by_day
 
   def receipt_text
     return pf_text if company.person?

@@ -7,7 +7,7 @@ class ReceiptEmailsController < ApplicationController
   include StatusActions
 
   def index
-    @list = ReceiptEmail.all_by_delivery_date
+    @list = ReceiptEmail.order('id DESC').page(params[:page])
     @recent_emails = EmailHistory.recent_emails
   end
 
@@ -38,7 +38,7 @@ class ReceiptEmailsController < ApplicationController
   private ###########################################################################################
 
   def receipt_email_params
-    params.require(:receipt_email).permit(:id, :body, :value, :day_of_month, :active, :company_id, :recipients_array, :active)
+    params.require(:receipt_email).permit(:id, :body, :value, :active, :company_id, :recipients_array, :active)
   end
 
   def load_email

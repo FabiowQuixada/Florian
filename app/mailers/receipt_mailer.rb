@@ -2,7 +2,7 @@ class ReceiptMailer < ApplicationMailer
 
   def send_email_daily
 
-    emails = ReceiptEmail.where(day_of_month: Date.today.day, active: true)
+    emails = ReceiptEmail.where active: true
 
     emails.each do |email|
       send_automatic_receipt_email(email).deliver_now

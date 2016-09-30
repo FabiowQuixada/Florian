@@ -9,7 +9,6 @@
 		<tr>
 			<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
 				<th class="admin-only id-column"></th>
-				<th class="sorter-false"><%= i18n.t :day %></th>
 				<th class="sorter-false hidden-xs"><%= i18n.t :company %></th>
 				<th class="sorter-false hidden-xs"><%= i18n.t :competence %></th>
 				<th class="sorter-false hidden-xs" style="width: 150px;"><%= i18n.t :value %></th>
@@ -27,7 +26,6 @@
 		<% @list.each do |iterator| %>
 			<tr id="model_<%= iterator.id %>" class="model_row">
 				<td class="model_id admin-only"><%= iterator.id %></td>
-				<td><%= iterator.day_of_month %></td>
 				<td class="hidden-xs receipt_company"><%= iterator.company.name %></td>
 				<td class="hidden-xs"><%= iterator.competence.capitalize %></td>
 				<td class="hidden-xs"><%= number_to_currency(iterator.value) %></td>
