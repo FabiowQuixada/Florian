@@ -1,8 +1,8 @@
-require './lib/modules/locale'
+require './lib/modules/locale_helper'
 
 class ApplicationController < ActionController::Base
 
-  include Locale
+  include LocaleHelper
 
   # 'info' is closeable, while 'waiting_msg' is not
   add_flash_types :info, :waiting_msg

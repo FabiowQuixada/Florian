@@ -1,4 +1,4 @@
-module Locale
+module LocaleHelper
 
   def genderize_tag(model, tag)
     I18n.t(model.genderize(tag), model: t('activerecord.models.' + model.class.model_name.param_key + '.one')).downcase.capitalize

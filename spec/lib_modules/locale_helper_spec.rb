@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe Locale do
-  let(:dummy_class) { Class.new { include Locale } }
+describe LocaleHelper do
+  let(:dummy_class) { Class.new { include LocaleHelper } }
 
   it { expect(dummy_class.new.genderize_full_tag(Donation.new, 'helpers.action.new')). to eq 'Nova' }
   it { expect(dummy_class.new.genderize_full_tag(ReceiptEmail.new, 'helpers.action.new')). to eq 'Novo' }
