@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
-	<%= render 'others/menu' %>
+	<%= render 'others/menu' if mobile_device? %>
 
-	<div id="submenu-line" class="container-fluid padless ">
+	<div id="submenu-line" class="container-fluid padless">
 		<!-- Breadcrumbs -->
 		<div class="row">
 			<div class="col-xs-12 col-md-7 col-lg-7">
@@ -18,7 +18,7 @@
 				</ol>
 			</div>
 			<div class="hidden-xs col-md-1 col-lg-1"></div>
-			<div class="hidden-xs col-md-4 col-lg-4  profile-area">
+			<div class="hidden-xs col-md-4 col-lg-4 profile-area">
 				<div class="right">
 					<%= profile_btn %> 
 					<%= admin_info_btn %> 

@@ -18,13 +18,21 @@
 	</head>
 
 	<body data-no-turbolink="true">
-		<div class="main_box">
-			<%= render 'others/header' %>
-			<%= render 'others/message_area' %>
-			<%= yield -%>
-			<%= render 'others/footer' %>
+
+		<div style="width: 100%; display: table;">
+		    <div style="display: table-row">
+		        <div class="hidden-xs" style="width: 180px; display: table-cell;">
+		        	<%= render 'others/menu' unless mobile_device? %>
+		        </div>
+		        <div class="main_box" style="display: table-cell;">
+		        	<%= render 'others/header' %>
+					<%= render 'others/message_area' %>
+					<%= yield -%>
+					<%= render 'others/footer' %>
+				</div>
+		    </div>
 		</div>
 
 		<%= render 'others/modals' %>
-	</body>
+
 </html>

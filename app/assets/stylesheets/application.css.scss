@@ -50,10 +50,6 @@ html {
 @media screen and (min-width: 720px) {
     body {
         min-height: 100%;
-        position:absolute;
-        left:16%;
-        right:16%;
-        margin:0px auto;
     }
 }
 
@@ -70,10 +66,6 @@ html {
     font-size: 12px;
     height: 27px;
     line-height: 27px;
-}
-
-ul.nav li.dropdown:hover > ul.dropdown-menu {
-    display: block;
 }
 
 /** Buttons *******************************************************************************/
