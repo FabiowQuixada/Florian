@@ -59,7 +59,6 @@ NGO_BANK = 'Itaú (341)'.freeze
 NGO_AGENCY =  (Rails.env == 'showcase' ? '1234' : '8373')
 NGO_ACCOUNT = (Rails.env == 'showcase' ? '12345-6' : '14373-7')
 
-SSETTINGS_PSE_RECIPIENTS = 'exemplo@gmail.com'.freeze
 SSETTINGS_PSE_TITLE_PREFIX = 'Relatório de Produtos e Serviços - '.freeze
 SSETTINGS_PSE_TITLE = SSETTINGS_PSE_TITLE_PREFIX + '#competencia'
 SSETTINGS_PSE_BODY = 'Segue em anexo o relatório de produtos e serviços referente a #competencia.'.freeze

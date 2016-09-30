@@ -7,6 +7,16 @@ FactoryGirl.define do
       company nil
     end
 
+    trait :nameless do
+      name ''
+    end
+
+    trait :phoneless do
+      telephone ''
+      celphone ''
+      fax ''
+    end
+
     trait :no_data do
       name nil
       position nil

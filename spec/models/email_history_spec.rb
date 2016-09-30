@@ -12,10 +12,13 @@ describe EmailHistory, type: :model do
   it { is_expected.to belong_to :user }
   it { is_expected.to belong_to :receipt_email }
 
+  # Methods #################################################################################
+  describe '#send_type_desc' do
+    it { expect((build :email_history, :auto).send_type_desc).to eq 'Automático' }
+    it { expect((build :email_history, :resend).send_type_desc).to eq 'Reenvio' }
+    it { expect((build :email_history, :test).send_type_desc).to eq 'Teste' }
+  end
 
-  it 'send_type_desc' do
-    expect((build :email_history, :auto).send_type_desc).to eq 'Automático'
-    expect((build :email_history, :resend).send_type_desc).to eq 'Reenvio'
-    expect((build :email_history, :test).send_type_desc).to eq 'Teste'
+  describe '.recent_emails' do
   end
 end

@@ -3,13 +3,13 @@ FactoryGirl.define do
     sequence(:name, 1) { |n| "Usuario #{n}" }
     sequence(:signature, 1) { |n| "Usuario #{n}" }
     email { Faker::Internet.email }
-    bcc { Faker::Internet.email }
     password { 'Faker::Internet.password' }
     password_confirmation { 'Faker::Internet.password' }
     role
 
     after(:build) do |user|
       user.system_setting ||= build(:system_setting, user: user)
+      user.bcc = user.email
     end
 
     trait :system do

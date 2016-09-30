@@ -13,6 +13,18 @@ describe ServiceData, type: :model do
 
   it { expect(described_class.number_of_services).to eq 6 }
 
+  # Methods #################################################################################
+  it '#after_initialize' do
+    serv = described_class.new
+    described_class.services.each do |service|
+      expect(serv.send(service.to_s)).to eq 0
+    end
+  end
+
+  describe '.number_of_services' do
+    it { expect(described_class.number_of_services).to eq 6 }
+  end
+
   it '#qty' do
     data = build :service_data
     data.occupational_therapy = 9

@@ -8,13 +8,28 @@ describe SystemSetting, type: :model do
   it { is_expected.to validate_presence_of(:pse_title) }
   it { is_expected.to validate_presence_of(:pse_body) }
 
-
   # Relationships
   it { is_expected.to belong_to :user }
 
-  it { expect(build(:system_setting).model_gender).to eq 'f' }
   it { expect(build(:system_setting, pse_private_recipients_array: nil).private_recipients_as_array).to eq [] }
 
+  describe 'processed texts' do
+    let(:system_setting) { build :system_setting }
+    let(:current_competence) { I18n.localize(Date.today, format: :competence) }
+    let(:current_expected_title) { "Relatório de Produtos e Serviços - #{current_competence.capitalize}" }
+    let(:current_expected_body) { "Segue em anexo o relatório de produtos e serviços referente a #{current_competence.capitalize}." }
+    let(:past_date) { Date.today - 6.months }
+    let(:past_competence) { I18n.localize(past_date, format: :competence) }
+    let(:past_expected_title) { "Relatório de Produtos e Serviços - #{past_competence.capitalize}" }
+    let(:past_expected_body) { "Segue em anexo o relatório de produtos e serviços referente a #{past_competence.capitalize}." }
+
+    it { expect(system_setting.pse_processed_title).to eq current_expected_title }
+    it { expect(system_setting.pse_processed_body).to include current_expected_body }
+    it { expect(system_setting.pse_processed_body).to end_with system_setting.user.full_signature }
+    it { expect(system_setting.pse_processed_title(past_date)).to eq past_expected_title }
+    it { expect(system_setting.pse_processed_body(past_date)).to include past_expected_body }
+    it { expect(system_setting.pse_processed_body(past_date)).to end_with system_setting.user.full_signature }
+  end
 
   describe 'tags' do
     let(:setting) { build(:system_setting) }
@@ -29,5 +44,23 @@ describe SystemSetting, type: :model do
     it { expect(setting.send(:apply_all_tags_to, setting.send(:pse_body))).to include setting.competence(Date.today).capitalize }
     it { expect(setting.send(:apply_all_tags_to, setting.send(:pse_title), date)).to include setting.competence(date).capitalize }
     it { expect(setting.send(:apply_all_tags_to, setting.send(:pse_body), date)).to include setting.competence(date).capitalize }
+  end
+
+
+  # Methods #################################################################################
+  describe '#recipients_as_array' do
+    let(:setting) { build :system_setting }
+    let(:recipientless_setting) { build :system_setting, pse_recipients_array: nil }
+
+    it { expect(setting.recipients_as_array).to eq SAMPLE_RECIPIENTS.split(/,/) }
+    it { expect(recipientless_setting.recipients_as_array).to eq [] }
+  end
+
+  describe '#private_recipients_as_array' do
+    let(:setting) { build :system_setting }
+    let(:private_recipientless_setting) { build :system_setting, pse_private_recipients_array: nil }
+
+    it { expect(setting.private_recipients_as_array).to eq SAMPLE_RECIPIENTS.split(/,/) }
+    it { expect(private_recipientless_setting.private_recipients_as_array).to eq [] }
   end
 end

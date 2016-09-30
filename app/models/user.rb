@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
   def build_default_system_setting
     build_system_setting
 
-    system_setting.pse_recipients_array = SSETTINGS_PSE_RECIPIENTS
+    system_setting.pse_recipients_array = SAMPLE_RECIPIENTS
     system_setting.pse_title = SSETTINGS_PSE_TITLE
     system_setting.pse_body = SSETTINGS_PSE_BODY
     system_setting.re_title = SSETTINGS_RE_TITLE

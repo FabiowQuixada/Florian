@@ -51,7 +51,7 @@ class ProductAndServiceWeek < ActiveRecord::Base
   end
 
   def common?
-    0 <= number && number <= 5
+    0 < number && number <= TOTALS_NUMBER - 1
   end
 
   def totals?
@@ -71,11 +71,11 @@ class ProductAndServiceWeek < ActiveRecord::Base
   end
 
   def title
-    I18n.t('activerecord.models.product_and_service_week.one') + " #{number}"
+    "#{I18n.t('activerecord.models.product_and_service_week.one')} #{number}"
   end
 
   def period
-    I18n.t('helpers.from') + " #{start_date} " + I18n.t('helpers.to') + " #{end_date}"
+    "#{I18n.t('helpers.from')} #{start_date} #{I18n.t('helpers.to')} #{end_date}"
   end
 
   def to_s

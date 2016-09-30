@@ -24,7 +24,6 @@ class ProductData < ActiveRecord::Base
   end
 
   def validate_model
-
     self.is_valid = true
 
     ProductData.products.each do |product|

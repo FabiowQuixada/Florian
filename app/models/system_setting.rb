@@ -23,16 +23,12 @@ class SystemSetting < ActiveRecord::Base
   # Methods
   def recipients_as_array
     return [] if pse_recipients_array.nil? || pse_recipients_array.empty?
-
     pse_recipients_array.split(/,/)
   end
 
 
   def private_recipients_as_array
-    if pse_private_recipients_array.nil? || pse_private_recipients_array.empty?
-      return []
-    end
-
+    return [] if pse_private_recipients_array.nil? || pse_private_recipients_array.empty?
     pse_private_recipients_array.split(/,/)
   end
 

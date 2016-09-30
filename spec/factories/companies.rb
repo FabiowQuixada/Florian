@@ -13,6 +13,12 @@ FactoryGirl.define do
       cnpj nil
     end
 
+    trait :pessoa_juridica do
+      entity_type "Pessoa Jurídica"
+      cnpj { BlaBla::CNPJ.formatado }
+      cpf nil
+    end
+
     trait :pessoa_fisica do
       entity_type "Pessoa Física"
       cpf { BlaBla::CPF.formatado }

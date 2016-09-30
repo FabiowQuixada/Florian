@@ -3,6 +3,12 @@ FactoryGirl.define do
     status ProductAndServiceDatum.statuses[:created]
     competence { Faker::Date.between(100.years.ago.change(day: 1), 100.years.from_now.change(day: 1)) }
 
+    after(:build) do |product_and_service_datum|
+      product_and_service_datum.weeks.each do |week|
+        week.product_and_service_datum ||= product_and_service_datum
+      end
+    end
+
     trait :invalid do
       competence nil
     end

@@ -10,6 +10,7 @@ class Company < ActiveRecord::Base
   attr_accessor :contacts_to_be_deleted
 
 
+  # "Pessoa Juridica" and "Pessoa Fisica" is a Brazil's definition
   enum entity_type: [:"Pessoa Jurídica", :"Pessoa Física"]
   enum category: [:"1 (Abaixo de R$ 300,00)", :"2 (Entre R$ 300,00 e R$ 600,00)", :"3 (Acima de R$ 600,00)"]
   enum group: [:Mantenedora, :Pontual, :Negativa, :Desativada]
@@ -56,23 +57,29 @@ class Company < ActiveRecord::Base
   end
 
   def donation_rejectable?(att)
-    (att['value'].nil? || att['value'] == '0,00') && (att['donation_date'].nil? || !att['donation_date'].is_a?(Date)) && (att['remark'].nil? || att['remark'].blank?)
+    donation = Donation.new(att)
+    donation.company = self
+    !donation.valid?
   end
 
   def update(params)
-    result = update_attributes params
-    destroy_donations params
-    destroy_contacts params
 
-    result
+    destroy_contacts params
+    destroy_donations params
+    update_attributes params
+  rescue
+    raise ActiveRecord::Rollback
+
   end
 
   private
 
+  # Uniqueness doesn't work, for some reason
   def unique_cnpj
     errors.add(:cnpj, I18n.t('errors.company.unique_cnpj')) if cnpj && !cnpj.to_s.empty? && Company.where(cnpj: cnpj).where('id <> ?', id || 0).first
   end
 
+  # Uniqueness doesn't work, for some reason
   def unique_cpf
     errors.add(:cpf, I18n.t('errors.company.unique_cpf')) if cpf && !cpf.to_s.empty? && Company.where(cpf: cpf).where('id <> ?', id || 0).first
   end

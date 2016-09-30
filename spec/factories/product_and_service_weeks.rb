@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :product_and_service_week do
     product_and_service_datum
+    number 3
 
     transient do
       service_data_count 2

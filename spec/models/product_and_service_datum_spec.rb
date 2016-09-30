@@ -20,10 +20,7 @@ describe ProductAndServiceDatum, type: :model do
   it { expect(build(:product_and_service_datum).weeks).to have(7).items }
   it { expect(build(:product_and_service_datum).final_week.number).to eq 7 }
 
-  it 'saves its competence as day 1 of the month' do
-    datum = described_class.create!(competence: Date.new(2001, 2, 3))
-    expect(datum.competence.day).to eq 1
-  end
+  it { expect(described_class.create!(competence: Date.new(2001, 2, 3)).competence.day).to eq 1 }
 
   it 'returns the correct number of services' do
     datum = build :product_and_service_datum
@@ -41,5 +38,49 @@ describe ProductAndServiceDatum, type: :model do
     datum.weeks.each { |week| sum += week.product_qty if week.common? }
 
     expect(datum.product_qty).to eq sum
+  end
+
+  # Methods #################################################################################
+  describe '#can_edit?' do
+    it { expect((build :product_and_service_datum, :created).can_edit?).to be true }
+    it { expect((build :product_and_service_datum, :on_analysis).can_edit?).to be true }
+    it { expect((build :product_and_service_datum, :finalized).can_edit?).to be false }
+  end
+
+  describe '#status_desc' do
+    it { expect((build :product_and_service_datum, :created).status_desc).to eq 'Novo' }
+    it { expect((build :product_and_service_datum, :on_analysis).status_desc).to eq 'Em análise' }
+    it { expect((build :product_and_service_datum, :finalized).status_desc).to eq 'Finalizado' }
+  end
+
+  describe '#final_week' do
+    let(:prod_serv_datum) { build :product_and_service_datum }
+    it { expect(prod_serv_datum.final_week).to be prod_serv_datum.weeks[6] }
+  end
+
+  describe '#validate_model' do
+    let(:datum) { build :product_and_service_datum }
+    let(:extra_week_datum) do
+      datum = build :product_and_service_datum
+      datum.weeks.new
+      datum
+    end
+
+    let(:missing_week_datum) do
+      datum = build :product_and_service_datum
+      datum.weeks.delete datum.weeks.last
+      datum
+    end
+
+    let(:no_week_datum) do
+      datum = build :product_and_service_datum
+      datum.weeks.clear
+      datum
+    end
+
+    it { expect(datum.send(:validate_model)).to be_nil }
+    it { expect(extra_week_datum.send(:validate_model)).to eq ["Número de semanas inválido: 8;"] }
+    it { expect(missing_week_datum.send(:validate_model)).to eq ["Número de semanas inválido: 6;"] }
+    it { expect(no_week_datum.send(:validate_model)).to eq ["Número de semanas inválido: 0;"] }
   end
 end
