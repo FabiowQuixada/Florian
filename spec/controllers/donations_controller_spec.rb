@@ -7,38 +7,9 @@ describe DonationsController, type: :controller do
 
   include_examples 'index request tests'
   include_examples 'new request tests'
+  include_examples 'create request tests', Donation
   include_examples 'edit request tests', Donation
   include_examples 'destroy tests', Donation
-
-  describe 'POST #create' do
-    context 'with valid attributes' do
-      before(:each) do
-        post :create, donation: build(:donation).attributes
-      end
-
-      it 'creates a new donation' do
-        expect { post :create, donation: build(:donation).attributes }.to change { Donation.count }.by(1)
-      end
-
-      it 'redirects to index' do
-        expect(response).to have_http_status(:found)
-        expect(response).to redirect_to donations_path
-      end
-    end
-
-    context 'with invalid attributes' do
-      it 'does not create a new donation' do
-        expect { post :create, donation: attributes_for(:donation, :invalid) }.not_to change { Donation.count }
-      end
-
-      it 're-renders new' do
-        post :create, donation: attributes_for(:donation, :invalid)
-
-        expect(response).to have_http_status(:ok)
-        expect(response).to render_template('_form')
-      end
-    end
-  end
 
   describe 'POST #create_and_new' do
     context 'with valid attributes' do

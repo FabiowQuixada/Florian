@@ -7,36 +7,9 @@ describe ReceiptEmailsController, type: :controller do
 
   include_examples 'index request tests'
   include_examples 'new request tests'
+  include_examples 'create request tests', ReceiptEmail
   include_examples 'edit request tests', ReceiptEmail
   include_examples 'destroy tests', ReceiptEmail
-
-  describe 'POST #create' do
-    context 'with valid attributes' do
-      it 'creates a new receipt_email' do
-        expect { post :create, receipt_email: build(:receipt_email).attributes }.to change { ReceiptEmail.count }.by(1)
-      end
-
-      it 'redirects to index' do
-        post :create, receipt_email: build(:receipt_email).attributes
-
-        expect(response).to have_http_status(:found)
-        expect(response).to redirect_to receipt_emails_path
-      end
-    end
-
-    context 'with invalid attributes' do
-      it 'does not create a new receipt_email' do
-        expect { post :create, receipt_email: attributes_for(:receipt_email, :invalid) }.not_to change { ReceiptEmail.count }
-      end
-
-      it 're-renders new' do
-        post :create, receipt_email: attributes_for(:receipt_email, :invalid)
-
-        expect(response).to have_http_status(:ok)
-        expect(response).to render_template('_form')
-      end
-    end
-  end
 
   describe 'PUT #update' do
     context 'with valid attributes' do
@@ -114,12 +87,17 @@ describe ReceiptEmailsController, type: :controller do
         expect(response.body).to eq(expected)
       end
 
-      #  TODO If FlorianMailer raises an exception
-      # it 'displays a unkown error message' do
-      #   @model = create :receipt_email
-      #   post :resend, id: @model.id, competence: '06/2016', receipt_email: attributes_for(:receipt_email, recipients_array: 'aa@aa.com')
-      #   expect(response.body).to eq(@expected)
-      # end
+      it 'handles invalid competence' do
+        model = create :receipt_email
+        post :resend, id: model.id, competence: '076/2016', receipt_email: attributes_for(:receipt_email, recipients_array: 'aa@aa.com')
+        expect(response.body).to eq(I18n.t('alert.email.invalid_competence'))
+      end
+
+      it 'handles invalid data' do
+        model = create :receipt_email
+        post :resend, id: model.id, competence: '06/2016'
+        expect(response.body).to eq I18n.t('alert.email.error_resending')
+      end
     end
 
     describe 'POST #send_test' do
@@ -163,12 +141,17 @@ describe ReceiptEmailsController, type: :controller do
         end
       end
 
-      #  TODO If FlorianMailer raises an exception
-      # it 'displays a unkown error message' do
-      #   @model = create :receipt_email
-      #   post :resend, id: @model.id, competence: '06/2016', receipt_email: attributes_for(:receipt_email, recipients_array: 'aa@aa.com')
-      #   expect(response.body).to eq(@expected)
-      # end
+      it 'handles invalid competence' do
+        model = create :receipt_email
+        post :send_test, id: model.id, competence: '076/2016', receipt_email: attributes_for(:receipt_email, recipients_array: 'aa@aa.com')
+        expect(response.body).to eq(I18n.t('alert.email.invalid_competence'))
+      end
+
+      it 'handles invalid data' do
+        model = create :receipt_email
+        post :send_test, id: model.id, competence: '06/2016'
+        expect(response.body).to eq I18n.t('alert.email.error_sending_test')
+      end
     end
   end
 end

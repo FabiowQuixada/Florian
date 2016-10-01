@@ -7,28 +7,14 @@ describe BillsController, type: :controller do
 
   include_examples 'index request tests'
   include_examples 'new request tests'
+  include_examples 'create request tests with valid attributes', Bill
   include_examples 'edit request tests', Bill
   include_examples 'destroy tests', Bill
 
 
   describe 'POST #create' do
-    context 'with valid attributes' do
-      it 'creates a new bill' do
-        expect { post :create, bill: attributes_for(:bill) }.to change { Bill.count }.by(1)
-      end
-
-      it 'redirects to index' do
-        post :create, bill: attributes_for(:bill)
-
-        expect(response).to have_http_status(:found)
-        expect(response).to redirect_to bills_path
-      end
-    end
-
     context 'with invalid attributes' do
-      it 'does not create a new bill' do
-        expect { post :create, bill: attributes_for(:bill, :invalid) }.to change { Bill.count }.by(1)
-      end
+      it { expect { post :create, bill: attributes_for(:bill, :invalid) }.to change { Bill.count }.by(1) }
 
       it 're-renders new' do
         post :create, bill: attributes_for(:bill, :invalid)

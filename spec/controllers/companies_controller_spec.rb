@@ -7,34 +7,18 @@ describe CompaniesController, type: :controller do
 
   include_examples 'index request tests'
   include_examples 'new request tests'
+  include_examples 'create request tests with invalid attributes', Company
   include_examples 'edit request tests', Company
   include_examples 'destroy tests', Company
 
-  describe 'POST #create' do
-    context 'with valid attributes' do
-      it 'creates a new company' do
-        expect { post :create, company: attributes_for(:company) }.to change { Company.count }.by(1)
-      end
+  # TODO: should be called by include_examples 'create request tests with valid attributes', but it raises an error
+  describe 'POST #create with valid attributes' do
+    it { expect { post :create, klass => attributes_for(klass) }.to change { model_class.count }.by 1 }
 
-      it 'redirects to index' do
-        post :create, company: attributes_for(:company)
-
-        expect(response).to have_http_status(:found)
-        expect(response).to redirect_to companies_path
-      end
-    end
-
-    context 'with invalid attributes' do
-      it 'does not create a new company' do
-        expect { post :create, company: attributes_for(:company, :invalid) }.not_to change { Company.count }
-      end
-
-      it 're-renders new' do
-        post :create, company: attributes_for(:company, :invalid)
-
-        expect(response).to have_http_status(:ok)
-        expect(response).to render_template '_form'
-      end
+    it 'redirects to index' do
+      post :create, klass => attributes_for(klass)
+      expect(response).to have_http_status :found
+      expect(response).to redirect_to model_index_path
     end
   end
 
