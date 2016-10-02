@@ -7,9 +7,9 @@ describe ReceiptEmailsController, type: :controller do
 
   include_examples 'index request tests'
   include_examples 'new request tests'
-  include_examples 'create request tests', ReceiptEmail
-  include_examples 'edit request tests', ReceiptEmail
-  include_examples 'destroy tests', ReceiptEmail
+  include_examples 'create request tests'
+  include_examples 'edit request tests'
+  include_examples 'destroy tests'
 
   describe 'PUT #update' do
     context 'with valid attributes' do

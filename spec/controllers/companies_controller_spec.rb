@@ -7,9 +7,9 @@ describe CompaniesController, type: :controller do
 
   include_examples 'index request tests'
   include_examples 'new request tests'
-  include_examples 'create request tests with invalid attributes', Company
-  include_examples 'edit request tests', Company
-  include_examples 'destroy tests', Company
+  include_examples 'create request tests with invalid attributes'
+  include_examples 'edit request tests'
+  include_examples 'destroy tests'
 
   # TODO: should be called by include_examples 'create request tests with valid attributes', but it raises an error
   describe 'POST #create with valid attributes' do

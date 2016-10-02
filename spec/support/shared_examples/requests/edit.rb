@@ -1,9 +1,9 @@
-shared_examples 'edit request tests' do |class_name|
+shared_examples 'edit request tests' do
   describe 'GET #edit' do
     render_views
 
     before :each do
-      get :edit, id: class_name.first.id
+      get :edit, id: model_class.first.id
     end
 
     it { expect(response).to have_http_status :ok }

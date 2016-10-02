@@ -7,9 +7,9 @@ describe DonationsController, type: :controller do
 
   include_examples 'index request tests'
   include_examples 'new request tests'
-  include_examples 'create request tests', Donation
-  include_examples 'edit request tests', Donation
-  include_examples 'destroy tests', Donation
+  include_examples 'create request tests'
+  include_examples 'edit request tests'
+  include_examples 'destroy tests'
 
   describe 'POST #create_and_new' do
     context 'with valid attributes' do

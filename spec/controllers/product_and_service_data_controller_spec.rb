@@ -7,9 +7,9 @@ describe ProductAndServiceDataController, type: :controller do
 
   include_examples 'index request tests'
   include_examples 'new request tests'
-  include_examples 'create request tests with valid attributes', ProductAndServiceDatum
-  include_examples 'edit request tests', ProductAndServiceDatum
-  include_examples 'destroy tests', ProductAndServiceDatum
+  include_examples 'create request tests with valid attributes'
+  include_examples 'edit request tests'
+  include_examples 'destroy tests'
 
   it 'creates a new product_and_service_datum' do
     expect { post :create, product_and_service_datum: build(:product_and_service_datum).attributes }.to change { ProductAndServiceDatum.count }.by(1)
