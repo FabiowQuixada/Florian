@@ -9,6 +9,7 @@ describe ProductAndServiceDataController, type: :controller do
   include_examples 'new request tests'
   include_examples 'create request tests with valid attributes'
   include_examples 'edit request tests'
+  include_examples 'update request tests', competence: Date.new(2015, 6, 1)
   include_examples 'destroy tests'
 
   it 'creates a new product_and_service_datum' do
@@ -27,37 +28,9 @@ describe ProductAndServiceDataController, type: :controller do
         post :create, product_and_service_datum: build(:product_and_service_datum, :invalid).attributes
 
         # Special case
-        expect(response).to have_http_status(:found)
+        expect(response).to have_http_status :found
         expect(response).to redirect_to product_and_service_data_path
       end
-    end
-  end
-
-  describe 'PUT #update' do
-    let(:model) { create :product_and_service_datum }
-
-    context 'with valid attributes' do
-      before(:each) do
-        put :update, id: model.id, product_and_service_datum: attributes_for(:product_and_service_datum, competence: Date.new(2015, 6, 12))
-        model.reload
-      end
-
-      it { expect(response).to have_http_status(:found) }
-      it { expect(response).to redirect_to product_and_service_data_path }
-      it { expect(assigns(:product_and_service_datum)).to eq(model) }
-      it { expect(model.competence).to eq(Date.strptime('{ 1, 6, 2015 }', '{ %d, %m, %Y }')) }
-    end
-
-    context 'with invalid attributes' do
-      before(:each) do
-        put :update, id: model.id, product_and_service_datum: attributes_for(:product_and_service_datum, competence: nil)
-        model.reload
-      end
-
-      it { expect(response).to have_http_status(:ok) }
-      it { expect(response).to render_template('_form') }
-      it { expect(assigns(:product_and_service_datum)).to eq(model) }
-      it { expect(model.competence).not_to be_nil }
     end
   end
 end

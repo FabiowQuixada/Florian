@@ -1,4 +1,4 @@
-shared_examples 'create request tests' do 
+shared_examples 'create request tests' do
   include_examples 'create request tests with valid attributes'
   include_examples 'create request tests with invalid attributes'
 end

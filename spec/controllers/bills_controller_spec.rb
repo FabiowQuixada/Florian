@@ -9,8 +9,8 @@ describe BillsController, type: :controller do
   include_examples 'new request tests'
   include_examples 'create request tests with valid attributes'
   include_examples 'edit request tests'
+  include_examples 'update request tests', water: 3.14, energy: 1.14
   include_examples 'destroy tests'
-
 
   describe 'POST #create' do
     context 'with invalid attributes' do
@@ -23,38 +23,6 @@ describe BillsController, type: :controller do
         # This is a special case, which should not be tested -- just for the record
         # expect(response).to redirect_to new_bill_path
       end
-    end
-  end
-
-  describe 'PUT #update' do
-    context 'with valid attributes' do
-      let(:model) { create :bill }
-
-      before(:each) do
-        put :update, id: model.id, bill: attributes_for(:bill, water: 3.14, energy: 1.14)
-        model.reload
-      end
-
-      it { expect(response).to have_http_status(:found) }
-      it { expect(response).to redirect_to bills_path }
-      it { expect(assigns(:bill)).to eq(model) }
-      it { expect(model.water).to eq(ActionController::Base.helpers.number_to_currency(3.14)) }
-      it { expect(model.energy).to eq(ActionController::Base.helpers.number_to_currency(1.14)) }
-    end
-
-    context 'with invalid attributes' do
-      let(:model) { create :bill }
-
-      before(:each) do
-        put :update, id: model.id, bill: attributes_for(:bill, water: nil, energy: nil)
-        model.reload
-      end
-
-      it { expect(response).to have_http_status(:ok) }
-      it { expect(response).to render_template('_form') }
-      it { expect(assigns(:bill)).to eq(model) }
-      it { expect(model.water).not_to eq(ActionController::Base.helpers.number_to_currency(3.14)) }
-      it { expect(model.energy).not_to eq(ActionController::Base.helpers.number_to_currency(1.14)) }
     end
   end
 
