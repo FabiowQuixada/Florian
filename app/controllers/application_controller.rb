@@ -51,6 +51,8 @@ class ApplicationController < ActionController::Base
   end
 
   def log_error(exc)
-    logger.error "Exception catch [#{DateTime.now.strftime('%d/%m/%Y :: %H:%M:%S')}] ==> #{exc.message} \n" + exc.backtrace.join("\n")
+    backtrace = ''
+    backtrace = exc.backtrace.each { |line| logger.error line } unless exc.backtrace.nil?
+    logger.error "Exception catch [#{DateTime.now.strftime('%d/%m/%Y :: %H:%M:%S')}] ==> #{exc.message}\n #{backtrace}"
   end
 end
