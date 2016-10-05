@@ -6,12 +6,6 @@ module ServiceHelper
     else
       text_field_tag "product_and_service_datum[product_and_service_weeks_attributes][#{week.index}][service_data_attributes][#{serv_type}][#{service}]", week.service_data[serv_type].instance_eval(service), class: service_field_classes(week, service, serv_type, row), readonly: fields_readonly?(week)
     end
-
-    # if temp_week(week)
-    #   form.text_field(service, class: service_field_classes(week, service, serv_type, row), readonly: fields_readonly?(week))
-    # else
-    #   form.text_field(service, class: service_field_classes(week, service, serv_type, row), disabled: week.totals?)
-    # end
   end
 
   def service_field_classes(week, service, serv_type, row)
@@ -28,9 +22,5 @@ module ServiceHelper
 
   def services_ids(week)
     " (#{week.service_data[0].id}, #{week.service_data[1].id})"
-  end
-
-  def temp_week(week)
-    week.index != -2
   end
 end

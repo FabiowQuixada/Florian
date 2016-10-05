@@ -51,7 +51,7 @@ Lint/Eval:
     - spec/others/whenever_spec.rb
 
 Metrics/LineLength:
-  Max: 500
+  Max: 1000
 
 Style/EmptyLinesAroundModuleBody:
   Enabled: false
