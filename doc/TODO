@@ -1,46 +1,24 @@
-Graficos e mais graficos;
-Script ambientes paralelos ativos no servidor (uat, showcase);
-Backup servidor;
-AWS: Porta 80;
-
-Showcase: Reinicializacao semanal do BD: p isso precisa parar o servidor;
-
-Mensagem "vc ja ta logado!" -> "bem vindo de volta!"
-Deixa salvar PF sem cpf;
-Auto login e senha do github;
-Testes: Stubs;
-Session do db: destruicao de contatos de entidade quando atualiza a entidade;
-product_and_service_weeks/update_and_send quando da erro no envio de e-mail 
-Gems: Resque, Sidekiq, Ransack, Capistrano, acts_as_tenant, paginacao, (SemaphoreCI)
-Copia de producao pra desenvolvimento;
-bundle exec...
-Status de respostas do servidor;
-Web-kit;
-Teste Whenever;
-Shared examples controllers;
-Formatacao HTML (ERB) - Sublime
-SASS;
+Otimizacao de Testes: Stubs, etc, reorganizacao, e teoria: unitario, integracao, etc;
+Menu lateral;
+AWS: Porta 80 && tirar 'iaq' da url;
+Script para subir a aplicacao;
 
 =====================================================================
 
 Depois:
- - Filtros de doações;
- - Ordenador de colunas: Dinheiro;
+ - Ordenador de colunas: Dinheiro (Ransak?);
  - Voltar pelo browser: history API;
  - Numeros na esquerda: Quando grafico esta vazio;
- - Foco no ano corrente;
-
+   - O valor R$ ,00 (colocar um 0 antes);
+ - Graficos e mais graficos;
+ - Script ambientes paralelos ativos no servidor (uat, showcase);
 
 Interno:
  - Usuário: Novo, Senha no Firefox;
  - Auditoria de produtos e servicos: submodelos;
- - Rubocop - comentarios;
- - Warnings das gems de seguranca;
- - Excluir dois p&ds seguidos;
  - Testes comentados;
- - Separacao dos concerns;
- - Fields da tab de contatos e doacoes: usar rails helpers;
-
+ - TODOs;
+ - bundle exec...
 
 Frescurinha:
  - Smooth scroll no fechamento de alerts;

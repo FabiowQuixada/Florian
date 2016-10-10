@@ -3,6 +3,7 @@ DATABASE:
   rake db:migrate VERSION=0 RAILS_ENV=test && rake db:migrate RAILS_ENV=test && rake db:seed RAILS_ENV=test
   bundle exec rake db:drop db:create db:migrate db:seed RAILS_ENV=production
   bundle exec rake db:rollback STEP=1 && rake db:migrate
+  cd $(dirname $0) && bundle exec whenever -s "environment=production" --update && wheneverize .
 
 
 FLORIAN GENERATOR:
@@ -10,8 +11,9 @@ FLORIAN GENERATOR:
 
 
 PROCESS KILL:
-  ps aux | grep rails
+  ps aux | grep puma
   kill -9 {process_id}
+  kill -9 $(lsof -ti tcp:4000)
 
 
 DONT KNOW, GOTTA REMEBER :x
@@ -20,3 +22,7 @@ DONT KNOW, GOTTA REMEBER :x
 
 OTHERS:
   save_and_open_page
+  sudo -i -u postgres
+  git reset --soft HEAD^
+  git grep "# rubocop:disable" -- './*' ':!/doc/*' ':!/scripts/*'
+  git grep "TODO: " -- './*' ':!/doc/*' ':!/scripts/*'
