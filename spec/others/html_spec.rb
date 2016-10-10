@@ -25,21 +25,21 @@ describe 'HTML', type: :request do
 
     it 'has consistent index html code' do
       MENU_MODELS.each do |model|
-        visit send model.model_name.route_key + '_path'
+        visit send "#{model.model_name.route_key}_path"
         expect(page).to have_valid_html
       end
     end
 
     it 'has consistent new html code' do
       MENU_MODELS.each do |model|
-        visit send 'new_' + model.name.underscore + '_path'
+        visit send "new_#{model.name.underscore}_path"
         expect(page).to have_valid_html
       end
     end
 
     it 'has consistent edit html code' do
       MENU_MODELS.each do |model|
-        visit send 'edit_' + model.name.underscore + '_path', model.first
+        visit send "edit_#{model.name.underscore}_path", model.first
         expect(page).to have_valid_html
       end
     end

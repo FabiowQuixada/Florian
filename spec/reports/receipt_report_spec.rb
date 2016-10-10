@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe ReceiptReport do
   describe 'weekly report' do
-    let(:receipt) { create :receipt_email }
+    let(:receipt) { build :receipt_email }
     let(:date) { Date.yesterday }
     let(:rendered_pdf) { described_class.new('/tmp/prod_serv.pdf', receipt, date).pdf.render }
     let(:text_analysis) { PDF::Inspector::Text.analyze(rendered_pdf) }

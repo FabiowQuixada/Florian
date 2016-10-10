@@ -51,10 +51,10 @@ describe User, type: :model do
     let(:system_setting) { (build :user).system_setting }
 
     it { expect(system_setting.pse_recipients_array).to eq SAMPLE_RECIPIENTS }
-    it { expect(system_setting.pse_title).to eq SSETTINGS_PSE_TITLE }
-    it { expect(system_setting.pse_body).to eq SSETTINGS_PSE_BODY }
-    it { expect(system_setting.re_title).to eq SSETTINGS_RE_TITLE }
-    it { expect(system_setting.re_body).to eq SSETTINGS_RE_BODY }
+    it { expect(system_setting.pse_title).to eq SETTINGS_PSE_TITLE }
+    it { expect(system_setting.pse_body).to eq SETTINGS_PSE_BODY }
+    it { expect(system_setting.re_title).to eq SETTINGS_RE_TITLE }
+    it { expect(system_setting.re_body).to eq SETTINGS_RE_BODY }
   end
 
   describe '#active=' do

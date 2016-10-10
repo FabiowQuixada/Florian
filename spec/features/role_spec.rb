@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Role, type: :request do
-  describe 'as admin' do
+  context 'as admin' do
     before :each do
       login_as_admin
     end
@@ -22,7 +22,7 @@ describe Role, type: :request do
     end
   end
 
-  describe 'as common user' do
+  context 'as common user' do
     before :each do
       login_as_common_user
     end

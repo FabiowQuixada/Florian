@@ -1,4 +1,4 @@
-shared_examples 'an psd e-mail' do
+shared_examples 'a psd e-mail' do
   let(:attachment) { mail.attachments[0] }
 
   it { expect(mail.from).to eq([SYSTEM_EMAIL]) }

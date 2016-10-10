@@ -55,10 +55,10 @@ class User < ActiveRecord::Base
     build_system_setting
 
     system_setting.pse_recipients_array = SAMPLE_RECIPIENTS
-    system_setting.pse_title = SSETTINGS_PSE_TITLE
-    system_setting.pse_body = SSETTINGS_PSE_BODY
-    system_setting.re_title = SSETTINGS_RE_TITLE
-    system_setting.re_body = SSETTINGS_RE_BODY
+    system_setting.pse_title = SETTINGS_PSE_TITLE
+    system_setting.pse_body = SETTINGS_PSE_BODY
+    system_setting.re_title = SETTINGS_RE_TITLE
+    system_setting.re_body = SETTINGS_RE_BODY
 
     system_setting.valid?
   end

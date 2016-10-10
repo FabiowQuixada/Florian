@@ -4,8 +4,8 @@ class ProdServMailer < ApplicationMailer
     attach_report week
 
     mail(to: user.system_setting.pse_private_recipients_array,
-         subject: SSETTINGS_PSE_TITLE_PREFIX + week.period,
-         body: SSETTINGS_PSE_BODY_WEEK.gsub(I18n.t('tags.competence'), week.period) + user.full_signature)
+         subject: SETTINGS_PSE_TITLE_PREFIX + week.period,
+         body: SETTINGS_PSE_BODY_WEEK.gsub(I18n.t('tags.competence'), week.period) + user.full_signature)
   end
 
   def send_to_analysis(week, user)

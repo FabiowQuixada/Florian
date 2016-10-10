@@ -9,10 +9,10 @@ describe ProdServMailer, type: :mailer do
     let(:mail) { described_class.send_weekly_email(week, user).deliver_now }
     let(:competence) { week.product_and_service_datum.competence }
 
-    it_behaves_like 'an psd e-mail'
+    it_behaves_like 'a psd e-mail'
     it { expect(mail.to).to eq(user.system_setting.private_recipients_as_array) }
-    it { expect(mail.subject).to eq(SSETTINGS_PSE_TITLE_PREFIX + period) }
-    it { expect(body_text(mail)).to eq(SSETTINGS_PSE_BODY_WEEK.gsub(I18n.t('tags.competence'), period) + user.full_signature) }
+    it { expect(mail.subject).to eq(SETTINGS_PSE_TITLE_PREFIX + period) }
+    it { expect(body_text(mail)).to eq(SETTINGS_PSE_BODY_WEEK.gsub(I18n.t('tags.competence'), period) + user.full_signature) }
   end
 
 
@@ -20,7 +20,7 @@ describe ProdServMailer, type: :mailer do
     let(:competence) { week.product_and_service_datum.competence }
     let(:mail) { described_class.send_to_analysis(week, user).deliver_now }
 
-    it_behaves_like 'an psd e-mail'
+    it_behaves_like 'a psd e-mail'
     it { expect(mail.to).to eq([ANALYSIS_EMAIL]) }
     it { expect(mail.subject).to eq(user.system_setting.pse_processed_title(competence)) }
     it { expect(body_text(mail)).to eq(user.system_setting.pse_processed_body(competence)) }
@@ -30,7 +30,7 @@ describe ProdServMailer, type: :mailer do
     let(:competence) { week.product_and_service_datum.competence }
     let(:mail) { described_class.send_monthly_email(week, user).deliver_now }
 
-    it_behaves_like 'an psd e-mail'
+    it_behaves_like 'a psd e-mail'
     it { expect(mail.to).to eq(user.system_setting.recipients_as_array) }
     it { expect(mail.subject).to eq(user.system_setting.pse_processed_title(competence)) }
     it { expect(body_text(mail)).to eq(user.system_setting.pse_processed_body(competence)) }
