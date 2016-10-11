@@ -3,19 +3,18 @@ class Company < ActiveRecord::Base
   # Configuration
   audited
   include ModelHelper
+  include CompanyEnumHelper
   usar_como_cnpj :cnpj
   usar_como_cpf :cpf
   after_initialize :default_values
   attr_accessor :donations_to_be_deleted
   attr_accessor :contacts_to_be_deleted
 
-
-  # "Pessoa Juridica" and "Pessoa Fisica" is a Brazil's definition
-  enum entity_type: [:"Pessoa Jurídica", :"Pessoa Física"]
-  enum category: [:"1 (Abaixo de R$ 300,00)", :"2 (Entre R$ 300,00 e R$ 600,00)", :"3 (Acima de R$ 600,00)"]
-  enum group: [:Mantenedora, :Pontual, :Negativa, :Desativada]
-  enum payment_frequency: [:Indeterminado, :"Diário", :Semanal, :Mensal, :Bimestral, :Semestral, :Anual, :"Outro (Observações)"]
-  enum contract: [:"Com contrato", :"Sem contrato", :"Contrato + Aditivo"]
+  enum entity_type: [:company, :person]
+  enum category: [:low, :medium, :high]
+  enum group: [:maintainer, :punctual, :negative, :deactivated]
+  enum payment_frequency: [:undefined, :diary, :weekly, :monthly, :bimonthly, :semiannually, :annually, :other]
+  enum contract: [:with_contract, :no_contract, :contract_and_additive]
 
 
   # Relationships
@@ -46,14 +45,6 @@ class Company < ActiveRecord::Base
   # Methods
   def to_s
     name
-  end
-
-  def person?
-    entity_type == "Pessoa Física"
-  end
-
-  def company?
-    entity_type == "Pessoa Jurídica"
   end
 
   def donation_rejectable?(att)
@@ -87,7 +78,7 @@ class Company < ActiveRecord::Base
   def default_values
     self.city ||= DEFAULT_COMPANY_CITY
     self.state ||= DEFAULT_COMPANY_STATE
-    self.entity_type ||= Company.entity_types[:"Pessoa Jurídica"]
+    self.entity_type ||= 'company'
   end
 
   def destroy_donations(params)

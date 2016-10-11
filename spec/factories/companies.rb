@@ -1,26 +1,26 @@
 FactoryGirl.define do
   factory :company do
-    entity_type "Pessoa Jurídica"
+    entity_type 'company'
     cnpj { BlaBla::CNPJ.formatado }
     sequence(:registration_name, 1) { |n| "Company #{n}" }
     sequence(:name, 1) { |n| "Company #{n} Ltda." }
     address 'Rua X'
-    category '2 (Entre R$ 300,00 e R$ 600,00)'
-    group 'Mantenedora'
+    category :medium
+    group :maintainer
 
     trait :invalid do
       entity_type nil
       cnpj nil
     end
 
-    trait :pessoa_juridica do
-      entity_type "Pessoa Jurídica"
+    trait :company do
+      entity_type 'company'
       cnpj { BlaBla::CNPJ.formatado }
       cpf nil
     end
 
-    trait :pessoa_fisica do
-      entity_type "Pessoa Física"
+    trait :person do
+      entity_type 'person'
       cpf { BlaBla::CPF.formatado }
       cnpj nil
       registration_name nil

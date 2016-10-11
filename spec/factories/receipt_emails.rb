@@ -11,7 +11,7 @@ FactoryGirl.define do
     end
 
     trait :pf_company do
-      company { build(:company, :pessoa_fisica) }
+      company { build(:company, :person) }
     end
 
     trait :pj_company do
@@ -19,12 +19,12 @@ FactoryGirl.define do
     end
 
     trait :with_history do
-      after(:build) do |receipt_email|
+      after :build do |receipt_email|
         receipt_email.email_histories = build_list(:email_history, 3, receipt_email: receipt_email)
       end
     end
 
-    before(:create) do |receipt_email|
+    before :create do |receipt_email|
       receipt_email.company.save
     end
   end

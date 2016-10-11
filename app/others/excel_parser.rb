@@ -63,9 +63,9 @@ class ExcelParser
   def self.parse_basic_info(company, row)
     col = BASIC_INFO_POS
     company.entity_type = if row[col] == 'PF'
-                            Company.entity_types[:"Pessoa Física"]
+                            'person'
                           else
-                            Company.entity_types[:"Pessoa Jurídica"]
+                            'company'
                           end
 
     company.registration_name = row[col += 1]
@@ -92,11 +92,11 @@ class ExcelParser
     cat = 0
 
     if val == 'I'
-      cat = Company.categories[:"1 (Abaixo de R$ 300,00)"]
+      cat = 'low'
     elsif val == 'II'
-      cat = Company.categories[:"2 (Entre R$ 300,00 e R$ 600,00)"]
+      cat = 'medium'
     elsif val == 'III'
-      cat = Company.categories[:"3 (Acima de R$ 600,00)"]
+      cat = 'high'
     end
 
     company.category = cat
@@ -146,19 +146,19 @@ class ExcelParser
   def self.parse_payment_frequency(company, row)
     company.payment_frequency = case row[PAY_FREQ_POS]
                                 when 'Mensal'
-                                  Company.payment_frequencies[:Mensal]
+                                  'monthly'
                                 when 'Diariamente'
-                                  Company.payment_frequencies[:"Diário"]
+                                  'diary'
                                 when 'Bimestral'
-                                  Company.payment_frequencies[:Bimestral]
+                                  'bimonthly'
                                 when 'Semanal'
-                                  Company.payment_frequencies[:Semanal]
+                                  'weekly'
                                 when 'Indeterminado'
-                                  Company.payment_frequencies[:Indeterminado]
+                                  'undefined'
                                 when 'Anual'
-                                  Company.payment_frequencies[:Anual]
+                                  'annually'
                                 when 'Semestral'
-                                  Company.payment_frequencies[:Semestral]
+                                  'semiannually'
                                 end
 
     company
@@ -179,9 +179,9 @@ class ExcelParser
   def self.parse_contract(company, row)
     company.contract = case row[CONTRACT_POS]
                        when 'Contrato'
-                         Company.contracts[:"Com contrato"]
+                         'with_contract'
                        when 'Sem contrato'
-                         Company.contracts[:"Sem contrato"]
+                         'no_contract'
                        end
 
     company

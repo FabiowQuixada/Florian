@@ -14,6 +14,7 @@ module FlorianProject
     Prawn::Font::AFM.hide_m17n_warning = true
 
     config.exceptions_app = routes
+    config.autoload_paths += %W(#{config.root}/lib/modules)
 
     # Avoids insertion of a error message div in the forms, which would break the layout
     config.action_view.field_error_proc = proc { |html_tag, _instance|

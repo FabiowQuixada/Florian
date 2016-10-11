@@ -41,7 +41,7 @@ class Donation < ActiveRecord::Base
   private
 
   def no_value?
-    value.nil? || value == '0,00'
+    value.nil? || value == 0
   end
 
   def no_remark?

@@ -21,7 +21,7 @@ class EmailHistory < ActiveRecord::Base
   end
 
   def send_type_desc
-    I18n.t("activerecord.attributes.receipt_email.type_values.#{send_type}")
+    I18n.t("enums.email_history.send_type.#{send_type}")
   end
 
   def self.recent_emails

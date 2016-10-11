@@ -69,10 +69,6 @@ pt-BR:
         competence: "Competência"
         company: "Mantenedora"
         recipients_array: "Destinatários"
-        type_values:
-          auto: Automático
-          resend: Reenvio
-          test: Teste
       system_setting:
         user: Usuário
         re_title: "Título"
@@ -190,12 +186,43 @@ pt-BR:
       system_setting: s
       user: s
       role: s
-    enums:
-      product_and_service_datum:
-        status:
-          created: Novo
-          on_analysis: Em análise
-          finalized: Finalizado
+  enums:
+    company:
+      entity_type: 
+        company: Pessoa Jurídica
+        person: Pessoa Física
+      category: 
+        low: 1 (Abaixo de R$ 300,00)
+        medium: 2 (Entre R$ 300,00 e R$ 600,00)
+        high: 3 (Acima de R$ 600,00)
+      group: 
+        maintainer: Mantenedora
+        punctual: Pontual
+        negative: Negativa
+        deactivated: Desativada
+      payment_frequency:
+        undefined: Indeterminado
+        diary: Diário
+        weekly: Semanal
+        monthly: Mensal
+        bimonthly: Bimestral
+        semiannually: Semestral
+        annually: Anual
+        other: Outro (Observações)
+      contract_type:
+        with_contract: Com contrato
+        no_contract: Sem contrato
+        contract_and_additive: Contrato + Aditivo
+    email_history:
+      send_type:
+        auto: Automático
+        resend: Reenvio
+        test: Teste
+    product_and_service_datum:
+      status:
+        created: Novo
+        on_analysis: Em análise
+        finalized: Finalizado
   activated:
     m:
       s: "%{model} ativado com sucesso!"

@@ -46,7 +46,7 @@ describe Donation, type: :model do
 
   describe '#no_value?' do
     it { expect((build :donation, value: nil).send(:no_value?)).to be true }
-    it { expect((build :donation, value: '0,00').send(:no_value?)).to be true }
+    it { expect((build :donation, value: 0).send(:no_value?)).to be true }
     it { expect((build :donation, value: 1.14).send(:no_value?)).to be false }
   end
 

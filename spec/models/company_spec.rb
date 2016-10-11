@@ -39,7 +39,7 @@ describe Company, type: :model do
   end
 
   it 'does not save a `Person` without CPF' do
-    company = build :company, :pessoa_fisica
+    company = build :company, :person
     company.cpf = nil
     company.valid?
     expect(company.errors.full_messages).to include "O campo 'CPF' é obrigatório;"
@@ -52,19 +52,19 @@ describe Company, type: :model do
 
     it { expect(company.city).to eq DEFAULT_COMPANY_CITY }
     it { expect(company.state).to eq DEFAULT_COMPANY_STATE }
-    it { expect(company.entity_type).to eq "Pessoa Jurídica" }
+    it { expect(company.entity_type).to eq 'company' }
   end
 
   describe '#person?' do
-    let(:company) { build :company, :pessoa_fisica }
-    it { expect(company.entity_type == "Pessoa Física").to be true }
+    let(:company) { build :company, :person }
+    it { expect(company.entity_type == 'person').to be true }
     it { expect(company.cpf).not_to be nil }
     it { expect(company.cnpj).to be nil }
   end
 
   describe '#company?' do
-    let(:company) { build :company, :pessoa_juridica }
-    it { expect(company.entity_type == "Pessoa Jurídica").to be true }
+    let(:company) { build :company, :company }
+    it { expect(company.entity_type == 'company').to be true }
     it { expect(company.cnpj).not_to be nil }
     it { expect(company.cpf).to be nil }
   end
@@ -115,7 +115,7 @@ describe Company, type: :model do
   end
 
   describe '#unique_cnpj' do
-    let(:persisted_company) { described_class.where(entity_type: "Pessoa Jurídica").first }
+    let(:persisted_company) { described_class.where(entity_type: 'company').first }
     let(:used_cnpj_company) { build :company, cnpj: persisted_company.cnpj }
     let(:new_cnpj_company) { build :company }
 
@@ -124,9 +124,9 @@ describe Company, type: :model do
   end
 
   describe '#unique_cpf' do
-    let(:persisted_company) { described_class.where(entity_type: "Pessoa Física").first }
-    let(:used_cpf_company) { build :company, :pessoa_fisica, cpf: persisted_company.cpf }
-    let(:new_cpf_company) { build :company, :pessoa_fisica }
+    let(:persisted_company) { described_class.where(entity_type: 'person').first }
+    let(:used_cpf_company) { build :company, :person, cpf: persisted_company.cpf }
+    let(:new_cpf_company) { build :company, :person }
 
     it { expect(used_cpf_company.valid?).to be false }
     it { expect(new_cpf_company.valid?).to be true }

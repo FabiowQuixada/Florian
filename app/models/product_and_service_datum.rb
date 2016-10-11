@@ -43,7 +43,7 @@ class ProductAndServiceDatum < ActiveRecord::Base
   end
 
   def status_desc
-    I18n.t("activerecord.enums.product_and_service_datum.status.#{status}")
+    I18n.t("enums.product_and_service_datum.status.#{status}")
   end
 
   def service_qty

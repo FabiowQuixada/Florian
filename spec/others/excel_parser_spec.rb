@@ -28,14 +28,14 @@ describe ExcelParser do
   describe 'parses basic info - PJ' do
     let(:company) { described_class.parse_basic_info Company.new, row }
 
-    it { expect(company.entity_type).to eq "Pessoa Jurídica" }
+    it { expect(company.company?).to be true }
     it { expect(company.name).to eq 'Casa Blanca' }
     it { expect(company.registration_name).to eq 'Casa Blanca Imóveis Ltda.' }
   end
 
   describe 'parses basic info - PF' do
     let(:company) { described_class.parse_basic_info Company.new, row_2 }
-    it { expect(company.entity_type).to eq "Pessoa Física" }
+    it { expect(company.person?).to be true }
   end
 
   describe 'parses CNPJ' do
@@ -45,14 +45,14 @@ describe ExcelParser do
   end
 
   describe 'parses CPF' do
-    let(:company) { described_class.parse_cpf_cnpj Company.new(entity_type: :"Pessoa Física"), row_2 }
+    let(:company) { described_class.parse_cpf_cnpj Company.new(entity_type: 'person'), row_2 }
 
     it { expect(company.cpf.numero).to eq '229.915.813-87' }
   end
 
   it 'parses category' do
     company = described_class.parse_category Company.new, row
-    expect(company.category).to eq '2 (Entre R$ 300,00 e R$ 600,00)'
+    expect(company.category).to eq 'medium'
   end
 
   it 'parses all contacts' do
@@ -73,7 +73,7 @@ describe ExcelParser do
 
   it 'parses payment frequency' do
     company = described_class.parse_payment_frequency Company.new, row
-    expect(company.payment_frequency).to eq 'Mensal'
+    expect(company.payment_frequency).to eq 'monthly'
   end
 
   it 'parses payment period' do
@@ -83,7 +83,7 @@ describe ExcelParser do
 
   it 'parses contract' do
     company = described_class.parse_contract Company.new, row
-    expect(company.contract).to eq 'Sem contrato'
+    expect(company.contract).to eq 'no_contract'
   end
 
   it 'parses first parcel' do
