@@ -78,6 +78,15 @@ describe Company, type: :model do
     it { expect(company.donation_rejectable?(valid_donation.as_json)).to be false }
   end
 
+  describe '#contact_rejectable?' do
+    let(:company) { build :company }
+    let(:valid_contact) { build :contact }
+    let(:invalid_contact) { build :contact, :no_data }
+
+    it { expect(company.contact_rejectable?(invalid_contact.as_json)).to be true }
+    it { expect(company.contact_rejectable?(valid_contact.as_json)).to be false }
+  end
+
   describe '#update' do
     let(:company) { described_class.first }
     let(:donation_params) { { donations_to_be_deleted: company.donations.first.id.to_s } }
@@ -100,17 +109,17 @@ describe Company, type: :model do
     end
 
     it 'does not update the company if there was an error destroying a donation' do
-      # old_address = company.address
+      old_address = company.address
       company.address = "here&there #{rand(1..1000)}"
       expect { company.update(invalid_donation_params) }.to raise_error ActiveRecord::Rollback
-      # expect(company.address).to eq old_address
+      expect(described_class.first.address).to eq old_address
     end
 
     it 'does not update the company if there was an error destroying a contact' do
-      # old_address = company.address
+      old_address = company.address
       company.address = "here&there #{rand(1..1000)}"
       expect { company.update(invalid_contact_params) }.to raise_error ActiveRecord::Rollback
-      # expect(company.address).to eq old_address
+      expect(described_class.first.address).to eq old_address
     end
   end
 

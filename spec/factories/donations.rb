@@ -8,7 +8,7 @@ FactoryGirl.define do
       value nil
     end
 
-    before(:create) do |donation|
+    before :create do |donation|
       donation.company.save
     end
   end

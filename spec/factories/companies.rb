@@ -27,19 +27,19 @@ FactoryGirl.define do
     end
 
     trait :with_donations do
-      after(:build) do |company|
+      after :build do |company|
         company.donations = build_list(:donation, 3, company: company)
       end
     end
 
     trait :with_invalid_donations do
-      after(:build) do |company|
+      after :build do |company|
         company.donations = build_list(:donation, 3, company: company, donation_date: nil)
       end
     end
 
     trait :with_contacts do
-      after(:build) do |company|
+      after :build do |company|
         company.contacts = build_list(:contact, 3, company: company)
       end
     end

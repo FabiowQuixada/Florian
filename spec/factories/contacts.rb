@@ -3,10 +3,6 @@ FactoryGirl.define do
     sequence(:name, 1) { |n| "Contact #{n}" }
     company
 
-    trait :invalid do
-      company nil
-    end
-
     trait :nameless do
       name ''
     end
