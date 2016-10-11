@@ -5,7 +5,7 @@
 	<div class="container-fluid padless">
 		<div class="row">
 			<div class="col-md-5">
-				<%= render partial: 'shared/email_address_table', locals: { f: f, model: @model } %>
+				<%= render 'shared/email_address_table', f: f, model: @model %>
 			</div>
 			<div class="col-md-7">
 
@@ -92,7 +92,7 @@
 		</div>
 	<% end #new_record? %>
 
-	<%= render partial: 'shared/form_status_button', locals: { f: f } %>
+	<%= render 'shared/form_status_button', f: f %>
 	
 	<br/>
 

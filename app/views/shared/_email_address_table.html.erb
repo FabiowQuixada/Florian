@@ -19,7 +19,7 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
 <table id="<%= field_name %>_recipients_table" class="table table-striped table-condensed table-bordered unbreakable-table">
     <tbody>
         <% model.public_send(method_name).each_with_index do |email_address, index| %>
-        <%= render partial: 'shared/email_address', locals: { email_address: email_address, index: index, field_name: field_name } %>
+            <%= render 'shared/email_address', email_address: email_address, index: index, field_name: field_name %>
         <% end %>
     </tbody>
 </table>

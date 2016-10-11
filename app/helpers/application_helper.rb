@@ -21,7 +21,7 @@ module ApplicationHelper
 
   def menu(klass, display_name = nil)
     display_name ||= plural_of(klass)
-    render partial: 'others/menu_item', locals: { klass: klass, display_name: display_name }
+    render 'others/menu_item', klass: klass, display_name: display_name
   end
 
   ## Images #########################################################################

@@ -1,7 +1,7 @@
 
 <%= new_btn @model %>
 
-<%= render partial: 'shared/pagination', locals: { top: true } %>
+<%= render 'shared/pagination', top: true %>
 
 <table id="index_table" class="table table-striped table-hover table-bordered table-condensed tablesorter tablesorter-blue">
 	<thead>
@@ -34,5 +34,5 @@
 	</tbody>
 </table>
 
-<%= render partial: 'shared/pagination', locals: { top: false } %>
+<%= render 'shared/pagination', top: false %>
 <%= render 'shared/index_commons' %>

@@ -9,17 +9,17 @@
 	</ul>
 
 	<div id="main_tab_0" class="general_tab container-fluid tab_body">
-		<%= render partial: 'main_tab_form', locals: { f: f } %>
+		<%= render 'main_tab_form', f: f %>
 	</div>
 
 	<!-- Donations -->
 	<div id="main_tab_1" style="display: none;" class="container-fluid tab_body">
-		<%= render partial: 'donation_tab_form', locals: { f: f } %>
+		<%= render 'donation_tab_form', f: f %>
 	</div>
 
 	<!-- Contacts -->
 	<div id="main_tab_2" style="display: none;" class="container-fluid tab_body">
-		<%= render partial: 'contact_tab_form', locals: { f: f }  %>
+		<%= render 'contact_tab_form', f: f  %>
 	</div>
 
 	<br/>
@@ -31,7 +31,7 @@
 
 <%end%>
 
-<%= render partial: 'shared/tab_commons', locals: { tab_type: 'main', number_of_tabs: 3 } %>
+<%= render 'shared/tab_commons', tab_type: 'main', number_of_tabs: 3 %>
 <%= render 'shared/form_commons' %>
 
 <script>

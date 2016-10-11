@@ -90,8 +90,8 @@
 
   </div>
 
-  <%= render partial: 'shared/tab_commons', locals: { number_of_tabs: NUMBER_OF_BILLS, tab_type: bill[0].to_s } %>
+  <%= render 'shared/tab_commons', number_of_tabs: NUMBER_OF_BILLS, tab_type: bill[0].to_s %>
 
 <% end %>
 
-<%= render partial: 'shared/tab_commons', locals: { number_of_tabs: @graph_data.length, tab_type: 'bill', title: Time.now.year } %>
+<%= render 'shared/tab_commons', number_of_tabs: @graph_data.length, tab_type: 'bill', title: Time.now.year %>

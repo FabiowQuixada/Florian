@@ -91,10 +91,10 @@
 						<!-- Main data -->
 						<div class="row">
 							<div class="col-xs-12 col-md-7">
-								<%= render partial: 'service_data/form', locals: { week_f: week_f } %>
+								<%= render 'service_data/form', week_f: week_f %>
 							</div>
 							<div class="col-xs-12 col-md-5">
-								<%= render partial: 'product_data/form', locals: { week_f: week_f } %>
+								<%= render 'product_data/form', week_f: week_f %>
 							</div>
 						</div>
 
@@ -176,7 +176,7 @@
 <% end #hidden_form %>
 
 <%= render 'shared/form_commons' %>
-<%= render partial: 'shared/tab_commons', locals: { tab_type: 'prod_serv_data', number_of_tabs: 7 } %>
+<%= render 'shared/tab_commons', tab_type: 'prod_serv_data', number_of_tabs: 7 %>
 
 <script>
 

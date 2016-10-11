@@ -93,10 +93,10 @@
 					<div class="container-fluid padless">
 						<div class="row">
 							<div class="col-md-6">
-								<%= render partial: 'shared/email_address_table', locals: {f: settings_form, model: @model.system_setting, field_name: 'pse_recipients_array'} %>
+								<%= render 'shared/email_address_table', f: settings_form, model: @model.system_setting, field_name: 'pse_recipients_array' %>
 							</div>
 							<div class="col-md-6">
-								<%= render partial: 'shared/email_address_table', locals: {f: settings_form, model: @model.system_setting, field_name: 'pse_private_recipients_array', method_name: 'private_recipients_as_array'} %>
+								<%= render 'shared/email_address_table', f: settings_form, model: @model.system_setting, field_name: 'pse_private_recipients_array', method_name: 'private_recipients_as_array' %>
 							</div>
 						</div>
 					</div>
@@ -147,8 +147,8 @@
 
 <% end %>
 
-<%= render partial: 'shared/form_commons', locals: { model: @model.system_setting } %>
-<%= render partial: 'shared/tab_commons', locals: { tab_type: 'main', number_of_tabs: 3 } %>
+<%= render 'shared/form_commons', model: @model.system_setting %>
+<%= render 'shared/tab_commons', tab_type: 'main', number_of_tabs: 3 %>
 
 <script>
 
