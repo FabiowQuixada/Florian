@@ -5,6 +5,15 @@ describe Company, js: true, type: :request do
     login_as_admin
   end
 
+  it 'persists a maintainer with a contact' do
+    visit new_company_path
+    fill_main_fields
+    add_contact
+
+    click_on 'Salvar'
+    expect(page).to have_content 'sucesso'
+  end
+
   it 'persists donation' do
     visit edit_company_path described_class.first.id
     remark = "observacao #{Time.new.usec}"
@@ -25,6 +34,17 @@ describe Company, js: true, type: :request do
 
   # == Helper methods =============================================================
 
+  def fill_main_fields
+    time = Time.new.usec
+    select 'Pessoa Jurídica', from: 'company_entity_type'
+    fill_in 'company_registration_name', with: "Maintainer #{time}"
+    fill_in 'company_cnpj', with: '77.766.361/0001-78'
+    fill_in 'company_name', with: "Maintainer #{time}"
+    fill_in 'company_address', with: "Maintainer address #{time}"
+    select '1 (Abaixo de R$ 300,00)', from: 'company_category'
+    select 'Mantenedora', from: 'company_group'
+  end
+
   def fill_donation_fields(remark)
     fill_in 'new_donation_date', with: "01/10/2015\n"
     fill_in 'new_donation_value', with: '5678'
@@ -35,6 +55,16 @@ describe Company, js: true, type: :request do
     page.find('#main_tab_1_title').click
     fill_donation_fields remark
     page.find('#add_donation_btn').click
+  end
+
+  def fill_contact_fields(name)
+    fill_in 'temp_contact_name', with: name
+  end
+
+  def add_contact(name = "Contato #{Time.new.usec}")
+    page.find('#main_tab_2_title').click
+    fill_contact_fields name
+    page.find('#add_contact_btn').click
   end
 
   def expect_edit_page_to_have_content(remark)

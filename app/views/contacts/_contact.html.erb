@@ -11,15 +11,12 @@
 
     <!-- Server communication data -->
     <td style="display:none;">
-        <% if contact.id && contact.id > 0 %>   
-            <%= contact_hidden_tag(contact, 'id') %>
-        <% end %>
-
-        <%= contact_hidden_tag(contact, 'name') %>
-        <%= contact_hidden_tag(contact, 'position') %>
-        <%= contact_hidden_tag(contact, 'email_address') %>
-        <%= contact_hidden_tag(contact, 'telephone') %>
-        <%= contact_hidden_tag(contact, 'celphone') %>
-        <%= contact_hidden_tag(contact, 'fax') %>
+        <%= contact_hidden_tag contact, 'id' if contact.id && contact.id > 0 %>
+        <%= contact_hidden_tag contact, 'name' %>
+        <%= contact_hidden_tag contact, 'position' %>
+        <%= contact_hidden_tag contact, 'email_address' %>
+        <%= contact_hidden_tag contact, 'telephone' %>
+        <%= contact_hidden_tag contact, 'celphone' %>
+        <%= contact_hidden_tag contact, 'fax' %>
     </td>
 </tr>
