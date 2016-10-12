@@ -25,12 +25,9 @@
 
 	<!-- Server communication data -->
 	<td style="display:none;" colspan="5">
-	    <% if donation.id && donation.id > 0 %>
-	    	<%= donation_hidden_tag(donation, 'id') %>
-	    <% end %>
-
-	    <%= donation_hidden_tag(donation, 'donation_date') %>
-	    <%= donation_hidden_tag(donation, 'value') %>
-	    <%= donation_hidden_tag(donation, 'remark') %>
+    	<%= donation_hidden_tag donation, 'id' if donation.id && donation.id > 0 %>
+	    <%= donation_hidden_tag donation, 'donation_date' %>
+	    <%= donation_hidden_tag donation, 'value' %>
+	    <%= donation_hidden_tag donation, 'remark' %>
 	</td>
 </tr>

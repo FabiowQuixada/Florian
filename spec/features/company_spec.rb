@@ -14,6 +14,15 @@ describe Company, js: true, type: :request do
     expect(page).to have_content 'sucesso'
   end
 
+  it 'persists a maintainer with a donation' do
+    visit new_company_path
+    fill_main_fields
+    add_donation
+
+    click_on 'Salvar'
+    expect(page).to have_content 'sucesso'
+  end
+
   it 'persists donation' do
     visit edit_company_path described_class.first.id
     remark = "observacao #{Time.new.usec}"
@@ -38,7 +47,7 @@ describe Company, js: true, type: :request do
     time = Time.new.usec
     select 'Pessoa Jurídica', from: 'company_entity_type'
     fill_in 'company_registration_name', with: "Maintainer #{time}"
-    fill_in 'company_cnpj', with: '77.766.361/0001-78'
+    fill_in 'company_cnpj', with: BlaBla::CNPJ.formatado
     fill_in 'company_name', with: "Maintainer #{time}"
     fill_in 'company_address', with: "Maintainer address #{time}"
     select '1 (Abaixo de R$ 300,00)', from: 'company_category'
@@ -51,7 +60,7 @@ describe Company, js: true, type: :request do
     fill_in 'new_donation_remark', with: remark
   end
 
-  def add_donation(remark)
+  def add_donation(remark = "Observacao #{Time.new.usec}")
     page.find('#main_tab_1_title').click
     fill_donation_fields remark
     page.find('#add_donation_btn').click

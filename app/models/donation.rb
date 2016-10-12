@@ -13,7 +13,7 @@ class Donation < ActiveRecord::Base
 
   # Validations
   validate :validate_model
-  validates :donation_date, :company, presence: true
+  validates :donation_date, presence: true
 
 
   # Methods
