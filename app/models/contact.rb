@@ -12,9 +12,9 @@ class Contact < ActiveRecord::Base
   # Validations
   validate :validate_model
   validates :company, presence: true
-  validates :telephone, format: { with: PHONE_FORMAT, message: I18n.t('errors.contact.invalid_telephone') }, allow_blank: true
-  validates :celphone, format: { with: CELPHONE_FORMAT, message: I18n.t('errors.contact.invalid_celphone') }, allow_blank: true
-  validates :fax, format: { with: PHONE_FORMAT, message: I18n.t('errors.contact.invalid_fax') }, allow_blank: true
+  validates :telephone, format: { with: PHONE_FORMAT, message: I18n.t('errors.messages.invalid', attribute: I18n.t('activerecord.attributes.contact.telephone')) }, allow_blank: true
+  validates :celphone, format: { with: CELPHONE_FORMAT, message: I18n.t('errors.messages.invalid', attribute: I18n.t('activerecord.attributes.contact.celphone')) }, allow_blank: true
+  validates :fax, format: { with: PHONE_FORMAT, message: I18n.t('errors.messages.invalid', attribute: I18n.t('activerecord.attributes.contact.fax')) }, allow_blank: true
 
 
   private

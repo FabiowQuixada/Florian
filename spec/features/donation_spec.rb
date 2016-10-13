@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe Donation, type: :request do
-  
   before :each do
     login_as_admin
   end

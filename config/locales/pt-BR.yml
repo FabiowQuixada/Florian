@@ -661,13 +661,6 @@ pt-BR:
       one_recipient: "O e-mail deve ter pelo menos um destinatário;"
     contact:
       all_empty: "Preencha pelo menos um dos campos."
-      invalid_telephone: "O campo 'Telefone' é inválido;"
-      invalid_celphone: "O campo 'Celular' é inválido;"
-      invalid_fax: "O campo 'Fax' é inválido;"
-    company:
-      unique_cnpj: "Este CNPJ já está em uso;"
-      unique_cpf: "Este CPF já está em uso;"
-      contacts: "Número de contatos inválido: %{contacts};"
     donation:
       value_or_remark: "Preencha pelo menos um dos seguintes campos: 'Valor' ou 'Observação';"
     system_setting:

@@ -67,12 +67,12 @@ class Company < ActiveRecord::Base
 
   # Uniqueness doesn't work, for some reason
   def unique_cnpj
-    errors.add(:cnpj, I18n.t('errors.company.unique_cnpj')) if cnpj && !cnpj.to_s.empty? && Company.where(cnpj: cnpj).where('id <> ?', id || 0).first
+    errors.add(:cnpj, I18n.t('errors.messages.taken', attribute: I18n.t('activerecord.attributes.company.cnpj'))) if cnpj && !cnpj.to_s.empty? && Company.where(cnpj: cnpj).where('id <> ?', id || 0).first
   end
 
   # Uniqueness doesn't work, for some reason
   def unique_cpf
-    errors.add(:cpf, I18n.t('errors.company.unique_cpf')) if cpf && !cpf.to_s.empty? && Company.where(cpf: cpf).where('id <> ?', id || 0).first
+    errors.add(:cpf, I18n.t('errors.messages.taken', attribute: I18n.t('activerecord.attributes.contact.cpf'))) if cpf && !cpf.to_s.empty? && Company.where(cpf: cpf).where('id <> ?', id || 0).first
   end
 
   def default_values
