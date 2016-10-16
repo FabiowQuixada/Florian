@@ -13,6 +13,7 @@ class BillsController < ApplicationController
 
   def index_sorting_method
     list = Bill.order(:competence).page(params[:page])
+    initialize_year(Date.today.year)
 
     list.each do |bill|
       year = bill.competence.year
