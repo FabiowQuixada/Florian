@@ -75,7 +75,7 @@ class ProductAndServiceWeek < ActiveRecord::Base
   end
 
   def period
-    "#{I18n.t('helpers.from')} #{start_date} #{I18n.t('helpers.to')} #{end_date}"
+    "#{I18n.t('helpers.from')} #{I18n.l start_date} #{I18n.t('helpers.to')} #{I18n.l end_date}"
   end
 
   def to_s

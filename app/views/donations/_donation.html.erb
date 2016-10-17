@@ -2,7 +2,7 @@
 	
 	<!-- Non-extra-small views -->
 	<td class="hidden-xs donation_id admin-only" style="display:none;"><%= donation.id %></td>
-	<td class="hidden-xs donation_date col-xs-6 col-md-3"><%= donation.donation_date %></td>
+	<td class="hidden-xs donation_date col-xs-6 col-md-3"><%= I18n.l donation.donation_date %></td>
 	<td class="hidden-xs donation_value col-xs-6 col-md-3"><%= number_to_currency donation.value %></td>
 	<td class="hidden-xs donation_remark col-xs-12 col-md-6"><%= donation.remark %></td>
 	<td class="hidden-xs icon-column-2"><%= sub_destroy_btn Donation %></td>
@@ -13,7 +13,7 @@
 			<tbody>
 				<tr class="gray-background">
 					<td class="admin-only" style="display:none;"><%= donation.id %></td>
-					<td class="donation_date"><%= donation.donation_date %></td>
+					<td class="donation_date"><%= I18n.l donation.donation_date %></td>
 					<td class="donation_value"><%= number_to_currency donation.value %></td>
 					<td class="icon-column-2"><%= sub_destroy_btn Donation %></td>
 				</tr><tr>
