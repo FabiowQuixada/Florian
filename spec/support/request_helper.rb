@@ -1,4 +1,4 @@
-module HelperUtility
+module RequestHelper
 
   def go_back
     page.find('#form_back_btn').click
@@ -15,5 +15,5 @@ module HelperUtility
 end
 
 RSpec.configure do |config|
-  config.include HelperUtility, type: :request
+  config.include RequestHelper, type: :request
 end
