@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :email_history do
     value 3
-    body SETTINGS_RE_BODY
+    body I18n.t('defaults.report.receipt.email_body')
     send_type EmailHistory.send_types[:auto]
     recipients_array Faker::Internet.email
     user

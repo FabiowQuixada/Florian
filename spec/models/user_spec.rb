@@ -51,10 +51,10 @@ describe User, type: :model do
     let(:system_setting) { (build :user).system_setting }
 
     it { expect(system_setting.pse_recipients_array).to eq SAMPLE_RECIPIENTS }
-    it { expect(system_setting.pse_title).to eq SETTINGS_PSE_TITLE }
-    it { expect(system_setting.pse_body).to eq SETTINGS_PSE_BODY }
-    it { expect(system_setting.re_title).to eq SETTINGS_RE_TITLE }
-    it { expect(system_setting.re_body).to eq SETTINGS_RE_BODY }
+    it { expect(system_setting.pse_title).to eq I18n.t('defaults.report.product_and_service.email_title') }
+    it { expect(system_setting.pse_body).to eq I18n.t('defaults.report.product_and_service.monthly_email_body') }
+    it { expect(system_setting.re_title).to eq I18n.t('defaults.report.receipt.email_title') }
+    it { expect(system_setting.re_body).to eq I18n.t('defaults.report.receipt.email_body') }
   end
 
   describe '#active=' do

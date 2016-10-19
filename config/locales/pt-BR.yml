@@ -304,6 +304,16 @@ pt-BR:
         other: Meses
       second: Segundo
       year: Ano
+  defaults:
+    report:
+      product_and_service:
+        email_title: 'Relatório de Produtos e Serviços - #competencia'
+        email_title_prefix: 'Relatório de Produtos e Serviços - '
+        monthly_email_body: 'Segue em anexo o relatório de produtos e serviços referente a #competencia.'
+        weekly_email_body: 'Segue em anexo o relatório de produtos e serviços referente ao período #competencia.'
+      receipt:
+        email_body: 'Prezados, segue em anexo o recibo de doação da #mantenedora, no valor de #valor referente a #competencia.'
+        email_title: 'Recibo de Doação IAQ #mantenedora - #competencia'
   description:
     email:
       resend: Reenviar e-mail para mantenedoras

@@ -2,10 +2,10 @@ FactoryGirl.define do
   factory :system_setting do
     pse_recipients_array SAMPLE_RECIPIENTS
     pse_private_recipients_array SAMPLE_RECIPIENTS
-    re_title SETTINGS_RE_TITLE
-    re_body SETTINGS_RE_BODY
-    pse_title SETTINGS_PSE_TITLE
-    pse_body SETTINGS_PSE_BODY
+    re_title I18n.t('defaults.report.receipt.email_title')
+    re_body I18n.t('defaults.report.receipt.email_body')
+    pse_title I18n.t('defaults.report.product_and_service.email_title')
+    pse_body I18n.t('defaults.report.product_and_service.monthly_email_body')
     user
 
     trait :invalid do

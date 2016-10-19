@@ -3,7 +3,7 @@ FactoryGirl.define do
     value 3
     day_of_month 3
     maintainer
-    body SETTINGS_RE_BODY
+    body I18n.t('defaults.report.receipt.email_body')
     recipients_array SAMPLE_RECIPIENTS
 
     trait :invalid do

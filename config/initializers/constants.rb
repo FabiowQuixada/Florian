@@ -58,10 +58,3 @@ GUEST_USERS_NUMBERS = [1909, 1224, 2043, 2049, 1166, 1890, 1811, 2462, 2321, 172
 NGO_BANK = 'Itaú (341)'.freeze
 NGO_AGENCY =  (Rails.env == 'showcase' ? '1234' : '8373')
 NGO_ACCOUNT = (Rails.env == 'showcase' ? '12345-6' : '14373-7')
-
-SETTINGS_PSE_TITLE_PREFIX = 'Relatório de Produtos e Serviços - '.freeze
-SETTINGS_PSE_TITLE = SETTINGS_PSE_TITLE_PREFIX + '#competencia'
-SETTINGS_PSE_BODY = 'Segue em anexo o relatório de produtos e serviços referente a #competencia.'.freeze
-SETTINGS_PSE_BODY_WEEK = 'Segue em anexo o relatório de produtos e serviços referente ao período #competencia.'.freeze
-SETTINGS_RE_TITLE = 'Recibo de Doação ' + NGO_NAME + ' #mantenedora - #competencia'.freeze
-SETTINGS_RE_BODY = 'Prezados, segue em anexo o recibo de doação da #mantenedora, no valor de #valor referente a #competencia.'.freeze

@@ -11,8 +11,8 @@ describe ProdServMailer, type: :mailer do
 
     it_behaves_like 'a psd e-mail'
     it { expect(mail.to).to eq(user.system_setting.private_recipients_as_array) }
-    it { expect(mail.subject).to eq(SETTINGS_PSE_TITLE_PREFIX + period) }
-    it { expect(body_text(mail)).to eq(SETTINGS_PSE_BODY_WEEK.gsub(I18n.t('tags.competence'), period) + user.full_signature) }
+    it { expect(mail.subject).to eq(I18n.t('defaults.report.product_and_service.email_title').gsub(I18n.t('tags.competence'), period)) }
+    it { expect(body_text(mail)).to eq(I18n.t('defaults.report.product_and_service.weekly_email_body').gsub(I18n.t('tags.competence'), period) + user.full_signature) }
   end
 
 
