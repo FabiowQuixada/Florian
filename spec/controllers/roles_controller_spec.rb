@@ -5,7 +5,7 @@ describe RolesController, type: :controller do
     let(:sucess_msg) { { message: Role.new.was('destroyed'), success: true }.to_json }
     let(:error_msg) { { message: I18n.t('errors.deletion'), success: false }.to_json }
     let(:non_admin_msg) { { message: I18n.t('errors.unpermitted_action'), success: false }.to_json }
-    let(:dependent_objects) { { message: "Não é possível excluir o registro pois existem users dependentes;", success: false }.to_json }
+    let(:dependent_objects) { { message: I18n.t('errors.messages.restrict_dependent_destroy.many', record: 'users'), success: false }.to_json }
 
     describe 'successfully deletes model as admin' do
       let(:role) { Role.where(name: 'Grupo sem usuario').first }
@@ -29,7 +29,7 @@ describe RolesController, type: :controller do
     end
 
     describe 'cant destroy role with dependent users' do
-      before(:each) do
+      before :each do
         sign_in User.first
       end
 
@@ -49,7 +49,7 @@ describe RolesController, type: :controller do
     end
 
     describe 'does not destroy model as common user' do
-      before(:each) do
+      before :each do
         sign_in User.last
       end
 
@@ -179,7 +179,7 @@ describe RolesController, type: :controller do
 
       it { expect(response).to have_http_status(:found) }
       it { expect(response).to redirect_to root_path }
-      it { expect(flash[:alert]).to eq 'Acesso negado!' }
+      it { expect(flash[:alert]).to eq I18n.t('alert.access_denied') }
     end
 
     context 'tries to GET #new' do
@@ -189,7 +189,7 @@ describe RolesController, type: :controller do
 
       it { expect(response).to have_http_status(:found) }
       it { expect(response).to redirect_to root_path }
-      it { expect(flash[:alert]).to eq 'Acesso negado!' }
+      it { expect(flash[:alert]).to eq I18n.t('alert.access_denied') }
     end
 
     context 'tries to POST #create' do
@@ -199,7 +199,7 @@ describe RolesController, type: :controller do
 
       it { expect(response).to have_http_status(:found) }
       it { expect(response).to redirect_to root_path }
-      it { expect(flash[:alert]).to eq 'Acesso negado!' }
+      it { expect(flash[:alert]).to eq I18n.t('alert.access_denied') }
     end
 
     context 'tries to GET #edit' do
@@ -209,7 +209,7 @@ describe RolesController, type: :controller do
 
       it { expect(response).to have_http_status(:found) }
       it { expect(response).to redirect_to root_path }
-      it { expect(flash[:alert]).to eq 'Acesso negado!' }
+      it { expect(flash[:alert]).to eq I18n.t('alert.access_denied') }
     end
 
     context 'tries to PUT #update' do
@@ -219,7 +219,7 @@ describe RolesController, type: :controller do
 
       it { expect(response).to have_http_status(:found) }
       it { expect(response).to redirect_to root_path }
-      it { expect(flash[:alert]).to eq 'Acesso negado!' }
+      it { expect(flash[:alert]).to eq I18n.t('alert.access_denied') }
     end
   end
 end

@@ -114,7 +114,7 @@ describe UsersController, type: :controller do
 
       it { expect(response).to have_http_status(:found) }
       it { expect(response).to redirect_to root_path }
-      it { expect(flash[:alert]).to eq 'Acesso negado!' }
+      it { expect(flash[:alert]).to eq I18n.t('alert.access_denied') }
     end
 
     context 'tries to GET #new' do
@@ -124,7 +124,7 @@ describe UsersController, type: :controller do
 
       it { expect(response).to have_http_status(:found) }
       it { expect(response).to redirect_to root_path }
-      it { expect(flash[:alert]).to eq 'Acesso negado!' }
+      it { expect(flash[:alert]).to eq I18n.t('alert.access_denied') }
     end
 
     context 'tries to POST #create' do
@@ -134,7 +134,7 @@ describe UsersController, type: :controller do
 
       it { expect(response).to have_http_status(:found) }
       it { expect(response).to redirect_to root_path }
-      it { expect(flash[:alert]).to eq 'Acesso negado!' }
+      it { expect(flash[:alert]).to eq I18n.t('alert.access_denied') }
     end
 
     context 'tries to GET #edit' do
@@ -144,7 +144,7 @@ describe UsersController, type: :controller do
 
       it { expect(response).to have_http_status(:found) }
       it { expect(response).to redirect_to root_path }
-      it { expect(flash[:alert]).to eq 'Acesso negado!' }
+      it { expect(flash[:alert]).to eq I18n.t('alert.access_denied') }
     end
 
     context 'tries to PUT #update' do
@@ -154,7 +154,7 @@ describe UsersController, type: :controller do
 
       it { expect(response).to have_http_status(:found) }
       it { expect(response).to redirect_to root_path }
-      it { expect(flash[:alert]).to eq 'Acesso negado!' }
+      it { expect(flash[:alert]).to eq I18n.t('alert.access_denied') }
     end
   end
 end

@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe ReceiptEmailsController, type: :controller do
+  include LocaleHelper
+
   before :each do
     sign_in User.first
   end
@@ -19,11 +21,11 @@ describe ReceiptEmailsController, type: :controller do
       let(:model) { create :receipt_email }
       let(:expected) do
         {
-          message: 'E-mail de recibo reenviado com sucesso!',
+          message: model.was('resent'),
           date: I18n.localize(Date.today, format: :default_i),
           maintainer: model.maintainer.name,
           value: ActionController::Base.helpers.number_to_currency(model.value),
-          type: 'Reenvio',
+          type: I18n.t('enums.email_history.send_type.resend'),
           user: model.history.last.user.name
         }.to_json
       end
@@ -43,14 +45,14 @@ describe ReceiptEmailsController, type: :controller do
       it 'displays an invalid competence message' do
         post :resend, id: model.id, competence: Date.today, receipt_email: attributes_for(:receipt_email, recipients_array: 'aa@aa.com')
 
-        expect(response.body).to eq('Competência inválida;')
+        expect(response.body).to eq I18n.t('alert.email.invalid_competence')
       end
 
       it 'displays a invalid e-mail error message' do
         post :resend, id: model.id, competence: '06/2016', receipt_email: attributes_for(:receipt_email, recipients_array: nil)
 
         expected = {
-          recipients_array: ['O e-mail deve ter pelo menos um destinatário;']
+          recipients_array: [I18n.t('errors.email.one_recipient')]
         }.to_json
 
         expect(response.body).to eq(expected)
@@ -74,11 +76,11 @@ describe ReceiptEmailsController, type: :controller do
         let(:model) { create :receipt_email, :with_history }
         let(:expected) do
           {
-            message: 'E-mail de recibo de teste enviado com sucesso!',
+            message: model.was('test_sent'),
             date: I18n.localize(Date.today, format: :default_i),
             maintainer: model.maintainer.name,
             value: ActionController::Base.helpers.number_to_currency(model.value),
-            type: 'Teste',
+            type: I18n.t('enums.email_history.send_type.test'),
             user: User.first.name
           }.to_json
         end
@@ -96,14 +98,14 @@ describe ReceiptEmailsController, type: :controller do
         it 'displays an invalid competence message' do
           post :resend, id: model.id, competence: Date.today, receipt_email: attributes_for(:receipt_email, recipients_array: 'aa@aa.com')
 
-          expect(response.body).to eq('Competência inválida;')
+          expect(response.body).to eq I18n.t('alert.email.invalid_competence')
         end
 
         it 'displays a invalid e-mail error message' do
           post :resend, id: model.id, competence: '06/2016', receipt_email: attributes_for(:receipt_email, recipients_array: nil)
 
           expected = {
-            recipients_array: ['O e-mail deve ter pelo menos um destinatário;']
+            recipients_array: [I18n.t('errors.email.one_recipient')]
           }.to_json
 
           expect(response.body).to eq(expected)
