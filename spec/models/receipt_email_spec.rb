@@ -25,9 +25,9 @@ describe ReceiptEmail, type: :model do
     let(:user) { User.first }
     let(:date) { Date.today + 1.month }
     let(:receipt) { described_class.first }
-    let(:expected_title) { "Recibo de Doação IAQ Maintainer 7 Ltda. - " + I18n.localize(date, format: :competence).capitalize }
-    let(:expected_body) { "Prezados, segue em anexo o recibo de doação da Maintainer 7 Ltda., no valor de R$ 3,00 (três reais) referente a " + I18n.localize(date, format: :competence).capitalize + '.' + user.full_signature }
-    let(:expected_receipt_text) { "A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu da Maintainer 7, inscrito sob o CNPJ/MF nº " + receipt.maintainer.cnpj.to_s + ", situada na Rua X, a importância supra de R$ 3,00 (três reais) como doação em " + I18n.localize(date, format: :competence).capitalize + '.' }
+    let(:expected_title) { processed_title(receipt, date) }
+    let(:expected_body) { processed_body(receipt, date, user) }
+    let(:expected_receipt_text) { processed_receipt_text(receipt, date) }
 
     it { expect(receipt.processed_title(user, date)).to eq expected_title }
     it { expect(receipt.processed_body(user, date)).to eq expected_body }
@@ -51,10 +51,27 @@ describe ReceiptEmail, type: :model do
 
     it { expect(receipt.send(:apply_competence_tag_to, receipt.send(:receipt_text), date)).to include receipt.competence(date).capitalize }
     it { expect(receipt.send(:apply_maintainer_tag_to, receipt.send(:receipt_text))).to include receipt.maintainer.registration_name }
-    it { expect(receipt.send(:apply_value_tag_to, receipt.send(:receipt_text))).to include ActionController::Base.helpers.number_to_currency(receipt.value) + ' (' + receipt.value.real.por_extenso + ')' }
+    it { expect(receipt.send(:apply_value_tag_to, receipt.send(:receipt_text))).to include LocaleHandler.full_money_desc(receipt.value) }
 
-    it { expect(receipt.send(:apply_all_tags_to, receipt.send(:receipt_text))).to include receipt.competence(Date.today).capitalize }
-    it { expect(receipt.send(:apply_all_tags_to, receipt.send(:receipt_text))).to include receipt.maintainer.registration_name }
-    it { expect(receipt.send(:apply_all_tags_to, receipt.send(:receipt_text))).to include ActionController::Base.helpers.number_to_currency(receipt.value) + ' (' + receipt.value.real.por_extenso + ')' }
+    it { expect(processed_receipt_text(receipt)).to include receipt.competence(Date.today).capitalize }
+    it { expect(processed_receipt_text(receipt)).to include receipt.maintainer.registration_name }
+    it { expect(processed_receipt_text(receipt)).to include LocaleHandler.full_money_desc(receipt.value) }
+  end
+
+  def processed_title(receipt, date)
+    I18n.t('defaults.report.receipt.email_title')
+        .sub(I18n.t('tags.competence'), I18n.localize(date, format: :competence).capitalize)
+        .sub(I18n.t('tags.maintainer'), receipt.maintainer.name)
+  end
+
+  def processed_body(receipt, date, user)
+    I18n.t('defaults.report.receipt.email_body')
+        .sub(I18n.t('tags.competence'), I18n.localize(date, format: :competence).capitalize)
+        .sub(I18n.t('tags.value'), LocaleHandler.full_money_desc(receipt.value))
+        .sub(I18n.t('tags.maintainer'), receipt.maintainer.name) + user.full_signature
+  end
+
+  def processed_receipt_text(receipt, date = Date.today)
+    receipt.send(:apply_all_tags_to, receipt.send(:receipt_text), date)
   end
 end

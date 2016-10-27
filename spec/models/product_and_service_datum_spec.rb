@@ -48,9 +48,9 @@ describe ProductAndServiceDatum, type: :model do
   end
 
   describe '#status_desc' do
-    it { expect((build :product_and_service_datum, :created).status_desc).to eq 'Novo' }
-    it { expect((build :product_and_service_datum, :on_analysis).status_desc).to eq 'Em análise' }
-    it { expect((build :product_and_service_datum, :finalized).status_desc).to eq 'Finalizado' }
+    it { expect((build :product_and_service_datum, :created).status_desc).to eq I18n.t('enums.product_and_service_datum.status.created') }
+    it { expect((build :product_and_service_datum, :on_analysis).status_desc).to eq I18n.t('enums.product_and_service_datum.status.on_analysis') }
+    it { expect((build :product_and_service_datum, :finalized).status_desc).to eq I18n.t('enums.product_and_service_datum.status.finalized') }
   end
 
   describe '#final_week' do
@@ -79,8 +79,8 @@ describe ProductAndServiceDatum, type: :model do
     end
 
     it { expect(datum.send(:validate_model)).to be_nil }
-    it { expect(extra_week_datum.send(:validate_model)).to eq ["Número de semanas inválido: 8;"] }
-    it { expect(missing_week_datum.send(:validate_model)).to eq ["Número de semanas inválido: 6;"] }
-    it { expect(no_week_datum.send(:validate_model)).to eq ["Número de semanas inválido: 0;"] }
+    it { expect(extra_week_datum.send(:validate_model)).to eq [I18n.t('errors.product_and_service_datum.weeks_qty', weeks: 8)] }
+    it { expect(missing_week_datum.send(:validate_model)).to eq [I18n.t('errors.product_and_service_datum.weeks_qty', weeks: 6)] }
+    it { expect(no_week_datum.send(:validate_model)).to eq [I18n.t('errors.product_and_service_datum.weeks_qty', weeks: 0)] }
   end
 end

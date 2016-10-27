@@ -35,14 +35,14 @@ describe Maintainer, type: :model do
     maintainer = build :maintainer
     maintainer.cnpj = nil
     maintainer.valid?
-    expect(maintainer.errors.full_messages).to include "O campo 'CNPJ' é obrigatório;"
+    expect(maintainer.errors.full_messages).to include I18n.t('errors.messages.blank', attribute: I18n.t('activerecord.attributes.maintainer.cnpj'))
   end
 
   it 'does not save a `person` maintainer without CPF' do
     maintainer = build :maintainer, :person
     maintainer.cpf = nil
     maintainer.valid?
-    expect(maintainer.errors.full_messages).to include "O campo 'CPF' é obrigatório;"
+    expect(maintainer.errors.full_messages).to include I18n.t('errors.messages.blank', attribute: I18n.t('activerecord.attributes.maintainer.cpf'))
   end
 
   # Methods #################################################################################

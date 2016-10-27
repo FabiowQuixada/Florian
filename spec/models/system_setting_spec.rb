@@ -16,12 +16,12 @@ describe SystemSetting, type: :model do
   describe 'processed texts' do
     let(:system_setting) { build :system_setting }
     let(:current_competence) { I18n.localize(Date.today, format: :competence) }
-    let(:current_expected_title) { "Relatório de Produtos e Serviços - #{current_competence.capitalize}" }
-    let(:current_expected_body) { "Segue em anexo o relatório de produtos e serviços referente a #{current_competence.capitalize}." }
+    let(:current_expected_title) { I18n.t('defaults.report.product_and_service.email_title').sub(I18n.t('tags.competence'), current_competence.capitalize) }
+    let(:current_expected_body) { processed_body(current_competence) }
     let(:past_date) { Date.today - 6.months }
     let(:past_competence) { I18n.localize(past_date, format: :competence) }
-    let(:past_expected_title) { "Relatório de Produtos e Serviços - #{past_competence.capitalize}" }
-    let(:past_expected_body) { "Segue em anexo o relatório de produtos e serviços referente a #{past_competence.capitalize}." }
+    let(:past_expected_title) { I18n.t('defaults.report.product_and_service.email_title').sub(I18n.t('tags.competence'), past_competence.capitalize) }
+    let(:past_expected_body) { I18n.t('defaults.report.product_and_service.monthly_email_body').sub(I18n.t('tags.competence'), past_competence.capitalize) }
 
     it { expect(system_setting.pse_processed_title).to eq current_expected_title }
     it { expect(system_setting.pse_processed_body).to include current_expected_body }
@@ -40,10 +40,10 @@ describe SystemSetting, type: :model do
     it { expect(setting.send(:apply_competence_tag_to, setting.send(:pse_title), date)).to include setting.competence(date).capitalize }
     it { expect(setting.send(:apply_competence_tag_to, setting.send(:pse_body), date)).to include setting.competence(date).capitalize }
 
-    it { expect(setting.send(:apply_all_tags_to, setting.send(:pse_title))).to include setting.competence(Date.today).capitalize }
-    it { expect(setting.send(:apply_all_tags_to, setting.send(:pse_body))).to include setting.competence(Date.today).capitalize }
-    it { expect(setting.send(:apply_all_tags_to, setting.send(:pse_title), date)).to include setting.competence(date).capitalize }
-    it { expect(setting.send(:apply_all_tags_to, setting.send(:pse_body), date)).to include setting.competence(date).capitalize }
+    it { expect(apply_all_tags_to(setting, 'title')).to include setting.competence(Date.today).capitalize }
+    it { expect(apply_all_tags_to(setting, 'body')).to include setting.competence(Date.today).capitalize }
+    it { expect(apply_all_tags_to(setting, 'title', date)).to include setting.competence(date).capitalize }
+    it { expect(apply_all_tags_to(setting, 'body', date)).to include setting.competence(date).capitalize }
   end
 
 
@@ -62,5 +62,15 @@ describe SystemSetting, type: :model do
 
     it { expect(setting.private_recipients_as_array).to eq SAMPLE_RECIPIENTS.split(/,/) }
     it { expect(private_recipientless_setting.private_recipients_as_array).to eq [] }
+  end
+
+  # Helper methods ########################################
+
+  def apply_all_tags_to(setting, field, date = Date.today)
+    setting.send(:apply_all_tags_to, setting.send("pse_#{field}"), date)
+  end
+
+  def processed_body(competence)
+    I18n.t('defaults.report.product_and_service.monthly_email_body').sub(I18n.t('tags.competence'), competence.capitalize)
   end
 end

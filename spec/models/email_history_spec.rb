@@ -14,9 +14,9 @@ describe EmailHistory, type: :model do
 
   # Methods #################################################################################
   describe '#send_type_desc' do
-    it { expect((build :email_history, :auto).send_type_desc).to eq 'Automático' }
-    it { expect((build :email_history, :resend).send_type_desc).to eq 'Reenvio' }
-    it { expect((build :email_history, :test).send_type_desc).to eq 'Teste' }
+    it { expect((build :email_history, :auto).send_type_desc).to eq I18n.t('enums.email_history.send_type.auto') }
+    it { expect((build :email_history, :resend).send_type_desc).to eq I18n.t('enums.email_history.send_type.resend') }
+    it { expect((build :email_history, :test).send_type_desc).to eq I18n.t('enums.email_history.send_type.test') }
   end
 
   describe '.recent_emails' do

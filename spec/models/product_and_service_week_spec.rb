@@ -106,7 +106,7 @@ describe ProductAndServiceWeek, type: :model do
   # Methods #################################################################################
 
   describe '#title' do
-    it { expect(build(:product_and_service_week).title).to eq 'Semana 3' }
+    it { expect(build(:product_and_service_week).title).to eq "#{I18n.t('activerecord.models.product_and_service_week.one')} 3" }
   end
 
   describe '#common?' do
