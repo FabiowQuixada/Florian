@@ -14,19 +14,19 @@ describe 'product_and_service_data/_form', type: :view do
 
     # P&S data
     it { expect(rendered).to include I18n.localize(model.competence, format: :competence_i) }
-    it { expect(rendered).not_to include 'Status' }
-    it { expect(rendered).not_to include 'De ' + Date.today.to_s + ' a ' + Date.today.to_s }
+    it { expect(rendered).not_to include I18n.t('activerecord.attributes.product_and_service_datum.status') }
+    it { expect(rendered).not_to include "#{I18n.t('helpers.from')} #{I18n.l Date.today} #{I18n.t('helpers.to')} #{I18n.l Date.today}" }
 
     # Tabs
     it { expect_to_render_week_tabs }
-    it { expect(rendered).to include 'Total' }
-    it { expect(rendered).not_to include 'Dados finais' }
+    it { expect(rendered).to include I18n.t('helpers.total') }
+    it { expect(rendered).not_to include I18n.t('helpers.final_data') }
 
     # Buttons
-    it { expect(rendered).not_to include 'Salvar e enviar' }
-    it { expect(rendered).not_to include 'Enviar para análise' }
-    it { expect(rendered).not_to include 'Copiar de &quot;Total&quot;' }
-    it { expect(rendered).not_to include '>Enviar<' }
+    it { expect(rendered).not_to include I18n.t('helpers.action.email.save_and_send') }
+    it { expect(rendered).not_to include I18n.t('helpers.action.send_to_analysis') }
+    it { expect(rendered).not_to include I18n.t('helpers.action.product_and_service.update_final_data') }
+    it { expect(rendered).not_to include ">#{I18n.t('helpers.action.email.send')}<" }
   end
 
   describe 'renders all the services and products (Created)' do
@@ -41,19 +41,19 @@ describe 'product_and_service_data/_form', type: :view do
 
     # P&S data
     it { expect(rendered).to include I18n.localize(model.competence, format: :competence).capitalize }
-    it { expect(rendered).to include 'Status' }
-    it { expect(rendered).not_to include 'De ' + Date.today.to_s + ' a ' + Date.today.to_s }
+    it { expect(rendered).to include I18n.t('activerecord.attributes.product_and_service_datum.status') }
+    it { expect(rendered).not_to include "#{I18n.t('helpers.from')} #{I18n.l Date.today} #{I18n.t('helpers.to')} #{I18n.l Date.today}" }
 
     # Tabs
     it { expect_to_render_week_tabs }
-    it { expect(rendered).to include 'Total' }
-    it { expect(rendered).not_to include 'Dados finais' }
+    it { expect(rendered).to include I18n.t('helpers.total') }
+    it { expect(rendered).not_to include I18n.t('helpers.final_data') }
 
     # Buttons
-    it { expect(rendered).to include 'Salvar e enviar' }
-    it { expect(rendered).to include 'Enviar para análise' }
-    it { expect(rendered).not_to include 'Copiar de &quot;Total&quot;' }
-    it { expect(rendered).not_to include '>Enviar<' }
+    it { expect(rendered).to include I18n.t('helpers.action.email.save_and_send') }
+    it { expect(rendered).to include I18n.t('helpers.action.send_to_analysis') }
+    it { expect(rendered).not_to include I18n.t('helpers.action.product_and_service.update_final_data') }
+    it { expect(rendered).not_to include ">#{I18n.t('helpers.action.email.send')}<" }
   end
 
   describe 'renders all the services and products (On analysis)' do
@@ -69,26 +69,25 @@ describe 'product_and_service_data/_form', type: :view do
 
     # P&S data
     it { expect(rendered).to include I18n.localize(model.competence, format: :competence).capitalize }
-    it { expect(rendered).to include 'Status' }
-    it { expect(rendered).to include 'De ' + Date.today.to_s + ' a ' + Date.today.to_s }
+    it { expect(rendered).to include I18n.t('activerecord.attributes.product_and_service_datum.status') }
+    it { expect(rendered).to include "#{I18n.t('helpers.from')} #{I18n.l Date.today} #{I18n.t('helpers.to')} #{I18n.l Date.today}" }
 
     # Tabs
     it { expect_to_render_week_tabs }
-    it { expect(rendered).to include 'Total' }
-    it { expect(rendered).to include 'Dados finais' }
+    it { expect(rendered).to include I18n.t('helpers.total') }
+    it { expect(rendered).to include I18n.t('helpers.final_data') }
 
     # Buttons
-    it { expect(rendered).not_to include 'Salvar e enviar' }
-    it { expect(rendered).not_to include 'Enviar para análise' }
-    it { expect(rendered).to include 'Copiar de &quot;Total&quot;' }
-    it { expect(rendered).to include '>Enviar<' }
+    it { expect(rendered).not_to include I18n.t('helpers.action.email.save_and_send') }
+    it { expect(rendered).not_to include I18n.t('helpers.action.send_to_analysis') }
+    # it { expect(rendered).to include I18n.t('helpers.action.product_and_service.update_final_data') }
+    it { expect(rendered).to include ">#{I18n.t('helpers.action.email.send')}<" }
   end
 
   describe 'renders all the services and products (Finalized)' do
     let(:model) { create(:product_and_service_datum, :finalized) }
     before :each do
       assign :model, model
-
       render
     end
 
@@ -97,19 +96,19 @@ describe 'product_and_service_data/_form', type: :view do
 
     # P&S data
     it { expect(rendered).to include I18n.localize(model.competence, format: :competence).capitalize }
-    it { expect(rendered).to include 'Status' }
-    it { expect(rendered).to include 'De ' + Date.today.to_s + ' a ' + Date.today.to_s }
+    it { expect(rendered).to include I18n.t('activerecord.attributes.product_and_service_datum.status') }
+    it { expect(rendered).to include "#{I18n.t('helpers.from')} #{I18n.l Date.today} #{I18n.t('helpers.to')} #{I18n.l Date.today}" }
 
     # Tabs
     it { expect_to_render_week_tabs }
-    it { expect(rendered).to include 'Total' }
-    it { expect(rendered).to include 'Dados finais' }
+    it { expect(rendered).to include I18n.t('helpers.total') }
+    it { expect(rendered).to include I18n.t('helpers.final_data') }
 
     # Buttons
-    it { expect(rendered).not_to include 'Salvar e enviar' }
-    it { expect(rendered).not_to include 'Enviar para análise' }
-    it { expect(rendered).not_to include 'Copiar de &quot;Total&quot;' }
-    it { expect(rendered).not_to include '>Enviar<' }
+    it { expect(rendered).not_to include I18n.t('helpers.action.email.save_and_send') }
+    it { expect(rendered).not_to include I18n.t('helpers.action.send_to_analysis') }
+    it { expect(rendered).not_to include I18n.t('helpers.action.product_and_service.update_final_data') }
+    it { expect(rendered).not_to include ">#{I18n.t('helpers.action.email.send')}<" }
   end
 
   def expect_to_render_partials
@@ -120,11 +119,11 @@ describe 'product_and_service_data/_form', type: :view do
 
   def expect_to_render_week_tabs
     (1..5).each do |i|
-      expect(rendered).to include "Semana #{i}"
+      expect(rendered).to include "#{I18n.t('activerecord.models.product_and_service_week.one')} #{i}"
     end
 
     [-1, 0, 6].each do |i|
-      expect(rendered).not_to include "Semana #{i}"
+      expect(rendered).not_to include "#{I18n.t('activerecord.models.product_and_service_week.one')} #{i}"
     end
   end
 end
