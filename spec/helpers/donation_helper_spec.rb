@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe DonationHelper do
+  include LocaleHelper
+
   let(:model) { build :donation, id: 4 }
 
   describe '#donation_hidden_tag' do
@@ -9,6 +11,6 @@ describe DonationHelper do
   end
 
   describe '#save_and_new_btn' do
-    it { expect(helper.save_and_new_btn(model)).to eq '<a id="create_and_new_btn" class="btn btn-primary resend_btn" href="javascript:void(0)">Salvar e cadastrar nova</a>' }
+    it { expect(helper.save_and_new_btn(model)).to eq "<a id=\"create_and_new_btn\" class=\"btn btn-primary resend_btn\" href=\"javascript:void(0)\">#{genderize_full_tag(Donation.new, 'helpers.action.update_and_new')}</a>" }
   end
 end

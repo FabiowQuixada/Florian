@@ -8,8 +8,8 @@ describe ProductAndServiceDataHelper do
   let(:finalized_week) { build :product_and_service_week, :finalized_datum }
   let(:on_analysis_week) { build :product_and_service_week, :on_analysis_datum }
 
-  it { expect(helper.send_to_analysis_btn).to eq "<a id=\"update_and_send_btn_5\" class=\"btn btn-primary send_btn\" href=\"javascript:void(0)\">Enviar para análise</a>" }
-  it { expect(helper.send_mainteiners_btn).to eq '<a id="update_and_send_btn_6" class="btn btn-primary send_btn" href="javascript:void(0)">Enviar</a>' }
+  it { expect(helper.send_to_analysis_btn).to eq "<a id=\"update_and_send_btn_5\" class=\"btn btn-primary send_btn\" href=\"javascript:void(0)\">#{I18n.t('helpers.action.send_to_analysis')}</a>" }
+  it { expect(helper.send_mainteiners_btn).to eq "<a id=\"update_and_send_btn_6\" class=\"btn btn-primary send_btn\" href=\"javascript:void(0)\">#{I18n.t('helpers.action.email.send')}</a>" }
 
 
   describe '#fields_readonly?' do
