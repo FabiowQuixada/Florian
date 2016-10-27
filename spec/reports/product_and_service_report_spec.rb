@@ -13,9 +13,9 @@ describe ProductAndServiceReport do
     it { validates_services_footer_row }
     it { validates_products }
 
-    it { expect(text_analysis.strings[-3]).to eq('Rua Visconde de Sabóia, nº 75 – Salas 01 a 16 - Centro – Cep: 60.030-090 - Fortaleza – CE') }
-    it { expect(text_analysis.strings[-2]).to eq('Fone: 55 85 3251-1093') }
-    it { expect(text_analysis.strings[-1]).to eq('E-mail: apoioaoqueimado@yahoo.com.br') }
+    it { expect(text_analysis.strings[-3]).to eq I18n.t('report.footer.address') }
+    it { expect(text_analysis.strings[-2]).to eq I18n.t('report.footer.phone') }
+    it { expect(text_analysis.strings[-1]).to eq I18n.t('report.footer.email') }
 
     it { expect(page_analysis.pages.size).to eq(1) }
   end
@@ -33,9 +33,9 @@ describe ProductAndServiceReport do
     it { expect(text_analysis.strings[0]).to eq(I18n.t('report.title.monthly_prod_and_service')) }
     it { expect(text_analysis.strings[1]).to eq(I18n.localize(week.product_and_service_datum.competence, format: :competence).capitalize) }
 
-    it { expect(text_analysis.strings[-3]).to eq('Rua Visconde de Sabóia, nº 75 – Salas 01 a 16 - Centro – Cep: 60.030-090 - Fortaleza – CE') }
-    it { expect(text_analysis.strings[-2]).to eq('Fone: 55 85 3251-1093') }
-    it { expect(text_analysis.strings[-1]).to eq('E-mail: apoioaoqueimado@yahoo.com.br') }
+    it { expect(text_analysis.strings[-3]).to eq I18n.t('report.footer.address') }
+    it { expect(text_analysis.strings[-2]).to eq I18n.t('report.footer.phone') }
+    it { expect(text_analysis.strings[-1]).to eq I18n.t('report.footer.email') }
 
     it { expect(page_analysis.pages.size).to eq(1) }
   end

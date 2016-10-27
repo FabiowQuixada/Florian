@@ -11,7 +11,7 @@ class FlorianReport < Prawn::Document
 
     # Title and subtitle box
     two_dimensional_array = pdf.make_table [[title], [subtitle]] do
-      style(row(0), size: 18, padding_top: 8)
+      style(row(0), size: 18, padding_top: 8, width: 350)
       style(row(1), size: 14, padding_top: -5)
       cells.borders = []
     end
