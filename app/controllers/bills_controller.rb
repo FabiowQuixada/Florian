@@ -12,18 +12,20 @@ class BillsController < ApplicationController
   end
 
   def index_sorting_method
-    list = Bill.order('competence DESC').page(params[:page])
+    list = Bill.order('competence DESC')
     initialize_year(Date.today.year)
 
-    list.each do |bill|
-      year = bill.competence.year
-      month = bill.competence.month
+    list.each { |bill| prepare_graph_data bill }
 
-      initialize_year year
-      populate_month bill, month, year
-    end
+    list.page(params[:page])
+  end
 
-    list
+  def prepare_graph_data(bill)
+    year = bill.competence.year
+    month = bill.competence.month
+
+    initialize_year year
+    populate_month bill, month, year
   end
 
   def initialize_year(year)
