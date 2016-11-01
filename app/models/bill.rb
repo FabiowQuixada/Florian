@@ -3,9 +3,6 @@ class Bill < ActiveRecord::Base
   # Configuration
   audited
   include ModelHelper
-  usar_como_dinheiro :water
-  usar_como_dinheiro :energy
-  usar_como_dinheiro :telephone
   after_initialize :default_values
 
 
@@ -14,8 +11,19 @@ class Bill < ActiveRecord::Base
   validates :water, :energy, :telephone, numericality: { greater_than_or_equal_to: 0 }, presence: true
   validate :validate_model
 
-
   # Methods
+  def water=(val)
+    monetize :water, val
+  end
+
+  def energy=(val)
+    monetize :energy, val
+  end
+
+  def telephone=(val)
+    monetize :telephone, val
+  end
+
   def to_s
     I18n.localize(competence, format: :competence).capitalize
   end

@@ -1,7 +1,7 @@
 class EmailHistory < ActiveRecord::Base
 
   # Configuration
-  usar_como_dinheiro :value
+  include ModelHelper
   enum send_type: [:auto, :resend, :test]
 
 
@@ -16,6 +16,10 @@ class EmailHistory < ActiveRecord::Base
 
 
   # Methods
+  def value=(val)
+    monetize :value, val
+  end
+
   def send_type_desc
     I18n.t("activerecord.attributes.receipt_email.type_values.#{send_type}")
   end

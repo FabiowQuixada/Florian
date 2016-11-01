@@ -26,4 +26,12 @@ module ModelHelper
     attribute = I18n.t("activerecord.attributes.#{self.class.name.underscore}.#{field}")
     I18n.t('errors.messages.blank', attribute: attribute)
   end
+
+  def monetize(att, val)
+    self[att] = if val.nil?
+                  nil
+                else
+                  val.to_s.scan(/\b-?[\d.]+/).join.to_f
+                end
+  end
 end

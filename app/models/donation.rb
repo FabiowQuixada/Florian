@@ -5,7 +5,6 @@ class Donation < ActiveRecord::Base
   include ModelHelper
   after_initialize :init
   before_save :default_values
-  usar_como_dinheiro :value
 
 
   # Relationships
@@ -20,6 +19,10 @@ class Donation < ActiveRecord::Base
   # Methods
   def init
     self.donation_date ||= Time.now
+  end
+
+  def value=(val)
+    monetize :value, val
   end
 
   def to_s

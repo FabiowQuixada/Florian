@@ -25,9 +25,9 @@
 			<tr id="model_<%= iterator.id %>" class="model_row">
 				<td class="model_id admin-only"><%= iterator.id %></td>
 				<td><%=	I18n.localize(iterator.competence, format: :competence).capitalize %></td>
-				<td><%=	number_to_currency(iterator.water) %></td>
-				<td><%=	number_to_currency(iterator.energy) %></td>
-				<td><%=	number_to_currency(iterator.telephone) %></td>
+				<td><%=	number_to_currency iterator.water %></td>
+				<td><%=	number_to_currency iterator.energy %></td>
+				<td><%=	number_to_currency iterator.telephone %></td>
 				<td class="icon-column"><%= edit_btn iterator %></td>
 				<td class="admin-only icon-column"><%= destroy_btn %></td>
 			</tr>

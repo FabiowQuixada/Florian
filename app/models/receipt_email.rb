@@ -1,11 +1,8 @@
-require 'date'
-
 class ReceiptEmail < ActiveRecord::Base
 
   # Configuration
   audited
   include ModelHelper
-  usar_como_dinheiro :value
   after_initialize :init
 
 
@@ -29,6 +26,10 @@ class ReceiptEmail < ActiveRecord::Base
 
 
   # Methods
+  def value=(val)
+    monetize :value, val
+  end
+
   def to_s
     company.name
   end
@@ -91,7 +92,7 @@ class ReceiptEmail < ActiveRecord::Base
   end
 
   def apply_value_tag_to(text)
-    text.gsub(I18n.t('tags.value'), "#{ActionController::Base.helpers.number_to_currency(value)} (#{value.real.por_extenso})")
+    text.gsub(I18n.t('tags.value'), LocaleHandler.full_money_desc(value))
   end
 
   def apply_all_tags_to(text, date = Date.today)

@@ -42,7 +42,7 @@
 							</div>
 							<div class="form-group col-md-3">
 								<div class="input-group">
-									<span class="input-group-addon">R$</span>
+									<span class="input-group-addon"><%= currency %></span>
 									<%= text_field_tag :value, '', id: 'new_donation_value', class: 'form-control money temp_field' %>
 								</div>
 							</div>
@@ -156,7 +156,7 @@
 			errors.push('<%= I18n.t('errors.donation.date_mandatory') %>');
 		}
 
-		if((!$('#new_donation_value').val() || $('#new_donation_value').val() == '0,00') && !$('#new_donation_remark').val()) {
+		if((!$('#new_donation_value').val() || $('#new_donation_value').val() == '<%= number_to_currency 0, format: "%n" %>') && !$('#new_donation_remark').val()) {
 			errors.push('<%= I18n.t('errors.donation.value_or_remark') %>');
 		}
 
@@ -169,7 +169,7 @@
 
 	function clean_donation_fields() {
 		$('#new_donation_date').val('');
-		$('#new_donation_value').val('0,00');
+		$('#new_donation_value').val('<%= number_to_currency 0, format: "%n" %>');
 		$('#new_donation_remark').val('');
 
 		hide_errors_from_box('donation');
@@ -194,7 +194,7 @@
 				transient_donations += 1;
 
 				date = $('#new_donation_date').val();
-				value = 'R$ ' + $('#new_donation_value').val();
+				value = $('#new_donation_value').val();
 				remark = $('#new_donation_remark').val();
 
 				$.ajax({

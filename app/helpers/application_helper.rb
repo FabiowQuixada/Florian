@@ -56,6 +56,10 @@ module ApplicationHelper
     end
   end
 
+  def currency
+    t('number.currency.format.unit') + ' '
+  end
+
 
   private ############################################################################################
 
