@@ -19,7 +19,7 @@ describe BillsController, type: :controller do
       it 're-renders new' do
         post :create, bill: attributes_for(:bill, :invalid)
 
-        expect(response).to have_http_status(:found)
+        expect(response).to have_http_status :found
         # This is a special case, which should not be tested -- just for the record
         # expect(response).to redirect_to new_bill_path
       end
@@ -36,9 +36,6 @@ describe BillsController, type: :controller do
       let(:zeroed_year) do
         expected = {}
         expected[year] = []
-        (0..11).each do |month|
-          expected[year][month] ||= ['0,00', '0,00', '0,00']
-        end
 
         expected
       end

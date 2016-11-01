@@ -27,7 +27,9 @@
           <% if month_data %>
             <% month[bill] = "['#{(I18n.t :abbr_month_names, scope: :date)[i+1]}', #{month_data[bill]}]" %>
 
-          months_array<%= bill %>.push(<%= month[bill].html_safe %>);
+            months_array<%= bill %>.push(<%= month[bill].html_safe %>);
+
+          <% end %>
 
           <% end # each bill %>
 

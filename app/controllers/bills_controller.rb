@@ -12,7 +12,7 @@ class BillsController < ApplicationController
   end
 
   def index_sorting_method
-    list = Bill.order(:competence).page(params[:page])
+    list = Bill.order('competence DESC').page(params[:page])
     initialize_year(Date.today.year)
 
     list.each do |bill|
@@ -30,10 +30,6 @@ class BillsController < ApplicationController
     @graph_data ||= {}
     return unless @graph_data[year].nil?
     @graph_data[year] = []
-
-    (0..11).each do |month|
-      @graph_data[year][month] ||= ['0,00', '0,00', '0,00']
-    end
   end
 
   def populate_month(bill, month, year)
