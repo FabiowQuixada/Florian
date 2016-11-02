@@ -27,7 +27,6 @@ gem 'jbuilder', '~> 2.0'
 gem 'modularity', '~> 2.0', '>= 2.0.1'
 gem 'kaminari'
 
-
 group :development, :showcase do
   gem 'letter_opener'
 end

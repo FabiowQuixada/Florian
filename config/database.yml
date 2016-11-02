@@ -4,7 +4,6 @@ default: &default
   password: poseidon0123
   adapter: postgresql
   pool: 5
-  host: localhost
   timeout: 5000
   port: 5432
 

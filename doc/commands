@@ -26,3 +26,4 @@ OTHERS:
   git reset --soft HEAD^
   git grep "# rubocop:disable" -- './*' ':!/doc/*' ':!/scripts/*'
   git grep "TODO: " -- './*' ':!/doc/*' ':!/scripts/*'
+  git stash -u && git rebase --continue && git stash pop && git gui

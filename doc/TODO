@@ -1,17 +1,30 @@
-Otimizacao de Testes: Stubs, etc, reorganizacao, e teoria: unitario, integracao, etc;
+Otimizacao de Testes: Stubs, etc, reorganizacao, teoria, etc;
 Menu lateral;
 AWS: Porta 80 && tirar 'iaq' da url;
 Script para subir a aplicacao;
 
+Dinheiro:
+ - Nos campos: 1,999.00 (4 digitos);
+ 
+
+Atualizacao do js dinamicamente (mask)
+Atualizar tabela Audit: Company -> Maintainer (onde colocar pra rodar script?)
+Teste showcase;
+internacionalizar formato de dinheiro ( provavelmente por causa de usar_como_dinheiro);
+Localizar de acordo com localizacao;
+
 =====================================================================
 
 Depois:
+ - Grafico de Contas:
+   - Ao deletar conta, atualizar grafico;
+   - O valor R$ ,00 (colocar um 0 antes);
+   - Fundir graficos;
  - Ordenador de colunas: Dinheiro (Ransak?);
  - Voltar pelo browser: history API;
- - Numeros na esquerda: Quando grafico esta vazio;
-   - O valor R$ ,00 (colocar um 0 antes);
  - Graficos e mais graficos;
  - Script ambientes paralelos ativos no servidor (uat, showcase);
+ - Report: cidade default na assinatura;
 
 Interno:
  - Usuário: Novo, Senha no Firefox;
