@@ -20,7 +20,7 @@
 				<%= f.label :water %>
 				<div class="input-group">
 					<span class="input-group-addon"><%= currency %></span>
-					<%= f.text_field :water, class: 'form-control money' %>
+					<%= money_field f, :water %>
 				</div>
 			</div>
 
@@ -28,7 +28,7 @@
 				<%= f.label :energy %>
 				<div class="input-group">
 					<span class="input-group-addon"><%= currency %></span>
-					<%= f.text_field :energy, class: 'form-control money' %>
+					<%= money_field f, :energy %>
 				</div>
 			</div>
 
@@ -36,7 +36,7 @@
 				<%= f.label :telephone %>
 				<div class="input-group">
 					<span class="input-group-addon"><%= currency %></span>
-					<%= f.text_field :telephone, class: 'form-control money' %>
+					<%= money_field f, :telephone %>
 				</div>
 			</div>
 		</div>

@@ -24,10 +24,14 @@ module ApplicationHelper
     render 'others/menu_item', klass: klass, display_name: display_name
   end
 
+  def money_field(f, att)
+    f.text_field att, value: number_to_currency(@model.send(att).to_f, unit: ''), class: 'form-control money'
+  end
+
   ## Images #########################################################################
 
   def trash_img(field_name)
-    image_tag('delete.png', title: t('helpers.action.remove'), class: field_name + '_remove_recipient_btn remove_btn')
+    image_tag('delete.png', title: t('helpers.action.remove'), class: "#{field_name}_remove_recipient_btn remove_btn")
   end
 
   def activate_img(iterator)

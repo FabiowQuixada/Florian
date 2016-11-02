@@ -23,11 +23,11 @@ $(function() {
 	$(".fax").mask("(99) 9999-9999", { placeholder : "(__) ____-____" });
 	$('.day_of_month').mask('99');
 	$('.numbers_only').mask('9999999');
-	$('.money').mask('000' + delimiter + '000' + delimiter + '000' + separator + '00', { reverse : true });	
+	$('.money').mask('000' + delimiter + '000' + separator + '00', { reverse : true });	
 
 	// Field initialization;
 	$(".money").each(function() {
-		if(!$(this).val() || $(this).val() == '0.0' || $(this).val() == '00')
+		if(!$(this).val() || $(this).val() == '0.0' || $(this).val() == '00' || $(this).val() == '0')
 			$(this).val('<%= number_to_currency 0, format: "%n" %>');
 	});
 
