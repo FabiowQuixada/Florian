@@ -18,6 +18,7 @@ gem 'jquery-turbolinks'
 gem 'rubocop', require: false
 gem 'rubocop-rspec'
 gem 'puma'
+gem 'migration_data'
 gem 'rails', '4.2.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
