@@ -8,14 +8,14 @@
 				</div>
 			</div>
 			<div class="form-group col-md-6">
-				<%= label_tag 'company_last_parcel', t('activerecord.attributes.company.last_parcel') %>
-				<%= text_field_tag :last_parcel, '', { id: 'company_last_parcel', class: 'form-control', readonly: true } %>
+				<%= label_tag 'maintainer_last_parcel', t('activerecord.attributes.maintainer.last_parcel') %>
+				<%= text_field_tag :last_parcel, '', { id: 'maintainer_last_parcel', class: 'form-control', readonly: true } %>
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group col-md-4">
 				<%= f.label :payment_frequency %>
-				<%= f.select :payment_frequency, Company.i18n_payment_frequencies { |e| [e.key, e.value] }, { include_blank: t('helpers.select.prompt') }, { class: 'form-control' } %>
+				<%= f.select :payment_frequency, Maintainer.i18n_payment_frequencies { |e| [e.key, e.value] }, { include_blank: t('helpers.select.prompt') }, { class: 'form-control' } %>
 			</div>
 			<div class="form-group col-md-4">
 				<%= f.label :payment_period %>
@@ -23,13 +23,13 @@
 			</div>
 			<div class="form-group col-md-4">
 				<%= f.label :contract %>
-				<%= f.select :contract, Company.i18n_contracts { |e| [e.key, e.value] }, { include_blank: t('helpers.select.prompt') }, { class: 'form-control' } %>
+				<%= f.select :contract, Maintainer.i18n_contracts { |e| [e.key, e.value] }, { include_blank: t('helpers.select.prompt') }, { class: 'form-control' } %>
 			</div>
 		</div>
 		<div class="row">
 			<div class="container-fluid">
 				<div class="panel panel-default">
-					<div class="panel-heading"><%= t('helpers.company.new_donation') %></div>
+					<div class="panel-heading"><%= t('helpers.maintainer.new_donation') %></div>
 					<div class="panel-body">
 
 						<%= render 'shared/error_alert', id: 'donation' %>
@@ -98,24 +98,24 @@
 
 	function toogle_parcel_qty_field() {
 		if(cant_set_parcels()) {
-			$('#company_payment_period').prop('readonly', true);
-			$('#company_payment_period').val('');
+			$('#maintainer_payment_period').prop('readonly', true);
+			$('#maintainer_payment_period').val('');
 		} else {
-			$('#company_payment_period').prop('readonly', false);
+			$('#maintainer_payment_period').prop('readonly', false);
 		}
 	}
 
 	function cant_set_parcels() {
-		frequency = $('#company_payment_frequency').val();
+		frequency = $('#maintainer_payment_frequency').val();
 
-		return !frequency || frequency === '' || frequency === "<%= Company.payment_frequencies.keys[0] %>" || frequency === "<%= Company.payment_frequencies.keys[7] %>";
+		return !frequency || frequency === '' || frequency === "<%= Maintainer.payment_frequencies.keys[0] %>" || frequency === "<%= Maintainer.payment_frequencies.keys[7] %>";
 	}
 
 	function set_last_parcel_date() {
-		first_date = $('#company_first_parcel').val();
-		frequency = $('#company_payment_frequency').val();
-		parcel_qty = $('#company_payment_period').val();
-		last_date = $('#company_last_parcel');
+		first_date = $('#maintainer_first_parcel').val();
+		frequency = $('#maintainer_payment_frequency').val();
+		parcel_qty = $('#maintainer_payment_period').val();
+		last_date = $('#maintainer_last_parcel');
 
 		if(!first_date || cant_set_parcels() || !parcel_qty) {
 			last_date.val('');
@@ -125,19 +125,19 @@
 		var frequency_type;
 		var temp = parcel_qty;
 
-		if(frequency == "<%= Company.payment_frequencies.keys[1] %>") {
+		if(frequency == "<%= Maintainer.payment_frequencies.keys[1] %>") {
 			frequency_type = 'days';
-		} else if(frequency == "<%= Company.payment_frequencies.keys[2] %>") {
+		} else if(frequency == "<%= Maintainer.payment_frequencies.keys[2] %>") {
 			frequency_type = 'weeks';
-		} else if(frequency == "<%= Company.payment_frequencies.keys[3] %>") {
+		} else if(frequency == "<%= Maintainer.payment_frequencies.keys[3] %>") {
 			frequency_type = 'months';
-		} else if(frequency == "<%= Company.payment_frequencies.keys[4] %>") {
+		} else if(frequency == "<%= Maintainer.payment_frequencies.keys[4] %>") {
 			temp = 3;
 			frequency_type = 'months';
-		} else if(frequency == "<%= Company.payment_frequencies.keys[5] %>") {
+		} else if(frequency == "<%= Maintainer.payment_frequencies.keys[5] %>") {
 			temp = 6;
 			frequency_type = 'months';
-		} else if(frequency == "<%= Company.payment_frequencies.keys[6] %>") {
+		} else if(frequency == "<%= Maintainer.payment_frequencies.keys[6] %>") {
 			frequency_type = 'years';
 		}
 
@@ -180,11 +180,11 @@
 		toogle_parcel_qty_field();
 		set_last_parcel_date();
 
-	    $('#company_entity_type').on('change', update_fields_by_entity_type);
-		$('#company_first_parcel').on('change', set_last_parcel_date);
-		$('#company_payment_period').on('change', set_last_parcel_date);
-		$('#company_payment_frequency').on('change', set_last_parcel_date);
-		$('#company_payment_frequency').change(toogle_parcel_qty_field);
+	    $('#maintainer_entity_type').on('change', update_fields_by_entity_type);
+		$('#maintainer_first_parcel').on('change', set_last_parcel_date);
+		$('#maintainer_payment_period').on('change', set_last_parcel_date);
+		$('#maintainer_payment_frequency').on('change', set_last_parcel_date);
+		$('#maintainer_payment_frequency').change(toogle_parcel_qty_field);
 		$('body').on('click', '#new_donation_btn', set_datepicker);
 
 		$('#add_donation_btn').on('click', function() {
@@ -198,7 +198,7 @@
 				remark = $('#new_donation_remark').val();
 
 				$.ajax({
-					url: '<%= url_for(action: 'donation_row', controller: 'companies', only_path: false, protocol: 'http') %>', 
+					url: '<%= url_for(action: 'donation_row', controller: 'maintainers', only_path: false, protocol: 'http') %>', 
 					data: {donation: {id: temp_donation_id, donation_date: date, value: value, remark: remark}},
 					success: function(result) {
 			        	$('#donations_table > tbody:last-child').append(result);
@@ -223,7 +223,7 @@
 			}
 
 			if(id > 0) {
-				$('#company_donations_to_be_deleted').val($('#company_donations_to_be_deleted').val() + id + ',');
+				$('#maintainer_donations_to_be_deleted').val($('#maintainer_donations_to_be_deleted').val() + id + ',');
 			}
 		});
 	})

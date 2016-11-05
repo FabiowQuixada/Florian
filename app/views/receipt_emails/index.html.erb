@@ -9,7 +9,7 @@
 		<tr>
 			<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
 				<th class="admin-only id-column"></th>
-				<th class="sorter-false hidden-xs"><%= i18n.t :company %></th>
+				<th class="sorter-false hidden-xs"><%= i18n.t :maintainer %></th>
 				<th class="sorter-false hidden-xs"><%= i18n.t :competence %></th>
 				<th class="sorter-false hidden-xs" style="width: 150px;"><%= i18n.t :value %></th>
 				<th class="sorter-false icon-column"></th>
@@ -26,7 +26,7 @@
 		<% @list.each do |iterator| %>
 			<tr id="model_<%= iterator.id %>" class="model_row">
 				<td class="model_id admin-only"><%= iterator.id %></td>
-				<td class="hidden-xs receipt_company"><%= iterator.company.name %></td>
+				<td class="hidden-xs receipt_maintainer"><%= iterator.maintainer.name %></td>
 				<td class="hidden-xs"><%= iterator.competence.capitalize %></td>
 				<td class="hidden-xs"><%= number_to_currency(iterator.value) %></td>
 				<td class="icon-column"><%= edit_btn iterator %></td>
@@ -54,7 +54,7 @@
 			id = $(this).closest('.model_row').find('.model_id').text();
 			$('#resend_email_id').val(id);
 			$('#resend_email_form').get(0).setAttribute('action', resend_path(id));
-			$('.modal_company_name').text($(this).closest('.model_row').find('.receipt_company').text());
+			$('.modal_maintainer_name').text($(this).closest('.model_row').find('.receipt_maintainer').text());
 			$('#resend_email_modal').modal('show');
 		});
 
@@ -66,7 +66,7 @@
 			id = $(this).closest('.model_row').find('.model_id').text();
 			$('#send_test_email_id').val(id);
 			$('#send_test_email_form').get(0).setAttribute('action', send_test_path(id));
-			$('.modal_company_name').text($(this).closest('.model_row').find('.receipt_company').text());
+			$('.modal_maintainer_name').text($(this).closest('.model_row').find('.receipt_maintainer').text());
 			$('#send_test_email_modal').modal('show');
 		});
 

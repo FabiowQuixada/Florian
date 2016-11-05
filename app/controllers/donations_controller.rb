@@ -19,7 +19,7 @@ class DonationsController < ApplicationController
   private ###########################################################################################
 
   def donation_params
-    params.require(:donation).permit(:value, :donation_date, :remark, :company_id, :user_id)
+    params.require(:donation).permit(:value, :donation_date, :remark, :maintainer_id, :user_id)
   end
 
   def index_sorting_method

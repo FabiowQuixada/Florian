@@ -29,7 +29,7 @@ class Ability
   end
 
   def common_user_managment
-    can :manage, Company
+    can :manage, Maintainer
     can :manage, Bill
     can :manage, Donation
     can :manage, SystemSetting

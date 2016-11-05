@@ -8,7 +8,7 @@ class Donation < ActiveRecord::Base
 
 
   # Relationships
-  belongs_to :company
+  belongs_to :maintainer
 
 
   # Validations
@@ -26,7 +26,7 @@ class Donation < ActiveRecord::Base
   end
 
   def to_s
-    "#{company.name} (#{donation_date})"
+    "#{maintainer.name} (#{donation_date})"
   end
 
   def default_values

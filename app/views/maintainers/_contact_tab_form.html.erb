@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="container-fluid">
 		<div class="panel panel-default">
-			<div id="contact_panel_header" class="panel-heading"><%= t('helpers.company.new_contact') %></div>
+			<div id="contact_panel_header" class="panel-heading"><%= t('helpers.maintainer.new_contact') %></div>
 			<div class="panel-body">
 
 				<%= render 'shared/error_alert', id: 'contact' %>
@@ -88,16 +88,16 @@
 					$('#contact_' + loaded_contact_id + ' .contact_fax').text(fax);
 
 					// Params;
-					$('#company_contacts_attributes_' + loaded_contact_id + '_name').val(name);
-					$('#company_contacts_attributes_' + loaded_contact_id + '_position').val(position);
-					$('#company_contacts_attributes_' + loaded_contact_id + '_email_address').val(email);
-					$('#company_contacts_attributes_' + loaded_contact_id + '_telephone').val(telephone);
-					$('#company_contacts_attributes_' + loaded_contact_id + '_celphone').val(celphone);
-					$('#company_contacts_attributes_' + loaded_contact_id + '_fax').val(fax);
+					$('#maintainer_contacts_attributes_' + loaded_contact_id + '_name').val(name);
+					$('#maintainer_contacts_attributes_' + loaded_contact_id + '_position').val(position);
+					$('#maintainer_contacts_attributes_' + loaded_contact_id + '_email_address').val(email);
+					$('#maintainer_contacts_attributes_' + loaded_contact_id + '_telephone').val(telephone);
+					$('#maintainer_contacts_attributes_' + loaded_contact_id + '_celphone').val(celphone);
+					$('#maintainer_contacts_attributes_' + loaded_contact_id + '_fax').val(fax);
 
 				} else {
 					$.ajax({
-						url: '<%= url_for(action: 'contact_row', controller: 'companies', only_path: false, protocol: 'http') %>', 
+						url: '<%= url_for(action: 'contact_row', controller: 'maintainers', only_path: false, protocol: 'http') %>', 
 						data: {contact: {id: contact_temp_id, name: name, position: position, email_address: email, telephone: telephone, celphone: celphone, fax: fax}},
 						success: function(result) {
 							$('#contacts_table > tbody:last-child').append(result);
@@ -144,7 +144,7 @@
 			loaded_contact_id = id;
 			$('#cancel_contact_edition_btn').show();
 			$('#add_contact_btn').text('<%= t('helpers.action.update') %>');
-			$('#contact_panel_header').text('<%= t('helpers.company.edit_contact') %>');
+			$('#contact_panel_header').text('<%= t('helpers.maintainer.edit_contact') %>');
 
 			$('#temp_contact_name').val($('#contact_' + id + ' .contact_name').text());
 			$('#temp_contact_position').val($('#contact_' + id + ' .contact_position').text());
@@ -165,7 +165,7 @@
 			loaded_contact_id = null;
 			$('#cancel_contact_edition_btn').hide();
 			$('#add_contact_btn').text('<%= t('helpers.action.add') %>');
-			$('#contact_panel_header').text('<%= t('helpers.company.new_contact') %>');
+			$('#contact_panel_header').text('<%= t('helpers.maintainer.new_contact') %>');
 
 			hide_errors_from_box('contact');
 		}
@@ -181,7 +181,7 @@
 				$('#no_contacts_row').show();
 
 			if(id > 0) {
-				$('#company_contacts_to_be_deleted').val($('#company_contacts_to_be_deleted').val() + id + ',');
+				$('#maintainer_contacts_to_be_deleted').val($('#maintainer_contacts_to_be_deleted').val() + id + ',');
 			}
 		});
 

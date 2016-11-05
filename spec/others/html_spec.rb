@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'HTML', type: :request do
-  MENU_MODELS = [Company, Donation, ReceiptEmail, ProductAndServiceDatum, Bill, User, Role].freeze
+  MENU_MODELS = [Maintainer, Donation, ReceiptEmail, ProductAndServiceDatum, Bill, User, Role].freeze
 
   it 'has consistent login html code' do
     visit new_user_session_path

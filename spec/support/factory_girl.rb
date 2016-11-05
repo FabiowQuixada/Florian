@@ -20,10 +20,10 @@ RSpec.configure do |config|
     User.create(name: 'Inativo', email: 'teste_inativo@yahoo.com.br', password: 'usuario_teste', password_confirmation: 'usuario_teste', bcc: 'teste@test.com', role: role2, active: false)
     User.create(name: 'Comum', email: 'teste_comum@yahoo.com.br', password: 'usuario_comum', password_confirmation: 'usuario_comum', bcc: 'teste@test.com', role: role2)
 
-    FactoryGirl.create :company, :with_contacts, :with_donations
-    comp1 = Company.create(entity_type: 'company', name: 'Empresa I', registration_name: 'Empresa I Ltda.', cnpj: '31162488000187', category: 'medium', address: 'lala', group: 'maintainer')
+    FactoryGirl.create :maintainer, :with_contacts, :with_donations
+    comp1 = Maintainer.create(entity_type: 'company', name: 'Empresa I', registration_name: 'Empresa I Ltda.', cnpj: '31162488000187', category: 'medium', address: 'lala', group: 'maintainer')
 
-    Donation.create(value: 0.00, donation_date: Time.now, remark: '02 potes de creme', company: comp1)
+    Donation.create(value: 0.00, donation_date: Time.now, remark: '02 potes de creme', maintainer: comp1)
 
     FactoryGirl.create :receipt_email, :with_history
     FactoryGirl.create :bill, water: 4, energy: 5

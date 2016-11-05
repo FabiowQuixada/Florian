@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :companies, except: [:show] do
+  resources :maintainers, except: [:show] do
     collection do
       get 'contact_row'
       get 'donation_row'

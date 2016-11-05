@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Unsaved data', js: true, type: :request do
-  UNSAVED_DATA = [Company, Bill, ProductAndServiceDatum, Donation, ReceiptEmail].freeze
+  UNSAVED_DATA = [Maintainer, Bill, ProductAndServiceDatum, Donation, ReceiptEmail].freeze
 
   before :each do
     login_as_admin
@@ -16,7 +16,7 @@ describe 'Unsaved data', js: true, type: :request do
   end
 
   it 'does not display unsaved data warning if temporary fields are filled' do
-    [Company, Bill, ProductAndServiceDatum, Donation, ReceiptEmail].each do |data|
+    [Maintainer, Bill, ProductAndServiceDatum, Donation, ReceiptEmail].each do |data|
       fill_temp_data data.new
       go_back
       expect(page).to have_no_content('Dados não salvos'), data.name
@@ -57,7 +57,7 @@ describe 'Unsaved data', js: true, type: :request do
   end
 
   def go_somewhere_with_a_temp_field(model)
-    page.find('#main_tab_1_title').click if model.is_a? Company
+    page.find('#main_tab_1_title').click if model.is_a? Maintainer
   end
 
   def edit_path(model)

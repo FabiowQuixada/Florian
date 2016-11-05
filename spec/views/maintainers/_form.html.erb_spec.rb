@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'companies/_form', type: :view do
-  let(:class_name) { Company }
+describe 'maintainers/_form', type: :view do
+  let(:class_name) { Maintainer }
   it_behaves_like 'an form view'
 
   it 'renders partials' do
@@ -23,7 +23,7 @@ describe 'companies/_form', type: :view do
     end
 
     it 'does not display a no-donation message if it has donations' do
-      model = build :company, :with_donations
+      model = build :maintainer, :with_donations
       assign :model, model
       render
 
@@ -41,7 +41,7 @@ describe 'companies/_form', type: :view do
     end
 
     it 'does not display a no-contact message if it has contacts' do
-      model = build :company, :with_contacts
+      model = build :maintainer, :with_contacts
       assign :model, model
       render
 

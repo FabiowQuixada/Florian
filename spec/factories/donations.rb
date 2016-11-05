@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :donation do
     sequence(:remark, 1) { |n| "Observacao #{n}" }
-    company
+    maintainer
 
     trait :invalid do
       remark nil
@@ -9,7 +9,7 @@ FactoryGirl.define do
     end
 
     before :create do |donation|
-      donation.company.save
+      donation.maintainer.save
     end
   end
 end

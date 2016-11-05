@@ -12,8 +12,11 @@ describe ReceiptReport do
 
     it { expect(text_analysis.strings).to include(ActionController::Base.helpers.number_to_currency(receipt.value)) }
 
-    # Because of paragraph breaks
-    it { expect(text_analysis.strings[3..7] * ' ').to eq(receipt.processed_receipt_text(date)) }
+    it 'displays receipt text' do
+      text_analysis.strings[3..7].each do |text_frag|
+        expect(receipt.processed_receipt_text(date)).to include text_frag
+      end
+    end
 
     it { expect(text_analysis.strings).to include("Dados para depósito") }
     it { expect(text_analysis.strings).to include("Banco: Itaú (341)") }

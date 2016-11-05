@@ -4,7 +4,7 @@
 		<div class="modal-content">
 			<%= form_tag 'javascript:void(0)', remote: true, id: 'resend_email_form' do %>
 				<div class="modal-header">
-					<%= t('modal.email.title.resend') %><span class="modal_company_name"></span>
+					<%= t('modal.email.title.resend') %><span class="modal_maintainer_name"></span>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 						&times;
 					</button>
@@ -40,7 +40,7 @@
 		<div class="modal-content">
 			<%= form_tag 'javascript:void(0)', remote: true, id: 'send_test_email_form' do %>
 			<div class="modal-header">
-				<%= t('modal.email.title.send_test') %><span class="modal_company_name"></span>
+				<%= t('modal.email.title.send_test') %><span class="modal_maintainer_name"></span>
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 					&times;
 				</button>
@@ -111,7 +111,7 @@
 						<thead>
 							<tr>
 								<th><%= t('activerecord.attributes.email_history.created_at') %></th>
-								<th><%= t('activerecord.attributes.receipt_email.company') %></th>
+								<th><%= t('activerecord.attributes.receipt_email.maintainer') %></th>
 								<th><%= t('audit.type') %></th>
 							</tr>
 						</thead>
@@ -124,7 +124,7 @@
 								<tr>
 									<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
 										<td><%= l(history.created_at, format: :really_short) %></td>
-										<td class="email_company"><%= history.receipt_email.company.name %></td>
+										<td class="email_maintainer"><%= history.receipt_email.maintainer.name %></td>
 										<td><%= history.send_type_desc %></td>
 									<% end %>
 								</tr>
@@ -216,7 +216,7 @@
 
 	function add_recent_email(response) {
 		line = '<tr><td>' + response.date + '<\/td>' +
-		'<td>' + response.company + '<\/td>' +
+		'<td>' + response.maintainer + '<\/td>' +
 		'<td>' + response.type + '<\/td>' +
 		'<\/tr>';
 		$('#recent_emails_table > tbody:last-child').append(line);

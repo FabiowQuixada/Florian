@@ -10,7 +10,7 @@
 				<th class="admin-only id-column"></th>
 				<th class="sorter-false"><%= i18n.t :donation_date %></th>
 				<th class="hidden-xs sorter-false" style="width: 150px;"><%= i18n.t :value %></th>
-				<th class="sorter-false"><%= i18n.t :company %></th>
+				<th class="sorter-false"><%= i18n.t :maintainer %></th>
 				<th class="hidden-xs sorter-false"><%= i18n.t :remark %></th>
 				<th class="sorter-false icon-column"></th>
 				<th class="admin-only sorter-false icon-column"></th>
@@ -25,7 +25,7 @@
 				<td class="model_id admin-only"><%= iterator.id %></td>
 				<td><%= I18n.l iterator.donation_date %></td>
 				<td class="hidden-xs"><%= number_to_currency iterator.value %></td>
-				<td><%= iterator.company.name %></td>
+				<td><%= iterator.maintainer.name %></td>
 				<td class="hidden-xs"><%= iterator.remark %></td>
 				<td class="icon-column"><%= edit_btn iterator %></td>
 				<td class="admin-only icon-column"><%= destroy_btn %></td>

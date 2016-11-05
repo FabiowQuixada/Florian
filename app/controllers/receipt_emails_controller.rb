@@ -38,7 +38,7 @@ class ReceiptEmailsController < ApplicationController
   private ###########################################################################################
 
   def receipt_email_params
-    params.require(:receipt_email).permit(:id, :body, :value, :active, :company_id, :recipients_array, :active)
+    params.require(:receipt_email).permit(:id, :body, :value, :active, :maintainer_id, :recipients_array, :active)
   end
 
   def load_email
@@ -61,7 +61,7 @@ class ReceiptEmailsController < ApplicationController
     { json: {
       message: genderize_tag(email, type),
       date: l(history.created_at, format: :really_short),
-      company: email.company.name,
+      maintainer: email.maintainer.name,
       value: ActionController::Base.helpers.number_to_currency(history.value),
       type: history.send_type_desc,
       user: history.user.name

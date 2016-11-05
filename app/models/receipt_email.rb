@@ -14,7 +14,7 @@ class ReceiptEmail < ActiveRecord::Base
   # Relationships
   has_many :email_histories, dependent: :destroy
   accepts_nested_attributes_for :email_histories
-  belongs_to :company
+  belongs_to :maintainer
   alias_attribute :history, :email_histories
 
 
@@ -22,7 +22,7 @@ class ReceiptEmail < ActiveRecord::Base
   validates :recipients_array, presence: { message: I18n.t('errors.email.one_recipient') }
   validates_numericality_of :value, greater_than: 0, less_than_or_equal_to: 1_000_000
   validates_numericality_of :day_of_month, greater_than: 0, less_than_or_equal_to: 28
-  validates :value, :day_of_month, :company, :body, presence: true
+  validates :value, :day_of_month, :maintainer, :body, presence: true
 
 
   # Methods
@@ -31,7 +31,7 @@ class ReceiptEmail < ActiveRecord::Base
   end
 
   def to_s
-    company.name
+    maintainer.name
   end
 
   def title(user)
@@ -71,24 +71,24 @@ class ReceiptEmail < ActiveRecord::Base
   private ###############################################################################################################
 
   def receipt_text
-    return pf_text if company.person?
-    return pj_text if company.company?
+    return person_text if maintainer.person?
+    return company_text if maintainer.company?
   end
 
-  def pf_text
-    EnvironmentContentHandler.receipt_report_pf_main_text company
+  def person_text
+    EnvironmentContentHandler.receipt_report_person_main_text maintainer
   end
 
-  def pj_text
-    EnvironmentContentHandler.receipt_report_pj_main_text company
+  def company_text
+    EnvironmentContentHandler.receipt_report_company_main_text maintainer
   end
 
   def apply_competence_tag_to(text, date)
     text.gsub(I18n.t('tags.competence'), competence(date).capitalize)
   end
 
-  def apply_company_tag_to(text)
-    text.gsub(I18n.t('tags.company'), company.name)
+  def apply_maintainer_tag_to(text)
+    text.gsub(I18n.t('tags.maintainer'), maintainer.name)
   end
 
   def apply_value_tag_to(text)
@@ -96,6 +96,6 @@ class ReceiptEmail < ActiveRecord::Base
   end
 
   def apply_all_tags_to(text, date = Date.today)
-    apply_value_tag_to apply_company_tag_to apply_competence_tag_to(text, date)
+    apply_value_tag_to apply_maintainer_tag_to apply_competence_tag_to(text, date)
   end
 end

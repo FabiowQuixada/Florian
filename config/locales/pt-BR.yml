@@ -35,7 +35,7 @@ pt-BR:
       product_datum:
         one: Produto
         other: Produtos
-      company:
+      maintainer:
         one: Mantenedora
         other: Mantenedoras
       contact:
@@ -67,7 +67,7 @@ pt-BR:
         day: "Dia"
         value: "Valor"
         competence: "Competência"
-        company: "Mantenedora"
+        maintainer: "Mantenedora"
         recipients_array: "Destinatários"
       system_setting:
         user: Usuário
@@ -76,7 +76,7 @@ pt-BR:
         pse_title: "Título"
         pse_body: "Corpo"
         pse_day_of_month: "Dia do lembrete"
-        company: "Mantenedora"
+        maintainer: "Mantenedora"
         pse_recipients_array: "Destinatários"
         pse_private_recipients_array: "Destinatários privados"
       product_and_service_datum:
@@ -112,7 +112,7 @@ pt-BR:
         status: Status
       email_history:
         created_at: Data
-      company:
+      maintainer:
         registration_name: Razão social
         cnpj: CNPJ
         cpf: CPF
@@ -140,10 +140,10 @@ pt-BR:
         celphone: Celular
         fax: FAX
         email_address: E-mail
-        company: Mantenedora
+        maintainer: Mantenedora
         contact_type: Tipo de Contato
       donation:
-        company: Mantenedora
+        maintainer: Mantenedora
         date: Data
         donation_date: Data
         value: Valor
@@ -166,7 +166,7 @@ pt-BR:
         description: Descrição
     gender:
       bill: f
-      company: f
+      maintainer: f
       contact: m
       donation: f
       product_and_service_datum: m
@@ -177,7 +177,7 @@ pt-BR:
       role: m
     number:
       bill: s
-      company: s
+      maintainer: s
       contact: s
       donation: s
       product_and_service_datum: p
@@ -187,7 +187,7 @@ pt-BR:
       user: s
       role: s
   enums:
-    company:
+    maintainer:
       entity_type: 
         company: Pessoa Jurídica
         person: Pessoa Física
@@ -304,7 +304,7 @@ pt-BR:
       fill_a_recipient: Digite um endereço de e-mail;
       duplicated_recipient: 'O destinatário já foi adicionado;'
   tags:
-    company: '#mantenedora'
+    maintainer: '#mantenedora'
     competence: '#competencia'
     value: '#valor'
   report:
@@ -328,7 +328,7 @@ pt-BR:
         agency: 'Agência'
         account: 'Conta Corrente'
       receipt_text:
-        company: 'A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu da %{name}, inscrito sob o CNPJ/MF nº %{cnpj}, situada na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
+        maintainer: 'A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu da %{name}, inscrito sob o CNPJ/MF nº %{cnpj}, situada na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
         person: 'A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu de %{name}, CPF nº %{cpf}, residente na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
   helpers:
     main_page: Página Principal
@@ -397,7 +397,7 @@ pt-BR:
       return: Retorno
       week_footer: '* Os dados desta semana serão enviados por e-mail apenas para os colaboradores.'
       final_footer: 'Estes serão os dados enviados por e-mail para os mantenedores.'
-    company:
+    maintainer:
       new_donation: Nova doação
       new_contact: Novo contato
       edit_contact: Editar contato

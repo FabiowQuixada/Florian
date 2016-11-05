@@ -49,11 +49,11 @@
 	function update_fields_by_entity_type() {
 
 		$('.person_area').hide();
-		$('.company_area').hide();	
+		$('.maintainer_area').hide();	
 
-		if($('#company_entity_type').val() == "company") {
-			$('.company_area').show();
-		} else if($('#company_entity_type').val() == "person") {
+		if($('#maintainer_entity_type').val() == "company") {
+			$('.maintainer_area').show();
+		} else if($('#maintainer_entity_type').val() == "person") {
 			$('.person_area').show();
 		}
 	}

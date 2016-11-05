@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-describe Company, js: true, type: :request do
+describe Maintainer, js: true, type: :request do
   before :each do
     login_as_admin
   end
 
   it 'persists a maintainer with a contact' do
-    visit new_company_path
+    visit new_maintainer_path
     fill_main_fields
     add_contact
 
@@ -15,7 +15,7 @@ describe Company, js: true, type: :request do
   end
 
   it 'persists a maintainer with a donation' do
-    visit new_company_path
+    visit new_maintainer_path
     fill_main_fields
     add_donation
 
@@ -24,7 +24,7 @@ describe Company, js: true, type: :request do
   end
 
   it 'persists donation' do
-    visit edit_company_path described_class.first.id
+    visit edit_maintainer_path described_class.first.id
     remark = "observacao #{Time.new.usec}"
     add_donation remark
     click_on 'Atualizar'
@@ -33,7 +33,7 @@ describe Company, js: true, type: :request do
   end
 
   it 'adds transient donation data should display warning message when pressing back button' do
-    visit edit_company_path described_class.first.id
+    visit edit_maintainer_path described_class.first.id
     add_donation 'remark'
 
     go_back
@@ -45,13 +45,13 @@ describe Company, js: true, type: :request do
 
   def fill_main_fields
     time = Time.new.usec
-    select 'Pessoa Jurídica', from: 'company_entity_type'
-    fill_in 'company_registration_name', with: "Maintainer #{time}"
-    fill_in 'company_cnpj', with: BlaBla::CNPJ.formatado
-    fill_in 'company_name', with: "Maintainer #{time}"
-    fill_in 'company_address', with: "Maintainer address #{time}"
-    select '1 (Abaixo de R$ 300,00)', from: 'company_category'
-    select 'Mantenedora', from: 'company_group'
+    select 'Pessoa Jurídica', from: 'maintainer_entity_type'
+    fill_in 'maintainer_registration_name', with: "Maintainer #{time}"
+    fill_in 'maintainer_cnpj', with: BlaBla::CNPJ.formatado
+    fill_in 'maintainer_name', with: "Maintainer #{time}"
+    fill_in 'maintainer_address', with: "Maintainer address #{time}"
+    select '1 (Abaixo de R$ 300,00)', from: 'maintainer_category'
+    select 'Mantenedora', from: 'maintainer_group'
   end
 
   def fill_donation_fields(remark)
@@ -77,7 +77,7 @@ describe Company, js: true, type: :request do
   end
 
   def expect_edit_page_to_have_content(remark)
-    visit edit_company_path described_class.first.id
+    visit edit_maintainer_path described_class.first.id
 
     page.all('tr.transient_donation').each do |tr|
       tr.should have_content(remark)

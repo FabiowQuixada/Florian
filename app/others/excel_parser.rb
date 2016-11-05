@@ -12,82 +12,82 @@ class ExcelParser
   CONTRACT_POS = 32
 
   def self.parse
-    inconsistent_companies = parse_file Roo::Excel.new(Rails.root.join('app', 'assets', 'empresas_2016.xls'))
-    print_parse_errors inconsistent_companies
-    inconsistent_companies
+    inconsistent_maintainers = parse_file Roo::Excel.new(Rails.root.join('app', 'assets', 'empresas_2016.xls'))
+    print_parse_errors inconsistent_maintainers
+    inconsistent_maintainers
   end
 
   def self.parse_file(file)
-    inconsistent_companies = []
+    inconsistent_maintainers = []
 
     file.worksheets.each do |sheet|
-      # Get companies
+      # Get maintainers
       (4..(sheet.count - 1)).each do |r|
         row = sheet.rows[r]
 
-        company = parse_company row
+        maintainer = parse_maintainer row
 
-        inconsistent_companies << company unless company.save
+        inconsistent_maintainers << maintainer unless maintainer.save
       end # Row loop end
     end # Sheet loop end
 
-    inconsistent_companies
+    inconsistent_maintainers
   end
 
-  def self.print_parse_errors(inconsistent_companies)
-    inconsistent_companies.each do |company|
-      company.errors.full_messages.each do |error_message|
+  def self.print_parse_errors(inconsistent_maintainers)
+    inconsistent_maintainers.each do |maintainer|
+      maintainer.errors.full_messages.each do |error_message|
         puts error_message
       end
     end
   end
 
-  def self.parse_company(row)
-    company = Company.new group: 1
+  def self.parse_maintainer(row)
+    maintainer = Maintainer.new group: 1
 
-    parse_basic_info company, row
-    parse_general_info company, row
-    parse_category company, row
-    parse_cpf_cnpj company, row
-    parse_general_info company, row
-    # parse_contacts company, row
-    # parse_donation company, row
-    parse_payment_frequency company, row
-    parse_payment_period company, row
-    parse_first_parcel company, row
-    parse_contract company, row
+    parse_basic_info maintainer, row
+    parse_general_info maintainer, row
+    parse_category maintainer, row
+    parse_cpf_cnpj maintainer, row
+    parse_general_info maintainer, row
+    # parse_contacts maintainer, row
+    # parse_donation maintainer, row
+    parse_payment_frequency maintainer, row
+    parse_payment_period maintainer, row
+    parse_first_parcel maintainer, row
+    parse_contract maintainer, row
 
-    company
+    maintainer
   end
 
-  def self.parse_basic_info(company, row)
+  def self.parse_basic_info(maintainer, row)
     col = BASIC_INFO_POS
-    company.entity_type = if row[col] == 'PF'
-                            'person'
-                          else
-                            'company'
-                          end
+    maintainer.entity_type = if row[col] == 'PF'
+                               'person'
+                             else
+                               'company'
+                             end
 
-    company.registration_name = row[col += 1]
-    company.name = row[col + 1]
+    maintainer.registration_name = row[col += 1]
+    maintainer.name = row[col + 1]
 
-    company
+    maintainer
   end
 
-  def self.parse_general_info(company, row)
+  def self.parse_general_info(maintainer, row)
     col = GENERAL_INFO_POS
-    company.address = row[col += 1]
-    company.neighborhood = row[col += 1]
-    company.cep = row[col += 1]
-    company.city = row[col += 1]
-    company.state = row[col += 1]
-    company.email_address = row[col += 1]
-    company.website = row[col + 1]
+    maintainer.address = row[col += 1]
+    maintainer.neighborhood = row[col += 1]
+    maintainer.cep = row[col += 1]
+    maintainer.city = row[col += 1]
+    maintainer.state = row[col += 1]
+    maintainer.email_address = row[col += 1]
+    maintainer.website = row[col + 1]
 
-    company
+    maintainer
   end
 
-  def self.parse_category(company, row)
+  def self.parse_category(maintainer, row)
     val = row[CATEGORY_POS]
     cat = 0
 
@@ -99,32 +99,32 @@ class ExcelParser
       cat = 'high'
     end
 
-    company.category = cat
+    maintainer.category = cat
 
-    company
+    maintainer
   end
 
-  def self.parse_cpf_cnpj(company, row)
+  def self.parse_cpf_cnpj(maintainer, row)
     val = row[CPF_CNPJ_POS]
-    if company.person?
-      company.cpf = val
+    if maintainer.person?
+      maintainer.cpf = val
     else
-      company.cnpj = val
+      maintainer.cnpj = val
     end
 
-    company
+    maintainer
   end
 
-  def self.parse_contacts(company, row)
-    company.contacts.clear
-    parse_contact company, 0, row
-    parse_contact company, 1, row
-    parse_contact company, 2, row
+  def self.parse_contacts(maintainer, row)
+    maintainer.contacts.clear
+    parse_contact maintainer, 0, row
+    parse_contact maintainer, 1, row
+    parse_contact maintainer, 2, row
 
-    company
+    maintainer
   end
 
-  def self.parse_contact(company, type, row)
+  def self.parse_contact(maintainer, type, row)
     col = CONTACTS_POS + CONTACT_LEN * type
     contact = Contact.new
 
@@ -138,60 +138,60 @@ class ExcelParser
     contact.celphone = "85#{row[col]}" unless row[col].nil?
     contact.email_address = row[col + 1]
 
-    company.contacts.push contact
+    maintainer.contacts.push contact
 
-    company
+    maintainer
   end
 
-  def self.parse_payment_frequency(company, row)
-    company.payment_frequency = case row[PAY_FREQ_POS]
-                                when 'Mensal'
-                                  'monthly'
-                                when 'Diariamente'
-                                  'diary'
-                                when 'Bimestral'
-                                  'bimonthly'
-                                when 'Semanal'
-                                  'weekly'
-                                when 'Indeterminado'
-                                  'undefined'
-                                when 'Anual'
-                                  'annually'
-                                when 'Semestral'
-                                  'semiannually'
-                                end
+  def self.parse_payment_frequency(maintainer, row)
+    maintainer.payment_frequency = case row[PAY_FREQ_POS]
+                                   when 'Mensal'
+                                     'monthly'
+                                   when 'Diariamente'
+                                     'diary'
+                                   when 'Bimestral'
+                                     'bimonthly'
+                                   when 'Semanal'
+                                     'weekly'
+                                   when 'Indeterminado'
+                                     'undefined'
+                                   when 'Anual'
+                                     'annually'
+                                   when 'Semestral'
+                                     'semiannually'
+                                   end
 
-    company
+    maintainer
   end
 
-  def self.parse_payment_period(company, row)
+  def self.parse_payment_period(maintainer, row)
     val = row[PAY_PERIOD_POS]
 
     if val == 'Indeterminado'
-      company.payment_period = 0
+      maintainer.payment_period = 0
     elsif val.is_a? Numeric
-      company.payment_period = val
+      maintainer.payment_period = val
     end
 
-    company
+    maintainer
   end
 
-  def self.parse_contract(company, row)
-    company.contract = case row[CONTRACT_POS]
-                       when 'Contrato'
-                         'with_contract'
-                       when 'Sem contrato'
-                         'no_contract'
-                       end
+  def self.parse_contract(maintainer, row)
+    maintainer.contract = case row[CONTRACT_POS]
+                          when 'Contrato'
+                            'with_contract'
+                          when 'Sem contrato'
+                            'no_contract'
+                          end
 
-    company
+    maintainer
   end
 
-  def self.parse_first_parcel(company, row)
+  def self.parse_first_parcel(maintainer, row)
     val = row[FIRST_PARCEL_POS]
-    company.first_parcel = val
+    maintainer.first_parcel = val
 
-    company
+    maintainer
   end
 
   def read(row, col)

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ReceiptEmail, type: :request do
+describe ReceiptEmail, js: true, type: :request do
   before :each do
     login_as_admin
     visit new_receipt_email_path

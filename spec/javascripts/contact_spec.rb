@@ -3,11 +3,11 @@ require 'rails_helper'
 describe Contact, js: true, type: :request do
   before :each do
     login_as_admin
-    visit edit_company_path Company.first
+    visit edit_maintainer_path Maintainer.first
     page.find('#main_tab_2_title').click
   end
 
-  it 'adds a contact to an entity' do
+  it 'adds a contact to a maintainer' do
     add_contact 'Joao'
     expect(all('td.contact_name').last['innerHTML']).to eq 'Joao'
     expect(all('td.contact_position').last['innerHTML']).to eq 'Chefe'
@@ -16,8 +16,8 @@ describe Contact, js: true, type: :request do
     expect(all('td.contact_name').last['innerHTML']).to eq 'Joao'
   end
 
-  it 'loads and updates a contact in a entity' do
-    contact = Company.first.contacts[0]
+  it 'loads and updates a contact in a maintainer' do
+    contact = Maintainer.first.contacts[0]
     new_name = edit_first_contact
 
     expect(find("tr#contact_#{contact.id} td.contact_name")['innerHTML']).to eq new_name
@@ -25,7 +25,7 @@ describe Contact, js: true, type: :request do
     expect(find("tr#contact_#{contact.id} td.contact_name")['innerHTML']).to eq new_name
   end
 
-  it 'deletes a contact from an entity' do
+  it 'deletes a contact from a maintainer' do
     deleted_name = first('td.contact_name')['innerHTML']
     first('.remove_contact_btn').click
     save_and_revisit
@@ -57,7 +57,7 @@ describe Contact, js: true, type: :request do
 
   def save_and_revisit
     find('.save_btn').click
-    visit edit_company_path Company.first
+    visit edit_maintainer_path Maintainer.first
     page.find('#main_tab_2_title').click
   end
 end

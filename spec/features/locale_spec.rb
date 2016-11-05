@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Locale', type: :request do
-  LOCALE_DATA = [Company, Donation, ReceiptEmail, ProductAndServiceDatum, Bill, User, Role].freeze
+  LOCALE_DATA = [Maintainer, Donation, ReceiptEmail, ProductAndServiceDatum, Bill, User, Role].freeze
 
   it 'contains no translation missing on login page' do
     visit root_path

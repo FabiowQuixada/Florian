@@ -18,7 +18,7 @@ describe ModelHelper do
     it { expect(klass.model_gender).to eq 'm' }
     it { expect(klass.model_number).to eq 's' }
     it { expect(klass.was('updated')).to eq 'E-mail de recibo atualizado com sucesso!' }
-    it { expect(klass.blank_error_message('company')).to eq "O campo 'Mantenedora' é obrigatório;" }
+    it { expect(klass.blank_error_message('maintainer')).to eq "O campo 'Mantenedora' é obrigatório;" }
   end
 
   describe 'product and service datum' do

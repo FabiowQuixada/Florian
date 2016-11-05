@@ -5,7 +5,7 @@ describe Donation, type: :model do
   it { is_expected.to validate_presence_of(:donation_date) }
 
   # Relationships
-  it { is_expected.to belong_to :company }
+  it { is_expected.to belong_to :maintainer }
 
   it 'does not save if there is no value and no remark' do
     model = build(:donation, value: nil, remark: nil)

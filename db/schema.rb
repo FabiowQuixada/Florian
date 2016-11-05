@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160811033936) do
+ActiveRecord::Schema.define(version: 20161011000000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,7 +48,45 @@ ActiveRecord::Schema.define(version: 20160811033936) do
     t.datetime "updated_at",                         null: false
   end
 
-  create_table "companies", force: :cascade do |t|
+  create_table "contacts", force: :cascade do |t|
+    t.string   "name"
+    t.string   "position"
+    t.string   "email_address"
+    t.string   "telephone"
+    t.string   "celphone"
+    t.string   "fax"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "maintainer_id", null: false
+  end
+
+  add_index "contacts", ["maintainer_id"], name: "index_contacts_on_maintainer_id", using: :btree
+
+  create_table "donations", force: :cascade do |t|
+    t.decimal  "value",         precision: 8, scale: 2, null: false
+    t.date     "donation_date",                         null: false
+    t.text     "remark"
+    t.integer  "maintainer_id",                         null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "donations", ["maintainer_id"], name: "index_donations_on_maintainer_id", using: :btree
+
+  create_table "email_histories", force: :cascade do |t|
+    t.string   "body",                                     null: false
+    t.decimal  "value",            precision: 8, scale: 2, null: false
+    t.datetime "created_at",                               null: false
+    t.string   "recipients_array",                         null: false
+    t.integer  "send_type",                                null: false
+    t.integer  "user_id",                                  null: false
+    t.integer  "receipt_email_id",                         null: false
+  end
+
+  add_index "email_histories", ["receipt_email_id"], name: "index_email_histories_on_receipt_email_id", using: :btree
+  add_index "email_histories", ["user_id"], name: "index_email_histories_on_user_id", using: :btree
+
+  create_table "maintainers", force: :cascade do |t|
     t.string   "registration_name"
     t.string   "name",              null: false
     t.string   "cnpj"
@@ -71,44 +109,6 @@ ActiveRecord::Schema.define(version: 20160811033936) do
     t.string   "cpf"
     t.integer  "entity_type"
   end
-
-  create_table "contacts", force: :cascade do |t|
-    t.string   "name"
-    t.string   "position"
-    t.string   "email_address"
-    t.string   "telephone"
-    t.string   "celphone"
-    t.string   "fax"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "company_id",    null: false
-  end
-
-  add_index "contacts", ["company_id"], name: "index_contacts_on_company_id", using: :btree
-
-  create_table "donations", force: :cascade do |t|
-    t.decimal  "value",         precision: 8, scale: 2, null: false
-    t.date     "donation_date",                         null: false
-    t.text     "remark"
-    t.integer  "company_id",                            null: false
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-  end
-
-  add_index "donations", ["company_id"], name: "index_donations_on_company_id", using: :btree
-
-  create_table "email_histories", force: :cascade do |t|
-    t.string   "body",                                     null: false
-    t.decimal  "value",            precision: 8, scale: 2, null: false
-    t.datetime "created_at",                               null: false
-    t.string   "recipients_array",                         null: false
-    t.integer  "send_type",                                null: false
-    t.integer  "user_id",                                  null: false
-    t.integer  "receipt_email_id",                         null: false
-  end
-
-  add_index "email_histories", ["receipt_email_id"], name: "index_email_histories_on_receipt_email_id", using: :btree
-  add_index "email_histories", ["user_id"], name: "index_email_histories_on_user_id", using: :btree
 
   create_table "product_and_service_data", force: :cascade do |t|
     t.date     "competence",             null: false
@@ -152,10 +152,10 @@ ActiveRecord::Schema.define(version: 20160811033936) do
     t.decimal  "value",            precision: 8, scale: 2,                null: false
     t.datetime "created_at",                                              null: false
     t.datetime "updated_at",                                              null: false
-    t.integer  "company_id",                                              null: false
+    t.integer  "maintainer_id",                                           null: false
   end
 
-  add_index "receipt_emails", ["company_id"], name: "index_receipt_emails_on_company_id", using: :btree
+  add_index "receipt_emails", ["maintainer_id"], name: "index_receipt_emails_on_maintainer_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",                       null: false
@@ -218,13 +218,13 @@ ActiveRecord::Schema.define(version: 20160811033936) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
 
-  add_foreign_key "contacts", "companies"
-  add_foreign_key "donations", "companies"
+  add_foreign_key "contacts", "maintainers"
+  add_foreign_key "donations", "maintainers"
   add_foreign_key "email_histories", "receipt_emails"
   add_foreign_key "email_histories", "users"
   add_foreign_key "product_and_service_weeks", "product_and_service_data"
   add_foreign_key "product_data", "product_and_service_weeks"
-  add_foreign_key "receipt_emails", "companies"
+  add_foreign_key "receipt_emails", "maintainers"
   add_foreign_key "service_data", "product_and_service_weeks"
   add_foreign_key "system_settings", "users"
   add_foreign_key "users", "roles"

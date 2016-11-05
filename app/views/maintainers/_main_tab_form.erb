@@ -1,10 +1,10 @@
 <div class="row">
 	<div class="form-group col-md-6">
 		<%= f.label :entity_type %>
-		<%= f.select :entity_type, Company.i18n_entity_types { |e| [e.key, e.value] }, {}, { class: 'form-control', disabled: f.object.persisted? } %>
+		<%= f.select :entity_type, Maintainer.i18n_entity_types { |e| [e.key, e.value] }, {}, { class: 'form-control', disabled: f.object.persisted? } %>
 	</div>
 
-	<div class="form-group col-md-6 company_area">
+	<div class="form-group col-md-6 maintainer_area">
 		<%= f.label :registration_name %>
 		<%= f.text_field :registration_name, class: 'form-control', readonly: f.object.persisted? %>
 	</div>
@@ -15,7 +15,7 @@
 			<%= f.text_field :cpf, class: 'form-control cpf', readonly: f.object.persisted? %>
 		</div>
 
-		<div class="form-group col-md-6 company_area">
+		<div class="form-group col-md-6 maintainer_area">
 			<%= f.label :cnpj %>
 			<%= f.text_field :cnpj, class: 'form-control cnpj', readonly: f.object.persisted? %>
 		</div>
@@ -67,12 +67,12 @@
 </div><div class="row">
 	<div class="form-group col-md-6">
 		<%= f.label :category %>
-		<%= f.select :category, Company.i18n_categories { |e| [e.key, e.value] }, { include_blank: t('helpers.select.prompt')}, { class: 'form-control' } %>
+		<%= f.select :category, Maintainer.i18n_categories { |e| [e.key, e.value] }, { include_blank: t('helpers.select.prompt')}, { class: 'form-control' } %>
 	</div>
 
 	<div class="form-group col-md-6">
 		<%= f.label :group %>
-		<%= f.select :group, Company.i18n_groups { |e| [e.key, e.value] }, { include_blank: t('helpers.select.prompt')}, { class: 'form-control' } %>
+		<%= f.select :group, Maintainer.i18n_groups { |e| [e.key, e.value] }, { include_blank: t('helpers.select.prompt')}, { class: 'form-control' } %>
 	</div>
 </div><div class="row">
 

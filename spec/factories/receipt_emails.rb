@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :receipt_email do
     value 3
     day_of_month 3
-    company
+    maintainer
     body SETTINGS_RE_BODY
     recipients_array SAMPLE_RECIPIENTS
 
@@ -10,12 +10,12 @@ FactoryGirl.define do
       value nil
     end
 
-    trait :pf_company do
-      company { build(:company, :person) }
+    trait :person_maintainer do
+      maintainer { build(:maintainer, :person) }
     end
 
-    trait :pj_company do
-      company { build(:company) }
+    trait :company_maintainer do
+      maintainer { build(:maintainer) }
     end
 
     trait :with_history do
@@ -25,7 +25,7 @@ FactoryGirl.define do
     end
 
     before :create do |receipt_email|
-      receipt_email.company.save
+      receipt_email.maintainer.save
     end
   end
 end

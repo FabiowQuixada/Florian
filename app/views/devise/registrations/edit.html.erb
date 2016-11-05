@@ -75,7 +75,7 @@
 						<div style="float:right">
 							<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
 								<div class="btn-group">
-									<button type="button" class="btn btn-primary btn-xs" id="add_company_to_re_title_btn"><%= i18n.t :company %></button>
+									<button type="button" class="btn btn-primary btn-xs" id="add_maintainer_to_re_title_btn"><%= i18n.t :maintainer %></button>
 									<button type="button" class="btn btn-primary btn-xs" id="add_value_to_re_title_btn"><%= i18n.t :value %></button>
 									<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_re_title_btn"><%= i18n.t :competence %></button>
 								</div>
@@ -157,10 +157,10 @@
 	});
 
 	$(function() {
-		$("#add_company_to_re_title_btn").on('click', function() {add_tag_to_field('user_system_setting_re_title', '<%= t('tags.company') %>')});
+		$("#add_maintainer_to_re_title_btn").on('click', function() {add_tag_to_field('user_system_setting_re_title', '<%= t('tags.maintainer') %>')});
 		$("#add_value_to_re_title_btn").on('click', function() {add_tag_to_field('user_system_setting_re_title', '<%= t('tags.value') %>')});
 		$("#add_competence_to_re_title_btn").on('click', function() {add_tag_to_field('user_system_setting_re_title', '<%= t('tags.competence') %>')});
-		$("#add_company_to_re_body_btn").on('click', function() {add_tag_to_field('user_system_setting_re_body', '<%= t('tags.company') %>')});
+		$("#add_maintainer_to_re_body_btn").on('click', function() {add_tag_to_field('user_system_setting_re_body', '<%= t('tags.maintainer') %>')});
 		$("#add_value_to_re_body_btn").on('click', function() {add_tag_to_field('user_system_setting_re_body', '<%= t('tags.value') %>')});
 		$("#add_competence_to_re_body_btn").on('click', function() {add_tag_to_field('user_system_setting_re_body', '<%= t('tags.competence') %>')});
 

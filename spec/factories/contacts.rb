@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :contact do
     sequence(:name, 1) { |n| "Contact #{n}" }
-    company
+    maintainer
 
     trait :nameless do
       name ''

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe CompaniesController, type: :controller do
+describe MaintainersController, type: :controller do
   before :each do
     sign_in User.first
   end

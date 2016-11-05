@@ -4,8 +4,8 @@ module DonationHelper
     tag :input,
         value: donation.send(field).to_s,
         type: 'hidden',
-        name: "company[donations_attributes][#{donation.id}][#{field}]",
-        id: "company_donations_attributes_#{donation.id}_#{field}"
+        name: "maintainer[donations_attributes][#{donation.id}][#{field}]",
+        id: "maintainer_donations_attributes_#{donation.id}_#{field}"
   end
 
   def save_and_new_btn(model)

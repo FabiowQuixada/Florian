@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Contact, type: :model do
-  it { is_expected.to belong_to :company }
+  it { is_expected.to belong_to :maintainer }
 
   it 'does not save if its attributes are empty' do
     model = build(:contact, :no_data)

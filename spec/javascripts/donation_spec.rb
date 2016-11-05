@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-describe Donation, type: :request do
+describe Donation, js: true, type: :request do
   before :each do
     login_as_admin
-    visit edit_company_path Company.first
+    visit edit_maintainer_path Maintainer.first
     page.find('#main_tab_1_title').click
   end
 
-  it 'adds a donation to an entity' do
+  it 'adds a donation to a maintainer' do
     new_remark = add_donation
     expect(all('td.donation_value').last['innerHTML']).to eq 'R$ 56,78'
     expect(all('td.donation_remark').last['innerHTML']).to eq new_remark
@@ -15,7 +15,7 @@ describe Donation, type: :request do
     expect(all('td.donation_remark').last['innerHTML']).to eq new_remark
   end
 
-  it 'deletes a donation from an entity' do
+  it 'deletes a donation from a maintainer' do
     remark = all('td.donation_remark').last['innerHTML']
     all('.remove_donation_btn').last.click
     save_and_revisit
@@ -39,7 +39,7 @@ describe Donation, type: :request do
 
   def save_and_revisit
     find('.save_btn').click
-    visit edit_company_path Company.first
+    visit edit_maintainer_path Maintainer.first
     page.find('#main_tab_1_title').click
   end
 end

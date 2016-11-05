@@ -27,37 +27,37 @@ class EnvironmentContentHandler
     pdf.text president_signature, inline_format: true, style: :bold, align: :center
   end
 
-  def self.receipt_report_pf_main_text(company)
-    I18n.t(pf_tag,
-           name: company.name,
-           cpf: company.cpf.to_s,
-           address: company.address,
+  def self.receipt_report_person_main_text(maintainer)
+    I18n.t(person_tag,
+           name: maintainer.name,
+           cpf: maintainer.cpf.to_s,
+           address: maintainer.address,
            value_tag: I18n.t('tags.value'),
            competence_tag: I18n.t('tags.competence'))
   end
 
-  def self.receipt_report_pj_main_text(company)
-    I18n.t(pj_tag,
-           name: company.registration_name,
-           cnpj: company.cnpj.to_s,
-           address: company.address,
+  def self.receipt_report_company_main_text(maintainer)
+    I18n.t(company_tag,
+           name: maintainer.registration_name,
+           cnpj: maintainer.cnpj.to_s,
+           address: maintainer.address,
            value_tag: I18n.t('tags.value'),
            competence_tag: I18n.t('tags.competence'))
   end
 
-  def self.pf_tag
+  def self.person_tag
     if Rails.env == 'showcase'
-      'showcase.report.pf_receipt_text'
+      'showcase.report.person_receipt_text'
     else
       'report.other.receipt_text.person'
     end
   end
 
-  def self.pj_tag
+  def self.company_tag
     if Rails.env == 'showcase'
-      'showcase.report.pj_receipt_text'
+      'showcase.report.company_receipt_text'
     else
-      'report.other.receipt_text.company'
+      'report.other.receipt_text.maintainer'
     end
   end
 

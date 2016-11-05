@@ -1,9 +1,9 @@
-class Company < ActiveRecord::Base
+class Maintainer < ActiveRecord::Base
 
   # Configuration
   audited
   include ModelHelper
-  include CompanyEnumHelper
+  include MaintainerEnumHelper
   usar_como_cnpj :cnpj
   usar_como_cpf :cpf
   after_initialize :default_values
@@ -49,13 +49,13 @@ class Company < ActiveRecord::Base
 
   def donation_rejectable?(att)
     donation = Donation.new(att)
-    donation.company = self
+    donation.maintainer = self
     !donation.valid?
   end
 
   def contact_rejectable?(att)
     contact = Contact.new(att)
-    contact.company = self
+    contact.maintainer = self
     !contact.valid?
   end
 
@@ -73,12 +73,12 @@ class Company < ActiveRecord::Base
 
   # Uniqueness doesn't work, for some reason
   def unique_cnpj
-    errors.add(:cnpj, I18n.t('errors.messages.taken', attribute: I18n.t('activerecord.attributes.company.cnpj'))) if cnpj && !cnpj.to_s.empty? && Company.where(cnpj: cnpj).where('id <> ?', id || 0).first
+    errors.add(:cnpj, I18n.t('errors.messages.taken', attribute: I18n.t('activerecord.attributes.maintainer.cnpj'))) if cnpj && !cnpj.to_s.empty? && Maintainer.where(cnpj: cnpj).where('id <> ?', id || 0).first
   end
 
   # Uniqueness doesn't work, for some reason
   def unique_cpf
-    errors.add(:cpf, I18n.t('errors.messages.taken', attribute: I18n.t('activerecord.attributes.contact.cpf'))) if cpf && !cpf.to_s.empty? && Company.where(cpf: cpf).where('id <> ?', id || 0).first
+    errors.add(:cpf, I18n.t('errors.messages.taken', attribute: I18n.t('activerecord.attributes.contact.cpf'))) if cpf && !cpf.to_s.empty? && Maintainer.where(cpf: cpf).where('id <> ?', id || 0).first
   end
 
   def default_values

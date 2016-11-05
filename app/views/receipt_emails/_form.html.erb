@@ -12,11 +12,11 @@
 				<div class="container-fluid padless">
 					<div class="row">
 						<div class="col-sm-12 form-group">
-							<%= f.label :company %>
+							<%= f.label :maintainer %>
 							<% if f.object.persisted? %>
-								<%= f.collection_select(:company_id, Company.where(id: f.object.company_id), :id, :name, {}, {id: 'receipt_email_company', class: 'form-control', disabled: true}) %>
+								<%= f.collection_select(:maintainer_id, Maintainer.where(id: f.object.maintainer_id), :id, :name, {}, {id: 'receipt_email_maintainer', class: 'form-control', disabled: true}) %>
 							<% else %>
-								<%= f.collection_select(:company_id, Company.where(group: 1), :id, :name, {include_blank: t('helpers.select.prompt')}, {id: 'receipt_email_company', class: 'form-control'}) %>
+								<%= f.collection_select(:maintainer_id, Maintainer.where(group: 1), :id, :name, {include_blank: t('helpers.select.prompt')}, {id: 'receipt_email_maintainer', class: 'form-control'}) %>
 							<% end %>
 						</div>
 					</div><div class="row">
@@ -46,7 +46,7 @@
 		<div style="float:right">
 			<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
 				<div class="btn-group">
-					<button type="button" class="btn btn-primary btn-xs" id="add_company_to_body_btn"><%= i18n.t :company %></button>
+					<button type="button" class="btn btn-primary btn-xs" id="add_maintainer_to_body_btn"><%= i18n.t :maintainer %></button>
 					<button type="button" class="btn btn-primary btn-xs" id="add_value_to_body_btn"><%= i18n.t :value %></button>
 					<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_body_btn"><%= i18n.t :competence %></button>
 				</div>
@@ -120,7 +120,7 @@
 
 				clean_resend_modal();
 				$('#resend_email_form').get(0).setAttribute('action', '<%= resend_receipt_email_path @model %>');
-				$('.modal_company_name').text('<%= @model.company.name %>');
+				$('.modal_maintainer_name').text('<%= @model.maintainer.name %>');
 				$('#resend_email_modal').modal('show');
 			});
 
@@ -128,7 +128,7 @@
 
 				clean_send_test_modal();
 				$('#send_test_email_form').get(0).setAttribute('action', '<%= send_test_receipt_email_path @model %>');
-				$('.modal_company_name').text('<%= @model.company.name %>');
+				$('.modal_maintainer_name').text('<%= @model.maintainer.name %>');
 				$('#send_test_email_modal').modal('show');
 			});
 
@@ -152,10 +152,10 @@
 		}
 
 		function contains_all_tags(text) {
-			return text.indexOf("<%= t('tags.company') %>") == -1 || text.indexOf("<%= t('tags.value') %>") == -1 || text.indexOf("<%= t('tags.competence') %>") == -1;
+			return text.indexOf("<%= t('tags.maintainer') %>") == -1 || text.indexOf("<%= t('tags.value') %>") == -1 || text.indexOf("<%= t('tags.competence') %>") == -1;
 		}
 
-		$("#add_company_to_body_btn").on('click', function() {add_tag_to_field('receipt_email_body', '<%= t('tags.company') %>')});
+		$("#add_maintainer_to_body_btn").on('click', function() {add_tag_to_field('receipt_email_body', '<%= t('tags.maintainer') %>')});
 		$("#add_value_to_body_btn").on('click', function() {add_tag_to_field('receipt_email_body', '<%= t('tags.value') %>')});
 		$("#add_competence_to_body_btn").on('click', function() {add_tag_to_field('receipt_email_body', '<%= t('tags.competence') %>')});
 

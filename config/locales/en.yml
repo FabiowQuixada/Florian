@@ -35,7 +35,7 @@ en:
       product_datum:
         one: Product
         other: Products
-      company:
+      maintainer:
         one: Maintainer
         other: Maintainers
       contact:
@@ -67,7 +67,7 @@ en:
         day: "Day"
         value: "Value"
         competence: "Competence"
-        company: "Maintainer"
+        maintainer: "Maintainer"
         recipients_array: "Recipients"
         type_values:
           auto: Automatic
@@ -80,7 +80,7 @@ en:
         pse_title: "Title"
         pse_body: "Body"
         pse_day_of_month: "Remind day"
-        company: "Maintainers"
+        maintainer: "Maintainers"
         pse_recipients_array: "Recipients"
         pse_private_recipients_array: "Private recipients"
       product_and_service_datum:
@@ -116,7 +116,7 @@ en:
         status: Status
       email_history:
         created_at: Date
-      company:
+      maintainer:
         registration_name: Registration name
         cnpj: CNPJ
         cpf: CPF
@@ -144,10 +144,10 @@ en:
         celphone: Celphone
         fax: FAX
         email_address: E-mail
-        company: Maintainers
+        maintainer: Maintainers
         contact_type: Contact type
       donation:
-        company: Maintainer
+        maintainer: Maintainer
         date: Date
         donation_date: Date
         value: Value
@@ -170,7 +170,7 @@ en:
         description: Description
     gender:
       bill: n
-      company: n
+      maintainer: n
       contact: n
       donation: n
       product_and_service_datum: n
@@ -181,7 +181,7 @@ en:
       role: n
     number:
       bill: s
-      company: s
+      maintainer: s
       contact: s
       donation: s
       product_and_service_datum: s
@@ -191,7 +191,7 @@ en:
       user: s
       role: s
   enums:
-    company:
+    maintainer:
       entity_type: 
         company: Company
         person: Person
@@ -281,7 +281,7 @@ en:
       fill_a_recipient: Please add a receipient e-mail address;
       duplicated_recipient: 'This recipient was already added;'
   tags:
-    company: '#maintainer'
+    maintainer: '#maintainer'
     competence: '#competence'
     value: '#value'
   report:
@@ -305,7 +305,7 @@ en:
         agency: 'Agency'
         account: 'Account'
       receipt_text:
-        company: 'The Instituto de Apoio ao Queimado (IAQ) NGO, under CNPJ/MF nº 08.093.224/0001-05, at Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, received from %{name}, under CNPJ/MF nº %{cnpj}, at %{address}, the importance of %{value_tag} as a donation in %{competence_tag}.'
+        maintainer: 'The Instituto de Apoio ao Queimado (IAQ) NGO, under CNPJ/MF nº 08.093.224/0001-05, at Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, received from %{name}, under CNPJ/MF nº %{cnpj}, at %{address}, the importance of %{value_tag} as a donation in %{competence_tag}.'
         person: 'The Instituto de Apoio ao Queimado (IAQ) NGO, under CNPJ/MF nº 08.093.224/0001-05, at Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, received from %{name}, CPF nº %{cpf}, living in %{address}, the importance of %{value_tag} as a donation in %{competence_tag}.'
   helpers:
     main_page: Main page
@@ -362,7 +362,7 @@ en:
       return: Return
       week_footer: '* This week data will be sent only to collaborators.'
       final_footer: 'These are the data that will be sent to the maintainers.'
-    company:
+    maintainer:
       new_donation: New donation
       new_contact: New contact
       edit_contact: Edit contact
@@ -756,5 +756,5 @@ en:
         address: 'Canis Major street, 1743 - CEP 55.555-555 - Fortaleza, Ceará'
         phone: '(85) 0000-0000 / (85) 9 9999-9999'
         email: 'contact@sirius.com'
-      pf_receipt_text: 'We state that Sirius company, under CNPJ/MF nº 00.000.000/0000-00, localized at Canis Major street, received from %{name}, CPF nº %{cpf}, who lives at %{address}, %{value_tag} as a donation in %{competence_tag}.'
-      pj_receipt_text: 'We state that Sirius company, under CNPJ/MF nº 00.000.000/0000-00, localized at Manis Major street, received from %{name}, under CNPJ/MF nº %{cnpj}, localized at %{address}, %{value_tag} as a donation in %{competence_tag}.'
+      pf_receipt_text: 'We state that Sirius maintainer, under CNPJ/MF nº 00.000.000/0000-00, localized at Canis Major street, received from %{name}, CPF nº %{cpf}, who lives at %{address}, %{value_tag} as a donation in %{competence_tag}.'
+      pj_receipt_text: 'We state that Sirius maintainer, under CNPJ/MF nº 00.000.000/0000-00, localized at Manis Major street, received from %{name}, under CNPJ/MF nº %{cnpj}, localized at %{address}, %{value_tag} as a donation in %{competence_tag}.'

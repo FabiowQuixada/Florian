@@ -21,7 +21,7 @@ describe ReceiptEmailsController, type: :controller do
         {
           message: 'E-mail de recibo reenviado com sucesso!',
           date: I18n.localize(Date.today, format: :default_i),
-          company: model.company.name,
+          maintainer: model.maintainer.name,
           value: ActionController::Base.helpers.number_to_currency(model.value),
           type: 'Reenvio',
           user: model.history.last.user.name
@@ -76,7 +76,7 @@ describe ReceiptEmailsController, type: :controller do
           {
             message: 'E-mail de recibo de teste enviado com sucesso!',
             date: I18n.localize(Date.today, format: :default_i),
-            company: model.company.name,
+            maintainer: model.maintainer.name,
             value: ActionController::Base.helpers.number_to_currency(model.value),
             type: 'Teste',
             user: User.first.name
