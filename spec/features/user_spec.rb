@@ -8,7 +8,7 @@ describe User, type: :request do
   it 'is not allowed to login if it is not active' do
     visit root_path
     try_to_login_as_inactive_user
-    expect(page).to have_content 'inativada'
+    expect_deactivated_msg
   end
 
   describe 'as admin' do
@@ -19,15 +19,15 @@ describe User, type: :request do
     it 'adds a new user' do
       visit new_user_path
       fill_new_fields
-      click_on 'Salvar'
-      expect(page).to have_content 'sucesso'
+      click_on_save_btn
+      expect_success_msg
     end
 
     it 'updates profile info' do
       visit edit_user_registration_path
       fill_admin_profile_fields
       fill_settings_fields
-      click_on 'Atualizar'
+      click_on_update_btn
       check_if_changes_persisted
     end
   end
@@ -39,18 +39,18 @@ describe User, type: :request do
 
     it 'tries to add a new user' do
       visit new_user_path
-      expect(page).to have_content 'Acesso negado!'
+      expect_access_denied_msg
     end
 
     it 'tries to edit another user' do
       visit edit_user_path non_logged_user
-      expect(page).to have_content 'Acesso negado!'
+      expect_access_denied_msg
     end
 
     it 'updates profile info' do
       visit edit_user_registration_path
       fill_common_user_profile_fields
-      click_on 'Atualizar'
+      click_on_update_btn
       visit edit_user_registration_path
       expect(first('#user_signature').value).to eq signature
     end
@@ -75,34 +75,40 @@ describe User, type: :request do
   # == Helper methods =============================================================
 
   def fill_new_fields
-    fill_in 'Nome', with: 'Joaozinho'
-    fill_in 'E-mail', with: 'joao@semdedo.com'
-    fill_in 'Senha', with: 'fulano0123'
-    fill_in 'Confirmação da nova senha', with: 'fulano0123'
-    select('Usuário', from: 'Grupo')
+    name_field = I18n.t('activerecord.attributes.user.name')
+    email_field = I18n.t('activerecord.attributes.user.email')
+    password_field = I18n.t('activerecord.attributes.user.password')
+    confirm_pass_field = I18n.t('activerecord.attributes.user.password_confirmation')
+    group_field = I18n.t('activerecord.attributes.user.role')
+
+    fill_in name_field, with: 'Joaozinho'
+    fill_in email_field, with: 'joao@semdedo.com'
+    fill_in password_field, with: 'fulano0123'
+    fill_in confirm_pass_field, with: 'fulano0123'
+    select 'Usuário', from: group_field
   end
 
   def fill_admin_profile_fields
-    fill_in 'Assinatura', with: signature
-    fill_in 'Senha atual', with: 'fulano0123'
+    fill_in i18n_field('signature'), with: signature
+    fill_in i18n_field('current_password'), with: 'fulano0123'
   end
 
   def fill_common_user_profile_fields
-    fill_in 'Assinatura', with: signature
-    fill_in 'Senha atual', with: 'usuario_comum'
+    signature_field = i18n_field 'signature'
+    cur_pass_field = i18n_field 'current_password'
+
+    fill_in signature_field, with: signature
+    fill_in cur_pass_field, with: 'usuario_comum'
   end
 
   def try_to_login_as_inactive_user
-    fill_in 'E-mail', with: 'teste_inativo@yahoo.com.br'
-    fill_in 'Senha', with: 'usuario_teste'
-    check 'Manter-me logado'
-
-    click_on 'Login'
+    fill_login_fields_with 'teste_inativo@yahoo.com.br', 'usuario_teste'
+    click_on_login_btn
   end
 
   def fill_settings_fields
     page.find('#main_tab_1_title').click
-    first('#user_system_setting_re_title').set re_title
+    # first('#user_system_setting_re_title').set re_title
 
     page.find('#main_tab_2_title').click
     first('#user_system_setting_pse_title').set pse_title
@@ -111,7 +117,7 @@ describe User, type: :request do
   def check_if_changes_persisted
     visit edit_user_registration_path
     check_general_tab
-    check_receipt_tab
+    # check_receipt_tab
     check_prod_serv_tab
   end
 
@@ -127,5 +133,10 @@ describe User, type: :request do
   def check_prod_serv_tab
     page.find('#main_tab_2_title').click
     expect(first('#user_system_setting_pse_title').value).to eq pse_title
+  end
+
+  def expect_deactivated_msg
+    expect(page).to have_content 'inativada' if I18n.locale == :"pt-BR"
+    expect(page).to have_content 'not activated yet' if I18n.locale == :en
   end
 end

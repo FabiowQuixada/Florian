@@ -1,15 +1,6 @@
 require 'rails_helper'
 
 describe 'Status', type: :request do
-  # def initialize(num)
-  #   ActiveRecord::Base.connection.tables.map do |model|
-  #     klass = model.capitalize.singularize.camelize
-  #     if klass != "SchemaMigration" and klass != "Audit" and Object.const_get(klass).column_names.include? 'active'
-  #       puts klass
-  #     end
-  #   end
-  # end
-
   STATUS_DATA = [Role, ReceiptEmail].freeze
 
   context 'admin' do
@@ -19,9 +10,9 @@ describe 'Status', type: :request do
 
     it "changes models' status" do
       STATUS_DATA.each do |data|
-        visit send(data.model_name.route_key + '_path')
+        visit send("#{data.model_name.route_key}_path")
         click_first_valid_status_btn data.new
-        expect(page).to have_content('sucesso'), ('Expected to include "sucesso": ' + data.to_s)
+        expect_success_msg
       end
     end
   end
@@ -34,14 +25,14 @@ describe 'Status', type: :request do
     it "change models' status" do
       [ReceiptEmail].each do |data|
         toogle_status_of data.new
-        expect(page).to have_content('sucesso'), ('Expected to include "sucesso": ' + data.to_s)
+        expect_success_msg
       end
     end
 
     it 'does not change private area' do
       [User, Role].each do |data|
-        visit send(data.model_name.route_key + '_path')
-        expect(page).to have_content('negado'), data.name
+        visit send("#{data.model_name.route_key}_path")
+        expect_access_denied_msg
       end
     end
   end

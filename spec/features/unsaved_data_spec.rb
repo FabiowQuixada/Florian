@@ -11,7 +11,7 @@ describe 'Unsaved data', js: true, type: :request do
     UNSAVED_DATA.each do |data|
       fill_non_temp_data data.new
       go_back
-      expect(page).to have_content('Dados não salvos'), data.name
+      expect(page).to have_content I18n.t('modal.title.back')
     end
   end
 
@@ -19,7 +19,7 @@ describe 'Unsaved data', js: true, type: :request do
     [Maintainer, Bill, ProductAndServiceDatum, Donation, ReceiptEmail].each do |data|
       fill_temp_data data.new
       go_back
-      expect(page).to have_no_content('Dados não salvos'), data.name
+      expect(page).not_to have_content I18n.t('modal.title.back')
     end
   end
 
@@ -32,12 +32,12 @@ describe 'Unsaved data', js: true, type: :request do
   # == Helper methods =============================================================
 
   def change_status_and_go_back(data)
-    visit send('edit_' + data.name.underscore + '_path', data.first)
+    visit send("edit_#{data.name.underscore}_path", data.first)
 
     first('.form_status_box img').click
 
     go_back
-    expect(page).to have_content('Dados não salvos'), data.name
+    expect(page).to have_content I18n.t('modal.title.back')
   end
 
   def fill_temp_data(model)
@@ -46,14 +46,14 @@ describe 'Unsaved data', js: true, type: :request do
 
     fill_temp_inputs unless all('.temp_field').empty?
   rescue Capybara::ElementNotFound => e
-    raise Capybara::ElementNotFound, e.message + ': ' + model.class.name
+    raise Capybara::ElementNotFound, "#{e.message}: #{model.class.name}"
   end
 
   def fill_non_temp_data(model)
     visit edit_path(model)
     fill_non_temp_inputs
   rescue Capybara::ElementNotFound => e
-    raise Capybara::ElementNotFound, e.message + ': ' + model.class.name
+    raise Capybara::ElementNotFound, "#{e.message}: #{model.class.name}"
   end
 
   def go_somewhere_with_a_temp_field(model)
@@ -61,7 +61,7 @@ describe 'Unsaved data', js: true, type: :request do
   end
 
   def edit_path(model)
-    send('edit_' + model.class.name.singularize.underscore + '_path', model.class.first.id)
+    send("edit_#{model.class.name.singularize.underscore}_path", model.class.first.id)
   end
 
   def fill_temp_inputs

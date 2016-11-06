@@ -7,7 +7,7 @@ describe ProductAndServiceDatum, type: :request do
     login_as_admin
     visit new_product_and_service_datum_path
     fill_fields
-    click_on 'Salvar'
+    click_on_save_btn
     visit edit_product_and_service_datum_path described_class.last
   end
 

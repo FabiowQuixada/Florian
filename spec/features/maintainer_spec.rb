@@ -10,8 +10,8 @@ describe Maintainer, js: true, type: :request do
     fill_main_fields
     add_contact
 
-    click_on 'Salvar'
-    expect(page).to have_content 'sucesso'
+    click_on_save_btn
+    expect_success_msg
   end
 
   it 'persists a maintainer with a donation' do
@@ -19,16 +19,16 @@ describe Maintainer, js: true, type: :request do
     fill_main_fields
     add_donation
 
-    click_on 'Salvar'
-    expect(page).to have_content 'sucesso'
+    click_on_save_btn
+    expect_success_msg
   end
 
   it 'persists donation' do
     visit edit_maintainer_path described_class.first.id
     remark = "observacao #{Time.new.usec}"
     add_donation remark
-    click_on 'Atualizar'
 
+    click_on_update_btn
     expect_edit_page_to_have_content remark
   end
 
@@ -37,21 +37,29 @@ describe Maintainer, js: true, type: :request do
     add_donation 'remark'
 
     go_back
-
-    expect(page).to have_content 'Dados não salvos'
+    expect(page).to have_content I18n.t('modal.title.back')
   end
 
   # == Helper methods =============================================================
 
   def fill_main_fields
+    company_type = I18n.t('enums.maintainer.entity_type.company')
+    low_category = I18n.t('enums.maintainer.category.low')
+    maintainer_group = I18n.t('enums.maintainer.group.maintainer')
+
+    fill_main_fields_with company_type, low_category, maintainer_group
+  end
+
+  def fill_main_fields_with(company_type, low_category, maintainer_group)
     time = Time.new.usec
-    select 'Pessoa Jurídica', from: 'maintainer_entity_type'
+
+    select company_type, from: 'maintainer_entity_type'
     fill_in 'maintainer_registration_name', with: "Maintainer #{time}"
     fill_in 'maintainer_cnpj', with: BlaBla::CNPJ.formatado
     fill_in 'maintainer_name', with: "Maintainer #{time}"
     fill_in 'maintainer_address', with: "Maintainer address #{time}"
-    select '1 (Abaixo de R$ 300,00)', from: 'maintainer_category'
-    select 'Mantenedora', from: 'maintainer_group'
+    select low_category, from: 'maintainer_category'
+    select maintainer_group, from: 'maintainer_group'
   end
 
   def fill_donation_fields(remark)

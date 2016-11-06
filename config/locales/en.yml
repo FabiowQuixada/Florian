@@ -140,8 +140,8 @@ en:
         one: Maintainer
         other: Maintainers
       product_and_service_datum:
-        one: Products & Services
-        other: Products & Services
+        one: Products and Services
+        other: Products and Services
       product_and_service_week:
         one: Week
         other: Weeks
@@ -388,7 +388,7 @@ en:
     format: "%{message}"
     messages:
       accepted: must be accepted
-      blank: can't be blank
+      blank: "Field can't be blank: %{attribute};"
       confirmation: doesn't match %{attribute}
       empty: can't be empty
       equal_to: must be equal to %{count}
@@ -479,7 +479,7 @@ en:
           p: New
           s: New
       product_and_service:
-        update_final_data: Copy from "Total"
+        update_final_data: 'Copy from "Total"'
       remove: Remove
       save: Save
       send_to_analysis: Send to analysis
@@ -490,8 +490,8 @@ en:
       update: Update
       update_and_new:
         n:
-          p: Save & new
-          s: Save & new
+          p: Save and new
+          s: Save and new
       update_data: Save
     attention: Attention
     by: by

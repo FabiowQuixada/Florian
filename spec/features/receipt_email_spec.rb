@@ -10,17 +10,17 @@ describe ReceiptEmail, js: true, type: :request do
     it 'resends e-mail' do
       all('.resend_btn').first.click
       fill_in 'resend_competence', with: '10/2015' + "\n"
-      click_on 'Enviar'
+      click_on_send_btn
     end
 
     it 'sends test e-mail' do
       all('.send_test_btn').first.click
       fill_in 'send_test_competence', with: '10/2015' + "\n"
-      click_on 'Enviar'
+      click_on_send_btn
     end
 
     after :each do
-      expect(page).to have_content'sucesso'
+      expect_success_msg
     end
   end
 
@@ -33,17 +33,21 @@ describe ReceiptEmail, js: true, type: :request do
     it 'resends e-mail' do
       all('.resend_btn').first.click
       fill_in 'resend_competence', with: '10/2015' + "\n"
-      click_on 'Enviar'
+      click_on_send_btn
     end
 
     it 'sends test e-mail' do
       all('.send_test_btn').first.click
       fill_in 'send_test_competence', with: '10/2015' + "\n"
-      click_on 'Enviar'
+      click_on_send_btn
     end
 
     after :each do
-      expect(page).to have_content 'sucesso'
+      expect_success_msg
     end
+  end
+
+  def click_on_send_btn
+    click_on I18n.t('helpers.action.email.send')
   end
 end

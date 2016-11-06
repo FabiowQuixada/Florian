@@ -9,14 +9,14 @@ describe Role, type: :request do
     it 'adds a new role' do
       visit new_role_path
       fill_form
-      click_on 'Salvar'
-      expect(page).to have_content 'sucesso'
+      click_on_save_btn
+      expect_success_msg
     end
 
     it 'updates role' do
       visit edit_role_path described_class.first
-      fill_in 'Descrição', with: 'lala'
-      click_on 'Atualizar'
+      change_field 'description', 'lala'
+      click_on_update_btn
       visit edit_role_path described_class.first
       expect(first('#role_description').value).to eq 'lala'
     end
@@ -29,12 +29,12 @@ describe Role, type: :request do
 
     it 'tries to add a new role' do
       visit new_role_path
-      expect(page).to have_content 'Acesso negado!'
+      expect_access_denied_msg
     end
 
     it 'updates role' do
       visit edit_role_path described_class.first
-      expect(page).to have_content 'Acesso negado!'
+      expect_access_denied_msg
     end
   end
 
@@ -42,7 +42,11 @@ describe Role, type: :request do
   # == Helper methods =============================================================
 
   def fill_form
-    fill_in 'Nome', with: 'Grupo'
-    fill_in 'Descrição', with: 'desc'
+    fill_in i18n_field('name'), with: 'Grupo'
+    fill_in i18n_field('description'), with: 'desc'
+  end
+
+  def change_field(field_name, value)
+    fill_in i18n_field(field_name), with: value
   end
 end
