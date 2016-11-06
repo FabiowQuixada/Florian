@@ -5,6 +5,8 @@ class Bill < ActiveRecord::Base
   include ModelHelper
   after_initialize :default_values
 
+  enum bill_type: [:water, :energy, :telephone]
+
 
   # Validations
   validates :competence, presence: true

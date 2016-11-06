@@ -32,7 +32,6 @@ SHOWCASE_USER = 'Visitante'.freeze
 SHOWCASE_EMAIL = 'visitante@florian.com'.freeze
 SHOWCASE_PASSWORD = 'visitante'.freeze
 
-NUMBER_OF_BILLS = 3
 NUMBER_OF_WEEKS = 5
 
 ANALYSIS_EMAIL = (Rails.env == 'production' ? 'edmarmaciel@gmail.com' : 'ftquixada@gmail.com')

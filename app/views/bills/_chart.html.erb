@@ -7,39 +7,11 @@
   function draw_charts() {
 
     // For each year...
-    <% @graph_data.each do |year_data| %>
-
-      // year_data is an array with the following structure: [[2016, [....]], [2017, [....]]];
-      year = <%= year_data[0] %>;
-
-      <% (0..(NUMBER_OF_BILLS-1)).each do |bill_code| %>
-        months_array<%= bill_code %> = new Array();
-      <% end %>
-
-      // For each month...
-      <% year_data[1].each_with_index do |month_data, i| %>
-
-        // For each bill (water, energy etc)...
-        <% (0..(NUMBER_OF_BILLS-1)).each do |bill| %>
-
-          <% month = [] %>
-
-          <% if month_data %>
-            <% month[bill] = "['#{(I18n.t :abbr_month_names, scope: :date)[i+1]}', #{month_data[bill]}]" %>
-
-            months_array<%= bill %>.push(<%= month[bill].html_safe %>);
-
-          <% end %>
-
-          <% end # each bill %>
-
-        <% end # each month %>
-
-        <% (0..(NUMBER_OF_BILLS-1)).each do |bill_code| %>
-          draw_chart_by_year(year, months_array<%= bill_code %>, <%= bill_code %>);
+    <% @graph_data.each do |year_key, value| %>
+        <% Bill.bill_types.each do |type| %>
+          draw_chart_by_year(<%= year_key %>, <%= value[type[1]].compact.to_s.html_safe %>, <%= type[1] %>);
         <% end %>
-
-    <% end # each year %>
+    <% end %>
   }
 
   function draw_chart_by_year(year, months_array, type) {
@@ -84,15 +56,15 @@
   </ul>
 
   <!-- Year's bills (bodies) -->
-  <% (0..(NUMBER_OF_BILLS-1)).each do |bill_code| %>
-    <div id="<%= bill[0].to_s %>_tab_<%= bill_code %>">
-      <div id="chart_div_<%= bill[0].to_s %>_<%= bill_code %>" style="display: block; margin: 0 auto"></div>
+  <% Bill.bill_types.each do |type| %>
+    <div id="<%= bill[0].to_s %>_tab_<%= type[1] %>">
+      <div id="chart_div_<%= bill[0].to_s %>_<%= type[1] %>" style="display: block; margin: 0 auto"></div>
     </div>
   <% end %>
 
   </div>
 
-  <%= render 'shared/tab_commons', number_of_tabs: NUMBER_OF_BILLS, tab_type: bill[0].to_s %>
+  <%= render 'shared/tab_commons', number_of_tabs: Bill.bill_types.length, tab_type: bill[0].to_s %>
 
 <% end %>
 
