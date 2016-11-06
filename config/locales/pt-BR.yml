@@ -1,169 +1,116 @@
 pt-BR:
-  app_title: Flórian
-  author: Fabiow Quixadá
-  main_page: Página Principal
-  environments:
-    development: Desenvolvimento
-    test: Teste
-    uat: Homologação
-    showcase: Showcase
-    production: Produção
-  attention: Atenção
-  uat_mode_message: Você está em ambiente de teste.
-  menu:
-    emails: E-mails
-    email:
-      receipt: Recibo
-      prod_serv: "Produtos & Serviços"
   activerecord:
-    models:
-      bill:
-        one: Conta
-        other: Contas
-      receipt_email:
-        one: E-mail de Recibo
-        other: E-mails de Recibo
-      product_and_service_datum:
-        one: Produtos e Serviços
-        other: Produtos e Serviços
-      product_and_service_week:
-        one: Semana
-        other: Semanas
-      service_datum:
-        one: Serviço
-        other: Serviços
-      product_datum:
-        one: Produto
-        other: Produtos
-      maintainer:
-        one: Mantenedora
-        other: Mantenedoras
-      contact:
-        one: Contato
-        other: Contatos
-      system_setting:
-        one: Configuração
-        other: Configurações
-      user:
-        one: Usuário
-        other: Usuários
-      role:
-        one: Grupo
-        other: Grupos
-      donation:
-        one: Doação
-        other: Doações
     attributes:
       bill:
         competence: "Competência"
-        water: Água
         energy: Energia
         telephone: Telefone
-      receipt_email:
-        email: "E-mail"
-        title: "Título"
-        body: "Corpo"
-        day_of_month: "Dia do mês"
-        day: "Dia"
-        value: "Valor"
-        competence: "Competência"
-        maintainer: "Mantenedora"
-        recipients_array: "Destinatários"
-      system_setting:
-        user: Usuário
-        re_title: "Título"
-        re_body: "Corpo"
-        pse_title: "Título"
-        pse_body: "Corpo"
-        pse_day_of_month: "Dia do lembrete"
-        maintainer: "Mantenedora"
-        pse_recipients_array: "Destinatários"
-        pse_private_recipients_array: "Destinatários privados"
-      product_and_service_datum:
-        recipients_array: "Destinatários"
-        competence: Competência
-        send_date: Data de finalização
-        services: Serviços
-        products: Produtos
-        attendances: Atendimentos
-        returns: Retornos
-        status: Status
-      product_and_service_week:
-        number: Número
-        start_date: Data de início
-        end_date: Data de término
-      service_data:
-        service_type: Tipo de serviço
-        psychology: Psicologia
-        physiotherapy: Fisioterapia
-        plastic_surgery: Cirurgia plástica
-        mesh: Malha
-        gynecology: Ginecologia
-        occupational_therapy: Ter. ocupacional
-      product_data:
-        mesh: Malha
-        cream: Creme
-        protector: Protetor
-        silicon: Silicone
-        mask: Máscara
-        foam: Espuma
-        skin_expander: Expansor de Pele
-        cervical_collar: Colar Cervical
-        status: Status
-      email_history:
-        created_at: Data
-      maintainer:
-        registration_name: Razão social
-        cnpj: CNPJ
-        cpf: CPF
-        entity_type: Tipo de pessoa
-        name: Nome / Nome fantasia
-        cep: CEP
-        neighborhood: Bairro
-        city: Cidade
-        state: Estado
-        address: Endereço
-        email_address: 'E-mail'
-        website: Site
-        category: Categoria
-        group: Grupo
-        contract: Contrato
-        first_parcel: Primeira parcela
-        last_parcel: Última parcela
-        remark: Anotações gerais
-        payment_frequency: Frequência
-        payment_period: No. parcelas
+        water: Água
       contact:
+        celphone: Celular
+        contact_type: Tipo de Contato
+        email_address: E-mail
+        fax: FAX
+        maintainer: Mantenedora
         name: Nome
         position: Cargo
         telephone: Telefone
-        celphone: Celular
-        fax: FAX
-        email_address: E-mail
-        maintainer: Mantenedora
-        contact_type: Tipo de Contato
       donation:
-        maintainer: Mantenedora
         date: Data
         donation_date: Data
-        value: Valor
+        maintainer: Mantenedora
         remark: Observação
-      user:
-        name: Nome
-        role: Grupo
-        email: E-mail
-        password: Senha
-        new_password: Nova senha
-        password_confirmation: Confirmação da nova senha
-        current_password: Senha atual
-        remember_me: Manter-me logado
-        signature: "Assinatura"
-        from: "De"
-        test_recipient: "Destinatário-teste"
-        bcc: "Cópia oculta"
+        value: Valor
+      email_history:
+        created_at: Data
+      maintainer:
+        address: Endereço
+        category: Categoria
+        cep: CEP
+        city: Cidade
+        cnpj: CNPJ
+        contract: Contrato
+        cpf: CPF
+        email_address: 'E-mail'
+        entity_type: Tipo de pessoa
+        first_parcel: Primeira parcela
+        group: Grupo
+        last_parcel: Última parcela
+        name: Nome / Nome fantasia
+        neighborhood: Bairro
+        payment_frequency: Frequência
+        payment_period: No. parcelas
+        registration_name: Razão social
+        remark: Anotações gerais
+        state: Estado
+        website: Site
+      product_and_service_datum:
+        attendances: Atendimentos
+        competence: Competência
+        products: Produtos
+        recipients_array: "Destinatários"
+        returns: Retornos
+        send_date: Data de finalização
+        services: Serviços
+        status: Status
+      product_and_service_week:
+        end_date: Data de término
+        number: Número
+        start_date: Data de início
+      product_data:
+        cervical_collar: Colar Cervical
+        cream: Creme
+        foam: Espuma
+        mask: Máscara
+        mesh: Malha
+        protector: Protetor
+        silicon: Silicone
+        skin_expander: Expansor de Pele
+        status: Status
+      receipt_email:
+        body: "Corpo"
+        competence: "Competência"
+        day: "Dia"
+        day_of_month: "Dia do mês"
+        email: "E-mail"
+        maintainer: "Mantenedora"
+        recipients_array: "Destinatários"
+        title: "Título"
+        value: "Valor"
       role:
-        name: Nome
         description: Descrição
+        name: Nome
+      service_data:
+        gynecology: Ginecologia
+        mesh: Malha
+        occupational_therapy: Ter. ocupacional
+        physiotherapy: Fisioterapia
+        plastic_surgery: Cirurgia plástica
+        psychology: Psicologia
+        service_type: Tipo de serviço
+      system_setting:
+        maintainer: "Mantenedora"
+        pse_body: "Corpo"
+        pse_day_of_month: "Dia do lembrete"
+        pse_private_recipients_array: "Destinatários privados"
+        pse_recipients_array: "Destinatários"
+        pse_title: "Título"
+        re_body: "Corpo"
+        re_title: "Título"
+        user: Usuário
+      user:
+        bcc: "Cópia oculta"
+        current_password: Senha atual
+        email: E-mail
+        from: "De"
+        name: Nome
+        new_password: Nova senha
+        password: Senha
+        password_confirmation: Confirmação da nova senha
+        remember_me: Manter-me logado
+        role: Grupo
+        signature: "Assinatura"
+        test_recipient: "Destinatário-teste"
     gender:
       bill: f
       maintainer: f
@@ -175,6 +122,43 @@ pt-BR:
       system_setting: f
       user: m
       role: m
+    models:
+      bill:
+        one: Conta
+        other: Contas
+      contact:
+        one: Contato
+        other: Contatos
+      donation:
+        one: Doação
+        other: Doações
+      maintainer:
+        one: Mantenedora
+        other: Mantenedoras
+      product_and_service_datum:
+        one: Produtos e Serviços
+        other: Produtos e Serviços
+      product_and_service_week:
+        one: Semana
+        other: Semanas
+      product_datum:
+        one: Produto
+        other: Produtos
+      receipt_email:
+        one: E-mail de Recibo
+        other: E-mails de Recibo
+      role:
+        one: Grupo
+        other: Grupos
+      service_datum:
+        one: Serviço
+        other: Serviços
+      system_setting:
+        one: Configuração
+        other: Configurações
+      user:
+        one: Usuário
+        other: Usuários
     number:
       bill: s
       maintainer: s
@@ -186,367 +170,36 @@ pt-BR:
       system_setting: s
       user: s
       role: s
-  enums:
-    maintainer:
-      entity_type: 
-        company: Pessoa Jurídica
-        person: Pessoa Física
-      category: 
-        low: 1 (Abaixo de R$ 300,00)
-        medium: 2 (Entre R$ 300,00 e R$ 600,00)
-        high: 3 (Acima de R$ 600,00)
-      group: 
-        maintainer: Mantenedora
-        punctual: Pontual
-        negative: Negativa
-        deactivated: Desativada
-      payment_frequency:
-        undefined: Indeterminado
-        diary: Diário
-        weekly: Semanal
-        monthly: Mensal
-        bimonthly: Bimestral
-        semiannually: Semestral
-        annually: Anual
-        other: Outro (Observações)
-      contract_type:
-        with_contract: Com contrato
-        no_contract: Sem contrato
-        contract_and_additive: Contrato + Aditivo
-    email_history:
-      send_type:
-        auto: Automático
-        resend: Reenvio
-        test: Teste
-    product_and_service_datum:
-      status:
-        created: Novo
-        on_analysis: Em análise
-        finalized: Finalizado
-  activated:
-    m:
-      s: "%{model} ativado com sucesso!"
-      p: "%{model} ativados com sucesso!"
-    f:
-      s: "%{model} ativada com sucesso!"
-      p: "%{model} ativadas com sucesso!"
-  deactivated:
-    m:
-      s: "%{model} inativado com sucesso!"
-      p: "%{model} inativados com sucesso!"
-    f:
-      s: "%{model} inativada com sucesso!"
-      p: "%{model} inativadas com sucesso!"
-  created:
-    m:
-      s: "%{model} criado com sucesso!"
-      p: "%{model} criados com sucesso!"
-    f:
-      s: "%{model} criada com sucesso!"
-      p: "%{model} criadas com sucesso!"
-  updated:
-    m:
-      s: "%{model} atualizado com sucesso!"
-      p: "%{model} atualizados com sucesso!"
-    f:
-      s: "%{model} atualizada com sucesso!"
-      p: "%{model} atualizadas com sucesso!"
-  removed:
-    m:
-      s: "%{model} removido com sucesso!"
-      p: "%{model} removidos com sucesso!"
-    f:
-      s: "%{model} removida com sucesso!"
-      p: "%{model} removidas com sucesso!"
-  destroyed:
-    m:
-      s: "%{model} deletado com sucesso!"
-      p: "%{model} deletados com sucesso!"
-    f:
-      s: "%{model} deletada com sucesso!"
-      p: "%{model} deletadas com sucesso!"
-  sent:
-    m:
-      s: "%{model} enviado com sucesso!"
-      p: "%{model} enviados com sucesso!"
-    f:
-      s: "%{model} enviada com sucesso!"
-      p: "%{model} enviadas com sucesso!"
-  resent:
-    m:
-      s: "%{model} reenviado com sucesso!"
-      p: "%{model} reenviados com sucesso!"
-    f:
-      s: "%{model} reenviada com sucesso!"
-      p: "%{model} reenviadas com sucesso!"
-  test_sent:
-    m:
-      s: "%{model} de teste enviado com sucesso!"
-      p: "%{model} de teste enviados com sucesso!"
-    f:
-      s: "%{model} de teste enviada com sucesso!"
-      p: "%{model} de teste enviadas com sucesso!"
   alert:
     access_denied: "Acesso negado!"
-    query_results:
-      zero: 'Sua consulta não retornou nenhum registro.'
-      one: 'Sua consulta retornou 1 registro.'
-      other: 'Sua consulta retornou %{count} registros.'
     email:
-      sending: Enviando e-mail...
-      sending_test: Enviando e-mail de teste...
-      resending: Reenviando e-mail...
-      error_sending_test: 'Ocorreu um erro ao enviar um e-mail de teste. Por favor, entre em contato com o administrador informando o horário do ocorrido.'
-      error_sending: 'Ocorreu um erro ao enviar o e-mail. Por favor, entre em contato com o administrador informando o horário do ocorrido.'
+      duplicated_recipient: 'O destinatário já foi adicionado;'
       error_resending: 'Ocorreu um erro ao reenviar o e-mail. Por favor, entre em contato com o administrador informando o horário do ocorrido.'
+      error_sending: 'Ocorreu um erro ao enviar o e-mail. Por favor, entre em contato com o administrador informando o horário do ocorrido.'
+      error_sending_test: 'Ocorreu um erro ao enviar um e-mail de teste. Por favor, entre em contato com o administrador informando o horário do ocorrido.'
+      fill_a_recipient: Digite um endereço de e-mail;
       invalid_competence: Competência inválida;
       invalid_recipient: E-mail inválido;
-      fill_a_recipient: Digite um endereço de e-mail;
-      duplicated_recipient: 'O destinatário já foi adicionado;'
-  tags:
-    maintainer: '#mantenedora'
-    competence: '#competencia'
-    value: '#valor'
-  report:
-    title:
-      weekly_prod_and_service: "Relatório Semanal de Produtos e Serviços"
-      monthly_prod_and_service: "Relatório Mensal de Produtos e Serviços"
-      receipt: Recibo
-    footer:
-      address: "Rua Visconde de Sabóia, nº 75 – Salas 01 a 16 - Centro – Cep: 60.030-090 - Fortaleza – CE"
-      phone: "Fone: 55 85 3251-1093"
-      email: "E-mail: apoioaoqueimado@yahoo.com.br"
-    president_name: "Dr. Edmar Maciel Lima Júnior"
-    president_description: "Presidente do Instituto de Apoio ao Queimado – I.A.Q."
-    attachment:
-      receipt_email: 'recibo_de_doacao'
-      prod_serv_report: 'relatorio_de_produtos_e_servicos'
-    other:
-      banking:
-        deposit_data: 'Dados para depósito'
-        bank: 'Banco'
-        agency: 'Agência'
-        account: 'Conta Corrente'
-      receipt_text:
-        maintainer: 'A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu da %{name}, inscrito sob o CNPJ/MF nº %{cnpj}, situada na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
-        person: 'A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu de %{name}, CPF nº %{cpf}, residente na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
-  helpers:
-    main_page: Página Principal
-    by: por
-    error: Erro
-    about: 
-      title: Sobre...
-      st_florian: São Floriano
-      main_description: 'O nome "Florian" é uma variação do nome de São Floriano, santo da Igreja Católica padroeiro dos bombeiros e dos limpadores de chaminés e protetor das pessoas envolvidas em incêndios. Tem como um de seus símbolos a "Cruz Floriana", utilizada como logotipo deste sistema.'
-      showcase_description: 'São Floriano foi escolhido como referência para este sistema por ele ter sido desenvolvido para uma ONG que trata de pessoas vítimas de queimaduras.'
-    general: Geral
-    email_tag: "[Florian] "
-    email:
-      production_db_backup:
-        subject: 'Backup Semanal'
-        body: 'Banco de Produção'
-    changelog: Changelog
-    test_email_prefix: '[TESTE] '
-    min_length: '(No mínimo %{min_length} caracteres)'
-    profile: Perfil
-    none: (Nenhum)
-    from: De
-    to: a
-    total: Total
-    final_data: Dados finais
-    logged_as: "Logado como "
-    no_recent_emails: Nenhum e-mail recente
-    is_active:
-      m:
-        s: 'Este %{model} está ativo, clique aqui para inativá-lo.'
-        p: 'Estes %{model} estão ativos, clique aqui para inativá-los.'
-      f:
-        s: 'Esta %{model} está ativa, clique aqui para inativá-la.'
-        p: 'Estas %{model} estão ativas, clique aqui para inativá-las.'
-    is_inactive:
-      m:
-        s: 'Este %{model} está inativo, clique aqui para ativá-lo.'
-        p: 'Estes %{model} estão inativos, clique aqui para ativá-los.'
-      f:
-        s: 'Esta %{model} está inativa, clique aqui para ativá-la.'
-        p: 'Estas %{model} estão inativas, clique aqui para ativá-las.'
-    none_registered:
-      m:
-        s: 'Nenhum %{model} cadastrado.'
-        p: 'Não há quaisquer %{model} cadastrados.'
-      f:
-        s: 'Nenhuma %{model} cadastrada.'
-        p: 'Não há quaisquer %{model} cadastradas.'
-    select:
-      prompt: Selecione
-      all:
-        m:
-          s: 'Todos'
-          p: 'Todos'
-        f:
-          s: 'Todas'
-          p: 'Todas'
-    receipt_email:
-      index_footer: '*Os e-mails serão enviados às %{time}:00h da manhã nos respectivos dias.'
-      new_recipient: "Novo destinatário"
-      recent: Recentes
-    prod_and_serv_datum:
-      attendances: Atendimentos
-      product_output: Saída de Produtos
-      checkup: Avaliação
-      return: Retorno
-      week_footer: '* Os dados desta semana serão enviados por e-mail apenas para os colaboradores.'
-      final_footer: 'Estes serão os dados enviados por e-mail para os mantenedores.'
-    maintainer:
-      new_donation: Nova doação
-      new_contact: Novo contato
-      edit_contact: Editar contato
-    action:
-      login: Login
-      signup: Cadastrar
-      new:
-        m:
-          s: Novo
-          p: Novos
-        f:
-          s: Nova
-          p: Novas
-      edit: Editar
-      show: Visualizar
-      save: Salvar
-      show_admin_private_data: Exibir dados de administrador. Opção disponível também no ambiente de portfólio para fins de ilustração, sem permissão para ações administrativas.
-      update: Atualizar
-      update_and_new:
-        m:
-          s: Salvar e cadastrar novo
-          p: Salvar e cadastrar novos
-        f:
-          s: Salvar e cadastrar nova
-          p: Salvar e cadastrar novas
-      update_data: Salvar
-      destroy: Deletar
-      confirm: Confirmar
-      cancel: Cancelar
-      back: Voltar
-      discard: Descartar
-      add: Adicionar
-      filter: Filtrar
-      remove: Remover
-      activate: Ativar
-      deactivate: Inativar
-      send_to_analysis: Enviar para análise
-      email:
-        add_recipient: +
-        private_send: Enviar internamente
-        save_and_send: Salvar e enviar
-        send: Enviar
-        resend: Reenviar
-        send_test: Enviar teste
-        view_receipt: Visualizar recibo
-        config: Configurações
-      product_and_service:
-        update_final_data: Copiar de "Total"
-      login: Login
-      sign_up: Registrar-se
-      logout: Sair
-  views:
-    pagination:
-      first: "&laquo; Primeira"
-      last: "Última &raquo;"
-      previous: "&lsaquo; Anterior"
-      next: "Próxima &rsaquo;"
-      truncate: "&hellip;"
-  is_active:
-    m:
-      s: '%{model} está ativo, clique para inativá-lo'
-      p: '%{model} estão ativos, clique para inativá-los'
-    f:
-      s: '%{model} está ativa, clique para inativá-la'
-      p: '%{model} estão ativas, clique para inativá-las'
-  is_inactive:
-    m:
-      s: '%{model} está inativo, clique para ativá-lo'
-      p: '%{model} estão inativos, clique para ativá-los'
-    f:
-      s: '%{model} está inativa, clique para ativá-la'
-      p: '%{model} estão inativas, clique para ativá-las'
-  description:
-    email:
-      resend: Reenviar e-mail para mantenedoras
-      send_test: Enviar e-mail teste apenas para
-  modal:
-    remove_title:
-      m:
-        s: 'Remover %{model}'
-        p: 'Remover %{model}'
-      f:
-        s: 'Remover %{model}'
-        p: 'Remover %{model}'
-    remove_body:
-      m:
-        s: 'Tem certeza que deseja remover este %{model}?'
-        p: 'Tem certeza que deseja remover estes %{model}?'
-      f:
-        s: 'Tem certeza que deseja remover esta %{model}?'
-        p: 'Tem certeza que deseja remover estas %{model}?'
-    destroy_model:
-      m:
-        s: 'Tem certeza que deseja deletar este %{model}?'
-        p: 'Tem certeza que deseja deletar estes %{model}?'
-      f:
-        s: 'Tem certeza que deseja deletar esta %{model}?'
-        p: 'Tem certeza que deseja deletar estas %{model}?'
-    title:
-      bill_graphs: Gráficos de Contas Por Ano
-      back: Dados não salvos
-      destroy: Deleção
-    body:
-      back: 'Suas alterações não foram salvas, deseja descartá-las?'
-    email:
-      title:
-        resend: 'Reenvio de E-mail para '
-        send_test: 'Enviar E-mail de Teste da '
-        remove: 'Remover E-mail da '
-        warning_save: Atenção
-        recent_emails: 'E-mails Enviados nos Últimos %{days} Dias'
-      body:
-        remove: Tem certeza que deseja remover este e-mail?
-        warning_save: "O campo 'Corpo' deve constar os símbolos especiais (#), para que seja atualizado corretamente pelo sistema. Por exemplo, se você digitar a competência 'outubro', nos demais meses a competência não será ajustada automaticamente. Em vez disso, use os botões disponíveis acima do campo."
-  title:
-    new:
-      m:
-        s: 'Novo %{model}'
-        p: 'Novos %{model}'
-      f:
-        s: 'Nova %{model}'
-        p: 'Novas %{model}'
-    edit:
-      m:
-        s: 'Editar %{model}'
-        p: 'Editar %{model}'
-      f:
-        s: 'Editar %{model}'
-        p: 'Editar %{model}'
+      resending: Reenviando e-mail...
+      sending: Enviando e-mail...
+      sending_test: Enviando e-mail de teste...
+    query_results:
+      one: 'Sua consulta retornou 1 registro.'
+      other: 'Sua consulta retornou %{count} registros.'
+      zero: 'Sua consulta não retornou nenhum registro.'
+  app_data:
+    app_title: Flórian
+    author: Fabiow Quixadá
   audit:
+    data: Dados
+    history: Histórico
     title: Auditoria
-    who: Quem
+    type: Tipo
+    value: Valor
+    what: Alterações
     when: Quando
     where: Onde
-    what: Alterações
-    value: Valor
-    type: Tipo
-    history: Histórico
-    data: Dados
-  exception:
-    invalid_recipient: O e-mail não pôde ser enviado devido a pelo menos um dos destinatários ser inválido.
-    no_internet_connection: Não há conexão com a internet.
-  error_pages:
-    not_found:
-      title: "Desculpe, mas esta página não existe ou você não tem permissão para acessá-la."
-      body: Verifique se o endereço está correto ou contate o administrador informando o horário do ocorrido.
-    internal_server_error:
-      title: "Desculpe, mas algo deu errado."
-      body: "Por favor, contate o administrador informando o horário do ocorrido."
+    who: Quem
   date:
     abbr_day_names:
     - Dom
@@ -579,15 +232,15 @@ pt-BR:
     - sexta-feira
     - sábado
     formats:
-      default: "%d/%m/%Y"
-      default_i: "%d/%m/%y"
-      long: "%d de %B de %Y"
-      short: "%d de %B"
       competence: "%B/%Y"
       competence_i: "%m/%Y"
+      default: "%d/%m/%Y"
+      default_i: "%d/%m/%y"
       javascript_format:
         competence: "mm/yyyy"
         date: "dd/mm/yyyy"
+      long: "%d de %B de %Y"
+      short: "%d de %B"
     month_names:
     -
     - janeiro
@@ -651,36 +304,75 @@ pt-BR:
         other: Meses
       second: Segundo
       year: Ano
-  errors:
-    undestroyable_user: 'Nenhum usuário pode ser deletado.'
-    deletion: A deleção não pôde ser efetuada por algum motivo. Verifique o log.
-    unpermitted_action: Desculpe, você não tem permissão para realizar esta ação.
-    user:
-      cannot_deactivate_admin: 'Não é possível desativar um administrador;'
+  description:
     email:
-      one_recipient: "O e-mail deve ter pelo menos um destinatário;"
+      resend: Reenviar e-mail para mantenedoras
+      send_test: Enviar e-mail teste apenas para
+  devise:
+    leave_blank_if: (Deixe em branco se não quiser alterá-la)
+    type_password_to_change: (Sua senha é necessária para que as mudanças tenham efeito)
+  enums:
+    email_history:
+      send_type:
+        auto: Automático
+        resend: Reenvio
+        test: Teste
+    maintainer:
+      category: 
+        high: 3 (Acima de R$ 600,00)
+        low: 1 (Abaixo de R$ 300,00)
+        medium: 2 (Entre R$ 300,00 e R$ 600,00)
+      contract_type:
+        contract_and_additive: Contrato + Aditivo
+        no_contract: Sem contrato
+        with_contract: Com contrato
+      entity_type: 
+        company: Pessoa Jurídica
+        person: Pessoa Física
+      group: 
+        deactivated: Desativada
+        maintainer: Mantenedora
+        negative: Negativa
+        punctual: Pontual
+      payment_frequency:
+        annually: Anual
+        bimonthly: Bimestral
+        diary: Diário
+        monthly: Mensal
+        other: Outro (Observações)
+        semiannually: Semestral
+        undefined: Indeterminado
+        weekly: Semanal
+    product_and_service_datum:
+      status:
+        created: Novo
+        finalized: Finalizado
+        on_analysis: Em análise
+  environments:
+    development: Desenvolvimento
+    production: Produção
+    showcase: Showcase
+    test: Teste
+    uat: Homologação
+  error_pages:
+    internal_server_error:
+      body: "Por favor, contate o administrador informando o horário do ocorrido."
+      title: "Desculpe, mas algo deu errado."
+    not_found:
+      body: Verifique se o endereço está correto ou contate o administrador informando o horário do ocorrido.
+      title: "Desculpe, mas esta página não existe ou você não tem permissão para acessá-la."
+  errors:
     contact:
       all_empty: "Preencha pelo menos um dos campos."
+    deletion: A deleção não pôde ser efetuada por algum motivo. Verifique o log.
     donation:
       value_or_remark: "Preencha pelo menos um dos seguintes campos: 'Valor' ou 'Observação';"
-    system_setting:
-      recipients: "Adicione pelo menos um destinatario;"
-      private_recipients: "Adicione pelo menos um destinatario privado;"
-    product_and_service_datum:
-      cant_send: "Não é possível enviar estes dados;"
-      cant_send_to_analysis: "Não é possível enviar estes dados para análise;"
-      cant_send_to_maintainers: "Não é possível enviar estes dados para as mantenedoras;"
-      period_is_mandatory: "O campo de período da semana é obrigatório: Semana %{week_number};"
-      invalid_period: "Período inválido: Semana %{week_number};"
-      all_attendances_are_mandatory: "Todos os atendimentos são obrigatórios: Semana %{week_number};"
-      all_returns_are_mandatory: "Todos os retornos são obrigatórios: Semana %{week_number};"
-      all_products_are_mandatory: "Todos os produtos são obrigatórios: Semana %{week_number};"
-      weeks_qty: "Número de semanas inválido: %{weeks};"
+    email:
+      one_recipient: "O e-mail deve ter pelo menos um destinatário;"
     format: "%{message}"
     messages:
       accepted: "O campo '%{attribute}' deve ser aceito;"
       blank: "O campo '%{attribute}' é obrigatório;"
-      present: "O campo '%{attribute}' deve ficar em branco;"
       confirmation: "Os campos 'Senha' e 'Confirmação de senha' não conferem;"
       empty: "O campo '%{attribute}' não pode ficar vazio;"
       equal_to: "O campo '%{attribute}' deve ser igual a %{count};"
@@ -695,22 +387,302 @@ pt-BR:
       not_a_number: "O campo '%{attribute}' não é um número;"
       not_an_integer: "O campo '%{attribute}' não é um número inteiro;"
       odd: "O campo '%{attribute}' deve ser ímpar;"
+      other_than: "O campo '%{attribute}' deve ser diferente de %{count};"
+      present: "O campo '%{attribute}' deve ficar em branco;"
       record_invalid: "A validação falhou: %{errors}"
       restrict_dependent_destroy:
-        one: Não é possível excluir o registro pois existe um %{record} dependente;
         many: Não é possível excluir o registro pois existem %{record} dependentes;
+        one: Não é possível excluir o registro pois existe um %{record} dependente;
       taken: "O campo '%{attribute}' já está em uso;"
       too_long: "O campo '%{attribute}' é muito longo (máximo: %{count} caracteres);"
       too_short: "O campo '%{attribute}' é muito curto (mínimo: %{count} caracteres);"
       wrong_length: "O campo '%{attribute}' não possui o tamanho esperado (%{count} caracteres);"
-      other_than: "O campo '%{attribute}' deve ser diferente de %{count};"
+    product_and_service_datum:
+      all_attendances_are_mandatory: "Todos os atendimentos são obrigatórios: Semana %{week_number};"
+      all_products_are_mandatory: "Todos os produtos são obrigatórios: Semana %{week_number};"
+      all_returns_are_mandatory: "Todos os retornos são obrigatórios: Semana %{week_number};"
+      cant_send: "Não é possível enviar estes dados;"
+      cant_send_to_analysis: "Não é possível enviar estes dados para análise;"
+      cant_send_to_maintainers: "Não é possível enviar estes dados para as mantenedoras;"
+      invalid_period: "Período inválido: Semana %{week_number};"
+      period_is_mandatory: "O campo de período da semana é obrigatório: Semana %{week_number};"
+      weeks_qty: "Número de semanas inválido: %{weeks};"
+    system_setting:
+      private_recipients: "Adicione pelo menos um destinatario privado;"
+      recipients: "Adicione pelo menos um destinatario;"
     template:
       body: 'Por favor, verifique o(s) seguinte(s) campo(s):'
       header:
         one: 'Não foi possível gravar %{model}: 1 erro'
         other: 'Não foi possível gravar %{model}: %{count} erros.'
+    undestroyable_user: 'Nenhum usuário pode ser deletado.'
+    unpermitted_action: Desculpe, você não tem permissão para realizar esta ação.
+    user:
+      cannot_deactivate_admin: 'Não é possível desativar um administrador;'
+  exception:
+    invalid_recipient: O e-mail não pôde ser enviado devido a pelo menos um dos destinatários ser inválido.
+    no_internet_connection: Não há conexão com a internet.
+  helpers:
+    about: 
+      main_description: 'O nome "Florian" é uma variação do nome de São Floriano, santo da Igreja Católica padroeiro dos bombeiros e dos limpadores de chaminés e protetor das pessoas envolvidas em incêndios. Tem como um de seus símbolos a "Cruz Floriana", utilizada como logotipo deste sistema.'
+      showcase_description: 'São Floriano foi escolhido como referência para este sistema por ele ter sido desenvolvido para uma ONG que trata de pessoas vítimas de queimaduras.'
+      st_florian: São Floriano
+      title: Sobre...
+    action:
+      activate: Ativar
+      add: Adicionar
+      back: Voltar
+      cancel: Cancelar
+      confirm: Confirmar
+      deactivate: Inativar
+      destroy: Deletar
+      discard: Descartar
+      edit: Editar
+      email:
+        add_recipient: +
+        config: Configurações
+        private_send: Enviar internamente
+        resend: Reenviar
+        save_and_send: Salvar e enviar
+        send: Enviar
+        send_test: Enviar teste
+        view_receipt: Visualizar recibo
+      filter: Filtrar
+      login: Login
+      login: Login
+      logout: Sair
+      new:
+        f:
+          p: Novas
+          s: Nova
+        m:
+          p: Novos
+          s: Novo
+      product_and_service:
+        update_final_data: Copiar de "Total"
+      remove: Remover
+      save: Salvar
+      send_to_analysis: Enviar para análise
+      show: Visualizar
+      show_admin_private_data: Exibir dados de administrador. Opção disponível também no ambiente de portfólio para fins de ilustração, sem permissão para ações administrativas.
+      sign_up: Registrar-se
+      signup: Cadastrar
+      update: Atualizar
+      update_and_new:
+        f:
+          p: Salvar e cadastrar novas
+          s: Salvar e cadastrar nova
+        m:
+          p: Salvar e cadastrar novos
+          s: Salvar e cadastrar novo
+      update_data: Salvar
+    attention: Atenção
+    by: por
+    changelog: Changelog
+    email:
+      production_db_backup:
+        body: 'Banco de Produção'
+        subject: 'Backup Semanal'
+    email_tag: "[Florian] "
+    error: Erro
+    final_data: Dados finais
+    from: De
+    to: a
+    general: Geral
+    logged_as: "Logado como "
+    main_page: Página Principal
+    maintainer:
+      edit_contact: Editar contato
+      new_contact: Novo contato
+      new_donation: Nova doação
+    min_length: '(No mínimo %{min_length} caracteres)'
+    no_recent_emails: Nenhum e-mail recente
+    none: (Nenhum)
+    prod_and_serv_datum:
+      attendances: Atendimentos
+      checkup: Avaliação
+      final_footer: 'Estes serão os dados enviados por e-mail para os mantenedores.'
+      product_output: Saída de Produtos
+      return: Retorno
+      week_footer: '* Os dados desta semana serão enviados por e-mail apenas para os colaboradores.'
+    profile: Perfil
+    receipt_email:
+      index_footer: '*Os e-mails serão enviados às %{time}:00h da manhã nos respectivos dias.'
+      new_recipient: "Novo destinatário"
+      recent: Recentes
+    select:
+      all:
+        f:
+          p: 'Todas'
+          s: 'Todas'
+        m:
+          p: 'Todos'
+          s: 'Todos'
+      prompt: Selecione
+    test_email_prefix: '[TESTE] '
+    total: Total
+  menu:
+    email:
+      prod_serv: "Produtos & Serviços"
+      receipt: Recibo
+    emails: E-mails
+  modal:
+    body:
+      back: 'Suas alterações não foram salvas, deseja descartá-las?'
+    email:
+      body:
+        remove: Tem certeza que deseja remover este e-mail?
+        warning_save: "O campo 'Corpo' deve constar os símbolos especiais (#), para que seja atualizado corretamente pelo sistema. Por exemplo, se você digitar a competência 'outubro', nos demais meses a competência não será ajustada automaticamente. Em vez disso, use os botões disponíveis acima do campo."
+      title:
+        recent_emails: 'E-mails Enviados nos Últimos %{days} Dias'
+        remove: 'Remover E-mail da '
+        resend: 'Reenvio de E-mail para '
+        send_test: 'Enviar E-mail de Teste da '
+        warning_save: Atenção
+    title:
+      back: Dados não salvos
+      bill_graphs: Gráficos de Contas Por Ano
+      destroy: Deleção
+  model_phrases:
+    are_you_sure:
+      destroy:
+        f:
+          p: 'Tem certeza que deseja deletar estas %{model}?'
+          s: 'Tem certeza que deseja deletar esta %{model}?'
+        m:
+          p: 'Tem certeza que deseja deletar estes %{model}?'
+          s: 'Tem certeza que deseja deletar este %{model}?'
+      remove:
+        f:
+          p: 'Tem certeza que deseja remover estas %{model}?'
+          s: 'Tem certeza que deseja remover esta %{model}?'
+        m:
+          p: 'Tem certeza que deseja remover estes %{model}?'
+          s: 'Tem certeza que deseja remover este %{model}?'
+    none_registered:
+      f:
+        p: 'Não há quaisquer %{model} cadastradas.'
+        s: 'Nenhuma %{model} cadastrada.'
+      m:
+        p: 'Não há quaisquer %{model} cadastrados.'
+        s: 'Nenhum %{model} cadastrado.'
+    past_actions:
+      activated:
+        f:
+          p: "%{model} ativadas com sucesso!"
+          s: "%{model} ativada com sucesso!"
+        m:
+          p: "%{model} ativados com sucesso!"
+          s: "%{model} ativado com sucesso!"
+      created:
+        f:
+          p: "%{model} criadas com sucesso!"
+          s: "%{model} criada com sucesso!"
+        m:
+          p: "%{model} criados com sucesso!"
+          s: "%{model} criado com sucesso!"
+      deactivated:
+        f:
+          p: "%{model} inativadas com sucesso!"
+          s: "%{model} inativada com sucesso!"
+        m:
+          p: "%{model} inativados com sucesso!"
+          s: "%{model} inativado com sucesso!"
+      destroyed:
+        f:
+          p: "%{model} deletadas com sucesso!"
+          s: "%{model} deletada com sucesso!"
+        m:
+          p: "%{model} deletados com sucesso!"
+          s: "%{model} deletado com sucesso!"
+      removed:
+        f:
+          p: "%{model} removidas com sucesso!"
+          s: "%{model} removida com sucesso!"
+        m:
+          p: "%{model} removidos com sucesso!"
+          s: "%{model} removido com sucesso!"
+      resent:
+        f:
+          p: "%{model} reenviadas com sucesso!"
+          s: "%{model} reenviada com sucesso!"
+        m:
+          p: "%{model} reenviados com sucesso!"
+          s: "%{model} reenviado com sucesso!"
+      sent:
+        f:
+          p: "%{model} enviadas com sucesso!"
+          s: "%{model} enviada com sucesso!"
+        m:
+          p: "%{model} enviados com sucesso!"
+          s: "%{model} enviado com sucesso!"
+      test_sent:
+        f:
+          p: "%{model} de teste enviadas com sucesso!"
+          s: "%{model} de teste enviada com sucesso!"
+        m:
+          p: "%{model} de teste enviados com sucesso!"
+          s: "%{model} de teste enviado com sucesso!"
+      updated:
+        f:
+          p: "%{model} atualizadas com sucesso!"
+          s: "%{model} atualizada com sucesso!"
+        m:
+          p: "%{model} atualizados com sucesso!"
+          s: "%{model} atualizado com sucesso!"
+    prompt:
+      edit:
+        f:
+          p: 'Editar %{model}'
+          s: 'Editar %{model}'
+        m:
+          p: 'Editar %{model}'
+          s: 'Editar %{model}'
+      new:
+        f:
+          p: 'Novas %{model}'
+          s: 'Nova %{model}'
+        m:
+          p: 'Novos %{model}'
+          s: 'Novo %{model}'
+      remove:
+        f:
+          p: 'Remover %{model}'
+          s: 'Remover %{model}'
+        m:
+          p: 'Remover %{model}'
+          s: 'Remover %{model}'
+    status:
+      full_desc:
+        is_active:
+          f:
+            p: 'Estas %{model} estão ativas, clique aqui para inativá-las.'
+            s: 'Esta %{model} está ativa, clique aqui para inativá-la.'
+          m:
+            p: 'Estes %{model} estão ativos, clique aqui para inativá-los.'
+            s: 'Este %{model} está ativo, clique aqui para inativá-lo.'
+        is_inactive:
+          f:
+            p: 'Estas %{model} estão inativas, clique aqui para ativá-las.'
+            s: 'Esta %{model} está inativa, clique aqui para ativá-la.'
+          m:
+            p: 'Estes %{model} estão inativos, clique aqui para ativá-los.'
+            s: 'Este %{model} está inativo, clique aqui para ativá-lo.'
+      is_active:
+        f:
+          p: '%{model} estão ativas, clique para inativá-las'
+          s: '%{model} está ativa, clique para inativá-la'
+        m:
+          p: '%{model} estão ativos, clique para inativá-los'
+          s: '%{model} está ativo, clique para inativá-lo'
+      is_inactive:
+        f:
+          p: '%{model} estão inativas, clique para ativá-las'
+          s: '%{model} está inativa, clique para ativá-la'
+        m:
+          p: '%{model} estão inativos, clique para ativá-los'
+          s: '%{model} está inativo, clique para ativá-lo'
   number:
-    value: Valor
     currency:
       format:
         delimiter: "."
@@ -766,62 +738,70 @@ pt-BR:
     precision:
       format:
         delimiter: "."
+    value: Valor
+  other: 
+    graph:
+      one: Gráfico
+      other: Gráficos
+  report:
+    attachment:
+      prod_serv_report: 'relatorio_de_produtos_e_servicos'
+      receipt_email: 'recibo_de_doacao'
+    footer:
+      address: "Rua Visconde de Sabóia, nº 75 – Salas 01 a 16 - Centro – Cep: 60.030-090 - Fortaleza – CE"
+      email: "E-mail: apoioaoqueimado@yahoo.com.br"
+      phone: "Fone: 55 85 3251-1093"
+    other:
+      banking:
+        account: 'Conta Corrente'
+        agency: 'Agência'
+        bank: 'Banco'
+        deposit_data: 'Dados para depósito'
+      receipt_text:
+        maintainer: 'A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu da %{name}, inscrito sob o CNPJ/MF nº %{cnpj}, situada na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
+        person: 'A ONG – Instituto de Apoio ao Queimado (IAQ), inscrita sob o CNPJ/MF nº 08.093.224/0001-05, situada à Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, recebeu de %{name}, CPF nº %{cpf}, residente na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
+    president_description: "Presidente do Instituto de Apoio ao Queimado – I.A.Q."
+    president_name: "Dr. Edmar Maciel Lima Júnior"
+    title:
+      monthly_prod_and_service: "Relatório Mensal de Produtos e Serviços"
+      receipt: Recibo
+      weekly_prod_and_service: "Relatório Semanal de Produtos e Serviços"
+  showcase: 
+    cant_edit: 'Não é possível alterar estas configurações em ambiente de portfólio.'
+    login_info: 'Você está em ambiente de portfólio. Os dados aqui apresentados são fictícios e reinicializados semanalmente. Para fazer login, utilize as seguintes credenciais: %{showcase_email} para login e %{showcase_password} para senha.'
+    report:
+      footer: 
+        address: 'Rua Canis Major, 1743 - CEP 55.555-555 - Fortaleza, Ceará'
+        email: 'contato@sirius.com.br'
+        phone: '(85) 0000-0000 / (85) 9 9999-9999'
+      pf_receipt_text: 'A empresa Sirius, inscrita sob o CNPJ/MF nº 00.000.000/0000-00, situada à Rua Canis Major, recebeu de %{name}, CPF nº %{cpf}, residente na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
+      pj_receipt_text: 'A empresa Sirius, inscrita sob o CNPJ/MF nº 00.000.000/0000-00, situada à Rua Manis Major, recebeu da %{name}, inscrito sob o CNPJ/MF nº %{cnpj}, situada na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
+      president_description: "Presidente do Instituto Sirius"
+      president_name: "Dr. Carl Sagan"
   support:
     array:
       last_word_connector: " e "
       two_words_connector: " e "
       words_connector: ", "
+  tags:
+    competence: '#competencia'
+    maintainer: '#mantenedora'
+    value: '#valor'
   time:
     am: ''
     formats:
       default: "%a, %d de %B de %Y, às %H:%M:%S %z"
       long: "%d de %B de %Y, às %H:%M"
       long_2: "%d/%m/%y, às %H:%Mh"
-      short: "%d de %B, às %H:%M"
       really_short: "%d/%m/%y"
+      short: "%d de %B, às %H:%M"
     pm: ''
-  other: 
-    graph:
-      one: Gráfico
-      other: Gráficos
-  devise:
-    email:
-      welcome: 'Bem-vindo(a), '
-      hello: 'Olá, '
-      reset_password:
-        1: 'Foi requisitada uma mudança de senha para sua conta. Você pode fazer isto através do seguinte link:'
-        2: 'Se não foi você que fez esta requisição, por favor ignore este e-mail.'
-        3: 'Sua senha não mudará a não ser que você acesse o link acima e crie uma nova.'
-        link: 'Mudar minha senha'
-      unlock_instructions:
-        1: 'Sua conta foi bloqueada devido a sucessivas tentativas infrutífgeras de login.'
-        2: 'Clique no link a seguir para desbloquear sua conta:'
-        link: 'Desbloquear minha conta'
-      confirmation_instructions:
-        1: 'Você pode confirmar sua conta de e-mail através do seguinte link:'
-        link: 'Confirmar'
-    title:
-      instruction_resend: Reenvio de Instruções de Confirmação
-      signup: Cadastro
-      forgot_password: Redefinição de Senha
-      didnt_receive_unlock: Não recebeu as instruções de desbloqueio?
-      didnt_receive_confirmation: Não recebeu as instruções de confirmação?
-    login_with: 'Logar com '
-    waiting_for_confirmation: 'Aguardando confirmação para: '
-    leave_blank_if: (Deixe em branco se não quiser alterá-la)
-    type_password_to_change: (Sua senha é necessária para que as mudanças tenham efeito)
-    buttons:
-      forgot_password: Esqueceu sua senha?
-      send_reset_password: Enviar instruções
-  showcase: 
-    login_info: 'Você está em ambiente de portfólio. Os dados aqui apresentados são fictícios e reinicializados semanalmente. Para fazer login, utilize as seguintes credenciais: %{showcase_email} para login e %{showcase_password} para senha.'
-    cant_edit: 'Não é possível alterar estas configurações em ambiente de portfólio.'
-    report:
-      president_name: "Dr. Carl Sagan"
-      president_description: "Presidente do Instituto Sirius"
-      footer: 
-        address: 'Rua Canis Major, 1743 - CEP 55.555-555 - Fortaleza, Ceará'
-        phone: '(85) 0000-0000 / (85) 9 9999-9999'
-        email: 'contato@sirius.com.br'
-      pf_receipt_text: 'A empresa Sirius, inscrita sob o CNPJ/MF nº 00.000.000/0000-00, situada à Rua Canis Major, recebeu de %{name}, CPF nº %{cpf}, residente na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
-      pj_receipt_text: 'A empresa Sirius, inscrita sob o CNPJ/MF nº 00.000.000/0000-00, situada à Rua Manis Major, recebeu da %{name}, inscrito sob o CNPJ/MF nº %{cnpj}, situada na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
+  title:
+  uat_mode_message: Você está em ambiente de teste.
+  views:
+    pagination:
+      first: "&laquo; Primeira"
+      last: "Última &raquo;"
+      next: "Próxima &rsaquo;"
+      previous: "&lsaquo; Anterior"
+      truncate: "&hellip;"

@@ -10,7 +10,7 @@ class DonationsController < ApplicationController
     @breadcrumbs = Hash[@model.model_name.human(count: 2) => donations_path, t(@model.genderize('helpers.action.new')) => '']
 
     if @model.save
-      redirect_to new_donation_path, notice: genderize_tag(@model, 'created')
+      redirect_to new_donation_path, notice: @model.was('created')
     else
       render '_form'
     end

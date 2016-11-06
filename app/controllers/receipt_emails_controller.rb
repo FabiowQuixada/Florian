@@ -59,7 +59,7 @@ class ReceiptEmailsController < ApplicationController
     history = email.email_histories.last
 
     { json: {
-      message: genderize_tag(email, type),
+      message: genderize_tag(email, "model_phrases.past_actions.#{type}"),
       date: l(history.created_at, format: :really_short),
       maintainer: email.maintainer.name,
       value: ActionController::Base.helpers.number_to_currency(history.value),

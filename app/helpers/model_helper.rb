@@ -15,7 +15,7 @@ module ModelHelper
   end
 
   def was(verb)
-    I18n.t("#{verb}.#{model_gender}.#{model_number}", model: I18n.t("activerecord.models.#{self.class.model_name.param_key}.one")).downcase.capitalize
+    I18n.t("model_phrases.past_actions.#{verb}.#{model_gender}.#{model_number}", model: I18n.t("activerecord.models.#{self.class.model_name.param_key}.one")).downcase.capitalize
   end
 
   def breadcrumb_path

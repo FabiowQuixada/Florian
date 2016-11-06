@@ -31,17 +31,17 @@ module ApplicationHelper
   end
 
   def activate_img(iterator)
-    image_tag('deactivate.png', title: genderize_tag(iterator, 'is_inactive'), class: 'activate_btn status_btn')
+    image_tag('deactivate.png', title: genderize_tag(iterator, 'model_phrases.status.is_inactive'), class: 'activate_btn status_btn')
   end
 
   def deactivate_img(iterator)
-    image_tag('activate.png', title: genderize_tag(iterator, 'is_active'), class: 'deactivate_btn status_btn')
+    image_tag('activate.png', title: genderize_tag(iterator, 'model_phrases.status.is_active'), class: 'deactivate_btn status_btn')
   end
 
   ## Other #######################################
 
   def app_footer
-    t('app_title') + " #{Time.now.year} #{footer_env}"
+    t('app_data.app_title') + " #{Time.now.year} #{footer_env}"
   end
 
   def showcase_login_msg
@@ -52,7 +52,7 @@ module ApplicationHelper
     style = list.any? ? 'display:none' : ''
 
     content_tag :tr, id: "no_#{model.class.name.pluralize.underscore}_row", style: style do
-      content_tag(:td, genderize_tag(model, 'helpers.none_registered'), colspan: colspan)
+      content_tag(:td, genderize_tag(model, 'model_phrases.none_registered'), colspan: colspan)
     end
   end
 

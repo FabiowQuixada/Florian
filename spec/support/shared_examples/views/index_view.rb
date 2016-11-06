@@ -32,7 +32,7 @@ shared_examples 'an index view' do
     it { expect(view).to render_template('shared/_index_commons') }
 
     # Others
-    it { expect(rendered).to include genderize_tag(model, 'helpers.none_registered') }
+    it { expect(rendered).to include genderize_tag(model, 'model_phrases.none_registered') }
     it { expect(rendered).to include 'class="table table-striped table-hover table-bordered table-condensed tablesorter tablesorter-blue"' }
     it { expect(rendered).not_to include '<tr id=\'model_' }
     it { expect(rendered).not_to include '<td class="model_id admin-only" style="display: none;">' }

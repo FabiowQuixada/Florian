@@ -6,13 +6,13 @@
 		<div class="modal-content">
 			<%= form_tag({url: '#'}, method: 'delete', remote: true, id: 'remove_form') do %>
 			<div class="modal-header">
-				<%= genderize_tag(@model, 'modal.remove_title') %>
+				<%= genderize_tag(@model, 'model_phrases.prompt.remove') %>
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 					&times;
 				</button>
 			</div>
 			<div class="modal-body">
-				<%= genderize_tag(@model, 'modal.remove_body') %>
+				<%= genderize_tag(@model, 'model_phrases.are_you_sure.remove') %>
 			</div>
 			<div class="modal-footer">
 
@@ -94,7 +94,7 @@
 
 			id = $(this).closest('.model_row').find('.model_id').html();
 			display_confirm_modal("<%= t('modal.title.destroy') %>",
-				"<%= genderize_tag(@model, 'modal.destroy_model') %>", destroy_model.bind(self, id));
+				"<%= genderize_tag(@model, 'model_phrases.are_you_sure.destroy') %>", destroy_model.bind(self, id));
 		});
 
 	});

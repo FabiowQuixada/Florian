@@ -1,173 +1,120 @@
 en:
-  app_title: Florian
-  author: Fabiow Quixadá
-  main_page: Main Page
-  environments:
-    development: Development
-    test: Test
-    uat: Homologation
-    showcase: Showcase
-    production: Production
-  attention: Attention
-  uat_mode_message: You are in test environment.
-  menu:
-    emails: E-mails
-    email:
-      receipt: Receipt
-      prod_serv: Products & Services
   activerecord:
-    models:
-      bill:
-        one: Bill
-        other: Bills
-      receipt_email:
-        one: Receipt E-mail
-        other: Receipt E-mails
-      product_and_service_datum:
-        one: Products & Services
-        other: Products & Services
-      product_and_service_week:
-        one: Week
-        other: Weeks
-      service_datum:
-        one: Service
-        other: Services
-      product_datum:
-        one: Product
-        other: Products
-      maintainer:
-        one: Maintainer
-        other: Maintainers
-      contact:
-        one: Contact
-        other: Contact
-      system_setting:
-        one: Setting
-        other: Settings
-      user:
-        one: User
-        other: Users
-      role:
-        one: Group
-        other: Groups
-      donation:
-        one: Donation
-        other: Donations
     attributes:
       bill:
         competence: "Competence"
-        water: Water
         energy: Energy
         telephone: Telephone
+        water: Water
+      contact:
+        celphone: Celphone
+        contact_type: Contact type
+        email_address: E-mail
+        fax: FAX
+        maintainer: Maintainers
+        name: Name
+        position: Position
+        telephone: Telephone
+      donation:
+        date: Date
+        donation_date: Date
+        maintainer: Maintainer
+        remark: Remark
+        value: Value
+      email_history:
+        created_at: Date
+      maintainer:
+        address: Address
+        category: Category
+        cep: CEP
+        city: City
+        cnpj: CNPJ
+        contract: Contract
+        cpf: CPF
+        email_address: 'E-mail'
+        entity_type: Entity type
+        first_parcel: First parcel
+        group: Group
+        last_parcel: Last parcel
+        name: Name
+        neighborhood: Neighborhood
+        payment_frequency: Payment frequency
+        payment_period: Payment period
+        registration_name: Registration name
+        remark: Remarks
+        state: State
+        website: Website
+      product_and_service_datum:
+        attendances: Attendances
+        competence: Competence
+        products: Products
+        recipients_array: "Recipients"
+        returns: Returns
+        send_date: Send date
+        services: Services
+        status: Status
+      product_and_service_week:
+        end_date: End date
+        number: Number
+        start_date: Start date
+      product_data:
+        cervical_collar: Cervical collar
+        cream: Cream
+        foam: Foam
+        mask: Mask
+        mesh: Mesh
+        protector: Protector
+        silicon: Silicon
+        skin_expander: Skin expander
+        status: Status
       receipt_email:
-        email: "E-mail"
-        title: "Title"
         body: "Body"
-        day_of_month: "Day of month"
-        day: "Day"
-        value: "Value"
         competence: "Competence"
+        day: "Day"
+        day_of_month: "Day of month"
+        email: "E-mail"
         maintainer: "Maintainer"
         recipients_array: "Recipients"
+        title: "Title"
         type_values:
           auto: Automatic
           resend: Resend
           test: Test
-      system_setting:
-        user: User
-        re_title: "Title"
-        re_body: "Body"
-        pse_title: "Title"
-        pse_body: "Body"
-        pse_day_of_month: "Remind day"
-        maintainer: "Maintainers"
-        pse_recipients_array: "Recipients"
-        pse_private_recipients_array: "Private recipients"
-      product_and_service_datum:
-        recipients_array: "Recipients"
-        competence: Competence
-        send_date: Send date
-        services: Services
-        products: Products
-        attendances: Attendances
-        returns: Returns
-        status: Status
-      product_and_service_week:
-        number: Number
-        start_date: Start date
-        end_date: End date
+        value: "Value"
+      role:
+        description: Description
+        name: Name
       service_data:
-        service_type: Service type
-        psychology: Psychology
+        gynecology: Gynecology
+        mesh: Mesh
+        occupational_therapy: Occupational therapy
         physiotherapy: Physiotherapy
         plastic_surgery: Plastic surgery
-        mesh: Mesh
-        gynecology: Gynecology
-        occupational_therapy: Occupational therapy
-      product_data:
-        mesh: Mesh
-        cream: Cream
-        protector: Protector
-        silicon: Silicon
-        mask: Mask
-        foam: Foam
-        skin_expander: Skin expander
-        cervical_collar: Cervical collar
-        status: Status
-      email_history:
-        created_at: Date
-      maintainer:
-        registration_name: Registration name
-        cnpj: CNPJ
-        cpf: CPF
-        entity_type: Entity type
-        name: Name
-        cep: CEP
-        neighborhood: Neighborhood
-        city: City
-        state: State
-        address: Address
-        email_address: 'E-mail'
-        website: Website
-        category: Category
-        group: Group
-        contract: Contract
-        first_parcel: First parcel
-        last_parcel: Last parcel
-        remark: Remarks
-        payment_frequency: Payment frequency
-        payment_period: Payment period
-      contact:
-        name: Name
-        position: Position
-        telephone: Telephone
-        celphone: Celphone
-        fax: FAX
-        email_address: E-mail
-        maintainer: Maintainers
-        contact_type: Contact type
-      donation:
-        maintainer: Maintainer
-        date: Date
-        donation_date: Date
-        value: Value
-        remark: Remark
+        psychology: Psychology
+        service_type: Service type
+      system_setting:
+        maintainer: "Maintainers"
+        pse_body: "Body"
+        pse_day_of_month: "Remind day"
+        pse_private_recipients_array: "Private recipients"
+        pse_recipients_array: "Recipients"
+        pse_title: "Title"
+        re_body: "Body"
+        re_title: "Title"
+        user: User
       user:
-        name: Name
-        role: Group
-        email: E-mail
-        password: Password
-        new_password: New password
-        password_confirmation: Password confirmation
-        current_password: Current password
-        remember_me: Remember me
-        signature: "Signature"
-        from: "From"
-        test_recipient: "Test-recipient"
         bcc: "Bcc"
-      role:
+        current_password: Current password
+        email: E-mail
+        from: "From"
         name: Name
-        description: Description
+        new_password: New password
+        password: Password
+        password_confirmation: Password confirmation
+        remember_me: Remember me
+        role: Group
+        signature: "Signature"
+        test_recipient: "Test-recipient"
     gender:
       bill: n
       maintainer: n
@@ -179,6 +126,43 @@ en:
       system_setting: n
       user: n
       role: n
+    models:
+      bill:
+        one: Bill
+        other: Bills
+      contact:
+        one: Contact
+        other: Contact
+      donation:
+        one: Donation
+        other: Donations
+      maintainer:
+        one: Maintainer
+        other: Maintainers
+      product_and_service_datum:
+        one: Products & Services
+        other: Products & Services
+      product_and_service_week:
+        one: Week
+        other: Weeks
+      product_datum:
+        one: Product
+        other: Products
+      receipt_email:
+        one: Receipt E-mail
+        other: Receipt E-mails
+      role:
+        one: Group
+        other: Groups
+      service_datum:
+        one: Service
+        other: Services
+      system_setting:
+        one: Setting
+        other: Settings
+      user:
+        one: User
+        other: Users
     number:
       bill: s
       maintainer: s
@@ -190,301 +174,36 @@ en:
       system_setting: s
       user: s
       role: s
-  enums:
-    maintainer:
-      entity_type: 
-        company: Company
-        person: Person
-      category: 
-        low: 1 (Under $ 300,00)
-        medium: 2 (Between $ 300,00 and $ 600,00)
-        high: 3 (Over $ 600,00)
-      group: 
-        maintainer: Maintainer
-        punctual: Punctual
-        negative: Negative
-        deactivated: Deactivated
-      payment_frequency:
-        undefined: Undefined
-        diary: Diary
-        weekly: Weekly
-        monthly: Monthly
-        bimonthly: Bimonthly
-        semiannually: Semiannually
-        annually: Annually
-        other: Other (Remarks)
-      contract_type:
-        with_contract: Contract
-        no_contract: No contract
-        contract_and_additive: Contract and additive
-    email_history:
-      send_type:
-        auto: Automatic
-        resend: Resend
-        test: Test
-    product_and_service_datum:
-      status:
-        created: New
-        on_analysis: On analysis
-        finalized: Finalized
-  activated:
-    n:
-      s: "%{model} successfully activated!"
-      p: "%{model} successfully activated!"
-  deactivated:
-    n:
-      s: "%{model} successfully deactivated!"
-      p: "%{model} successfully deactivated!"
-  created:
-    n:
-      s: "%{model} successfully created!"
-      p: "%{model} successfully created!"
-  updated:
-    n:
-      s: "%{model} successfully updated!"
-      p: "%{model} successfully updated!"
-  removed:
-    n:
-      s: "%{model} successfully removed!"
-      p: "%{model} successfully removed!"
-  destroyed:
-    n:
-      s: "%{model} successfully destroyed!"
-      p: "%{model} successfully destroyed!"
-  sent:
-    n:
-      s: "%{model} successfully sent!"
-      p: "%{model} successfully sent!"
-  resent:
-    n:
-      s: "%{model} successfully resent!"
-      p: "%{model} successfully resent!"
-  test_sent:
-    n:
-      s: "Test %{model} successfully sent!"
-      p: "Test %{model} successfully sent!"
   alert:
     access_denied: "Access denied!"
-    query_results:
-      zero: 'No record found.'
-      one: '1 record found.'
-      other: '%{count} records found.'
     email:
-      sending: Sending e-mail...
-      sending_test: Sending test e-mail...
-      resending: Resending e-mail...
-      error_sending_test: 'There was an error while trying to send a test e-mail. Please contact the administrator and inform him the time this has happenned.'
-      error_sending: 'There was an error while trying to send the e-mail. Please contact the administrator and inform him the time this has happenned.'
+      duplicated_recipient: 'This recipient was already added;'
       error_resending: 'There was an error while trying to resend the e-mail. Please contact the administrator and inform him the time this has happenned.'
+      error_sending: 'There was an error while trying to send the e-mail. Please contact the administrator and inform him the time this has happenned.'
+      error_sending_test: 'There was an error while trying to send a test e-mail. Please contact the administrator and inform him the time this has happenned.'
+      fill_a_recipient: Please add a receipient e-mail address;
       invalid_competence: Invalid competence;
       invalid_recipient: Invalid e-mail;
-      fill_a_recipient: Please add a receipient e-mail address;
-      duplicated_recipient: 'This recipient was already added;'
-  tags:
-    maintainer: '#maintainer'
-    competence: '#competence'
-    value: '#value'
-  report:
-    title:
-      weekly_prod_and_service: "Product & Service Weekly Report"
-      monthly_prod_and_service: "Product & Service Monthly Report"
-      receipt: Receipt
-    footer:
-      address: "Rua Visconde de Sabóia, 75 – Salas 01 a 16 – Centro – Cep: 60.030-090 - Fortaleza – CE"
-      phone: "Phone: 55 85 3251-1093"
-      email: "E-mail: apoioaoqueimado@yahoo.com.br"
-    president_name: "Dr. Edmar Maciel Lima Júnior"
-    president_description: "President of IAQ (Instituto de Apoio ao Queimado)"
-    attachment:
-      receipt_email: 'donation_receipt'
-      prod_serv_report: 'product_and_service_report'
-    other:
-      banking:
-        deposit_data: 'Deposit data'
-        bank: 'Bank'
-        agency: 'Agency'
-        account: 'Account'
-      receipt_text:
-        maintainer: 'The Instituto de Apoio ao Queimado (IAQ) NGO, under CNPJ/MF nº 08.093.224/0001-05, at Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, received from %{name}, under CNPJ/MF nº %{cnpj}, at %{address}, the importance of %{value_tag} as a donation in %{competence_tag}.'
-        person: 'The Instituto de Apoio ao Queimado (IAQ) NGO, under CNPJ/MF nº 08.093.224/0001-05, at Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, received from %{name}, CPF nº %{cpf}, living in %{address}, the importance of %{value_tag} as a donation in %{competence_tag}.'
-  helpers:
-    main_page: Main page
-    by: by
-    error: Error
-    about: 
-      title: About...
-      st_florian: St. Florian
-      main_description: 'Saint Florian, is a Catholic Church holy man, patron saint of the firemen, chimney-cleaners and also of those who were victims of severe burnings. The "Florian Cross" is one of his symbols, which was used as the logo of this web application.'
-      showcase_description: 'Saint Florian was chosen as a reference for this web application because it was developed for a NGO that helps people who got hurt in fire accidents.'
-    general: General
-    email_tag: "[Florian] "
-    email:
-      production_db_backup:
-        subject: 'Weekly Backup'
-        body: 'Production Database'
-    changelog: Changelog
-    test_email_prefix: '[TEST] '
-    min_length: '(At least %{min_length} characters)'
-    profile: Profile
-    none: (None)
-    from: From
-    to: to
-    total: Total
-    final_data: Final data
-    logged_as: "Loged as "
-    no_recent_emails: No recent e-mails
-    is_active:
-      n:
-        s: 'This %{model} is active, click here to deactivate it.'
-        p: 'These %{model} are active, click here to deactivate them.'
-    is_inactive:
-      n:
-        s: 'This %{model} is deactived, click here to activate it.'
-        p: 'These %{model} are deactived, click here to activate them.'
-    none_registered:
-      n:
-        s: 'No %{model} registered.'
-        p: 'No %{model} registered.'
-    select:
-      prompt: Select
-      all:
-        n:
-          s: 'All'
-          p: 'All'
-    receipt_email:
-      index_footer: '* The e-mails will be sent at %{time}:00am of every first day of month.'
-      new_recipient: "New recipient"
-      recent: Recent
-    prod_and_serv_datum:
-      attendances: Attendances
-      product_output: Products
-      checkup: Check up
-      return: Return
-      week_footer: '* This week data will be sent only to collaborators.'
-      final_footer: 'These are the data that will be sent to the maintainers.'
-    maintainer:
-      new_donation: New donation
-      new_contact: New contact
-      edit_contact: Edit contact
-    action:
-      login: Login
-      signup: Sign up
-      new:
-        n:
-          s: New
-          p: New
-      edit: Edit
-      show: Visualize
-      save: Save
-      show_admin_private_data: Display admin data. This option is also available on the showcase environment for ilustration ends, the administration actions are not allowed.
-      update: Update
-      update_and_new:
-        n:
-          s: Save & new
-          p: Save & new
-      update_data: Save
-      destroy: Delete
-      confirm: Confirm
-      cancel: Cancel
-      back: Back
-      discard: Discard
-      add: Add
-      filter: Filter
-      remove: Remove
-      activate: Activate
-      deactivate: Deactivate
-      send_to_analysis: Send to analysis
-      email:
-        add_recipient: +
-        private_send: Send internally
-        save_and_send: Save and send
-        send: Send
-        resend: Resend
-        send_test: Send test
-        view_receipt: View receipt
-        config: Settings
-      product_and_service:
-        update_final_data: Copy from "Total"
-      login: Login
-      sign_up: Sign up
-      logout: Logout
-  views:
-    pagination:
-      first: "&laquo; First"
-      last: "Last &raquo;"
-      previous: "&lsaquo; Previous"
-      next: "Next &rsaquo;"
-      truncate: "&hellip;"
-  is_active:
-    n:
-      s: '%{model} is active, click here to deactivate it'
-      p: '%{model} are active, click here to deactivate them'
-  is_inactive:
-    n:
-      s: '%{model} is deactived, click here to activate it'
-      p: '%{model} are deactived, click here to activate them'
-  description:
-    email:
-      resend: Resend e-mail to maintainers
-      send_test: Send test email to
-  modal:
-    remove_title:
-      n:
-        s: 'Remove %{model}'
-        p: 'Remove %{model}'
-    remove_body:
-      n:
-        s: 'Are you sure you want to remove this %{model}?'
-        p: 'Are you sure you want to remove these %{model}?'
-    destroy_model:
-      n:
-        s: 'Are you sure you want to remove this %{model}?'
-        p: 'Are you sure you want to remove these %{model}?'
-    title:
-      bill_graphs: Bills Graphs by Year
-      back: Unsaved Data
-      destroy: Deletion
-    body:
-      back: 'The changes were not saved, do you want to discard them?'
-    email:
-      title:
-        resend: 'Resend E-mail to '
-        send_test: 'Send Test E-mail to '
-        remove: 'Remove E-mail of '
-        warning_save: Warning
-        recent_emails: 'Sent E-mails in the last %{days} days'
-      body:
-        remove: Are you sure you want to remove this e-mail?
-        warning_save: "The 'Body' field needs to include the special characters (starting with #), so that it can be correctly updated by the system. For instance, if you simply type 'october' instead of using the special character, the subsequent months will not have updated competence. Instead, use the available buttons above the field."
-  title:
-    new:
-      n:
-        s: 'New %{model}'
-        p: 'New %{model}'
-    edit:
-      n:
-        s: 'Edit %{model}'
-        p: 'Edit %{model}'
+      resending: Resending e-mail...
+      sending: Sending e-mail...
+      sending_test: Sending test e-mail...
+    query_results:
+      one: '1 record found.'
+      other: '%{count} records found.'
+      zero: 'No record found.'
+  app_data:
+    app_title: Florian
+    author: Fabiow Quixadá
   audit:
+    data: Data
+    history: History
     title: Audit
-    who: Who
+    type: Type
+    value: Value
+    what: What
     when: When
     where: Where
-    what: What
-    value: Value
-    type: Type
-    history: History
-    data: Data
-  exception:
-    invalid_recipient: The requested e-mail could not be sent because there is at least one invalid recipient.
-    no_internet_connection: There is no internet connection.
-  error_pages:
-    not_found:
-      title: "Sorry, but this page doesn't exist or you don't have permission to access it."
-      body: Please check the URL or contact the administrator, telling him what time this happanned.
-    internal_server_error:
-      title: "Sorry, but something bad happenned."
-      body: "Please, contact the administrator and tell him what time this happanned."
+    who: Who
   date:
     abbr_day_names:
     - Sun
@@ -517,16 +236,16 @@ en:
     - Friday
     - Saturday
     formats:
-      default: "%Y-%m-%d"
-      long: "%B %d, %Y"
-      short: "%b %d"
-      default: "%m/%d/%Y"
-      default_i: "%m/%d/%y"
       competence: "%B/%Y"
       competence_i: "%m/%Y"
+      default: "%Y-%m-%d"
+      default: "%m/%d/%Y"
+      default_i: "%m/%d/%y"
       javascript_format:
         competence: "mm/yyyy"
         date: "mm/dd/yyyy"
+      long: "%B %d, %Y"
+      short: "%b %d"
     month_names:
     -
     - January
@@ -578,12 +297,12 @@ en:
       x_months:
         one: 1 month
         other: "%{count} months"
-      x_years:
-        one: 1 year
-        other: "%{count} years"  
       x_seconds:
         one: 1 second
         other: "%{count} seconds"
+      x_years:
+        one: 1 year
+        other: "%{count} years"  
     prompts:
       day: Day
       hour: Hour
@@ -591,38 +310,98 @@ en:
       month: Month
       second: Seconds
       year: Year
-  errors:
-    undestroyable_user: 'No user can be deleted.'
-    deletion: Deletion could be be completed for some reason. Check the log file.
-    unpermitted_action: Sorry, you do not have permission to take this action.
-    user:
-      cannot_deactivate_admin: You cannot deactivate an administrator;
+  defaults:
+    report:
+      product_and_service:
+        email_title: 'Product and Service Report - #competence'
+        email_title_prefix: 'Product and Service Report - '
+        monthly_email_body: 'Whatever monthly #competence.'
+        weekly_email_body: 'Whatever weekly #competence.'
+      receipt:
+        email_body: 'Dear all, whatever #value #competence.'
+        email_title: 'Donation Receipt for #maintainer - #competence'
+  description:
     email:
-      one_recipient: "This e-mail must have at least one recipient;"
+      resend: Resend e-mail to maintainers
+      send_test: Send test email to
+  devise:
+    leave_blank_if: (Leave blank if you don't want to change it)
+    type_password_to_change: (Sua senha é necessária para que as mudanças tenham efeito)
+  enums:
+    email_history:
+      send_type:
+        auto: Automatic
+        resend: Resend
+        test: Test
+    maintainer:
+      category: 
+        high: 3 (Over $600.00)
+        low: 1 (Under $300.00)
+        medium: 2 (Between $300.00 and $600.00)
+      contract_type:
+        contract_and_additive: Contract and additive
+        no_contract: No contract
+        with_contract: Contract
+      entity_type: 
+        company: Company
+        person: Person
+      group: 
+        deactivated: Deactivated
+        maintainer: Maintainer
+        negative: Negative
+        punctual: Punctual
+      payment_frequency:
+        annually: Annually
+        bimonthly: Bimonthly
+        diary: Diary
+        monthly: Monthly
+        other: Other (Remarks)
+        semiannually: Semiannually
+        undefined: Undefined
+        weekly: Weekly
+    product_and_service_datum:
+      status:
+        created: New
+        finalized: Finalized
+        on_analysis: On analysis
+  environments:
+    development: Development
+    production: Production
+    showcase: Showcase
+    test: Test
+    uat: Homologation
+  error_pages:
+    internal_server_error:
+      body: "Please, contact the administrator and tell him what time this happanned."
+      title: "Sorry, but something bad happenned."
+    not_found:
+      body: Please check the URL or contact the administrator, telling him what time this happanned.
+      title: "Sorry, but this page doesn't exist or you don't have permission to access it."
+  errors:
     contact:
       all_empty: "All fields are empty. Fill at least one of them."
+    deletion: Deletion could be be completed for some reason. Check the log file.
     donation:
       value_or_remark: "Fill at least one of the following fields: 'Value' or 'Remark';"
-    system_setting:
-      recipients: "Add at least one recipient;"
-      private_recipients: "Add at least one private recipient;"
+    email:
+      one_recipient: "This e-mail must have at least one recipient;"
     format: "%{message}"
     messages:
       accepted: must be accepted
-      blank: "Field can't be blank: %{attribute};"
+      blank: can't be blank
       confirmation: doesn't match %{attribute}
       empty: can't be empty
       equal_to: must be equal to %{count}
       even: must be even
       exclusion: is reserved
-      greater_than: must be greater than %{count}
+      greater_than: "Field must be greater than %{count}: %{attribute};"
       greater_than_or_equal_to: must be greater than or equal to %{count}
       inclusion: is not included in the list
-      invalid: is invalid
+      invalid: "Field is invalid: %{attribute};"
       less_than: must be less than %{count}
       less_than_or_equal_to: must be less than or equal to %{count}
       model_invalid: "Validation failed: %{errors}"
-      not_a_number: "Field is not a number: %{attribute};"
+      not_a_number: is not a number
       not_an_integer: must be an integer
       odd: must be odd
       other_than: must be other than %{count}
@@ -630,8 +409,8 @@ en:
       required: must exist
       restrict_dependent_destroy:
         many: Cannot delete record because dependent %{record} exist
-        one: Cannot delete record because dependent %{record} exist
-      taken: has already been taken
+        one: Cannot delete this record because there is a dependent %{record}
+      taken: "Field has already been taken: %{attribute}"
       too_long:
         one: is too long (maximum is 1 character)
         other: is too long (maximum is %{count} characters)
@@ -641,18 +420,231 @@ en:
       wrong_length:
         one: is the wrong length (should be 1 character)
         other: is the wrong length (should be %{count} characters)
-      other_than: "O campo '%{attribute}' deve ser diferente de %{count};"
+    product_and_service_datum:
+      all_attendances_are_mandatory: "All attendances are mandatory: Week %{week_number};"
+      all_products_are_mandatory: "All products are mandatory: Week %{week_number};"
+      all_returns_are_mandatory: "All returns are mandatory: Week %{week_number};"
+      cant_send: "Could not send data;"
+      cant_send_to_analysis: "Could not send data to analysis;"
+      cant_send_to_maintainers: "Could not send data to the maintainers;"
+      invalid_period: "Invalid period: Week %{week_number};"
+      period_is_mandatory: 'The "Period" field is mandatory: Week %{week_number};'
+      weeks_qty: "Invalid number of weeks: %{weeks};"
+    system_setting:
+      private_recipients: "Add at least one private recipient;"
+      recipients: "Add at least one recipient;"
     template:
       body: 'Please check the following fields:'
       header:
         one: 'Could not save this %{model}: 1 error.'
         other: 'Could not save this %{model}: %{count} errors.'
+    undestroyable_user: 'No user can be deleted.'
+    unpermitted_action: Sorry, you do not have permission to take this action.
+    user:
+      cannot_deactivate_admin: You cannot deactivate an administrator;
+  exception:
+    invalid_recipient: The requested e-mail could not be sent because there is at least one invalid recipient.
+    no_internet_connection: There is no internet connection.
+  helpers:
+    about: 
+      main_description: 'Saint Florian, is a Catholic Church holy man, patron saint of the firemen, chimney-cleaners and also of those who were victims of severe burnings. The "Florian Cross" is one of his symbols, which was used as the logo of this web application.'
+      showcase_description: 'Saint Florian was chosen as a reference for this web application because it was developed for a NGO that helps people who got hurt in fire accidents.'
+      st_florian: St. Florian
+      title: About...
+    action:
+      activate: Activate
+      add: Add
+      back: Back
+      cancel: Cancel
+      confirm: Confirm
+      deactivate: Deactivate
+      destroy: Delete
+      discard: Discard
+      edit: Edit
+      email:
+        add_recipient: +
+        config: Settings
+        private_send: Send internally
+        resend: Resend
+        save_and_send: Save and send
+        send: Send
+        send_test: Send test
+        view_receipt: View receipt
+      filter: Filter
+      login: Login
+      login: Login
+      logout: Logout
+      new:
+        n:
+          p: New
+          s: New
+      product_and_service:
+        update_final_data: Copy from "Total"
+      remove: Remove
+      save: Save
+      send_to_analysis: Send to analysis
+      show: Visualize
+      show_admin_private_data: Display admin data. This option is also available on the showcase environment for ilustration ends, the administration actions are not allowed.
+      sign_up: Sign up
+      signup: Sign up
+      update: Update
+      update_and_new:
+        n:
+          p: Save & new
+          s: Save & new
+      update_data: Save
+    attention: Attention
+    by: by
+    changelog: Changelog
+    email:
+      production_db_backup:
+        body: 'Production Database'
+        subject: 'Weekly Backup'
+    email_tag: "[Florian] "
+    error: Error
+    final_data: Final data
+    from: From
+    general: General
+    logged_as: "Loged as "
+    main_page: Main page
+    maintainer:
+      edit_contact: Edit contact
+      new_contact: New contact
+      new_donation: New donation
+    min_length: '(At least %{min_length} characters)'
+    no_recent_emails: No recent e-mails
+    none: (None)
+    prod_and_serv_datum:
+      attendances: Attendances
+      checkup: Check up
+      final_footer: 'These are the data that will be sent to the maintainers.'
+      product_output: Products
+      return: Return
+      week_footer: '* This week data will be sent only to collaborators.'
+    profile: Profile
+    receipt_email:
+      index_footer: '* The e-mails will be sent at %{time}:00am of every first day of month.'
+      new_recipient: "New recipient"
+      recent: Recent
+    select:
+      all:
+        n:
+          p: 'All'
+          s: 'All'
+      prompt: Select
+    test_email_prefix: '[TEST] '
+    to: to
+    total: Total
+  menu:
+    email:
+      prod_serv: Products & Services
+      receipt: Receipt
+    emails: E-mails
+  modal:
+    body:
+      back: 'The changes were not saved, do you want to discard them?'
+    email:
+      body:
+        remove: Are you sure you want to remove this e-mail?
+        warning_save: "The 'Body' field needs to include the special characters (starting with #), so that it can be correctly updated by the system. For instance, if you simply type 'october' instead of using the special character, the subsequent months will not have updated competence. Instead, use the available buttons above the field."
+      title:
+        recent_emails: 'Sent E-mails in the last %{days} days'
+        remove: 'Remove E-mail of '
+        resend: 'Resend E-mail to '
+        send_test: 'Send Test E-mail to '
+        warning_save: Warning
+    title:
+      back: Unsaved Data
+      bill_graphs: Bills Graphs by Year
+      destroy: Deletion
+  model_phrases:
+    are_you_sure:
+      destroy:
+        n:
+          p: 'Are you sure you want to remove these %{model}?'
+          s: 'Are you sure you want to remove this %{model}?'
+      remove:
+        n:
+          p: 'Are you sure you want to remove these %{model}?'
+          s: 'Are you sure you want to remove this %{model}?'
+    none_registered:
+      n:
+        p: 'No %{model} registered.'
+        s: 'No %{model} registered.'
+    past_actions:
+      activated:
+        n:
+          p: "%{model} successfully activated!"
+          s: "%{model} successfully activated!"
+      created:
+        n:
+          p: "%{model} successfully created!"
+          s: "%{model} successfully created!"
+      deactivated:
+        n:
+          p: "%{model} successfully deactivated!"
+          s: "%{model} successfully deactivated!"
+      destroyed:
+        n:
+          p: "%{model} successfully destroyed!"
+          s: "%{model} successfully destroyed!"
+      removed:
+        n:
+          p: "%{model} successfully removed!"
+          s: "%{model} successfully removed!"
+      resent:
+        n:
+          p: "%{model} successfully resent!"
+          s: "%{model} successfully resent!"
+      sent:
+        n:
+          p: "%{model} successfully sent!"
+          s: "%{model} successfully sent!"
+      test_sent:
+        n:
+          p: "Test %{model} successfully sent!"
+          s: "Test %{model} successfully sent!"
+      updated:
+        n:
+          p: "%{model} successfully updated!"
+          s: "%{model} successfully updated!"
+    prompt:
+      edit:
+        n:
+          p: 'Edit %{model}'
+          s: 'Edit %{model}'
+      new:
+        n:
+          p: 'New %{model}'
+          s: 'New %{model}'
+      remove:
+        n:
+          p: 'Remove %{model}'
+          s: 'Remove %{model}'
+    status:
+      full_desc:
+        is_active:
+          n:
+            p: 'These %{model} are active, click here to deactivate them.'
+            s: 'This %{model} is active, click here to deactivate it.'
+        is_inactive:
+          n:
+            p: 'These %{model} are deactived, click here to activate them.'
+            s: 'This %{model} is deactived, click here to activate it.'
+      is_active:
+        n:
+          p: '%{model} are active, click here to deactivate them'
+          s: '%{model} is active, click here to deactivate it'
+      is_inactive:
+        n:
+          p: '%{model} are deactived, click here to activate them'
+          s: '%{model} is deactived, click here to activate it'
   number:
-    value: Value
+    array:
+      last_word_connector: ", and "
+      two_words_connector: " and "
+      words_connector: ", "
     currency:
-      name:
-        one: dollar
-        other: dollars
       format:
         delimiter: ","
         format: "%u%n"
@@ -661,6 +653,9 @@ en:
         significant: false
         strip_insignificant_zeros: false
         unit: "$"
+      name:
+        one: dollar
+        other: dollars
     format:
       delimiter: ","
       precision: 3
@@ -700,61 +695,62 @@ en:
       format:
         delimiter: ''
     support:
-    array:
-      last_word_connector: ", and "
-      two_words_connector: " and "
-      words_connector: ", "
+    value: Value
+  other: 
+    graph:
+      one: Graph
+      other: Graphs
+  report:
+    attachment:
+      prod_serv_report: 'product_and_service_report'
+      receipt_email: 'donation_receipt'
+    footer:
+      address: "Rua Visconde de Sabóia, 75 – Salas 01 a 16 – Centro – Cep: 60.030-090 - Fortaleza – CE"
+      email: "E-mail: apoioaoqueimado@yahoo.com.br"
+      phone: "Phone: 55 85 3251-1093"
+    other:
+      banking:
+        account: 'Account'
+        agency: 'Agency'
+        bank: 'Bank'
+        deposit_data: 'Deposit data'
+      receipt_text:
+        maintainer: 'The Instituto de Apoio ao Queimado (IAQ) NGO, under CNPJ/MF nº 08.093.224/0001-05, at Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, received from %{name}, under CNPJ/MF nº %{cnpj}, at %{address}, the importance of %{value_tag} as a donation in %{competence_tag}.'
+        person: 'The Instituto de Apoio ao Queimado (IAQ) NGO, under CNPJ/MF nº 08.093.224/0001-05, at Rua Visconde de Sabóia, nº 75, salas 01 a 16 – Centro, received from %{name}, CPF nº %{cpf}, living in %{address}, the importance of %{value_tag} as a donation in %{competence_tag}.'
+    president_description: "President of IAQ (Instituto de Apoio ao Queimado)"
+    president_name: "Dr. Edmar Maciel Lima Júnior"
+    title:
+      monthly_prod_and_service: "Product & Service Monthly Report"
+      receipt: Receipt
+      weekly_prod_and_service: "Product & Service Weekly Report"
+  showcase: 
+    cant_edit: 'Sorry, you cannot change profile settings in showcase enviroment.'
+    login_info: 'You are in showcase environment. The date is fake and reset weekly. To login, use the following credentials: %{showcase_email} for user and %{showcase_password} for password.'
+    report:
+      footer: 
+        address: 'Canis Major street, 1743 - CEP 55.555-555 - Fortaleza, Ceará'
+        email: 'contact@sirius.com'
+        phone: '(85) 0000-0000 / (85) 9 9999-9999'
+      pf_receipt_text: 'We declare that Sirius maintainer, under CNPJ/MF nº 00.000.000/0000-00, localized at Canis Major street, received from %{name}, CPF nº %{cpf}, who lives at %{address}, %{value_tag} as a donation in %{competence_tag}.'
+      pj_receipt_text: 'We declare that Sirius maintainer, under CNPJ/MF nº 00.000.000/0000-00, localized at Manis Major street, received from %{name}, under CNPJ/MF nº %{cnpj}, localized at %{address}, %{value_tag} as a donation in %{competence_tag}.'
+  tags:
+    competence: '#competence'
+    maintainer: '#maintainer'
+    value: '#value'
   time:
     am: am
     formats:
       default: "%a, %d %b %Y %H:%M:%S %z"
       long: "%B %d, %Y %H:%M"
       long_2: "%m/%d/%y, at %H:%Mh"
-      short: "%d %b %H:%M"
       really_short: "%m/%d/%y"
+      short: "%d %b %H:%M"
     pm: pm
-  other: 
-    graph:
-      one: Graph
-      other: Graphs
-  devise:
-    email:
-      welcome: 'Bem-vindo(a), '
-      hello: 'Olá, '
-      reset_password:
-        1: 'Foi requisitada uma mudança de senha para sua conta. Você pode fazer isto através do seguinte link:'
-        2: 'Se não foi você que fez esta requisição, por favor ignore este e-mail.'
-        3: 'Sua senha não mudará a não ser que você acesse o link acima e crie uma nova.'
-        link: 'Mudar minha senha'
-      unlock_instructions:
-        1: 'Sua conta foi bloqueada devido a sucessivas tentativas infrutífgeras de login.'
-        2: 'Clique no link a seguir para desbloquear sua conta:'
-        link: 'Desbloquear minha conta'
-      confirmation_instructions:
-        1: 'Você pode confirmar sua conta de e-mail através do seguinte link:'
-        link: 'Confirmar'
-    title:
-      instruction_resend: Reenvio de Instruções de Confirmação
-      signup: Cadastro
-      forgot_password: Redefinição de Senha
-      didnt_receive_unlock: Não recebeu as instruções de desbloqueio?
-      didnt_receive_confirmation: Não recebeu as instruções de confirmação?
-    login_with: 'Logar com '
-    waiting_for_confirmation: 'Aguardando confirmação para: '
-    leave_blank_if: (Leave blank if you don't want to change it)
-    type_password_to_change: (Sua senha é necessária para que as mudanças tenham efeito)
-    buttons:
-      forgot_password: Esqueceu sua senha?
-      send_reset_password: Enviar instruções
-  showcase: 
-    login_info: 'You are in showcase environment. The date is fake and reset weekly. To login, use the following credentials: %{showcase_email} for user and %{showcase_password} for password.'
-    cant_edit: 'Sorry, you cannot change profile settings in showcase enviroment.'
-    report:
-      president_name: "Dr. Carl Sagan"
-      president_description: "President of the Sirius Institute"
-      footer: 
-        address: 'Canis Major street, 1743 - CEP 55.555-555 - Fortaleza, Ceará'
-        phone: '(85) 0000-0000 / (85) 9 9999-9999'
-        email: 'contact@sirius.com'
-      pf_receipt_text: 'We state that Sirius maintainer, under CNPJ/MF nº 00.000.000/0000-00, localized at Canis Major street, received from %{name}, CPF nº %{cpf}, who lives at %{address}, %{value_tag} as a donation in %{competence_tag}.'
-      pj_receipt_text: 'We state that Sirius maintainer, under CNPJ/MF nº 00.000.000/0000-00, localized at Manis Major street, received from %{name}, under CNPJ/MF nº %{cnpj}, localized at %{address}, %{value_tag} as a donation in %{competence_tag}.'
+  uat_mode_message: You are in test environment.
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      next: "Next &rsaquo;"
+      previous: "&lsaquo; Previous"
+      truncate: "&hellip;"

@@ -44,7 +44,7 @@ module ButtonHelper
   end
 
   def author_email_btn
-    link_to t('author'), 'javascript:void(0)', id: 'author_email_btn'
+    link_to t('app_data.author'), 'javascript:void(0)', id: 'author_email_btn'
   end
 
   def sub_edit_btn(klass)
