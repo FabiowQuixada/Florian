@@ -60,7 +60,7 @@ describe 'Status', type: :request do
   end
 
   def toogle_status_of(model)
-    visit send(model.model_name.route_key + '_path')
+    visit send("#{model.model_name.route_key}_path")
 
     return unless page.has_css?('.model_row')
 

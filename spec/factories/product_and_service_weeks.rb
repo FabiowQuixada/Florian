@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :product_and_service_week do
     product_and_service_datum
-    number 3
+    number { Faker::Number.between(1, ProductAndServiceWeek::TOTALS_NUMBER - 1) }
 
     transient do
       service_data_count 2
@@ -18,11 +18,11 @@ FactoryGirl.define do
     end
 
     trait :totals do
-      number 6
+      number ProductAndServiceWeek::TOTALS_NUMBER
     end
 
     trait :final do
-      number 7
+      number ProductAndServiceWeek::FINAL_NUMBER
     end
 
     trait :helper do

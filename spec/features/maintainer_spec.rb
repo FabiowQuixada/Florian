@@ -25,7 +25,7 @@ describe Maintainer, js: true, type: :request do
 
   it 'persists donation' do
     visit edit_maintainer_path described_class.first.id
-    remark = "observacao #{Time.new.usec}"
+    remark = Faker::Hipster.paragraph
     add_donation remark
 
     click_on_update_btn
@@ -34,7 +34,7 @@ describe Maintainer, js: true, type: :request do
 
   it 'adds transient donation data should display warning message when pressing back button' do
     visit edit_maintainer_path described_class.first.id
-    add_donation 'remark'
+    add_donation Faker::Hipster.paragraph
 
     go_back
     expect(page).to have_content I18n.t('modal.title.back')
@@ -51,24 +51,22 @@ describe Maintainer, js: true, type: :request do
   end
 
   def fill_main_fields_with(company_type, low_category, maintainer_group)
-    time = Time.new.usec
-
     select company_type, from: 'maintainer_entity_type'
-    fill_in 'maintainer_registration_name', with: "Maintainer #{time}"
+    fill_in 'maintainer_registration_name', with: Faker::Company.name
     fill_in 'maintainer_cnpj', with: BlaBla::CNPJ.formatado
-    fill_in 'maintainer_name', with: "Maintainer #{time}"
-    fill_in 'maintainer_address', with: "Maintainer address #{time}"
+    fill_in 'maintainer_name', with: Faker::Company.name
+    fill_in 'maintainer_address', with: Faker::Address.street_address
     select low_category, from: 'maintainer_category'
     select maintainer_group, from: 'maintainer_group'
   end
 
   def fill_donation_fields(remark)
-    fill_in 'new_donation_date', with: "01/10/2015\n"
-    fill_in 'new_donation_value', with: '5678'
+    fill_in 'new_donation_date', with: Faker::Date.forward(23)
+    fill_in 'new_donation_value', with: Faker::Number.number(4)
     fill_in 'new_donation_remark', with: remark
   end
 
-  def add_donation(remark = "Observacao #{Time.new.usec}")
+  def add_donation(remark = Faker::Hacker.say_something_smart)
     page.find('#main_tab_1_title').click
     fill_donation_fields remark
     page.find('#add_donation_btn').click
@@ -78,7 +76,7 @@ describe Maintainer, js: true, type: :request do
     fill_in 'temp_contact_name', with: name
   end
 
-  def add_contact(name = "Contato #{Time.new.usec}")
+  def add_contact(name = Faker::Name.name)
     page.find('#main_tab_2_title').click
     fill_contact_fields name
     page.find('#add_contact_btn').click

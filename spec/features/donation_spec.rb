@@ -30,8 +30,8 @@ describe Donation, type: :request do
   # == Helper methods =============================================================
 
   def fill_fields
-    fill_in i18n_field('donation_date'), with: '01/10/2015'
-    fill_in i18n_field('value'), with: '1234'
+    fill_in i18n_field('donation_date'), with: Faker::Date.forward(23)
+    fill_in i18n_field('value'), with: Faker::Number.number(4)
     select(Maintainer.where(group: 'maintainer').first.name, from: 'donation_maintainer_id')
     input_blur
   end

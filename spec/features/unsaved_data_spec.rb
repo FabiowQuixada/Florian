@@ -66,7 +66,7 @@ describe 'Unsaved data', js: true, type: :request do
 
   def fill_temp_inputs
     field = first('.temp_field:not([readonly])')
-    field.set 'whatever' unless field.nil?
+    field.set Faker::Lorem.word unless field.nil?
   end
 
   def fill_non_temp_inputs
@@ -79,7 +79,7 @@ describe 'Unsaved data', js: true, type: :request do
 
   def fill_a_non_temp_input
     field = first('input:not([readonly])')
-    field.set 'whatever' unless field.nil?
+    field.set Faker::Lorem.word unless field.nil?
   end
 
   def fill_a_non_temp_number
@@ -89,16 +89,16 @@ describe 'Unsaved data', js: true, type: :request do
 
   def fill_a_non_temp_textarea
     field = first('textarea:not([readonly])')
-    field.set 'whatever' unless field.nil?
+    field.set Faker::Lorem.word unless field.nil?
   end
 
   def fill_a_non_temp_date
     field = first('.date:not([readonly])')
-    field.set '11/11/1111' unless field.nil?
+    field.set Faker::Date.forward(23) unless field.nil?
   end
 
   def fill_a_non_temp_money_input
     field = first('.money:not([readonly])')
-    field.set '0,01' unless field.nil?
+    field.set Faker::Number.number(4) unless field.nil?
   end
 end

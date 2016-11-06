@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :contact do
-    sequence(:name, 1) { |n| "Contact #{n}" }
+    name { Faker::Name.name }
     maintainer
 
     trait :nameless do

@@ -42,8 +42,8 @@ describe ProductAndServiceDatum, type: :request do
   end
 
   def fill_week_0_products
-    first(prefix + '0_product_data_attributes_mask').set(10)
-    first(prefix + '0_product_data_attributes_skin_expander').set(11)
+    first("#{prefix}0_product_data_attributes_mask").set(10)
+    first("#{prefix}0_product_data_attributes_skin_expander").set(11)
   end
 
   def check_week_0_totals_column
@@ -72,8 +72,8 @@ describe ProductAndServiceDatum, type: :request do
   end
 
   def fill_week_1_products
-    first(prefix + '1_product_data_attributes_mask').set(12)
-    first(prefix + '1_product_data_attributes_cervical_collar').set(13)
+    first("#{prefix}1_product_data_attributes_mask").set(12)
+    first("#{prefix}1_product_data_attributes_cervical_collar").set(13)
   end
 
   def check_week_1_totals_column

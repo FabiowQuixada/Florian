@@ -81,8 +81,8 @@ describe User, type: :request do
     confirm_pass_field = I18n.t('activerecord.attributes.user.password_confirmation')
     group_field = I18n.t('activerecord.attributes.user.role')
 
-    fill_in name_field, with: 'Joaozinho'
-    fill_in email_field, with: 'joao@semdedo.com'
+    fill_in name_field, with: Faker::Name.name
+    fill_in email_field, with: Faker::Internet.email
     fill_in password_field, with: 'fulano0123'
     fill_in confirm_pass_field, with: 'fulano0123'
     select 'Usuário', from: group_field

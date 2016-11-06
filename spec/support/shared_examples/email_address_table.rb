@@ -22,8 +22,8 @@ shared_examples 'an e-mail address table' do |fields|
   end
 
   def add_email_address(field_name)
-    first('input#' + field_name + '_new_recipient_field').set('exemplo' + @id.to_s + '@gmail.com')
-    first('span#' + field_name + '_add_recipient_btn').click
+    first("input##{field_name}_new_recipient_field").set Faker::Internet.email
+    first("span##{field_name}_add_recipient_btn").click
 
     check_if_email_address_was_added field_name, @id
 
@@ -36,8 +36,8 @@ shared_examples 'an e-mail address table' do |fields|
   end
 
   def remove_last_email_address(field_name)
-    within('tr#' + field_name + '_email_address_' + (@id + 1).to_s) do
-      first('img.' + field_name + '_remove_recipient_btn').click
+    within("tr##{field_name}_email_address_#{@id + 1}") do
+      first("img.#{field_name}_remove_recipient_btn").click
     end
 
     sleep 1

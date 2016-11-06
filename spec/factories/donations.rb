@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :donation do
-    sequence(:remark, 1) { |n| "Observacao #{n}" }
+    donation_date { Faker::Date.forward 1000 }
+    remark { Faker::Lorem.paragraph }
     maintainer
 
     trait :invalid do

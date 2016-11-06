@@ -8,12 +8,18 @@ describe Contact, js: true, type: :request do
   end
 
   it 'adds a contact to a maintainer' do
-    add_contact 'Joao'
-    expect(all('td.contact_name').last['innerHTML']).to eq 'Joao'
-    expect(all('td.contact_position').last['innerHTML']).to eq 'Chefe'
+    name = Faker::Name.name
+    position = Faker::Name.name
+    add_contact name, position
+    expect(all('td.contact_name').last['innerHTML']).to eq name
+    expect(all('td.contact_position').last['innerHTML']).to eq position
+  end
 
+  it 'persists a contact to a maintainer' do
+    name = Faker::Name.name
+    add_contact name
     save_and_revisit
-    expect(all('td.contact_name').last['innerHTML']).to eq 'Joao'
+    expect(all('td.contact_name').last['innerHTML']).to eq name
   end
 
   it 'loads and updates a contact in a maintainer' do
@@ -35,19 +41,19 @@ describe Contact, js: true, type: :request do
 
   # Helper methods ##################################
 
-  def add_contact(name)
+  def add_contact(name = Faker::Name.name, position = Faker::Name.name)
     fill_in 'temp_contact_name', with: name
-    fill_in 'temp_contact_position', with: 'Chefe'
-    fill_in 'temp_contact_email_address', with: 'exemplo@gmail.com'
-    fill_in 'temp_contact_telephone', with: '85325756158'
-    fill_in 'temp_contact_celphone', with: '85325756158'
-    fill_in 'temp_contact_fax', with: '85325756158'
+    fill_in 'temp_contact_position', with: position
+    fill_in 'temp_contact_email_address', with: Faker::Internet.email
+    fill_in 'temp_contact_telephone', with: Faker::Number.number(11)
+    fill_in 'temp_contact_celphone', with: Faker::Number.number(11)
+    fill_in 'temp_contact_fax', with: Faker::Number.number(11)
 
     find('#add_contact_btn').click
   end
 
   def edit_first_contact
-    new_name = "Contato #{Time.now}"
+    new_name = Faker::Name.name
     first('.edit_contact_btn').click
     fill_in 'temp_contact_name', with: new_name
     find('#add_contact_btn').click

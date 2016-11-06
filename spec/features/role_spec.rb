@@ -42,8 +42,8 @@ describe Role, type: :request do
   # == Helper methods =============================================================
 
   def fill_form
-    fill_in i18n_field('name'), with: 'Grupo'
-    fill_in i18n_field('description'), with: 'desc'
+    fill_in i18n_field('name'), with: Faker::Team.name
+    fill_in i18n_field('description'), with: Faker::Lorem.paragraph
   end
 
   def change_field(field_name, value)

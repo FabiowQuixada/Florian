@@ -2,9 +2,9 @@ FactoryGirl.define do
   factory :maintainer do
     entity_type 'company'
     cnpj { BlaBla::CNPJ.formatado }
-    sequence(:registration_name, 1) { |n| "Maintainer #{n}" }
-    sequence(:name, 1) { |n| "Maintainer #{n} Ltda." }
-    address 'Rua X'
+    registration_name { "#{Faker::Company.name} #{Faker::Number.number(5)}" }
+    name { "#{Faker::Company.name} #{Faker::Number.number(5)}" }
+    address Faker::Address.street_address
     category :medium
     group :maintainer
 

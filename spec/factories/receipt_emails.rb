@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :receipt_email do
-    value 3
-    day_of_month 3
+    value Faker::Number.between(900, 2500)
+    day_of_month Faker::Number.between(1, 28)
     maintainer
     body I18n.t('defaults.report.receipt.email_body')
     recipients_array SAMPLE_RECIPIENTS

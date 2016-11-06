@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe ServiceHelper do
   describe '#service_field_tag' do
-    let(:common_week) { build :product_and_service_week }
+    let(:common_week) { build :product_and_service_week, number: 3 }
     let(:helper_week) { build :product_and_service_week, :helper }
 
     it { expect(helper.service_field_tag(common_week, 'mesh', 0, 4)).to eq '<input type="text" name="product_and_service_datum[product_and_service_weeks_attributes][2][service_data_attributes][0][mesh]" id="product_and_service_datum_product_and_service_weeks_attributes_2_service_data_attributes_0_mesh" value="0" class="attendance attendance_week_2 service_checkup form-control mesh week_2 numbers_only service_input input-sm service_row_4_col_0" />' }
@@ -17,7 +17,7 @@ describe ServiceHelper do
   end
 
   describe '#service_field_classes' do
-    let(:common_week) { build :product_and_service_week }
+    let(:common_week) { build :product_and_service_week, number: 3 }
     let(:totals_week) { build :product_and_service_week, :totals }
     let(:final_week) { build :product_and_service_week, :final }
     let(:helper_week) { build :product_and_service_week, :helper }

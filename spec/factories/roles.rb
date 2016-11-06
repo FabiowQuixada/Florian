@@ -1,10 +1,14 @@
 FactoryGirl.define do
   factory :role do
-    sequence(:name, 1) { |n| "Grupo #{n}" }
-    description 'Grupo'
+    name { Faker::Team.name }
+    description { Faker::Lorem.paragraph }
 
     trait :invalid do
       name nil
+    end
+
+    trait :admin do
+      name 'Admin'
     end
   end
 end

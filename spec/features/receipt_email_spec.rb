@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe ReceiptEmail, js: true, type: :request do
+  let(:competence) { "#{10 / 2015}\n" }
+
   context 'in listing page' do
     before :each do
       login_as_admin
@@ -9,13 +11,13 @@ describe ReceiptEmail, js: true, type: :request do
 
     it 'resends e-mail' do
       all('.resend_btn').first.click
-      fill_in 'resend_competence', with: '10/2015' + "\n"
+      fill_in 'resend_competence', with: competence
       click_on_send_btn
     end
 
     it 'sends test e-mail' do
       all('.send_test_btn').first.click
-      fill_in 'send_test_competence', with: '10/2015' + "\n"
+      fill_in 'send_test_competence', with: competence
       click_on_send_btn
     end
 
@@ -32,13 +34,13 @@ describe ReceiptEmail, js: true, type: :request do
 
     it 'resends e-mail' do
       all('.resend_btn').first.click
-      fill_in 'resend_competence', with: '10/2015' + "\n"
+      fill_in 'resend_competence', with: competence
       click_on_send_btn
     end
 
     it 'sends test e-mail' do
       all('.send_test_btn').first.click
-      fill_in 'send_test_competence', with: '10/2015' + "\n"
+      fill_in 'send_test_competence', with: competence
       click_on_send_btn
     end
 
