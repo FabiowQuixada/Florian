@@ -447,7 +447,7 @@ en:
     no_internet_connection: There is no internet connection.
   helpers:
     about: 
-      main_description: 'Saint Florian, is a Catholic Church holy man, patron saint of the firemen, chimney-cleaners and also of those who were victims of severe burnings. The "Florian Cross" is one of his symbols, which was used as the logo of this web application.'
+      main_description: 'Saint Florian is a Catholic Church holy man, patron saint of the firemen, chimney-cleaners and also of those who were victims of severe burnings. The "Florian Cross" is one of his symbols, which was used as the logo of this web application.'
       showcase_description: 'Saint Florian was chosen as a reference for this web application because it was developed for a NGO that helps people who got hurt in fire accidents.'
       st_florian: St. Florian
       title: About...
