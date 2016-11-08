@@ -3,7 +3,7 @@ if Rails.env == 'showcase'
   guest_role = Role.create(name: SHOWCASE_USER, description: SHOWCASE_USER)
 
   GUEST_USERS_NUMBERS.each do |number|
-    User.create name: Faker::Name.name,
+    User.create name: "Guest#{number}",
                 email: "guest_#{number}@florian.com",
                 password: SHOWCASE_PASSWORD,
                 password_confirmation: SHOWCASE_PASSWORD,
