@@ -4,7 +4,7 @@ shared_examples 'destroy tests' do
   let(:non_admin_msg) { { message: I18n.t('errors.unpermitted_action'), success: false }.to_json }
 
   describe 'successfully deletes model as admin' do
-    before(:each) do
+    before :each do
       sign_in User.first
     end
 
@@ -24,7 +24,7 @@ shared_examples 'destroy tests' do
   end
 
   describe 'does not destroy model as common user' do
-    before(:each) do
+    before :each do
       sign_in User.last
     end
 

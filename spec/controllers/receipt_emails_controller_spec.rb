@@ -32,7 +32,7 @@ describe ReceiptEmailsController, type: :controller do
 
 
       before :each do
-        post :resend, id: model.id, competence: '06/2016', receipt_email: attributes_for(:receipt_email, recipients_array: 'aa@aa.com')
+        post :resend, id: model.id, competence: '06/2016', receipt_email: model.attributes
       end
 
       it { expect(response.body).to eq(expected) }
@@ -86,7 +86,7 @@ describe ReceiptEmailsController, type: :controller do
         end
 
         before(:each) do
-          post :send_test, id: model.id, competence: '06/2016', receipt_email: attributes_for(:receipt_email, recipients_array: 'aa@aa.com')
+          post :send_test, id: model.id, competence: '06/2016', receipt_email: model.attributes
         end
 
         it { expect(response.body).to eq(expected) }

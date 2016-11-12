@@ -1,11 +1,13 @@
 FactoryGirl.define do
   factory :product_and_service_datum do
-    status ProductAndServiceDatum.statuses[:created]
+    status { ProductAndServiceDatum.statuses[:created] }
     competence { Faker::Date.between(100.years.ago.change(day: 1), 100.years.from_now.change(day: 1)) }
 
-    after :build do |product_and_service_datum|
-      product_and_service_datum.weeks.each do |week|
-        week.product_and_service_datum ||= product_and_service_datum
+    after :build do |datum|
+      datum.product_and_service_weeks = []
+
+      (NUMBER_OF_WEEKS + 2).times do |number|
+        datum.product_and_service_weeks << build(:product_and_service_week, product_and_service_datum: datum, number: number + 1)
       end
     end
 
@@ -23,6 +25,10 @@ FactoryGirl.define do
 
     trait :finalized do
       status ProductAndServiceDatum.statuses[:finalized]
+    end
+
+    trait :random_status do
+      status { ProductAndServiceDatum.statuses.keys[rand(ProductAndServiceDatum.statuses.length)] }
     end
   end
 end

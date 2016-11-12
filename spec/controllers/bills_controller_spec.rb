@@ -25,34 +25,4 @@ describe BillsController, type: :controller do
       end
     end
   end
-
-  context 'private methods' do
-    let(:year) { 2016 }
-    let(:month) { 3 }
-    let(:bills_controller) { described_class.new }
-    let(:bill) { Bill.first }
-
-    describe '#initialize_year' do
-      let(:zeroed_year) do
-        expected = {}
-        expected[year] = []
-
-        expected
-      end
-
-      it 'initializes graph`s year' do
-        bills_controller.send('initialize_year', year)
-        expect(bills_controller.instance_variable_get(:'@graph_data')).to eq zeroed_year
-      end
-    end
-
-    describe '#populate_month' do
-      let(:expected) { [bill.water.to_s, bill.energy.to_s, bill.telephone.to_s] }
-
-      it 'populates graph data' do
-        bills_controller.send('populate_month', bill, month, year)
-        expect(bills_controller.instance_variable_get(:'@graph_data')[year][month - 1]).to eq expected
-      end
-    end
-  end
 end

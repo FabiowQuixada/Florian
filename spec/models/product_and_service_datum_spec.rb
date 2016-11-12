@@ -18,7 +18,7 @@ describe ProductAndServiceDatum, type: :model do
   # Relationships
   it { is_expected.to have_many :product_and_service_weeks }
   it { expect(build(:product_and_service_datum).weeks).to have(7).items }
-  it { expect(build(:product_and_service_datum).final_week.number).to eq 7 }
+  it { expect(build(:product_and_service_datum).final_week.number).to eq ProductAndServiceWeek::FINAL_NUMBER }
 
   it { expect(described_class.create!(competence: Date.new(2001, 2, 3)).competence.day).to eq 1 }
 

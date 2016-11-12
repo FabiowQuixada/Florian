@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe ProductAndServiceDataHelper do
-  let(:common_week) { build :product_and_service_week }
+  let(:common_week) { build :product_and_service_week, :common }
   let(:totals_week) { build :product_and_service_week, :totals }
   let(:final_week) { build :product_and_service_week, :final }
   let(:helper_week) { build :product_and_service_week, :helper }

@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :receipt_email do
-    value Faker::Number.between(900, 2500)
-    day_of_month Faker::Number.between(1, 28)
+    value { Faker::Number.between(900, 2500) }
+    day_of_month 1
     maintainer
     body I18n.t('defaults.report.receipt.email_body')
     recipients_array SAMPLE_RECIPIENTS
@@ -26,6 +26,10 @@ FactoryGirl.define do
 
     before :create do |receipt_email|
       receipt_email.maintainer.save
+    end
+
+    trait :showcase do
+      maintainer { Maintainer.order('RANDOM()').first }
     end
   end
 end

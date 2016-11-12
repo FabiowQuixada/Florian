@@ -18,7 +18,7 @@ describe DonationsController, type: :controller do
 
       it 'redirects to new' do
         post :create_and_new, donation: build(:donation).attributes
-        expect(response).to have_http_status(:found)
+        expect(response).to have_http_status :found
         expect(response).to redirect_to new_donation_path
       end
     end
@@ -28,8 +28,8 @@ describe DonationsController, type: :controller do
 
       it 're-renders new' do
         post :create_and_new, donation: attributes_for(:donation, :invalid)
-        expect(response).to have_http_status(:ok)
-        expect(response).to render_template('_form')
+        expect(response).to have_http_status :ok
+        expect(response).to render_template '_form'
       end
     end
   end

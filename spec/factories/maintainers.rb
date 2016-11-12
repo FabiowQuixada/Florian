@@ -5,8 +5,8 @@ FactoryGirl.define do
     registration_name { "#{Faker::Company.name} #{Faker::Number.number(5)}" }
     name { "#{Faker::Company.name} #{Faker::Number.number(5)}" }
     address Faker::Address.street_address
-    category :medium
-    group :maintainer
+    category { Maintainer.categories.keys[rand(Maintainer.categories.length)] }
+    group { Maintainer.groups.keys[rand(Maintainer.groups.length)] }
 
     trait :invalid do
       entity_type nil
