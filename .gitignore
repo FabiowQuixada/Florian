@@ -9,6 +9,7 @@ capybara-*.html
 /spec/tmp
 /backups
 /vendor
+/lib/tasks/prod_db_seed.rake
 **.orig
 rerun.txt
 pickle-email-*.html
