@@ -19,7 +19,7 @@
 			</div>
 
 			<div class="col-md-6 form-group">
-				<%= f.label 'maintainer_id', I18n.t('activerecord.attributes.donation.maintainer') %>
+				<%= f.label :maintainer, class: 'required' %>
 				<%= f.collection_select(:maintainer_id, Maintainer.where(group: Maintainer.groups[:maintainer]), :id, :name, { include_blank: t('helpers.select.prompt') }, { class: 'form-control', disabled: f.object.persisted? }) %>
 			</div>
 		</div>
