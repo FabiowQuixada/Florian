@@ -26,7 +26,7 @@ class Donation < ActiveRecord::Base
   end
 
   def to_s
-    "#{maintainer.name} (#{donation_date})"
+    "#{maintainer.name} (#{I18n.l donation_date})"
   end
 
   def default_values
