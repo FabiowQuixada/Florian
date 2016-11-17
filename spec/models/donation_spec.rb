@@ -40,7 +40,7 @@ describe Donation, type: :model do
   # Methods #################################################################################
 
   describe '#validate_model' do
-    it { expect((build :donation, :invalid).send(:validate_model)).to eq [I18n.t('errors.donation.value_or_remark')] }
+    it { expect((build :donation, :invalid).send(:validate_model).full_messages).to include I18n.t('errors.donation.value_or_remark') }
   end
 
   describe '#no_value?' do

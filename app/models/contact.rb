@@ -21,6 +21,7 @@ class Contact < ActiveRecord::Base
 
   def validate_model
     errors.add :name, I18n.t('errors.contact.all_empty') if no_attrs_filled?
+    errors
   end
 
   def no_attrs_filled?

@@ -60,13 +60,11 @@ class Maintainer < ActiveRecord::Base
   end
 
   def update(params)
-
     destroy_contacts params
     destroy_donations params
     update_attributes params
   rescue
     raise ActiveRecord::Rollback
-
   end
 
   private

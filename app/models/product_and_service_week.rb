@@ -30,6 +30,8 @@ class ProductAndServiceWeek < ActiveRecord::Base
 
     validate_prod
     validate_servs
+
+    errors
   end
 
   def service_qty

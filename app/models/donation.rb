@@ -48,6 +48,7 @@ class Donation < ActiveRecord::Base
   def validate_date
     errors.add :donation_date, blank_error_message('date') unless donation_date.is_a? Date
     errors.add :donation_date, I18n.t('errors.donation.value_or_remark') if no_value? && no_remark?
+    errors
   end
 
   def no_remark?

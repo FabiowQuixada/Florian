@@ -20,7 +20,7 @@ describe Contact, type: :model do
   # Methods #################################################################################
   describe '#validate_model' do
     let(:contact) { build :contact, :no_data }
-    it { expect(contact.send(:validate_model)).to eq [I18n.t('errors.contact.all_empty')] }
+    it { expect(contact.send(:validate_model).full_messages).to include I18n.t('errors.contact.all_empty') }
   end
 
   describe '#not_filled?' do

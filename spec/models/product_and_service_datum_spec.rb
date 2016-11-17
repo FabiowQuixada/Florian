@@ -78,9 +78,9 @@ describe ProductAndServiceDatum, type: :model do
       datum
     end
 
-    it { expect(datum.send(:validate_model)).to be_nil }
-    it { expect(extra_week_datum.send(:validate_model)).to eq [I18n.t('errors.product_and_service_datum.weeks_qty', weeks: 8)] }
-    it { expect(missing_week_datum.send(:validate_model)).to eq [I18n.t('errors.product_and_service_datum.weeks_qty', weeks: 6)] }
-    it { expect(no_week_datum.send(:validate_model)).to eq [I18n.t('errors.product_and_service_datum.weeks_qty', weeks: 0)] }
+    it { expect(datum.send(:validate_model).full_messages).to be_empty }
+    it { expect(extra_week_datum.send(:validate_model).full_messages).to include I18n.t('errors.product_and_service_datum.weeks_qty', weeks: 8) }
+    it { expect(missing_week_datum.send(:validate_model).full_messages).to include I18n.t('errors.product_and_service_datum.weeks_qty', weeks: 6) }
+    it { expect(no_week_datum.send(:validate_model).full_messages).to include I18n.t('errors.product_and_service_datum.weeks_qty', weeks: 0) }
   end
 end

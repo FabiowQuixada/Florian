@@ -67,6 +67,7 @@ class ProductAndServiceDatum < ActiveRecord::Base
   def validate_model
     self.competence = self.competence.change(day: 1) if self.competence
     errors.add(:weeks, I18n.t('errors.product_and_service_datum.weeks_qty', weeks: weeks.size)) if weeks.length != 7
+    errors
   end
 
 end

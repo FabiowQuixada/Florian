@@ -45,6 +45,7 @@ class Bill < ActiveRecord::Base
 
     attribute = I18n.t('activerecord.attributes.bill.competence')
     errors.add(:competence, I18n.t('errors.messages.taken', attribute: attribute)) if competence_already_taken?
+    errors
   end
 
   def competence_already_taken?
