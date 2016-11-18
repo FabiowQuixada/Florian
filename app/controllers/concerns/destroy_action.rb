@@ -10,6 +10,8 @@ module DestroyAction extend ActiveSupport::Concern
   private
 
                      def destroy_model
+                       return root_path, alert: t('errors.unpermitted_action'), status: :unauthorized if Rails.env.showcase?
+
                        if @model.destroy
                          render json: { message: @model.was('destroyed'), success: true }
                        else
