@@ -8,8 +8,8 @@
 		<tr>
 			<% I18n.with_options(scope: 'activerecord.attributes.donation') do |i18n| %>
 				<th class="admin-only id-column"></th>
-				<th class="sorter-false"><%= i18n.t :donation_date %></th>
-				<th class="hidden-xs sorter-false" style="width: 150px;"><%= i18n.t :value %></th>
+				<th class="sorter-false date-column"><%= i18n.t :donation_date %></th>
+				<th class="hidden-xs sorter-false value-column"><%= i18n.t :value %></th>
 				<th class="sorter-false"><%= i18n.t :maintainer %></th>
 				<th class="hidden-xs sorter-false"><%= i18n.t :remark %></th>
 				<th class="sorter-false icon-column"></th>
