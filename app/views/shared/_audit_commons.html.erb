@@ -28,7 +28,13 @@
 								<td class="audit-where"><%= audit.remote_address %></td>
 								<td class="audit-what">
 									<% audit.audited_changes.each do |key, array| %>
-										<b> - <%= t("activerecord.attributes.#{@model.model_name.singular}.#{key}") %>:</b> <%= array %><br/>
+										<b> - <%= t("activerecord.attributes.#{@model.model_name.singular}.#{key}") %>:</b> 
+										<% if array.is_a? Array %>
+											<%= "#{array[0].to_s} => #{array[1].to_s}" %>
+										<% else %>
+											<%= array %>
+										<% end %>
+										<br/>
 									<% end %>
 								</td>
 							</tr>
