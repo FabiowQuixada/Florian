@@ -8,9 +8,9 @@ module ButtonHelper
     link_to t('helpers.action.logout'), destroy_user_session_path, method: :delete, style: 'margin-left: 5px;', class: 'btn btn-primary btn-xs'
   end
 
-  def new_btn(model)
-    path = send "new_#{model.class.to_s.underscore}_path", model
-    link_to genderize_full_tag(model, 'helpers.action.new'), path, class: 'btn btn-primary'
+  def new_btn
+    path = send "new_#{@model.class.to_s.underscore}_path", @model
+    link_to genderize_full_tag(@model, 'helpers.action.new'), path, class: 'btn btn-primary'
   end
 
   def save_update_btn(_model, form)
