@@ -22,11 +22,6 @@ describe Donation, type: :request do
     expect_success_msg
   end
 
-  it 'display only `maintainer` group maintainers' do
-    visit new_donation_path
-    expect(page).to have_select I18n.t('activerecord.models.maintainer.one'), with_options: Maintainer.where(group: 'maintainer').each.map(&:name)
-  end
-
   # == Helper methods =============================================================
 
   def fill_fields
