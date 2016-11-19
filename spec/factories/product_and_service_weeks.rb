@@ -2,6 +2,8 @@ FactoryGirl.define do
   factory :product_and_service_week do
     product_and_service_datum
     number { Faker::Number.between(1, ProductAndServiceWeek::TOTALS_NUMBER - 1) }
+    start_date { product_and_service_datum.competence.beginning_of_month + (7 * number).days }
+    end_date { product_and_service_datum.competence.beginning_of_month + (7 * number).days + 5.days }
 
     transient { service_data_count 2 }
 
