@@ -28,9 +28,8 @@ BR_STATES = [%w(Alagoas AL),
 ADMIN_EMAIL = 'ftquixada@gmail.com'.freeze
 SYSTEM_EMAIL = (Rails.env == 'showcase' ? 'sistema@florian.com' : 'apoioaoqueimado@yahoo.com.br').freeze
 
-SHOWCASE_USER = 'Visitante'.freeze
-SHOWCASE_EMAIL = 'visitante@florian.com'.freeze
-SHOWCASE_PASSWORD = 'visitante'.freeze
+SHOWCASE_USER = 'Guest'.freeze
+SHOWCASE_PASSWORD = 'guest_pass'.freeze
 
 NUMBER_OF_WEEKS = 5
 
@@ -54,6 +53,6 @@ NGO_HQ_CITY = 'Fortaleza'.freeze
 
 GUEST_USERS_NUMBERS = [1909, 1224, 2043, 2049, 1166, 1890, 1811, 2462, 2321, 1725, 2658, 1538, 1229, 2775, 2685, 2265, 1887, 2808, 1874, 2071].freeze
 
-NGO_BANK = 'Itaú (341)'.freeze
-NGO_AGENCY =  (Rails.env == 'showcase' ? '1234' : '8373')
-NGO_ACCOUNT = (Rails.env == 'showcase' ? '12345-6' : '14373-7')
+NGO_BANK = (Rails.env.showcase? ? 'Stellar Bank (123)' : 'Itaú (341)')
+NGO_AGENCY =  (Rails.env.showcase? ? '1234' : '8373')
+NGO_ACCOUNT = (Rails.env.showcase? ? '12345-6' : '14373-7')

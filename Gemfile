@@ -29,14 +29,14 @@ gem 'modularity', '~> 2.0', '>= 2.0.1'
 gem 'kaminari'
 gem 'i18n_yaml_sorter'
 
-group :development, :showcase do
+group :development, :showcase, :test do
   gem 'letter_opener'
+  gem 'faker', '~> 1.4', '>= 1.4.3'
 end
 
+gem 'byebug'
 group :development, :test do
-  gem 'byebug'
   gem 'better_errors'
-  gem 'faker', '~> 1.4', '>= 1.4.3'
   gem 'binding_of_caller'
   gem 'simplecov', require: false, group: :test
   gem 'brakeman', require: false
@@ -47,14 +47,14 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'factory_girl_rails', '~> 4.0'
+gem 'blabla', '~> 0.0.2'
 group :test do
   gem 'capybara'
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'rspec-collection_matchers'
   gem 'database_cleaner'
-  gem 'blabla', '~> 0.0.2'
-  gem 'factory_girl_rails', '~> 4.0'
   gem 'selenium-webdriver'
   gem 'poltergeist'
   gem 'launchy'

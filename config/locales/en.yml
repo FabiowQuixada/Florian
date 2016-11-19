@@ -315,10 +315,10 @@ en:
       product_and_service:
         email_title: 'Product and Service Report - #competence'
         email_title_prefix: 'Product and Service Report - '
-        monthly_email_body: 'Whatever monthly #competence.'
-        weekly_email_body: 'Whatever weekly #competence.'
+        monthly_email_body: 'Dear all, here is a monthly product and service report, relative to #competence.'
+        weekly_email_body: 'Dear all, here is a monthly product and service report, relative to #competence.'
       receipt:
-        email_body: 'Dear all, whatever #value #competence.'
+        email_body: 'Dear all, here is a receipt (#value) relative to #competence.'
         email_title: 'Donation Receipt for #maintainer - #competence'
   description:
     email:
@@ -725,14 +725,16 @@ en:
       weekly_prod_and_service: "Product & Service Weekly Report"
   showcase: 
     cant_edit: 'Sorry, you cannot change profile settings in showcase enviroment.'
-    login_info: 'You are in showcase environment. The date is fake and reset weekly. To login, use the following credentials: %{showcase_email} for user and %{showcase_password} for password.'
+    login_info: 'You are in showcase environment, therefore the presented data is not real and is reset weekly. To login, use the following credentials: %{showcase_email} for user e-mail and %{showcase_password} for password.'
     report:
+      company_receipt_text: 'We declare that the Sirius Institute, under CNPJ/MF nº 00.000.000/0000-00, localized at Manis Major street, received from %{name}, under CNPJ/MF nº %{cnpj}, localized at %{address}, %{value_tag} as a donation in %{competence_tag}.'
       footer: 
         address: 'Canis Major street, 1743 - CEP 55.555-555 - Fortaleza, Ceará'
         email: 'contact@sirius.com'
         phone: '(85) 0000-0000 / (85) 9 9999-9999'
-      pf_receipt_text: 'We declare that Sirius maintainer, under CNPJ/MF nº 00.000.000/0000-00, localized at Canis Major street, received from %{name}, CPF nº %{cpf}, who lives at %{address}, %{value_tag} as a donation in %{competence_tag}.'
-      pj_receipt_text: 'We declare that Sirius maintainer, under CNPJ/MF nº 00.000.000/0000-00, localized at Manis Major street, received from %{name}, under CNPJ/MF nº %{cnpj}, localized at %{address}, %{value_tag} as a donation in %{competence_tag}.'
+      person_receipt_text: 'We declare that the Sirius Institute, under CNPJ/MF nº 00.000.000/0000-00, localized at Canis Major street, received from %{name}, CPF nº %{cpf}, who lives at %{address}, %{value_tag} as a donation in %{competence_tag}.'
+      president_description: "President of the Sirius Institute"
+      president_name: "Dr. Carl Edward Sagan"
   tags:
     competence: '#competence'
     maintainer: '#maintainer'

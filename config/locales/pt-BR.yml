@@ -780,12 +780,12 @@ pt-BR:
     cant_edit: 'Não é possível alterar estas configurações em ambiente de portfólio.'
     login_info: 'Você está em ambiente de portfólio. Os dados aqui apresentados são fictícios e reinicializados semanalmente. Para fazer login, utilize as seguintes credenciais: %{showcase_email} para login e %{showcase_password} para senha.'
     report:
+      company_receipt_text: 'A empresa Sirius, inscrita sob o CNPJ/MF nº 00.000.000/0000-00, situada à Rua Manis Major, recebeu da %{name}, inscrito sob o CNPJ/MF nº %{cnpj}, situada na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
       footer: 
         address: 'Rua Canis Major, 1743 - CEP 55.555-555 - Fortaleza, Ceará'
         email: 'contato@sirius.com.br'
         phone: '(85) 0000-0000 / (85) 9 9999-9999'
-      pf_receipt_text: 'A empresa Sirius, inscrita sob o CNPJ/MF nº 00.000.000/0000-00, situada à Rua Canis Major, recebeu de %{name}, CPF nº %{cpf}, residente na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
-      pj_receipt_text: 'A empresa Sirius, inscrita sob o CNPJ/MF nº 00.000.000/0000-00, situada à Rua Manis Major, recebeu da %{name}, inscrito sob o CNPJ/MF nº %{cnpj}, situada na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
+      person_receipt_text: 'A empresa Sirius, inscrita sob o CNPJ/MF nº 00.000.000/0000-00, situada à Rua Canis Major, recebeu de %{name}, CPF nº %{cpf}, residente na %{address}, a importância supra de %{value_tag} como doação em %{competence_tag}.'
       president_description: "Presidente do Instituto Sirius"
       president_name: "Dr. Carl Sagan"
   support:

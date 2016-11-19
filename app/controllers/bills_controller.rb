@@ -26,13 +26,18 @@ class BillsController < ApplicationController
   end
 
   def populate_graph_by_type(bill, type)
-    year = bill.competence.year
-    month = bill.competence.month
-    month_abbr = I18n.t(:abbr_month_names, scope: :date)[month]
-    bill_type_value = bill.send(type[0]).to_f
+    populate(
+      bill.competence.year,
+      bill.competence.month,
+      I18n.t(:abbr_month_names, scope: :date)[bill.competence.month],
+      type,
+      bill.send(type[0]).to_f
+    )
+  end
 
+  def populate(year, month, month_abbr, type, bill_type_value)
     @graph_data[year] ||= {}
     @graph_data[year][type[1]] ||= []
-    @graph_data[year][type[1]][month-1] = [month_abbr, bill_type_value]
+    @graph_data[year][type[1]][month - 1] = [month_abbr, bill_type_value]
   end
 end
