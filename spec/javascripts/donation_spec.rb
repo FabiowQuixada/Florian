@@ -9,19 +9,19 @@ describe Donation, js: true, type: :request do
     page.find('#main_tab_1_title').click
   end
 
-  it 'adds a donation to a maintainer' do
+  it 'is added to a maintainer' do
     new_remark, new_value = add_donation
     expect(all('td.donation_value').last['innerHTML']).to eq number_to_currency new_value.to_f / 100
     expect(all('td.donation_remark').last['innerHTML']).to eq new_remark
   end
 
-  it 'persists a donation to a maintainer' do
+  it 'is persisted in a maintainer' do
     new_remark, _new_value = add_donation
     save_and_revisit
     expect(all('td.donation_remark').last['innerHTML']).to eq new_remark
   end
 
-  it 'deletes a donation from a maintainer' do
+  it 'is deleted from a maintainer' do
     remark = all('td.donation_remark').last['innerHTML']
     all('.remove_donation_btn').last.click
     save_and_revisit

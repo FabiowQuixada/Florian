@@ -7,31 +7,34 @@ describe Contact, js: true, type: :request do
     page.find('#main_tab_2_title').click
   end
 
-  it 'adds a contact to a maintainer' do
-    name = Faker::Name.name
-    position = Faker::Name.name
-    add_contact name, position
+  it 'is added to a maintainer' do
+    name, position = add_contact
+    wait
     expect(all('td.contact_name').last['innerHTML']).to eq name
     expect(all('td.contact_position').last['innerHTML']).to eq position
   end
 
-  it 'persists a contact to a maintainer' do
-    name = Faker::Name.name
-    add_contact name
+  it 'is persisted in to a maintainer' do
+    name, position = add_contact
     save_and_revisit
     expect(all('td.contact_name').last['innerHTML']).to eq name
+    expect(all('td.contact_position').last['innerHTML']).to eq position
   end
 
-  it 'loads and updates a contact in a maintainer' do
+  it 'is edited in a maintainer' do
     contact = Maintainer.first.contacts[0]
     new_name = edit_first_contact
-
     expect(find("tr#contact_#{contact.id} td.contact_name")['innerHTML']).to eq new_name
+  end
+
+  it 'changes are persisted in a maintainer' do
+    contact = Maintainer.first.contacts[0]
+    new_name = edit_first_contact
     save_and_revisit
     expect(find("tr#contact_#{contact.id} td.contact_name")['innerHTML']).to eq new_name
   end
 
-  it 'deletes a contact from a maintainer' do
+  it 'is deleted from a maintainer' do
     deleted_name = first('td.contact_name')['innerHTML']
     first('.remove_contact_btn').click
     save_and_revisit
@@ -50,6 +53,8 @@ describe Contact, js: true, type: :request do
     fill_in 'temp_contact_fax', with: Faker::Number.number(11)
 
     find('#add_contact_btn').click
+
+    [name, position]
   end
 
   def edit_first_contact
