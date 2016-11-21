@@ -26,14 +26,14 @@ BR_STATES = [%w(Alagoas AL),
              %w(Tocantins TO)].freeze
 
 ADMIN_EMAIL = 'ftquixada@gmail.com'.freeze
-SYSTEM_EMAIL = (Rails.env == 'showcase' ? 'sistema@florian.com' : 'apoioaoqueimado@yahoo.com.br').freeze
+SYSTEM_EMAIL = (Rails.env.showcase? ? 'sistema@florian.com' : 'apoioaoqueimado@yahoo.com.br').freeze
 
 SHOWCASE_USER = 'Guest'.freeze
 SHOWCASE_PASSWORD = 'guest_pass'.freeze
 
 NUMBER_OF_WEEKS = 5
 
-ANALYSIS_EMAIL = (Rails.env == 'production' ? 'edmarmaciel@gmail.com' : 'ftquixada@gmail.com')
+ANALYSIS_EMAIL = (Rails.env.production? ? 'edmarmaciel@gmail.com' : 'ftquixada@gmail.com')
 
 DEFAULT_COMPANY_CITY = 'Fortaleza'.freeze
 DEFAULT_COMPANY_STATE = 'CE'.freeze
@@ -46,7 +46,7 @@ GUEST_ROLE = 'Visitante'.freeze
 
 SAMPLE_RECIPIENTS = 'exemplo@gmail.com,exemplo2@yahoo.com.br'.freeze
 
-NGO_NAME = (Rails.env == 'showcase' ? 'Sirius' : 'IAQ')
+NGO_NAME = (Rails.env.showcase? ? 'Sirius' : 'IAQ')
 NGO_ADDRESS = 'Sirius Ltda.'.freeze
 NGO_FULL_NAME = ''.freeze
 NGO_HQ_CITY = 'Fortaleza'.freeze

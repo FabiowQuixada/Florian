@@ -76,6 +76,6 @@ module ApplicationHelper
   end
 
   def showcase_login_screen?
-    Rails.env == 'showcase' && request.env['PATH_INFO'] == '/users/sign_in'
+    Rails.env.showcase? && request.env['PATH_INFO'] == '/users/sign_in'
   end
 end

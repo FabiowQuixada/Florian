@@ -1,12 +1,12 @@
 class EnvironmentContentHandler
 
   def self.logo_path
-    return "#{Rails.root}/app/assets/images/app_logo.png" if Rails.env == 'showcase'
+    return "#{Rails.root}/app/assets/images/app_logo.png" if Rails.env.showcase?
     "#{Rails.root}/app/assets/images/logo_text.jpg"
   end
 
   def self.report_footer(pdf)
-    if Rails.env == 'showcase'
+    if Rails.env.showcase?
       pdf.text I18n.t('showcase.report.footer.address'), size: 10, align: :center
       pdf.text I18n.t('showcase.report.footer.phone'), size: 10, align: :center
       pdf.text I18n.t('showcase.report.footer.email'), size: 10, align: :center
@@ -22,7 +22,7 @@ class EnvironmentContentHandler
 
     pdf.move_down 30
     pdf.image signature_path, scale: 0.15, position: :center
-    pdf.move_up 15 if Rails.env != 'showcase'
+    pdf.move_up 15 unless Rails.env.showcase?
     pdf.text president_name, inline_format: true, style: :bold, align: :center
     pdf.text president_signature, inline_format: true, style: :bold, align: :center
   end
@@ -46,7 +46,7 @@ class EnvironmentContentHandler
   end
 
   def self.person_tag
-    if Rails.env == 'showcase'
+    if Rails.env.showcase?
       'showcase.report.person_receipt_text'
     else
       'report.other.receipt_text.person'
@@ -54,7 +54,7 @@ class EnvironmentContentHandler
   end
 
   def self.company_tag
-    if Rails.env == 'showcase'
+    if Rails.env.showcase?
       'showcase.report.company_receipt_text'
     else
       'report.other.receipt_text.maintainer'
@@ -62,7 +62,7 @@ class EnvironmentContentHandler
   end
 
   def self.president_data
-    if Rails.env == 'showcase'
+    if Rails.env.showcase?
       signature_path = "#{Rails.root}/app/assets/images/showcase_president_signature.png"
       president_name = I18n.t('showcase.report.president_name')
       president_signature = I18n.t('showcase.report.president_description')
