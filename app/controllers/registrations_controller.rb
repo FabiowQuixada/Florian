@@ -4,11 +4,8 @@ class RegistrationsController < Devise::RegistrationsController
 
   def update
     return redirect_to root_path, alert: t('errors.unpermitted_action'), status: :unauthorized if Rails.env.showcase?
-
     prev_unconfirmed_email = current_user.unconfirmed_email if current_user.respond_to?(:unconfirmed_email)
-
     yield current_user if block_given?
-
     redirect prev_unconfirmed_email
   end
 

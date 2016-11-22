@@ -34,7 +34,6 @@ describe ProductAndServiceWeek, type: :model do
       expect(week.errors.full_messages).to include I18n.t('errors.product_and_service_datum.period_is_mandatory', week_number: week_number)
     end
 
-
     it 'has a valid period' do
       week = build :product_and_service_week
       expect(week.start_date <= week.end_date).to be true

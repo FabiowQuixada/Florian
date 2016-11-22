@@ -11,7 +11,7 @@ describe 'Unsaved data', js: true, type: :request do
     UNSAVED_DATA.each do |data|
       fill_non_temp_data data.new
       go_back
-      expect(page).to have_content I18n.t('modal.title.back')
+      expect(page).to have_content(I18n.t('modal.title.back')), data.name
     end
   end
 

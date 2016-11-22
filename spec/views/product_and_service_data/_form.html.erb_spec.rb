@@ -71,7 +71,7 @@ describe 'product_and_service_data/_form', type: :view do
     # P&S data
     it { expect(rendered).to include I18n.localize(model.competence, format: :competence).capitalize }
     it { expect(rendered).to include I18n.t('activerecord.attributes.product_and_service_datum.status') }
-    it { expect(rendered).to include "#{I18n.t('helpers.from')} #{week.start_date} #{I18n.t('helpers.to')} #{week.end_date}" }
+    it { expect(rendered).to include week.period }
 
     # Tabs
     it { expect_to_render_week_tabs }
@@ -88,7 +88,7 @@ describe 'product_and_service_data/_form', type: :view do
   describe 'renders all the services and products (Finalized)' do
     let(:model) { create(:product_and_service_datum, :finalized) }
     let(:week) { model.weeks[0] }
-    
+
     before :each do
       assign :model, model
       render
@@ -100,7 +100,7 @@ describe 'product_and_service_data/_form', type: :view do
     # P&S data
     it { expect(rendered).to include I18n.localize(model.competence, format: :competence).capitalize }
     it { expect(rendered).to include I18n.t('activerecord.attributes.product_and_service_datum.status') }
-    it { expect(rendered).to include "#{I18n.t('helpers.from')} #{week.start_date} #{I18n.t('helpers.to')} #{week.end_date}" }
+    it { expect(rendered).to include week.period }
 
     # Tabs
     it { expect_to_render_week_tabs }

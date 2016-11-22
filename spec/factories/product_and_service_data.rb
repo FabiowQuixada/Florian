@@ -3,7 +3,7 @@ FactoryGirl.define do
     status { ProductAndServiceDatum.statuses[:created] }
     competence { Faker::Date.between(100.years.ago.change(day: 1), 100.years.from_now.change(day: 1)) }
 
-     after :build do |datum|
+    after :build do |datum|
       datum.product_and_service_weeks = []
 
       (NUMBER_OF_WEEKS + 2).times do |number|

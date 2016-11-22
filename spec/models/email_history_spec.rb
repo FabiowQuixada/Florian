@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 describe EmailHistory, type: :model do
-  it { is_expected.to define_enum_for(:send_type) }
+  it { is_expected.to define_enum_for :send_type }
 
-  it { is_expected.to validate_presence_of(:value) }
-  it { is_expected.to validate_presence_of(:recipients_array) }
-  it { is_expected.to validate_presence_of(:body) }
+  it { is_expected.to validate_presence_of :value }
+  it { is_expected.to validate_presence_of :recipients_array }
+  it { is_expected.to validate_presence_of :body }
 
 
   # Relationships

@@ -14,7 +14,7 @@ describe BillsController, type: :controller do
 
   describe 'POST #create' do
     context 'with invalid attributes' do
-      it { expect { post :create, bill: attributes_for(:bill, :invalid) }.to change { Bill.count }.by(1) }
+      it { expect { post :create, bill: build(:bill, :invalid).attributes }.to change { Bill.count }.by(1) }
 
       it 're-renders new' do
         post :create, bill: attributes_for(:bill, :invalid)
