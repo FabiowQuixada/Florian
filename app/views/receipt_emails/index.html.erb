@@ -10,7 +10,6 @@
 			<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
 				<th class="admin-only id-column"></th>
 				<th class="sorter-false hidden-xs"><%= i18n.t :maintainer %></th>
-				<th class="sorter-false hidden-xs"><%= i18n.t :competence %></th>
 				<th class="sorter-false hidden-xs value-column"><%= i18n.t :value %></th>
 				<th class="sorter-false icon-column"></th>
 				<th class="sorter-false hidden-xs icon-column"></th>
@@ -27,7 +26,6 @@
 			<tr id="model_<%= iterator.id %>" class="model_row">
 				<td class="model_id admin-only"><%= iterator.id %></td>
 				<td class="hidden-xs receipt_maintainer"><%= iterator.maintainer.name %></td>
-				<td class="hidden-xs"><%= iterator.competence.capitalize %></td>
 				<td class="hidden-xs"><%= number_to_currency(iterator.value) %></td>
 				<td class="icon-column"><%= edit_btn iterator %></td>
 				<td class="hidden-xs icon-column"><%= resend_btn %></td>
@@ -41,7 +39,7 @@
 
 <%= render 'shared/index_commons' %>
 
-<div class="asterisk-description"><%= t('helpers.receipt_email.index_footer', time: ReceiptEmail::DAILY_SEND_HOUR.to_s) %></div>
+<div class="asterisk-description"><%= t('helpers.receipt_email.index_footer', time: ReceiptEmail::DAILY_SEND_HOUR.to_s, competence: (Date.today + 1.month).strftime("%B/%Y").capitalize) %></div>
 
 <script>
 

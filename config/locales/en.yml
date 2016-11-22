@@ -522,7 +522,7 @@ en:
       week_footer: '* This week data will be sent only to collaborators.'
     profile: Profile
     receipt_email:
-      index_footer: '* The e-mails will be sent at %{time}:00am of every first day of month.'
+      index_footer: '* The e-mails will be sent at %{time}:00am of every first day of month. Next competence is %{competence}.'
       new_recipient: "New recipient"
       recent: Recent
     select:
@@ -545,7 +545,7 @@ en:
     email:
       body:
         remove: Are you sure you want to remove this e-mail?
-        warning_save: "The 'Body' field needs to include the special characters (starting with #), so that it can be correctly updated by the system. For instance, if you simply type 'october' instead of using the special character, the subsequent months will not have updated competence. Instead, use the available buttons above the field."
+        warning_save: "The 'Body' field needs to include the special characters (starting with #), so that it can be correctly updated by the system. For instance, if you simply type 'October' instead of using the special character, the subsequent months will not have updated competence. Instead, use the available buttons above the field."
       title:
         recent_emails: 'Sent E-mails in the last %{days} days'
         remove: 'Remove E-mail of '
