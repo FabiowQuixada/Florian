@@ -13,7 +13,7 @@ class Donation < ActiveRecord::Base
 
   # Validations
   validate :validate_model
-  validates :donation_date, presence: true
+  validates :donation_date, :maintainer, presence: true
 
 
   # Methods
@@ -34,8 +34,8 @@ class Donation < ActiveRecord::Base
   end
 
   def validate_model
-    validate_date
-    errors.add :maintainer, blank_error_message('maintainer') if maintainer.nil? && persisted?
+    errors.add :donation_date, blank_error_message('date') unless donation_date.is_a? Date
+    errors.add :value_or_remark, I18n.t('errors.donation.value_or_remark') if no_value? && no_remark?
     errors
   end
 
@@ -43,12 +43,6 @@ class Donation < ActiveRecord::Base
 
   def no_value?
     value.nil? || value == 0
-  end
-
-  def validate_date
-    errors.add :donation_date, blank_error_message('date') unless donation_date.is_a? Date
-    errors.add :donation_date, I18n.t('errors.donation.value_or_remark') if no_value? && no_remark?
-    errors
   end
 
   def no_remark?

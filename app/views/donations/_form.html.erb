@@ -19,7 +19,7 @@
 			</div>
 
 			<div class="col-md-6 form-group">
-				<%= f.label :maintainer, class: 'required' %>
+				<%= f.label :maintainer %>
 				<%= f.collection_select(:maintainer_id, Maintainer.all, :id, :name, { include_blank: t('helpers.select.prompt') }, { class: 'form-control', disabled: f.object.persisted? }) %>
 			</div>
 		</div>
