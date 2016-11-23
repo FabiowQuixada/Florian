@@ -44,6 +44,7 @@
 	<div class="form-group">
 		<%= f.label :body %>
 		<div style="float:right">
+			<%= user_help_btn 'body_tag_help_btn' %>
 			<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
 				<div class="btn-group">
 					<button type="button" class="btn btn-primary btn-xs" id="add_maintainer_to_body_btn"><%= i18n.t :maintainer %></button>
@@ -133,6 +134,10 @@
 			});
 
 		<% end %>
+
+		$('#body_tag_help_btn').click(function(ev) {
+			display_confirm_modal('<%= I18n.t 'modal.title.info' %>', '<%= I18n.t 'user_help_messages.tag_buttons' %>');
+		});
 
 		$('#receipt_email_title').val(escape_html('<%= current_user.system_setting.re_title %>'));
 

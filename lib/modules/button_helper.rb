@@ -31,6 +31,10 @@ module ButtonHelper
     end
   end
 
+  def user_help_btn(btn_id)
+    image_tag('question_mark.png', title: t('user_help_messages.click_for_help'), id: btn_id, class: 'question_btn')
+  end
+
   def form_back_btn
     content_tag :a, t('helpers.action.back'), id: 'form_back_btn', class: 'btn btn-primary back_btn'
   end

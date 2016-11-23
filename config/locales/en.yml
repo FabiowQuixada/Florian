@@ -556,6 +556,7 @@ en:
       back: Unsaved Data
       bill_graphs: Bills Graphs by Year
       destroy: Deletion
+      info: Info
   model_phrases:
     are_you_sure:
       destroy:
@@ -748,6 +749,9 @@ en:
       short: "%d %b %H:%M"
     pm: pm
   uat_mode_message: You are in test environment.
+  user_help_messages:
+    click_for_help: 'Click me for help!'
+    tag_buttons: "Use these buttons to insert tags (starting with #) in the fields, so that the texts can be correctly updated by the system where appropriated. For instance, in an e-mail title field, if you simply type 'October' instead of using the competence tag, the subsequent automatic e-mails will not have an updated competence."
   views:
     pagination:
       first: "&laquo; First"
