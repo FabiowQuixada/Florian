@@ -516,7 +516,7 @@ en:
     prod_and_serv_datum:
       attendances: Attendances
       checkup: Check up
-      final_footer: 'These are the data that will be sent to the maintainers.'
+      final_footer: 'This data will be sent to the maintainers.'
       product_output: Products
       return: Return
       week_footer: '* This week data will be sent only to collaborators.'

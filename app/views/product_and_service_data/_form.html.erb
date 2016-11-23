@@ -286,7 +286,27 @@
 		};
 
 		update_product_totals_from_tab(index);
-		update_service_totals_from_tab(index);		
+		update_service_totals_from_tab(index);
+	}
+
+	function copy_from_totals_to_final_tab() {
+		// Services;
+		for (var col = 0; col < 2; col++) {
+			for (var row = 0; row < <%= ServiceData.number_of_services %>; row++) {
+				temp = $('.service_row_' + row + '_col_' + col + '.week_5').val();
+				$('.service_row_' + row + '_col_' + col + '.week_6').val(temp);
+			}
+		};
+
+		// Products;
+		for (var row = 0; row < <%= ProductData.number_of_products %>; row++) {
+			temp = $('.product_row_' + row + '.week_5').val();
+			$('.product_row_' + row + '.week_6').val(temp);
+		};
+
+		// Totals;
+		update_product_totals_from_tab(6);
+		update_service_totals_from_tab(6);
 	}
 
 	$(function() {
@@ -301,7 +321,7 @@
 		// Listeners;
 		$('.service_input').on('blur', update_service_totals_for_each_tab);
 		$('.product_input').on('blur', update_product_totals_for_each_tab);
-		$('#update_final_data_btn').on('click', update_totals_tab);
+		$('#update_final_data_btn').on('click', copy_from_totals_to_final_tab);
 		$('#aux_competence').on('change', function() {
 			format_competence('aux_competence', 'product_and_service_datum_competence');
 		});
@@ -309,6 +329,8 @@
 		for (var i = 0; i < <%= @model.weeks.length+2 %>; i++) {
 			$('#update_and_send_btn_' + i).on('click', copy_to_hidden_form_and_send.bind(self, i));
 		}
+
+		copy_from_totals_to_final_tab();
 	});
 
 
