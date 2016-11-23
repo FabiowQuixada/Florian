@@ -150,7 +150,7 @@
 
 <% end %>
 
-<%= render 'shared/form_commons', model: @model.system_setting %>
+<%= render 'shared/form_commons', model: @model.system_setting, hide_audit: Rails.env.showcase? %>
 <%= render 'shared/tab_commons', tab_type: 'main', number_of_tabs: 3 %>
 
 <script>
