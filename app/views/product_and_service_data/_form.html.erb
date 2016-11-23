@@ -185,7 +185,7 @@
 	$('#main_form').submit(function() {
 		<% unless @model.persisted? %>
 			$("#aux_competence").prop("disabled", true);
-			$('#product_and_service_datum_competence').val('01/' + $('#aux_competence').val());
+			format_competence('aux_competence', 'product_and_service_datum_competence');
 		<% end %>
 	});
 
@@ -303,8 +303,8 @@
 		$('.product_input').on('blur', update_product_totals_for_each_tab);
 		$('#update_final_data_btn').on('click', update_totals_tab);
 		$('#aux_competence').on('change', function() {
-			$('#product_and_service_datum_competence').val(to_rails_date('01/' + $('#aux_competence').val()));
-		})
+			format_competence('aux_competence', 'product_and_service_datum_competence');
+		});
 
 		for (var i = 0; i < <%= @model.weeks.length+2 %>; i++) {
 			$('#update_and_send_btn_' + i).on('click', copy_to_hidden_form_and_send.bind(self, i));

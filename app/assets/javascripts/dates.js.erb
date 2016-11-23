@@ -32,10 +32,19 @@ function current_competence() {
 	return mm + '/' + yyyy;
 }
 
-// Input format: 
+// source field input format: mm/yyyy;
+function format_competence(source_field, target_field) {
+	var temp = $('#' + source_field).val().split("/");
+	year = temp[1];
+	month = temp[0];
+
+	$('#' + target_field).val(year + '-' + month + '-01');
+}
+
+// Input format: dd/mm/yyyy;
 function to_rails_date(date_string) {
 	var temp = date_string.split("/");
-	var date = new Date(temp[2], temp[1] - 1, temp[0]);
+	var date = new Date(temp[2], temp[0] - 1, temp[1]);
 	year = date.getFullYear();
 	month = ('0' + (date.getMonth() + 1)).slice(-2);
 	day = ('0' + date.getDate()).slice(-2);
