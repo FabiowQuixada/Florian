@@ -465,7 +465,7 @@ en:
         config: Settings
         private_send: Send internally
         resend: Resend
-        save_and_send: Save and send
+        save_and_send: Update and send
         send: Send
         send_test: Send test
         view_receipt: View receipt
@@ -519,10 +519,10 @@ en:
       final_footer: 'This data will be sent to the maintainers.'
       product_output: Products
       return: Return
-      week_footer: '* This week data will be sent only to collaborators.'
+      week_footer: 'This week data will be sent only to collaborators.'
     profile: Profile
     receipt_email:
-      index_footer: '* The e-mails will be sent at %{time}:00am of every first day of month. Next competence is %{competence}.'
+      index_footer: 'The e-mails will be sent at %{time}:00am of every first day of month. Next competence is %{competence}.'
       new_recipient: "New recipient"
       recent: Recent
     select:

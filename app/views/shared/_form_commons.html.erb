@@ -133,6 +133,11 @@
 		jQuery("#" + field).val(textAreaTxt.substring(0, caretPos) + ' ' + tag + ' ' + textAreaTxt.substring(caretPos) );
 	}
 
+	function validate_email(email) {
+        var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        return regex.test(email);
+    }
+
 	function go_back() {
 		window.location = '<%= model_full_path(@model) %>';
 	}

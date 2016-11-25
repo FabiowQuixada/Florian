@@ -114,15 +114,20 @@
 
 		function validate_contact() {
 
-			valid = at_least_one_field_filled();
+			var errors = new Array();
+			email = $('#temp_contact_email_address').val();
 
-			if(!valid) {
-				var errors = new Array();
+			if(!at_least_one_field_filled()) {
 				errors.push('<%= I18n.t('errors.contact.all_empty') %>');
-				display_error(errors, 'contact');
 			}
 
-			return valid;
+			if(email && !validate_email(email)) {
+				errors.push('<%= I18n.t('alert.email.invalid_recipient') %>');
+			}
+
+			display_error(errors, 'contact');
+
+			return errors.length === 0;
 		}
 
 		function at_least_one_field_filled() {

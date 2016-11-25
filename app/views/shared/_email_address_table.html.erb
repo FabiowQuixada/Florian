@@ -43,11 +43,6 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
         return result;
     }
 
-    function validate_recipient_email(email) {
-        var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        return regex.test(email);
-    }
-
     $('body').on('click', '.<%= field_name %>_remove_recipient_btn', function() {
         id = $(this).closest('.email_recipient').find('.recipient_id').text();
 
@@ -80,7 +75,7 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
 
         } else if(already_present(email_address)) {
             display_form_errors('<%= t('alert.email.duplicated_recipient') %>');
-        } else if (validate_recipient_email(email_address)) {
+        } else if (validate_email(email_address)) {
             $.ajax({
                 url: "<%= url_for(action: 'email_row', controller: 'helpers', only_path: false, protocol: 'http') %>", 
                 data: { email_address: email_address, index: temp_id, field_name: '<%= field_name %>' },
