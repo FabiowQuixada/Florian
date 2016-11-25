@@ -46,6 +46,10 @@ module ApplicationHelper
     image_tag('activate.png', title: genderize_tag(iterator, 'model_phrases.status.is_active'), class: 'deactivate_btn status_btn')
   end
 
+  def arrow_down
+    image_tag('arrow_down.png', class: 'arrow-down')
+  end
+
   ## Other #######################################
 
   def app_footer
