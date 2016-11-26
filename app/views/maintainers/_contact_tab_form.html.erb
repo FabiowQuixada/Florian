@@ -82,7 +82,7 @@
 					// View;
 					$('#contact_' + loaded_contact_id + ' .contact_name').text(name);
 					$('#contact_' + loaded_contact_id + ' .contact_position').text(position);
-					$('#contact_' + loaded_contact_id + ' .contact_email').text(email);
+					$('#contact_' + loaded_contact_id + ' .contact_email_address').text(email);
 					$('#contact_' + loaded_contact_id + ' .contact_telephone').text(telephone);
 					$('#contact_' + loaded_contact_id + ' .contact_celphone').text(celphone);
 					$('#contact_' + loaded_contact_id + ' .contact_fax').text(fax);
@@ -188,6 +188,8 @@
 			if(id > 0) {
 				$('#maintainer_contacts_to_be_deleted').val($('#maintainer_contacts_to_be_deleted').val() + id + ',');
 			}
+
+			clean_contact_fields();
 		});
 
 		$('body').on('click', '.edit_contact_btn', function() {

@@ -32,7 +32,7 @@ class MaintainersController < ApplicationController
                                        :neighborhood, :city, :state, :email_address, :website, :category, :donation, :first_parcel, :payment_frequency, :contract, :remark, :payment_period, :group,
                                        :donations_to_be_deleted, :contacts_to_be_deleted,
                                        donations_attributes: [:id, :value, :donation_date, :remark],
-                                       contacts_attributes: [:id, :name, :position, :telephone, :celphone, :email, :fax])
+                                       contacts_attributes: [:id, :name, :position, :telephone, :celphone, :email_address, :fax])
   end
 
   def contact_params

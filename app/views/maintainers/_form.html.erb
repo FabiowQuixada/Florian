@@ -36,6 +36,24 @@
 
 <script>
 
+	$('#main_form').on('submit', function(e) {
+
+		var errors = new Array();
+		email = $('#maintainer_email_address').val();
+		
+		preprocess_data();
+
+		if(email && !validate_email(email)) {
+			errors.push('<%= I18n.t('alert.email.invalid_recipient') %>');
+		}
+
+
+		if(errors.length > 0) {
+			e.preventDefault();
+			display_form_errors(errors);
+		}
+	});
+
 	function preprocess_data() {
 		if(new_donations()) {
 			window.any_change = true;
