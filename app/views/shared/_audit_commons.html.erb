@@ -1,4 +1,4 @@
-<% if !@model.new_record? && !current_user.nil? && current_user.admin? %>
+<% if (@model.persisted? && !current_user.nil? && current_user.admin?) || (Rails.env.showcase? && @model.persisted?) %>
 
 	<br/>
 
