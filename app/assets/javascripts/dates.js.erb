@@ -32,12 +32,13 @@ function current_competence() {
 	return mm + '/' + yyyy;
 }
 
+// Input format: 
 function to_rails_date(date_string) {
 	var temp = date_string.split("/");
 	var date = new Date(temp[2], temp[1] - 1, temp[0]);
 	year = date.getFullYear();
 	month = ('0' + (date.getMonth() + 1)).slice(-2);
-	day = ('0' + date.getDate()).slice(-2)
+	day = ('0' + date.getDate()).slice(-2);
 
 	return year + '-' + month + '-' + day;
 }

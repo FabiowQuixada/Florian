@@ -16,6 +16,7 @@ class MaintainersController < ApplicationController
   private #############################################
 
   def maintainer_params
+    params[:maintainer][:first_parcel] = formatted_date params[:maintainer][:first_parcel]
     params.require(:maintainer).permit(:id, :entity_type, :name, :registration_name, :cpf, :cnpj, :address, :cep,
                                        :neighborhood, :city, :state, :email_address, :website, :category, :donation, :first_parcel, :payment_frequency, :contract, :remark, :payment_period, :group,
                                        :donations_to_be_deleted, :contacts_to_be_deleted,
@@ -28,6 +29,7 @@ class MaintainersController < ApplicationController
   end
 
   def donation_params
+    params[:donation][:donation_date] = Date.strptime(params[:donation][:donation_date], '%m/%d/%Y').strftime('%F')
     params.require(:donation).permit(:id, :value, :donation_date, :remark)
   end
 

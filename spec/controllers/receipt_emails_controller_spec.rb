@@ -22,7 +22,7 @@ describe ReceiptEmailsController, type: :controller do
       let(:expected) do
         {
           message: model.was('resent'),
-          date: I18n.localize(Date.today, format: :default_i),
+          date: I18n.localize(Date.today, format: :really_short),
           maintainer: model.maintainer.name,
           value: ActionController::Base.helpers.number_to_currency(model.value),
           type: I18n.t('enums.email_history.send_type.resend'),
@@ -77,7 +77,7 @@ describe ReceiptEmailsController, type: :controller do
         let(:expected) do
           {
             message: model.was('test_sent'),
-            date: I18n.localize(Date.today, format: :default_i),
+            date: I18n.localize(Date.today, format: :really_short),
             maintainer: model.maintainer.name,
             value: ActionController::Base.helpers.number_to_currency(model.value),
             type: I18n.t('enums.email_history.send_type.test'),

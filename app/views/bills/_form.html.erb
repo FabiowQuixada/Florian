@@ -61,10 +61,15 @@
 	});
 
 	function preprocess_data() {
+		update_competence();
 	}
 
 	$('#bill_aux_competence').on('change', function() {
-		$('#bill_competence').val(to_rails_date('01/' + $('#bill_aux_competence').val()));
+		update_competence();
 	})
+
+	function update_competence() {
+		$('#bill_competence').val(to_rails_date('01/' + $('#bill_aux_competence').val()));
+	}
 
 </script>

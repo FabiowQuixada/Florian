@@ -24,6 +24,10 @@ module ApplicationHelper
     render 'others/menu_item', klass: klass, display_name: display_name
   end
 
+  def date_field(f, att)
+    f.text_field att, value: (@model.send(att).nil? ? '' : I18n.l(@model.send(att))), class: 'form-control date'
+  end
+
   def money_field(f, att)
     f.text_field att, value: number_to_currency(@model.send(att).to_f, unit: ''), class: 'form-control money'
   end

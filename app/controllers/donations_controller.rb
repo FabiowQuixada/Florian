@@ -19,6 +19,7 @@ class DonationsController < ApplicationController
   private ###########################################################################################
 
   def donation_params
+    params[:donation][:donation_date] = formatted_date params[:donation][:donation_date]
     params.require(:donation).permit(:value, :donation_date, :remark, :maintainer_id, :user_id)
   end
 

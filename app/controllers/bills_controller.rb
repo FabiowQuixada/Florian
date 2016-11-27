@@ -8,6 +8,7 @@ class BillsController < ApplicationController
   private #########################################################################################
 
   def bill_params
+    params[:bill][:competence] = formatted_date params[:bill][:competence]
     params.require(:bill).permit(:id, :competence, :water, :energy, :telephone)
   end
 

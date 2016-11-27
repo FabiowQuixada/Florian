@@ -34,14 +34,20 @@ class Donation < ActiveRecord::Base
   end
 
   def validate_model
-    errors.add :donation_date, blank_error_message('date') unless donation_date.is_a? Date
-    errors.add :donation_date, I18n.t('errors.donation.value_or_remark') if no_value? && no_remark?
+    validate_date
+    errors.add :maintainer, blank_error_message('maintainer') if maintainer.nil? && persisted?
+    errors
   end
 
   private
 
   def no_value?
     value.nil? || value == 0
+  end
+
+  def validate_date
+    errors.add :donation_date, blank_error_message('date') unless donation_date.is_a? Date
+    errors.add :donation_date, I18n.t('errors.donation.value_or_remark') if no_value? && no_remark?
   end
 
   def no_remark?

@@ -34,6 +34,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) << :name
   end
 
+  def formatted_date(date_param)
+    return nil if date_param.nil? || date_param == ''
+    return Date.strptime(date_param, '%m/%d/%Y').strftime('%F') unless date_param =~ /\d\d\d\d-\d\d-\d\d/
+    date_param
+  end
+
   private ######################################################################################
 
   def after_sign_out_path_for(_resource_or_scope)

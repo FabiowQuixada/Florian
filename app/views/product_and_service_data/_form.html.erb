@@ -66,12 +66,12 @@
 									<div class="input-group">
 										<span class="input-group-addon"><%= t 'helpers.from' %></span>
 										<div class="date" data-behaviour='datepicker' >
-											<span></span><%= week_f.text_field :start_date, class: 'form-control', readonly: @model.finalized? %><span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+											<span></span><%= week_f.text_field :start_date, value: I18n.l(week.start_date),class: 'form-control date', readonly: @model.finalized? %><span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 										</div>
 										<span class="input-group-addon" style="border-left: 0; border-right: 0;"><%= t 'helpers.to' %></span>
 										<div class="date" data-behaviour='datepicker'>
 											<span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-											<%= week_f.text_field :end_date, class: 'form-control', readonly: @model.finalized? %>
+											<%= week_f.text_field :end_date, value: I18n.l(week.end_date), class: 'form-control date', readonly: @model.finalized? %>
 										</div>
 									</div>
 								</div>

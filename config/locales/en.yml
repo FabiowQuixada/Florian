@@ -238,13 +238,12 @@ en:
     formats:
       competence: "%B/%Y"
       competence_i: "%m/%Y"
-      default: "%Y-%m-%d"
       default: "%m/%d/%Y"
-      default_i: "%m/%d/%y"
       javascript_format:
         competence: "mm/yyyy"
         date: "mm/dd/yyyy"
       long: "%B %d, %Y"
+      really_short: "%m/%d/%y"
       short: "%b %d"
     month_names:
     -

@@ -4,7 +4,7 @@
 			<div class="form-group col-md-6">
 				<%= f.label :first_parcel %>
 				<div class="input-group date" data-behaviour='datepicker' >
-					<%= f.text_field :first_parcel, { class: 'form-control' } %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+					<%= date_field f, :first_parcel %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 				</div>
 			</div>
 			<div class="form-group col-md-6">
@@ -142,7 +142,7 @@
 		}
 
 		if(parcel_qty != 0 || (frequency_type !== undefined && frequency_type !== '')) {
-			last_date.val(moment(first_date, "DD/MM/YYYY").add((temp-1), frequency_type).format("DD/MM/YYYY"));
+			last_date.val(moment(first_date, "<%= I18n.t('date.formats.javascript_format.date').upcase %>").add((temp-1), frequency_type).format("<%= I18n.t('date.formats.javascript_format.date').upcase %>"));
 		} else {
 			last_date.val('');
 		}

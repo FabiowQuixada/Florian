@@ -8,6 +8,7 @@ class ProductAndServiceDataController < ApplicationController
   private ###########################################################################################
 
   def product_and_service_datum_params
+    # params[:product_and_service_datum][:competence] = formatted_date params[:product_and_service_datum][:competence]
     params.require(:product_and_service_datum).permit(:id, :competence,
                                                       product_and_service_weeks_attributes: [:id, :number, :start_date, :end_date,
                                                                                              service_data_attributes: [:id, :psychology, :physiotherapy, :plastic_surgery, :mesh, :gynecology, :occupational_therapy],
