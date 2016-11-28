@@ -32,9 +32,11 @@ gem 'i18n_yaml_sorter'
 group :development, :showcase, :test do
   gem 'letter_opener'
   gem 'faker', '~> 1.4', '>= 1.4.3'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'byebug'
+  gem 'blabla', '~> 0.0.2'
 end
 
-gem 'byebug'
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -47,8 +49,6 @@ group :development, :test do
   gem 'spring'
 end
 
-gem 'factory_girl_rails', '~> 4.0'
-gem 'blabla', '~> 0.0.2'
 group :test do
   gem 'capybara'
   gem 'rspec-rails', '~> 3.0'
