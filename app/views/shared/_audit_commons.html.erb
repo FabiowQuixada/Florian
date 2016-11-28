@@ -21,11 +21,11 @@
 					</thead>
 
 					<tbody>
-						<% @model.audits.each do |audit| %>
+						<% @model.audits.each_with_index do |audit, index| %>
 							<tr>
-								<td><%= audit.user.name unless audit.user.nil? %></td>
+								<td><%= audit_user audit, index	%></td>
 								<td class="audit-when"><%= l(audit.created_at, format: :long_2) %></td>
-								<td class="audit-where"><%= audit.remote_address %></td>
+								<td class="audit-where"><%= audit_ip audit, index %></td>
 								<td class="audit-what">
 									<% audit.audited_changes.each do |key, array| %>
 										<b> - <%= t("activerecord.attributes.#{@model.model_name.singular}.#{key}") %>:</b> 

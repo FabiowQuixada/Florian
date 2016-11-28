@@ -32,6 +32,22 @@ module ApplicationHelper
     f.text_field att, value: number_to_currency(@model.send(att).to_f, unit: ''), class: 'form-control money'
   end
 
+  def audit_user(audit, index)
+    if index == 0
+      t 'audit.auto_creation_user'
+    else
+      audit.user.name unless audit.user.nil?
+    end
+  end
+
+  def audit_ip(audit, index)
+    if index == 0
+      t 'audit.auto_creation_ip'
+    else
+      audit.remote_address
+    end
+  end
+
   ## Images #########################################################################
 
   def trash_img(field_name)

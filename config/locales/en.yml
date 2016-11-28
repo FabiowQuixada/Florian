@@ -204,6 +204,8 @@ en:
     when: When
     where: Where
     who: Who
+    auto_creation_user: Admin
+    auto_creation_ip: Server
   date:
     abbr_day_names:
     - Sun
