@@ -24,6 +24,9 @@ class DonationsController < ApplicationController
   end
 
   def index_sorting_method
-    Donation.order('donation_date DESC').page(params[:page])
+    format_filter_date :donation_date_gteq
+    format_filter_date :donation_date_lteq
+    @q = Donation.ransack(params[:q])
+    @q.result.order('donation_date DESC').page(params[:page])
   end
 end
