@@ -3,8 +3,11 @@ shared_examples 'an index view' do
     let(:model) { class_name.new }
 
     before :each do
+      q = class_name.ransack(params[:q])
+
       assign :model, model
-      assign :list, class_name.all.page(1)
+      assign :q, q
+      assign :list, q.result.page(params[:page])
       render
     end
 
@@ -24,6 +27,7 @@ shared_examples 'an index view' do
 
     before :each do
       assign :model, model
+      assign :q, class_name.ransack(params[:q])
       assign :list, Kaminari.paginate_array([]).page(1)
       render
     end

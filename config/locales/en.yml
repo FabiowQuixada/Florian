@@ -195,6 +195,8 @@ en:
     app_title: Florian
     author: Fabiow Quixadá
   audit:
+    auto_creation_ip: Server
+    auto_creation_user: Admin
     data: Data
     history: History
     title: Audit
@@ -204,8 +206,6 @@ en:
     when: When
     where: Where
     who: Who
-    auto_creation_user: Admin
-    auto_creation_ip: Server
   date:
     abbr_day_names:
     - Sun
@@ -399,6 +399,8 @@ en:
       greater_than_or_equal_to: must be greater than or equal to %{count}
       inclusion: is not included in the list
       invalid: "Field is invalid: %{attribute};"
+      invalid_period: "Invalid period: %{attribute};"
+      invalid_period_i: "Invalid period;"
       less_than: must be less than %{count}
       less_than_or_equal_to: must be less than or equal to %{count}
       model_invalid: "Validation failed: %{errors}"
@@ -455,8 +457,10 @@ en:
     action:
       activate: Activate
       add: Add
+      apply: Apply
       back: Back
       cancel: Cancel
+      clean_filters: Clean filters
       confirm: Confirm
       deactivate: Deactivate
       destroy: Delete
@@ -471,6 +475,7 @@ en:
         send: Send
         send_test: Send test
         view_receipt: View receipt
+      filter: Filter
       filter: Filter
       login: Login
       login: Login
@@ -494,7 +499,13 @@ en:
           p: Save and new
           s: Save and new
       update_data: Save
+    activity:
+      active: Active
+      desc: Activity
+      inactive: Deactivated
+    and: and
     attention: Attention
+    between: Between
     by: by
     changelog: Changelog
     email:
@@ -503,6 +514,7 @@ en:
         subject: 'Weekly Backup'
     email_tag: "[Florian] "
     error: Error
+    filters: Filters
     final_data: Final data
     from: From
     general: General
@@ -528,10 +540,7 @@ en:
       new_recipient: "New recipient"
       recent: Recent
     select:
-      all:
-        n:
-          p: 'All'
-          s: 'All'
+      all: All
       prompt: Select
     test_email_prefix: '[TEST] '
     to: to
@@ -571,8 +580,8 @@ en:
           s: 'Are you sure you want to remove this %{model}?'
     none_registered:
       n:
-        p: 'No %{model} registered.'
-        s: 'No %{model} registered.'
+        p: 'No %{model} found.'
+        s: 'No %{model} found.'
     past_actions:
       activated:
         n:
@@ -727,7 +736,7 @@ en:
       weekly_prod_and_service: "Product & Service Weekly Report"
   showcase: 
     cant_edit: 'Sorry, you cannot change profile settings in showcase enviroment.'
-    login_info: 'You are in showcase environment, therefore the presented data is not real and is reset weekly. To login, use the following credentials: %{showcase_email} for user e-mail and %{showcase_password} for password.'
+    login_info: 'You are in showcase environment, therefore the presented data is not real and is reset weekly. To login, please use the following credentials: %{showcase_email} for user e-mail and %{showcase_password} for password.'
     report:
       company_receipt_text: 'We declare that the Sirius Institute, under CNPJ/MF nº 00.000.000/0000-00, localized at Manis Major street, received from %{name}, under CNPJ/MF nº %{cnpj}, localized at %{address}, %{value_tag} as a donation in %{competence_tag}.'
       footer: 

@@ -3,8 +3,12 @@ module IndexAction extend ActiveSupport::Concern
                    include HelperMethods
 
                    def index
+                     @filter = model_class.new
                      @list = index_sorting_method
-                     @list = model_class.order('created_at ASC').page(params[:page]) unless @list
+                     return if @list
+
+                     @q = model_class.ransack(params[:q])
+                     @list = @q.result.order('created_at ASC').page(params[:page])
                    end
 
   private

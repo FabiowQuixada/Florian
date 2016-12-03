@@ -24,6 +24,18 @@ module ApplicationHelper
     render 'others/menu_item', klass: klass, display_name: display_name
   end
 
+  def filter_date_field(f, att)
+    f.search_field att, value: params[:q] && params[:q][att] ? I18n.l(params[:q][att].to_date) : '', class: 'form-control date mb-0'
+  end
+
+  def filter_competence_field(f, att)
+    f.search_field att, value: params[:q] && params[:q][att] ? I18n.l(params[:q][att].to_date, format: I18n.t('date.formats.competence_i')) : '', class: 'form-control date mb-0 hidden'
+  end
+
+  def filter_aux_competence_field(f, att)
+    f.text_field att, value: params[:q] && params[:q][att] ? I18n.l(params[:q][att].to_date, format: I18n.t('date.formats.competence_i')) : '', id: "aux_#{att}", class: 'form-control date mb-0'
+  end
+
   def date_field(f, att)
     f.text_field att, value: (@model.send(att).nil? ? '' : I18n.l(@model.send(att))), class: 'form-control date'
   end
@@ -46,6 +58,11 @@ module ApplicationHelper
     else
       audit.remote_address
     end
+  end
+
+  def any_filter_filled
+    params[:q].to_a.each { |p| return true if p[1] != '' }
+    false
   end
 
   ## Images #########################################################################

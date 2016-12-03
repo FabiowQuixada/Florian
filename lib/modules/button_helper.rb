@@ -13,6 +13,14 @@ module ButtonHelper
     link_to genderize_full_tag(@model, 'helpers.action.new'), path, class: 'btn btn-primary'
   end
 
+  def filter_btn(form)
+    form.submit t('helpers.action.apply'), class: 'btn btn-primary btn-xs filter_btn'
+  end
+
+  def clean_filters_btn(_form)
+    link_to t('helpers.action.clean_filters'), 'javascript:void(0)', class: 'btn btn-primary btn-xs clean_filters_btn'
+  end
+
   def save_update_btn(_model, form)
     button_text = (@model.persisted? ? t('helpers.action.update') : t('helpers.action.save'))
     form.submit button_text, class: 'btn btn-primary save_btn'

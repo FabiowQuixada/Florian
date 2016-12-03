@@ -40,6 +40,10 @@ class ApplicationController < ActionController::Base
     date_param
   end
 
+  def format_filter_date(param)
+    params[:q][param] = formatted_date params[:q][param] if params[:q]
+  end
+
   private ######################################################################################
 
   def after_sign_out_path_for(_resource_or_scope)
