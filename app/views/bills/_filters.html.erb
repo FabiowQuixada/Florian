@@ -1,0 +1,66 @@
+<%= search_form_for @q, html: { id: 'search_form' } do |f| %>
+	<% I18n.with_options(scope: "activerecord.attributes.#{@model.class.name.underscore}") do |i18n| %>
+		<div class="panel-group">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" href="#index_filters"><%= arrow_down %><%= I18n.t 'helpers.filters' %></a>
+					</h4>
+				</div>
+				<div id="index_filters" class="panel-collapse collapse">
+					<div class="panel-body">
+						
+						<%= render 'shared/error_alert', id: 'filter' %>
+			    		
+			    		<div class="form-group row">
+							<label class="col-sm-3 col-form-label">
+								<%= f.label :competence_gteq, i18n.t(:competence), class: 'col-form-label' %>
+							</label>
+				    		<div class="col-sm-6">
+				    			<div class="input-group">
+									<span class="input-group-addon"><%= f.label :competence_lteq, t('helpers.between'), class: 'col-form-label' %>
+									</span>
+									<div class="date" data-behaviour='datepickercompetence' >
+										<span></span><%= filter_aux_competence_field f, :competence_gteq %>
+										<%= filter_competence_field f, :competence_gteq %>
+										<span class="input-group-addon hidden"><i class="glyphicon glyphicon-th"></i></span>
+									</div>
+									<span class="input-group-addon" style="border-left: 0; border-right: 0;"><%= f.label :competence_lteq, 'and', class: 'col-form-label' %></span>
+									<div class="date" data-behaviour='datepickercompetence'>
+										<span class="input-group-addon hidden"><i class="glyphicon glyphicon-th"></i></span>
+										<%= filter_aux_competence_field f, :competence_lteq  %>
+										<%= filter_competence_field f, :competence_lteq  %>
+									</div>
+								</div>
+				    		</div>
+			    		</div>
+
+						<div class="form-buttons">
+							<%= filter_btn f %>
+							<%= clean_filters_btn f %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<% end %>
+<% end %>
+
+<script>
+
+	$('#search_form').on('submit', function(e) {
+		format_competence('aux_competence_lteq', 'q_competence_lteq');
+		format_competence('aux_competence_gteq', 'q_competence_gteq');
+		
+		start_date = $('#q_competence_gteq').val();
+		end_date = $('#q_competence_lteq').val();
+		errors = validate_period(start_date, end_date);
+
+		if(errors.length !== 0) {
+			display_error(errors, 'filter');
+			e.preventDefault();
+		}
+
+	});
+
+</script>

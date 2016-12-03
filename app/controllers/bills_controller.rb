@@ -13,9 +13,11 @@ class BillsController < ApplicationController
   end
 
   def index_sorting_method
-    list = Bill.order 'competence DESC'
-    populate_graph list
-    list.page(params[:page])
+    populate_graph Bill.order 'competence DESC'
+    format_filter_date :competence_gteq
+    format_filter_date :competence_lteq
+    @q = Bill.ransack(params[:q])
+    @q.result.page(params[:page])
   end
 
   def populate_graph(list)
