@@ -5,6 +5,31 @@ describe Maintainer, js: true, type: :request do
     login_as_admin
   end
 
+  describe 'filters' do
+    before :each do
+      visit maintainers_path
+      click_on I18n.t 'helpers.filters'
+    end
+
+    it 'filters by group' do
+      select I18n.t('enums.maintainer.group.maintainer'), from: 'q_group_eq'
+      click_on I18n.t 'helpers.action.apply'
+
+      index_table = find('#index_table')
+      expect(index_table).to have_content I18n.t 'enums.maintainer.group.maintainer'
+      described_class.groups.each { |group| expect(index_table).not_to have_content I18n.t "enums.maintainer.group.#{group}" }
+    end
+
+    it 'filters by category' do
+      select I18n.t('enums.maintainer.category.low'), from: 'q_category_eq'
+      click_on I18n.t 'helpers.action.apply'
+
+      index_table = find('#index_table')
+      expect(index_table).to have_content I18n.t 'enums.maintainer.category.low'
+      described_class.categories.each { |category| expect(index_table).not_to have_content I18n.t "enums.maintainer.category.#{category}" }
+    end
+  end
+
   it 'persists a maintainer with a contact' do
     visit new_maintainer_path
     fill_main_fields

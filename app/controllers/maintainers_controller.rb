@@ -5,17 +5,6 @@ class MaintainersController < ApplicationController
   include ModificationActions
   include DestroyAction
 
-  def create
-    @model = model_class.new model_params
-    @model.donations.each { |donation| donation.maintainer = @model }
-
-    if @model.save
-      redirect_to model_index_path, notice: @model.was('created')
-    else
-      render '_form'
-    end
-  end
-
   def contact_row
     render partial: 'contacts/contact', locals: { contact: Contact.new(contact_params) }
   end
@@ -32,7 +21,7 @@ class MaintainersController < ApplicationController
                                        :neighborhood, :city, :state, :email_address, :website, :category, :donation, :first_parcel, :payment_frequency, :contract, :remark, :payment_period, :group,
                                        :donations_to_be_deleted, :contacts_to_be_deleted,
                                        donations_attributes: [:id, :value, :donation_date, :remark],
-                                       contacts_attributes: [:id, :name, :position, :telephone, :celphone, :email_address, :fax])
+                                       contacts_attributes: [:id, :name, :position, :telephone, :celphone, :email, :fax])
   end
 
   def contact_params
@@ -45,6 +34,7 @@ class MaintainersController < ApplicationController
   end
 
   def index_sorting_method
-    Maintainer.order(:name).page(params[:page])
+    @q = Maintainer.ransack(params[:q])
+    @q.result.order(:name).page(params[:page])
   end
 end
