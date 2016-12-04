@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   before_create :build_default_system_setting
   after_initialize :default_values
 
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable :registerable, :recoverable, :rememberable
   devise :database_authenticatable, :registerable, :trackable, :validatable

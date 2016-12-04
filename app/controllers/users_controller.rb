@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   end
 
   def index_sorting_method
-    User.order(:name).page(params[:page])
+    @q = User.ransack(params[:q])
+    @q.result.order(:name).page(params[:page])
   end
 end
