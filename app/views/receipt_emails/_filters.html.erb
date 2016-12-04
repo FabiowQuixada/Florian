@@ -1,0 +1,33 @@
+<%= search_form_for @q, html: { id: 'search_form' } do |f| %>
+	<% I18n.with_options(scope: "activerecord.attributes.#{@model.class.name.underscore}") do |i18n| %>
+		<div class="panel-group">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" href="#index_filters"><%= arrow_down %><%= I18n.t 'helpers.filters' %></a>
+					</h4>
+				</div>
+				<div id="index_filters" class="panel-collapse collapse">
+					<div class="panel-body">
+
+						<%= render 'shared/error_alert', id: 'filter' %>
+
+						<div class="form-group row">
+							<label class="col-sm-3 col-form-label">
+								<%= f.label :maintainer_id_eq, i18n.t(:maintainer), class: 'col-form-label' %>
+							</label>
+				    		<div class="col-sm-3">
+							  	<%= f.select :maintainer_id_eq, options_from_collection_for_select(Maintainer.all, :id, :name, @q.maintainer_id_eq), { include_blank: true }, { class: 'form-control mb-0' } %>
+				    		</div>
+				    	</div>
+			    		
+						<div class="form-buttons">
+							<%= filter_btn f %>
+							<%= clean_filters_btn f %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<% end %>
+<% end %>

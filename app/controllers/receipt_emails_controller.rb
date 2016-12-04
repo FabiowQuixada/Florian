@@ -7,7 +7,8 @@ class ReceiptEmailsController < ApplicationController
   include StatusActions
 
   def index
-    @list = ReceiptEmail.order('id DESC').page(params[:page])
+    @q = ReceiptEmail.ransack(params[:q])
+    @list = @q.result.order('id DESC').page(params[:page])
     @recent_emails = EmailHistory.recent_emails
   end
 
