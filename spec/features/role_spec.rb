@@ -1,9 +1,16 @@
 require 'rails_helper'
 
-describe Role, type: :request do
+describe Role, js: true, type: :request do
   context 'as admin' do
     before :each do
       login_as_admin
+    end
+
+    describe 'filters' do
+      before :each do
+        visit roles_path
+        click_on I18n.t 'helpers.filters'
+      end
     end
 
     it 'adds a new role' do
