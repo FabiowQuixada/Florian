@@ -22,7 +22,7 @@ module IndexAction extend ActiveSupport::Concern
 
                    def before_index
                      @model = model_class.new
-                     @breadcrumbs = @model.breadcrumb_path
+                     @breadcrumbs = breadcrumbs
                    end
 
 end

@@ -42,6 +42,14 @@ class ReceiptEmailsController < ApplicationController
     params.require(:receipt_email).permit(:id, :body, :value, :active, :maintainer_id, :recipients_array, :active)
   end
 
+  def breadcrumbs
+    if params[:action] == 'index'
+      Hash[I18n.t('menu.emails') => '', plural_of(model_class) => '']
+    else
+      Hash[I18n.t('menu.emails') => '', plural_of(model_class) => index_path]
+    end
+  end
+
   def load_email
     # If there's anything other than the id, load it from the parameters
     # Else, load it from the database

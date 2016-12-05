@@ -44,7 +44,33 @@ class ApplicationController < ActionController::Base
     params[:q][param] = formatted_date params[:q][param] if params[:q]
   end
 
+  def index_path
+    url_for(action: 'index', controller: model_class.model_name.route_key, only_path: false, protocol: 'http')
+  end
+
+  def breadcrumbs
+    if params[:action] == 'index'
+      Hash[plural_of(model_class) => '']
+    else
+      Hash[plural_of(model_class) => index_path]
+    end
+  end
+
   private ######################################################################################
+
+  def model_class_name
+    controller_name = nil
+    self.class.name.split('::').each { |i| controller_name = i if i.ends_with? 'Controller' }
+    controller_name[0..-11].singularize
+  end
+
+  def model_class
+    Object.const_get model_class_name
+  end
+
+  def plural_of(klass)
+    klass.new.model_name.human count: 2
+  end
 
   def after_sign_out_path_for(_resource_or_scope)
     new_user_session_path

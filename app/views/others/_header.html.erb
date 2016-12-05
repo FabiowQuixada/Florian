@@ -6,11 +6,7 @@
 		<div class="row">
 			<div class="col-xs-12 col-md-7 col-lg-7">
 				<ol class="breadcrumb">
-					<% @breadcrumbs.each do |bc| %>
-						<li <%= 'class="active thick"'.html_safe if bc == @breadcrumbs.to_a.last %>>
-							<%= bc.first %>
-						</li>
-					<% end %>
+					<%= breadcrumbs %>
 
 					<li class="pull-right visible-xs">
 						<%= admin_info_btn %>

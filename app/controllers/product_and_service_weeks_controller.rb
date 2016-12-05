@@ -36,10 +36,18 @@ class ProductAndServiceWeeksController < ApplicationController
 
   before_action :before_send_emails, only: [:update_and_send, :send_to_analysis, :send_maintainers]
 
+  def breadcrumbs
+    if params[:action] == 'index'
+      Hash[I18n.t('menu.emails') => '', plural_of(model_class) => '']
+    else
+      Hash[I18n.t('menu.emails') => '', plural_of(model_class) => product_and_service_data_path]
+    end
+  end
+
   def before_send_emails
     @week = ProductAndServiceWeek.find params[:product_and_service_week][:id]
     @model = @week.product_and_service_datum
-    @breadcrumbs = @model.breadcrumb_path.merge Hash[@model => '']
+    @breadcrumbs = breadcrumbs.merge Hash[@model => '']
   end
 
   def ok_to_update_and_send?

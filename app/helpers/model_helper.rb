@@ -18,10 +18,6 @@ module ModelHelper
     I18n.t("model_phrases.past_actions.#{verb}.#{model_gender}.#{model_number}", model: I18n.t("activerecord.models.#{self.class.model_name.param_key}.one")).downcase.capitalize
   end
 
-  def breadcrumb_path
-    Hash[model_name.human(count: 2) => 'send(self.model_name.route_key + "_path")']
-  end
-
   def blank_error_message(field)
     attribute = I18n.t("activerecord.attributes.#{self.class.name.underscore}.#{field}")
     I18n.t('errors.messages.blank', attribute: attribute)

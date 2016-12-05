@@ -40,6 +40,6 @@ module DestroyAction extend ActiveSupport::Concern
                        return unless can_destroy?
 
                        @model = model_class.find(params[:id])
-                       @breadcrumbs = @model.breadcrumb_path
+                       @breadcrumbs = breadcrumbs
                      end
 end

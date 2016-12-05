@@ -14,6 +14,14 @@ class ProductAndServiceDataController < ApplicationController
                                                                                              product_data_attributes: [:id, :mesh, :cream, :protector, :silicon, :mask, :foam, :skin_expander, :cervical_collar]])
   end
 
+  def breadcrumbs
+    if params[:action] == 'index'
+      Hash[I18n.t('menu.emails') => '', plural_of(model_class) => '']
+    else
+      Hash[I18n.t('menu.emails') => '', plural_of(model_class) => index_path]
+    end
+  end
+
   def index_sorting_method
     @q = ProductAndServiceDatum.ransack(params[:q])
     @q.result.order('competence DESC').page(params[:page])

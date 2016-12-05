@@ -24,7 +24,7 @@ module CreationActions extend ActiveSupport::Concern
 
                        def before_creation
                          @model = model_class.new
-                         @breadcrumbs = @model.breadcrumb_path.merge Hash[t(@model.genderize('helpers.action.new')) => '']
+                         @breadcrumbs = breadcrumbs.merge Hash[t(@model.genderize('helpers.action.new')) => '']
                        end
 
 end

@@ -7,6 +7,14 @@ module ApplicationHelper
   include ButtonHelper
   include ActionView::Helpers::TagHelper
 
+  def breadcrumbs
+    @breadcrumbs.collect do |bc|
+      content_tag :li,
+                  bc[1] == '' ? bc.first : link_to(bc[0], bc[1]),
+                  class: ('active thick' if bc == @breadcrumbs.to_a.last)
+    end.join.html_safe
+  end
+
   def model_full_path(model)
     url_for(action: 'index', controller: model.model_name.route_key, only_path: false, protocol: 'http')
   end

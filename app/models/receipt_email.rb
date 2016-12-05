@@ -64,10 +64,6 @@ class ReceiptEmail < ActiveRecord::Base
     recipients_array.split(/,/)
   end
 
-  def breadcrumb_path
-    Hash[I18n.t('menu.emails') => '', I18n.t('menu.email.receipt') => '']
-  end
-
   private ###############################################################################################################
 
   def receipt_text
