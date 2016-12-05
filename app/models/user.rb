@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   # Validations
   validates :name, :role, :signature, presence: true
   validates :name, :email, uniqueness: true
+  validates :locale, presence: true
 
 
   # Methods

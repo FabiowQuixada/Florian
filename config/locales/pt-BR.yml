@@ -103,6 +103,7 @@ pt-BR:
         current_password: Senha atual
         email: E-mail
         from: "De"
+        locale: Idioma
         name: Nome
         new_password: Nova senha
         password: Senha
@@ -191,6 +192,8 @@ pt-BR:
     app_title: Flórian
     author: Fabiow Quixadá
   audit:
+    auto_creation_ip: Servidor
+    auto_creation_user: Administrador
     data: Dados
     history: Histórico
     title: Auditoria
@@ -441,8 +444,10 @@ pt-BR:
     action:
       activate: Ativar
       add: Adicionar
+      apply: Aplicar
       back: Voltar
       cancel: Cancelar
+      clean_filters: Limpar filtros
       confirm: Confirmar
       deactivate: Inativar
       destroy: Deletar
@@ -458,7 +463,6 @@ pt-BR:
         send_test: Enviar teste
         view_receipt: Visualizar recibo
       filter: Filtrar
-      login: Login
       login: Login
       logout: Sair
       new:
@@ -487,6 +491,8 @@ pt-BR:
           s: Salvar e cadastrar novo
       update_data: Salvar
     attention: Atenção
+    between: Entre
+    and: e
     by: por
     changelog: Changelog
     email:
@@ -495,6 +501,7 @@ pt-BR:
         subject: 'Backup Semanal'
     email_tag: "[Florian] "
     error: Erro
+    filters: Filtros
     final_data: Dados finais
     from: De
     to: a
@@ -531,6 +538,9 @@ pt-BR:
       prompt: Selecione
     test_email_prefix: '[TESTE] '
     total: Total
+  locales:
+    en: English
+    pt-BR: Português
   menu:
     email:
       prod_serv: "Produtos & Serviços"
@@ -553,6 +563,7 @@ pt-BR:
       back: Dados não salvos
       bill_graphs: Gráficos de Contas Por Ano
       destroy: Deleção
+      info: Ajuda
   model_phrases:
     are_you_sure:
       destroy:
@@ -808,6 +819,9 @@ pt-BR:
     pm: ''
   title:
   uat_mode_message: Você está em ambiente de teste.
+  user_help_messages:
+    click_for_help: 'Clique aqui para obter ajuda!'
+    tag_buttons: "Use estes botões para inserir tags (que começam com #) nos campos, de modo que os textos possam ser atualizados pelo sistema apropriadamente. Por exemplo, em um campo de título de e-mail, se você simplesmente digitar 'outubro' em vez da tag de competência, os e-mails que serão enviados automaticamente não terão a competência atualizada."
   views:
     pagination:
       first: "&laquo; Primeira"

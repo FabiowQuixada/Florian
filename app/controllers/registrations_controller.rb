@@ -13,9 +13,8 @@ class RegistrationsController < Devise::RegistrationsController
 
   def redirect(prev_unconfirmed_email)
     if resource_updated?
-      custom_flash_key_message prev_unconfirmed_email
-      sign_in resource_name, current_user, bypass: true
-      respond_with current_user, location: after_update_path_for(current_user)
+      change_locale_settings
+      display_msgs prev_unconfirmed_email
     else
       clean_up_passwords current_user
       respond_with current_user
@@ -39,7 +38,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def account_update_params
-    params.require(:user).permit(:signature, :bcc, :email, :password, :password_confirmation, :current_password)
+    params.require(:user).permit(:signature, :bcc, :email, :password, :password_confirmation, :current_password, :locale)
   end
 
   before_action :before_edit, only: [:edit, :update]
@@ -51,6 +50,17 @@ class RegistrationsController < Devise::RegistrationsController
 
   def resource_updated?
     current_user.system_setting.update(system_setting_params) && update_resource(current_user, account_update_params)
+  end
+
+  def change_locale_settings
+    Rails.cache.clear # Updates (locale-based) JS masks
+    I18n.locale = params[:user][:locale]
+  end
+
+  def display_msgs(prev_unconfirmed_email)
+    custom_flash_key_message prev_unconfirmed_email
+    sign_in resource_name, current_user, bypass: true
+    respond_with current_user, location: after_update_path_for(current_user)
   end
 
 end

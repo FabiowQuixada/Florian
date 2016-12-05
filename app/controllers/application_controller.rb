@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   add_flash_types :info, :waiting_msg
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_filter :set_locale
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -25,7 +26,6 @@ class ApplicationController < ActionController::Base
     return exc.message if exc.instance_of? FlorianException
     default_message
   end
-
 
   protected ######################################################################################
 
@@ -80,5 +80,11 @@ class ApplicationController < ActionController::Base
     backtrace = ''
     backtrace = exc.backtrace.each { |line| logger.error line } unless exc.backtrace.nil?
     logger.error "Exception catch [#{DateTime.now.strftime('%d/%m/%Y :: %H:%M:%S')}] ==> #{exc.message}\n #{backtrace}"
+  end
+
+  def set_locale
+    locale = :en
+    locale = current_user.locale if current_user
+    I18n.locale = locale
   end
 end

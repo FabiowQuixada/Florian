@@ -54,6 +54,14 @@ describe User, js: true, type: :request do
       visit edit_user_registration_path
       expect(first('#user_signature').value).to eq signature
     end
+
+    it 'language is changed' do
+      visit edit_user_registration_path
+      select I18n.t('locale.pt-BR'), from: 'user_locale'
+      fill_in i18n_field('current_password'), with: 'usuario_comum'
+      click_on_update_btn
+      expect(page).to have_content 'Sua conta foi atualizada com sucesso.'
+    end
   end
 
   it '#active_for_authentication?' do

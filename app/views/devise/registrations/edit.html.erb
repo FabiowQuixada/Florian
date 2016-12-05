@@ -63,6 +63,13 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="row">
+				<div class="form-group col-md-6">
+					<%= f.label :locale %>
+					<%= f.select :locale, available_locales { |e| [e.key, e.value] }, { include_blank: t('helpers.select.prompt')}, { class: 'form-control' } %>
+				</div>
+			</div>
 		</div>
 
 		<%= f.fields_for @model.system_setting do |settings_form| %>

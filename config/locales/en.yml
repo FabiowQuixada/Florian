@@ -107,6 +107,7 @@ en:
         current_password: Current password
         email: E-mail
         from: "From"
+        locale: Language
         name: Name
         new_password: New password
         password: Password
@@ -476,8 +477,6 @@ en:
         send_test: Send test
         view_receipt: View receipt
       filter: Filter
-      filter: Filter
-      login: Login
       login: Login
       logout: Logout
       new:
@@ -545,6 +544,9 @@ en:
     test_email_prefix: '[TEST] '
     to: to
     total: Total
+  locale:
+    en: English
+    pt-BR: Português
   menu:
     email:
       prod_serv: Products & Services
