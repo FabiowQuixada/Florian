@@ -17,7 +17,6 @@
 //= require twitter/bootstrap
 //= require bootstrap-datepicker
 //= require jquery.turbolinks
-//= require jquery-tablesorter
 //= require_tree .
 
 var display_admin_data = false;

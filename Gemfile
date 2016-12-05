@@ -13,7 +13,6 @@ gem 'whenever', require: false
 gem 'figaro'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap-datepicker-rails'
-gem 'jquery-tablesorter'
 gem 'jquery-turbolinks'
 gem 'rubocop', require: false
 gem 'rubocop-rspec'

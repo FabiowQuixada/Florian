@@ -216,8 +216,6 @@ GEM
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    jquery-tablesorter (1.20.0)
-      railties (>= 3.2, < 5)
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
@@ -457,7 +455,6 @@ DEPENDENCIES
   i18n_yaml_sorter
   jbuilder (~> 2.0)
   jquery-rails
-  jquery-tablesorter
   jquery-turbolinks
   kaminari
   launchy
