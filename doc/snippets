@@ -1,0 +1,27 @@
+Validacao de formato de e-mail apenas no servidor (cmentar o JS):
+ validates :email, format: {with: EMAIL_FORMAT, message: I18n.t('errors.messages.invalid', attribute: I18n.t('activerecord.attributes.maintainer.email')) }, allow_blank: true
+  # validates :email_address, format: {with: EMAIL_FORMAT, message: I18n.t('errors.messages.invalid', attribute: I18n.t('activerecord.attributes.contact.email')) }, allow_blank: true
+  EMAIL_FORMAT = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+
+        # it 'filters by activity' do
+      #   select I18n.t('helpers.activity.inactive'), from: 'q_active_eq'
+      #   click_on I18n.t 'helpers.action.apply'
+
+      #   find_all('#index_table td.status a img').each { |img| expect(img['alt']).to eq 'Activate' }
+      # end
+
+
+
+module ActivityHelper
+  def self.included(base)
+    base.extend(ClassMethods)
+  end
+
+  module ClassMethods
+    def i18n_activities
+      hash = {}
+      activities.keys.each { |key| hash[I18n.t("helpers.activity.#{key}")] = key }
+      hash
+    end
+  end
+end

@@ -2,8 +2,8 @@ class RenameCompanyToMaintainer < ActiveRecord::Migration
   def change
     rename_table :companies, :maintainers
     rename_column :donations, :company_id, :maintainer_id
-	rename_column :contacts, :company_id, :maintainer_id
-	rename_column :receipt_emails, :company_id, :maintainer_id
+  	rename_column :contacts, :company_id, :maintainer_id
+  	rename_column :receipt_emails, :company_id, :maintainer_id
   end 
 
   def data
