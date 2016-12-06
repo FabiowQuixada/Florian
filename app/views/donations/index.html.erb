@@ -4,17 +4,17 @@
 
 <%= render 'shared/pagination', top: true %>
 
-<table id="index_table" class="table table-striped table-hover table-bordered table-condensed tablesorter tablesorter-blue">
+<table id="index_table" class="table table-striped table-hover table-bordered table-condensed">
 	<thead>
 		<tr>
 			<% I18n.with_options(scope: 'activerecord.attributes.donation') do |i18n| %>
 				<th class="admin-only id-column"></th>
-				<th class="sorter-false date-column"><%= i18n.t :donation_date %></th>
-				<th class="hidden-xs sorter-false value-column"><%= i18n.t :value %></th>
-				<th class="sorter-false"><%= i18n.t :maintainer %></th>
-				<th class="hidden-xs sorter-false"><%= i18n.t :remark %></th>
-				<th class="sorter-false icon-column"></th>
-				<th class="admin-only sorter-false icon-column"></th>
+				<th class="date-column"><%= sort_link @q, :donation_date, i18n.t(:donation_date) %></th>
+				<th class="hidden-xs value-column"><%= sort_link @q, :value, i18n.t(:value) %></th>
+				<th><%= sort_link @q, :maintainer_name, i18n.t(:maintainer) %></th>
+				<th class="hidden-xs"><%= i18n.t :remark %></th>
+				<th class="icon-column"></th>
+				<th class="admin-only icon-column"></th>
 			<% end %>
 		</tr>
 	</thead>

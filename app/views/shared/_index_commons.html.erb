@@ -36,18 +36,25 @@
 
 	$(document).ready(function() {
 
-		<% if any_filter_filled || Rails.env.test? %>
+		any_field_filled = true;
+
+		$("#index_filters input").each(function() {
+			if ($(this).val() !== "") {
+				any_field_filled = false;
+			}
+		});
+		
+		if(any_field_filled) {
+			$('.panel-collapse').collapse({
+			  toggle: true
+			});
+		}
+
+		<% if Rails.env.test? %>
 			$('.panel-collapse').collapse({
 			  toggle: true
 			});
 		<% end %>
-		
-		return $(function() {
-			$.extend($.tablesorter.defaults, {
-				widgets: ["zebra"]
-			});
-			$("#index_table").tablesorter();
-		});
 	});
 
 	<% if @model.class.column_names.include? 'active' %>

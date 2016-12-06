@@ -4,17 +4,17 @@
 
 <%= render 'shared/pagination', top: true %>
 
-<table id="index_table" class="table table-striped table-hover table-bordered table-condensed tablesorter tablesorter-blue">
+<table id="index_table" class="table table-striped table-hover table-bordered table-condensed">
 	<thead>
 		<tr>
 			<% I18n.with_options(scope: 'activerecord.attributes.product_and_service_datum') do |i18n| %>
 				<th class="admin-only id-column"></th>
-				<th class="sorter-false"><%= i18n.t :competence %></th>
-				<th class="sorter-false"><%= i18n.t :services %></th>
-				<th class="sorter-false"><%= i18n.t :products %></th>
-				<th class="sorter-false"><%= i18n.t :status %></th>
-				<th class="sorter-false icon-column"></th>
-				<th class="admin-only sorter-false"></th>
+				<th><%= sort_link @q, :competence, i18n.t(:competence) %></th>
+				<th><%= i18n.t :services %></th>
+				<th><%= i18n.t :products %></th>
+				<th><%= i18n.t :status %></th>
+				<th class="icon-column"></th>
+				<th class="admin-only"></th>
 			<% end %>
 		</tr>
 	</thead>

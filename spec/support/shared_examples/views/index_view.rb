@@ -15,7 +15,7 @@ shared_examples 'an index view' do
     it { expect(view).to render_template('shared/_index_commons') }
 
     # Others
-    it { expect(rendered).to include 'class="table table-striped table-hover table-bordered table-condensed tablesorter tablesorter-blue"' }
+    it { expect(rendered).to include 'class="table table-striped table-hover table-bordered table-condensed"' }
     it { expect(rendered).to include '<tr id="model_' }
     it { expect(rendered).to include '<td class="model_id admin-only">' }
     it { expect(rendered).to include '<thead>' }
@@ -37,7 +37,7 @@ shared_examples 'an index view' do
 
     # Others
     it { expect(rendered).to include genderize_tag(model, 'model_phrases.none_registered') }
-    it { expect(rendered).to include 'class="table table-striped table-hover table-bordered table-condensed tablesorter tablesorter-blue"' }
+    it { expect(rendered).to include 'class="table table-striped table-hover table-bordered table-condensed"' }
     it { expect(rendered).not_to include '<tr id=\'model_' }
     it { expect(rendered).not_to include '<td class="model_id admin-only" style="display: none;">' }
     it { expect(rendered).to include '<thead>' }

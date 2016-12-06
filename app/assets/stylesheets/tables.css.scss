@@ -4,12 +4,24 @@
 }
 
 .table-hover tbody tr.model_row:hover td {
-    background-color: #8FAEEE;
+    background-color: #BFCFFF;
 }
 
-table.tablesorter thead tr th.headerSortUp {} .input-group-addon {
-    border-left-width: 0;
-    border-right-width: 0;
+table#index_table th {
+    background-color: #428bca;
+    color: white;
+
+    a {
+        color: white;
+    }
+
+    a:hover {
+        color: white;
+    }
+
+    a:visited {
+        color: white;
+    }
 }
 
 tr { 

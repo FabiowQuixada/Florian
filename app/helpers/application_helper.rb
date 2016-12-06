@@ -68,11 +68,6 @@ module ApplicationHelper
     end
   end
 
-  def any_filter_filled
-    params[:q].to_a.each { |p| return true if p[1] != '' }
-    false
-  end
-
   ## Images #########################################################################
 
   def trash_img(field_name)

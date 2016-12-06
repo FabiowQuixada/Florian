@@ -4,16 +4,16 @@
 
 <%= render 'shared/pagination', top: true %>
 
-<table id="index_table" class="table table-striped table-hover table-bordered table-condensed tablesorter tablesorter-blue">
+<table id="index_table" class="table table-striped table-hover table-bordered table-condensed">
 	<thead>
 		<tr>
 			<% I18n.with_options(scope: 'activerecord.attributes.user') do |i18n| %>
 				<th class="admin-only id-column"></th>
-				<th><%= i18n.t :name %></th>
-				<th class="hidden-xs user_email"><%= i18n.t :email %></th>
-				<th class="hidden-xs"><%= i18n.t :role %></th>
-				<th class="sorter-false icon-column"></th>
-				<th class="hidden-xs sorter-false icon-column"></th>
+				<th><%= sort_link @q, :name, i18n.t(:name) %></th>
+				<th class="hidden-xs user_email"><%= sort_link @q, :email, i18n.t(:email) %></th>
+				<th class="hidden-xs"><%= sort_link @q, :role_name, i18n.t(:role) %></th>
+				<th class="icon-column"></th>
+				<th class="hidden-xs icon-column"></th>
 			<% end %>
 		</tr>
 	</thead>
