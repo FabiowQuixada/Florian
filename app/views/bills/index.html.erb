@@ -14,6 +14,7 @@
 				<th><%= sort_link @q, :water, i18n.t(:water) %></th>
 				<th><%= sort_link @q, :energy, i18n.t(:energy) %></th>
 				<th><%= sort_link @q, :telephone, i18n.t(:telephone) %></th>
+				<th><%= I18n.t('helpers.total') %></th>
 				<th class="icon-column"></th>
 				<th class="admin-only icon-column"></th>
 			<% end %>
@@ -29,6 +30,7 @@
 				<td><%=	number_to_currency iterator.water %></td>
 				<td><%=	number_to_currency iterator.energy %></td>
 				<td><%=	number_to_currency iterator.telephone %></td>
+				<td><%=	number_to_currency iterator.total %></td>
 				<td class="icon-column"><%= edit_btn iterator %></td>
 				<td class="admin-only icon-column"><%= destroy_btn %></td>
 			</tr>

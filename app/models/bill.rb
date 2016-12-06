@@ -26,6 +26,10 @@ class Bill < ActiveRecord::Base
     monetize :telephone, val
   end
 
+  def total
+    water + energy + telephone
+  end
+
   def to_s
     I18n.localize(competence, format: :competence).capitalize
   end

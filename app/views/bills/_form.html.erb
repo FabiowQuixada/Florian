@@ -16,27 +16,37 @@
 		</div>
 
 		<div class='row'>
-			<div class='form-group col-md-4'>
-				<%= f.label :water %>
-				<div class="input-group">
-					<span class="input-group-addon"><%= currency %></span>
-					<%= money_field f, :water %>
+			<div id="summable-inputs">
+				<div class='form-group col-md-3'>
+					<%= f.label :water %>
+					<div class="input-group">
+						<span class="input-group-addon"><%= currency %></span>
+						<%= money_field f, :water %>
+					</div>
+				</div>
+
+				<div class='form-group col-md-3'>
+					<%= f.label :energy %>
+					<div class="input-group">
+						<span class="input-group-addon"><%= currency %></span>
+						<%= money_field f, :energy %>
+					</div>
+				</div>
+
+				<div class='form-group col-md-3'>
+					<%= f.label :telephone %>
+					<div class="input-group">
+						<span class="input-group-addon"><%= currency %></span>
+						<%= money_field f, :telephone %>
+					</div>
 				</div>
 			</div>
 
-			<div class='form-group col-md-4'>
-				<%= f.label :energy %>
+			<div class='form-group col-md-3'>
+				<%= f.label I18n.t 'helpers.total' %>
 				<div class="input-group">
 					<span class="input-group-addon"><%= currency %></span>
-					<%= money_field f, :energy %>
-				</div>
-			</div>
-
-			<div class='form-group col-md-4'>
-				<%= f.label :telephone %>
-				<div class="input-group">
-					<span class="input-group-addon"><%= currency %></span>
-					<%= money_field f, :telephone %>
+					<%= f.text_field :total, value: number_to_currency(@model.total.to_f, unit: ''), id: 'bill_totals', class: 'form-control', readonly: true, disabled: true %>
 				</div>
 			</div>
 		</div>
@@ -67,6 +77,10 @@
 	$('#bill_aux_competence').on('change', function() {
 		preprocess_data();
 	})
+
+	$('#summable-inputs input').on('change', function() {
+		$('#bill_totals').val(currency_sum('#summable-inputs input'));
+	});
 
 
 </script>

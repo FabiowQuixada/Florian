@@ -17,7 +17,7 @@ class BillsController < ApplicationController
     format_filter_date :competence_gteq
     format_filter_date :competence_lteq
     @q = Bill.ransack(params[:q])
-    @q.result.page(params[:page])
+    @q.result.order('competence DESC').page(params[:page])
   end
 
   def populate_graph(list)
@@ -25,6 +25,7 @@ class BillsController < ApplicationController
 
     list.each do |bill|
       Bill.bill_types.each { |type| populate_graph_by_type(bill, type) }
+      populate_totals_graph(bill)
     end
   end
 
@@ -35,6 +36,16 @@ class BillsController < ApplicationController
       I18n.t(:abbr_month_names, scope: :date)[bill.competence.month],
       type,
       bill.send(type[0]).to_f
+    )
+  end
+
+  def populate_totals_graph(bill)
+    populate(
+      bill.competence.year,
+      bill.competence.month,
+      I18n.t(:abbr_month_names, scope: :date)[bill.competence.month],
+      [:total, 3],
+      (bill.water + bill.energy + bill.telephone).to_f
     )
   end
 

@@ -47,6 +47,20 @@ var entity_map = {
 	"/": '/' // &#x2F;
 };
 
+function number_to_currency(number) {
+	return number.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+}
+
+// The input should be a set of inputs, eg, '#summable-inputs input';
+function currency_sum(elements) {
+	sum = 0;
+	$(elements).each(function() {
+		sum += parseFloat( $(this).val().replace( /,/g, '')*100 );
+	});
+
+	return number_to_currency(sum/100);
+}
+
 function escape_html(string) {
 	return String(string).replace(/[&<>"'\/]/g, function (s) {
 		return entity_map[s];
