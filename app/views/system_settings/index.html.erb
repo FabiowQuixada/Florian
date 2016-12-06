@@ -15,6 +15,15 @@
 
 	<!-- Tabs bodies -->
 	<div class="container-fluid tab_body">
+
+		<div id="main_tab_0" class="general_tab">
+			<div class='row'>
+				<div class='form-group col-md-6'>
+					<%= f.label :city %>
+					<%= f.text_field :city, class: 'form-control' %>
+				</div>
+			</div>
+		</div>
 		<!-- Receipt e-mail tab body -->
 		<% if can? :manage, ReceiptEmail.new %>
 			<div id="main_tab_1" class="receipt_email_tab">

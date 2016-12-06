@@ -93,6 +93,7 @@ en:
         psychology: Psychology
         service_type: Service type
       system_setting:
+        city: City
         maintainer: "Maintainers"
         pse_body: "Body"
         pse_day_of_month: "Remind day"

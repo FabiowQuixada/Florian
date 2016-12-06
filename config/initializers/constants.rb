@@ -49,7 +49,6 @@ SAMPLE_RECIPIENTS = 'exemplo@gmail.com,exemplo2@yahoo.com.br'.freeze
 NGO_NAME = (Rails.env.showcase? ? 'Sirius' : 'IAQ')
 NGO_ADDRESS = 'Sirius Ltda.'.freeze
 NGO_FULL_NAME = ''.freeze
-NGO_HQ_CITY = 'Fortaleza'.freeze
 
 GUEST_USERS_NUMBERS = [1909, 1224, 2043, 2049, 1166, 1890, 1811, 2462, 2321, 1725, 2658, 1538, 1229, 2775, 2685, 2265, 1887, 2808, 1874, 2071].freeze
 

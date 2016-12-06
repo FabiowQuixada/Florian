@@ -20,6 +20,6 @@ class SystemSettingsController < ApplicationController
   private #############################################
 
   def system_settings_params
-    params.require(:system_setting).permit(:id, :re_title, :re_body, :pse_recipients_array, :pse_private_recipients_array, :pse_title, :pse_body)
+    params.require(:system_setting).permit(:id, :city, :re_title, :re_body, :pse_recipients_array, :pse_private_recipients_array, :pse_title, :pse_body)
   end
 end

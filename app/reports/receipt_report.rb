@@ -39,8 +39,9 @@ class ReceiptReport < FlorianReport
   end
 
   def render_date_place(pdf)
+    settings = SystemSetting.first
     pdf.move_down 30
-    pdf.text "#{NGO_HQ_CITY}, #{I18n.localize(Date.today, format: :long)}", inline_format: true, align: :center
+    pdf.text "#{settings.city}, #{I18n.localize(Date.today, format: :long)}", inline_format: true, align: :center
   end
 
   def render_signature(pdf)

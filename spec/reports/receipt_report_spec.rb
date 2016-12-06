@@ -24,7 +24,7 @@ describe ReceiptReport do
     it { expect(text_analysis.strings).to include "#{I18n.t('report.other.banking.agency')}: 8373" }
     it { expect(text_analysis.strings).to include "#{I18n.t('report.other.banking.account')}: 14373-7" }
 
-    it { expect(text_analysis.strings).to include "Fortaleza, #{I18n.localize(Date.today, format: :long)}" }
+    it { expect(text_analysis.strings).to include "#{SystemSetting.first.city}, #{I18n.localize(Date.today, format: :long)}" }
 
     it { expect(text_analysis.strings[-3]).to eq I18n.t('report.footer.address') }
     it { expect(text_analysis.strings[-2]).to eq I18n.t('report.footer.phone') }
