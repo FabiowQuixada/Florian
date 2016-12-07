@@ -9,10 +9,6 @@ class SystemSetting < ActiveRecord::Base
   # PSE: Product and Service Email
 
 
-  # Relationships
-  belongs_to :user
-
-
   # Validations
   validates :pse_recipients_array, presence: { message: I18n.t('errors.system_setting.recipients') }
   validates :pse_private_recipients_array, presence: { message: I18n.t('errors.system_setting.private_recipients') }
@@ -25,21 +21,16 @@ class SystemSetting < ActiveRecord::Base
     pse_recipients_array.split(/,/)
   end
 
-
   def private_recipients_as_array
     return [] if pse_private_recipients_array.nil? || pse_private_recipients_array.empty?
     pse_private_recipients_array.split(/,/)
   end
 
-  def to_s
-    user.name
-  end
-
   def pse_processed_title(date = Date.today)
-    apply_competence_tag_to user.system_setting.pse_title, date
+    apply_competence_tag_to pse_title, date
   end
 
-  def pse_processed_body(date = Date.today)
+  def pse_processed_body(user, date = Date.today)
     apply_competence_tag_to(pse_body, date) + user.full_signature
   end
 
@@ -52,7 +43,7 @@ class SystemSetting < ActiveRecord::Base
   end
 
   def apply_all_tags_to(text, date = Date.today)
-    apply_competence_tag_to(text, date)
+    apply_competence_tag_to text, date
   end
 
 end

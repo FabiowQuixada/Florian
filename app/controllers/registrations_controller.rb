@@ -12,7 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
   private ################################
 
   def redirect(prev_unconfirmed_email)
-    if resource_updated?
+    if update_resource(current_user, account_update_params)
       change_locale_settings
       display_msgs prev_unconfirmed_email
     else
@@ -33,10 +33,6 @@ class RegistrationsController < Devise::RegistrationsController
     set_flash_message :notice, flash_key
   end
 
-  def system_setting_params
-    params[:user].require(:system_setting).permit(:id, :user_id, :re_title, :re_body, :pse_recipients_array, :pse_private_recipients_array, :pse_title, :pse_body)
-  end
-
   def account_update_params
     params.require(:user).permit(:signature, :bcc, :email, :password, :password_confirmation, :current_password, :locale)
   end
@@ -46,10 +42,6 @@ class RegistrationsController < Devise::RegistrationsController
   def before_edit
     @model = current_user
     @breadcrumbs = Hash[t('helpers.profile') => '']
-  end
-
-  def resource_updated?
-    current_user.system_setting.update(system_setting_params) && update_resource(current_user, account_update_params)
   end
 
   def change_locale_settings
@@ -62,5 +54,4 @@ class RegistrationsController < Devise::RegistrationsController
     sign_in resource_name, current_user, bypass: true
     respond_with current_user, location: after_update_path_for(current_user)
   end
-
 end

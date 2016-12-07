@@ -5,150 +5,60 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 	<%= devise_error_messages! %>
 
-	<!-- Tabs headers -->
-	<ul class="nav nav-tabs">
-		<li id="main_tab_0_title"><a><%= t('activerecord.models.user.one') %></a></li>
-		<% if can? :manage, ReceiptEmail.new %>
-			<li id="main_tab_1_title"><a><%= t('activerecord.models.receipt_email.one') %></a></li>
-		<% end %>
-		<% if can? :manage, ProductAndServiceDatum.new %>
-			<li id="main_tab_2_title"><a><%= t('activerecord.models.product_and_service_datum.one') %></a></li>
-		<% end %>
-	</ul>
-
-	<!-- Tabs bodies -->
-	<div class="container-fluid tab_body">
-
-		<!-- User data tab body -->
-		<div id="main_tab_0" class="receipt_email_tab">
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="form-group">
-						<%= f.label :name %>
-						<%= f.text_field :name, disabled: true, class: 'form-control' %>
-					</div>
-				</div>
-				<div class="col-sm-6">
-					<div class="form-group">
-						<%= f.label :email %>
-						<%= f.email_field :email, autofocus: true, disabled: true, class: 'form-control' %>
-					</div>
-
-					<% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-						<div>
-							<%= t('devise.waiting_for_confirmation') + resource.unconfirmed_email %>
-						</div>
-					<% end %>
-				</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="form-group">
+				<%= f.label :name %>
+				<%= f.text_field :name, disabled: true, class: 'form-control' %>
 			</div>
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="form-group">
-						<%= f.label :password, t('activerecord.attributes.user.new_password') %> <i><%= t('devise.leave_blank_if') %></i>
-						<%= f.password_field :password, autocomplete: 'off', class: 'form-control' %>
-					</div>
-				</div>
-				<div class="col-sm-6">
-					<div class="form-group">
-						<%= f.label :password_confirmation %>
-						<%= f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control' %>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12">
-					<div class="form-group">
-						<%= f.label :signature %>
-						<%= f.text_area :signature, size: '24x6', class: 'form-control' %>
-					</div>
-				</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="form-group">
+				<%= f.label :email %>
+				<%= f.email_field :email, autofocus: true, disabled: true, class: 'form-control' %>
 			</div>
 
-			<div class="row">
-				<div class="form-group col-md-6">
-					<%= f.label :locale %>
-					<%= f.select :locale, available_locales { |e| [e.key, e.value] }, { include_blank: t('helpers.select.prompt')}, { class: 'form-control' } %>
+			<% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+				<div>
+					<%= t('devise.waiting_for_confirmation') + resource.unconfirmed_email %>
 				</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="form-group">
+				<%= f.label :password, t('activerecord.attributes.user.new_password') %> <i><%= t('devise.leave_blank_if') %></i>
+				<%= f.password_field :password, autocomplete: 'off', class: 'form-control' %>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="form-group">
+				<%= f.label :password_confirmation %>
+				<%= f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control' %>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="form-group">
+				<%= f.label :locale %>
+				<%= f.select :locale, available_locales { |e| [e.key, e.value] }, {}, { class: 'form-control' } %>
+			</div>
+		
+			<div class="form-group">
+				<%= f.label :current_password, class: 'required' %>
+				<%= f.password_field :current_password, autocomplete: 'off', class: 'form-control' %>
 			</div>
 		</div>
 
-		<%= f.fields_for @model.system_setting do |settings_form| %>
-
-			<!-- Receipt e-mail tab body -->
-			<% if can? :manage, ReceiptEmail.new %>
-				<div id="main_tab_1" class="receipt_email_tab">
-					<div class="form-group">
-						<%= settings_form.label :re_title %>
-						<div style="float:right">
-							<%= user_help_btn 'receipt_title_tag_help_btn' %>
-							<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
-								<div class="btn-group">
-									<button type="button" class="btn btn-primary btn-xs" id="add_maintainer_to_re_title_btn"><%= i18n.t :maintainer %></button>
-									<button type="button" class="btn btn-primary btn-xs" id="add_value_to_re_title_btn"><%= i18n.t :value %></button>
-									<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_re_title_btn"><%= i18n.t :competence %></button>
-								</div>
-							<% end %>
-						</div>
-						<%= settings_form.text_field :re_title, class: 'form-control' %>
-					</div>
-				</div>
-			<% end %>
-
-			<!-- Product and service datum tab body -->
-			<% if can? :manage, ProductAndServiceDatum.new %>
-				<div id="main_tab_2" class="prod_serv_email_tab">
-
-					<div class="container-fluid padless">
-						<div class="row">
-							<div class="col-md-6">
-								<%= render 'shared/email_address_table', f: settings_form, model: @model.system_setting, field_name: 'pse_recipients_array' %>
-							</div>
-							<div class="col-md-6">
-								<%= render 'shared/email_address_table', f: settings_form, model: @model.system_setting, field_name: 'pse_private_recipients_array', method_name: 'private_recipients_as_array' %>
-							</div>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<%= settings_form.label :pse_title %>
-						<div style="float:right">
-							<%= user_help_btn 'pse_title_tag_help_btn' %>
-							<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
-								<div class="btn-group">
-									<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_pse_title_btn"><%= i18n.t :competence %></button>
-								</div>
-							<% end %>
-						</div>
-						<%= settings_form.text_field :pse_title, class: 'form-control' %>
-					</div>
-
-					<div class="form-group">
-						<%= settings_form.label :pse_body %>
-						<div style="float:right">
-							<%= user_help_btn 'pse_body_tag_help_btn' %>
-							<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
-								<div class="btn-group">
-									<button type="button" class="btn btn-primary btn-xs" id="add_competence_to_pse_body_btn"><%= i18n.t :competence %></button>
-								</div>
-							<% end %>
-						</div>
-						<%= settings_form.text_area :pse_body, size: '24x6', class: 'form-control' %>
-					</div>
-				</div>
-			<% end %>
-		<% end # System setting form %>
-	</div>
-
-	<br/>
-
-	<div class="container-fluid tab_body">
-		<div class="form-group">
-			<%= f.label :current_password, class: 'required' %>
-			<%= f.password_field :current_password, autocomplete: 'off', class: 'form-control' %>
+		<div class="col-sm-6">
+			<div class="form-group">
+				<%= f.label :signature %>
+				<%= f.text_area :signature, size: '24x5', class: 'form-control' %>
+			</div>
 		</div>
 	</div>
-
-	<br/>
 
 	<div class="">
 		<%= f.submit t('helpers.action.update'), class: 'btn btn-primary save_btn' unless Rails.env.showcase? %>
@@ -157,41 +67,13 @@
 
 <% end %>
 
-<%= render 'shared/form_commons', model: @model.system_setting, hide_audit: Rails.env.showcase? %>
-<%= render 'shared/tab_commons', tab_type: 'main', number_of_tabs: 3 %>
+<%= render 'shared/form_commons', hide_audit: Rails.env.showcase? %>
 
 <script>
 
 	$( document ).ready(function() {
 		$("[for=user_password]").removeClass("required");
 	});
-
-	$(function() {
-		$("#add_maintainer_to_re_title_btn").on('click', function() {add_tag_to_field('user_system_setting_re_title', '<%= t('tags.maintainer') %>')});
-		$("#add_value_to_re_title_btn").on('click', function() {add_tag_to_field('user_system_setting_re_title', '<%= t('tags.value') %>')});
-		$("#add_competence_to_re_title_btn").on('click', function() {add_tag_to_field('user_system_setting_re_title', '<%= t('tags.competence') %>')});
-		$("#add_maintainer_to_re_body_btn").on('click', function() {add_tag_to_field('user_system_setting_re_body', '<%= t('tags.maintainer') %>')});
-		$("#add_value_to_re_body_btn").on('click', function() {add_tag_to_field('user_system_setting_re_body', '<%= t('tags.value') %>')});
-		$("#add_competence_to_re_body_btn").on('click', function() {add_tag_to_field('user_system_setting_re_body', '<%= t('tags.competence') %>')});
-
-		$("#add_competence_to_pse_body_btn").on('click', function() {add_tag_to_field('user_system_setting_pse_body', '<%= t('tags.competence') %>')});
-		$("#add_competence_to_pse_title_btn").on('click', function() {add_tag_to_field('user_system_setting_pse_title', '<%= t('tags.competence') %>')});
-
-		$('#receipt_title_tag_help_btn, #pse_title_tag_help_btn, #pse_body_tag_help_btn	').click(function(ev) {
-			display_confirm_modal('<%= I18n.t 'modal.title.info' %>', '<%= I18n.t 'user_help_messages.tag_buttons' %>');
-		});
-
-		hide_all_main_tabs_except(0);
-	});
-
-	function preprocess_data() {
-		if(transient_recipients > 0) {
-			window.any_changes = true;
-		}
-
-		$('#system_setting_pse_recipients_array').val(formated_recipients('pse_recipients_array'));
-		$('#system_setting_pse_private_recipients_array').val(formated_recipients('pse_private_recipients_array'));
-	}
 
 	$('#main_form').on('submit', function(evt) {
 		preprocess_data();

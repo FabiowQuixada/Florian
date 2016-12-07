@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161204235810) do
+ActiveRecord::Schema.define(version: 20161206165418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -188,11 +188,8 @@ ActiveRecord::Schema.define(version: 20161204235810) do
     t.string   "re_body",                                                       null: false
     t.datetime "created_at",                                                    null: false
     t.datetime "updated_at",                                                    null: false
-    t.integer  "user_id",                                                       null: false
     t.string   "pse_private_recipients_array", default: "exemplo@yahoo.com.br", null: false
   end
-
-  add_index "system_settings", ["user_id"], name: "index_system_settings_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",   null: false
@@ -227,6 +224,5 @@ ActiveRecord::Schema.define(version: 20161204235810) do
   add_foreign_key "product_data", "product_and_service_weeks"
   add_foreign_key "receipt_emails", "maintainers"
   add_foreign_key "service_data", "product_and_service_weeks"
-  add_foreign_key "system_settings", "users"
   add_foreign_key "users", "roles"
 end

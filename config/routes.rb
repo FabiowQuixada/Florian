@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :system_settings, only: [:index, :update]
   resources :bills, except: [:show]
 
   resources :receipt_emails, except: [:show] do

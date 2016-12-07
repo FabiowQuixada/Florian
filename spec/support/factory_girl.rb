@@ -12,6 +12,8 @@ RSpec.configure do |config|
       DatabaseCleaner.clean
     end
 
+    FactoryGirl.create :system_setting
+
     role1 = Role.create(name: ADMIN_ROLE, description: 'Administrador')
     User.create(name: 'Sistema', email: SYSTEM_EMAIL, password: 'fulano0123', password_confirmation: 'fulano0123', bcc: 'teste@test.com', role: role1)
 

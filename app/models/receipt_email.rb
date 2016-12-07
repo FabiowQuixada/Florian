@@ -34,12 +34,12 @@ class ReceiptEmail < ActiveRecord::Base
     maintainer.name
   end
 
-  def title(user)
-    user.system_setting.re_title
+  def title
+    SystemSetting.first.re_title
   end
 
-  def processed_title(user, date = Date.today)
-    apply_all_tags_to user.system_setting.re_title, date
+  def processed_title(date = Date.today)
+    apply_all_tags_to title, date
   end
 
   def processed_body(user, date = Date.today)

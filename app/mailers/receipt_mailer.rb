@@ -32,9 +32,9 @@ class ReceiptMailer < ApplicationMailer
     prefix = ''
     prefix = I18n.t('helpers.test_email_prefix') if type == EmailHistory.send_types[:test]
 
-    mail(to: recipients,
-         body: email.processed_body(user, date),
-         subject: prefix + email.processed_title(user, date))
+    mail to: recipients,
+         subject: prefix + email.processed_title(date),
+         body: email.processed_body(user, date)
 
     save_to_history email, type, user
 

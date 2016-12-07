@@ -17,7 +17,6 @@ describe User, type: :model do
 
   # Relationships
   it { is_expected.to belong_to :role }
-  it { is_expected.to have_one :system_setting }
 
   # Methods #################################################################################
 
@@ -45,16 +44,6 @@ describe User, type: :model do
     let(:user) { described_class.new }
     it { expect(user.bcc).to eq user.email }
     it { expect(user.signature).to eq user.name }
-  end
-
-  describe '#build_default_system_setting' do
-    let(:system_setting) { (build :user).system_setting }
-
-    it { expect(system_setting.pse_recipients_array).to eq SAMPLE_RECIPIENTS }
-    it { expect(system_setting.pse_title).to eq I18n.t('defaults.report.product_and_service.email_title') }
-    it { expect(system_setting.pse_body).to eq I18n.t('defaults.report.product_and_service.monthly_email_body') }
-    it { expect(system_setting.re_title).to eq I18n.t('defaults.report.receipt.email_title') }
-    it { expect(system_setting.re_body).to eq I18n.t('defaults.report.receipt.email_body') }
   end
 
   describe '#active=' do

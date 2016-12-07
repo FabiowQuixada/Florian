@@ -3,6 +3,7 @@ require 'rails_helper'
 describe ProdServMailer, type: :mailer do
   let(:week) { create :product_and_service_week }
   let(:user) { build :user, :common }
+  let(:settings) { build :system_setting }
 
   describe 'weekly e-mail' do
     let(:period) { week.period }
@@ -10,7 +11,7 @@ describe ProdServMailer, type: :mailer do
     let(:competence) { week.product_and_service_datum.competence }
 
     it_behaves_like 'a psd e-mail'
-    it { expect(mail.to).to eq(user.system_setting.private_recipients_as_array) }
+    it { expect(mail.to).to eq(settings.private_recipients_as_array) }
     it { expect(mail.subject).to eq(I18n.t('defaults.report.product_and_service.email_title').gsub(I18n.t('tags.competence'), period)) }
     it { expect(body_text(mail)).to eq(I18n.t('defaults.report.product_and_service.weekly_email_body').gsub(I18n.t('tags.competence'), period) + user.full_signature) }
   end
@@ -22,8 +23,10 @@ describe ProdServMailer, type: :mailer do
 
     it_behaves_like 'a psd e-mail'
     it { expect(mail.to).to eq([ANALYSIS_EMAIL]) }
-    it { expect(mail.subject).to eq(user.system_setting.pse_processed_title(competence)) }
-    it { expect(body_text(mail)).to eq(user.system_setting.pse_processed_body(competence)) }
+    it do
+      expect(mail.subject).to eq(settings.pse_processed_title(competence))
+    end
+    it { expect(body_text(mail)).to eq(settings.pse_processed_body(user, competence)) }
   end
 
   describe 'maintainers e-mail' do
@@ -31,9 +34,9 @@ describe ProdServMailer, type: :mailer do
     let(:mail) { described_class.send_monthly_email(week, user).deliver_now }
 
     it_behaves_like 'a psd e-mail'
-    it { expect(mail.to).to eq(user.system_setting.recipients_as_array) }
-    it { expect(mail.subject).to eq(user.system_setting.pse_processed_title(competence)) }
-    it { expect(body_text(mail)).to eq(user.system_setting.pse_processed_body(competence)) }
+    it { expect(mail.to).to eq(settings.recipients_as_array) }
+    it { expect(mail.subject).to eq(settings.pse_processed_title(competence)) }
+    it { expect(body_text(mail)).to eq(settings.pse_processed_body(user, competence)) }
   end
 
   def get_message_part(mail, content_type)

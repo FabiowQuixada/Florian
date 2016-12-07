@@ -10,7 +10,7 @@ describe ReceiptMailer, type: :mailer do
 
     it_behaves_like 'an receipt e-mail'
     it { expect(mail.to).to eq(SAMPLE_RECIPIENTS.split(/,/)) }
-    it { expect(mail.subject).to eq(receipt.processed_title(user, competence)) }
+    it { expect(mail.subject).to eq(receipt.processed_title(competence)) }
     it { expect(body_text(mail)).to eq(receipt.processed_body(user, Date.today)) }
   end
 
@@ -21,7 +21,7 @@ describe ReceiptMailer, type: :mailer do
 
       it_behaves_like 'an receipt e-mail'
       it { expect(mail.to).to eq([user.email]) }
-      it { expect(mail.subject).to eq(I18n.t('helpers.test_email_prefix') + receipt.processed_title(user, competence)) }
+      it { expect(mail.subject).to eq(I18n.t('helpers.test_email_prefix') + receipt.processed_title(competence)) }
       it { expect(body_text(mail)).to eq(receipt.processed_body(user, competence)) }
     end
 
@@ -43,7 +43,7 @@ describe ReceiptMailer, type: :mailer do
 
       it_behaves_like 'an receipt e-mail'
       it { expect(mail.to).to eq(SAMPLE_RECIPIENTS.split(/,/)) }
-      it { expect(mail.subject).to eq(receipt.processed_title(user, competence)) }
+      it { expect(mail.subject).to eq(receipt.processed_title(competence)) }
       it { expect(body_text(mail)).to eq(receipt.processed_body(user, competence)) }
     end
 

@@ -6,7 +6,6 @@ FactoryGirl.define do
     re_body I18n.t('defaults.report.receipt.email_body')
     pse_title I18n.t('defaults.report.product_and_service.email_title')
     pse_body I18n.t('defaults.report.product_and_service.monthly_email_body')
-    user
 
     trait :invalid do
       pse_recipients_array nil

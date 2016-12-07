@@ -29,7 +29,7 @@ describe ReceiptEmail, type: :model do
     let(:expected_body) { processed_body(receipt, date, user) }
     let(:expected_receipt_text) { processed_receipt_text(receipt, date) }
 
-    it { expect(receipt.processed_title(user, date)).to eq expected_title }
+    it { expect(receipt.processed_title(date)).to eq expected_title }
     it { expect(receipt.processed_body(user, date)).to eq expected_body }
     it { expect(receipt.processed_receipt_text(date)).to eq expected_receipt_text }
   end

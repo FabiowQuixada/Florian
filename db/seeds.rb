@@ -18,6 +18,7 @@ if Rails.env.production?
   Rake::Task['db:load_production_data'].invoke
   ExcelParser.parse
 else
+  FactoryGirl.create :system_setting
   30.times { FactoryGirl.create :maintainer }
   50.times { FactoryGirl.create :donation }
   30.times { FactoryGirl.create :receipt_email, :showcase }

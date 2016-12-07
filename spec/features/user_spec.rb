@@ -2,8 +2,6 @@ require 'rails_helper'
 
 describe User, js: true, type: :request do
   let(:signature) { 'lalala' }
-  let(:re_title) { 're #competencia lalala' }
-  let(:pse_title) { 'pse #competencia lalala' }
 
   it 'is not allowed to login if it is not active' do
     visit root_path
@@ -26,7 +24,6 @@ describe User, js: true, type: :request do
     it 'updates profile info' do
       visit edit_user_registration_path
       fill_admin_profile_fields
-      fill_settings_fields
       click_on_update_btn
       check_if_changes_persisted
     end
@@ -114,33 +111,9 @@ describe User, js: true, type: :request do
     click_on_login_btn
   end
 
-  def fill_settings_fields
-    page.find('#main_tab_1_title').click
-    # first('#user_system_setting_re_title').set re_title
-
-    page.find('#main_tab_2_title').click
-    first('#user_system_setting_pse_title').set pse_title
-  end
-
   def check_if_changes_persisted
     visit edit_user_registration_path
-    check_general_tab
-    # check_receipt_tab
-    check_prod_serv_tab
-  end
-
-  def check_general_tab
     expect(first('#user_signature').value).to eq signature
-  end
-
-  def check_receipt_tab
-    page.find('#main_tab_1_title').click
-    expect(first('#user_system_setting_re_title').value).to eq re_title
-  end
-
-  def check_prod_serv_tab
-    page.find('#main_tab_2_title').click
-    expect(first('#user_system_setting_pse_title').value).to eq pse_title
   end
 
   def expect_deactivated_msg

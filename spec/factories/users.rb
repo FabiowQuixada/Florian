@@ -7,7 +7,6 @@ FactoryGirl.define do
     role
 
     after :build do |user|
-      user.system_setting ||= build(:system_setting, user: user)
       user.bcc = user.email
       user.signature = user.name
     end

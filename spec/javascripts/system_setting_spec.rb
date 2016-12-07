@@ -3,7 +3,7 @@ require 'rails_helper'
 describe SystemSetting, js: true, type: :request do
   before :each do
     login_as_admin
-    visit edit_user_registration_path
+    visit system_settings_path
     page.find('#main_tab_2_title').click
   end
 
