@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Status', type: :request do
+describe 'Status', js: true, type: :request do
   STATUS_DATA = [Role, ReceiptEmail].freeze
 
   context 'admin' do

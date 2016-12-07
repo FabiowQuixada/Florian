@@ -2,7 +2,7 @@
 <% if !@model.new_record? %>
 
 	<div class="form_status_box status_btn">
-		<%= image_tag('activate.png', id: 'active_img') %><%= image_tag('deactivate.png', id: 'inactive_img', style: 'display:none;') %>  <span id="status_description"><%= genderize_tag(@model, 'model_phrases.status.full_desc.is_inactive') %></span>
+		<%= image_tag('activate.png', id: 'active_img') %><%= image_tag('deactivate.png', id: 'inactive_img', class: 'hidden') %>  <span id="status_description"><%= genderize_tag(@model, 'model_phrases.status.full_desc.is_inactive') %></span>
 	</div>
 
 	<%= f.hidden_field 'active', id: 'model_status', value: @model.active %>
@@ -11,15 +11,15 @@
 <script>
 
 	function inactivate() {
-		$('#active_img').hide();
-		$('#inactive_img').show();
+		$('#active_img').addClass('hidden');
+		$('#inactive_img').removeClass('hidden');
 		$('#model_status').val('false');
 		$('#status_description').text('<%= genderize_tag(@model, 'model_phrases.status.full_desc.is_inactive') %>');
 	}
 
 	function activate() {
-		$('#active_img').show();
-		$('#inactive_img').hide();
+		$('#active_img').removeClass('hidden');
+		$('#inactive_img').addClass('hidden');
 		$('#model_status').val('true');
 		$('#status_description').text('<%= genderize_tag(@model, 'model_phrases.status.full_desc.is_active') %>');
 	}

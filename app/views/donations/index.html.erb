@@ -23,9 +23,9 @@
 		<% @list.each do |iterator| %>
 			<tr id="model_<%= iterator.id %>" class="model_row">
 				<td class="model_id admin-only"><%= iterator.id %></td>
-				<td><%= I18n.l iterator.donation_date %></td>
+				<td class="date"><%= I18n.l iterator.donation_date %></td>
 				<td class="hidden-xs"><%= number_to_currency iterator.value %></td>
-				<td><%= iterator.maintainer.name %></td>
+				<td class="maintainer_name"><%= iterator.maintainer.name %></td>
 				<td class="hidden-xs"><%= iterator.remark %></td>
 				<td class="icon-column"><%= edit_btn iterator %></td>
 				<td class="admin-only icon-column"><%= destroy_btn %></td>

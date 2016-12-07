@@ -17,7 +17,7 @@
 				<div class="row">
 					<div class="col-md-12 right">
 						<a href="javascript:void(0)" id="add_contact_btn" class="btn btn-primary btn-xs add_btn"><%= t('helpers.action.add') %></a>
-						<a href="javascript:void(0)" id="cancel_contact_edition_btn" style="display:none;" class="btn btn-primary btn-xs add_btn"><%= t('helpers.action.cancel') %></a>
+						<a href="javascript:void(0)" id="cancel_contact_edition_btn" class="btn btn-primary btn-xs add_btn hidden"><%= t('helpers.action.cancel') %></a>
 					</div>
 				</div>
 			</div>
@@ -35,13 +35,13 @@
 						<th class="id-column admin-only"></th>
 						<th><%= i18n.t :name %></th>
 						<th><%= i18n.t :position %></th>
-						<th style="display:none;"></th>
+						<th class="hidden"></th>
 						<th><%= i18n.t :telephone %></th>
 						<th><%= i18n.t :celphone %></th>
-						<th style="display:none;"></th>
+						<th class="hidden"></th>
 						<th class="icon-column-2"></th>
 						<th class="icon-column-2"></th>
-						<th style="display:none;"></th>
+						<th class="hidden"></th>
 					<% end %>
 				</tr>
 			</thead>
@@ -108,7 +108,7 @@
 				}
 
 				clean_contact_fields();
-				$('#no_contacts_row').hide();
+				$('#no_contacts_row').addClass('hidden');
 			}
 		});
 
@@ -147,7 +147,7 @@
 		function load_contact(id) {
 
 			loaded_contact_id = id;
-			$('#cancel_contact_edition_btn').show();
+			$('#cancel_contact_edition_btn').removeClass('hidden');
 			$('#add_contact_btn').text('<%= t('helpers.action.update') %>');
 			$('#contact_panel_header').text('<%= t('helpers.maintainer.edit_contact') %>');
 
@@ -168,7 +168,7 @@
 			$('#temp_contact_fax').val('');
 
 			loaded_contact_id = null;
-			$('#cancel_contact_edition_btn').hide();
+			$('#cancel_contact_edition_btn').addClass('hidden');
 			$('#add_contact_btn').text('<%= t('helpers.action.add') %>');
 			$('#contact_panel_header').text('<%= t('helpers.maintainer.new_contact') %>');
 
@@ -183,7 +183,7 @@
 			transient_contacts -= 1;
 
 			if(document.getElementById("contacts_table").rows.length == 2)
-				$('#no_contacts_row').show();
+				$('#no_contacts_row').removeClass('hidden');
 
 			if(id > 0) {
 				$('#maintainer_contacts_to_be_deleted').val($('#maintainer_contacts_to_be_deleted').val() + id + ',');

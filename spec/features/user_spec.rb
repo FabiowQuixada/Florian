@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe User, type: :request do
+describe User, js: true, type: :request do
   let(:signature) { 'lalala' }
   let(:re_title) { 're #competencia lalala' }
   let(:pse_title) { 'pse #competencia lalala' }

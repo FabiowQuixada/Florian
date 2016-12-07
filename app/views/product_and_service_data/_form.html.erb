@@ -58,7 +58,7 @@
 
 <% end # main_form %>
 
-<%= form_for ProductAndServiceWeek.new, url: update_and_send_product_and_service_weeks_path, html: { id: 'hidden_week_form', style: 'display:none;' }, authenticity_token: true do |hidden_f| %>
+<%= form_for ProductAndServiceWeek.new, url: update_and_send_product_and_service_weeks_path, html: { id: 'hidden_week_form', class: 'hidden' }, authenticity_token: true do |hidden_f| %>
 
 	<%= hidden_f.text_field :id %>
 	<%= hidden_f.text_field :start_date, value: Date.today %>

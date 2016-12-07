@@ -13,12 +13,12 @@
 	</div>
 
 	<!-- Donations -->
-	<div id="main_tab_1" style="display: none;" class="container-fluid tab_body">
+	<div id="main_tab_1" class="container-fluid tab_body hidden">
 		<%= render 'donation_tab_form', f: f %>
 	</div>
 
 	<!-- Contacts -->
-	<div id="main_tab_2" style="display: none;" class="container-fluid tab_body">
+	<div id="main_tab_2" class="container-fluid tab_body hidden">
 		<%= render 'contact_tab_form', f: f  %>
 	</div>
 
@@ -66,13 +66,13 @@
 
 	function update_fields_by_entity_type() {
 
-		$('.person_area').hide();
-		$('.maintainer_area').hide();	
+		$('.person_area').addClass('hidden');
+		$('.maintainer_area').addClass('hidden');
 
 		if($('#maintainer_entity_type').val() == "company") {
-			$('.maintainer_area').show();
+			$('.maintainer_area').removeClass('hidden');
 		} else if($('#maintainer_entity_type').val() == "person") {
-			$('.person_area').show();
+			$('.person_area').removeClass('hidden');
 		}
 	}
 

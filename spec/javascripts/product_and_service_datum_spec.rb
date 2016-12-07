@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ProductAndServiceDatum, type: :request do
+describe ProductAndServiceDatum, js: true, type: :request do
   let(:prefix) { 'input#product_and_service_datum_product_and_service_weeks_attributes_' }
 
   before :each do

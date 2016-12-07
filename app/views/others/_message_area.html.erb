@@ -6,32 +6,32 @@
     </div>
 <% end %>
 
-<div id="global_warning_box" class="alert alert-warning fade in" style="display: none;">
+<div id="global_warning_box" class="alert alert-warning fade in hidden">
     <a href="javascript:void(0)" class="close" data-hide="alert">&times;</a>
     <div id="global_warning_massages">
     </div>
 </div>
 
-<div id="global_hideless_warning_box" class="alert alert-warning fade in" style="display: none;">
+<div id="global_hideless_warning_box" class="alert alert-warning fade in hidden">
     <a href="javascript:void(0)" class="close" data-hide="alert">&times;</a>
     <div id="global_hideless_warning_massages">
     </div>
 </div>
 
-<div id="global_notice_box" class="alert alert-success fade in" style="display: none;">
+<div id="global_notice_box" class="alert alert-success fade in hidden">
     <a href="javascript:void(0)" class="close" data-hide="alert">&times;</a>
     <div id="global_notice_massages">
         <%= notice %>
     </div>
 </div>
 
-<div id="global_info_box" class="alert alert-info fade in" style="display: none;">
+<div id="global_info_box" class="alert alert-info fade in hidden">
     <div id="global_info_massages">
         <%= info %>
     </div>
 </div>
 
-<div id="global_error_box" class="alert alert-danger fade in" style="display: none;">
+<div id="global_error_box" class="alert alert-danger fade in hidden">
     <a href="javascript:void(0)" class="close" data-hide="alert">&times;</a>
     <div id="global_error_messages">
         <%= alert %>
@@ -53,7 +53,7 @@
         hide_all_messages();
         to_top();
         $('#global_error_messages').html(result);
-        $('#global_error_box').show();
+        $('#global_error_box').removeClass('hidden');
     }
 
     function display_error(message, error_box_id) {
@@ -71,58 +71,58 @@
 
         hide_all_messages();
         $('#' + error_box_id + '_error_messages').html(result);
-        $('#' + error_box_id + '_error_box').show();
+        $('#' + error_box_id + '_error_box').removeClass('hidden');
     }
 
     function display_info(message) {
         hide_all_messages();
         to_top();
         $('#global_info_massages').html(message);
-        $('#global_info_box').show();
+        $('#global_info_box').removeClass('hidden');
     }
 
     function display_notice(message) {
         hide_all_messages();
         to_top();
         $('#global_notice_massages').html(message);
-        $('#global_notice_box').show();
+        $('#global_notice_box').removeClass('hidden');
     }
 
     function display_warning(message) {
         hide_all_messages();
         to_top();
         $('#global_warning_massages').html(message);
-        $('#global_warning_box').show();
+        $('#global_warning_box').removeClass('hidden');
     }
 
     function display_hideless_warning(message) {
         $('#global_hideless_warning_massages').html(message);
-        $('#global_hideless_warning_box').show();
+        $('#global_hideless_warning_box').removeClass('hidden');
     }
 
     function hide_info() {
         $('#global_info_massages').html('');
-        $('#global_info_box').hide();
+        $('#global_info_box').addClass('hidden');
     }
 
     function hide_notice() {
         $('#global_notice_massages').html('');
-        $('#global_notice_box').hide();
+        $('#global_notice_box').addClass('hidden');
     }
 
     function hide_errors_from_box(error_box_id) {
         $('#' + error_box_id + '_error_messages').html('');
-        $('#' + error_box_id + '_error_box').hide();
+        $('#' + error_box_id + '_error_box').addClass('hidden');
     }
 
     function hide_errors() {
         $('#global_error_messages').html('');
-        $('#global_error_box').hide();
+        $('#global_error_box').addClass('hidden');
 
         if($("#form_error_messages").length && $("#form_error_box").length)
         {
             $('#form_error_messages').html('');
-            $('#form_error_box').hide();
+            $('#form_error_box').addClass('hidden');
         }
     }
 
@@ -163,15 +163,15 @@
         <%= showcase_login_msg %>
 
         <% if notice %>
-            $('#global_notice_box').show();
+            $('#global_notice_box').removeClass('hidden');
         <% end %>
 
         <% if flash[:info] %>
-            $('#global_info_box').show();
+            $('#global_info_box').removeClass('hidden');
         <% end %>
 
         <% if alert %>
-            $('#global_error_box').show();
+            $('#global_error_box').removeClass('hidden');
         <% end %>
     });
 </script>

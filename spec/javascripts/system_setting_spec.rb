@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe SystemSetting, type: :request do
+describe SystemSetting, js: true, type: :request do
   before :each do
     login_as_admin
     visit edit_user_registration_path

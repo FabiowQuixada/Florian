@@ -1,6 +1,6 @@
 <%= f.fields_for :product_and_service_weeks, product_and_service_week do |week_f| %>
 
-	<div id="prod_serv_data_tab_<%= product_and_service_week.index %>" style="display:none;">
+	<div id="prod_serv_data_tab_<%= product_and_service_week.index %>" class="hidden">
 		<div class="tab_body">
 
 			<!-- Week range -->
@@ -15,12 +15,13 @@
 						<div class="form-group col-md-6">
 							<div class="input-group">
 								<span class="input-group-addon"><%= t 'helpers.from' %></span>
-								<div class="date" data-behaviour='datepicker' >
-									<span></span><%= week_f.text_field :start_date, value: I18n.l(product_and_service_week.start_date),class: 'form-control date', readonly: @model.finalized? %><span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+								<div class="date" data-behaviour='datepicker'>
+									<span></span><%= week_f.text_field :start_date, value: I18n.l(product_and_service_week.start_date),class: 'form-control date', readonly: @model.finalized? %>
+									<span class="input-group-addon hidden"><i class="glyphicon glyphicon-th"></i></span>
 								</div>
 								<span class="input-group-addon" style="border-left: 0; border-right: 0;"><%= t 'helpers.to' %></span>
 								<div class="date" data-behaviour='datepicker'>
-									<span style="display:none;" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+									<span class="input-group-addon hidden"><i class="glyphicon glyphicon-th"></i></span>
 									<%= week_f.text_field :end_date, value: I18n.l(product_and_service_week.end_date), class: 'form-control date', readonly: @model.finalized? %>
 								</div>
 							</div>

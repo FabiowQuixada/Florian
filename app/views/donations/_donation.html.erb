@@ -1,7 +1,7 @@
 <tr id="donation_<%= donation.id %>_row" class="donation_row">
 	
 	<!-- Non-extra-small views -->
-	<td class="hidden-xs donation_id admin-only" style="display:none;"><%= donation.id %></td>
+	<td class="hidden-xs donation_id admin-only hidden"><%= donation.id %></td>
 	<td class="hidden-xs donation_date col-xs-6 col-md-3"><%= I18n.l donation.donation_date %></td>
 	<td class="hidden-xs donation_value col-xs-6 col-md-3"><%= number_to_currency donation.value %></td>
 	<td class="hidden-xs donation_remark col-xs-12 col-md-6"><%= donation.remark %></td>
@@ -12,7 +12,7 @@
 		<table class="table table-striped table-bordered marginless">
 			<tbody>
 				<tr class="gray-background">
-					<td class="admin-only" style="display:none;"><%= donation.id %></td>
+					<td class="admin-only hidden"><%= donation.id %></td>
 					<td class="donation_date"><%= I18n.l donation.donation_date %></td>
 					<td class="donation_value"><%= number_to_currency donation.value %></td>
 					<td class="icon-column-2"><%= sub_destroy_btn Donation %></td>
@@ -24,7 +24,7 @@
 	</td>
 
 	<!-- Server communication data -->
-	<td style="display:none;" colspan="5">
+	<td class="hidden" colspan="5">
     	<%= donation_hidden_tag donation, 'id' if donation.id && donation.id > 0 %>
 	    <%= donation_hidden_tag donation, 'donation_date' %>
 	    <%= donation_hidden_tag donation, 'value' %>

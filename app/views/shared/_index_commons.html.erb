@@ -35,6 +35,13 @@
 	var id_to_be_deleted = -1;
 
 	$(document).ready(function() {
+
+		<% if any_filter_filled || Rails.env.test? %>
+			$('.panel-collapse').collapse({
+			  toggle: true
+			});
+		<% end %>
+		
 		return $(function() {
 			$.extend($.tablesorter.defaults, {
 				widgets: ["zebra"]
@@ -116,7 +123,7 @@
 					$('#model_' + id_to_be_deleted).remove();
 
 					if($('#index_table tbody tr').length == 1) {
-						$(<%= "no_#{@model.class.name.pluralize.underscore}_row" %>).show();
+						$(<%= "no_#{@model.class.name.pluralize.underscore}_row" %>).removeClass('hidden');
 					}
 				} else {
 					display_error(message);

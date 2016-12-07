@@ -33,8 +33,8 @@
 
     function display_confirm_modal(title, message, confirm_callback, cancel_callback) {
         
-        $("#confirm_modal .modal-footer").show();
-        $("#cancel_btn").show();
+        $("#confirm_modal .modal-footer").removeClass('hidden');
+        $("#cancel_btn").removeClass('hidden');
 
         $("#confirm_modal .modal-title").html(title);
         $("#confirm_modal .modal-body").html(message);
@@ -43,11 +43,11 @@
         if(cancel_callback !== undefined) {
             $("#cancel_btn").on("click", cancel_callback);
         } else {
-            $("#cancel_btn").hide();
+            $("#cancel_btn").addClass('hidden');
         }
 
         if(confirm_callback === undefined && cancel_callback === undefined) {
-            $("#confirm_modal .modal-footer").hide();
+            $("#confirm_modal .modal-footer").addClass('hidden');
         }
         
         $("#confirm_modal").modal("show");

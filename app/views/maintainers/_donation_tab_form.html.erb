@@ -66,7 +66,7 @@
 					<thead class="hidden-xs">
 						<tr>
 							<% I18n.with_options(scope: 'activerecord.attributes.donation') do |i18n| %>
-								<th class="admin-only id-column" style="display:none;"></th>
+								<th class="admin-only id-column hidden"></th>
 								<th><%= i18n.t :date %></th>
 								<th><%= i18n.t :value %></th>
 								<th style="width: 50%;" class="hidden-xs"><%= i18n.t :remark %></th>
@@ -207,7 +207,7 @@
 
 				temp_donation_id -= 1;
 				clean_donation_fields();
-				$('#no_donations_row').hide();
+				$('#no_donations_row').addClass('hidden');
 			}
 		});
 
@@ -219,7 +219,7 @@
 			transient_donations -= 1;
 
 			if(document.getElementById("donations_table").rows.length == 2) {
-				$('#no_donations_row').show();
+				$('#no_donations_row').removeClass('hidden');
 			}
 
 			if(id > 0) {

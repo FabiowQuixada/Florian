@@ -17,10 +17,10 @@
 
         for(i = 0; i <= <%= (number_of_tabs-1) %>; ++i) {
             $('#<%= tab_type %>_tab_' + i + '_title').removeClass('active');
-            $('#<%= tab_type %>_tab_' + i).hide();
+            $('#<%= tab_type %>_tab_' + i).addClass('hidden');
         }
 
-        $('#<%= tab_type %>_tab_' + tab_id).show();
+        $('#<%= tab_type %>_tab_' + tab_id).removeClass('hidden');
         $('#<%= tab_type %>_tab_' + tab_id + '_title').addClass('active');
     };
 
