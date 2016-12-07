@@ -19,7 +19,7 @@ describe 'maintainers/_form', type: :view do
       assign :model, model
       render
 
-      expect(rendered).not_to have_selector('tr#no_donations_row', visible: true)
+      expect(rendered).to have_selector('tr#no_donations_row', visible: true)
     end
 
     it 'does not display a no-donation message if it has donations' do
@@ -37,7 +37,7 @@ describe 'maintainers/_form', type: :view do
       assign :model, model
       render
 
-      expect(rendered).not_to have_selector('tr#no_contacts_row', visible: true)
+      expect(rendered).to have_selector('tr#no_contacts_row', visible: true)
     end
 
     it 'does not display a no-contact message if it has contacts' do

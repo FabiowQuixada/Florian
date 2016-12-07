@@ -5,6 +5,17 @@ class MaintainersController < ApplicationController
   include ModificationActions
   include DestroyAction
 
+  def create
+    @model = model_class.new model_params
+    @model.donations.each { |donation| donation.maintainer = @model }
+
+    if @model.save
+      redirect_to model_index_path, notice: @model.was('created')
+    else
+      render '_form'
+    end
+  end
+
   def contact_row
     render partial: 'contacts/contact', locals: { contact: Contact.new(contact_params) }
   end
