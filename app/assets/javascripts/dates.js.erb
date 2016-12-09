@@ -63,7 +63,9 @@ function is_after(start_date, end_date) {
 }
 
 // Format: yyyy-mm-dd;
-function validate_period(start_date, end_date, msg = '<%= I18n.t('errors.messages.invalid_period_i') %>') {
+function validate_period(start_date, end_date, msg) {
+
+	if (typeof(msg) === 'undefined') msg = "<%= I18n.t('errors.messages.invalid_period_i') %>";
 
 	if(!start_date || !end_date) {
 		return new Array();
