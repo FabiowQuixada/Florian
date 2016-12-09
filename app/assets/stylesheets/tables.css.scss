@@ -24,6 +24,11 @@ table#index_table th {
     }
 }
 
+table#index_table tfoot {
+    background-color: #428bca;
+    color: white;
+}
+
 tr { 
     th.icon-column {
         width: 16px;
