@@ -1,28 +1,23 @@
 <% if user_signed_in? %>
 	<%= render 'others/menu' %>
 
-	<div id="submenu-line" class="container-fluid padless ">
-		<!-- Breadcrumbs -->
-		<div class="row">
-			<div class="col-xs-12 col-md-7 col-lg-7">
-				<ol class="breadcrumb">
-					<%= breadcrumbs %>
-
-					<li class="pull-right visible-xs">
-						<%= admin_info_btn %>
-					</li>
-				</ol>
-			</div>
-			<div class="hidden-xs col-md-1 col-lg-1"></div>
-			<div class="hidden-xs col-md-4 col-lg-4 profile-area">
-				<div class="right">
+	<table id="submenu-line" class="padless">
+		<tr>
+			<td>
+				<ol class="breadcrumb"><%= breadcrumbs %></ol>
+			</td>
+			<td class="pull-right visible-xs profile-xs-area">
+				<%= admin_info_btn %>
+			</td>
+			<td class="profile-area hidden-xs" valign="top">
+				<div class="right profile-box">
 					<%= profile_btn %> 
 					<%= admin_info_btn %> 
 					<%= logout_btn %>
 				</div>
-			</div>
-		</div>
-	</div>
+			</td>
+		</tr>
+	</table>
 <% else %>
 	<!-- Login screen header -->
 	<div class="centre">
