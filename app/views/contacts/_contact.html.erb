@@ -10,7 +10,7 @@
     <td class="icon-column-2"><%= sub_destroy_btn Contact %></td>
 
     <!-- Server communication data -->
-    <td style="display:none;">
+    <td class="hidden">
         <%= contact_hidden_tag contact, 'id' if contact.id && contact.id > 0 %>
         <%= contact_hidden_tag contact, 'name' %>
         <%= contact_hidden_tag contact, 'position' %>

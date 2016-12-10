@@ -79,40 +79,6 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
     display: block;
 }
 
-/** Buttons *******************************************************************************/
-.edit_btn {
-    cursor: pointer;
-}
-.remove_btn {
-    cursor: pointer;
-}
-.question_btn {
-    cursor: pointer;
-}
-
-.add_recipient_btn {
-    cursor: pointer;
-}
-
-.destroy_btn {
-    cursor: pointer;
-}
-
-.logout-xs-btn-box {
-    margin-bottom: 15px;
-    float: right;
-    margin-right: 5px;
-}
-
-.logout-xs-btn {
-    margin-top: -20px;
-    float: right;
-}
-
-.admin_key_btn {
-  margin-left: 4px;
-}
-
 /** Other *********************************************************************************/
 .nav-tabs li {
     cursor: pointer;
@@ -158,12 +124,42 @@ $footer-color: #428BCA;
     margin: 0px;
 }
 
+.borderless {
+    border: 0;
+}
+
+.mid-addon {
+    border-left: 0;
+    border-right: 0;
+}
+
 .input-group-addon:first-child {
     border-left-width: 1px;
 }
 
 .input-group-addon:last-child {
     border-right-width: 1px;
+}
+
+.login-logo {
+    width: 70px; 
+    height: 70px;
+    margin-bottom: -10px;
+    margin-top: 10px;
+}
+
+.main-logo {
+    max-width: 100%;
+    max-height: 150%;
+    margin-top: -5px;
+}
+
+#error-img {
+    padding:10px;
+}
+
+#about-modal-body {
+    min-height: 190px;
 }
 
 #login_box {
@@ -211,6 +207,11 @@ div.centre {
 
 .audit-where {
     width: 18%;
+}
+
+.google-chart {
+    display: block; 
+    margin: 0 auto;
 }
 
 .audit-what {

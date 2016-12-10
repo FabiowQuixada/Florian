@@ -29,6 +29,10 @@ table#index_table tfoot {
     color: white;
 }
 
+th.column-lg {
+    width: 50%;
+}
+
 tr { 
     th.icon-column {
         width: 16px;
@@ -59,6 +63,10 @@ tr {
         align-content: center;
         text-align: center;
     }
+}
+
+td.middle {
+    vertical-align: middle;
 }
 
 .date-column {

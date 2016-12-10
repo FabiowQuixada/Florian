@@ -3,7 +3,7 @@
   <table>
     <tbody>
       <tr>
-        <td rowspan="2" style="padding:10px"><%= image_tag('error_warning.png', size: '64x64') %></td>
+        <td rowspan="2" class="error-img"><%= image_tag 'error_warning.png', size: '64x64' %></td>
         <td><b><h5><%= @title %></h5></b></td>
       </tr>
       <tr>
@@ -12,13 +12,12 @@
     </tbody>
   </table>
 
-  <a class="btn btn-primary back_btn"></span><%= t('helpers.action.back') %></a>
+  <a class="btn btn-primary back_btn"><%= t('helpers.action.back') %></a>
 </div>
 
 <script>
 
-  $('.back_btn').on('click', function()
-  {
+  $('.back_btn').on('click', function() {
     parent.history.back();
   });
 </script>

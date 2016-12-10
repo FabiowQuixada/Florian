@@ -62,13 +62,13 @@
   <!-- Year's bills (bodies) -->
   <% Bill.bill_types.each do |type| %>
     <div id="<%= bill[0].to_s %>_tab_<%= type[1] %>">
-      <div id="chart_div_<%= bill[0].to_s %>_<%= type[1] %>" style="display: block; margin: 0 auto"></div>
+      <div id="chart_div_<%= bill[0].to_s %>_<%= type[1] %>" class="google-chart"></div>
     </div>
   <% end %>
 
   <!-- Totals graph -->
   <div id="<%= bill[0].to_s %>_tab_3">
-      <div id="chart_div_<%= bill[0].to_s %>_3" style="display: block; margin: 0 auto"></div>
+      <div id="chart_div_<%= bill[0].to_s %>_3" class="google-chart"></div>
     </div>
 
   </div>

@@ -4,7 +4,7 @@
 		<div class="tab_body">
 
 			<!-- Week range -->
-			<div class="container-fluid" <%= 'style=display:none' unless product_and_service_week.common? %>>
+			<div class="container-fluid <%= 'hidden' unless product_and_service_week.common? %>">
 				<div class="row">
 					
 					<% if week_range_readonly?(product_and_service_week) %>
@@ -19,7 +19,7 @@
 									<span></span><%= week_f.text_field :start_date, value: I18n.l(product_and_service_week.start_date),class: 'form-control date', readonly: @model.finalized? %>
 									<span class="input-group-addon hidden"><i class="glyphicon glyphicon-th"></i></span>
 								</div>
-								<span class="input-group-addon" style="border-left: 0; border-right: 0;"><%= t 'helpers.to' %></span>
+								<span class="input-group-addon mid-addon"><%= t 'helpers.to' %></span>
 								<div class="date" data-behaviour='datepicker'>
 									<span class="input-group-addon hidden"><i class="glyphicon glyphicon-th"></i></span>
 									<%= week_f.text_field :end_date, value: I18n.l(product_and_service_week.end_date), class: 'form-control date', readonly: @model.finalized? %>

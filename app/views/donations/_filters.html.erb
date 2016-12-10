@@ -38,9 +38,9 @@
 									</span>
 									<div class="date" data-behaviour='datepicker' >
 										<span></span><%= filter_date_field f, :donation_date_gteq %>
-										<span class="input-group-addon hidden"><i class="glyphicon glyphicon-th"></i></span>
+										<span class="input-group-addon hidden "><i class="glyphicon glyphicon-th"></i></span>
 									</div>
-									<span class="input-group-addon" style="border-left: 0; border-right: 0;"><%= f.label :donation_date_lteq, t('helpers.and'), class: 'col-form-label' %></span>
+									<span class="input-group-addon mid-addon"><%= f.label :donation_date_lteq, t('helpers.and'), class: 'col-form-label' %></span>
 									<div class="date" data-behaviour='datepicker'>
 										<span class="input-group-addon hidden"><i class="glyphicon glyphicon-th"></i></span>
 										<%= filter_date_field f, :donation_date_lteq %>

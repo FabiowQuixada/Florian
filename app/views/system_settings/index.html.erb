@@ -29,7 +29,7 @@
 			<div id="main_tab_1" class="receipt_email_tab">
 				<div class="form-group">
 					<%= f.label :re_title %>
-					<div style="float:right">
+					<div class="tag-buttons">
 						<%= user_help_btn 'receipt_title_tag_help_btn' %>
 						<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
 							<div class="btn-group">
@@ -61,7 +61,7 @@
 
 				<div class="form-group">
 					<%= f.label :pse_title %>
-					<div style="float:right">
+					<div class="tag-buttons">
 						<%= user_help_btn 'pse_title_tag_help_btn' %>
 						<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
 							<div class="btn-group">
@@ -74,7 +74,7 @@
 
 				<div class="form-group">
 					<%= f.label :pse_body %>
-					<div style="float:right">
+					<div class="tag-buttons">
 						<%= user_help_btn 'pse_body_tag_help_btn' %>
 						<% I18n.with_options(scope: 'activerecord.attributes.receipt_email') do |i18n| %>
 							<div class="btn-group">
