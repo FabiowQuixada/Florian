@@ -25,8 +25,8 @@ class EmailHistory < ActiveRecord::Base
   end
 
   def self.recent_emails
-    all.where('created_at >= :start_date AND send_type != :send_type',
-              start_date: Date.new - ReceiptEmail::RECENT_EMAILS_DAYS.days,
-              send_type: EmailHistory.send_types[:test])
+    eager_load(receipt_email: :maintainer).where('email_histories.created_at >= :start_date AND send_type != :send_type',
+            start_date: Date.new - ReceiptEmail::RECENT_EMAILS_DAYS.days,
+            send_type: EmailHistory.send_types[:test])
   end
 end

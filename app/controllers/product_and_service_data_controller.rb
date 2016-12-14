@@ -22,9 +22,9 @@ class ProductAndServiceDataController < ApplicationController
     end
   end
 
-  def index_sorting_method
+  def index_query
     @q = ProductAndServiceDatum.ransack(params[:q])
-    @q.result.order('competence DESC').page(params[:page])
+    @q.result.eager_load(product_and_service_weeks: [:product_data, :service_data]).order(competence: :desc).page(params[:page])
   end
 
 end

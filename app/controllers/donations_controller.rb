@@ -23,10 +23,10 @@ class DonationsController < ApplicationController
     params.require(:donation).permit(:value, :donation_date, :remark, :maintainer_id, :user_id)
   end
 
-  def index_sorting_method
+  def index_query
     format_filter_date :donation_date_gteq
     format_filter_date :donation_date_lteq
     @q = Donation.ransack(params[:q])
-    @q.result.order('donation_date DESC').page(params[:page])
+    @q.result.eager_load(:maintainer).order(donation_date: :desc).page(params[:page])
   end
 end

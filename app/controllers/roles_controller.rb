@@ -12,7 +12,7 @@ class RolesController < ApplicationController
     params.require(:role).permit(:name, :description, :active)
   end
 
-  def index_sorting_method
+  def index_query
     @q = Role.ransack(params[:q])
     @q.result.order(:name).page(params[:page])
   end

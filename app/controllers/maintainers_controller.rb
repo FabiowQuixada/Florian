@@ -44,7 +44,7 @@ class MaintainersController < ApplicationController
     params.require(:donation).permit(:id, :value, :donation_date, :remark)
   end
 
-  def index_sorting_method
+  def index_query
     @q = Maintainer.ransack(params[:q])
     @q.result.order(:name).page(params[:page])
   end

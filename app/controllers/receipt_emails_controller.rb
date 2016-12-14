@@ -8,7 +8,7 @@ class ReceiptEmailsController < ApplicationController
 
   def index
     @q = ReceiptEmail.ransack(params[:q])
-    @list = @q.result.order('id DESC').page(params[:page])
+    @list = @q.result.eager_load(:maintainer).order('maintainers.name').page(params[:page])
     @recent_emails = EmailHistory.recent_emails
   end
 

@@ -12,12 +12,12 @@ class BillsController < ApplicationController
     params.require(:bill).permit(:id, :competence, :water, :energy, :telephone)
   end
 
-  def index_sorting_method
-    populate_graph Bill.order 'competence DESC'
+  def index_query
+    populate_graph Bill.order competence: :desc
     format_filter_date :competence_gteq
     format_filter_date :competence_lteq
     @q = Bill.ransack(params[:q])
-    @q.result.order('competence DESC').page(params[:page])
+    @q.result.order(competence: :desc).page(params[:page])
   end
 
   def populate_graph(list)

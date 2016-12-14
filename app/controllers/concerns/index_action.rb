@@ -4,7 +4,7 @@ module IndexAction extend ActiveSupport::Concern
 
                    def index
                      @filter = model_class.new
-                     @list = index_sorting_method
+                     @list = index_query
                      return if @list
 
                      @q = model_class.ransack(params[:q])
@@ -13,7 +13,7 @@ module IndexAction extend ActiveSupport::Concern
 
   private
 
-                   def index_sorting_method
+                   def index_query
                    end
 
                    included do

@@ -11,8 +11,8 @@ class UsersController < ApplicationController
     params.require(:user).permit(:id, :name, :email, :password, :role_id, :active, :locale)
   end
 
-  def index_sorting_method
+  def index_query
     @q = User.ransack(params[:q])
-    @q.result.order(:name).page(params[:page])
+    @q.result.eager_load(:role).order(:name).page(params[:page])
   end
 end
