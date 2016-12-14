@@ -1,12 +1,7 @@
 class ReceiptMailer < ApplicationMailer
 
-  def send_email_daily
-
-    emails = ReceiptEmail.where active: true
-
-    emails.each do |email|
-      send_automatic_receipt_email(email).deliver_now
-    end
+  def send_monthly_emails
+    ReceiptEmail.active.each { |email| send_automatic_receipt_email(email).deliver_now }
   end
 
   def send_test_receipt_email(email, user, date = nil)
