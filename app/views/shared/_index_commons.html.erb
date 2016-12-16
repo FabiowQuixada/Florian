@@ -49,12 +49,6 @@
 			  toggle: true
 			});
 		}
-
-		<% if Rails.env.test? %>
-			$('.panel-collapse').collapse({
-			  toggle: true
-			});
-		<% end %>
 	});
 
 	<% if @model.class.column_names.include? 'active' %>

@@ -17,8 +17,8 @@ describe Contact, js: true, type: :request do
   it 'is persisted in to a maintainer' do
     name, position = add_contact
     save_and_revisit
-    expect(all('td.contact_name').last['innerHTML']).to eq name
-    expect(all('td.contact_position').last['innerHTML']).to eq position
+    expect(find('#contacts_table').has_content?(name)).to be true
+    expect(find('#contacts_table').has_content?(position)).to be true
   end
 
   it 'is edited in a maintainer' do
