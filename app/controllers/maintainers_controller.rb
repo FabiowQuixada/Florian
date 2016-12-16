@@ -48,4 +48,8 @@ class MaintainersController < ApplicationController
     @q = Maintainer.ransack(params[:q])
     @q.result.order(:name).page(params[:page])
   end
+
+  def edit_query
+    model_class.eager_load([:donations, :contacts, :audits]).find(params[:id])
+  end
 end

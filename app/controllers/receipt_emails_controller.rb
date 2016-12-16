@@ -64,6 +64,10 @@ class ReceiptEmailsController < ApplicationController
     raise FlorianException, I18n.t('alert.email.invalid_competence')
   end
 
+  def edit_query
+    model_class.eager_load([:maintainer, :email_histories]).find(params[:id])
+  end
+
   def history_as_json(email, type)
     history = email.email_histories.last
 

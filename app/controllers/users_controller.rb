@@ -15,4 +15,8 @@ class UsersController < ApplicationController
     @q = User.ransack(params[:q])
     @q.result.eager_load(:role).order(:name).page(params[:page])
   end
+
+  def edit_query
+    model_class.eager_load(:role).find(params[:id])
+  end
 end

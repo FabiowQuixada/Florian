@@ -53,6 +53,8 @@ class Bill < ActiveRecord::Base
   end
 
   def competence_already_taken?
-    Bill.where("extract(month from competence) = #{competence.month} AND extract(year from competence) = #{competence.year} " + (id ? "AND id != #{id}" : '')).any?
+    Bill.where("extract(month from competence) = #{competence.month}
+     AND extract(year from competence) = #{competence.year} " +
+     (id ? "AND id != #{id}" : '')).any?
   end
 end

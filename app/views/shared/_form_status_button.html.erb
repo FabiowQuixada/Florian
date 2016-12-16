@@ -1,5 +1,5 @@
 
-<% if !@model.new_record? %>
+<% if @model.persisted? %>
 
 	<div class="form_status_box status_btn">
 		<%= image_tag('activate.png', id: 'active_img') %><%= image_tag('deactivate.png', id: 'inactive_img', class: 'hidden') %>  <span id="status_description"><%= genderize_tag(@model, 'model_phrases.status.full_desc.is_inactive') %></span>

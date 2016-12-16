@@ -19,4 +19,12 @@ module ReceiptEmailHelper
   def send_test_form_btn(model)
     link_to t('helpers.action.email.send_test'), 'javascript:void(0)', class: 'btn btn-primary send_test_btn' unless model.new_record?
   end
+
+  def receipt_maintainer_select(f)
+    if @model.persisted?
+      f.collection_select(:maintainer_id, [@model.maintainer], :id, :name, {}, id: 'receipt_email_maintainer', class: 'form-control', disabled: true)
+    else
+      f.collection_select(:maintainer_id, Maintainer.where(group: :maintainer), :id, :name, { include_blank: t('helpers.select.prompt') }, id: 'receipt_email_maintainer', class: 'form-control')
+    end
+  end
 end

@@ -29,4 +29,8 @@ class DonationsController < ApplicationController
     @q = Donation.ransack(params[:q])
     @q.result.eager_load(:maintainer).order(donation_date: :desc).page(params[:page])
   end
+
+  def edit_query
+    model_class.eager_load(:maintainer).find(params[:id])
+  end
 end

@@ -21,7 +21,11 @@ module ModificationActions extend ActiveSupport::Concern
                            end
 
                            def before_modification
-                             @model = model_class.find(params[:id])
+                             @model = edit_query
                              @breadcrumbs = breadcrumbs.merge Hash[@model => '']
+                           end
+
+                           def edit_query
+                             model_class.find(params[:id])
                            end
 end
