@@ -36,11 +36,12 @@
 
 	$(document).ready(function() {
 
-		any_field_filled = true;
+		any_field_filled = false;
 
-		$("#index_filters input").each(function() {
+		$("#index_filters input:not([type='submit']), #index_filters select").each(function() {
 			if ($(this).val() !== "") {
-				any_field_filled = false;
+				any_field_filled = true;
+				return;
 			}
 		});
 		
