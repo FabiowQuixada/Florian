@@ -17,7 +17,7 @@ class ReceiptEmailsController < ApplicationController
     return render json: email.errors, status: :unprocessable_entity unless email.valid?
 
     ReceiptMailer.resend_receipt_email(email, convert_competence, current_user).deliver_now
-    return render history_as_json(email, 'resent')
+    return render success_msg email, 'resent'
 
   rescue StandardError => exc
     exception_message = handle_exception exc, I18n.t('alert.email.error_resending')
@@ -29,7 +29,7 @@ class ReceiptEmailsController < ApplicationController
     return render json: email.errors, status: :unprocessable_entity unless email.valid?
 
     ReceiptMailer.send_test_receipt_email(email, current_user, convert_competence).deliver_now
-    return render history_as_json(email, 'test_sent')
+    return render success_msg email, 'test_sent'
 
   rescue StandardError => exc
     exception_message = handle_exception exc, I18n.t('alert.email.error_sending_test')
@@ -68,17 +68,10 @@ class ReceiptEmailsController < ApplicationController
     model_class.eager_load([:maintainer, :email_histories]).find(params[:id])
   end
 
-  def history_as_json(email, type)
-    history = email.email_histories.last
-
+  def success_msg(email, verb)
     { json: {
-      message: genderize_tag(email, "model_phrases.past_actions.#{type}"),
-      date: l(history.created_at, format: :really_short),
-      maintainer: email.maintainer.name,
-      value: ActionController::Base.helpers.number_to_currency(history.value),
-      type: history.send_type_desc,
-      user: history.user.name
+      message: genderize_tag(email, "model_phrases.past_actions.#{verb}"),
+      model: email.history.last.to_json
     } }
   end
-
 end

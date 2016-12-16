@@ -19,9 +19,7 @@ class ReceiptMailer < ApplicationMailer
   private
 
   def send_email(email, date, user, type, recipients = nil)
-
     recipients = email.recipients_array if recipients.nil?
-
     attach_receipt email, date
 
     prefix = ''
@@ -32,13 +30,12 @@ class ReceiptMailer < ApplicationMailer
          body: email.processed_body(user, date)
 
     save_to_history email, type, user
-
   end
 
   def send_test_email(email, date, user)
-    mail(to: user.email,
+    mail to: user.email,
          body: email.processed_body(user, date),
-         subject: I18n.t('helpers.test_email_prefix') + email.processed_title(user, date))
+         subject: I18n.t('helpers.test_email_prefix') + email.processed_title(user, date)
   end
 
   def attach_receipt(email, date)
@@ -63,5 +60,4 @@ class ReceiptMailer < ApplicationMailer
       send_type: type
     )
   end
-
 end

@@ -207,17 +207,17 @@
 	});
 
 	function add_history_item(response) {
-		line = '<tr><td>' + response.date + '<\/td>' +
-		'<td>' + response.value + '<\/td>' +
-		'<td>' + response.type + '<\/td>' +
-		'<td>' + response.user + '<\/td><\/tr>';
+		line = '<tr><td>' + response.model.date + '<\/td>' +
+		'<td>' + response.model.value + '<\/td>' +
+		'<td>' + response.model.type + '<\/td>' +
+		'<td>' + response.model.user + '<\/td><\/tr>';
 		$('#history_table > tbody:last-child').append(line);
 	}
 
 	function add_recent_email(response) {
-		line = '<tr><td>' + response.date + '<\/td>' +
-		'<td>' + response.maintainer + '<\/td>' +
-		'<td>' + response.type + '<\/td>' +
+		line = '<tr><td>' + response.model.date + '<\/td>' +
+		'<td>' + response.model.maintainer + '<\/td>' +
+		'<td>' + response.model.type + '<\/td>' +
 		'<\/tr>';
 		$('#recent_emails_table > tbody:last-child').append(line);
 	}
