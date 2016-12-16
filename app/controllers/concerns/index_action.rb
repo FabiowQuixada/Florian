@@ -5,10 +5,8 @@ module IndexAction extend ActiveSupport::Concern
                    def index
                      @filter = model_class.new
                      @list = index_query
-                     return if @list
 
-                     @q = model_class.ransack(params[:q])
-                     @list = @q.result.order('created_at ASC').page(params[:page])
+                     flash.now[:info] = t 'alert.query_results', count: @list.total_count if params[:q]
                    end
 
   private
