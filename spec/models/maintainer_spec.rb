@@ -124,7 +124,7 @@ describe Maintainer, type: :model do
   end
 
   describe '#unique_cnpj' do
-    let(:persisted_maintainer) { described_class.where(entity_type: :company).first }
+    let(:persisted_maintainer) { create :maintainer }
     let(:used_cnpj_maintainer) { build :maintainer, cnpj: persisted_maintainer.cnpj }
     let(:new_cnpj_maintainer) { build :maintainer }
 
@@ -133,7 +133,7 @@ describe Maintainer, type: :model do
   end
 
   describe '#unique_cpf' do
-    let(:persisted_maintainer) { described_class.where(entity_type: :person).first }
+    let(:persisted_maintainer) { create :maintainer, :person }
     let(:used_cpf_maintainer) { build :maintainer, :person, cpf: persisted_maintainer.cpf }
     let(:new_cpf_maintainer) { build :maintainer, :person }
 

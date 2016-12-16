@@ -33,15 +33,14 @@
 								<%= f.label :entity_type_eq, i18n.t(:entity_type), class: 'col-form-label' %>
 							</label>
 				    		<div class="col-sm-3">
-							  	<%= f.select :entity_type_eq, Maintainer::i18n_entity_types.to_a.map { |w| [w[0], w[1]] }, { include_blank: true }, { class: 'form-control mb-0' } %>
+							  	<%= f.select :entity_type_eq, search_entity_types, { include_blank: true }, { class: 'form-control mb-0' } %>
 				    		</div>
 
 							<label class="col-sm-3 col-form-label">
 								<%= f.label :group_eq, i18n.t(:group), class: 'col-form-label' %>
 							</label>
 				    		<div class="col-sm-3">
-							  	<%= f.select :group_eq, Maintainer::i18n_groups.to_a.map { |w| [w[0], w[1]] },
-			                         { include_blank: true }, { class: 'form-control mb-0' } %>
+							  	<%= f.select :group_eq, search_groups, { include_blank: true }, { class: 'form-control mb-0' } %>
 				    		</div>
 			    		</div>
 
@@ -50,8 +49,7 @@
 								<%= f.label :category_eq, i18n.t(:category), class: 'col-form-label' %>
 							</label>
 				    		<div class="col-sm-3">
-							  	<%= f.select :category_eq, Maintainer::i18n_categories.to_a.map { |w| [w[0], w[1]] },
-			                         { include_blank: true }, { class: 'form-control mb-0' } %>
+							  	<%= f.select :category_eq, search_categories, { include_blank: true }, { class: 'form-control mb-0' } %>
 				    		</div>
 			    		</div>
 

@@ -17,7 +17,7 @@ describe Maintainer, js: true, type: :request do
 
       index_table = find('#index_table')
       expect(index_table).to have_content I18n.t 'enums.maintainer.group.maintainer'
-      described_class.groups.each { |group| expect(index_table).not_to have_content I18n.t "enums.maintainer.group.#{group}" }
+      described_class.groups.each { |group| expect(index_table).not_to have_content I18n.t "enums.maintainer.group.#{group}" if group != 'maintainer' }
     end
 
     it 'filters by category' do
@@ -26,7 +26,7 @@ describe Maintainer, js: true, type: :request do
 
       index_table = find('#index_table')
       expect(index_table).to have_content I18n.t 'enums.maintainer.category.low'
-      described_class.categories.each { |category| expect(index_table).not_to have_content I18n.t "enums.maintainer.category.#{category}" }
+      described_class.categories.each { |category| expect(index_table).not_to have_content I18n.t "enums.maintainer.category.#{category}" if category != 'low' }
     end
   end
 
