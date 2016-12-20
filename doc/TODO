@@ -1,8 +1,25 @@
-Total contas de bills;
+Ransak: Filtro de atividade;
+
+Seguranca;
+Deletar conta do github;
+ataquex xss;
+page caching; 
+counter_cache;
+audit: ajax;
+
+===============================
+
+HTML5;
+validacao de data nos modelos;
+receipt e-mail: unique maintainer;
+
+================================
 
 Otimizacao de Testes: Stubs, etc, reorganizacao, teoria, etc;
 Menu lateral;
 Script para subir a aplicacao;
+Processamento de data (params) nos controllers;
+Estudas consultas Ransack;
 
 =====================================================================
 
@@ -10,16 +27,11 @@ Depois:
  - Grafico de Contas:
    - Ao deletar conta, atualizar grafico;
    - O valor R$ ,00 (colocar um 0 antes);
- - Ordenador de colunas: Dinheiro (Ransak?);
  - Voltar pelo browser: history API;
  - Graficos e mais graficos;
  - Script ambientes paralelos ativos no servidor (uat, showcase);
- - Report: cidade default na assinatura;
- - Localizar de acordo com localizacao (!);
- - Ransak: Filtro de atividade;
  - Teste showcase;
- - Checador de mudanca de locale?
- - Checador locale de duas tags consecutivas iguais?
+ - Gem guard-rspec;
 
 Interno:
  - Usuário: Novo, Senha no Firefox;
@@ -32,5 +44,3 @@ Frescurinha:
  - Smooth scroll no fechamento de alerts;
  - Smooth scroll na deleção de remetentes;
  - Mobile: Deslize horizontal;
-
- Gem guard-rspec
