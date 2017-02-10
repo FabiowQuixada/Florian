@@ -39,6 +39,8 @@ group :development, :showcase, :test do
 end
 
 group :development, :test do
+  gem 'jasmine'
+  gem 'jasmine-jquery-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'simplecov', require: false, group: :test
