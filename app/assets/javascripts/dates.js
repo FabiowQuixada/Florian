@@ -32,6 +32,7 @@ function current_competence() {
 	return mm + '/' + yyyy;
 }
 
+
 // source field input format: mm/yyyy;
 function format_competence(source_field, target_field) {
 	var temp = $('#' + source_field).val().split("/");
@@ -41,9 +42,14 @@ function format_competence(source_field, target_field) {
 	$('#' + target_field).val(year + '-' + month + '-01');
 }
 
-// Input format: dd/mm/yyyy;
+// Input format: mm/dd/yyyy;
 function to_rails_date(date_string) {
+
+	if(!is_valid_date(date_string))
+	  return null;
+
 	var temp = date_string.split("/");
+
 	var date = new Date(temp[2], temp[0] - 1, temp[1]);
 	year = date.getFullYear();
 	month = ('0' + (date.getMonth() + 1)).slice(-2);
@@ -53,19 +59,21 @@ function to_rails_date(date_string) {
 }
 
 // Format: yyyy-mm-dd;
-function is_after(start_date, end_date) {
-	var temp_1 = start_date.split("-");
-	var temp_2 = end_date.split("-");
-	var start_date = new Date(temp_1[2], temp_1[1], temp_1[0] - 1);
-	var end_date = new Date(temp_2[2], temp_2[1], temp_2[0] - 1);
+function to_js_date(rails_date) {
+  var temp = rails_date.split("-");
+  return new Date(temp[0], temp[1]-1, temp[2], 0, 0, 0, 0);
+}
 
-	return start_date > end_date;
+// Format: yyyy-mm-dd;
+function is_after(start_date, end_date) {
+  return to_js_date(start_date) > to_js_date(end_date);
 }
 
 // Format: yyyy-mm-dd;
 function validate_period(start_date, end_date, msg) {
 
-	if (typeof(msg) === 'undefined') msg = I18n.t('errors.messages.invalid_period_i');
+	if (typeof(msg) === 'undefined') 
+	  msg = I18n.t('errors.messages.invalid_period_i');
 
 	if(!start_date || !end_date) {
 		return new Array();
@@ -78,6 +86,21 @@ function validate_period(start_date, end_date, msg) {
 	}
 
 	return errors;
+}
+
+// Input format: mm/dd/yyyy;
+function is_valid_date(date_string) {
+	var comp = date_string.split('/');
+	var m = parseInt(comp[0], 10);
+	var d = parseInt(comp[1], 10);
+	var y = parseInt(comp[2], 10);
+	var date = new Date(y,m-1,d);
+
+	if (date.getFullYear() == y && date.getMonth() + 1 == m && date.getDate() == d) {
+	  return true;
+	} else {
+	  return false;
+	}
 }
 
 $(function() {
