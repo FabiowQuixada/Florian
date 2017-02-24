@@ -17,6 +17,9 @@
 //= require twitter/bootstrap
 //= require bootstrap-datepicker
 //= require jquery.turbolinks
+//= require i18n
+//= require i18n.js
+//= require i18n/translations
 //= require_tree .
 
 var display_admin_data = false;

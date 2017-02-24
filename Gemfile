@@ -28,6 +28,7 @@ gem 'modularity', '~> 2.0', '>= 2.0.1'
 gem 'kaminari'
 gem 'i18n_yaml_sorter'
 gem 'ransack'
+gem 'i18n-js', '>= 3.0.0.rc11'
 
 group :development, :showcase, :test do
   gem 'letter_opener'
