@@ -89,8 +89,6 @@
 
 <script>
 
-	const preprocess_data = () => {}
-
 	$('#main_form').submit(() => {
 		<% unless @model.persisted? %>
 			$("#aux_competence").prop("disabled", true);

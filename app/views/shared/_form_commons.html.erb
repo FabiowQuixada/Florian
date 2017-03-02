@@ -65,7 +65,9 @@
 
 			any_change = false;
 
-			preprocess_data();
+			if(typeof preprocess_data === "function") {
+				preprocess_data();
+			}
 
 			let changed_values_list = "";
 
