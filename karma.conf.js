@@ -19,6 +19,7 @@ module.exports = function(config) {
       'public/javascripts/i18n.js',
       'public/javascripts/translations.js',
       'app/assets/javascripts/**/*.js',
+      'app/views/**/*.js',
       'spec/javascripts/**/*.js',
       { pattern: 'spec/javascripts/fixtures/**/*.html', included: false, served: true }
     ],
@@ -28,6 +29,7 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       'app/assets/javascripts/**/*.js': ['babel'],
+      'app/views/**/*.js': ['babel'],
       'spec/javascripts/**/*js': ['babel']
     },
     babelPreprocessor: {
