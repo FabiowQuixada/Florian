@@ -115,7 +115,7 @@
 			display_confirm_modal('<%= I18n.t 'modal.title.info' %>', '<%= I18n.t 'user_help_messages.tag_buttons' %>'));
 	});
 
-	const preprocess_data = () => {
+	const before_submit_or_leave = () => {
 		if(transient_recipients > 0) {
 			window.any_changes = true;
 		}
@@ -124,6 +124,6 @@
 		$('#system_setting_pse_private_recipients_array').val(pse_private_recipients_array_formated_recipients('pse_private_recipients_array'));
 	}
 
-	$('#main_form').on('submit', e => preprocess_data());
+	$('#main_form').on('submit', e => before_submit_or_leave());
 
 </script>

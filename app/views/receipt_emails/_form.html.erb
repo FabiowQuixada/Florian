@@ -108,6 +108,14 @@
 
 <script>
 
+	const before_submit_or_leave = () => {
+		if(recipients_array_transient_recipients > 0) {
+			any_changes = true;
+		}
+
+		$('#receipt_email_recipients_array').val(recipients_array_formated_recipients());
+	}
+
 	$(() => {
 
 		<% if @model.persisted? %>
@@ -133,7 +141,7 @@
 		$('#receipt_email_title').val(escape_html('<%= SystemSetting.first.re_title %>'));
 
 		$('#main_form').on('submit', e => {
-			preprocess_data();
+			before_submit_or_leave();
 
 			if(!validate_tag_fields()) {
 				$('#warning_save_modal').modal('show');
@@ -151,14 +159,6 @@
 		$("#add_maintainer_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.maintainer')));
 		$("#add_value_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.value')));
 		$("#add_competence_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.competence')));
-
-		const preprocess_data = () => {
-			if(recipients_array_transient_recipients > 0) {
-				any_changes = true;
-			}
-
-			$('#receipt_email_recipients_array').val(recipients_array_formated_recipients());
-		}
 	});
 
 </script>

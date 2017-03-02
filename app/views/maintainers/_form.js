@@ -3,7 +3,7 @@ $(document).ready( () => {
     const errors = new Array();
     const email = $('#maintainer_email_address').val();
 
-    preprocess_data();
+    before_submit_or_leave();
 
     if(email && !validate_email(email)) {
       errors.push(I18n.t('alert.email.invalid_recipient'));
@@ -18,7 +18,7 @@ $(document).ready( () => {
   update_fields_by_entity_type();
 });
 
-const preprocess_data = () => {
+const before_submit_or_leave = () => {
   any_change = false;
 
   if(typeof new_donations === "function" && new_donations()) {

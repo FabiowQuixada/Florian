@@ -65,8 +65,8 @@
 
 			any_change = false;
 
-			if(typeof preprocess_data === "function") {
-				preprocess_data();
+			if(typeof before_submit_or_leave === "function") {
+				before_submit_or_leave();
 			}
 
 			let changed_values_list = "";
