@@ -74,7 +74,7 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
 
         } else if (validate_email(email_address)) {
             $.ajax({
-                url: "<%= url_for(action: 'email_row', controller: 'helpers', only_path: false, protocol: 'http') %>", 
+                url: "<%= email_row_helpers_path %>", 
                 data: { 
                     email_address: email_address, 
                     index: temp_<%= field_name %>_id, 

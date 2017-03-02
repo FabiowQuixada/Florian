@@ -86,7 +86,7 @@
 
 				} else {
 					$.ajax({
-						url: '<%= url_for(action: 'contact_row', controller: 'maintainers', only_path: false, protocol: 'http') %>', 
+						url: '<%= contact_row_maintainers_path %>', 
 						data: { contact },
 						success: result => $('#contacts_table > tbody:last-child').append(result)
 					});

@@ -165,7 +165,7 @@
 				const remark = $('#new_donation_remark').val();
 
 				$.ajax({
-					url: '<%= url_for(action: 'donation_row', controller: 'maintainers', only_path: false, protocol: 'http') %>', 
+					url: '<%= donation_row_maintainers_path %>', 
 					data: { donation },
 					success: result => $('#donations_table > tbody:last-child').append(result)
 				});
