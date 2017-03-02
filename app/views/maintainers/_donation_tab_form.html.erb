@@ -153,7 +153,7 @@
 			errors.push('<%= Donation.new.blank_error_message('date') %>');
 		}
 
-		if((!$('#new_donation_value').val() || $('#new_donation_value').val() == '<%= number_to_currency 0, format: "%n" %>') && !$('#new_donation_remark').val()) {
+		if((!$('#new_donation_value').val() || $('#new_donation_value').val() == to_money(0)) && !$('#new_donation_remark').val()) {
 			errors.push(I18n.t('errors.donation.value_or_remark'));
 		}
 
@@ -166,7 +166,7 @@
 
 	const clean_donation_fields = () => {
 		$('#new_donation_date').val('');
-		$('#new_donation_value').val('<%= number_to_currency 0, format: "%n" %>');
+		$('#new_donation_value').val(to_money(0));
 		$('#new_donation_remark').val('');
 
 		hide_errors_from_box('donation');

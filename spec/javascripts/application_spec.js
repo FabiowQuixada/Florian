@@ -17,6 +17,13 @@ describe("Application", () => {
       expect($('.admin-only')[0]).not.toBeHidden();
     });
   });
+  
+  it("converts numbers to currency", () => {
+    expect(to_money(34.78)).toEqual('34.78');
+    expect(to_money(5234.78)).toEqual('5,234.78');
+    expect(to_money(154779)).toEqual('154,779.00');
+    expect(to_money(0)).toEqual('0.00');
+  });
 
   it("sums elements by css class", () => {
     jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures';

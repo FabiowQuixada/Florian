@@ -1,5 +1,3 @@
-<% environment.context_class.instance_eval { include ActionView::Helpers::NumberHelper } %>
-
 $(() => {
 
     const delimiter = I18n.t("number.currency.format.delimiter")
@@ -28,7 +26,7 @@ $(() => {
 	// Field initialization;
 	$(".money").each((index, field) => {
 		if(!$(field).val() || $(field).val() == '0.0' || $(field).val() == '00' || $(field).val() == '0')
-			$(field).val('<%= number_to_currency 0, format: "%n" %>');
+			$(field).val(to_money(0));
 	});
 
 	$('.numbers_only').each((index, field) => {

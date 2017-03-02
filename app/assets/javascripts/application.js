@@ -48,16 +48,30 @@ const to_top = () => {
 	}, 1000);
 }
 
-const number_to_currency = number => number.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+const to_money = number => {
+  const cents = I18n.t("number.currency.format.precision"),
+    d = I18n.t("number.currency.format.separator"),
+    t = I18n.t("number.currency.format.delimiter"),
+    sign = number < 0 ? "-" : "",
+    i = String(parseInt(number = Math.abs(Number(number) || 0).toFixed(cents))),
+    j = i.length > 3 ? i.length % 3 : 0;
+
+  return (
+    sign +
+    (j ? i.substr(0, j) + t : "") +
+    i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) +
+    (cents ? d + Math.abs(number - i).toFixed(cents).slice(2) : "")
+  );
+};
 
 // The input should be a set of inputs, eg, '#summable-inputs input';
 const currency_sum = elements => {
-	let sum = 0;
-	$(elements).each((i, field) => {
-		sum += parseFloat( $(field).val().replace(/,/g, '') * 100 );
-	});
+  let sum = 0;
+  $(elements).each((i, field) => {
+    sum += parseFloat( $(field).val().replace(/,/g, '') * 100 );
+  });
 
-	return number_to_currency(sum/100);
+  return to_money(sum / 100);
 }
 
 const escape_html = string => String(string).replace(/[&<>"'\/]/g, s => entity_map[s])
