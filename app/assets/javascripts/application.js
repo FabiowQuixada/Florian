@@ -23,14 +23,6 @@
 //= require_tree .
 
 let display_admin_data = false;
-const entity_map = {
-	"&": "&amp;",
-	"<": "&lt;",
-	">": "&gt;",
-	'"': '&quot;',
-	"'": '&#39;',
-	"/": '/' // &#x2F;
-};
 
 const toogle_admin_data = () => {		
 	if(display_admin_data) {
@@ -74,7 +66,18 @@ const currency_sum = elements => {
   return to_money(sum / 100);
 }
 
-const escape_html = string => String(string).replace(/[&<>"'\/]/g, s => entity_map[s])
+const escape_html = string => {
+  const entity_map = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': '&quot;',
+    "'": '&#39;',
+    "/": '/' // &#x2F;
+  };
+
+  return String(string).replace(/[&<>"'\/]/g, s => entity_map[s]);
+}
 
 $(() => {
   toogle_admin_data();
