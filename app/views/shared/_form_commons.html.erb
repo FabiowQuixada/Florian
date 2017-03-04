@@ -28,8 +28,6 @@
 <%= render 'shared/audit_commons' unless hide_audit %>
 
 <script>
-
-	let any_change = false;
 	
 	<% if @model.persisted? %>
 
@@ -100,31 +98,12 @@
 		document.getElementById("main_form").submit();
 	});
 
-	const display_form_errors = message => {
-		let result = '';
-
-		if (Object.prototype.toString.call(message) === '[object Array]') {
-			result = msg_as_html_ul(message);
-		} else {
-			result = message;
-		}
-
-		hide_all_messages();
-		to_top();
-		$('#form_error_messages').html(result);
-		$('#form_error_box').removeClass('hidden');
-	}
 
 	const add_tag_to_field = (field, tag) => {
 		const caretPos = document.getElementById(field).selectionStart;
 		const textAreaTxt = jQuery(`#${field}`).val();
 		jQuery(`#${field}`).val(`${textAreaTxt.substring(0, caretPos)} ${tag} ${textAreaTxt.substring(caretPos)}`);
 	}
-
-	const validate_email = email => (
-		/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
-        .test(email)
-    )
 
 	const go_back = () => window.location = '<%= model_full_path(@model) %>'
 
