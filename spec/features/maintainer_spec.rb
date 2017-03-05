@@ -86,9 +86,10 @@ describe Maintainer, js: true, type: :request do
   end
 
   def fill_donation_fields(remark)
-    fill_in 'new_donation_date', with: Faker::Date.forward(23)
+    fill_in 'new_donation_date', with: I18n.localize(Faker::Date.forward(23))
     fill_in 'new_donation_value', with: Faker::Number.number(4)
     fill_in 'new_donation_remark', with: remark
+    execute_script('$(".datepicker-dropdown").hide()')
   end
 
   def add_donation(remark = Faker::Hacker.say_something_smart)

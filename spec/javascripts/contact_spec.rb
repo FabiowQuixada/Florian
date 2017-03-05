@@ -23,13 +23,13 @@ describe Contact, js: true, type: :request do
 
   it 'is edited in a maintainer' do
     contact = Maintainer.first.contacts[0]
-    new_name = edit_first_contact
+    new_name = edit_contact contact
     expect(find("tr#contact_#{contact.id} td.contact_name")['innerHTML']).to eq new_name
   end
 
   it 'changes are persisted in a maintainer' do
     contact = Maintainer.first.contacts[0]
-    new_name = edit_first_contact
+    new_name = edit_contact contact
     save_and_revisit
     expect(find("tr#contact_#{contact.id} td.contact_name")['innerHTML']).to eq new_name
   end
@@ -57,9 +57,10 @@ describe Contact, js: true, type: :request do
     [name, position]
   end
 
-  def edit_first_contact
+  def edit_contact(contact)
     new_name = Faker::Name.name
-    first('.edit_contact_btn').click
+    find("tr#contact_#{contact.id} .edit_contact_btn").click
+    # byebug
     fill_in 'temp_contact_name', with: new_name
     find('#add_contact_btn').click
 
