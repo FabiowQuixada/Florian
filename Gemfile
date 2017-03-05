@@ -50,6 +50,7 @@ group :development, :test do
   gem 'pdf-inspector', require: 'pdf/inspector'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'chromedriver-helper'
 end
 
 group :test do

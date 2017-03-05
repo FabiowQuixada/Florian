@@ -48,9 +48,14 @@ RSpec.configure do |config|
 
   require 'capybara/poltergeist'
   Capybara.default_driver = :poltergeist
+  Capybara.javascript_driver = :chrome
   options = { js_errors: false }
   Capybara.register_driver :poltergeist do |app|
     Capybara::Poltergeist::Driver.new(app, options)
+  end
+
+  Capybara.register_driver :chrome do |app|
+    Capybara::Selenium::Driver.new(app, browser: :chrome)
   end
 
   config.include FactoryGirl::Syntax::Methods
