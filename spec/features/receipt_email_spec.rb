@@ -3,7 +3,16 @@ require 'rails_helper'
 describe ReceiptEmail, js: true, type: :request do
   let(:competence) { "10/2015\n" }
 
-  context 'in listing page' do
+  context 'e-mails' do
+    before :each do
+      login_as_admin
+      visit edit_receipt_email_path described_class.first.id
+    end
+
+    include_examples 'an e-mail address table', ['recipients_array']
+  end
+
+  context 'index' do
     before :each do
       login_as_admin
       visit receipt_emails_path
@@ -38,7 +47,8 @@ describe ReceiptEmail, js: true, type: :request do
     end
   end
 
-  context 'in update page' do
+
+  context 'form' do
     before :each do
       login_as_admin
       visit edit_receipt_email_path described_class.first.id

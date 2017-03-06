@@ -60,7 +60,6 @@ describe Contact, js: true, type: :request do
   def edit_contact(contact)
     new_name = Faker::Name.name
     find("tr#contact_#{contact.id} .edit_contact_btn").click
-    # byebug
     fill_in 'temp_contact_name', with: new_name
     find('#add_contact_btn').click
 

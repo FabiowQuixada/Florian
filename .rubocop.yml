@@ -40,7 +40,7 @@ Metrics/AbcSize:
   Exclude:
     - app/others/excel_parser.rb
     - spec/reports/product_and_service_report_spec.rb
-    - spec/javascripts/product_and_service_datum_spec.rb
+    - spec/features/product_and_service_datum_spec.rb
 
 Metrics/CyclomaticComplexity:
   Exclude:

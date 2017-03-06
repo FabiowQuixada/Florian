@@ -15,11 +15,13 @@ describe SystemSetting, js: true, type: :request do
       click_on_update_btn
       check_if_changes_persisted
     end
-  end
 
-  describe 'as common user' do
-    before :each do
-      login_as_common_user
+    describe 'e-mail' do
+      before :each do
+        page.find('#main_tab_2_title').click
+      end
+
+      include_examples 'an e-mail address table', %w(pse_recipients_array pse_private_recipients_array)
     end
   end
 
