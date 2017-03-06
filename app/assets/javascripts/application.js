@@ -37,6 +37,9 @@
 //= require maintainers/form
 //= require maintainers/contact_tab_form
 //= require maintainers/donation_tab_form
+//= require receipt_emails/form
+//= require receipt_emails/index
+//= require receipt_emails/modals
 
 /* 
 

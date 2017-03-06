@@ -48,39 +48,3 @@
 <%= render 'shared/index_commons' %>
 
 <div class="asterisk-description"><%= t('helpers.receipt_email.index_footer', time: ReceiptEmail::DAILY_SEND_HOUR.to_s, competence: (Date.today + 1.month).strftime("%B/%Y").capitalize) %></div>
-
-<script>
-
-	$(document).ready(() => {
-
-		$('.resend_btn').click( e => {
-			const elem = $(e.currentTarget);
-			clean_resend_modal();
-
-			const id = elem.closest('.model_row').find('.model_id').text();
-			$('#resend_email_id').val(id);
-			$('#resend_email_form').get(0).setAttribute('action', resend_path(id));
-			$('.modal_maintainer_name').text(elem.closest('.model_row').find('.receipt_maintainer').text());
-			$('#resend_email_modal').modal('show');
-		});
-
-
-		$('.send_test_btn').click( e => {
-			const elem = $(e.currentTarget);
-			clean_send_test_modal();
-
-			const id = elem.closest('.model_row').find('.model_id').text();
-			$('#send_test_email_id').val(id);
-			$('#send_test_email_form').get(0).setAttribute('action', send_test_path(id));
-			$('.modal_maintainer_name').text(elem.closest('.model_row').find('.receipt_maintainer').text());
-			$('#send_test_email_modal').modal('show');
-		});
-
-
-		$('#recent_emails_btn').click( e =>	$('#recent_emails_modal').modal('show'))
-
-		const resend_path = id => '<%= resend_receipt_email_path -1 %>'.replace("-1", id)
-
-		const send_test_path = id => '<%= send_test_receipt_email_path -1 %>'.replace("-1", id)
-	});
-</script>

@@ -2,6 +2,8 @@
 
 	<%= render 'shared/form_errors' %>
 
+	<%= f.hidden_field :id %>
+
 	<div class="container-fluid padless">
 		<div class="row">
 			<div class="col-md-5">
@@ -105,60 +107,3 @@
 
 <%= render 'shared/form_commons' %>
 <%= render 'modals' %>
-
-<script>
-
-	const before_submit_or_leave = () => {
-		if(recipients_array_transient_recipients > 0) {
-			any_changes = true;
-		}
-
-		$('#receipt_email_recipients_array').val(recipients_array_formated_recipients());
-	}
-
-	$(() => {
-
-		<% if @model.persisted? %>
-			$('.resend_btn').click( e => {
-				clean_resend_modal();
-				$('#resend_email_form').get(0).setAttribute('action', '<%= resend_receipt_email_path @model %>');
-				$('.modal_maintainer_name').text('<%= @model.maintainer.name %>');
-				$('#resend_email_modal').modal('show');
-			});
-
-			$('.send_test_btn').click( e => {
-				clean_send_test_modal();
-				$('#send_test_email_form').get(0).setAttribute('action', '<%= send_test_receipt_email_path @model %>');
-				$('.modal_maintainer_name').text('<%= @model.maintainer.name %>');
-				$('#send_test_email_modal').modal('show');
-			});
-		<% end %>
-
-		$('#body_tag_help_btn').click( e => {
-			display_confirm_modal(I18n.t('modal.title.info'), I18n.t('user_help_messages.tag_buttons'));
-		});
-
-		$('#receipt_email_title').val(escape_html('<%= SystemSetting.first.re_title %>'));
-
-		$('#main_form').on('submit', e => {
-			before_submit_or_leave();
-
-			if(!validate_tag_fields()) {
-				$('#warning_save_modal').modal('show');
-				e.preventDefault();
-				return;
-			}
-		});
-
-		const validate_tag_fields = () => !contains_all_tags($('#receipt_email_body').val())
-
-		const contains_all_tags = text => (
-			text.indexOf(I18n.t('tags.maintainer')) == -1 || text.indexOf(I18n.t('tags.value')) == -1 || text.indexOf(I18n.t('tags.competence')) == -1
-		)
-
-		$("#add_maintainer_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.maintainer')));
-		$("#add_value_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.value')));
-		$("#add_competence_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.competence')));
-	});
-
-</script>
