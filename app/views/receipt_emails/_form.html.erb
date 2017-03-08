@@ -129,7 +129,7 @@
 		<% end %>
 
 		$('#body_tag_help_btn').click(function(ev) {
-			display_confirm_modal('<%= I18n.t 'modal.title.info' %>', '<%= I18n.t 'user_help_messages.tag_buttons' %>');
+			display_confirm_modal(I18n.t('modal.title.info'), I18n.t('user_help_messages.tag_buttons'));
 		});
 
 		$('#receipt_email_title').val(escape_html('<%= SystemSetting.first.re_title %>'));
@@ -150,12 +150,12 @@
 		}
 
 		function contains_all_tags(text) {
-			return text.indexOf("<%= t('tags.maintainer') %>") == -1 || text.indexOf("<%= t('tags.value') %>") == -1 || text.indexOf("<%= t('tags.competence') %>") == -1;
+			return text.indexOf(I18n.t('tags.maintainer')) == -1 || text.indexOf(I18n.t('tags.value')) == -1 || text.indexOf(I18n.t('tags.competence')) == -1;
 		}
 
-		$("#add_maintainer_to_body_btn").on('click', function() {add_tag_to_field('receipt_email_body', '<%= t('tags.maintainer') %>')});
-		$("#add_value_to_body_btn").on('click', function() {add_tag_to_field('receipt_email_body', '<%= t('tags.value') %>')});
-		$("#add_competence_to_body_btn").on('click', function() {add_tag_to_field('receipt_email_body', '<%= t('tags.competence') %>')});
+		$("#add_maintainer_to_body_btn").on('click', function() {add_tag_to_field('receipt_email_body', I18n.t('tags.maintainer'))});
+		$("#add_value_to_body_btn").on('click', function() {add_tag_to_field('receipt_email_body', I18n.t('tags.value'))});
+		$("#add_competence_to_body_btn").on('click', function() {add_tag_to_field('receipt_email_body', I18n.t('tags.competence'))});
 
 		function preprocess_data() {
 			if(transient_recipients > 0) {

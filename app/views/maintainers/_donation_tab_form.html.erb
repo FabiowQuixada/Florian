@@ -157,7 +157,7 @@
 		}
 
 		if((!$('#new_donation_value').val() || $('#new_donation_value').val() == '<%= number_to_currency 0, format: "%n" %>') && !$('#new_donation_remark').val()) {
-			errors.push('<%= I18n.t('errors.donation.value_or_remark') %>');
+			errors.push(I18n.t('errors.donation.value_or_remark'));
 		}
 
 		if(errors.length > 0) {

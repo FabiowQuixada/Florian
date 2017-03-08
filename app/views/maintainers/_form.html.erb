@@ -44,7 +44,7 @@
 		preprocess_data();
 
 		if(email && !validate_email(email)) {
-			errors.push('<%= I18n.t('alert.email.invalid_recipient') %>');
+			errors.push(I18n.t('alert.email.invalid_recipient'));
 		}
 
 

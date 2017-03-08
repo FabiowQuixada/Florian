@@ -71,10 +71,10 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
         email_address = $('#<%= field_name %>_new_recipient_field').val();
 
         if (!$('#<%= field_name %>_new_recipient_field').val()) {
-            display_form_errors('<%= t('alert.email.fill_a_recipient') %>');
+            display_form_errors(I18n.t('alert.email.fill_a_recipient'));
 
         } else if(already_present(email_address)) {
-            display_form_errors('<%= t('alert.email.duplicated_recipient') %>');
+            display_form_errors(I18n.t('alert.email.duplicated_recipient'));
         } else if (validate_email(email_address)) {
             $.ajax({
                 url: "<%= url_for(action: 'email_row', controller: 'helpers', only_path: false, protocol: 'http') %>", 
@@ -88,7 +88,7 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
             hide_all_messages();
             clean_email_fields();
         } else {
-            display_form_errors('<%= t('alert.email.invalid_recipient') %>');
+            display_form_errors(I18n.t('alert.email.invalid_recipient'));
         }
     });
 

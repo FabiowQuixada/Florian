@@ -106,7 +106,7 @@
 		$('.destroy_btn').on('click', function() {
 
 			id = $(this).closest('.model_row').find('.model_id').html();
-			display_confirm_modal("<%= t('modal.title.destroy') %>",
+			display_confirm_modal(I18n.t('modal.title.destroy'),
 				"<%= genderize_tag(@model, 'model_phrases.are_you_sure.destroy') %>", destroy_model.bind(self, id));
 		});
 
@@ -136,7 +136,7 @@
 				}
 			},
 			error: function(response) {
-				display_error("<%= t('error_pages.internal_server_error.title') %>");
+				display_error(I18n.t('error_pages.internal_server_error.title'));
 			}
 		});
 	}

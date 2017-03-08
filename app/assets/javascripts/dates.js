@@ -2,9 +2,9 @@ function set_month_datepicker() {
 	$('.datepicker-competence').datepicker()
 	$('[data-behaviour~=datepickercompetence]').datepicker({
 		minViewMode: 1,
-		format: "<%= I18n.t('date.formats.javascript_format.competence') %>",
+		format: I18n.t("date.formats.javascript_format.competence"),
 		autoclose: true,
-		language: "<%= I18n.locale %>"
+		language: I18n.locale
 	});
 }
 
@@ -12,9 +12,9 @@ function set_datepicker() {
 
 	$('.datepicker').datepicker()
 	$('[data-behaviour~=datepicker]').datepicker({
-		format: "<%= I18n.t('date.formats.javascript_format.date') %>",
+		format: I18n.t("date.formats.javascript_format.date"),
 		autoclose: true,
-		language: "<%= I18n.locale %>",
+		language: I18n.locale,
 		daysOfWeekDisabled: [0,6],
 		setDate: new Date()
 	});
@@ -65,7 +65,7 @@ function is_after(start_date, end_date) {
 // Format: yyyy-mm-dd;
 function validate_period(start_date, end_date, msg) {
 
-	if (typeof(msg) === 'undefined') msg = "<%= I18n.t('errors.messages.invalid_period_i') %>";
+	if (typeof(msg) === 'undefined') msg = I18n.t('errors.messages.invalid_period_i');
 
 	if(!start_date || !end_date) {
 		return new Array();
@@ -85,6 +85,6 @@ $(function() {
 	set_month_datepicker();
 	set_datepicker();
 
-	$(".datepicker-switch").html("<%= I18n.t('datetime.prompts.month.other') %>");
+	$(".datepicker-switch").html(I18n.t('datetime.prompts.month.other'));
 
 });

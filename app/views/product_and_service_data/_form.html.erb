@@ -263,7 +263,7 @@
 		update_hidden_prod_field('id', source_week_number);
 
 		set_request_url(source_week_number);
-		display_info("<%= t 'alert.email.sending' %>");
+		display_info(I18n.t("alert.email.sending"));
 		$("#hidden_week_form").submit();
 	}
 

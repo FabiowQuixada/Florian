@@ -175,7 +175,7 @@
 
 	$('#resend_email_form').submit(function(ev) {
 
-		display_info('<%= t('alert.email.resending') %>');
+		display_info(I18n.t('alert.email.resending'));
 		$('#resend_email_modal').modal('hide');
 
 		<% if params[:action] == 'edit' %>
@@ -191,7 +191,7 @@
 
 	$('#send_test_email_form').submit(function(ev) {
 
-		display_info('<%= t('alert.email.sending_test') %>');
+		display_info(I18n.t('alert.email.sending_test'));
 		$('#send_test_email_modal').modal('hide');
 
 		<% if params[:action] == 'edit' %>
