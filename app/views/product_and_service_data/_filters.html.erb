@@ -28,9 +28,9 @@
 									</div>
 									<span class="input-group-addon mid-addon"><%= f.label :competence_lteq, t('helpers.and'), class: 'col-form-label' %></span>
 									<div class="date" data-behaviour='datepickercompetence'>
+										<%= filter_competence_field f, :competence_lteq %>
 										<span class="input-group-addon hidden"><i class="glyphicon glyphicon-th"></i></span>
 										<%= filter_aux_competence_field f, :competence_lteq %>
-										<%= filter_competence_field f, :competence_lteq %>
 									</div>
 								</div>
 				    		</div>
