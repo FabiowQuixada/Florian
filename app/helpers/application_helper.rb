@@ -97,9 +97,9 @@ module ApplicationHelper
   end
 
   def no_records_row(model, list, colspan = 20)
-    style = list.any? ? 'display:none' : ''
+    css_class = list.any? ? 'hidden' : ''
 
-    content_tag :tr, id: "no_#{model.class.name.pluralize.underscore}_row", style: style do
+    content_tag :tr, id: "no_#{model.class.name.pluralize.underscore}_row", class: css_class do
       content_tag(:td, genderize_tag(model, 'model_phrases.none_registered'), colspan: colspan)
     end
   end

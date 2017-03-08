@@ -39,6 +39,14 @@ describe Maintainer, js: true, type: :request do
     expect_success_msg
   end
 
+  it 'displays "no contacts" message when all contacts are deleted' do
+    visit edit_maintainer_path described_class.first.id
+    page.find('#main_tab_2_title').click
+
+    all('.remove_contact_btn').each(&:click)
+    expect(page).to have_content 'No contact found.'
+  end
+
   it 'persists a maintainer with a donation' do
     visit new_maintainer_path
     fill_main_fields
@@ -55,6 +63,14 @@ describe Maintainer, js: true, type: :request do
 
     click_on_update_btn
     expect_edit_page_to_have_content remark
+  end
+
+  it 'displays "no donations" message when all donations are deleted' do
+    visit edit_maintainer_path described_class.first.id
+    page.find('#main_tab_1_title').click
+
+    all('.hidden-xs > .remove_donation_btn').each(&:click)
+    expect(page).to have_content 'No donation found.'
   end
 
   it 'adds transient donation data should display warning message when pressing back button' do
