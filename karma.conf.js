@@ -47,7 +47,8 @@ module.exports = function(config) {
     // list of files to exclude
     exclude: [
       'app/assets/javascripts/bootstrap.js',
-      'app/assets/javascripts/masks.js'
+      'app/assets/javascripts/masks.js',
+      'app/assets/javascripts/dates_initializer.js'
     ],
 
 

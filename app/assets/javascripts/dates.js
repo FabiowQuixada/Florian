@@ -92,10 +92,3 @@ const is_valid_date = date_string => {
 
 	return date.getFullYear() == y && date.getMonth() + 1 == m && date.getDate() == d;
 }
-
-$(() => {
-	set_month_datepicker();
-	set_datepicker();
-
-	$(".datepicker-switch").html(I18n.t('datetime.prompts.month.other'));
-});
