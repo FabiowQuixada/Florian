@@ -6,14 +6,23 @@ let validate_contact = null;
 let at_least_one_field_filled = null;
 let clean_contact_fields = null;
 let add_contact = null;
+let new_contacts = null;
 
 const maintainers_contact_tab_form = () => {
   // Temporary contacts have negative id;
-  let transient_contacts = 0;
   let loaded_contact_id = null;
   let contact_temp_id = -1;
 
-  const new_contacts = () => transient_contacts > 0
+  new_contacts = () => {
+    let new_contact = false;
+
+    $("#contacts_table td.contact_id").each((index, td) => {
+      if(parseInt($(td).text()) < 0)
+        new_contact = true;
+    });
+
+    return new_contact;
+  }
 
   load_contact = id => {
     loaded_contact_id = id;
@@ -32,7 +41,7 @@ const maintainers_contact_tab_form = () => {
 
   // Buils a contact based on user input;
   build_contact = () => {
-    const id = loaded_contact_id ? (contact_temp_id = contact_temp_id + 1) : loaded_contact_id;
+    const id = loaded_contact_id ? loaded_contact_id : (contact_temp_id = contact_temp_id - 1);
     const name = $('#temp_contact_name').val();
     const position = $('#temp_contact_position').val();
     const email_address = $('#temp_contact_email_address').val();
@@ -78,8 +87,6 @@ const maintainers_contact_tab_form = () => {
 
   add_contact = (contact) => {
     if(validate_contact(contact)) {
-      transient_contacts += 1;
-
       if(loaded_contact_id) {
 
         // View;
@@ -143,8 +150,6 @@ const maintainers_contact_tab_form = () => {
     const id = elem.closest('.contact_row').find('.contact_id').text();
 
     $(`#contact_${id}`).remove();
-
-    transient_contacts -= 1;
 
     if(document.getElementById("contacts_table").rows.length == 2)
       $('#no_contacts_row').removeClass('hidden');

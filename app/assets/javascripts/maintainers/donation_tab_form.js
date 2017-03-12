@@ -4,13 +4,22 @@ let build_donation = null;
 let clean_donation_fields = null;
 let add_donation = null;
 let validate_donation = null;
+let new_donations = null;
 
 const maintainers_donation_tab_form = () => {
   // Temporary donations have negative id;
   let temp_donation_id = -1;
-  let transient_donations = 0;
 
-  const new_donations = () => transient_donations > 0
+  new_donations = () => {
+    let new_donation = false;
+
+    $("#donations_table td.donation_id").each((index, td) => {
+      if(parseInt($(td).text()) < 0)
+        new_donation = true;
+    });
+
+    return new_donation;
+  }
 
   const cant_set_parcels = () => {
     const frequency = $('#maintainer_payment_frequency').val();
@@ -70,10 +79,10 @@ const maintainers_donation_tab_form = () => {
 
     if(!donation.donation_date) {
       const attribute = I18n.t("activerecord.attributes.donation.date");
-      errors.push(I18n.t("errors.messages.blank", { attribute: attribute }));
+      errors.push(I18n.t("errors.messages.blank", { attribute }));
     }
 
-    if((!donation.value || donation.value === to_money(0)) && !$('#new_donation_remark').val()) {
+    if((!donation.value || donation.value === to_money(0)) && !donation.remark) {
       errors.push(I18n.t('errors.donation.value_or_remark'));
     }
 
@@ -86,12 +95,6 @@ const maintainers_donation_tab_form = () => {
 
   add_donation = (donation) => {
     if(validate_donation(donation)) {
-      transient_donations += 1;
-
-      const date = $('#new_donation_date').val();
-      const value = $('#new_donation_value').val();
-      const remark = $('#new_donation_remark').val();
-
       $.ajax({
         url: Constants.paths.donation_row_maintainers, 
         data: { donation },
@@ -144,8 +147,6 @@ const maintainers_donation_tab_form = () => {
     const id = elem.closest('.donation_row').find('.donation_id').text();
 
     $(`#donation_${id}_row`).remove();
-
-    transient_donations -= 1;
 
     if(document.getElementById("donations_table").rows.length == 2) {
       $('#no_donations_row').removeClass('hidden');
