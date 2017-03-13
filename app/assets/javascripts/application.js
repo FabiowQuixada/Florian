@@ -31,6 +31,9 @@
 //= require server_functions
 //= require others/modals
 //= require errors/error
+//= require bills/form
+//= require bills/index
+//= require bills/filters
 
 /* 
 
