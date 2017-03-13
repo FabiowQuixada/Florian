@@ -12,13 +12,16 @@ describe Bill, js: true, type: :request do
         click_on I18n.t 'helpers.filters'
       end
 
-      it 'filters by date' do
-        fill_in 'aux_competence_gteq', with: start
-        fill_in 'aux_competence_lteq', with: final
-        click_on I18n.t 'helpers.action.apply'
+      describe 'by date' do
+        before :each do
+          fill_in 'aux_competence_gteq', with: start
+          fill_in 'aux_competence_lteq', with: final
+          click_on I18n.t 'helpers.action.apply'
+        end
 
-        expect(page).not_to have_content I18n.t('errors.messages.invalid_period_i')
-        expect_dates_to_be_in_interval
+        it { expect(page).not_to have_content I18n.t('errors.messages.invalid_period_i') }
+        it { expect_info_msg_to_include 'found' }
+        it { expect_dates_to_be_in_interval }
       end
 
       it 'displays message if the period is invalid' do

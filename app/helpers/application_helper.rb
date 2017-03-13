@@ -41,7 +41,7 @@ module ApplicationHelper
   end
 
   def filter_aux_competence_field(f, att)
-    f.text_field att, value: params[:q] && params[:q][att] ? I18n.l(params[:q][att].to_date, format: I18n.t('date.formats.competence_i')) : '', id: "aux_#{att}", class: 'form-control date mb-0'
+    f.text_field att, name: "query_aux_#{att}", value: params[:q] && params[:q][att] ? I18n.l(params[:q][att].to_date, format: I18n.t('date.formats.competence_i')) : '', id: "aux_#{att}", class: 'form-control date mb-0'
   end
 
   def date_field(f, att)

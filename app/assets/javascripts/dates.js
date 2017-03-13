@@ -39,6 +39,10 @@ const current_competence = () => {
 
 // source field input format: mm/yyyy;
 const format_competence = (source_field, target_field) => {
+	if(!$(`#${source_field}`).val()) {
+		return $(`#${target_field}`).val("");
+	}
+
 	const temp = $(`#${source_field}`).val().split("/");
 	const year = temp[1];
 	const month = temp[0];

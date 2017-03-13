@@ -26,6 +26,10 @@ module RequestHelper
     expect(page).to have_content 'success' if I18n.locale == :en
   end
 
+  def expect_info_msg_to_include(text)
+    expect(find('#global_info_massages')).to have_content text
+  end
+
   def expect_access_denied_msg
     expect(page).to have_content I18n.t('alert.access_denied')
   end
