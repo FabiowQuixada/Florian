@@ -6,10 +6,24 @@ describe Role, js: true, type: :request do
       login_as_admin
     end
 
-    describe 'filters' do
+    context 'index' do
       before :each do
         visit roles_path
-        click_on I18n.t 'helpers.filters'
+      end
+
+      describe 'filters' do
+        before :each do
+          click_on I18n.t 'helpers.filters'
+        end
+
+        it 'by name' do
+          name = described_class.first.name
+          fill_in :q_name_cont, with: name
+          click_on I18n.t 'helpers.action.apply'
+
+          find_all('#index_table td.role_name').each { |m| expect(m.text).to eq name }
+          expect_info_msg_to_include 'found'
+        end
       end
     end
 

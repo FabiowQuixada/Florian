@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe ReceiptEmail, js: true, type: :request do
-  let(:competence) { "10/2015\n" }
+  let(:competence) { '10/2015' }
 
   context 'e-mails' do
     before :each do
@@ -23,12 +23,13 @@ describe ReceiptEmail, js: true, type: :request do
         click_on I18n.t 'helpers.filters'
       end
 
-      it 'filters by maintainer' do
+      it 'by maintainer' do
         name = Maintainer.first.name
         select name, from: 'q_maintainer_id_eq'
         click_on I18n.t 'helpers.action.apply'
 
         find_all('#index_table td.receipt_maintainer').each { |m| expect(m.text).to eq name }
+        expect_info_msg_to_include 'found'
       end
     end
 

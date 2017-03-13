@@ -23,9 +23,9 @@
 		<% @list.each do |iterator| %>
 			<tr id="model_<%= iterator.id %>" class="model_row">
 				<td class="model_id admin-only"><%= iterator.id %></td>
-				<td><%= iterator.name %></td>
+				<td class="user_name"><%= iterator.name %></td>
 				<td class="hidden-xs"><%= iterator.email %></td>
-				<td class="hidden-xs"><%= iterator.role.name %></td>
+				<td class="hidden-xs user_role"><%= iterator.role.name %></td>
 				<td class="icon-column"><%= edit_btn iterator %></td>
 				<td class="hidden-xs status icon-column"><%= status_btn iterator %></td>
 			</tr>

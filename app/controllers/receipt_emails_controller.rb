@@ -8,8 +8,9 @@ class ReceiptEmailsController < ApplicationController
 
   def index
     @q = ReceiptEmail.ransack(params[:q])
-    @list = @q.result.eager_load(:maintainer).order('maintainers.name').page(params[:page])
+    @list = query_list
     @recent_emails = EmailHistory.recent_emails
+    flash.now[:info] = t 'alert.query_results', count: @list.total_count if params[:q]
   end
 
   def resend
@@ -48,6 +49,10 @@ class ReceiptEmailsController < ApplicationController
     else
       Hash[I18n.t('menu.emails') => '', plural_of(model_class) => index_path]
     end
+  end
+
+  def query_list
+    @q.result.eager_load(:maintainer).order('maintainers.name').page(params[:page])
   end
 
   def load_email

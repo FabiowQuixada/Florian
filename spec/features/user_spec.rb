@@ -14,6 +14,36 @@ describe User, js: true, type: :request do
       login_as_admin
     end
 
+    context 'index' do
+      before :each do
+        visit users_path
+      end
+
+      describe 'filters' do
+        before :each do
+          click_on I18n.t 'helpers.filters'
+        end
+
+        it 'by name' do
+          name = described_class.first.name
+          fill_in :q_name_cont, with: name
+          click_on I18n.t 'helpers.action.apply'
+
+          find_all('#index_table td.user_name').each { |m| expect(m.text).to eq name }
+          expect_info_msg_to_include 'found'
+        end
+
+        it 'by group' do
+          name = Role.first.name
+          select name, from: 'q_role_id_eq'
+          click_on I18n.t 'helpers.action.apply'
+
+          find_all('#index_table td.user_role').each { |m| expect(m.text).to eq name }
+          expect_info_msg_to_include 'found'
+        end
+      end
+    end
+
     it 'adds a new user' do
       visit new_user_path
       fill_new_fields

@@ -11,22 +11,46 @@ describe Maintainer, js: true, type: :request do
       click_on I18n.t 'helpers.filters'
     end
 
-    it 'filters by group' do
-      select I18n.t('enums.maintainer.group.maintainer'), from: 'q_group_eq'
-      click_on I18n.t 'helpers.action.apply'
+    describe 'by group' do
+      before :each do
+        select I18n.t('enums.maintainer.group.maintainer'), from: 'q_group_eq'
+        click_on I18n.t 'helpers.action.apply'
+      end
 
-      index_table = find('#index_table')
-      expect(index_table).to have_content I18n.t 'enums.maintainer.group.maintainer'
-      described_class.groups.each { |group| expect(index_table).not_to have_content I18n.t "enums.maintainer.group.#{group}" if group != 'maintainer' }
+      it { expect_info_msg_to_include 'found' }
+
+      it '' do
+        index_table = find('#index_table')
+        expect(index_table).to have_content I18n.t 'enums.maintainer.group.maintainer'
+      end
+
+      it '' do
+        index_table = find('#index_table')
+        described_class.groups.each do |group|
+          expect(index_table).not_to have_content I18n.t "enums.maintainer.group.#{group}" if group != 'maintainer'
+        end
+      end
     end
 
-    it 'filters by category' do
-      select I18n.t('enums.maintainer.category.low'), from: 'q_category_eq'
-      click_on I18n.t 'helpers.action.apply'
+    describe 'by category' do
+      before :each do
+        select I18n.t('enums.maintainer.category.low'), from: 'q_category_eq'
+        click_on I18n.t 'helpers.action.apply'
+      end
 
-      index_table = find('#index_table')
-      expect(index_table).to have_content I18n.t 'enums.maintainer.category.low'
-      described_class.categories.each { |category| expect(index_table).not_to have_content I18n.t "enums.maintainer.category.#{category}" if category != 'low' }
+      it { expect_info_msg_to_include 'found' }
+
+      it '' do
+        index_table = find('#index_table')
+        expect(index_table).to have_content I18n.t 'enums.maintainer.category.low'
+      end
+
+      it '' do
+        index_table = find('#index_table')
+        described_class.categories.each do |category|
+          expect(index_table).not_to have_content I18n.t "enums.maintainer.category.#{category}" if category != 'low'
+        end
+      end
     end
   end
 
