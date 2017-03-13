@@ -9,7 +9,6 @@ const set_month_datepicker = () => {
 }
 
 const set_datepicker = () => {
-
 	$('.datepicker').datepicker()
 	$('[data-behaviour~=datepicker]').datepicker({
 		format: I18n.t("date.formats.javascript_format.date"),
@@ -18,6 +17,11 @@ const set_datepicker = () => {
 		daysOfWeekDisabled: [0,6],
 		setDate: new Date()
 	});
+}
+
+const date_exc_msg = () => {
+	const attribute = "Date";
+    return I18n.t("errors.messages.invalid", {attribute}); 
 }
 
 const current_competence = () => {
@@ -44,9 +48,9 @@ const format_competence = (source_field, target_field) => {
 
 // Input format: mm/dd/yyyy;
 const to_rails_date = date_string => {
-
-	if(!is_valid_date(date_string))
-	  return null;
+	if(!is_valid_date(date_string)) {
+      throw date_exc_msg();
+	}
 
 	const temp = date_string.split("/");
 
@@ -60,12 +64,30 @@ const to_rails_date = date_string => {
 
 // Format: yyyy-mm-dd;
 const to_js_date = rails_date => {
+  const date_format = /[0-9]{4}-[0-9]{2}-[0-9]{2}/
+  if(!date_format.exec(rails_date)) {
+    throw date_exc_msg();
+  }
+
   const temp = rails_date.split("-");
   return new Date(temp[0], temp[1]-1, temp[2], 0, 0, 0, 0);
 }
 
+const is_valid_rails_date = rails_date => {
+	const comp = rails_date.split('-');
+	const y = parseInt(comp[0], 10);
+	const m = parseInt(comp[1], 10);
+	const d = parseInt(comp[2], 10);
+	const date = new Date(y,m-1,d);
+
+	return date.getFullYear() == y && date.getMonth() + 1 == m && date.getDate() == d;
+}
+
 // Format: yyyy-mm-dd;
-const is_after = (start_date, end_date) => to_js_date(start_date) > to_js_date(end_date)
+const is_after = (start_date, end_date) => (
+	is_valid_rails_date(start_date) && is_valid_rails_date(end_date) &&
+	to_js_date(start_date) > to_js_date(end_date)
+)
 
 // Format: yyyy-mm-dd;
 const validate_period = (start_date, end_date, msg = I18n.t('errors.messages.invalid_period_i')) => {

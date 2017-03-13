@@ -12,12 +12,17 @@ describe("Date", () => {
 
   it("is converted to rails format", () => {
     expect(to_rails_date("02/13/2014")).toEqual("2014-02-13");
-    expect(to_rails_date("13/02/2014")).toBe(null);
-    expect(to_rails_date("02/32/2014")).toBe(null);
+    expect(() => to_rails_date("13/02/2014")).toThrow(date_exc_msg());
+    expect(() => to_rails_date("02/32/2014")).toThrow(date_exc_msg());
+    expect(() => to_rails_date("02/32014")).toThrow(date_exc_msg());
+    expect(() => to_rails_date("some text")).toThrow(date_exc_msg());
   });
 
   it("is converted to js format", () => {
     expect(to_js_date("2014-02-13")).toEqual(new Date(2014, 1, 13, 0, 0, 0, 0));
+    expect(() => to_js_date("2016/02-13")).toThrow(date_exc_msg());
+    expect(() => to_js_date("20-02-13")).toThrow(date_exc_msg());
+    expect(() => to_js_date("some text")).toThrow(date_exc_msg());
   });
 
   it("is compared in rails format", () => {
@@ -36,5 +41,12 @@ describe("Date", () => {
     expect(is_valid_date("02/13/2014")).toBe(true);
     expect(is_valid_date("13/02/2014")).toBe(false);
     expect(is_valid_date("10/32/2014")).toBe(false);
+  });
+
+  it("is valid in rails format", () => {
+    expect(is_valid_rails_date("2014-01-01")).toBe(true);
+    expect(is_valid_rails_date("2014-13-01")).toBe(false);
+    expect(is_valid_rails_date("2014-10-32")).toBe(false);
+    expect(is_valid_rails_date("01/01/2014")).toBe(false);
   });
 });
