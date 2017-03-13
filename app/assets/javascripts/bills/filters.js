@@ -14,8 +14,7 @@ const bills_filters = () => {
         display_error(errors, 'filter');
         e.preventDefault();
       }
-    }
-    catch(error) {
+    } catch(error) {
       e.preventDefault();
       display_error(error);
     }
