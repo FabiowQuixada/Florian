@@ -29,6 +29,7 @@ gem 'kaminari'
 gem 'i18n_yaml_sorter'
 gem 'ransack'
 gem 'i18n-js', '>= 3.0.0.rc11'
+gem 'react-rails'
 
 group :development, :showcase, :test do
   gem 'letter_opener'
