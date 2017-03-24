@@ -27,3 +27,4 @@ OTHERS:
   git grep "# rubocop:disable" -- './*' ':!/doc/*' ':!/scripts/*'
   git grep "TODO: " -- './*' ':!/doc/*' ':!/scripts/*'
   git stash -u && git rebase --continue && git stash pop && git gui
+  webpack -d --display-reasons --display-chunks --progress --display-error-details --colors --devtool source-map
