@@ -33,20 +33,22 @@ RSpec.configure do |config|
   require 'rspec/rails'
   require 'support/factory_girl'
   require 'html_validation'
+  require 'capybara/rspec'
+  require 'capybara/poltergeist'
+
   include PageValidations
+  config.include FactoryGirl::Syntax::Methods
+  config.include Rails.application.routes.url_helpers
 
   HTMLValidation.ignored_errors = ['proprietary attribute']
-
-  # Add this to load Capybara integration:
-  require 'capybara/rspec'
-
   Warden.test_mode!
 
+  # Hooks
   config.after do
     Warden.test_reset!
   end
 
-  require 'capybara/poltergeist'
+  # Capybara Configuration
   Capybara.default_driver = :poltergeist
   Capybara.javascript_driver = :chrome
   options = { js_errors: false }
@@ -58,8 +60,6 @@ RSpec.configure do |config|
     Capybara::Selenium::Driver.new(app, browser: :chrome)
   end
 
-  config.include FactoryGirl::Syntax::Methods
-  config.include Rails.application.routes.url_helpers
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
