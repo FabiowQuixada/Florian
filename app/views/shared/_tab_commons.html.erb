@@ -5,44 +5,36 @@
     title = 2016 if local_assigns[:title].nil?
     %>
 
-    function hide_all_<%= tab_type %>_tabs_except(tab_id)
-    {
-        if(!tab_id) {
-            tab_id = 0;
-        }
+    const hide_all_<%= tab_type %>_tabs_except = (tab_id = 0) => {
 
         if($.isNumeric(tab_id)) {
 
         }
 
-        for(i = 0; i <= <%= (number_of_tabs-1) %>; ++i) {
-            $('#<%= tab_type %>_tab_' + i + '_title').removeClass('active');
-            $('#<%= tab_type %>_tab_' + i).addClass('hidden');
+        for(let i = 0; i <= <%= (number_of_tabs-1) %>; ++i) {
+            $(`#<%= tab_type %>_tab_${i}_title`).removeClass('active');
+            $(`#<%= tab_type %>_tab_${i}`).addClass('hidden');
         }
 
-        $('#<%= tab_type %>_tab_' + tab_id).removeClass('hidden');
-        $('#<%= tab_type %>_tab_' + tab_id + '_title').addClass('active');
+        $(`#<%= tab_type %>_tab_${tab_id}`).removeClass('hidden');
+        $(`#<%= tab_type %>_tab_${tab_id}_title`).addClass('active');
     };
 
     <% (0..(number_of_tabs-1)).each do |i| %>
 
-    $('#<%= tab_type %>_tab_<%= i %>_title').on('click', function()
-    {
-        hide_all_<%= tab_type %>_tabs_except(<%= i %>);
-    });
+      $('#<%= tab_type %>_tab_<%= i %>_title').on('click', () => hide_all_<%= tab_type %>_tabs_except(<%= i %>));
 
     <% end %>
 
     <% if !title.nil? %>
-    function hide_all_<%= tab_type %>_tabs_except_with_title(tab_title) {
-        index = $('.nav-tabs li a:contains(' + tab_title + ')').parent().attr('id');
-
-        hide_all_<%= tab_type %>_tabs_except(index);
-    }
+      const hide_all_<%= tab_type %>_tabs_except_with_title = tab_title => {
+        hide_all_<%= tab_type %>_tabs_except(
+          $(`.nav-tabs li a:contains(${tab_title})`).parent().attr('id')
+          );
+      }
     <% end %>
 
-    $(function() {
-
+    $(() => {
         <%# if !title.nil? %>
             //hide_all_<%= tab_type %>_tabs_except_with_title('<%= title %>');
             <%# elsif !focus.nil? %>

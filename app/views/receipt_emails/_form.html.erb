@@ -108,19 +108,17 @@
 
 <script>
 
-	function preprocess_data() {}
-
-	$(function() {
+	$(() => {
 
 		<% if @model.persisted? %>
-			$('.resend_btn').click(function(ev) {
+			$('.resend_btn').click( e => {
 				clean_resend_modal();
 				$('#resend_email_form').get(0).setAttribute('action', '<%= resend_receipt_email_path @model %>');
 				$('.modal_maintainer_name').text('<%= @model.maintainer.name %>');
 				$('#resend_email_modal').modal('show');
 			});
 
-			$('.send_test_btn').click(function(ev) {
+			$('.send_test_btn').click( e => {
 				clean_send_test_modal();
 				$('#send_test_email_form').get(0).setAttribute('action', '<%= send_test_receipt_email_path @model %>');
 				$('.modal_maintainer_name').text('<%= @model.maintainer.name %>');
@@ -128,41 +126,38 @@
 			});
 		<% end %>
 
-		$('#body_tag_help_btn').click(function(ev) {
+		$('#body_tag_help_btn').click( e => {
 			display_confirm_modal(I18n.t('modal.title.info'), I18n.t('user_help_messages.tag_buttons'));
 		});
 
 		$('#receipt_email_title').val(escape_html('<%= SystemSetting.first.re_title %>'));
 
-		$('#main_form').on('submit', function(evt) {
-
+		$('#main_form').on('submit', e => {
 			preprocess_data();
 
 			if(!validate_tag_fields()) {
 				$('#warning_save_modal').modal('show');
-				evt.preventDefault();
+				e.preventDefault();
 				return;
 			}
 		});
 
-		function validate_tag_fields() {
-			return !contains_all_tags($('#receipt_email_body').val());
-		}
+		const validate_tag_fields = () => !contains_all_tags($('#receipt_email_body').val())
 
-		function contains_all_tags(text) {
-			return text.indexOf(I18n.t('tags.maintainer')) == -1 || text.indexOf(I18n.t('tags.value')) == -1 || text.indexOf(I18n.t('tags.competence')) == -1;
-		}
+		const contains_all_tags = text => (
+			text.indexOf(I18n.t('tags.maintainer')) == -1 || text.indexOf(I18n.t('tags.value')) == -1 || text.indexOf(I18n.t('tags.competence')) == -1
+		)
 
-		$("#add_maintainer_to_body_btn").on('click', function() {add_tag_to_field('receipt_email_body', I18n.t('tags.maintainer'))});
-		$("#add_value_to_body_btn").on('click', function() {add_tag_to_field('receipt_email_body', I18n.t('tags.value'))});
-		$("#add_competence_to_body_btn").on('click', function() {add_tag_to_field('receipt_email_body', I18n.t('tags.competence'))});
+		$("#add_maintainer_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.maintainer')));
+		$("#add_value_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.value')));
+		$("#add_competence_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.competence')));
 
-		function preprocess_data() {
-			if(transient_recipients > 0) {
-				window.any_changes = true;
+		const preprocess_data = () => {
+			if(recipients_array_transient_recipients > 0) {
+				any_changes = true;
 			}
 
-			$('#receipt_email_recipients_array').val(formated_recipients());
+			$('#receipt_email_recipients_array').val(recipients_array_formated_recipients());
 		}
 	});
 

@@ -58,50 +58,57 @@
 <script>
 
 	// Temporary contacts have negative id;
-	var transient_contacts = 0;
-	var contact_temp_id = -1;
-	loaded_contact_id = null;
+	let transient_contacts = 0;
+	let contact_temp_id = -1;
+	let loaded_contact_id = null;
 
-	$(function() {
+	$(() => {
 
-		$('#add_contact_btn').on('click', function add_or_update_contact() {
+		$('#add_contact_btn').on('click', () => {
 
 			if(validate_contact()) {
-
 				transient_contacts += 1;
 
-				name = $('#temp_contact_name').val();
-				position = $('#temp_contact_position').val();
-				email = $('#temp_contact_email_address').val();
-				telephone = $('#temp_contact_telephone').val();
-				celphone = $('#temp_contact_celphone').val();
-				fax = $('#temp_contact_fax').val();
+				const name = $('#temp_contact_name').val();
+				const position = $('#temp_contact_position').val();
+				const email = $('#temp_contact_email_address').val();
+				const telephone = $('#temp_contact_telephone').val();
+				const celphone = $('#temp_contact_celphone').val();
+				const fax = $('#temp_contact_fax').val();
 
 				if(loaded_contact_id) {
 
 					// View;
-					$('#contact_' + loaded_contact_id + ' .contact_name').text(name);
-					$('#contact_' + loaded_contact_id + ' .contact_position').text(position);
-					$('#contact_' + loaded_contact_id + ' .contact_email_address').text(email);
-					$('#contact_' + loaded_contact_id + ' .contact_telephone').text(telephone);
-					$('#contact_' + loaded_contact_id + ' .contact_celphone').text(celphone);
-					$('#contact_' + loaded_contact_id + ' .contact_fax').text(fax);
+					$(`#contact_${loaded_contact_id} .contact_name`).text(name);
+					$(`#contact_${loaded_contact_id} .contact_position`).text(position);
+					$(`#contact_${loaded_contact_id} .contact_email_address`).text(email);
+					$(`#contact_${loaded_contact_id} .contact_telephone`).text(telephone);
+					$(`#contact_${loaded_contact_id} .contact_celphone`).text(celphone);
+					$(`#contact_${loaded_contact_id} .contact_fax`).text(fax);
 
 					// Params;
-					$('#maintainer_contacts_attributes_' + loaded_contact_id + '_name').val(name);
-					$('#maintainer_contacts_attributes_' + loaded_contact_id + '_position').val(position);
-					$('#maintainer_contacts_attributes_' + loaded_contact_id + '_email_address').val(email);
-					$('#maintainer_contacts_attributes_' + loaded_contact_id + '_telephone').val(telephone);
-					$('#maintainer_contacts_attributes_' + loaded_contact_id + '_celphone').val(celphone);
-					$('#maintainer_contacts_attributes_' + loaded_contact_id + '_fax').val(fax);
+					$(`#maintainer_contacts_attributes_${loaded_contact_id}_name`).val(name);
+					$(`#maintainer_contacts_attributes_${loaded_contact_id}_position`).val(position);
+					$(`#maintainer_contacts_attributes_${loaded_contact_id}_email_address`).val(email);
+					$(`#maintainer_contacts_attributes_${loaded_contact_id}_telephone`).val(telephone);
+					$(`#maintainer_contacts_attributes_${loaded_contact_id}_celphone`).val(celphone);
+					$(`#maintainer_contacts_attributes_${loaded_contact_id}_fax`).val(fax);
 
 				} else {
 					$.ajax({
 						url: '<%= url_for(action: 'contact_row', controller: 'maintainers', only_path: false, protocol: 'http') %>', 
-						data: {contact: {id: contact_temp_id, name: name, position: position, email_address: email, telephone: telephone, celphone: celphone, fax: fax}},
-						success: function(result) {
-							$('#contacts_table > tbody:last-child').append(result);
-				    	}
+						data: {
+							contact: {
+								id: contact_temp_id, 
+								name: name, 
+								position: position, 
+								email_address: email, 
+								telephone: telephone, 
+								celphone: celphone, 
+								fax: fax
+							}
+						},
+						success: result => $('#contacts_table > tbody:last-child').append(result)
 					});
 
 					contact_temp_id -= 1;
@@ -112,10 +119,9 @@
 			}
 		});
 
-		function validate_contact() {
-
-			var errors = new Array();
-			email = $('#temp_contact_email_address').val();
+		const validate_contact = () => {
+			const errors = new Array();
+			const email = $('#temp_contact_email_address').val();
 
 			if(!at_least_one_field_filled()) {
 				errors.push('<%= I18n.t('errors.contact.all_empty') %>');
@@ -130,12 +136,11 @@
 			return errors.length === 0;
 		}
 
-		function at_least_one_field_filled() {
+		const at_least_one_field_filled = () => {
+			let is_valid = false;
 
-			var is_valid = false;
-
-			$("#contact_data input").each(function() {
-				if ($(this).val() !== "") {
+			$("#contact_data input").each( (index, field) => {
+				if ($(field).val() !== "") {
 					is_valid = true;
 					return;
 				}
@@ -144,22 +149,22 @@
 			return is_valid;
 		}
 
-		function load_contact(id) {
+		const load_contact = id => {
 
 			loaded_contact_id = id;
 			$('#cancel_contact_edition_btn').removeClass('hidden');
 			$('#add_contact_btn').text('<%= t('helpers.action.update') %>');
 			$('#contact_panel_header').text('<%= t('helpers.maintainer.edit_contact') %>');
 
-			$('#temp_contact_name').val($('#contact_' + id + ' .contact_name').text());
-			$('#temp_contact_position').val($('#contact_' + id + ' .contact_position').text());
-			$('#temp_contact_email_address').val($('#contact_' + id + ' .contact_email_address').text());
-			$('#temp_contact_telephone').val($('#contact_' + id + ' .contact_telephone').text());
-			$('#temp_contact_celphone').val($('#contact_' + id + ' .contact_celphone').text());
-			$('#temp_contact_fax').val($('#contact_' + id + ' .contact_fax').text());
+			$('#temp_contact_name').val($(`#contact_${id} .contact_name`).text());
+			$('#temp_contact_position').val($(`#contact_${id} .contact_position`).text());
+			$('#temp_contact_email_address').val($(`#contact_${id} .contact_email_address`).text());
+			$('#temp_contact_telephone').val($(`#contact_${id} .contact_telephone`).text());
+			$('#temp_contact_celphone').val($(`#contact_${id} .contact_celphone`).text());
+			$('#temp_contact_fax').val($(`#contact_${id} .contact_fax`).text());
 		}
 
-		function clean_contact_fields() {
+		const clean_contact_fields = () => {
 			$('#temp_contact_name').val('');
 			$('#temp_contact_position').val('');
 			$('#temp_contact_email_address').val('');
@@ -175,10 +180,11 @@
 			hide_errors_from_box('contact');
 		}
 
-		$('body').on('click', '.remove_contact_btn', function() {
-			id = $(this).closest('.contact_row').find('.contact_id').text();
+		$('body').on('click', '.remove_contact_btn', e => {
+			const elem = $(e.currentTarget);
+			const id = elem.closest('.contact_row').find('.contact_id').text();
 
-	        $('#contact_' + id).remove();
+	        $(`#contact_${id}`).remove();
 
 			transient_contacts -= 1;
 
@@ -186,15 +192,15 @@
 				$('#no_contacts_row').removeClass('hidden');
 
 			if(id > 0) {
-				$('#maintainer_contacts_to_be_deleted').val($('#maintainer_contacts_to_be_deleted').val() + id + ',');
+				$('#maintainer_contacts_to_be_deleted').val(`${$('#maintainer_contacts_to_be_deleted').val()}${id},`);
 			}
 
 			clean_contact_fields();
 		});
 
-		$('body').on('click', '.edit_contact_btn', function() {
-			id = $(this).closest('.contact_row').find('.contact_id').text();
-			load_contact(id);
+		$('body').on('click', '.edit_contact_btn', e => {
+			const elem = $(e.currentTarget);
+			load_contact(elem.closest('.contact_row').find('.contact_id').text())
 		});
 
 		$('#cancel_contact_edition_btn').on('click', clean_contact_fields);

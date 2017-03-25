@@ -66,21 +66,10 @@
 
 <script>
 
-	$('#main_form').on('submit', function(evt) {
-		preprocess_data();
-	});
+	const preprocess_data = () => format_competence('bill_aux_competence', 'bill_competence')
 
-	function preprocess_data() {
-		format_competence('bill_aux_competence', 'bill_competence');
-	}
-
-	$('#bill_aux_competence').on('change', function() {
-		preprocess_data();
-	})
-
-	$('#summable-inputs input').on('change', function() {
-		$('#bill_totals').val(currency_sum('#summable-inputs input'));
-	});
-
+	$('#main_form').on('submit', e => preprocess_data());
+	$('#bill_aux_competence').on('change', () => preprocess_data());
+	$('#summable-inputs input').on('change', () => $('#bill_totals').val(currency_sum('#summable-inputs input')));
 
 </script>

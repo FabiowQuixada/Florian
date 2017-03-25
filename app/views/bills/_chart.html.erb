@@ -1,10 +1,8 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-  google.charts.load('current', {'packages':['corechart'], 'language': '<%= locale %>'});
-  google.charts.setOnLoadCallback(draw_charts);
   
-  function draw_charts() {
+  const draw_charts = () => {
 
     // For each year...
     <% @graph_data.each do |year_key, value| %>
@@ -16,15 +14,17 @@
         draw_chart_by_year(<%= year_key %>, <%= value[3].compact.to_s.html_safe %>, <%= 3 %>);
     <% end %>
   }
+  
+  google.charts.load('current', {'packages':['corechart'], 'language': '<%= locale %>'});
+  google.charts.setOnLoadCallback(draw_charts);
 
-  function draw_chart_by_year(year, months_array, type) {
-
-    var data = new google.visualization.DataTable();
+  const draw_chart_by_year = (year, months_array, type) => {
+    const data = new google.visualization.DataTable();
     data.addColumn('string', I18n.t("datetime.prompts.month"));
     data.addColumn('number', I18n.t("number.value"));
     data.addRows(months_array);
 
-    var options = {
+    const options = {
       hAxis: {titleTextStyle: {color: '#333'}},
       vAxis: {minValue: 0, viewWindowMode: "explicit", viewWindow:{ min: 0 }, format: '<%= currency %> ###,###,###.00'},
       'width': 500,
@@ -32,10 +32,10 @@
       legend: {position: 'none'}
     };
 
-    var formatter = new google.visualization.NumberFormat({decimalSymbol: I18n.t("number.currency.format.separator"), groupingSymbol: I18n.t("number.currency.format.delimiter"), negativeColor: 'red', negativeParens: true, prefix: '<%= currency %> '});
+    const formatter = new google.visualization.NumberFormat({decimalSymbol: I18n.t("number.currency.format.separator"), groupingSymbol: I18n.t("number.currency.format.delimiter"), negativeColor: 'red', negativeParens: true, prefix: '<%= currency %> '});
     formatter.format(data, 1);
 
-    var chart = new google.visualization.AreaChart(document.getElementById('chart_div_' + year + '_' + type));
+    const chart = new google.visualization.AreaChart(document.getElementById(`chart_div_${year}_${type}`));
     chart.draw(data, options);
   }
 

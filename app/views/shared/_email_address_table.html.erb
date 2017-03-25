@@ -28,13 +28,13 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
 
 <script>
 
-    var temp_id = -1;
-    var transient_recipients = 0;
+    let temp_<%= field_name %>_id = -1;
+    let <%= field_name %>_transient_recipients = 0;
 
-    function already_present(email_address) {
-        var result = false;
+    const <%= field_name %>_already_present = email_address => {
+        let result = false;
 
-        $('#<%= field_name %>_recipients_table > tbody > tr').each(function() {
+        $('#<%= field_name %>_recipients_table > tbody > tr').each(() => {
             if($(this).find('.recipient_email').html() == email_address) {
                 result = true;
             }
@@ -43,57 +43,56 @@ method_name = 'recipients_as_array' if local_assigns[:method_name].nil?
         return result;
     }
 
-    $('body').on('click', '.<%= field_name %>_remove_recipient_btn', function() {
-        id = $(this).closest('.email_recipient').find('.recipient_id').text();
+    $('body').on('click', '.<%= field_name %>_remove_recipient_btn', e => {
+        const elem = $(e.currentTarget);
+        const id = elem.closest('.email_recipient').find('.recipient_id').text();
 
-        $('#<%= field_name %>_email_address_' + id).fadeOut('slow', function() {
-            $('#<%= field_name %>_email_address_' + id).remove();
+        $(`#<%= field_name %>_email_address_${id}`).fadeOut('slow', () => {
+            $(`#<%= field_name %>_email_address_${id}`).remove();
         });
 
-        transient_recipients -= 1;
+        <%= field_name %>_transient_recipients -= 1;
     });
 
-    function formated_recipients(id) {
-        var array = '';
+    const <%= field_name %>_formated_recipients = (id = '<%= field_name %>') => {
+        let array = '';
 
-        if(!id)
-            id = '<%= field_name %>';
-
-        $('#' + id + '_recipients_table > tbody > tr').each(function() {
-            array = array.concat($(this).find('.recipient_email').html() + ', ');
+        $(`#${id}_recipients_table > tbody > tr`).each((i, elem) => {
+            array = array.concat($(elem).find('.recipient_email').html() + ', ');
         })
 
         return array.substring(0, array.length - 2);
     }
 
-    $('#<%= field_name %>_add_recipient_btn').on('click', function() {
-
-        email_address = $('#<%= field_name %>_new_recipient_field').val();
+    $('#<%= field_name %>_add_recipient_btn').on('click', () => {
+        const email_address = $('#<%= field_name %>_new_recipient_field').val();
 
         if (!$('#<%= field_name %>_new_recipient_field').val()) {
             display_form_errors(I18n.t('alert.email.fill_a_recipient'));
-
-        } else if(already_present(email_address)) {
+        } else if(<%= field_name %>_already_present(email_address)) {
             display_form_errors(I18n.t('alert.email.duplicated_recipient'));
+
         } else if (validate_email(email_address)) {
             $.ajax({
                 url: "<%= url_for(action: 'email_row', controller: 'helpers', only_path: false, protocol: 'http') %>", 
-                data: { email_address: email_address, index: temp_id, field_name: '<%= field_name %>' },
-                success: function(result) {
+                data: { 
+                    email_address: email_address, 
+                    index: temp_<%= field_name %>_id, 
+                    field_name: '<%= field_name %>'
+                },
+                success: result => {
                     $('#<%= field_name %>_recipients_table > tbody:last-child').append(result);
                 }
             });
 
-            temp_id = temp_id - 1;
+            temp_<%= field_name %>_id = temp_<%= field_name %>_id - 1;
             hide_all_messages();
-            clean_email_fields();
+            clean_<%= field_name %>_email_fields();
         } else {
             display_form_errors(I18n.t('alert.email.invalid_recipient'));
         }
     });
 
-    function clean_email_fields() {
-        $('#<%= field_name %>_new_recipient_field').val('');
-    }
+    const clean_<%= field_name %>_email_fields = () => $('#<%= field_name %>_new_recipient_field').val('')
 
 </script>

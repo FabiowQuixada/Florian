@@ -51,42 +51,36 @@
 
 <script>
 
-	$(document).ready(function() {
+	$(document).ready(() => {
 
-		$('.resend_btn').click(function(ev) {
-
+		$('.resend_btn').click( e => {
+			const elem = $(e.currentTarget);
 			clean_resend_modal();
 
-			id = $(this).closest('.model_row').find('.model_id').text();
+			const id = elem.closest('.model_row').find('.model_id').text();
 			$('#resend_email_id').val(id);
 			$('#resend_email_form').get(0).setAttribute('action', resend_path(id));
-			$('.modal_maintainer_name').text($(this).closest('.model_row').find('.receipt_maintainer').text());
+			$('.modal_maintainer_name').text(elem.closest('.model_row').find('.receipt_maintainer').text());
 			$('#resend_email_modal').modal('show');
 		});
 
 
-		$('.send_test_btn').click(function(ev) {
-
+		$('.send_test_btn').click( e => {
+			const elem = $(e.currentTarget);
 			clean_send_test_modal();
 
-			id = $(this).closest('.model_row').find('.model_id').text();
+			const id = elem.closest('.model_row').find('.model_id').text();
 			$('#send_test_email_id').val(id);
 			$('#send_test_email_form').get(0).setAttribute('action', send_test_path(id));
-			$('.modal_maintainer_name').text($(this).closest('.model_row').find('.receipt_maintainer').text());
+			$('.modal_maintainer_name').text(elem.closest('.model_row').find('.receipt_maintainer').text());
 			$('#send_test_email_modal').modal('show');
 		});
 
 
-		$('#recent_emails_btn').click(function(ev) {
-			$('#recent_emails_modal').modal('show');
-		});
+		$('#recent_emails_btn').click( e =>	$('#recent_emails_modal').modal('show'))
 
-		function resend_path(id) {
-			return '<%= resend_receipt_email_path -1 %>'.replace("-1", id);
-		}
+		const resend_path = id => '<%= resend_receipt_email_path -1 %>'.replace("-1", id)
 
-		function send_test_path(id) {
-			return '<%= send_test_receipt_email_path -1 %>'.replace("-1", id);
-		}
+		const send_test_path = id => '<%= send_test_receipt_email_path -1 %>'.replace("-1", id)
 	});
 </script>

@@ -44,11 +44,11 @@
 
 <script>
 
-	function preprocess_data() {}
+	const preprocess_data = () => {}
 
-	$('#create_and_new_btn').on('click', function(evt) {
+	$('#create_and_new_btn').on('click', e => {
 		$('form').get(0).setAttribute('action', '<%= create_and_new_donations_path %>');
-		$( "#main_form" ).submit();
+		$("#main_form").submit();
 	});
 
 </script>

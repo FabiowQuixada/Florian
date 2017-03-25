@@ -40,28 +40,8 @@
 
 <script>
 
-    function display_error(message) {
-
-        var result = '';
-
-        if (Object.prototype.toString.call(message) === '[object Array]') {
-            result = msg_as_html_ul(message);
-        } else {
-            result = message;
-        }
-
-        hide_all_messages();
-        to_top();
-        $('#global_error_messages').html(result);
-        $('#global_error_box').removeClass('hidden');
-    }
-
-    function display_error(message, error_box_id) {
-
-        var result = '';
-
-        if(!error_box_id)
-            error_box_id = 'global';
+    const display_error = (message, error_box_id = 'global') => {
+        let result = '';
 
         if (Object.prototype.toString.call(message) === '[object Array]') {
             result = msg_as_html_ul(message);
@@ -70,74 +50,73 @@
         }
 
         hide_all_messages();
-        $('#' + error_box_id + '_error_messages').html(result);
-        $('#' + error_box_id + '_error_box').removeClass('hidden');
+        $(`#${error_box_id}_error_messages`).html(result);
+        $(`#${error_box_id}_error_box`).removeClass('hidden');
     }
 
-    function display_info(message) {
+    const display_info = message => {
         hide_all_messages();
         to_top();
         $('#global_info_massages').html(message);
         $('#global_info_box').removeClass('hidden');
     }
 
-    function display_notice(message) {
+    const display_notice = message => {
         hide_all_messages();
         to_top();
         $('#global_notice_massages').html(message);
         $('#global_notice_box').removeClass('hidden');
     }
 
-    function display_warning(message) {
+    const display_warning = message => {
         hide_all_messages();
         to_top();
         $('#global_warning_massages').html(message);
         $('#global_warning_box').removeClass('hidden');
     }
 
-    function display_hideless_warning(message) {
+    const display_hideless_warning = message => {
         $('#global_hideless_warning_massages').html(message);
         $('#global_hideless_warning_box').removeClass('hidden');
     }
 
-    function hide_info() {
+    const hide_info = () => {
         $('#global_info_massages').html('');
         $('#global_info_box').addClass('hidden');
     }
 
-    function hide_notice() {
+    const hide_notice = () => {
         $('#global_notice_massages').html('');
         $('#global_notice_box').addClass('hidden');
     }
 
-    function hide_errors_from_box(error_box_id) {
-        $('#' + error_box_id + '_error_messages').html('');
-        $('#' + error_box_id + '_error_box').addClass('hidden');
+    const hide_errors_from_box = error_box_id => {
+        $(`#${error_box_id}_error_messages`).html('');
+        $(`#${error_box_id}_error_box`).addClass('hidden');
     }
 
-    function hide_errors() {
+    const hide_errors = () => {
         $('#global_error_messages').html('');
         $('#global_error_box').addClass('hidden');
 
-        if($("#form_error_messages").length && $("#form_error_box").length)
-        {
+        if($("#form_error_messages").length && $("#form_error_box").length) {
             $('#form_error_messages').html('');
             $('#form_error_box').addClass('hidden');
         }
     }
 
-    function hide_all_messages() {
+    const hide_all_messages = () => {
         hide_info();
         hide_notice();
         hide_errors();
     }
 
-    function parse_json_errors(xhr) {
+    const parse_json_errors = xhr => {
         try {
-            var json_obj = jQuery.parseJSON(xhr);
+            const json_obj = jQuery.parseJSON(xhr);
 
-            var output = new Array();
-            for (var i in json_obj)
+            const output = new Array();
+            for (let i in json_obj)
                 output.push(json_obj[i]);
 
             display_error(output);
@@ -148,18 +127,18 @@
         }
     }
 
-    function msg_as_html_ul(message) {
-        result = '<ul>';
+    const msg_as_html_ul = message => {
+        let result = '<ul>';
 
-        for (var i = 0; i < message.length; i++)
-            result += '<li>' + message[i] + '<\/li>';
+        for (let i = 0; i < message.length; i++)
+            result += `<li>${message[i]}<\/li>`;
 
         result += '<\/ul>';
 
         return result;
     }
 
-    $(function() {
+    $(() => {
         <%= showcase_login_msg %>
 
         <% if notice %>

@@ -36,10 +36,9 @@
 
 <script>
 
-	$('#main_form').on('submit', function(e) {
-
-		var errors = new Array();
-		email = $('#maintainer_email_address').val();
+	$('#main_form').on('submit', e => {
+		const errors = new Array();
+		const email = $('#maintainer_email_address').val();
 		
 		preprocess_data();
 
@@ -47,14 +46,13 @@
 			errors.push(I18n.t('alert.email.invalid_recipient'));
 		}
 
-
 		if(errors.length > 0) {
 			e.preventDefault();
 			display_form_errors(errors);
 		}
 	});
 
-	function preprocess_data() {
+	const preprocess_data = () => {
 		if(new_donations()) {
 			window.any_change = true;
 		}
@@ -64,8 +62,7 @@
 		}
 	}
 
-	function update_fields_by_entity_type() {
-
+	const update_fields_by_entity_type = () => {
 		$('.person_area').addClass('hidden');
 		$('.maintainer_area').addClass('hidden');
 
@@ -76,7 +73,7 @@
 		}
 	}
 
-	$(function() {
+	$(() => {
 		update_fields_by_entity_type();
 	});
 

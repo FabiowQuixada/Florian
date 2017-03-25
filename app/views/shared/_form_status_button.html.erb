@@ -10,22 +10,23 @@
 
 <script>
 
-	function inactivate() {
+	const inactivate = () => {
 		$('#active_img').addClass('hidden');
 		$('#inactive_img').removeClass('hidden');
 		$('#model_status').val('false');
 		$('#status_description').text('<%= genderize_tag(@model, 'model_phrases.status.full_desc.is_inactive') %>');
 	}
 
-	function activate() {
+	const activate = () => {
 		$('#active_img').removeClass('hidden');
 		$('#inactive_img').addClass('hidden');
 		$('#model_status').val('true');
 		$('#status_description').text('<%= genderize_tag(@model, 'model_phrases.status.full_desc.is_active') %>');
 	}
 
-	function set_status_btn() {
-		if($('#model_status').val() == 'true') {
+	const set_status_btn = () => {
+		// Yes, a string!!
+		if($('#model_status').val() === 'true') {
 			inactivate();
 		}
 		else {
@@ -33,7 +34,7 @@
 		}
 	}
 
-	$(document).ready(function() {
+	$(() => {
 		$('.status_btn').on('click', set_status_btn);
 
 		if(<%= @model.active? %>) {

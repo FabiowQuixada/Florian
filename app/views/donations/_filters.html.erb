@@ -62,16 +62,15 @@
 
 <script>
 
-	$('#search_form').on('submit', function(e) {
-		start_date = to_rails_date($('#q_donation_date_gteq').val());
-		end_date = to_rails_date($('#q_donation_date_lteq').val());
-		errors = validate_period(start_date, end_date);
+	$('#search_form').on('submit', e => {
+		const start_date = to_rails_date($('#q_donation_date_gteq').val());
+		const end_date = to_rails_date($('#q_donation_date_lteq').val());
+		const errors = validate_period(start_date, end_date);
 
 		if(errors.length !== 0) {
 			display_error(errors, 'filter');
 			e.preventDefault();
 		}
-
 	});
 
 </script>

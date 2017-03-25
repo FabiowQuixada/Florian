@@ -71,12 +71,7 @@
 
 <script>
 
-	$( document ).ready(function() {
-		$("[for=user_password]").removeClass("required");
-	});
-
-	$('#main_form').on('submit', function(evt) {
-		preprocess_data();
-	});
+	$(document).ready(() => $("[for=user_password]").removeClass("required"));
+	$('#main_form').on('submit', e => preprocess_data());
 
 </script>

@@ -22,10 +22,17 @@
 //= require i18n/translations
 //= require_tree .
 
-var display_admin_data = false;
+let display_admin_data = false;
+const entity_map = {
+	"&": "&amp;",
+	"<": "&lt;",
+	">": "&gt;",
+	'"': '&quot;',
+	"'": '&#39;',
+	"/": '/' // &#x2F;
+};
 
-function toogle_admin_data() {		
-
+const toogle_admin_data = () => {		
 	if(display_admin_data) {
 		$('.admin-only').show();
 	} else {
@@ -35,41 +42,26 @@ function toogle_admin_data() {
 	display_admin_data = !display_admin_data;
 }
 
-function to_top() {
+const to_top = () => {
 	$('html, body').animate({
 		scrollTop: $("body").offset().top
 	}, 1000);
 }
 
-var entity_map = {
-	"&": "&amp;",
-	"<": "&lt;",
-	">": "&gt;",
-	'"': '&quot;',
-	"'": '&#39;',
-	"/": '/' // &#x2F;
-};
-
-function number_to_currency(number) {
-	return number.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-}
+const number_to_currency = number => number.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
 
 // The input should be a set of inputs, eg, '#summable-inputs input';
-function currency_sum(elements) {
-	sum = 0;
-	$(elements).each(function() {
-		sum += parseFloat( $(this).val().replace( /,/g, '')*100 );
+const currency_sum = elements => {
+	let sum = 0;
+	$(elements).each((i, field) => {
+		sum += parseFloat( $(field).val().replace(/,/g, '') * 100 );
 	});
 
 	return number_to_currency(sum/100);
 }
 
-function escape_html(string) {
-	return String(string).replace(/[&<>"'\/]/g, function (s) {
-		return entity_map[s];
-	});
-}
+const escape_html = string => String(string).replace(/[&<>"'\/]/g, s => entity_map[s])
 
-$(function() {
-	toogle_admin_data();
+$(() => {
+  toogle_admin_data();
 })

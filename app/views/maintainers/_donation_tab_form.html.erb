@@ -89,14 +89,12 @@
 <script>
 
 	// Temporary donations have negative id;
-	var transient_donations = 0;
-	var temp_donation_id = -1;
+	let transient_donations = 0;
+	let temp_donation_id = -1;
 
-	function new_donations() {
-		return transient_donations > 0;
-	}
+	const new_donations = () => transient_donations > 0
 
-	function toogle_parcel_qty_field() {
+	const toogle_parcel_qty_field = () => {
 		if(cant_set_parcels()) {
 			$('#maintainer_payment_period').prop('readonly', true);
 			$('#maintainer_payment_period').val('');
@@ -105,25 +103,25 @@
 		}
 	}
 
-	function cant_set_parcels() {
-		frequency = $('#maintainer_payment_frequency').val();
+	const cant_set_parcels = () => {
+		const frequency = $('#maintainer_payment_frequency').val();
 
 		return !frequency || frequency === '' || frequency === "<%= Maintainer.payment_frequencies.keys[0] %>" || frequency === "<%= Maintainer.payment_frequencies.keys[7] %>";
 	}
 
-	function set_last_parcel_date() {
-		first_date = $('#maintainer_first_parcel').val();
-		frequency = $('#maintainer_payment_frequency').val();
-		parcel_qty = $('#maintainer_payment_period').val();
-		last_date = $('#maintainer_last_parcel');
+	const set_last_parcel_date = () => {
+		const first_date = $('#maintainer_first_parcel').val();
+		const frequency = $('#maintainer_payment_frequency').val();
+		const parcel_qty = $('#maintainer_payment_period').val();
+		const last_date = $('#maintainer_last_parcel');
 
 		if(!first_date || cant_set_parcels() || !parcel_qty) {
 			last_date.val('');
 			return;
 		}
 
-		var frequency_type;
-		var temp = parcel_qty;
+		let frequency_type;
+		let temp = parcel_qty;
 
 		if(frequency == "<%= Maintainer.payment_frequencies.keys[1] %>") {
 			frequency_type = 'days';
@@ -148,9 +146,8 @@
 		}
 	}
 
-	function validate_donation() {
-
-		var errors = new Array();
+	const validate_donation = () => {
+		const errors = new Array();
 
 		if(!$('#new_donation_date').val()) {
 			errors.push('<%= Donation.new.blank_error_message('date') %>');
@@ -167,7 +164,7 @@
 		return errors.length == 0;
 	}
 
-	function clean_donation_fields() {
+	const clean_donation_fields = () => {
 		$('#new_donation_date').val('');
 		$('#new_donation_value').val('<%= number_to_currency 0, format: "%n" %>');
 		$('#new_donation_remark').val('');
@@ -175,8 +172,7 @@
 		hide_errors_from_box('donation');
 	}
 
-	$(function() {
-
+	$(() => {
 		toogle_parcel_qty_field();
 		set_last_parcel_date();
 
@@ -187,22 +183,25 @@
 		$('#maintainer_payment_frequency').change(toogle_parcel_qty_field);
 		$('body').on('click', '#new_donation_btn', set_datepicker);
 
-		$('#add_donation_btn').on('click', function() {
-
+		$('#add_donation_btn').on('click', () => {
 			if(validate_donation()) {
-
 				transient_donations += 1;
 
-				date = $('#new_donation_date').val();
-				value = $('#new_donation_value').val();
-				remark = $('#new_donation_remark').val();
+				const date = $('#new_donation_date').val();
+				const value = $('#new_donation_value').val();
+				const remark = $('#new_donation_remark').val();
 
 				$.ajax({
 					url: '<%= url_for(action: 'donation_row', controller: 'maintainers', only_path: false, protocol: 'http') %>', 
-					data: {donation: {id: temp_donation_id, donation_date: date, value: value, remark: remark}},
-					success: function(result) {
-			        	$('#donations_table > tbody:last-child').append(result);
-			    	}
+					data: {
+						donation: {
+							id: temp_donation_id, 
+							donation_date: date, 
+							value: value, 
+							remark: remark
+						}
+					},
+					success: result => $('#donations_table > tbody:last-child').append(result)
 				});
 
 				temp_donation_id -= 1;
@@ -211,10 +210,11 @@
 			}
 		});
 
-		$('body').on('click', '.remove_donation_btn', function() {
-			id = $(this).closest('.donation_row').find('.donation_id').text();
+		$('body').on('click', '.remove_donation_btn', e => {
+			const elem = $(e.currentTarget);
+			const id = elem.closest('.donation_row').find('.donation_id').text();
 
-         	$('#donation_' + id + '_row').remove();
+         	$(`#donation_${id}_row`).remove();
 
 			transient_donations -= 1;
 
@@ -223,7 +223,7 @@
 			}
 
 			if(id > 0) {
-				$('#maintainer_donations_to_be_deleted').val($('#maintainer_donations_to_be_deleted').val() + id + ',');
+				$('#maintainer_donations_to_be_deleted').val(`${$('#maintainer_donations_to_be_deleted').val()}${id},`);
 			}
 		});
 	})

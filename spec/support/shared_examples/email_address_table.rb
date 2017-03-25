@@ -2,9 +2,8 @@ shared_examples 'an e-mail address table' do |fields|
   let(:fields) { fields }
 
   it 'removes a transient e-mail address' do
-    @id = -1
-
     fields.each do |field_name|
+      @id = -1
       check_email_address_life_cycle field_name
     end
   end
