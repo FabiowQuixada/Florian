@@ -38,6 +38,8 @@
 //= require maintainers/contact_tab_form
 //= require maintainers/donation_tab_form
 //= require system_settings/index
+//= require product_and_service_data/form
+//= require product_and_service_data/filters
 //= require receipt_emails/form
 //= require receipt_emails/index
 //= require receipt_emails/modals
