@@ -1,6 +1,9 @@
 $(() => { if(on_page('system_settings', 'index')) system_settings_index() });
 
 const system_settings_index = () => {
+  const email_field_1 = 'pse_recipients_array';
+  const email_field_2 = 'pse_private_recipients_array';
+
   set_number_of_tabs('main', 3);
 
   $("#add_maintainer_to_re_title_btn").on('click', () => add_tag_to_field('system_setting_re_title', I18n.t('tags.maintainer')));
@@ -17,7 +20,7 @@ const system_settings_index = () => {
       display_confirm_modal(I18n.t('modal.title.info'), I18n.t('user_help_messages.tag_buttons')));
 
   const before_submit_or_leave = () => {
-    if(transient_recipients > 0) {
+    if(new_recipients(email_field_1) || new_recipients(email_field_2)) {
       window.any_changes = true;
     }
 
@@ -26,4 +29,7 @@ const system_settings_index = () => {
   }
 
   $('#main_form').on('submit', e => before_submit_or_leave());
+
+  setup_listeners_for_email_field(email_field_1);
+  setup_listeners_for_email_field(email_field_2);
 }

@@ -1,6 +1,7 @@
 $(() => { if(on_page('receipt_emails', 'form')) receipt_emails_form() });
 
 const receipt_emails_form = () => {
+  const email_field_name = 'recipients_array'; 
 
   if(on_page('receipt_emails', 'edit')) {
     $('.resend_btn').click( e => {
@@ -29,11 +30,11 @@ const receipt_emails_form = () => {
 
 
   before_submit_or_leave = () => {
-    if(recipients_array_transient_recipients > 0) {
+    if(new_recipients(email_field_name)) {
       any_changes = true;
     }
 
-    $('#receipt_email_recipients_array').val(recipients_array_formated_recipients());
+    $('#receipt_email_recipients_array').val(formated_recipients(email_field_name));
   }
 
   $('#body_tag_help_btn').click( e => {
@@ -59,4 +60,6 @@ const receipt_emails_form = () => {
   $("#add_maintainer_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.maintainer')));
   $("#add_value_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.value')));
   $("#add_competence_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.competence')));
+
+  setup_listeners_for_email_field(email_field_name);
 }

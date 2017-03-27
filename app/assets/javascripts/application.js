@@ -30,6 +30,7 @@
 //= require server_constants
 //= require server_functions
 //= require others/modals
+//= require others/email_address_table
 //= require errors/error
 //= require bills/form
 //= require bills/index
