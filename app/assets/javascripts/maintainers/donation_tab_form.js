@@ -58,7 +58,7 @@ const maintainers_donation_tab_form = () => {
     }
 
     if(parcel_qty !== 0 || (frequency_type !== undefined && frequency_type !== '')) {
-      date_format = I18n.t('date.formats.javascript_format.date').toUpperCase();
+      const date_format = I18n.t('date.formats.javascript_format.date').toUpperCase();
       last_date.val(moment(first_date, date_format).add((temp-1), frequency_type).format(date_format));
     } else {
       last_date.val('');
@@ -69,7 +69,8 @@ const maintainers_donation_tab_form = () => {
     const errors = new Array();
 
     if(!donation.donation_date) {
-      errors.push(Constants.donation_message);
+      const attribute = I18n.t("activerecord.attributes.donation.date");
+      errors.push(I18n.t("errors.messages.blank", { attribute: attribute }));
     }
 
     if((!donation.value || donation.value === to_money(0)) && !$('#new_donation_remark').val()) {

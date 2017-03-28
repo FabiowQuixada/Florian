@@ -41,12 +41,3 @@
 <% end #main_form %>
 
 <%= render 'shared/form_commons' %>
-
-<script>
-
-	$('#create_and_new_btn').on('click', e => {
-		$('form').get(0).setAttribute('action', '<%= create_and_new_donations_path %>');
-		$("#main_form").submit();
-	});
-
-</script>
