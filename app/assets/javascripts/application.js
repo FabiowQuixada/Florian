@@ -20,24 +20,71 @@
 //= require i18n
 //= require i18n.js
 //= require i18n/translations
-//= require_tree .
+//= require masks
+//= require dates
+//= require dates_initializer
+//= require form_commons
+//= require listeners
+//= require message_area
+//= require tab_commons
+//= require others/modals
+//= require errors/error
+
+/* 
+
+  On top of some javascript files, there will be the a line like the following:
+    $(() => { if(on_page('bills', 'edit')) bills_edit(); });
+  
+  on_page('bills', 'edit') means if the rendered page was a result of the 'edit' action in the BillsController.
+
+  ...which means: "When the document is ready, if the user is on_page(), call the 'bills_edit' function,
+  which is defined below."
+
+
+  This is necessary so the function is available both for:
+   - Sprockets in the asset pipeline;
+   - Jasmine / Karma tests;
+
+*/
+
+const on_page = (controller, action) => on_controller(controller) && on_action(action)
+
+const on_controller = controller => {
+  if($("body").hasClass(controller))
+    return true;
+
+  return false;
+}
+
+const on_action = action => {
+  if(action === 'new')
+    return $("body").hasClass('new') || $("body").hasClass('create');
+
+  if(action === 'edit')
+    return $("body").hasClass('edit') || $("body").hasClass('update');
+
+  if(action === 'form')
+    return $("body").hasClass('new') || $("body").hasClass('create') || $("body").hasClass('edit') || $("body").hasClass('update');
+
+  return $("body").hasClass(action);
+}
 
 let display_admin_data = false;
 
-const toogle_admin_data = () => {		
-	if(display_admin_data) {
-		$('.admin-only').show();
-	} else {
-		$('.admin-only').hide();
-	}
+const toogle_admin_data = () => {   
+  if(display_admin_data) {
+    $('.admin-only').show();
+  } else {
+    $('.admin-only').hide();
+  }
 
-	display_admin_data = !display_admin_data;
+  display_admin_data = !display_admin_data;
 }
 
 const to_top = () => {
-	$('html, body').animate({
-		scrollTop: $("body").offset().top
-	}, 1000);
+  $('html, body').animate({
+    scrollTop: $("body").offset().top
+  }, 1000);
 }
 
 const to_money = number => {
