@@ -34,6 +34,9 @@
 //= require bills/form
 //= require bills/index
 //= require bills/filters
+//= require maintainers/form
+//= require maintainers/contact_tab_form
+//= require maintainers/donation_tab_form
 
 /* 
 

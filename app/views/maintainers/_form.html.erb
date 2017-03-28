@@ -8,17 +8,17 @@
 		<li id="main_tab_2_title"><a><%= plural_of Contact %></a></li>
 	</ul>
 
-	<div id="main_tab_0" class="general_tab container-fluid tab_body">
+	<div id="main_tab_0" class="main_tab tab_0 general_tab container-fluid tab_body">
 		<%= render 'main_tab_form', f: f %>
 	</div>
 
 	<!-- Donations -->
-	<div id="main_tab_1" class="container-fluid tab_body hidden">
+	<div id="main_tab_1" class="main_tab tab_1 container-fluid tab_body hidden">
 		<%= render 'donation_tab_form', f: f %>
 	</div>
 
 	<!-- Contacts -->
-	<div id="main_tab_2" class="container-fluid tab_body hidden">
+	<div id="main_tab_2" class="main_tab tab_2 container-fluid tab_body hidden">
 		<%= render 'contact_tab_form', f: f  %>
 	</div>
 
@@ -31,11 +31,4 @@
 
 <%end%>
 
-<%= render 'shared/tab_commons', tab_type: 'main', number_of_tabs: 3 %>
 <%= render 'shared/form_commons' %>
-
-<script>
-
-	<%= render 'form.js' %>
-
-</script>

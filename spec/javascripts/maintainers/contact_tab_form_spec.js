@@ -22,12 +22,14 @@ describe("Contact tab", () => {
   beforeEach(() => {
     jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures';
     loadFixtures('maintainers/contact_tab_form.html');
+    maintainers_form();
+    maintainers_contact_tab_form();
   });
 
 
   it("builds a contact object based on user inputs", () => {
     const expected = {
-      id: -1,
+      id: -2,
       name: '2',
       position: '3',
       email_address: 'foo@gmail.com',
@@ -53,7 +55,6 @@ describe("Contact tab", () => {
   it("cleans contact form", () => {
     clean_contact_fields();
 
-    expect(loaded_contact_id).toBe(null);
     expect($('#add_contact_btn').html()).toEqual(I18n.t('helpers.action.add'));
     expect($('#cancel_contact_edition_btn')).toHaveClass('hidden');
     expect($('#contact_panel_header').html()).toEqual(I18n.t('helpers.maintainer.new_contact'));

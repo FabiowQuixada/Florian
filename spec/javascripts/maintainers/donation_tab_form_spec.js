@@ -14,11 +14,14 @@ describe("Donation tab", () => {
   beforeEach(() => {
     jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures';
     loadFixtures('maintainers/donation_tab_form.html');
+    maintainers_form();
+    maintainers_donation_tab_form();
   });
 
   it("builds a donation object based on user inputs", () => {
     const donation = build_donation();
     const expected = {
+      id: -1,
       donation_date: '01/02/2013',
       value: '3',
       remark: '4',
@@ -27,11 +30,11 @@ describe("Donation tab", () => {
     expect(donation).toEqual(expected);
   });
 
-  // it("validates a donation", () => {
-  //   expect(validate_donation(build_donation())).toEqual(true);
-  //   expect(validate_donation(empty_donation)).toEqual(false);
-  //   expect(validate_donation(date_only_donation)).toEqual(false);
-  // });
+  it("validates a donation", () => {
+    expect(validate_donation(build_donation())).toEqual(true);
+    expect(validate_donation(empty_donation)).toEqual(false);
+    expect(validate_donation(date_only_donation)).toEqual(false);
+  });
 
   it("cleans donation form", () => {
     clean_donation_fields();

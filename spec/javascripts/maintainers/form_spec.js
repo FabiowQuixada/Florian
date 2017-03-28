@@ -26,13 +26,18 @@ describe("Maintainer form", () => {
   describe("before_submit_or_leave", () => {
     describe("when dealing with donations", () => {
       it("sets form state as 'changed'", () => {
-        transient_donations = 1;
+        const donation = {
+          donation_date: '01/02/2013',
+          value: '3',
+          remark: '4',
+        }
+
+        add_donation(donation);
         before_submit_or_leave();
         expect(any_change).toEqual(true);
       });
 
       it("does not set form state as 'changed'", () => {
-        transient_donations = 0;
         before_submit_or_leave();
         expect(any_change).toEqual(false);
       });
@@ -45,13 +50,22 @@ describe("Maintainer form", () => {
 
     describe("when dealing with contacts", () => {
       it("sets the form state as 'changed'", () => {
-        transient_contacts = 1;
+        const contact = {
+          id: -1,
+          name: '2',
+          position: '3',
+          email_address: 'foo@gmail.com',
+          telephone: '5',
+          celphone: '6',
+          fax: '7'
+        }
+
+        add_contact(contact);
         before_submit_or_leave();
         expect(any_change).toEqual(true);
       });
 
       it("does not set form state as 'changed'", () => {
-        transient_contacts = 0;
         before_submit_or_leave();
         expect(any_change).toEqual(false);
       });
