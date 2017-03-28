@@ -16,7 +16,7 @@
 	<!-- Tabs bodies -->
 	<div class="container-fluid tab_body">
 
-		<div id="main_tab_0" class="general_tab">
+		<div id="main_tab_0" class="main_tab tab_0">
 			<div class='row'>
 				<div class='form-group col-md-6'>
 					<%= f.label :city %>
@@ -26,7 +26,7 @@
 		</div>
 		<!-- Receipt e-mail tab body -->
 		<% if can? :manage, ReceiptEmail.new %>
-			<div id="main_tab_1" class="receipt_email_tab">
+			<div id="main_tab_1" class="main_tab tab_1">
 				<div class="form-group">
 					<%= f.label :re_title %>
 					<div class="tag-buttons">
@@ -46,7 +46,7 @@
 
 		<!-- Product and service datum tab body -->
 		<% if can? :manage, ProductAndServiceDatum.new %>
-			<div id="main_tab_2" class="prod_serv_email_tab">
+			<div id="main_tab_2" class="main_tab tab_2">
 
 				<div class="container-fluid padless">
 					<div class="row">
@@ -95,35 +95,4 @@
 	</div>
 <% end %>
 
-<%= render 'shared/tab_commons', tab_type: 'main', number_of_tabs: 3 %>
 <%= render 'shared/form_commons', hide_audit: Rails.env.showcase? %>
-
-<script>
-
-	$(() => {
-		$("#add_maintainer_to_re_title_btn").on('click', () => add_tag_to_field('system_setting_re_title', '<%= t('tags.maintainer') %>'));
-		$("#add_value_to_re_title_btn").on('click', () => add_tag_to_field('system_setting_re_title', '<%= t('tags.value') %>'));
-		$("#add_competence_to_re_title_btn").on('click', () => add_tag_to_field('system_setting_re_title', '<%= t('tags.competence') %>'));
-		$("#add_maintainer_to_re_body_btn").on('click', () => add_tag_to_field('system_setting_re_body', '<%= t('tags.maintainer') %>'));
-		$("#add_value_to_re_body_btn").on('click', () => add_tag_to_field('system_setting_re_body', '<%= t('tags.value') %>'));
-		$("#add_competence_to_re_body_btn").on('click', () => add_tag_to_field('system_setting_re_body', '<%= t('tags.competence') %>'));
-
-		$("#add_competence_to_pse_body_btn").on('click', () => add_tag_to_field('system_setting_pse_body', '<%= t('tags.competence') %>'));
-		$("#add_competence_to_pse_title_btn").on('click', () => add_tag_to_field('system_setting_pse_title', '<%= t('tags.competence') %>'));
-
-		$('#receipt_title_tag_help_btn, #pse_title_tag_help_btn, #pse_body_tag_help_btn	').click( e => 
-			display_confirm_modal('<%= I18n.t 'modal.title.info' %>', '<%= I18n.t 'user_help_messages.tag_buttons' %>'));
-	});
-
-	const before_submit_or_leave = () => {
-		if(transient_recipients > 0) {
-			window.any_changes = true;
-		}
-
-		$('#system_setting_pse_recipients_array').val(pse_recipients_array_formated_recipients('pse_recipients_array'));
-		$('#system_setting_pse_private_recipients_array').val(pse_private_recipients_array_formated_recipients('pse_private_recipients_array'));
-	}
-
-	$('#main_form').on('submit', e => before_submit_or_leave());
-
-</script>
