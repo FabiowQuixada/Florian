@@ -1,3 +1,5 @@
+import { on_page } from './../application.js'
+
 $(() => { if(on_page('donations', 'index')) donations_filters() });
 
 const donations_filters = () => {

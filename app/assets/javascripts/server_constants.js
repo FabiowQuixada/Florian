@@ -23,7 +23,7 @@ const Constants = {
   },
 
   system_settings: {
-    receipt_title: "Donation Receipt for #maintainer - #competence"
+    receipt_title: "Donation Receipt for #maintainer - #competencelalalala"
   },
   admin_email: "ftquixada@gmail.com",
 
@@ -36,3 +36,4 @@ const Constants = {
   services_array: ["psychology", "physiotherapy", "plastic_surgery", "mesh", "gynecology", "occupational_therapy"],
 }
 
+export default Constants

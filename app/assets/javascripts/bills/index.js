@@ -1,3 +1,5 @@
+import { on_page } from './../application.js'
+
 $(() => { if(on_page('bills', 'index')) bills_index() });
 
 const bills_index = () => {

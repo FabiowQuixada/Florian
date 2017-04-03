@@ -1,3 +1,10 @@
+import { on_page } from './../application.js'
+import { display_confirm_modal } from './../others/modals.js'
+import { new_recipients, setup_listeners_for_email_field, formated_recipients } from './../others/email_address_table.js'
+import { add_tag_to_field } from './../form_commons.js'
+import I18n from './../i18n.js'
+import { set_number_of_tabs } from './../tab_commons.js'
+
 $(() => { if(on_page('system_settings', 'index')) system_settings_index() });
 
 const system_settings_index = () => {
@@ -24,8 +31,8 @@ const system_settings_index = () => {
       window.any_changes = true;
     }
 
-    $('#system_setting_pse_recipients_array').val(pse_recipients_array_formated_recipients('pse_recipients_array'));
-    $('#system_setting_pse_private_recipients_array').val(pse_private_recipients_array_formated_recipients('pse_private_recipients_array'));
+    $('#system_setting_pse_recipients_array').val(formated_recipients('pse_recipients_array'));
+    $('#system_setting_pse_private_recipients_array').val(formated_recipients('pse_private_recipients_array'));
   }
 
   $('#main_form').on('submit', e => before_submit_or_leave());

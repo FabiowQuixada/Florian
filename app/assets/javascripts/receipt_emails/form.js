@@ -1,7 +1,14 @@
+import { on_page, escape_html } from './../application.js'
+import Constants from './../server_constants.js'
+import { new_recipients, setup_listeners_for_email_field, formated_recipients } from './../others/email_address_table.js'
+import I18n from './../i18n.js'
+
 $(() => { if(on_page('receipt_emails', 'form')) receipt_emails_form() });
 
+let before_submit_or_leave;
+
 const receipt_emails_form = () => {
-  const email_field_name = 'recipients_array'; 
+  const email_field = 'recipients_array';
 
   if(on_page('receipt_emails', 'edit')) {
     $('.resend_btn').click( e => {
@@ -30,11 +37,11 @@ const receipt_emails_form = () => {
 
 
   before_submit_or_leave = () => {
-    if(new_recipients(email_field_name)) {
+    if(new_recipients(email_field)) {
       any_changes = true;
     }
 
-    $('#receipt_email_recipients_array').val(formated_recipients(email_field_name));
+    $('#receipt_email_email_field').val(formated_recipients(email_field));
   }
 
   $('#body_tag_help_btn').click( e => {
@@ -61,5 +68,5 @@ const receipt_emails_form = () => {
   $("#add_value_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.value')));
   $("#add_competence_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.competence')));
 
-  setup_listeners_for_email_field(email_field_name);
+  setup_listeners_for_email_field(email_field);
 }

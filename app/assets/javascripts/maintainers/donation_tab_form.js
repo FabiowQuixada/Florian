@@ -1,10 +1,14 @@
+import { on_page } from './../application.js'
+import Constants from './../server_constants.js'
+import { set_datepicker } from './../dates.js'
+
 $(() => { if(on_page('maintainers', 'form')) maintainers_donation_tab_form() });
 
-let build_donation = null;
-let clean_donation_fields = null;
-let add_donation = null;
-let validate_donation = null;
-let new_donations = null;
+let build_donation;
+let clean_donation_fields;
+let add_donation;
+let validate_donation;
+let new_donations;
 
 const maintainers_donation_tab_form = () => {
   // Temporary donations have negative id;

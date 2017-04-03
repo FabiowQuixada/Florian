@@ -1,16 +1,18 @@
+import { on_page } from './../application.js'
+
 $(() => { if(on_page('maintainers', 'form')) maintainers_contact_tab_form() });
 
-let load_contact = null;
-let build_contact = null;
-let validate_contact = null;
-let at_least_one_field_filled = null;
-let clean_contact_fields = null;
-let add_contact = null;
-let new_contacts = null;
+let load_contact;
+let build_contact;
+let validate_contact;
+let at_least_one_field_filled;
+let clean_contact_fields;
+let add_contact;
+let new_contacts;
 
 const maintainers_contact_tab_form = () => {
   // Temporary contacts have negative id;
-  let loaded_contact_id = null;
+  let loaded_contact_id;
   let contact_temp_id = -1;
 
   new_contacts = () => {

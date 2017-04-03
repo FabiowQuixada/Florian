@@ -1,3 +1,6 @@
+import { on_page, currency_sum } from './../application.js'
+import { format_competence } from './../dates.js'
+
 $(() => { if(on_page('bills', 'form')) bills_form(); });
 
 const bills_form = () => {

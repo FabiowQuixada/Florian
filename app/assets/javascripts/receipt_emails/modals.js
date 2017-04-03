@@ -1,7 +1,9 @@
+import { on_controller } from './../application.js'
+
 $(() => { if(on_controller('receipt_emails')) receipt_emails_modals() });
 
-const clean_resend_modal = () => $('#resend_competence').val(default_competence())
-const clean_send_test_modal = () => $('#send_test_competence').val(default_competence())
+export const clean_resend_modal = () => $('#resend_competence').val(default_competence());
+export const clean_send_test_modal = () => $('#send_test_competence').val(default_competence());
 const default_competence = () => `${("0" + (new Date().getMonth()+1)).slice(-2)}/${new Date().getFullYear()}`
 
 const receipt_emails_modals = () => {

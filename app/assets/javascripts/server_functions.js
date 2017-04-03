@@ -7,3 +7,5 @@ const ServerFunctions = {
     resend_receipt_email: (id) => "/receipt_emails/-1/resend".replace("-1", id)
   }
 }
+
+export default ServerFunctions

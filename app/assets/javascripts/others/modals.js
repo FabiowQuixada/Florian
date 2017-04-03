@@ -1,4 +1,4 @@
-const display_confirm_modal = (title, message, confirm_callback, cancel_callback) => {
+export const display_confirm_modal = (title, message, confirm_callback, cancel_callback) => {
   $("#confirm_modal .modal-footer").removeClass('hidden');
   $("#cancel_btn").removeClass('hidden');
 

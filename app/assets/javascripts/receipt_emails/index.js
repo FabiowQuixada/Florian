@@ -1,3 +1,7 @@
+import { on_page } from './../application.js'
+import { clean_resend_modal, clean_send_test_modal } from './modals.js'
+import { ServerFunctions } from './../server_functions.js'
+
 $(() => { if(on_page('receipt_emails', 'index')) receipt_emails_index() });
 
 const receipt_emails_index = () => {

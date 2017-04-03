@@ -1,3 +1,5 @@
+import { on_page } from './../application.js'
+
 $(() => { if(on_page('donations', 'form')) donations_form() });
 
 const donations_form = () => {

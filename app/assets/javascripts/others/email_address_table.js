@@ -1,3 +1,8 @@
+import { display_form_errors, validate_email } from './../form_commons.js'
+import { hide_all_messages } from './../message_area.js'
+import Constants from './../server_constants.js'
+import I18n from './../i18n.js'
+
 /**
 
   This file is the e-mail table partial javascript counter-part. You have to take care of a few things:
@@ -13,6 +18,8 @@
 
 */
 
+let temp_ids;
+
 const next_temp_id = field => {
   if (typeof temp_ids === 'undefined') {
     temp_ids = {};
@@ -25,7 +32,7 @@ const next_temp_id = field => {
   return temp_ids[field]--;
 }
 
-const new_recipients = field => {
+export const new_recipients = field => {
   let new_recipient = false;
 
   $(`#${field}_table td.contact_id`).each((index, td) => {
@@ -48,7 +55,7 @@ const already_present = (email_address, field) => {
   return result;
 }
 
-const formated_recipients = (id = field_name) => {
+export const formated_recipients = (id = field_name) => {
   let array = '';
 
   $(`#${id}_recipients_table > tbody > tr`).each((i, elem) => {
@@ -60,7 +67,7 @@ const formated_recipients = (id = field_name) => {
 
 const clean_email_fields = field => $(`#${field}_new_recipient_field`).val('')
 
-const setup_listeners_for_email_field = field_name => {
+export const setup_listeners_for_email_field = field_name => {
   $('body').on('click', `.${field_name}_remove_recipient_btn`, e => {
     const elem = $(e.currentTarget);
     const id = elem.closest('.email_recipient').find('.recipient_id').text();

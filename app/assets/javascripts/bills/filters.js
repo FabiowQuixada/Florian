@@ -1,3 +1,6 @@
+import { on_page } from './../application.js'
+import { format_competence, validate_period } from './../dates.js'
+
 $(() => { if(on_page('bills', 'index')) bills_filters() });
 
 const bills_filters = () => {

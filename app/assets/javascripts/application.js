@@ -17,35 +17,6 @@
 //= require twitter/bootstrap
 //= require bootstrap-datepicker
 //= require jquery.turbolinks
-//= require i18n
-//= require i18n.js
-//= require i18n/translations
-//= require masks
-//= require dates
-//= require dates_initializer
-//= require form_commons
-//= require listeners
-//= require message_area
-//= require tab_commons
-//= require server_constants
-//= require server_functions
-//= require others/modals
-//= require others/email_address_table
-//= require errors/error
-//= require bills/form
-//= require bills/index
-//= require bills/filters
-//= require donations/form
-//= require donations/filters
-//= require maintainers/form
-//= require maintainers/contact_tab_form
-//= require maintainers/donation_tab_form
-//= require system_settings/index
-//= require product_and_service_data/form
-//= require product_and_service_data/filters
-//= require receipt_emails/form
-//= require receipt_emails/index
-//= require receipt_emails/modals
 
 /* 
 
@@ -64,16 +35,18 @@
 
 */
 
-const on_page = (controller, action) => on_controller(controller) && on_action(action)
+import I18n from './i18n.js'
 
-const on_controller = controller => {
+export const on_page = (controller, action) => on_controller(controller) && on_action(action)
+
+export const on_controller = controller => {
   if($("body").hasClass(controller))
     return true;
 
   return false;
 }
 
-const on_action = action => {
+export const on_action = action => {
   if(action === 'new')
     return $("body").hasClass('new') || $("body").hasClass('create');
 
@@ -86,9 +59,14 @@ const on_action = action => {
   return $("body").hasClass(action);
 }
 
+export const validate_email = email => (
+  /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+      .test(email)
+  )
+
 let display_admin_data = false;
 
-const toogle_admin_data = () => {   
+export const toogle_admin_data = () => {   
   if(display_admin_data) {
     $('.admin-only').show();
   } else {
@@ -98,13 +76,7 @@ const toogle_admin_data = () => {
   display_admin_data = !display_admin_data;
 }
 
-const to_top = () => {
-  $('html, body').animate({
-    scrollTop: $("body").offset().top
-  }, 1000);
-}
-
-const to_money = number => {
+export const to_money = number => {
   const cents = I18n.t("number.currency.format.precision"),
     d = I18n.t("number.currency.format.separator"),
     t = I18n.t("number.currency.format.delimiter"),
@@ -121,7 +93,7 @@ const to_money = number => {
 };
 
 // The input should be a set of inputs, eg, '#summable-inputs input';
-const currency_sum = elements => {
+export const currency_sum = elements => {
   let sum = 0;
   $(elements).each((i, field) => {
     sum += parseFloat( $(field).val().replace(/,/g, '') * 100 );
@@ -130,7 +102,7 @@ const currency_sum = elements => {
   return to_money(sum / 100);
 }
 
-const escape_html = string => {
+export const escape_html = string => {
   const entity_map = {
     "&": "&amp;",
     "<": "&lt;",

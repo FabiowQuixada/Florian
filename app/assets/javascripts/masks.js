@@ -1,3 +1,8 @@
+require('jquery-mask-plugin');
+
+import I18n from './i18n.js'
+import { to_money } from './application.js'
+
 $(() => {
 
     const delimiter = I18n.t("number.currency.format.delimiter")
