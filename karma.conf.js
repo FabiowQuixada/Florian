@@ -18,7 +18,7 @@ module.exports = function(config) {
       'https://code.jquery.com/jquery-1.11.2.min.js',
       'public/javascripts/i18n.js',
       'public/javascripts/translations.js',
-      'app/assets/javascripts/**/*.js',
+      'app/frontend/javascripts/**/*.js',
       'spec/javascripts/**/*.js',
       { pattern: 'spec/javascripts/fixtures/**/*.html', included: false, served: true }
     ],
@@ -27,7 +27,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'app/assets/javascripts/**/*.js': ['babel'],
+      'app/frontend/javascripts/**/*.js': ['babel'],
       'spec/javascripts/**/*js': ['babel']
     },
     babelPreprocessor: {
@@ -46,9 +46,9 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-      'app/assets/javascripts/bootstrap.js',
-      'app/assets/javascripts/masks.js',
-      'app/assets/javascripts/dates_initializer.js'
+      'app/frontend/javascripts/bootstrap.js',
+      'app/frontend/javascripts/masks.js',
+      'app/frontend/javascripts/dates_initializer.js',
     ],
 
 

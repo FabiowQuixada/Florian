@@ -18,7 +18,7 @@ namespace :build_client_data do |client_data|
   end
 
   def target_dir
-    'app/assets/javascripts'
+    'app/frontend/javascripts'
   end
 
   def procompile(file_name)
