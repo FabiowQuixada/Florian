@@ -35,6 +35,7 @@ const Constants = {
   week_final_number: 7,
   number_of_services: 6,
   number_of_products: 8,
+  number_of_bill_types: 3,
   number_of_weeks: 7,
   products_array: ["mesh", "cream", "protector", "silicon", "mask", "foam", "skin_expander", "cervical_collar"],
   services_array: ["psychology", "physiotherapy", "plastic_surgery", "mesh", "gynecology", "occupational_therapy"],

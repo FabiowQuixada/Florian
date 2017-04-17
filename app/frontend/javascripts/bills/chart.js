@@ -1,10 +1,19 @@
 import I18n from './../i18n'
 import Constants from './../server_constants'
 import { on_page } from './../application'
+import { set_number_of_tabs } from './../tab_commons'
 
 $(() => { if(on_page('bills', 'index')) bills_charts() });
 
 const bills_charts = () => {
+  // A new tab is created for each year;
+  set_number_of_tabs('main', Object.keys(bill_chart_data).length);
+
+  // Inside each year tab, each bill has its own tab - there's also a "Totals" tab;
+  for (let year of Object.keys(bill_chart_data)) {
+    set_number_of_tabs(year, Constants.number_of_bill_types+1);
+  }
+
   const $S = require('scriptjs');
   $S('https://www.gstatic.com/charts/loader.js', function () {
     google.charts.load('current', {'packages':['corechart'], 'language': I18n.locale});

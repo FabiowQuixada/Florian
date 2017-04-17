@@ -38,6 +38,7 @@ const Constants = {
   week_final_number: <%= ProductAndServiceWeek::FINAL_NUMBER %>,
   number_of_services: <%= ServiceData.number_of_services %>,
   number_of_products: <%= ProductData.number_of_products %>,
+  number_of_bill_types: <%= Bill.bill_types.length %>,
   number_of_weeks: 7,
   products_array: <%= ProductData.products.to_a.to_s.html_safe %>,
   services_array: <%= ServiceData.services.to_a.to_s.html_safe %>,

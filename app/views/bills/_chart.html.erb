@@ -1,55 +1,16 @@
-
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-  
-  const draw_charts = () => {
-
-    // For each year...
-    <% @graph_data.each do |year_key, value| %>
-        <% Bill.bill_types.each do |type| %>
-          draw_chart_by_year(<%= year_key %>, <%= value[type[1]].compact.to_s.html_safe %>, <%= type[1] %>);
-        <% end %>
-
-        // Totals;
-        draw_chart_by_year(<%= year_key %>, <%= value[3].compact.to_s.html_safe %>, <%= 3 %>);
-    <% end %>
-  }
-  
-  google.charts.load('current', {'packages':['corechart'], 'language': '<%= locale %>'});
-  google.charts.setOnLoadCallback(draw_charts);
-
-  const draw_chart_by_year = (year, months_array, type) => {
-    const data = new google.visualization.DataTable();
-    data.addColumn('string', I18n.t("datetime.prompts.month"));
-    data.addColumn('number', I18n.t("number.value"));
-    data.addRows(months_array);
-
-    const options = {
-      hAxis: {titleTextStyle: {color: '#333'}},
-      vAxis: {minValue: 0, viewWindowMode: "explicit", viewWindow:{ min: 0 }, format: '<%= currency %> ###,###,###.00'},
-      'width': 500,
-      chartArea: {  width: "65%" },
-      legend: {position: 'none'}
-    };
-
-    const formatter = new google.visualization.NumberFormat({decimalSymbol: I18n.t("number.currency.format.separator"), groupingSymbol: I18n.t("number.currency.format.delimiter"), negativeColor: 'red', negativeParens: true, prefix: '<%= currency %> '});
-    formatter.format(data, 1);
-
-    const chart = new google.visualization.AreaChart(document.getElementById(`chart_div_${year}_${type}`));
-    chart.draw(data, options);
-  }
-
+<script>
+  const bill_chart_data = <%= @graph_data.to_json.html_safe %>;
 </script>
 
 <ul class="nav nav-tabs">
   <% @graph_data.each_with_index do |bill, i| %>
-      <li id="bill_tab_<%= i %>_title"><a><%= bill[0] %></a></li>
+      <li id="main_tab_<%= i %>_title"><a><%= bill[0] %></a></li>
   <% end %>
 </ul>
 
 <% @graph_data.each_with_index do |bill, i| %>
 
-  <div id="bill_tab_<%= i %>" class="container-fluid tab_body">
+  <div id="main_tab_<%= i %>" class="container-fluid tab_body">
 
   <!-- Year's bills (titles) -->
   <ul class="nav nav-pills">
@@ -73,8 +34,6 @@
 
   </div>
 
-  <%= render 'shared/tab_commons', number_of_tabs: Bill.bill_types.length+1, tab_type: bill[0].to_s %>
-
 <% end %>
 
-<%= render 'shared/tab_commons', number_of_tabs: @graph_data.length, tab_type: 'bill', title: Time.now.year %>
+<%#= render 'shared/tab_commons', number_of_tabs: @graph_data.length, tab_type: 'bill', title: Time.now.year %>
