@@ -1,5 +1,5 @@
-import { on_page, currency_sum } from './../application.js'
-import { format_competence } from './../dates.js'
+import { on_page, currency_sum } from './../application'
+import { format_competence } from './../dates'
 
 $(() => { if(on_page('bills', 'form')) bills_form(); });
 

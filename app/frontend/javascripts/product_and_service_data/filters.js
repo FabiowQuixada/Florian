@@ -1,4 +1,4 @@
-import { on_page } from './../application.js'
+import { on_page } from './../application'
 
 $(() => { if(on_page('product_and_service_data', 'index')) product_and_service_data_filters() });
 

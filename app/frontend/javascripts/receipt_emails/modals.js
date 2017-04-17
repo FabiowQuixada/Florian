@@ -1,4 +1,4 @@
-import { on_controller } from './../application.js'
+import { on_controller } from './../application'
 
 $(() => { if(on_controller('receipt_emails')) receipt_emails_modals() });
 

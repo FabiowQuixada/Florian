@@ -1,5 +1,5 @@
-import { on_action, to_top } from './application.js'
-import { hide_all_messages } from './message_area.js'
+import { on_action, to_top } from './application'
+import { hide_all_messages } from './message_area'
 
 let any_change = false;
 let attr_values = new Array();

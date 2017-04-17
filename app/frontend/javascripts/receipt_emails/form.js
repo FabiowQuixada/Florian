@@ -1,7 +1,7 @@
-import { on_page, escape_html } from './../application.js'
-import Constants from './../server_constants.js'
-import { new_recipients, setup_listeners_for_email_field, formated_recipients } from './../others/email_address_table.js'
-import I18n from './../i18n.js'
+import { on_page, escape_html } from './../application'
+import Constants from './../server_constants'
+import { new_recipients, setup_listeners_for_email_field, formated_recipients } from './../others/email_address_table'
+import I18n from './../i18n'
 
 $(() => { if(on_page('receipt_emails', 'form')) receipt_emails_form() });
 

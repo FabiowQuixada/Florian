@@ -1,10 +1,10 @@
-import { on_page, on_action } from './../application.js'
-import { current_competence } from './../dates.js'
-import Constants from './../server_constants.js'
-import { display_info } from './../message_area.js'
-import { set_number_of_tabs } from './../tab_commons.js'
+import { on_page, on_action } from './../application'
+import { current_competence } from './../dates'
+import Constants from './../server_constants'
+import { display_info } from './../message_area'
+import { set_number_of_tabs } from './../tab_commons'
 
-import I18n from './../i18n.js'
+import I18n from './../i18n'
 
 $(() => { if(on_page('product_and_service_data', 'form')) product_and_service_data_form() });
 

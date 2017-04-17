@@ -15,7 +15,7 @@
 
 */
 
-import I18n from './i18n.js'
+import I18n from './i18n'
 
 export const on_page = (controller, action) => on_controller(controller) && on_action(action)
 

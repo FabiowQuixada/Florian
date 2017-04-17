@@ -1,9 +1,9 @@
-import { on_page } from './../application.js'
-import { display_confirm_modal } from './../others/modals.js'
-import { new_recipients, setup_listeners_for_email_field, formated_recipients } from './../others/email_address_table.js'
-import { add_tag_to_field } from './../form_commons.js'
-import I18n from './../i18n.js'
-import { set_number_of_tabs } from './../tab_commons.js'
+import { on_page } from './../application'
+import { display_confirm_modal } from './../others/modals'
+import { new_recipients, setup_listeners_for_email_field, formated_recipients } from './../others/email_address_table'
+import { add_tag_to_field } from './../form_commons'
+import I18n from './../i18n'
+import { set_number_of_tabs } from './../tab_commons'
 
 $(() => { if(on_page('system_settings', 'index')) system_settings_index() });
 

@@ -1,7 +1,7 @@
-import { display_form_errors, validate_email } from './../form_commons.js'
-import { hide_all_messages } from './../message_area.js'
-import Constants from './../server_constants.js'
-import I18n from './../i18n.js'
+import { display_form_errors, validate_email } from './../form_commons'
+import { hide_all_messages } from './../message_area'
+import Constants from './../server_constants'
+import I18n from './../i18n'
 
 /**
 

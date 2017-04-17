@@ -1,7 +1,7 @@
-require('jquery-mask-plugin');
+import I18n from './i18n'
+import { to_money } from './application'
 
-import I18n from './i18n.js'
-import { to_money } from './application.js'
+require('jquery-mask-plugin');
 
 $(() => {
 

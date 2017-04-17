@@ -1,6 +1,6 @@
 require('bootstrap-datepicker');
 
-import I18n from './i18n.js'
+import I18n from './i18n'
 
 export const set_month_datepicker = () => {
 	$('.datepicker-competence').datepicker();

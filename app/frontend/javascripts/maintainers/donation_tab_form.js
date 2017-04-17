@@ -1,6 +1,6 @@
-import { on_page } from './../application.js'
-import Constants from './../server_constants.js'
-import { set_datepicker } from './../dates.js'
+import { on_page } from './../application'
+import Constants from './../server_constants'
+import { set_datepicker } from './../dates'
 
 $(() => { if(on_page('maintainers', 'form')) maintainers_donation_tab_form() });
 

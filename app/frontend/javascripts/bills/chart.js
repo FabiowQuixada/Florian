@@ -1,6 +1,6 @@
-import I18n from './../i18n.js'
-import Constants from './../server_constants.js'
-import { on_page } from './../application.js'
+import I18n from './../i18n'
+import Constants from './../server_constants'
+import { on_page } from './../application'
 
 $(() => { if(on_page('bills', 'index')) bills_charts() });
 

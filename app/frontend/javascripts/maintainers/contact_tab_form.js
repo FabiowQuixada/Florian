@@ -1,4 +1,4 @@
-import { on_page } from './../application.js'
+import { on_page } from './../application'
 
 $(() => { if(on_page('maintainers', 'form')) maintainers_contact_tab_form() });
 

@@ -1,5 +1,5 @@
-import { on_page } from './../application.js'
-import { set_number_of_tabs } from './../tab_commons.js'
+import { on_page } from './../application'
+import { set_number_of_tabs } from './../tab_commons'
 
 $(() => { if(on_page('maintainers', 'form')) maintainers_form() });
 
