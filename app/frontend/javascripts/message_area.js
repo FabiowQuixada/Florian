@@ -94,6 +94,10 @@ export const msg_as_html_ul = message => {
   return result;
 }
 
+export const is_empty = message => (
+  (typeof message !== 'string' && Object.prototype.toString.call(message) !== '[object Array]') || message.length === 0
+)
+
 export const to_top = () => {
   $('html, body').animate({
     scrollTop: $("body").offset().top
