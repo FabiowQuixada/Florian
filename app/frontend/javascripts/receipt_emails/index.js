@@ -27,5 +27,5 @@ const receipt_emails_index = () => {
     $('#send_test_email_modal').modal('show');
   });
 
-  $('#recent_emails_btn').click( e => $('#recent_emails_modal').modal('show'))
+  $('#recent_emails_btn').click( () => $('#recent_emails_modal').modal('show'))
 }
