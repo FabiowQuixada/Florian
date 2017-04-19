@@ -18,36 +18,36 @@ export const display_error = (message, error_box_id = 'global') => {
 export const display_info = message => {
   hide_all_messages();
   to_top();
-  $('#global_info_massages').html(message);
+  $('#global_info_messages').html(message);
   $('#global_info_box').removeClass('hidden');
 }
 
 export const display_notice = message => {
   hide_all_messages();
   to_top();
-  $('#global_notice_massages').html(message);
+  $('#global_notice_messages').html(message);
   $('#global_notice_box').removeClass('hidden');
 }
 
 export const display_warning = message => {
   hide_all_messages();
   to_top();
-  $('#global_warning_massages').html(message);
+  $('#global_warning_messages').html(message);
   $('#global_warning_box').removeClass('hidden');
 }
 
 const display_hideless_warning = message => {
-  $('#global_hideless_warning_massages').html(message);
+  $('#global_hideless_warning_messages').html(message);
   $('#global_hideless_warning_box').removeClass('hidden');
 }
 
 const hide_info = () => {
-  $('#global_info_massages').html('');
+  $('#global_info_messages').html('');
   $('#global_info_box').addClass('hidden');
 }
 
 const hide_notice = () => {
-  $('#global_notice_massages').html('');
+  $('#global_notice_messages').html('');
   $('#global_notice_box').addClass('hidden');
 }
 

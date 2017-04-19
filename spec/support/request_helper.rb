@@ -27,7 +27,7 @@ module RequestHelper
   end
 
   def expect_info_msg_to_include(text)
-    expect(find('#global_info_massages')).to have_content text
+    expect(find('#global_info_messages')).to have_content text
   end
 
   def expect_access_denied_msg
