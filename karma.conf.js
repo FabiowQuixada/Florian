@@ -1,5 +1,10 @@
 // Karma configuration
 // Generated on Sun Feb 26 2017 15:18:55 GMT-0300 (BRT)
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpackConfig = require('./webpack.config.js');
+webpackConfig.entry = null;
 
 module.exports = function(config) {
   config.set({
@@ -16,10 +21,10 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'https://code.jquery.com/jquery-1.11.2.min.js',
-      'public/javascripts/i18n.js',
-      'public/javascripts/translations.js',
-      'app/frontend/javascripts/**/*.js',
+      { pattern: 'app/frontend/javascripts/**/*.js', included: false },
+      { pattern: 'app/frontend/javascripts/**/*.jsx', included: false },
       'spec/javascripts/**/*.js',
+      'spec/javascripts/**/*.jsx',
       { pattern: 'spec/javascripts/fixtures/**/*.html', included: false, served: true }
     ],
 
@@ -27,8 +32,11 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      './app/assets/javascripts/bundle.js': ['webpack'],
       'app/frontend/javascripts/**/*.js': ['babel'],
-      'spec/javascripts/**/*js': ['babel']
+      'app/frontend/javascripts/**/*.jsx': ['babel'],
+      'spec/javascripts/**/*.js': ['webpack', 'babel'],
+      'spec/javascripts/**/*.jsx': ['webpack', 'babel'],
     },
     babelPreprocessor: {
       options: {
@@ -41,6 +49,12 @@ module.exports = function(config) {
       sourceFileName: function (file) {
         return file.originalPath;
       }
+    },
+
+    webpack: webpackConfig,
+
+    webpackMiddleware: {
+      noInfo: true
     },
 
 
@@ -93,6 +107,12 @@ module.exports = function(config) {
     // how many browser should be started simultaneous
     concurrency: Infinity,
 
-    plugins : ['karma-jasmine-jquery', 'karma-jasmine', 'karma-phantomjs-launcher', 'karma-babel-preprocessor']
+    plugins: [
+      'karma-jasmine-jquery',
+      'karma-jasmine',
+      'karma-phantomjs-launcher',
+      'karma-babel-preprocessor',
+      'karma-webpack',
+    ]
   })
 }
