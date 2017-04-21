@@ -7,7 +7,7 @@ module StatusActions extend ActiveSupport::Concern
                        model.active = true
                        model.save
 
-                       render json: { message: model.was('activated'), id: model.id, activated: true }
+                       render json: { message: model.was('activated'), id: model.id, activated: true, status: :ok }
                      rescue => exc
                        exception_message = handle_exception exc, exc.message
                        return render json: exception_message, status: :internal_server_error
@@ -18,7 +18,7 @@ module StatusActions extend ActiveSupport::Concern
                        model.active = false
                        model.save
 
-                       render json: { message: model.was('deactivated'), id: model.id, activated: false }
+                       render json: { message: model.was('deactivated'), id: model.id, activated: false, status: :ok }
                      rescue => exc
                        exception_message = handle_exception exc, exc.message
                        return render json: exception_message, status: :internal_server_error

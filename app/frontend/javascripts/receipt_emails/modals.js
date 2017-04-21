@@ -71,8 +71,8 @@ const receipt_emails_modals = () => {
           value: $('#receipt_email_value').val(),
           maintainer: $('#receipt_email_id').val(),
           title: $('#receipt_email_title').val(),
-          body: $('#receipt_email_body').val()
-          // TODO active
+          body: $('#receipt_email_body').val(),
+          active: $('#model_status').val()
         }
       },
       success: response => {

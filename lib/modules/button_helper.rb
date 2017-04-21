@@ -33,9 +33,9 @@ module ButtonHelper
 
   def status_btn(iterator)
     if iterator.active
-      deactivation_btn iterator
+      deactivate_img iterator
     else
-      activation_btn iterator
+      activate_img iterator
     end
   end
 
@@ -68,16 +68,6 @@ module ButtonHelper
   end
 
   private ############################################################################################
-
-  def deactivation_btn(iterator)
-    path = send("deactivate_#{iterator.class.to_s.underscore}_path", iterator)
-    link_to deactivate_img(iterator), path, method: :post, remote: true, id: "change_status_#{iterator.id}", 'data-type' => :json, class: 'deactivate_btn'
-  end
-
-  def activation_btn(iterator)
-    path = send("activate_#{iterator.class.to_s.underscore}_path", iterator)
-    link_to activate_img(iterator), path, method: :post, remote: true, id: "change_status_#{iterator.id}", 'data-type' => :json, class: 'activate_btn'
-  end
 
   def app_about_btn
     link_to image_tag('info.png', title: t('helpers.about.title')), 'javascript:void(0)', id: 'app_about_btn'

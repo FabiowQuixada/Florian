@@ -28,6 +28,11 @@ class IndexCommons {
       window.location = ServerFunctions.paths.index(model);
     });
 
+    $('#index_table').on('click', '.status_btn', e => {
+      const id = $(e.currentTarget).closest('.model_row').find('.model_id').html();
+      IndexCommons.update_status(id);
+    });
+
     $('.destroy_btn').on('click', e => {
       const id = $(e.currentTarget).closest('.model_row').find('.model_id').html();
       const model = $('#rails_model').val();
@@ -37,6 +42,54 @@ class IndexCommons {
         IndexCommons.destroy_model.bind(self, id)
       );
     });
+  }
+
+  static update_status(id) {
+    const controller = $('#rails_controller').val();
+    const target = `#model_${id} .status > a`;
+    // TODO
+    const current_status = $(`#index_table #model_${id} .activate_btn`).length;
+
+    $.ajax({
+      type: "POST",
+      url: IndexCommons.status_path(controller, id, current_status),
+      beforeSend: xhr => {
+        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+      },
+      dataType: "json",
+      success: response => {
+        const message = response.message;
+        const model = $('#rails_model').val();
+        const target = `tr#model_${id} td.status`;
+
+        if(response.status === "ok") {
+          display_notice(message);
+
+          if(response.activated === true) {
+            $(target).html(
+              ServerFunctions.buttons.deactivate(model, response.id)
+            );
+          }
+          else {
+            $(target).html(
+              ServerFunctions.buttons.activate(model, response.id)
+            );
+          }
+        } else {
+          display_error(message);
+        }
+      },
+      error: response => {
+        display_error(I18n.t('error_pages.internal_server_error.title'));
+      }
+    });
+  }
+
+  static status_path(controller, id, is_now_active) {
+    if(is_now_active === 0)
+      return ServerFunctions.paths.deactivate(controller, id);
+    else
+      return ServerFunctions.paths.activate(controller, id);
   }
 
   static destroy_model(id) {

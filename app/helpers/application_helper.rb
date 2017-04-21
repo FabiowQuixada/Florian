@@ -71,11 +71,11 @@ module ApplicationHelper
   end
 
   def activate_img(iterator)
-    image_tag('deactivate.png', title: genderize_tag(iterator, 'model_phrases.status.is_inactive'), class: 'activate_btn status_btn')
+    image_tag('deactivate.png', title: genderize_tag(iterator, 'model_phrases.status.is_inactive'), id: "change_status_#{iterator.id}", class: 'activate_btn status_btn')
   end
 
   def deactivate_img(iterator)
-    image_tag('activate.png', title: genderize_tag(iterator, 'model_phrases.status.is_active'), class: 'deactivate_btn status_btn')
+    image_tag('activate.png', title: genderize_tag(iterator, 'model_phrases.status.is_active'), id: "change_status_#{iterator.id}", class: 'deactivate_btn status_btn')
   end
 
   def arrow_down

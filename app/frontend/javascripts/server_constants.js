@@ -20,7 +20,9 @@ const Constants = {
 
     assets: {
       edit: "/assets/edit-948a7de1e9b5b9831a539a276d13172ebcc261325a7936481e240174cd00d40a.png",
-      delete: "/assets/delete-3a0379bf402ba2c782f7391618c6af3ec238cd0cbf83a73d95fb64779b2b9e11.png"
+      delete: "/assets/delete-3a0379bf402ba2c782f7391618c6af3ec238cd0cbf83a73d95fb64779b2b9e11.png",
+      activate: "/assets/activate-1ba06c9e55681638539c7f621edb2d27abddff75fee30604edf3b0bc8629eb7c.png",
+      deactivate: "/assets/deactivate-8b6116799d6aa7b16f68da5b33d97cb50eea6d55ced20194b220829471d6da58.png",
     }
   },
 
