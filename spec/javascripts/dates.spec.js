@@ -15,6 +15,7 @@ describe("Date", () => {
 
   it("is converted to rails format", () => {
     expect(Dates.to_rails_date("02/13/2014")).toEqual("2014-02-13");
+    expect(Dates.to_rails_date("")).toBe(null);
     expect(() => Dates.to_rails_date("13/02/2014")).toThrow(Dates.date_exc_msg());
     expect(() => Dates.to_rails_date("02/32/2014")).toThrow(Dates.date_exc_msg());
     expect(() => Dates.to_rails_date("02/32014")).toThrow(Dates.date_exc_msg());

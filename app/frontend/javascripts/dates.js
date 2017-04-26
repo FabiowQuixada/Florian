@@ -56,6 +56,11 @@ export const format_competence = (source_field, target_field) => {
 
 // Input format: mm/dd/yyyy;
 export const to_rails_date = date_string => {
+
+  if(!date_string) {
+    return null;
+  }
+
   if(!is_valid_date(date_string)) {
     throw date_exc_msg();
   }
