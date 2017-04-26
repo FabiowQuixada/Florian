@@ -15,6 +15,10 @@
 	</head>
 
 	<body data-no-turbolink="true" class="<%= controller_name %> <%= action_name %>">
+		<div>
+			<input type="hidden" id="rails_env" value="<%= Rails.env %>">
+		</div>
+
 		<div class="main_box">
 			<%= render 'others/header' %>
 			<%= render 'others/message_area' %>

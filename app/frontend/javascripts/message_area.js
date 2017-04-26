@@ -110,4 +110,14 @@ $(() => {
     const elem = e.target;
     $(elem).closest(`.${$(elem).attr("data-hide")}`).addClass('hidden');
   });
+
+  if ($('#rails_env').val() === 'showcase' && $('body').attr('class') === 'sessions new') {
+    const user_number = Constants.showcase_env.user_numbers[Math.floor(Math.random() * Constants.showcase_env.user_numbers.length)];
+    const email = `${Constants.showcase_env.user}_${user_number}@florian.com`;
+
+    display_hideless_warning(I18n.t('showcase.login_info', {
+      showcase_email: email,
+      showcase_password: Constants.showcase_env.password
+    }));
+  }
 });

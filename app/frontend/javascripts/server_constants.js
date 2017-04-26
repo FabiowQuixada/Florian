@@ -27,6 +27,13 @@ const Constants = {
   system_settings: {
     receipt_title: "Donation Receipt for #maintainer - #competence"
   },
+
+  showcase_env: {
+    user: "guest",
+    user_numbers: [1909, 1224, 2043, 2049, 1166, 1890, 1811, 2462, 2321, 1725, 2658, 1538, 1229, 2775, 2685, 2265, 1887, 2808, 1874, 2071],
+    password: "guest_pass"
+  },
+
   admin_email: "ftquixada@gmail.com",
 
   week_totals_number: 6,

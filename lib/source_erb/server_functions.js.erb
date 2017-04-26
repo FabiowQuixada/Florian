@@ -7,7 +7,8 @@
 const ServerFunctions = {
   paths: {
     send_test_receipt_email: (id) => "<%= send_test_receipt_email_path -1 %>".replace("-1", id),
-    resend_receipt_email: (id) => "<%= resend_receipt_email_path -1 %>".replace("-1", id)
+    resend_receipt_email: (id) => "<%= resend_receipt_email_path -1 %>".replace("-1", id),
+    index: model_name => "<%= receipt_emails_path %>".replace("receipt_emails", model_name),
   }
 }
 

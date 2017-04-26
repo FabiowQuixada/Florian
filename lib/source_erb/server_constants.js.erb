@@ -30,6 +30,13 @@ const Constants = {
   system_settings: {
     receipt_title: "<%= SystemSetting.first.re_title %>"
   },
+
+  showcase_env: {
+    user: "<%= SHOWCASE_USER.underscore %>",
+    user_numbers: <%= GUEST_USERS_NUMBERS %>,
+    password: "<%= SHOWCASE_PASSWORD %>"
+  },
+
   admin_email: "<%= ADMIN_EMAIL %>",
 
   week_totals_number: <%= ProductAndServiceWeek::TOTALS_NUMBER %>,
