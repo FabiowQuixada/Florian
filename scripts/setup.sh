@@ -11,6 +11,11 @@ cp external/brdata.rb vendor/cache/ruby/2.2.0/gems/brdata-3.3.0/
 cp external/db_backup.rb ~/Backup/models/
 
 
+# Node & Npm
+sudo apt-get install nodejs npm
+sudo npm install
+
+
 # PhantomJS
 sudo apt-get install build-essential chrpath libssl-dev libxft-dev
 sudo apt-get install libfreetype6 libfreetype6-dev
@@ -21,6 +26,7 @@ wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2
 sudo tar xvjf $PHANTOM_JS.tar.bz2
 sudo mv $PHANTOM_JS /usr/local/share
 sudo ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin
+
 
 # Redirects port 3000 to 80
 sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 3000

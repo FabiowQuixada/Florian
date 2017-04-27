@@ -9,6 +9,7 @@ AllCops:
     - 'vendor/**/*'
     - external/**
     - lib/generators/iaq_gen/florian_gen_generator.rb
+    - node_modules/**/*
 
 RSpec/DescribedClass:
   Exclude:
