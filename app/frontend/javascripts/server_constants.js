@@ -15,7 +15,6 @@ const Constants = {
 
   paths: {
     email_row_helpers: "/helpers/email_row",
-    donation_row_maintainers: "/maintainers/donation_row",
     send_to_analysis_product_and_service_weeks: "/product_and_service_weeks/send_to_analysis",
     send_maintainers_product_and_service_weeks: "/product_and_service_weeks/send_maintainers",
     create_and_new_donations: "/donations/create_and_new",

@@ -16,10 +16,6 @@ class MaintainersController < ApplicationController
     end
   end
 
-  def donation_row
-    render partial: 'donations/donation', locals: { donation: Donation.new(donation_params) }
-  end
-
   private #############################################
 
   def maintainer_params
@@ -29,11 +25,6 @@ class MaintainersController < ApplicationController
                                        :donations_to_be_deleted, :contacts_to_be_deleted,
                                        donations_attributes: [:id, :value, :donation_date, :remark],
                                        contacts_attributes: [:id, :name, :position, :telephone, :celphone, :email, :fax])
-  end
-
-  def donation_params
-    params[:donation][:donation_date] = Date.strptime(params[:donation][:donation_date], '%m/%d/%Y').strftime('%F')
-    params.require(:donation).permit(:id, :value, :donation_date, :remark)
   end
 
   def index_query

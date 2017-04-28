@@ -25,12 +25,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :maintainers, except: [:show] do
-    collection do
-      get 'donation_row'
-    end
-  end
-
+  resources :maintainers, except: [:show]
   resources :system_settings, only: [:index, :update]
   resources :bills, except: [:show]
 

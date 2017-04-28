@@ -59,60 +59,6 @@ const maintainers_donation_tab_form = () => {
     }
   }
 
-  validate_donation = (donation) => {
-    const errors = new Array();
-
-    if(!donation.donation_date) {
-      const attribute = I18n.t("activerecord.attributes.donation.date");
-      errors.push(I18n.t("errors.messages.blank", { attribute }));
-    }
-
-    if((!donation.value || donation.value === to_money(0)) && !donation.remark) {
-      errors.push(I18n.t('errors.donation.value_or_remark'));
-    }
-
-    if(errors.length > 0) {
-      display_error(errors, 'donation');
-    }
-
-    return errors.length === 0;
-  }
-
-  add_donation = (donation) => {
-    if(validate_donation(donation)) {
-      $.ajax({
-        url: Constants.paths.donation_row_maintainers, 
-        data: { donation },
-        success: result => $('#donations_table > tbody:last-child').append(result)
-      });
-
-      temp_donation_id -= 1;
-      clean_donation_fields();
-      $('#no_donations_row').addClass('hidden');
-    }
-  }
-
-  build_donation = () => {
-    const donation_date = $('#new_donation_date').val();
-    const value = $('#new_donation_value').val();
-    const remark = $('#new_donation_remark').val();
-
-    return {
-      id: temp_donation_id,
-      donation_date,
-      value,
-      remark
-    }
-  }
-
-  clean_donation_fields = () => {
-    $('#new_donation_date').val('');
-    $('#new_donation_value').val(to_money(0));
-    $('#new_donation_remark').val('');
-
-    hide_errors_from_box('donation');
-  }
-
   toogle_parcel_qty_field();
   set_last_parcel_date();
 
@@ -120,25 +66,4 @@ const maintainers_donation_tab_form = () => {
   $('#maintainer_payment_period').on('change', set_last_parcel_date);
   $('#maintainer_payment_frequency').on('change', set_last_parcel_date);
   $('#maintainer_payment_frequency').change(toogle_parcel_qty_field);
-  $('body').on('click', '#new_donation_btn', set_datepicker);
-
-  $('#add_donation_btn').on('click', () => {
-    donation = build_donation();
-    add_donation(donation);
-  });
-
-  $('body').on('click', '.remove_donation_btn', e => {
-    const elem = $(e.currentTarget);
-    const id = elem.closest('.donation_row').find('.donation_id').text();
-
-    $(`#donation_${id}_row`).remove();
-
-    if(document.getElementById("donations_table").rows.length == 2) {
-      $('#no_donations_row').removeClass('hidden');
-    }
-
-    if(id > 0) {
-      $('#maintainer_donations_to_be_deleted').val(`${$('#maintainer_donations_to_be_deleted').val()}${id},`);
-    }
-  });
 }
