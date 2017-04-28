@@ -16,10 +16,6 @@ class MaintainersController < ApplicationController
     end
   end
 
-  def contact_row
-    render partial: 'contacts/contact', locals: { contact: Contact.new(contact_params) }
-  end
-
   def donation_row
     render partial: 'donations/donation', locals: { donation: Donation.new(donation_params) }
   end
@@ -33,10 +29,6 @@ class MaintainersController < ApplicationController
                                        :donations_to_be_deleted, :contacts_to_be_deleted,
                                        donations_attributes: [:id, :value, :donation_date, :remark],
                                        contacts_attributes: [:id, :name, :position, :telephone, :celphone, :email, :fax])
-  end
-
-  def contact_params
-    params.require(:contact).permit(:id, :name, :position, :email_address, :telephone, :celphone, :fax)
   end
 
   def donation_params
