@@ -32,8 +32,6 @@ const receipt_emails_form = () => {
       const company_name = $('#receipt_email_maintainer > option[selected="selected"]').text();
 
       clean_resend_modal();
-      $('#resend_email_form').get(0).setAttribute('action', 
-        ServerFunctions.paths.resend_receipt_email(id));
       $('.modal_maintainer_name').text(company_name);
       $('#resend_email_modal').modal('show');
     });
@@ -43,7 +41,6 @@ const receipt_emails_form = () => {
       const company_name = $('#receipt_email_maintainer > option[selected="selected"]').text();
       
       clean_send_test_modal();
-      $('#send_test_email_form').get(0).setAttribute('action', ServerFunctions.paths.send_test_receipt_email(id));
       $('.modal_maintainer_name').text(company_name);
       $('#send_test_email_modal').modal('show');
     });

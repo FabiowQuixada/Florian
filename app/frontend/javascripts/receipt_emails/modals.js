@@ -2,6 +2,7 @@ import { on_controller, on_action } from './../application'
 import { display_info, display_notice, parse_json_errors } from './../message_area'
 import I18n from './../i18n'
 import { attr_values } from './../form_commons'
+import ServerFunctions from './../server_functions'
 
 $(() => { if(on_controller('receipt_emails')) receipt_emails_modals() });
 
@@ -12,64 +13,76 @@ const default_competence = () => `${("0" + (new Date().getMonth()+1)).slice(-2)}
 const receipt_emails_modals = () => {
   $('#modal_save_btn').on('click', () => document.getElementById("main_form").submit())
 
-  $("#send_test_email_form").on("ajax:success", (e, data, status, xhr) => {
-    display_notice(data.message);
-    add_history_item(data);
-  }).on("ajax:error", (e, xhr, status, error) => parse_json_errors(xhr.responseText));
-
-  $("#resend_email_form").on("ajax:success", (e, data, status, xhr) => {
-    display_notice(data.message);
-    add_history_item(data);
-    add_recent_email(data);
-  }).on("ajax:error", (e, xhr, status, error) => parse_json_errors(xhr.responseText));
-
-  $('#resend_email_form').submit( () => {
+  $("#resend_email_modal .btn-ok").on('click', function() {
     display_info(I18n.t('alert.email.resending'));
-
     $('#resend_email_modal').modal('hide');
 
-    if(on_action('edit')) {
-      for (let key in attr_values) {
-        add_hidden_field('resend_email_form', key, $(`#${key}`).val());
-      }
-
-      add_hidden_field('resend_email_form', 'active', $('#model_status').val());
-    }
+    const id = $('#receipt_email_id').val();
+    $.ajax(ReceiptEmailsModals.send_request(
+      ServerFunctions.paths.resend_receipt_email(id),
+      $('#resend_competence').val()
+    ));
   });
 
-  $('#send_test_email_form').submit( () => {
+  $("#send_test_email_modal .btn-ok").on('click', function() {
     display_info(I18n.t('alert.email.sending_test'));
-
     $('#send_test_email_modal').modal('hide');
 
-    if(on_action('edit')) {
-      for (let key in attr_values) {
-        add_hidden_field('send_test_email_form', key, $(`#${key}`).val());
-      }
-
-      add_hidden_field('send_test_email_form', 'active', $('#model_status').val());
-    }
+    const id = $('#receipt_email_id').val();
+    $.ajax(ReceiptEmailsModals.send_request(
+      ServerFunctions.paths.send_test_receipt_email(id),
+      $('#send_test_competence').val()
+    ));
   });
 
-  const add_history_item = response => {
+  const add_history_item = email => {
     $('#history_table > tbody:last-child').append(
       `<tr>
-        <td>${response.model.date}<\/td>
-        <td>${response.model.value}<\/td>
-        <td>${response.model.type}<\/td>
-        <td>${response.model.user}<\/td>
+        <td>${email.date}<\/td>
+        <td>${email.value}<\/td>
+        <td>${email.type}<\/td>
+        <td>${email.user}<\/td>
       <\/tr>`
     );
   }
 
-  const add_recent_email = response => {
+  const add_recent_email = email => {
     $('#recent_emails_table > tbody:last-child').append(
       `<tr>
-        <td>${response.model.date}<\/td>
-        <td>${response.model.maintainer}<\/td>
-        <td>${response.model.type}<\/td>
+        <td>${email.date}<\/td>
+        <td>${email.maintainer}<\/td>
+        <td>${email.type}<\/td>
       <\/tr>`
     );
+  }
+
+  const send_request = (url, competence) => {
+    return { 
+      url,
+      type: 'POST',
+      beforeSend: xhr => {
+        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+      },
+      data: {
+        competence,
+        receipt_email: {
+          id: $('#receipt_email_id').val(),
+          recipients_array: $('#receipt_email_recipients_array').val(),
+          value: $('#receipt_email_value').val(),
+          maintainer: $('#receipt_email_id').val(),
+          title: $('#receipt_email_title').val(),
+          body: $('#receipt_email_body').val()
+          // TODO active
+        }
+      },
+      success: response => {
+        display_notice(response.message);
+        ReceiptEmailsModals.add_history_item(response.model);
+      },
+      error: response => {
+        parse_json_errors(response.responseText);
+      }
+    };
   }
 
   const add_hidden_field = (form_id, key, value) => {

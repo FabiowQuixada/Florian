@@ -45,6 +45,8 @@
     </tfoot>
 </table>
 
+<input type="hidden" id="receipt_email_id" />
+
 <%= render 'shared/index_commons' %>
 
 <div class="asterisk-description"><%= t('helpers.receipt_email.index_footer', time: ReceiptEmail::DAILY_SEND_HOUR.to_s, competence: (Date.today + 1.month).strftime("%B/%Y").capitalize) %></div>
