@@ -1,7 +1,13 @@
 import { on_page } from './../application'
 
-$(() => { if(on_page('bills', 'index')) bills_index() });
+$(() => { if(on_page('bills', 'index')) new BillsIndex() });
 
-const bills_index = () => {
-  $('#graphs_btn').click( () => $('#graphs_modal').modal('show'));
-}
+const BillsIndex = (function() {
+  function BillsIndex() {
+	$('#graphs_btn').click( () => $('#graphs_modal').modal('show'));
+  }
+  
+  return BillsIndex;
+}());
+
+export default BillsIndex;

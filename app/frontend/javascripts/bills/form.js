@@ -1,12 +1,19 @@
 import { on_page, currency_sum } from './../application'
 import { format_competence } from './../dates'
 
-$(() => { if(on_page('bills', 'form')) bills_form(); });
+$(() => { if(on_page('bills', 'form')) new BillsForm(); });
 
-const bills_form = () => {
-  const before_submit_or_leave = () => format_competence('bill_aux_competence', 'bill_competence')
+const BillsForm = (function() {
+  function BillsForm() {
 
-  $('#main_form').on('submit', () => before_submit_or_leave());
-  $('#bill_aux_competence').on('change', () => before_submit_or_leave());
-  $('#summable-inputs input').on('change', () => $('#bill_totals').val(currency_sum('#summable-inputs input')));
-}
+  	this.before_submit_or_leave = () => format_competence('bill_aux_competence', 'bill_competence');
+
+	$('#main_form').on('submit', () => before_submit_or_leave());
+	$('#bill_aux_competence').on('change', () => before_submit_or_leave());
+	$('#summable-inputs input').on('change', () => $('#bill_totals').val(currency_sum('#summable-inputs input')));
+  }
+  
+  return BillsForm;
+}());
+
+export default BillsForm;
