@@ -56,6 +56,8 @@ export const toogle_admin_data = () => {
   display_admin_data = !display_admin_data;
 }
 
+export const displaying_admin_data = () => display_admin_data
+
 export const to_money = number => {
   const cents = I18n.t("number.currency.format.precision"),
     d = I18n.t("number.currency.format.separator"),
