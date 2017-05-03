@@ -2,63 +2,76 @@ import { on_page } from './../application'
 import { set_number_of_tabs } from './../tab_commons'
 import { init } from './../form_commons'
 
-$(() => { if(on_page('maintainers', 'form')) maintainers_form() });
+$(() => { if(on_page('maintainers', 'form')) new MaintainersForm() });
 
-const maintainers_form = () => {
-  const new_donations = () => {
-    let new_donation = false;
+const MaintainersForm = (function() {
+  function MaintainersForm() {
 
-    $("#donations_table .server-communication-data input.donation_id").each((index, input) => {
-      if(parseInt($(input).val()) < 0)
-        new_donation = true;
-    });
+    this.update_fields_by_entity_type = () => {
+      $('.person_area').addClass('hidden');
+      $('.maintainer_area').addClass('hidden');
 
-    return new_donation;
-  }
-
-  const new_contacts = () => {
-    let new_contact = false;
-
-    $("#contacts_table .server-communication-data input.contact_id").each((index, td) => {
-      if(parseInt($(td).val()) < 0)
-        new_contact = true;
-    });
-
-    return new_contact;
-  }
-
-  const before_submit_or_leave = () => new_donations() || new_contacts()
-
-  init(before_submit_or_leave);
-
-  set_number_of_tabs('main', 3);
-
-  const update_fields_by_entity_type = () => {
-    $('.person_area').addClass('hidden');
-    $('.maintainer_area').addClass('hidden');
-
-    if($('#maintainer_entity_type').val() == "company") {
-      $('.maintainer_area').removeClass('hidden');
-    } else if($('#maintainer_entity_type').val() == "person") {
-      $('.person_area').removeClass('hidden');
-    }
-  }
-
-  $('#main_form').on('submit', e => {
-    const errors = new Array();
-    const email = $('#maintainer_email_address').val();
-
-    before_submit_or_leave();
-
-    if(email && !validate_email(email)) {
-      errors.push(I18n.t('alert.email.invalid_recipient'));
+      if($('#maintainer_entity_type').val() === "company") {
+        $('.maintainer_area').removeClass('hidden');
+      } else if($('#maintainer_entity_type').val() === "person") {
+        $('.person_area').removeClass('hidden');
+      }
     }
 
-    if(errors.length > 0) {
-      e.preventDefault();
-      display_form_errors(errors);
-    }
-  });
+    this.new_donations = () => {
+      let new_donation = false;
 
-  update_fields_by_entity_type();
-}
+      $("#donations_table .server-communication-data input.donation_id").each((index, input) => {
+        if(parseInt($(input).val()) < 0)
+          new_donation = true;
+      });
+
+      return new_donation;
+    }
+
+    this.new_contacts = () => {
+      let new_contact = false;
+
+      $("#contacts_table td.contact_id").each((index, td) => {
+        if(parseInt($(td).html()) < 0)
+          new_contact = true;
+      });
+
+      return new_contact;
+    }
+
+    this.before_submit_or_leave = () => {
+      return this.new_donations() || this.new_contacts();
+    }
+
+    this.setup_listeners = () => {
+      $('#maintainer_entity_type').on('change', this.update_fields_by_entity_type);
+
+      $('#main_form').on('submit', e => {
+        const errors = new Array();
+        const email = $('#maintainer_email_address').val();
+
+        before_submit_or_leave();
+
+        if(email && !validate_email(email)) {
+          const attribute = I18n.t('activerecord.attributes.maintainer.email_address');
+          errors.push(I18n.t('errors.messages.invalid', { attribute: attribute }));
+        }
+
+        if(errors.length > 0) {
+          e.preventDefault();
+          display_form_errors(errors);
+        }
+      });
+    }
+
+    set_number_of_tabs('main', 3);
+    init(this.before_submit_or_leave);
+    this.update_fields_by_entity_type();
+    this.setup_listeners();
+  }
+
+  return MaintainersForm;
+}());
+
+export default MaintainersForm;

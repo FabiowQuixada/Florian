@@ -1,9 +1,52 @@
-<input id="maintainer_entity_type" value="company" />
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <title>Homepage</title>
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+    </head>
+    <body>
 
-<div id="maintainer_area" class="maintainer_area" />
-<div id="person_area" class="person_area" />
+      <input id="maintainer_entity_type" value="company" />
 
-<table id="contacts_table">
-  <thead></thead>
-  <tbody></tbody>
-</table>
+      <div id="maintainer_area" class="maintainer_area" />
+      <div id="person_area" class="person_area" />
+
+      <div id="donation_area"></div>
+      <div id="main_tab_2"></div>
+
+      <table id="contacts_table">
+        <thead></thead>
+        <tbody>
+          <tr>
+            <td class="server-communication-data">
+              <input type="hidden" class="contact_id" value="-4" />
+              <input type="hidden" class="contact_id" value="7" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table id="donations_table">
+        <thead></thead>
+        <tbody>
+          <tr>
+            <td class="server-communication-data">
+              <input type="hidden" class="donation_id" value="-4" />
+              <input type="hidden" class="donation_id" value="7" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <script>
+
+        var contactList = [];
+        var contact_first_time = true;
+
+        var donationList = [];
+        var donation_first_time = true;
+
+      </script>
+    </body>
+</html>
