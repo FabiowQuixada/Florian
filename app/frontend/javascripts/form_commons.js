@@ -5,6 +5,11 @@ let any_change = false;
 let attr_values = new Array();
 let before_submit_or_leave;
 
+// TODO: Not the best way of getting the model name;
+const go_back = (model_name = $('body').attr('class').split(' ')[0]) => {
+  window.location = ServerFunctions.paths.index(model_name);
+}
+
 export const display_form_errors = message => {
   let result = '';
 
@@ -44,12 +49,12 @@ $(() => {
         before_submit_or_leave();
       }
 
-      let changed_values_list = "";
+      // const changed_values_list = [];
 
       if(!any_change) {
         for (let key in attr_values) {
           if(has_changed(key)) {
-            changed_values_list += `' ${key}`;
+            // changed_values_list.push(key);
             any_change = true;
           }
         }
@@ -81,9 +86,7 @@ $(() => {
     $('#form_back_btn').on('click', handle_back_on_edit);
 
   } else {
-    $(document).ready( () => {
-      $('.back_btn').on('click', () => go_back());
-    });
+    $( () => $('.back_btn').on('click', () => go_back()) );
   }
 });
 

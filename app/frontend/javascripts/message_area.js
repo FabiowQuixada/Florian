@@ -1,10 +1,6 @@
 export const display_error = (message, error_box_id = 'global') => {
   let result = '';
 
-  if(is_empty(message)) {
-    return;
-  }  
-
   if (Object.prototype.toString.call(message) === '[object Array]') {
     result = msg_as_html_ul(message);
   } else {
@@ -17,10 +13,6 @@ export const display_error = (message, error_box_id = 'global') => {
 }
 
 export const display_info = message => {
-  if(is_empty(message)) {
-    return;
-  } 
-
   hide_all_messages();
   to_top();
   $('#global_info_massages').html(message);
@@ -28,10 +20,6 @@ export const display_info = message => {
 }
 
 const display_notice = message => {
-  if(is_empty(message)) {
-    return;
-  } 
-
   hide_all_messages();
   to_top();
   $('#global_notice_massages').html(message);
@@ -39,10 +27,6 @@ const display_notice = message => {
 }
 
 const display_warning = message => {
-  if(is_empty(message)) {
-    return;
-  } 
-  
   hide_all_messages();
   to_top();
   $('#global_warning_massages').html(message);
@@ -50,10 +34,6 @@ const display_warning = message => {
 }
 
 const display_hideless_warning = message => {
-  if(is_empty(message)) {
-    return;
-  } 
-  
   $('#global_hideless_warning_massages').html(message);
   $('#global_hideless_warning_box').removeClass('hidden');
 }
@@ -82,9 +62,6 @@ const hide_errors = () => {
     $('#form_error_box').addClass('hidden');
   }
 }
-
-const is_empty = message => (typeof message === 'string' || message instanceof String ||
-  (Object.prototype.toString.call(message) === '[object Array]' && message.length === 0))
 
 export const hide_all_messages = () => {
   hide_info();
@@ -125,8 +102,10 @@ export const to_top = () => {
   }, 1000);
 }
 
-// Handles alert hide, instead of dismiss;
-$("[data-hide]").on("click", e => {
-  elem = e.target;
-  $(elem).closest(`.${$(elem).attr("data-hide")}`).hide();
+$(() => {
+  // Handles alert hide, instead of dismiss;
+  $("[data-hide]").on("click", e => {
+    const elem = e.target;
+    $(elem).closest(`.${$(elem).attr("data-hide")}`).addClass('hidden');
+  });
 });

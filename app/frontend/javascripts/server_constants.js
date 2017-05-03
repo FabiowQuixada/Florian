@@ -19,11 +19,16 @@ const Constants = {
     contact_row_maintainers: "/maintainers/contact_row",
     send_to_analysis_product_and_service_weeks: "/product_and_service_weeks/send_to_analysis",
     send_maintainers_product_and_service_weeks: "/product_and_service_weeks/send_maintainers",
-    create_and_new_donations: "/donations/create_and_new"
+    create_and_new_donations: "/donations/create_and_new",
+
+    assets: {
+      edit: "/assets/edit-948a7de1e9b5b9831a539a276d13172ebcc261325a7936481e240174cd00d40a.png",
+      delete: "/assets/delete-3a0379bf402ba2c782f7391618c6af3ec238cd0cbf83a73d95fb64779b2b9e11.png"
+    }
   },
 
   system_settings: {
-    receipt_title: "Donation Receipt for #maintainer - #competencelalalala"
+    receipt_title: "Donation Receipt for #maintainer - #competence"
   },
   admin_email: "ftquixada@gmail.com",
 

@@ -13,10 +13,11 @@
 //= require jquery2
 //= require jquery_ujs
 //= require turbolinks
-//= require bootstrap
-//= require twitter/bootstrap
-//= require bootstrap-datepicker
 //= require jquery.turbolinks
+//= require react
+//= require react_ujs
+//= require components
+//= require redux
 
 /* 
 
