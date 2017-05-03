@@ -15,8 +15,11 @@
 	</head>
 
 	<body data-no-turbolink="true" class="<%= controller_name %> <%= action_name %>">
-		<div>
+		<div id="server_data">
 			<input type="hidden" id="rails_env" value="<%= Rails.env %>">
+			<input type="hidden" id="rails_model" value="<%= @model.class.model_name.name.underscore if @model %>">
+			<input type="hidden" id="i18n_model" value="<%= @model.class.model_name.name.underscore if @model %>">
+			<input type="hidden" id="rails_controller" value="<%= controller_name %>">
 		</div>
 
 		<div class="main_box">

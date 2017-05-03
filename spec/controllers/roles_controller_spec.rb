@@ -2,7 +2,6 @@ require 'rails_helper'
 
 describe RolesController, type: :controller do
   context 'model destruction' do
-    let(:sucess_msg) { { message: Role.new.was('destroyed'), success: true }.to_json }
     let(:error_msg) { { message: I18n.t('errors.deletion'), success: false }.to_json }
     let(:non_admin_msg) { { message: I18n.t('errors.unpermitted_action'), success: false }.to_json }
     let(:dependent_objects) { { message: I18n.t('errors.messages.restrict_dependent_destroy.many', record: 'users'), success: false }.to_json }
@@ -17,14 +16,14 @@ describe RolesController, type: :controller do
         count = Role.count
         xhr :delete, :destroy, id: role.id
         expect(Role.count).to eq count - 1
-        expect(response.body).to eq(sucess_msg)
+        expect(response.body).to eq sucess_msg(role.id)
       end
 
       it 'common request' do
         count = Role.count
         xhr :delete, :destroy, id: role.id
         expect(Role.count).to eq count - 1
-        expect(response.body).to eq(sucess_msg)
+        expect(response.body).to eq sucess_msg(role.id)
       end
     end
 
@@ -221,5 +220,10 @@ describe RolesController, type: :controller do
       it { expect(response).to redirect_to root_path }
       it { expect(flash[:alert]).to eq I18n.t('alert.access_denied') }
     end
+  end
+
+  #################################################################################################
+  def sucess_msg(id)
+    { message: Role.new.was('destroyed'), model_id: id, success: true }.to_json
   end
 end

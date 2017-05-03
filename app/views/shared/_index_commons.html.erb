@@ -4,7 +4,6 @@
 <div class="modal fade" id="remove_modal" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
-			<%= form_tag({url: '#'}, method: 'delete', remote: true, id: 'remove_form') do %>
 			<div class="modal-header">
 				<%= genderize_tag(@model, 'model_phrases.prompt.remove') %>
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -19,9 +18,10 @@
 				<button type="button" class="btn btn-primary" data-dismiss="modal">
 					<%= t('helpers.action.cancel') %>
 				</button>
-				<%= submit_tag t('helpers.action.remove'), class: 'btn btn-primary btn-ok' %>
+				<button type="button" class="btn btn-primary btn-ok" data-dismiss="modal">
+					<%= t('helpers.action.remove') %>
+				</button>
 			</div>
-			<% end %>
 		</div>
 	</div>
 </div>
@@ -31,25 +31,6 @@
 <% end %>
 
 <script>
-
-	let id_to_be_deleted = -1;
-
-	$(() => {
-		let any_field_filled = false;
-
-		$("#index_filters input:not([type='submit']), #index_filters select").each((index, field) => {
-			if ($(field).val() !== "") {
-				any_field_filled = true;
-				return;
-			}
-		});
-		
-		if(any_field_filled) {
-			$('.panel-collapse').collapse({
-			  toggle: true
-			});
-		}
-	});
 
 	<% if @model.class.column_names.include? 'active' %>
 
@@ -86,50 +67,5 @@
 		}
 
 	<% end %>
-
-	$(() => {
-		$('.clean_filters_btn').on('click', () => window.location = '<%= model_full_path(@model) %>');
-
-		$("#remove_form").on("ajax:success", (e, data, status, xhr) => {
-			display_notice(data.success);
-		}).on("ajax:error", (e, xhr, status, error) => {
-			parse_json_errors(xhr.responseText);
-		});
-
-		$('.destroy_btn').on('click', () => {
-			const id = $(this).closest('.model_row').find('.model_id').html();
-			display_confirm_modal(I18n.t('modal.title.destroy'),
-				"<%= genderize_tag(@model, 'model_phrases.are_you_sure.destroy') %>", destroy_model.bind(self, id));
-		});
-
-	});
-
-	const destroy_model = id => {
-		id_to_be_deleted = id;
-
-		$.ajax({
-			type: "DELETE",
-			url: `<%= model_full_path(@model) %>/${id}`,
-			dataType: "json",
-			success: response => {
-				const message = response.message;
-
-				if(response.success) {
-					display_notice(message);
-
-					$(`#model_${id_to_be_deleted}`).remove();
-
-					if($('#index_table tbody tr').length == 1) {
-						$(<%= "no_#{@model.class.name.pluralize.underscore}_row" %>).removeClass('hidden');
-					}
-				} else {
-					display_error(message);
-				}
-			},
-			error: response => {
-				display_error(I18n.t('error_pages.internal_server_error.title'));
-			}
-		});
-	}
 
 </script>
