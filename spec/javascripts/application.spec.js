@@ -7,19 +7,14 @@ describe("application", () => {
   });
 
   describe("admin data", () => {
-
     it("displays admin data", () => {
-      $('.admin-only').show();
-      application.toogle_admin_data();
-      expect(application.displaying_admin_data()).toEqual(true);
-      expect($('.admin-only')[0]).toBeHidden();
+      application.display_admin_data();
+      expect($('#admin-data')).not.toBeHidden();
     });
 
     it("hides admin data", () => {
-      $('.admin-only').hide();
-      application.toogle_admin_data();
-      expect(application.displaying_admin_data()).toEqual(false);
-      expect($('.admin-only')[0]).not.toBeHidden();
+      application.hide_admin_data();
+      expect($('#admin-data')).toBeHidden();
     });
   });
   

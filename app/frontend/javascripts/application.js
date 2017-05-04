@@ -44,19 +44,25 @@ export const validate_email = email => (
       .test(email)
   )
 
-let display_admin_data = false;
+let displaying_admin_data = false;
 
-export const toogle_admin_data = () => {   
-  if(display_admin_data) {
-    $('.admin-only').show();
+export const toogle_admin_data = () => {
+  if(displaying_admin_data) {
+    hide_admin_data();
   } else {
-    $('.admin-only').hide();
+    display_admin_data();
   }
-
-  display_admin_data = !display_admin_data;
 }
 
-export const displaying_admin_data = () => display_admin_data
+export const hide_admin_data = () => {
+  displaying_admin_data = false;
+  $('.admin-only').hide();
+}
+
+export const display_admin_data = () => {
+  displaying_admin_data = true;
+  $('.admin-only').show();
+}
 
 export const to_money = number => {
   const cents = I18n.t("number.currency.format.precision"),
@@ -98,5 +104,5 @@ export const escape_html = string => {
 }
 
 $(() => {
-  toogle_admin_data();
+  hide_admin_data();
 })
