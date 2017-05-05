@@ -9,20 +9,14 @@ $(() => { if(on_action('index')) new IndexCommons() });
 const IndexCommons = (function() {
   function IndexCommons() {
     this.setup_filter_panel = () => {
-      let any_field_filled = false;
+      $('#index_filters.panel-collapse').collapse("hide");
 
       $("#index_filters input:not([type='submit']), #index_filters select").each((index, field) => {
-        if (!$(field).val()) {
-          any_field_filled = true;
+        if ($(field).val()) {
+          $('#index_filters.panel-collapse').collapse("show");
           return;
         }
       });
-
-      if(any_field_filled) {
-        $('.panel-collapse').collapse({
-          toggle: true
-        });
-      }
     }
 
     this.setup_listeners = () => {
