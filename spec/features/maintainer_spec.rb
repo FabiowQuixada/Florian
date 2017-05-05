@@ -40,12 +40,12 @@ describe Maintainer, js: true, type: :request do
 
       it { expect_info_msg_to_include 'found' }
 
-      it '' do
+      it 'displays `low` category' do
         index_table = find('#index_table')
         expect(index_table).to have_content I18n.t 'enums.maintainer.category.low'
       end
 
-      it '' do
+      it 'displays no category other than `low`' do
         index_table = find('#index_table')
         described_class.categories.each do |category|
           expect(index_table).not_to have_content I18n.t "enums.maintainer.category.#{category}" if category != 'low'

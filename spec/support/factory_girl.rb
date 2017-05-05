@@ -23,6 +23,8 @@ RSpec.configure do |config|
     User.create(name: 'Comum', email: 'teste_comum@yahoo.com.br', password: 'usuario_comum', password_confirmation: 'usuario_comum', bcc: 'teste@test.com', role: role2)
 
     FactoryGirl.create :maintainer, :with_contacts, :with_donations
+    FactoryGirl.create :maintainer, category: :low
+    FactoryGirl.create :maintainer, group: :maintainer
     comp1 = Maintainer.create(entity_type: 'company', name: 'Empresa I', registration_name: 'Empresa I Ltda.', cnpj: '31162488000187', category: 'medium', address: 'lala', group: 'maintainer')
 
     Donation.create(value: 0.00, donation_date: Time.now, remark: '02 potes de creme', maintainer: comp1)
