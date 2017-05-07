@@ -8,29 +8,35 @@ webpackConfig.entry = null;
 
 module.exports = function(config) {
   config.set({
-
-    // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
-
-
-    // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine-jquery', 'jasmine'],
+    reporters: ['progress'],
+    port: 9876,
+    colors: true,
+    logLevel: config.LOG_INFO, // LOG_DEBUG
+    autoWatch: true,
+    browsers: ['PhantomJS'],
+    singleRun: false,
+    concurrency: Infinity,
+    webpack: webpackConfig,
+    webpackMiddleware: { noInfo: true  },
+    client: { captureConsole: true },
 
-
-    // list of files / patterns to load in the browser
     files: [
       'https://code.jquery.com/jquery-1.11.2.min.js',
-      { pattern: 'app/frontend/javascripts/**/*.js', included: false },
-      { pattern: 'app/frontend/javascripts/**/*.jsx', included: false },
       'spec/javascripts/**/*.js',
       'spec/javascripts/**/*.jsx',
+      { pattern: 'app/frontend/javascripts/**/*.js', included: false },
+      { pattern: 'app/frontend/javascripts/**/*.jsx', included: false },
       { pattern: 'spec/javascripts/fixtures/**/*.html', included: false, served: true }
     ],
 
+    exclude: [
+      'app/frontend/javascripts/bootstrap.js',
+      'app/frontend/javascripts/masks.js',
+      'app/frontend/javascripts/dates_initializer.js',
+    ],
 
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       './app/assets/javascripts/bundle.js': ['webpack'],
       'app/frontend/javascripts/**/*.js': ['babel'],
@@ -38,6 +44,7 @@ module.exports = function(config) {
       'spec/javascripts/**/*.js': ['webpack', 'babel'],
       'spec/javascripts/**/*.jsx': ['webpack', 'babel'],
     },
+
     babelPreprocessor: {
       options: {
         presets: ['es2015'],
@@ -50,62 +57,6 @@ module.exports = function(config) {
         return file.originalPath;
       }
     },
-
-    webpack: webpackConfig,
-
-    webpackMiddleware: {
-      noInfo: true
-    },
-
-
-    // list of files to exclude
-    exclude: [
-      'app/frontend/javascripts/bootstrap.js',
-      'app/frontend/javascripts/masks.js',
-      'app/frontend/javascripts/dates_initializer.js',
-    ],
-
-
-    client: {
-      captureConsole: true
-    },
-
-
-    // test results reporter to use
-    // possible values: 'dots', 'progress'
-    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
-
-
-    // web server port
-    port: 9876,
-
-
-    // enable / disable colors in the output (reporters and logs)
-    colors: true,
-
-
-    // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
-
-
-    // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
-
-
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
-
-
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
-
-    // Concurrency level
-    // how many browser should be started simultaneous
-    concurrency: Infinity,
 
     plugins: [
       'karma-jasmine-jquery',
