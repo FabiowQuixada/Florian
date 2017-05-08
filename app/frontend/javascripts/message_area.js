@@ -51,7 +51,7 @@ const hide_notice = () => {
   $('#global_notice_box').addClass('hidden');
 }
 
-const hide_errors = () => {
+export const hide_errors = () => {
   $('#global_error_messages').html('');
   $('#global_error_box').addClass('hidden');
 
