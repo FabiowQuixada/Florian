@@ -177,8 +177,4 @@ describe("Message area", () => {
       });
     });
   });
-
-  describe("parse_json_errors", () => {
-    // TODO
-  });
 });

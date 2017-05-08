@@ -1,5 +1,5 @@
 import { on_controller, on_action } from './../application'
-import { display_info, display_notice, parse_json_errors } from './../message_area'
+import { display_info, display_notice } from './../message_area'
 import I18n from './../i18n'
 import ServerFunctions from './../server_functions'
 
@@ -84,7 +84,7 @@ const ReceiptEmailsModals = (function() {
           this.add_history_item(response.model);
         },
         error: response => {
-          parse_json_errors(response.responseText);
+          display_error(response.responseText);
         }
       };
     }

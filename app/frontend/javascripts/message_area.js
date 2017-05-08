@@ -87,22 +87,6 @@ export const hide_all_messages = () => {
   hide_errors();
 }
 
-export const parse_json_errors = xhr => {
-  try {
-    const json_obj = jQuery.parseJSON(xhr);
-
-    const output = new Array();
-    for (let i in json_obj)
-      output.push(json_obj[i]);
-
-    display_error(output);
-  }
-  catch(e) {
-    if (typeof xhr === 'string' || xhr instanceof String)
-      return display_error(xhr);
-  }
-}
-
 export const msg_as_html_ul = message => {
   if(is_empty(message)) {
     return "";
