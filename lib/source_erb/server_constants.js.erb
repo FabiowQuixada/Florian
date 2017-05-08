@@ -22,7 +22,12 @@ const Constants = {
     contact_row_maintainers: "<%= contact_row_maintainers_path %>",
     send_to_analysis_product_and_service_weeks: "<%= send_to_analysis_product_and_service_weeks_path %>",
     send_maintainers_product_and_service_weeks: "<%= send_maintainers_product_and_service_weeks_path %>",
-    create_and_new_donations: "<%= create_and_new_donations_path %>"
+    create_and_new_donations: "<%= create_and_new_donations_path %>",
+
+    assets: {
+      edit: "/assets/<%= Rails.application.assets.find_asset('edit.png').digest_path %>",
+      delete: "/assets/<%= Rails.application.assets.find_asset('delete.png').digest_path %>"
+    }
   },
 
   system_settings: {
