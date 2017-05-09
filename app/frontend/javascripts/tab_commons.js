@@ -8,13 +8,7 @@ export const set_number_of_tabs = (tab_type, number) => {
   }
 
   hide_all_tabs_except(tab_type, 0);
-}
-
-const hide_all_tabs_except_with_title = (tab_type, tab_title) => {
-  hide_all_tabs_except(tab_type, 
-    $(`.nav-tabs li a:contains(${tab_title})`).parent().attr('id')
-  );
-}
+};
 
 export const hide_all_tabs_except = (tab_type, tab_id = 0) => {
   for(let i = 0; i < number_of_tabs[tab_type]; ++i) {

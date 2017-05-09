@@ -1,4 +1,7 @@
-import { on_controller } from './../application'
+import { on_controller, on_action } from './../application'
+import { display_info, display_notice, parse_json_errors } from './../message_area'
+import I18n from './../i18n'
+import { attr_values } from './../form_commons'
 
 $(() => { if(on_controller('receipt_emails')) receipt_emails_modals() });
 
@@ -20,7 +23,7 @@ const receipt_emails_modals = () => {
     add_recent_email(data);
   }).on("ajax:error", (e, xhr, status, error) => parse_json_errors(xhr.responseText));
 
-  $('#resend_email_form').submit( e => {
+  $('#resend_email_form').submit( () => {
     display_info(I18n.t('alert.email.resending'));
 
     $('#resend_email_modal').modal('hide');
@@ -34,7 +37,7 @@ const receipt_emails_modals = () => {
     }
   });
 
-  $('#send_test_email_form').submit( e => {
+  $('#send_test_email_form').submit( () => {
     display_info(I18n.t('alert.email.sending_test'));
 
     $('#send_test_email_modal').modal('hide');

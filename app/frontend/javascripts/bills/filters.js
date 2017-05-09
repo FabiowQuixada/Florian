@@ -1,4 +1,5 @@
 import { on_page } from './../application'
+import { display_error } from './../message_area'
 import { format_competence, validate_period } from './../dates'
 
 $(() => { if(on_page('bills', 'index')) bills_filters() });

@@ -1,13 +1,11 @@
-import { on_action, to_top } from './application'
-import { hide_all_messages } from './message_area'
+import { on_action } from './application'
+import { hide_all_messages, to_top, msg_as_html_ul } from './message_area'
+import ServerFunctions from './server_functions'
 
-let any_change = false;
-let attr_values = new Array();
-let before_submit_or_leave;
+export const attr_values = new Array();
 
-// TODO: Not the best way of getting the model name;
-const go_back = (model_name = $('body').attr('class').split(' ')[0]) => {
-  window.location = ServerFunctions.paths.index(model_name);
+const go_back = (controller = $('#rails_controller').val()) => {
+  window.location = ServerFunctions.paths.index(controller);
 }
 
 export const display_form_errors = message => {
@@ -31,9 +29,13 @@ export const add_tag_to_field = (field, tag) => {
   jQuery(`#${field}`).val(`${textAreaTxt.substring(0, caretPos)} ${tag} ${textAreaTxt.substring(caretPos)}`);
 }
 
-$(() => {
+// TODO: Do it in a better way;
+var b_submit_or_leave;
+
+export const init = before_submit_or_leave => {
+  b_submit_or_leave = before_submit_or_leave;
+
   if(on_action('form')) {
-    
     const has_changed = key => {
       if($(`#${key}`).hasClass("numbers_only") && attr_values[key] === "" && $(`#${key}`).val() === "0")
         return false;
@@ -42,11 +44,10 @@ $(() => {
     }
 
     const handle_back_on_edit = () => {
+      let any_change = false;
 
-      any_change = false;
-
-      if(typeof before_submit_or_leave === "function") {
-        before_submit_or_leave();
+      if(typeof b_submit_or_leave === "function") {
+        any_change = b_submit_or_leave();
       }
 
       // const changed_values_list = [];
@@ -68,7 +69,6 @@ $(() => {
       }
     }
 
-
     const button = elem => elem.hasClass('btn')
     const temp_field = elem => elem.hasClass('temp_field')
     const hidden_field = elem => elem.attr('type') !== 'hidden'
@@ -76,7 +76,7 @@ $(() => {
     const has_id = elem => typeof elem.attr('id') !== 'undefined'
 
     // Saves the values of the model on page load, so it can be compared to the values when the user goes back, allowing a 'not-saved data' pop-up to display;
-    attr_values = new Array();
+    attr_values.length = 0;
     $('input, textarea, select').each((i, field) => {
       const elem = $(field);
       if(!button(elem) && has_id(elem) && !temp_field(elem) && (status_attr(elem) || hidden_field(elem)))
@@ -85,11 +85,17 @@ $(() => {
 
     $('#form_back_btn').on('click', handle_back_on_edit);
 
-  } else {
-    $( () => $('.back_btn').on('click', () => go_back()) );
-  }
-});
+    $('#modal_confirm_btn').on('click', () => {
+      document.getElementById("main_form").submit();
+    });
 
-$('#modal_confirm_btn').on('click', () => {
-  document.getElementById("main_form").submit();
+  } else {
+    $('.back_btn').on('click', () => {
+      go_back();
+    });
+  }
+}
+
+$( () => {
+  init();
 });

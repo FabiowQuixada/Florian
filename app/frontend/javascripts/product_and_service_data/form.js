@@ -1,10 +1,9 @@
+import I18n from './../i18n'
 import { on_page, on_action } from './../application'
-import { current_competence } from './../dates'
+import { current_competence, format_competence } from './../dates'
 import Constants from './../server_constants'
 import { display_info } from './../message_area'
 import { set_number_of_tabs } from './../tab_commons'
-
-import I18n from './../i18n'
 
 $(() => { if(on_page('product_and_service_data', 'form')) product_and_service_data_form() });
 
@@ -91,7 +90,7 @@ const product_and_service_data_form = () => {
 
         $(`.service_row_${row}_col_${col}.week_${index}`).val(sum);
       }
-    };
+    }
 
     // Products;
     for (let row = 0; row < Constants.number_of_products; row++) {
@@ -106,7 +105,7 @@ const product_and_service_data_form = () => {
 
       $(`.product_row_${row}.week_${index}`).val(sum);
 
-    };
+    }
 
     update_product_totals_from_tab(index);
     update_service_totals_from_tab(index);
@@ -119,13 +118,13 @@ const product_and_service_data_form = () => {
         const temp = $(`.service_row_${row}_col_${col}.week_5`).val();
         $(`.service_row_${row}_col_${col}.week_6`).val(temp);
       }
-    };
+    }
 
     // Products;
     for (let row = 0; row < Constants.number_of_products; row++) {
       const temp = $(`.product_row_${row}.week_5`).val();
       $(`.product_row_${row}.week_6`).val(temp);
-    };
+    }
 
     // Totals;
     update_product_totals_from_tab(6);

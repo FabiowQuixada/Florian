@@ -1,3 +1,6 @@
+import I18n from './i18n'
+import Constants from './server_constants'
+
 export const display_error = (message, error_box_id = 'global') => {
   let result = '';
 
@@ -19,14 +22,14 @@ export const display_info = message => {
   $('#global_info_box').removeClass('hidden');
 }
 
-const display_notice = message => {
+export const display_notice = message => {
   hide_all_messages();
   to_top();
   $('#global_notice_massages').html(message);
   $('#global_notice_box').removeClass('hidden');
 }
 
-const display_warning = message => {
+export const display_warning = message => {
   hide_all_messages();
   to_top();
   $('#global_warning_massages').html(message);
@@ -48,11 +51,6 @@ const hide_notice = () => {
   $('#global_notice_box').addClass('hidden');
 }
 
-const hide_errors_from_box = error_box_id => {
-  $(`#${error_box_id}_error_messages`).html('');
-  $(`#${error_box_id}_error_box`).addClass('hidden');
-}
-
 const hide_errors = () => {
   $('#global_error_messages').html('');
   $('#global_error_box').addClass('hidden');
@@ -69,7 +67,7 @@ export const hide_all_messages = () => {
   hide_errors();
 }
 
-const parse_json_errors = xhr => {
+export const parse_json_errors = xhr => {
   try {
     const json_obj = jQuery.parseJSON(xhr);
 
@@ -85,7 +83,7 @@ const parse_json_errors = xhr => {
   }
 }
 
-const msg_as_html_ul = message => {
+export const msg_as_html_ul = message => {
   let result = '<ul>';
 
   for (let i = 0; i < message.length; i++)

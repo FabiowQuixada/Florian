@@ -1,27 +1,39 @@
 import { on_page } from './../application'
 import { set_number_of_tabs } from './../tab_commons'
+import { init } from './../form_commons'
 
 $(() => { if(on_page('maintainers', 'form')) maintainers_form() });
 
-let update_fields_by_entity_type;
-let before_submit_or_leave;
-
 const maintainers_form = () => {
-  set_number_of_tabs('main', 3);
+  const new_donations = () => {
+    let new_donation = false;
 
-  before_submit_or_leave = () => {
-    any_change = false;
+    $("#donations_table .server-communication-data input.donation_id").each((index, input) => {
+      if(parseInt($(input).val()) < 0)
+        new_donation = true;
+    });
 
-    if(typeof new_donations === "function" && new_donations()) {
-      any_change = true;
-    }
-
-    if(typeof new_contacts === "function" && new_contacts()) {
-      any_change = true;
-    }
+    return new_donation;
   }
 
-  update_fields_by_entity_type = () => {
+  const new_contacts = () => {
+    let new_contact = false;
+
+    $("#contacts_table .server-communication-data input.contact_id").each((index, td) => {
+      if(parseInt($(td).val()) < 0)
+        new_contact = true;
+    });
+
+    return new_contact;
+  }
+
+  const before_submit_or_leave = () => new_donations() || new_contacts()
+
+  init(before_submit_or_leave);
+
+  set_number_of_tabs('main', 3);
+
+  const update_fields_by_entity_type = () => {
     $('.person_area').addClass('hidden');
     $('.maintainer_area').addClass('hidden');
 

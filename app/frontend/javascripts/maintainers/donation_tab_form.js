@@ -1,30 +1,11 @@
+import I18n from './../i18n'
 import { on_page } from './../application'
 import Constants from './../server_constants'
-import { set_datepicker } from './../dates'
+import moment from 'moment';
 
 $(() => { if(on_page('maintainers', 'form')) maintainers_donation_tab_form() });
 
-let build_donation;
-let clean_donation_fields;
-let add_donation;
-let validate_donation;
-let new_donations;
-
 const maintainers_donation_tab_form = () => {
-  // Temporary donations have negative id;
-  let temp_donation_id = -1;
-
-  new_donations = () => {
-    let new_donation = false;
-
-    $("#donations_table td.donation_id").each((index, td) => {
-      if(parseInt($(td).text()) < 0)
-        new_donation = true;
-    });
-
-    return new_donation;
-  }
-
   const cant_set_parcels = () => {
     const frequency = $('#maintainer_payment_frequency').val();
 
