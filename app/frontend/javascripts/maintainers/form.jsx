@@ -1,3 +1,9 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux';
+import maintainerReducer from './../redux/reducers/maintainerReducer';
+import ContactAreaContainer from './../redux/containers/ContactAreaContainer'
 import { on_page } from './../application'
 import { set_number_of_tabs } from './../tab_commons'
 import { init } from './../form_commons'
@@ -65,10 +71,22 @@ const MaintainersForm = (function() {
       });
     }
 
+    this.setup_view_components = () => {
+      const store = createStore(maintainerReducer);
+
+      ReactDOM.render(
+        <Provider store={store}>
+          <ContactAreaContainer />
+        </Provider>,
+        document.getElementById("main_tab_2")
+      );
+    }
+
     set_number_of_tabs('main', 3);
     init(this.before_submit_or_leave);
     this.update_fields_by_entity_type();
     this.setup_listeners();
+    this.setup_view_components();
   }
 
   return MaintainersForm;

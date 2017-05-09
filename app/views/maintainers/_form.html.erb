@@ -32,3 +32,10 @@
 <%end%>
 
 <%= render 'shared/form_commons' %>
+
+<script>
+
+  var contactList = <%= @model.contacts.to_json.html_safe %>;
+  var contact_first_time = true;
+
+</script>

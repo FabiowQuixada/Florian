@@ -27,11 +27,12 @@ const validate = contact => {
   }
 
   if(contact.email_address && !validate_email(contact.email_address)) {
-    errors.push(I18n.t('alert.email.invalid_recipient'));
+    const attribute = I18n.t('activerecord.attributes.contact.email_address');
+    errors.push(I18n.t('errors.messages.invalid', { attribute: attribute }));
   }
 
   if(!valid_phone(contact.telephone)) {
-    const attribute = I18n.t('activerecord.attributes.contact.telephone')
+    const attribute = I18n.t('activerecord.attributes.contact.telephone');
     errors.push(I18n.t('errors.messages.invalid', { attribute: attribute }));
   }
   

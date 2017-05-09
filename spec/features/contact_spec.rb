@@ -36,7 +36,7 @@ describe Contact, js: true, type: :request do
 
   it 'is deleted from a maintainer' do
     deleted_name = first('td.contact_name')['innerHTML']
-    first('.remove_contact_btn').click
+    first('.remove_btn').click
     save_and_revisit
     expect(first('td.contact_name')['innerHTML']).not_to eq deleted_name
   end
@@ -45,23 +45,27 @@ describe Contact, js: true, type: :request do
   # Helper methods ##################################
 
   def add_contact(name = Faker::Name.name, position = Faker::Name.name)
-    fill_in 'temp_contact_name', with: name
-    fill_in 'temp_contact_position', with: position
-    fill_in 'temp_contact_email_address', with: Faker::Internet.email
-    fill_in 'temp_contact_telephone', with: Faker::Number.number(11)
-    fill_in 'temp_contact_celphone', with: Faker::Number.number(11)
-    fill_in 'temp_contact_fax', with: Faker::Number.number(11)
+    within '#contact_area' do
+      fill_in 'contact_name', with: name
+      fill_in 'contact_position', with: position
+      fill_in 'contact_email_address', with: Faker::Internet.email
+      fill_in 'contact_telephone', with: Faker::Number.number(11)
+      fill_in 'contact_celphone', with: Faker::Number.number(11)
+      fill_in 'contact_fax', with: Faker::Number.number(11)
 
-    find('#add_contact_btn').click
+      find('.add-btn').click
+    end
 
     [name, position]
   end
 
   def edit_contact(contact)
     new_name = Faker::Name.name
-    find("tr#contact_#{contact.id} .edit_contact_btn").click
-    fill_in 'temp_contact_name', with: new_name
-    find('#add_contact_btn').click
+    find("tr#contact_#{contact.id} .edit_btn").click
+    within '#contact_area' do
+      fill_in 'contact_name', with: new_name
+      find('.update-btn').click
+    end
 
     new_name
   end

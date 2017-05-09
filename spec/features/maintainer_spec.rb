@@ -118,7 +118,7 @@ describe Maintainer, js: true, type: :request do
   def fill_main_fields_with(company_type, low_category, maintainer_group)
     select company_type, from: 'maintainer_entity_type'
     fill_in 'maintainer_registration_name', with: Faker::Company.name
-    fill_in 'maintainer_cnpj', with: BlaBla::CNPJ.formatado
+    fill_in 'maintainer_cnpj', with: BlaBla::CNPJ.numero
     fill_in 'maintainer_name', with: Faker::Company.name
     fill_in 'maintainer_address', with: Faker::Address.street_address
     select low_category, from: 'maintainer_category'
@@ -126,26 +126,30 @@ describe Maintainer, js: true, type: :request do
   end
 
   def fill_donation_fields(remark)
-    fill_in 'new_donation_date', with: I18n.localize(Faker::Date.forward(23))
-    fill_in 'new_donation_value', with: Faker::Number.number(4)
-    fill_in 'new_donation_remark', with: remark
+    find('#donation_donation_date_group input.temp_field').set I18n.localize(Faker::Date.forward(23))
+    fill_in 'donation_value', with: Faker::Number.number(4)
+    fill_in 'donation_remark', with: remark
     execute_script('$(".datepicker-dropdown").hide()')
   end
 
   def add_donation(remark = Faker::Hacker.say_something_smart)
     page.find('#main_tab_1_title').click
-    fill_donation_fields remark
-    page.find('#add_donation_btn').click
+    within '#donation_area' do
+      fill_donation_fields remark
+      page.find('.add-btn').click
+    end
   end
 
   def fill_contact_fields(name)
-    fill_in 'temp_contact_name', with: name
+    fill_in 'contact_name', with: name
   end
 
   def add_contact(name = Faker::Name.name)
     page.find('#main_tab_2_title').click
-    fill_contact_fields name
-    page.find('#add_contact_btn').click
+    within '#contact_area' do
+      fill_contact_fields name
+      page.find('.add-btn').click
+    end
   end
 
   def expect_edit_page_to_have_content(remark)
