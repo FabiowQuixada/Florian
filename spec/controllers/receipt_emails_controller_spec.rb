@@ -17,6 +17,11 @@ describe ReceiptEmailsController, type: :controller do
   # == E-mail deliveries =======================================================================================
 
   describe 'POST #resend' do
+    let(:invalid_competence_msg) do
+      I18n.t('errors.messages.invalid', attribute:
+        I18n.t('activerecord.attributes.bill.competence'))
+    end
+
     context 'with valid attributes' do
       let(:model) { create :receipt_email }
       let(:expected) do
@@ -45,7 +50,7 @@ describe ReceiptEmailsController, type: :controller do
       it 'displays an invalid competence message' do
         post :resend, id: model.id, competence: Date.today, receipt_email: attributes_for(:receipt_email, recipients_array: 'aa@aa.com')
 
-        expect(response.body).to eq I18n.t('alert.email.invalid_competence')
+        expect(response.body).to eq invalid_competence_msg
       end
 
       it 'displays a invalid e-mail error message' do
@@ -61,7 +66,7 @@ describe ReceiptEmailsController, type: :controller do
       it 'handles invalid competence' do
         model = create :receipt_email
         post :resend, id: model.id, competence: '076/2016', receipt_email: attributes_for(:receipt_email, recipients_array: 'aa@aa.com')
-        expect(response.body).to eq(I18n.t('alert.email.invalid_competence'))
+        expect(response.body).to eq invalid_competence_msg
       end
 
       it 'handles invalid data' do
@@ -98,7 +103,7 @@ describe ReceiptEmailsController, type: :controller do
         it 'displays an invalid competence message' do
           post :resend, id: model.id, competence: Date.today, receipt_email: attributes_for(:receipt_email, recipients_array: 'aa@aa.com')
 
-          expect(response.body).to eq I18n.t('alert.email.invalid_competence')
+          expect(response.body).to eq invalid_competence_msg
         end
 
         it 'displays a invalid e-mail error message' do
@@ -115,7 +120,7 @@ describe ReceiptEmailsController, type: :controller do
       it 'handles invalid competence' do
         model = create :receipt_email
         post :send_test, id: model.id, competence: '076/2016', receipt_email: attributes_for(:receipt_email, recipients_array: 'aa@aa.com')
-        expect(response.body).to eq(I18n.t('alert.email.invalid_competence'))
+        expect(response.body).to eqinvalid_competence_msg
       end
 
       it 'handles invalid data' do

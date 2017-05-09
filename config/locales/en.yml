@@ -183,9 +183,7 @@ en:
       error_resending: 'There was an error while trying to resend the e-mail. Please contact the administrator and inform him the time this has happenned.'
       error_sending: 'There was an error while trying to send the e-mail. Please contact the administrator and inform him the time this has happenned.'
       error_sending_test: 'There was an error while trying to send a test e-mail. Please contact the administrator and inform him the time this has happenned.'
-      fill_a_recipient: Please add a receipient e-mail address;
-      invalid_competence: Invalid competence;
-      invalid_recipient: Invalid e-mail;
+      fill_a_recipient: Please add a recipient e-mail address;
       resending: Resending e-mail...
       sending: Sending e-mail...
       sending_test: Sending test e-mail...

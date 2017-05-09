@@ -66,7 +66,8 @@ class ReceiptEmailsController < ApplicationController
   def convert_competence
     FlorianDateHelper.competence_to_date params[:competence]
   rescue
-    raise FlorianException, I18n.t('alert.email.invalid_competence')
+    raise FlorianException, I18n.t('errors.messages.invalid', attribute:
+      I18n.t('activerecord.attributes.bill.competence'))
   end
 
   def edit_query
