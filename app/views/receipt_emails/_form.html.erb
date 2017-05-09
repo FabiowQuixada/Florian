@@ -6,11 +6,9 @@
 
 	<div class="container-fluid padless">
 		<div class="row">
-			<div class="col-md-5">
-				<%= render 'shared/email_address_table', f: f, model: @model %>
+			<div id="email_area" class="col-md-5">
 			</div>
 			<div class="col-md-7">
-
 				<div class="container-fluid padless">
 					<div class="row">
 						<div class="col-sm-12 form-group">
@@ -104,6 +102,24 @@
 	</div>
 
 <% end #main_form %>
+
+<script>
+
+  // TODO: This is a quick-fix due to an issue
+  // with the communication between React and
+  // Rails. Yeah, I know, this is *really* ugly;
+
+  var email_first_time = [];
+  email_first_time['recipients_array'] = true;
+
+  var emailList = [];
+  emailList['recipients_array'] = <%= @model.recipients_as_array.to_json.html_safe %>.map(
+    value => ({
+      is_persisted: "true",
+      address: value
+    }));
+
+</script>
 
 <%= render 'shared/form_commons' %>
 <%= render 'modals' %>

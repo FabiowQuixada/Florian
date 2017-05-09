@@ -2,56 +2,45 @@ shared_examples 'an e-mail address table' do |fields|
   let(:fields) { fields }
 
   it 'removes a transient e-mail address' do
-    fields.each do |field_name|
-      @id = -1
-      check_email_address_life_cycle field_name
-    end
+    fields.each { |field_name| check_email_address_life_cycle field_name }
   end
 
   # Helper methods ###############
 
   def check_email_address_life_cycle(field_name)
-    add_email_address field_name
+    email_1 = add_email_address field_name
     add_email_address field_name
 
-    remove_last_email_address field_name
+    remove_email_address field_name, email_1
 
-    check_if_only_the_correct_row_was_removed field_name, @id + 1
-    check_if_no_other_fields_are_affected field_name, @id + 1
+    check_if_only_the_correct_row_was_removed field_name, email_1
+    check_if_no_other_fields_are_affected field_name, email_1
   end
 
   def add_email_address(field_name)
-    first("input##{field_name}_new_recipient_field").set Faker::Internet.email
-    first("span##{field_name}_add_recipient_btn").click
+    email = Faker::Internet.email
+    find("input##{field_name}_new_recipient_field").set email
+    find("span##{field_name}_add_recipient_btn").click
 
-    check_if_email_address_was_added field_name, @id
-
-    @id -= 1
+    check_if_email_address_was_added field_name, email
+    email
   end
 
-  def check_if_email_address_was_added(field_name, i)
-    sleep 1
-    expect(row(field_name, i)).not_to be_nil, nil_msg(field_name)
+  def check_if_email_address_was_added(field_name, email)
+    expect(row(field_name, email)).not_to be_nil, nil_msg(field_name)
   end
 
-  def remove_last_email_address(field_name)
-    within("tr##{field_name}_email_address_#{@id + 1}") do
-      first("img.#{field_name}_remove_recipient_btn").click
-    end
-
-    sleep 1
+  def remove_email_address(field_name, email)
+    row(field_name, email).find('.remove_btn').click
   end
 
-  def check_if_only_the_correct_row_was_removed(field_name, i)
-    expect(row(field_name, i)).to be_nil, not_nil_msg(field_name)
-    expect(row(field_name, i + 1)).not_to be_nil, nil_msg(field_name)
+  def check_if_only_the_correct_row_was_removed(field_name, email)
+    expect(row(field_name, email)).to be_nil, not_nil_msg(field_name)
   end
 
-  def check_if_no_other_fields_are_affected(field_name, i)
-    fields.each do |field_name_2|
-      if field_name != field_name_2
-        expect(row(field_name, i + 1)).not_to be_nil, nil_msg(field_name, field_name_2)
-      end
+  def check_if_no_other_fields_are_affected(field_name, email)
+    rows_other_than(field_name, email).each do |row|
+      expect(row).not_to be_nil, nil_msg(field_name, email)
     end
   end
 

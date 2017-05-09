@@ -1,14 +1,30 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore } from 'redux'
 import { on_page, escape_html } from './../application'
+import { Provider } from 'react-redux';
+import EmailAreaContainer from './../redux/containers/EmailAreaContainer'
 import Constants from './../server_constants'
-import { new_recipients, setup_listeners_for_email_field, formated_recipients } from './../others/email_address_table'
+import emailsReducer from './../redux/reducers/emailsReducer';
+import { new_recipients, } from './../others/email_address_table'
 import I18n from './../i18n'
+import { formated_recipients } from '../others/email_address_table'
+import { init, add_tag_to_field } from './../form_commons'
 
 $(() => { if(on_page('receipt_emails', 'form')) receipt_emails_form() });
 
-let before_submit_or_leave;
-
 const receipt_emails_form = () => {
   const email_field = 'recipients_array';
+  const store = createStore(emailsReducer);
+
+  ReactDOM.render(
+    <Provider store={store}>
+      <EmailAreaContainer 
+        model="receipt_email"
+        label={ I18n.t("activerecord.attributes.receipt_email.recipients_array") } />
+    </Provider>,
+    document.getElementById("email_area")
+  );
 
   if(on_page('receipt_emails', 'edit')) {
     $('.resend_btn').click( e => {
@@ -36,13 +52,17 @@ const receipt_emails_form = () => {
   $('#receipt_email_title').val(escape_html(Constants.system_settings.receipt_title));
 
 
-  before_submit_or_leave = () => {
+  this.before_submit_or_leave = () => {
     if(new_recipients(email_field)) {
-      any_changes = true;
+      return true;
     }
 
-    $('#receipt_email_email_field').val(formated_recipients(email_field));
+    $(`#receipt_email_${email_field}`).val(formated_recipients(email_field));
+
+    return false;
   }
+
+  init(this.before_submit_or_leave);
 
   $('#body_tag_help_btn').click( e => {
     display_confirm_modal(I18n.t('modal.title.info'), I18n.t('user_help_messages.tag_buttons'));
@@ -67,6 +87,4 @@ const receipt_emails_form = () => {
   $("#add_maintainer_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.maintainer')));
   $("#add_value_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.value')));
   $("#add_competence_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.competence')));
-
-  setup_listeners_for_email_field(email_field);
 }
