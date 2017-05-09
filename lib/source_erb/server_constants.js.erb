@@ -1,0 +1,40 @@
+<% 
+  require File.expand_path('../../../config/environment',  __FILE__)
+  self.class.include Rails.application.routes.url_helpers
+%>
+<%= init_comment %>
+
+const Constants = {
+  payment_freq: {
+    undefined: "<%= Maintainer.payment_frequencies.keys[0] %>",
+    diary: "<%= Maintainer.payment_frequencies.keys[1] %>",
+    weekly: "<%= Maintainer.payment_frequencies.keys[2] %>",
+    monthly: "<%= Maintainer.payment_frequencies.keys[3] %>",
+    bimonthly: "<%= Maintainer.payment_frequencies.keys[4] %>",
+    semiannually: "<%= Maintainer.payment_frequencies.keys[5] %>",
+    annually: "<%= Maintainer.payment_frequencies.keys[6] %>",
+    other: "<%= Maintainer.payment_frequencies.keys[7] %>",
+  },
+
+  paths: {
+    donation_row_maintainers: "<%= donation_row_maintainers_path %>",
+    contact_row_maintainers: "<%= contact_row_maintainers_path %>",
+    send_to_analysis_product_and_service_weeks: "<%= send_to_analysis_product_and_service_weeks_path %>",
+    send_maintainers_product_and_service_weeks: "<%= send_maintainers_product_and_service_weeks_path %>",
+    create_and_new_donations: "<%= create_and_new_donations_path %>"
+  },
+
+  system_settings: {
+    receipt_title: "<%= SystemSetting.first.re_title %>"
+  },
+  admin_email: "<%= ADMIN_EMAIL %>",
+
+  week_totals_number: <%= ProductAndServiceWeek::TOTALS_NUMBER %>,
+  week_final_number: <%= ProductAndServiceWeek::FINAL_NUMBER %>,
+  number_of_services: <%= ServiceData.number_of_services %>,
+  number_of_products: <%= ProductData.number_of_products %>,
+  number_of_weeks: 7,
+  products_array: <%= ProductData.products.to_a.to_s.html_safe %>,
+  services_array: <%= ServiceData.services.to_a.to_s.html_safe %>,
+}
+

@@ -2,6 +2,7 @@ set -e
 
 # Formatting checkers / correctors
 bundle exec rake i18n:sort
+bundle exec rake build_client_data:all
 bundle exec rubocop -a
 
 # Actual Tests

@@ -28,5 +28,10 @@ sudo mv $PHANTOM_JS /usr/local/share
 sudo ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin
 
 
+# Procompile some .js.erb files so that they are available
+# for client-side code and also for Karma / Jasmine tests
+bundle exec rake build_client_data:all
+
+
 # Redirects port 3000 to 80
 sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 3000

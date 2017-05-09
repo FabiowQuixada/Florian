@@ -27,6 +27,8 @@
 //= require listeners
 //= require message_area
 //= require tab_commons
+//= require server_constants
+//= require server_functions
 //= require others/modals
 //= require errors/error
 

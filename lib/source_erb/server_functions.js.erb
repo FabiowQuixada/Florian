@@ -1,0 +1,12 @@
+<% 
+  require File.expand_path('../../../config/environment',  __FILE__)
+  self.class.include Rails.application.routes.url_helpers
+%>
+<%= init_comment %>
+
+const ServerFunctions = {
+  paths: {
+    send_test_receipt_email: (id) => "<%= send_test_receipt_email_path -1 %>".replace("-1", id),
+    resend_receipt_email: (id) => "<%= resend_receipt_email_path -1 %>".replace("-1", id)
+  }
+}

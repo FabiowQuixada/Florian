@@ -21,6 +21,7 @@ RSpec/DescribeClass:
   Exclude:
     - spec/support/shared_examples/requests/**
     - spec/others/**
+    - spec/rake/**
 
 RSpec/InstanceVariable:
   Exclude:
