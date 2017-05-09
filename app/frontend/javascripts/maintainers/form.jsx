@@ -4,6 +4,7 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux';
 import maintainerReducer from './../redux/reducers/maintainerReducer';
 import ContactAreaContainer from './../redux/containers/ContactAreaContainer'
+import DonationAreaContainer from './../redux/containers/DonationAreaContainer'
 import { on_page } from './../application'
 import { set_number_of_tabs } from './../tab_commons'
 import { init } from './../form_commons'
@@ -73,6 +74,13 @@ const MaintainersForm = (function() {
 
     this.setup_view_components = () => {
       const store = createStore(maintainerReducer);
+
+      ReactDOM.render(
+        <Provider store={store}>
+          <DonationAreaContainer />
+        </Provider>,
+        document.getElementById("donation_area")
+      );
 
       ReactDOM.render(
         <Provider store={store}>

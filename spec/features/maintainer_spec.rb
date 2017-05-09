@@ -54,55 +54,74 @@ describe Maintainer, js: true, type: :request do
     end
   end
 
-  it 'persists a maintainer with a contact' do
-    visit new_maintainer_path
-    fill_main_fields
-    add_contact
+  describe 'new' do
+    before do
+      visit new_maintainer_path
+      fill_main_fields
+    end
 
-    click_on_save_btn
-    expect_success_msg
+    it 'persists a maintainer with a contact' do
+      add_contact
+      click_on_save_btn
+      expect_success_msg
+    end
+
+    it 'persists a maintainer with a donation' do
+      add_donation
+      click_on_save_btn
+      expect_success_msg
+    end
   end
 
-  it 'displays "no contacts" message when all contacts are deleted' do
-    visit edit_maintainer_path described_class.first.id
-    page.find('#main_tab_2_title').click
+  describe 'edit' do
+    let(:maintainer) { described_class.first }
 
-    all('.remove_contact_btn').each(&:click)
-    expect(page).to have_content 'No contact found.'
-  end
+    before do
+      visit edit_maintainer_path maintainer
+    end
 
-  it 'persists a maintainer with a donation' do
-    visit new_maintainer_path
-    fill_main_fields
-    add_donation
+    it 'displays "no contacts" message when all contacts are deleted' do
+      page.find('#main_tab_2_title').click
 
-    click_on_save_btn
-    expect_success_msg
-  end
+      # Workaround
+      maintainer.contacts.length.times { first('#contact_area .remove_btn').click }
+      expect(page).to have_content 'No contacts found.'
+    end
 
-  it 'persists donation' do
-    visit edit_maintainer_path described_class.first.id
-    remark = Faker::Hipster.paragraph
-    add_donation remark
+    describe 'donation' do
+      before :each do
+        visit edit_maintainer_path described_class.first
+        page.find('#main_tab_1_title').click
+      end
 
-    click_on_update_btn
-    expect_edit_page_to_have_content remark
-  end
+      it 'adds transient donation data should display warning message when pressing back button' do
+        add_donation Faker::Hipster.paragraph
 
-  it 'displays "no donations" message when all donations are deleted' do
-    visit edit_maintainer_path described_class.first.id
-    page.find('#main_tab_1_title').click
+        go_back
+        expect(page).to have_content I18n.t('modal.title.back')
+      end
 
-    all('.hidden-xs > .remove_donation_btn').each(&:click)
-    expect(page).to have_content 'No donation found.'
-  end
+      it 'persists donation' do
+        remark = Faker::Hipster.paragraph
+        add_donation remark
 
-  it 'adds transient donation data should display warning message when pressing back button' do
-    visit edit_maintainer_path described_class.first.id
-    add_donation Faker::Hipster.paragraph
+        click_on_update_btn
+        expect_edit_page_to_have_content remark
+      end
 
-    go_back
-    expect(page).to have_content I18n.t('modal.title.back')
+      it 'displays "no donations" message when all donations are deleted' do
+        # Workaround
+        maintainer.donations.length.times { first('#donation_area .hidden-xs > .remove_btn').click }
+        expect(page).to have_content 'No donations found.'
+      end
+
+      it 'is deleted from a maintainer' do
+        remark = all('td.donation_remark').last['innerHTML']
+        all('.remove_btn').last.click
+        save_and_revisit
+        expect(all('td.donation_remark').last['innerHTML']).not_to eq remark
+      end
+    end
   end
 
   # == Helper methods =============================================================
@@ -158,5 +177,11 @@ describe Maintainer, js: true, type: :request do
     page.all('tr.transient_donation').each do |tr|
       tr.should have_content(remark)
     end
+  end
+
+  def save_and_revisit
+    find('.save_btn').click
+    visit edit_maintainer_path Maintainer.first
+    page.find('#main_tab_1_title').click
   end
 end
