@@ -51,10 +51,10 @@
 				<div class="container-fluid padless">
 					<div class="row">
 						<div class="col-md-6">
-							<%= render 'shared/email_address_table', f: f, model: @model, field_name: 'pse_recipients_array' %>
+							<div id="pse_recipients_array_area"></div>
 						</div>
 						<div class="col-md-6">
-							<%= render 'shared/email_address_table', f: f, model: @model, field_name: 'pse_private_recipients_array', method_name: 'private_recipients_as_array' %>
+							<div id="pse_private_recipients_array_area"></div>
 						</div>
 					</div>
 				</div>
@@ -96,3 +96,27 @@
 <% end %>
 
 <%= render 'shared/form_commons', hide_audit: Rails.env.showcase? %>
+
+<script>
+
+  // TODO: This is a quick-fix due to an issue
+  // with the communication between React and
+  // Rails. Yeah, I know, this is *really* ugly;
+
+  var email_first_time = [];
+  email_first_time['pse_recipients_array'] = true;
+  email_first_time['pse_private_recipients_array'] = true;
+
+  var emailList = [];
+  emailList['pse_recipients_array'] = <%= @model.recipients_as_array.to_json.html_safe %>.map(
+    value => ({
+      is_persisted: "true",
+      address: value
+    }));
+  emailList['pse_private_recipients_array'] = <%= @model.private_recipients_as_array.to_json.html_safe %>.map(
+    value => ({
+      is_persisted: "true",
+      address: value
+    }));
+
+</script>

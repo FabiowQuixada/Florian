@@ -1,9 +1,15 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux';
 import { on_page } from './../application'
 import { display_confirm_modal } from './../others/modals'
 import { new_recipients, setup_listeners_for_email_field, formated_recipients } from './../others/email_address_table'
 import { add_tag_to_field } from './../form_commons'
 import I18n from './../i18n'
 import { set_number_of_tabs } from './../tab_commons'
+import emailsReducer from './../redux/reducers/emailsReducer';
+import EmailAreaContainer from './../redux/containers/EmailAreaContainer'
 
 $(() => { if(on_page('system_settings', 'index')) system_settings_index() });
 
@@ -12,6 +18,27 @@ const system_settings_index = () => {
   const email_field_2 = 'pse_private_recipients_array';
 
   set_number_of_tabs('main', 3);
+
+  const store1 = createStore(emailsReducer);
+  const store2 = createStore(emailsReducer);
+
+  ReactDOM.render(
+    <Provider store={store1}>
+      <EmailAreaContainer
+        model="system_setting"
+        field_name={email_field_1} />
+    </Provider>,
+    document.getElementById(`${email_field_1}_area`)
+  );
+
+  ReactDOM.render(
+    <Provider store={store2}>
+      <EmailAreaContainer
+        model="system_setting"
+        field_name={email_field_2} />
+    </Provider>,
+    document.getElementById(`${email_field_2}_area`)
+  );
 
   $("#add_maintainer_to_re_title_btn").on('click', () => add_tag_to_field('system_setting_re_title', I18n.t('tags.maintainer')));
   $("#add_value_to_re_title_btn").on('click', () => add_tag_to_field('system_setting_re_title', I18n.t('tags.value')));
