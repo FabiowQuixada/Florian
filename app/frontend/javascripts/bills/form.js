@@ -12,7 +12,7 @@ const BillsForm = (function() {
     $('#bill_aux_competence').on('change', () => this.before_submit_or_leave);
     $('#summable-inputs input').on('change', () => $('#bill_totals').val(currency_sum('#summable-inputs input')));
   }
-  
+
   return BillsForm;
 }());
 

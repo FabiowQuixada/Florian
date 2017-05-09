@@ -37,7 +37,7 @@ const IndexCommons = (function() {
         const model = $('#rails_model').val();
         const i18nModel = I18n.t(`activerecord.models.${model}.one`).toLowerCase();
         display_confirm_modal(I18n.t('modal.title.destroy'),
-          I18n.t('model_phrases.are_you_sure.destroy.n.s', { model: i18nModel }), 
+          I18n.t('model_phrases.are_you_sure.destroy.n.s', { model: i18nModel }),
           self.destroy_model.bind(self, id)
         );
       });
@@ -92,7 +92,7 @@ const IndexCommons = (function() {
 
     this.destroy_model = (id) => {
       const controller = $('#rails_controller').val();
-      
+
       $.ajax({
         type: "DELETE",
         url: `${ServerFunctions.paths.index(controller)}/${id}`,

@@ -16,11 +16,11 @@ describe("Tab commons", () => {
         expect($('#main_tab_0_title').hasClass('active')).toEqual(true);
       });
 
-      it("deactivates second tab title", () => {  
+      it("deactivates second tab title", () => {
         expect($('#main_tab_1_title').hasClass('active')).toEqual(false);
       });
 
-      it("deactivates third tab title", () => { 
+      it("deactivates third tab title", () => {
         expect($('#main_tab_2_title').hasClass('active')).toEqual(false);
       });
 
@@ -28,11 +28,11 @@ describe("Tab commons", () => {
         expect($('#main_tab_0').hasClass('hidden')).toEqual(false);
       });
 
-      it("hides second tab body", () => {  
+      it("hides second tab body", () => {
         expect($('#main_tab_1').hasClass('hidden')).toEqual(true);
       });
 
-      it("hides third tab body", () => { 
+      it("hides third tab body", () => {
         expect($('#main_tab_2').hasClass('hidden')).toEqual(true);
       });
     });
@@ -46,11 +46,11 @@ describe("Tab commons", () => {
         expect($('#test_tab_0_title').hasClass('active')).toEqual(true);
       });
 
-      it("deactivates second tab title", () => {  
+      it("deactivates second tab title", () => {
         expect($('#test_tab_1_title').hasClass('active')).toEqual(false);
       });
 
-      it("deactivates third tab title", () => { 
+      it("deactivates third tab title", () => {
         expect($('#test_tab_2_title').hasClass('active')).toEqual(false);
       });
 
@@ -58,11 +58,11 @@ describe("Tab commons", () => {
         expect($('#test_tab_0').hasClass('hidden')).toEqual(false);
       });
 
-      it("hides second tab body", () => {  
+      it("hides second tab body", () => {
         expect($('#test_tab_1').hasClass('hidden')).toEqual(true);
       });
 
-      it("hides third tab body", () => { 
+      it("hides third tab body", () => {
         expect($('#test_tab_2').hasClass('hidden')).toEqual(true);
       });
     });
@@ -78,11 +78,11 @@ describe("Tab commons", () => {
         expect($('#main_tab_0_title').hasClass('active')).toEqual(false);
       });
 
-      it("activates second tab title", () => {  
+      it("activates second tab title", () => {
         expect($('#main_tab_1_title').hasClass('active')).toEqual(true);
       });
 
-      it("deactivates third tab title", () => { 
+      it("deactivates third tab title", () => {
         expect($('#main_tab_2_title').hasClass('active')).toEqual(false);
       });
 
@@ -90,11 +90,11 @@ describe("Tab commons", () => {
         expect($('#main_tab_0').hasClass('hidden')).toEqual(true);
       });
 
-      it("displays second tab body", () => {  
+      it("displays second tab body", () => {
         expect($('#main_tab_1').hasClass('hidden')).toEqual(false);
       });
 
-      it("hides third tab body", () => { 
+      it("hides third tab body", () => {
         expect($('#main_tab_2').hasClass('hidden')).toEqual(true);
       });
     });
@@ -108,11 +108,11 @@ describe("Tab commons", () => {
         expect($('#test_tab_0_title').hasClass('active')).toEqual(false);
       });
 
-      it("activates second tab title", () => {  
+      it("activates second tab title", () => {
         expect($('#test_tab_1_title').hasClass('active')).toEqual(true);
       });
 
-      it("deactivates third tab title", () => { 
+      it("deactivates third tab title", () => {
         expect($('#test_tab_2_title').hasClass('active')).toEqual(false);
       });
 
@@ -120,11 +120,11 @@ describe("Tab commons", () => {
         expect($('#test_tab_0').hasClass('hidden')).toEqual(true);
       });
 
-      it("displays second tab body", () => {  
+      it("displays second tab body", () => {
         expect($('#test_tab_1').hasClass('hidden')).toEqual(false);
       });
 
-      it("hides third tab body", () => { 
+      it("hides third tab body", () => {
         expect($('#test_tab_2').hasClass('hidden')).toEqual(true);
       });
     });

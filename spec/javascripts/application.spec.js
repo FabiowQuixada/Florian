@@ -17,7 +17,7 @@ describe("application", () => {
       expect($('#admin-data')).toBeHidden();
     });
   });
-  
+
   it("converts numbers to currency", () => {
     // TODO Locale is not loaded with Karma;
     // expect(application.to_money(34.78)).toEqual('34.78');

@@ -3,7 +3,7 @@ import Constants from './../../../../app/frontend/javascripts/server_constants';
 
 describe("Product and service form", () => {
   let ps_data_form;
-  
+
   beforeEach(() => {
     jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures';
     loadFixtures('product_and_service_data/form.html');
@@ -31,7 +31,7 @@ describe("Product and service form", () => {
       $(`#total_service_checkup_week_3`).val(0);
       $(`#total_service_return_week_3`).val(-4);
       $(`#total_service_week_3`).val(0);
-      
+
       $('#row_0 .service_checkup').val(2);
       $('#row_0 .service_return').val(5);
       $('#row_1 .service_checkup').val(4);
@@ -50,7 +50,7 @@ describe("Product and service form", () => {
     // it("updates week's total checkups", () => {
     //   expect($(`#total_service_checkup_week_3`).val()).toEqual('6');
     // });
-    
+
     // it("updates week's total returns", () => {
     //   expect($(`#total_service_return_week_3`).val()).toEqual('14');
     // });
@@ -125,7 +125,7 @@ describe("Product and service form", () => {
       $('#serv_0').val(7);
       $('#serv_2').val(2);
       ps_data_form.update_services_in_totals_tab(3, 0);
-      
+
       expect($(`.service_row_3_col_0.week_5`).val()).toEqual('9');
     });
   });
@@ -177,31 +177,31 @@ describe("Product and service form", () => {
 
   describe("update_hidden_serv_field", () => {
     it("", () => {
-    
+
     });
 
     it("", () => {
-      
+
     });
   });
 
   describe("update_hidden_prod_field", () => {
     it("", () => {
-    
+
     });
 
     it("", () => {
-      
+
     });
   });
 
   describe("update_hidden_week_field", () => {
     it("", () => {
-    
+
     });
 
     it("", () => {
-      
+
     });
   });
 
@@ -231,7 +231,7 @@ describe("Product and service form", () => {
       // All service fields plus 'id' field, one time
       // for each type of service (checkup and return);
       const number_of_services = (Constants.services_array.length+1)*2;
-      
+
       const week_number = 4;
       spyOn(ps_data_form, "update_hidden_serv_field");
       ps_data_form.copy_to_hidden_form_and_send(week_number);

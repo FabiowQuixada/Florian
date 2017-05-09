@@ -1,4 +1,4 @@
-/** 
+/**
  *
  *  TODO These tests work, but some lines of code in some files
  *  have to be removed for it to work. This is a React issue;

@@ -25,7 +25,7 @@ export const set_datepicker = () => {
 
 export const date_exc_msg = () => {
   const attribute = "Date";
-  return I18n.t("errors.messages.invalid", {attribute}); 
+  return I18n.t("errors.messages.invalid", {attribute});
 };
 
 export const current_competence = () => {

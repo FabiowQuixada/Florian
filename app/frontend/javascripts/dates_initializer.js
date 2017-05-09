@@ -1,7 +1,7 @@
 import { set_month_datepicker, set_datepicker } from './dates';
 import I18n from './i18n';
 
-// This piece of code is separated because it will be ignored by Karma. 
+// This piece of code is separated because it will be ignored by Karma.
 // If this code runs during Karma tests, it raises a few errors;
 $(() => {
   set_month_datepicker();

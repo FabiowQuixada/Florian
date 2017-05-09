@@ -7,7 +7,7 @@ $(() => { if(on_page('donations', 'index')) new DonationsFilters(); });
 const DonationsFilters = (function() {
   function DonationsFilters() {
     $('#search_form').on('submit', e => {
-      try { 
+      try {
         const start_date = to_rails_date($('#q_donation_date_gteq').val());
         const end_date = to_rails_date($('#q_donation_date_lteq').val());
         const errors = validate_period(start_date, end_date);
@@ -22,7 +22,7 @@ const DonationsFilters = (function() {
       }
     });
   }
-  
+
   return DonationsFilters;
 }());
 

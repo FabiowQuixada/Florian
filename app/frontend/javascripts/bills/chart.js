@@ -77,7 +77,7 @@ const BillsCharts = (function() {
       chart.draw(data, options);
     };
   }
-  
+
   return BillsCharts;
 }());
 

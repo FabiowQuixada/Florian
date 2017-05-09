@@ -64,7 +64,7 @@ const ProductAndServiceDataForm = (function() {
 
     this.update_product_totals_for_each_tab = () => {
       for (let i = 0; i <= Constants.week_final_number; i++) {
-        this.update_product_totals_from_tab(i);      
+        this.update_product_totals_from_tab(i);
       }
 
       this.update_totals_tab();

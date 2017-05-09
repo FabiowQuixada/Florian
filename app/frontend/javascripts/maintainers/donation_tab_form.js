@@ -23,16 +23,17 @@ const MaintainersDonationTabForm = (function() {
     };
 
     this.set_last_parcel_date = () => {
-      const first_date = $('#maintainer_first_parcel').val();
+
       const frequency = $('#maintainer_payment_frequency').val();
       const parcel_qty = $('#maintainer_payment_period').val();
-      const last_date = $('#maintainer_last_parcel');
 
-      if(!first_date || this.cant_set_parcels() || !parcel_qty) {
-        last_date.val('');
-        return;
-      }
 
+      let { frequency_type, temp } = this. kkk(frequency, parcel_qty);
+
+      this.update_last_parcel(parcel_qty, frequency_type, temp);
+    };
+
+    this.kkk = (frequency, parcel_qty) => {
       let frequency_type;
       let temp = parcel_qty;
 
@@ -52,11 +53,22 @@ const MaintainersDonationTabForm = (function() {
         frequency_type = 'years';
       }
 
+      return { frequency_type, temp };
+    };
+
+    this.update_last_parcel = (parcel_qty, frequency_type, temp) => {
+      const first_date = $('#maintainer_first_parcel').val();
+      const last_date = $('#maintainer_last_parcel');
+
+      last_date.val('');
+
+      if(!first_date || this.cant_set_parcels() || !parcel_qty) {
+        return;
+      }
+
       if(parcel_qty !== 0 || (frequency_type !== undefined && frequency_type !== '')) {
         const date_format = I18n.t('date.formats.javascript_format.date').toUpperCase();
         last_date.val(moment(first_date, date_format).add((temp-1), frequency_type).format(date_format));
-      } else {
-        last_date.val('');
       }
     };
 
@@ -70,7 +82,7 @@ const MaintainersDonationTabForm = (function() {
     this.set_last_parcel_date();
     this.setup_listeners();
   }
-  
+
   return MaintainersDonationTabForm;
 }());
 

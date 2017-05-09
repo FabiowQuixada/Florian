@@ -6,7 +6,7 @@ const BillsIndex = (function() {
   function BillsIndex() {
     $('#graphs_btn').click( () => $('#graphs_modal').modal('show'));
   }
-  
+
   return BillsIndex;
 }());
 

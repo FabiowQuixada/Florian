@@ -16,7 +16,8 @@
     },
     "plugins": [
         "react",
-        "jasmine-jquery"
+        "jasmine-jquery",
+        "es6-recommended"
     ],
     "globals": {
         "google": {},
@@ -28,6 +29,8 @@
         "quotes": ["off", "double"],
         "semi": ["error", "always"],
         "eol-last": ["error", "always"],
-        "eqeqeq": "error"
+        "eqeqeq": "error",
+        "complexity": ["warn"],
+        "no-trailing-spaces": ["error", { "skipBlankLines": false }]
     }
 }

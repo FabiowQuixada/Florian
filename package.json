@@ -29,6 +29,7 @@
     "browser-js": "^1.10.1",
     "deep-freeze": "0.0.1",
     "eslint": "^3.19.0",
+    "eslint-plugin-es6-recommended": "^0.1.2",
     "eslint-plugin-jasmine-jquery": "^1.0.0",
     "eslint-plugin-react": "^6.10.3",
     "exports-loader": "~0.6.2",

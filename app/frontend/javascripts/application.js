@@ -1,8 +1,8 @@
-/* 
+/*
 
   On top of some javascript files, there will be the a line like the following:
     $(() => { if(on_page('bills', 'edit')) bills_edit(); });
-  
+
   on_page('bills', 'edit') means if the rendered page was a result of the 'edit' action in the BillsController.
 
   ...which means: "When the document is ready, if the user is on_page(), call the 'bills_edit' function,

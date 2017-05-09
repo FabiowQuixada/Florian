@@ -52,7 +52,7 @@ const save_model_values_on_page_load = () => {
   attr_values.length = 0;
   $('input, textarea, select').each((i, field) => {
     const elem = $(field);
-    if(!button(elem) && has_id(elem) && !temp_field(elem) && 
+    if(!button(elem) && has_id(elem) && !temp_field(elem) &&
         (status_attr(elem) || hidden_field(elem)))
       attr_values[$(field).attr('id')] = $(field).val();
   });

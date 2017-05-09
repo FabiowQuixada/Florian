@@ -26,7 +26,7 @@ $(() => {
   $(".fax").mask("(99) 9999-9999", { placeholder : "(__) ____-____" });
   $('.day_of_month').mask('99');
   $('.numbers_only').mask('9999999');
-  $('.money').mask(`000${delimiter}000${separator}00`, { reverse : true }); 
+  $('.money').mask(`000${delimiter}000${separator}00`, { reverse : true });
 
   // Field initialization;
   $(".money").each((index, field) => {

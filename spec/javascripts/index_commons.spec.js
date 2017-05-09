@@ -1,6 +1,6 @@
 /**
  *
- * 
+ *
  * There is some problem when loading 'new IndexCommons();'
  *
  *
