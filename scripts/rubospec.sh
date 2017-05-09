@@ -3,6 +3,7 @@ set -e
 # Formatting checkers / correctors
 bundle exec rake i18n:sort
 bundle exec rake build_client_data:all
+./node_modules/.bin/eslint app/frontend/ spec/javascripts/ --fix
 bundle exec rubocop -a
 
 # Actual Tests
