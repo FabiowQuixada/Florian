@@ -60,24 +60,24 @@
 
 <%= form_for ProductAndServiceWeek.new, url: update_and_send_product_and_service_weeks_path, html: { id: 'hidden_week_form', class: 'hidden' }, authenticity_token: true do |hidden_f| %>
 
-	<%= hidden_f.text_field :id %>
-	<%= hidden_f.text_field :start_date, value: Date.today %>
-	<%= hidden_f.text_field :end_date, value: Date.today %>
+	<%= hidden_f.text_field :id, id: "hiddenweek_id" %>
+	<%= hidden_f.text_field :start_date, value: Date.today, id: "hiddenweek_start_date" %>
+	<%= hidden_f.text_field :end_date, value: Date.today, id: "hiddenweek_end_date" %>
 
 	<!-- Products -->
 	<%= hidden_f.fields_for :product_data_attributes do |prod_f| %>
-		<%= prod_f.hidden_field :id %>
+		<%= prod_f.hidden_field :id, id: "hiddenweek_product_id" %>
 		<% ProductData.products.each do |name| %>
-			<%= prod_f.hidden_field name %>
+			<%= prod_f.hidden_field name, id: "hiddenweek_product_#{name}" %>
 		<% end %>
 	<% end %>
 
 	<!-- Services -->
-	<% hidden_f.object.service_data.each do |serv| %>
+	<% hidden_f.object.service_data.each_with_index do |serv, index| %>
 		<%= hidden_f.fields_for :service_data, serv do |serv_f| %>
-			<%= serv_f.hidden_field :id %>
+			<%= serv_f.hidden_field :id, id: "hiddenweek_service_id_c#{index}" %>
 			<% ServiceData.services.each do |name| %>
-				<%= serv_f.hidden_field name %>
+				<%= serv_f.hidden_field name, id: "hiddenweek_service_#{name}_c#{index}" %>
 			<% end %>
 		<% end %>
 	<% end %>

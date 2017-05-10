@@ -32,7 +32,7 @@
 		<!-- Service body rows -->
 		<tbody>
 			<% ServiceData.services.each_with_index do |serv, row| %>
-				<tr class="service-<%= week.index %>-row">
+				<tr class="<%= serv %>-row row-<%= row %>">
 					<th scope="row" class="col-md-6">
 						<%= t("activerecord.attributes.service_data.#{serv}") %>
 					</th>
@@ -43,7 +43,11 @@
 						<%= service_field_tag(week, serv, 1, row) %>
 					</td>
 					<td class="col-md-2">
-						<%= text_field_tag serv, '', id: "week_#{week.number}_service_#{serv}_total", class: "form-control input-sm service_total temp_field week_#{week.index}", readonly: true, disabled: true %>
+						<%= text_field_tag serv, '', 
+							id: "w#{week.index}_service_#{serv}_total", 
+							class: "form-control input-sm temp_field service_total_field_column", 
+							readonly: true, 
+							disabled: true %>
 					</td>
 				</tr>
 			<% end %>
@@ -57,13 +61,28 @@
 					<%= t 'helpers.total' %>
 				</th>
 				<td class="col-md-2">
-					<%= text_field_tag 'total_service_checkup', 0, id: "total_service_checkup_week_#{week.index}", class: 'form-control input-sm temp_field', readonly: true, disabled: true %>
+					<%= text_field_tag 'total_service_checkup', 
+						0, 
+						id: "w#{week.index}_service_checkup_total", 
+						class: 'form-control input-sm temp_field service_total_field_row', 
+						readonly: true, 
+						disabled: true %>
 				</td>
 				<td class="col-md-2">
-					<%= text_field_tag 'total_service_return', 0, id: "total_service_return_week_#{week.index}", class: 'form-control input-sm temp_field', readonly: true, disabled: true %>
+					<%= text_field_tag 'total_service_return', 
+						0, 
+						id: "w#{week.index}_service_return_total", 
+						class: 'form-control input-sm temp_field service_total_field_row', 
+						readonly: true, 
+						disabled: true %>
 				</td>
 				<td class="col-md-2">
-					<%= text_field_tag 'total_service', 0, id: "total_service_week_#{week.index}", class: 'form-control input-sm temp_field', readonly: true, disabled: true %>
+					<%= text_field_tag 'total_service', 
+						0, 
+						id: "w#{week.index}_service_absolute_total", 
+						class: 'form-control input-sm temp_field service_absolute_total', 
+						readonly: true, 
+						disabled: true %>
 				</td>
 			</tr>
 		</tfoot>

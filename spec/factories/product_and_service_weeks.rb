@@ -40,10 +40,6 @@ FactoryGirl.define do
       number ProductAndServiceWeek::FINAL_NUMBER
     end
 
-    trait :helper do
-      number 0
-    end
-
     trait :finalized_datum do
       association :product_and_service_datum, factory: [:product_and_service_datum, :finalized]
     end

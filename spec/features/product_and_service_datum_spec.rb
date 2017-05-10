@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe ProductAndServiceDatum, js: true, type: :request do
-  let(:prefix) { 'input#product_and_service_datum_product_and_service_weeks_attributes_' }
-
   describe 'filters' do
     let(:start) { '02/2016' }
     let(:final) { '06/2016' }
@@ -47,11 +45,11 @@ describe ProductAndServiceDatum, js: true, type: :request do
         visit edit_product_and_service_datum_path described_class.last
       end
 
-      it { expect(first("#{prefix}0_service_data_attributes_0_psychology").value).to eq '1' }
-      it { expect(first("#{prefix}0_service_data_attributes_1_psychology").value).to eq '12' }
-      it { expect(first("#{prefix}0_service_data_attributes_0_plastic_surgery").value).to eq '3' }
-      it { expect(first("#{prefix}0_service_data_attributes_1_mesh").value).to eq '4' }
-      it { expect(first("#{prefix}0_product_data_attributes_mask").value).to eq '10' }
+      it { expect(find('#w0_service_psychology_c0').value).to eq '1' }
+      it { expect(find('#w0_service_psychology_c1').value).to eq '12' }
+      it { expect(find('#w0_service_plastic_surgery_c0').value).to eq '3' }
+      it { expect(find('#w0_service_mesh_c1').value).to eq '4' }
+      it { expect(find('#w0_product_mask').value).to eq '10' }
     end
 
     it 'makes sure js is working for week 0 services' do
@@ -82,63 +80,63 @@ describe ProductAndServiceDatum, js: true, type: :request do
   # Helper methods ################################################################################
 
   def fill_week_0_services
-    first("#{prefix}0_service_data_attributes_0_psychology").set(1)
-    first("#{prefix}0_service_data_attributes_1_psychology").set(12)
-    first("#{prefix}0_service_data_attributes_0_plastic_surgery").set(3)
-    first("#{prefix}0_service_data_attributes_1_mesh").set(4)
+    find('#w0_service_psychology_c0').set(1)
+    find('#w0_service_psychology_c1').set(12)
+    find('#w0_service_plastic_surgery_c0').set(3)
+    find('#w0_service_mesh_c1').set(4)
   end
 
   def fill_week_0_products
-    first("#{prefix}0_product_data_attributes_mask").set(10)
-    first("#{prefix}0_product_data_attributes_skin_expander").set(11)
+    find('#w0_product_mask').set(10)
+    find('#w0_product_skin_expander').set(11)
   end
 
   def check_week_0_totals_column
     input_blur
-    expect(first('input#week_1_service_psychology_total').value).to eq '13'
-    expect(first('input#week_1_service_mesh_total').value).to eq '4'
+    expect(find('#w0_service_psychology_total').value).to eq '13'
+    expect(find('#w0_service_mesh_total').value).to eq '4'
   end
 
   def check_week_0_footer_row
     input_blur
-    expect(first('input#total_service_checkup_week_0').value).to eq '4'
-    expect(first('input#total_service_return_week_0').value).to eq '16'
-    expect(first('input#total_service_week_0').value).to eq '20'
+    expect(find('#w0_service_checkup_total').value).to eq '4'
+    expect(find('#w0_service_return_total').value).to eq '16'
+    expect(find('#w0_service_absolute_total').value).to eq '20'
   end
 
   def check_week_0_products_total
     input_blur
-    expect(first('input#total_product_week_0').value).to eq '21'
+    expect(find('#w0_product_total').value).to eq '21'
   end
 
   def fill_week_1_services
-    first("#{prefix}1_service_data_attributes_0_psychology").set(5)
-    first("#{prefix}1_service_data_attributes_1_psychology").set(6)
-    first("#{prefix}1_service_data_attributes_0_gynecology").set(7)
-    first("#{prefix}1_service_data_attributes_1_occupational_therapy").set(8)
+    find('#w1_service_psychology_c0').set(5)
+    find('#w1_service_psychology_c1').set(6)
+    find('#w1_service_gynecology_c0').set(7)
+    find('#w1_service_occupational_therapy_c1').set(8)
   end
 
   def fill_week_1_products
-    first("#{prefix}1_product_data_attributes_mask").set(12)
-    first("#{prefix}1_product_data_attributes_cervical_collar").set(13)
+    find('#w1_product_mask').set(12)
+    find('#w1_product_cervical_collar').set(13)
   end
 
   def check_week_1_totals_column
     input_blur
-    expect(first('input#week_2_service_psychology_total').value).to eq '11'
-    expect(first('input#week_2_service_gynecology_total').value).to eq '7'
+    expect(find('#w1_service_psychology_total').value).to eq '11'
+    expect(find('#w1_service_gynecology_total').value).to eq '7'
   end
 
   def check_week_1_footer_row
     input_blur
-    expect(first('input#total_service_checkup_week_1').value).to eq '12'
-    expect(first('input#total_service_return_week_1').value).to eq '14'
-    expect(first('input#total_service_week_1').value).to eq '26'
+    expect(find('#w1_service_checkup_total').value).to eq '12'
+    expect(find('#w1_service_return_total').value).to eq '14'
+    expect(find('#w1_service_absolute_total').value).to eq '26'
   end
 
   def check_week_1_products_total
     input_blur
-    expect(first('input#total_product_week_1').value).to eq '25'
+    expect(find('#w1_product_total').value).to eq '25'
   end
 
   def go_to_week_1_tab
@@ -146,11 +144,11 @@ describe ProductAndServiceDatum, js: true, type: :request do
   end
 
   def fill_fields
-    first("#{prefix}0_service_data_attributes_0_psychology").set(1)
-    first("#{prefix}0_service_data_attributes_1_psychology").set(12)
-    first("#{prefix}0_service_data_attributes_0_plastic_surgery").set(3)
-    first("#{prefix}0_service_data_attributes_1_mesh").set(4)
-    first("#{prefix}0_product_data_attributes_mask").set(10)
+    find('#w0_service_psychology_c0').set(1)
+    find('#w0_service_psychology_c1').set(12)
+    find('#w0_service_plastic_surgery_c0').set(3)
+    find('#w0_service_mesh_c1').set(4)
+    find('#w0_product_mask').set(10)
   end
 
   def expect_dates_to_be_in_interval

@@ -25,7 +25,7 @@ $(() => {
   $(".telephone").mask("(99) 9999-9999", { placeholder : "(__) ____-____" });
   $(".fax").mask("(99) 9999-9999", { placeholder : "(__) ____-____" });
   $(".day_of_month").mask("99");
-  $(".numbers_only").mask("9999999");
+  $('.numbers_only').keyup(function () { this.value = this.value.replace(/[^0-9\.]/g,''); });
   $(".money").mask(`000${delimiter}000${separator}00`, { reverse : true });
 
   // Field initialization;

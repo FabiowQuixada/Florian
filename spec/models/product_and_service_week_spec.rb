@@ -123,18 +123,12 @@ describe ProductAndServiceWeek, type: :model do
     it { expect(build(:product_and_service_week, number: 6).totals?).to be true }
     it { expect(build(:product_and_service_week, number: 7).totals?).to be false }
   end
+
   describe '#final?' do
     it { expect(build(:product_and_service_week, number: 0).final?).to be false }
     it { expect(build(:product_and_service_week, number: 1).final?).to be false }
     it { expect(build(:product_and_service_week, number: 5).final?).to be false }
     it { expect(build(:product_and_service_week, number: 6).final?).to be false }
     it { expect(build(:product_and_service_week, number: 7).final?).to be true }
-  end
-  describe '#helper?' do
-    it { expect(build(:product_and_service_week, number: 0).helper?).to be true }
-    it { expect(build(:product_and_service_week, number: 1).helper?).to be false }
-    it { expect(build(:product_and_service_week, number: 5).helper?).to be false }
-    it { expect(build(:product_and_service_week, number: 6).helper?).to be false }
-    it { expect(build(:product_and_service_week, number: 7).helper?).to be false }
   end
 end

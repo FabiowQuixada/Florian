@@ -8,7 +8,6 @@ class ProductAndServiceWeek < ActiveRecord::Base
   # Constants
   TOTALS_NUMBER = 6
   FINAL_NUMBER = 7
-  HELPER_NUMBER = -1
 
 
   # Relationships
@@ -62,10 +61,6 @@ class ProductAndServiceWeek < ActiveRecord::Base
 
   def final?
     number == FINAL_NUMBER
-  end
-
-  def helper?
-    index == HELPER_NUMBER
   end
 
   def index
