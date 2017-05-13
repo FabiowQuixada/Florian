@@ -11,9 +11,9 @@ const BillsCharts = (function() {
     set_number_of_tabs("main", Object.keys(bill_chart_data).length);
 
     // Inside each year tab, each bill has its own tab - there's also a "Totals" tab;
-    for (let year of Object.keys(bill_chart_data)) {
+    Object.keys(bill_chart_data).forEach( year => {
       set_number_of_tabs(year, Constants.number_of_bill_types+1);
-    }
+    });
 
     const $S = require("scriptjs");
     $S("https://www.gstatic.com/charts/loader.js", () => {
@@ -40,7 +40,7 @@ const BillsCharts = (function() {
       const bill_types = Constants.number_of_bill_types;
       const data = bill_chart_data;
 
-      for (let year of Object.keys(data)) {
+      Object.keys(data).forEach( year => {
         const months = data[year];
         for(let type = 0; type < bill_types; ++type) {
           this.prepare_and_draw_chart(year, months, type);
@@ -48,7 +48,7 @@ const BillsCharts = (function() {
 
         // Totals;
         this.prepare_and_draw_chart(year, months, bill_types);
-      }
+      });
     };
 
     this.prepare_and_draw_chart = (year, months, type) => {

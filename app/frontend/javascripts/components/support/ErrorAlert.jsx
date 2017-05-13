@@ -5,10 +5,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 const msg_as_html_ul = message => {
-  let messages = [];
-
-  for (let i = 0; i < message.length; i++)
-    messages.push(<li key={i}>{message[i]}</li>);
+  const messages = message.map( (message, index) => (
+    <li key={index}>{message}</li>
+  ));
 
   return <ul>{messages}</ul>;
 }

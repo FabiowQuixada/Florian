@@ -7,7 +7,7 @@ import { LOAD_LIST_FROM_SERVER } from './../../../constants/emailsConstants';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const EmailArea = ({ data = [],
+const EmailArea = ({
         msg_box_id = 'global',
         model,
         field_name = 'recipients_array',
@@ -16,7 +16,6 @@ const EmailArea = ({ data = [],
         errors
       }, { store }) => {
   
-  let table_rows = new Array();
   const state = store.getState();
 
   // TODO: This is a quick-fix due to an issue
@@ -32,15 +31,13 @@ const EmailArea = ({ data = [],
     email_first_time[field_name] = false;
   }
 
-  for (let email of state.rows) {
-    table_rows.push(
-      <Email
-        field_name={field_name}
-        email={email} 
-        key={`${field_name}_${email.address}`}
-        onDestroy={ email => store.dispatch(remove(email)) } />
-    );
-  }
+  const table_rows = state.rows.map( email => (
+    <Email
+      field_name={field_name}
+      email={email}
+      key={`${field_name}_${email.address}`}
+      onDestroy={ email => store.dispatch(remove(email)) } />
+  ));
 
   return (
     <div>
@@ -92,10 +89,6 @@ EmailArea.contextTypes = {
 };
 
 EmailArea.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
-    is_persisted: PropTypes.string,
-    address: PropTypes.string
-  })),
   msg_box_id: PropTypes.string,
   model: PropTypes.string.isRequired,
   field_name: PropTypes.string,

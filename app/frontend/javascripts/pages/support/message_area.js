@@ -92,19 +92,15 @@ export const msg_as_html_ul = message => {
     return "";
   }
 
-  let result = "<ul>";
   let msg_array = message;
 
   if(typeof message === "string" || message instanceof String) {
     msg_array = [message];
   }
 
-  for (let i = 0; i < msg_array.length; i++)
-    result += `<li>${msg_array[i]}<\/li>`;
+  const result = msg_array.map( msg => `<li>${msg}<\/li>`);
 
-  result += "<\/ul>";
-
-  return result;
+  return `<ul>${result.join("")}<\/ul>`;
 };
 
 export const is_empty = message => {

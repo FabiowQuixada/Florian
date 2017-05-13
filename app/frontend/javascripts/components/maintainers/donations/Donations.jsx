@@ -4,16 +4,12 @@ import Donation from './Donation'
 import PropTypes from 'prop-types';
 
 const Donations = ({ data, onDonationDestroy }) => {
-  let table_rows = new Array();
-
-  for (let i = 0; i < data.length; i++) {
-    table_rows.push(
-      <Donation 
-        donation={data[i]} 
-        key={i}
-        onDestroy={ onDonationDestroy } />
-    );
-  }
+  const table_rows = data.map( (donation, index) => (
+    <Donation
+      donation={ donation }
+      key={ index }
+      onDestroy={ onDonationDestroy } />
+  ));
 
   return (
     <div id="donations_table">

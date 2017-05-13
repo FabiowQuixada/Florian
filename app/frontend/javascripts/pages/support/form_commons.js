@@ -21,21 +21,10 @@ const go_back = (controller = $("#rails_controller").val()) => {
 };
 
 const handle_back_on_edit = before_submit_or_leave => {
-  let any_change = false;
+  let any_change = attr_values.filter(has_changed);
 
   if(typeof before_submit_or_leave === "function") {
     any_change = before_submit_or_leave();
-  }
-
-  // const changed_values_list = [];
-
-  if(!any_change) {
-    for (let key in attr_values) {
-      if(has_changed(key)) {
-        // changed_values_list.push(key);
-        any_change = true;
-      }
-    }
   }
 
   if(any_change) {

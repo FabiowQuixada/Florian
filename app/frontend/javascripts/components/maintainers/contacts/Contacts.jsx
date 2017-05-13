@@ -4,17 +4,13 @@ import Contact from './Contact'
 import PropTypes from 'prop-types';
 
 const Contacts = ({ data, onContactEdit, onContactDestroy }) => {
-  let table_rows = new Array();
-
-  for (let i = 0; i < data.length; i++) {
-    table_rows.push(
-      <Contact 
-        contact={ data[i] } 
-        key={ i }
-        onEdit={ onContactEdit }
-        onDestroy={ onContactDestroy } />
-    );
-  }
+  const table_rows = data.map( (contact, index) => (
+    <Contact
+      contact={ contact }
+      key={ index }
+      onEdit={ onContactEdit }
+      onDestroy={ onContactDestroy } />
+  ));
   
   return (
     <div id="contacts_table">
