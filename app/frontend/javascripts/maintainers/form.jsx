@@ -8,6 +8,7 @@ import DonationAreaContainer from './../redux/containers/DonationAreaContainer'
 import { on_page } from './../application'
 import { set_number_of_tabs } from './../tab_commons'
 import { init } from './../form_commons'
+import { display_error } from './../message_area'
 
 $(() => { if(on_page('maintainers', 'form')) new MaintainersForm() });
 
@@ -67,7 +68,7 @@ const MaintainersForm = (function() {
 
         if(errors.length > 0) {
           e.preventDefault();
-          display_form_errors(errors);
+          display_error(errors);
         }
       });
     }

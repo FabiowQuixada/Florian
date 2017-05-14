@@ -1,7 +1,6 @@
 import { on_controller, on_action } from './../application'
 import { display_info, display_notice, parse_json_errors } from './../message_area'
 import I18n from './../i18n'
-import { attr_values } from './../form_commons'
 import ServerFunctions from './../server_functions'
 
 $(() => { if(on_controller('receipt_emails')) new ReceiptEmailsModals() });
