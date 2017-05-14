@@ -15,7 +15,7 @@
 
 */
 
-import I18n from './i18n';
+import I18n from "./i18n";
 
 export const on_page = (controller, action) => on_controller(controller) && on_action(action);
 
@@ -27,14 +27,14 @@ export const on_controller = controller => {
 };
 
 export const on_action = action => {
-  if(action === 'new')
-    return $("body").hasClass('new') || $("body").hasClass('create');
+  if(action === "new")
+    return $("body").hasClass("new") || $("body").hasClass("create");
 
-  if(action === 'edit')
-    return $("body").hasClass('edit') || $("body").hasClass('update');
+  if(action === "edit")
+    return $("body").hasClass("edit") || $("body").hasClass("update");
 
-  if(action === 'form')
-    return $("body").hasClass('new') || $("body").hasClass('create') || $("body").hasClass('edit') || $("body").hasClass('update');
+  if(action === "form")
+    return $("body").hasClass("new") || $("body").hasClass("create") || $("body").hasClass("edit") || $("body").hasClass("update");
 
   return $("body").hasClass(action);
 };
@@ -56,12 +56,12 @@ export const toogle_admin_data = () => {
 
 export const hide_admin_data = () => {
   displaying_admin_data = false;
-  $('.admin-only').hide();
+  $(".admin-only").hide();
 };
 
 export const display_admin_data = () => {
   displaying_admin_data = true;
-  $('.admin-only').show();
+  $(".admin-only").show();
 };
 
 export const to_money = number => {
@@ -84,7 +84,7 @@ export const to_money = number => {
 export const currency_sum = elements => {
   let sum = 0;
   $(elements).each((i, field) => {
-    sum += parseFloat( $(field).val().replace(/,/g, '') * 100 );
+    sum += parseFloat( $(field).val().replace(/,/g, "") * 100 );
   });
 
   return to_money(sum / 100);
@@ -95,9 +95,9 @@ export const escape_html = string => {
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
-    '"': '&quot;',
-    "'": '&#39;',
-    "/": '/' // &#x2F;
+    "\"": "&quot;",
+    "'": "&#39;",
+    "/": "/" // &#x2F;
   };
 
   return String(string).replace(/[&<>"'\/]/g, s => entity_map[s]);

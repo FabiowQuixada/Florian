@@ -3,12 +3,12 @@ let contact_temp_id = -1;
 class ContactFactory {
   static new(
            id = contact_temp_id--,
-           name = 'Joao',
-           position = '',
-           email_address = '',
-           telephone = '',
-           celphone = '',
-           fax = ''
+           name = "Joao",
+           position = "",
+           email_address = "",
+           telephone = "",
+           celphone = "",
+           fax = ""
          ) {
     return {
       id,
@@ -24,12 +24,12 @@ class ContactFactory {
   static empty(id = contact_temp_id--) {
     return {
       id,
-      name: '',
-      position: '',
-      email_address: '',
-      telephone: '',
-      celphone: '',
-      fax: ''
+      name: "",
+      position: "",
+      email_address: "",
+      telephone: "",
+      celphone: "",
+      fax: ""
     };
   }
 }

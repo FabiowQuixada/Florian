@@ -1,16 +1,16 @@
-import * as Dates from './../../app/frontend/javascripts/dates';
-import I18n from './../../app/frontend/javascripts/i18n';
+import * as Dates from "./../../app/frontend/javascripts/dates";
+import I18n from "./../../app/frontend/javascripts/i18n";
 
 describe("Date", () => {
   it("formatted as competence", () => {
-    jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures';
-    loadFixtures('dates.html');
+    jasmine.getFixtures().fixturesPath = "base/spec/javascripts/fixtures";
+    loadFixtures("dates.html");
     const source_field_id = "source";
     const target_field_id = "target";
 
     Dates.format_competence(source_field_id, target_field_id);
 
-    expect($(`#${target_field_id}`).val()).toEqual('02-13-01');
+    expect($(`#${target_field_id}`).val()).toEqual("02-13-01");
   });
 
   it("is converted to rails format", () => {
@@ -37,7 +37,7 @@ describe("Date", () => {
   it("is validated in rails format", () => {
     expect(Dates.validate_period("2016-02-13", "2015-02-13", "Nope")).toEqual(["Nope"]);
     expect(Dates.validate_period("2016-02-13", "2015-02-13", "Yeap")).toEqual(["Yeap"]);
-    expect(Dates.validate_period("2016-02-13", "2015-02-13")).toEqual([I18n.t('errors.messages.invalid_period_i')]);
+    expect(Dates.validate_period("2016-02-13", "2015-02-13")).toEqual([I18n.t("errors.messages.invalid_period_i")]);
     expect(Dates.validate_period("2014-02-13", "2015-02-13")).toEqual([]);
   });
 

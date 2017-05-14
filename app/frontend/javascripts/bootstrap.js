@@ -1,4 +1,4 @@
-require('bootstrap');
+require("bootstrap");
 
 $(() => {
   $("a[rel~=popover], .has-popover").popover();

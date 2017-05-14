@@ -1,20 +1,20 @@
-import * as application from './../../app/frontend/javascripts/application';
+import * as application from "./../../app/frontend/javascripts/application";
 
 describe("application", () => {
   beforeEach(() => {
-    jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures';
-    loadFixtures('application.html');
+    jasmine.getFixtures().fixturesPath = "base/spec/javascripts/fixtures";
+    loadFixtures("application.html");
   });
 
   describe("admin data", () => {
     it("displays admin data", () => {
       application.display_admin_data();
-      expect($('#admin-data')).not.toBeHidden();
+      expect($("#admin-data")).not.toBeHidden();
     });
 
     it("hides admin data", () => {
       application.hide_admin_data();
-      expect($('#admin-data')).toBeHidden();
+      expect($("#admin-data")).toBeHidden();
     });
   });
 
@@ -32,6 +32,6 @@ describe("application", () => {
   });
 
   it("escapes html", () => {
-    expect(application.escape_html("&<>\"'/")).toEqual('&amp;&lt;&gt;&quot;&#39;/');
+    expect(application.escape_html("&<>\"'/")).toEqual("&amp;&lt;&gt;&quot;&#39;/");
   });
 });

@@ -1,10 +1,10 @@
-import I18n from './i18n';
+import I18n from "./i18n";
 
-require('bootstrap-datepicker');
+require("bootstrap-datepicker");
 
 export const set_month_datepicker = () => {
-  $('.datepicker-competence').datepicker();
-  $('[data-behaviour~=datepickercompetence]').datepicker({
+  $(".datepicker-competence").datepicker();
+  $("[data-behaviour~=datepickercompetence]").datepicker({
     minViewMode: 1,
     format: I18n.t("date.formats.javascript_format.competence"),
     autoclose: true,
@@ -13,8 +13,8 @@ export const set_month_datepicker = () => {
 };
 
 export const set_datepicker = () => {
-  $('.datepicker').datepicker();
-  $('[data-behaviour~=datepicker]').datepicker({
+  $(".datepicker").datepicker();
+  $("[data-behaviour~=datepicker]").datepicker({
     format: I18n.t("date.formats.javascript_format.date"),
     autoclose: true,
     language: I18n.locale,
@@ -69,8 +69,8 @@ export const to_rails_date = date_string => {
 
   const date = new Date(temp[2], temp[0] - 1, temp[1]);
   const year = date.getFullYear();
-  const month = ('0' + (date.getMonth() + 1)).slice(-2);
-  const day = ('0' + date.getDate()).slice(-2);
+  const month = ("0" + (date.getMonth() + 1)).slice(-2);
+  const day = ("0" + date.getDate()).slice(-2);
 
   return `${year}-${month}-${day}`;
 };
@@ -87,7 +87,7 @@ export const to_js_date = rails_date => {
 };
 
 export const is_valid_rails_date = rails_date => {
-  const comp = rails_date.split('-');
+  const comp = rails_date.split("-");
   const y = parseInt(comp[0], 10);
   const m = parseInt(comp[1], 10);
   const d = parseInt(comp[2], 10);
@@ -103,7 +103,7 @@ export const is_after = (start_date, end_date) => (
 );
 
 // Format: yyyy-mm-dd;
-export const validate_period = (start_date, end_date, msg = I18n.t('errors.messages.invalid_period_i')) => {
+export const validate_period = (start_date, end_date, msg = I18n.t("errors.messages.invalid_period_i")) => {
   if(!start_date || !end_date) {
     return new Array();
   }
@@ -119,7 +119,7 @@ export const validate_period = (start_date, end_date, msg = I18n.t('errors.messa
 
 // Input format: mm/dd/yyyy;
 export const is_valid_date = date_string => {
-  const comp = date_string.split('/');
+  const comp = date_string.split("/");
   const m = parseInt(comp[0], 10);
   const d = parseInt(comp[1], 10);
   const y = parseInt(comp[2], 10);

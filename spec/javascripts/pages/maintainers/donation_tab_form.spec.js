@@ -1,12 +1,12 @@
-import MaintainersDonationTabForm from './../../../../app/frontend/javascripts/maintainers/donation_tab_form';
-import Constants from './../../../../app/frontend/javascripts/server_constants';
+import MaintainersDonationTabForm from "./../../../../app/frontend/javascripts/maintainers/donation_tab_form";
+import Constants from "./../../../../app/frontend/javascripts/server_constants";
 
 describe("Maintainer donation tab form", () => {
   let donation_tab_form;
 
   beforeEach(() => {
-    jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures';
-    loadFixtures('maintainers/donation_tab_form.html');
+    jasmine.getFixtures().fixturesPath = "base/spec/javascripts/fixtures";
+    loadFixtures("maintainers/donation_tab_form.html");
     donation_tab_form = new MaintainersDonationTabForm();
     $.holdReady(true);
   });
@@ -23,7 +23,7 @@ describe("Maintainer donation tab form", () => {
     });
 
     it("blocks parcel field if no payment frequency option is selected", () => {
-      $("#maintainer_payment_frequency").val('');
+      $("#maintainer_payment_frequency").val("");
       expect(donation_tab_form.cant_set_parcels()).toEqual(true);
     });
 
@@ -35,41 +35,41 @@ describe("Maintainer donation tab form", () => {
 
   describe("toogle_parcel_qty_field", () => {
     it("allows user to edit 'payment period' if 'parcel frequency' is set to 'semiannually'", () => {
-      $('#maintainer_payment_period').attr('readonly');
+      $("#maintainer_payment_period").attr("readonly");
       $("#maintainer_payment_frequency").val(Constants.payment_freq.semiannually);
       donation_tab_form.toogle_parcel_qty_field();
-      expect($('#maintainer_payment_period').is('[readonly]')).toEqual(false);
+      expect($("#maintainer_payment_period").is("[readonly]")).toEqual(false);
     });
 
     it("prevents user from editing 'payment period' if 'parcel frequency' is not set", () => {
-      $('#maintainer_payment_period').removeAttr('readonly');
+      $("#maintainer_payment_period").removeAttr("readonly");
       $("#maintainer_payment_frequency").val(Constants.payment_freq.undefined);
       donation_tab_form.toogle_parcel_qty_field();
-      expect($('#maintainer_payment_period').is('[readonly]')).toEqual(true);
+      expect($("#maintainer_payment_period").is("[readonly]")).toEqual(true);
     });
   });
 
   describe("set_last_parcel_date", () => {
     beforeEach(() => {
-      $('#maintainer_last_parcel').val('undefined');
+      $("#maintainer_last_parcel").val("undefined");
     });
 
     it("cleans 'last parcel date' if 'first parcel' field is empty", () => {
-      $('#maintainer_first_parcel').val('');
+      $("#maintainer_first_parcel").val("");
       donation_tab_form.set_last_parcel_date();
-      expect($('#maintainer_last_parcel').val()).toEqual('');
+      expect($("#maintainer_last_parcel").val()).toEqual("");
     });
 
     it("cleans 'last parcel date' if 'first parcel' field is empty", () => {
-      $('#maintainer_payment_frequency').val('');
+      $("#maintainer_payment_frequency").val("");
       donation_tab_form.set_last_parcel_date();
-      expect($('#maintainer_last_parcel').val()).toEqual('');
+      expect($("#maintainer_last_parcel").val()).toEqual("");
     });
 
     it("cleans 'last parcel date' if 'first parcel' field is empty", () => {
-      $('#maintainer_payment_period').val('');
+      $("#maintainer_payment_period").val("");
       donation_tab_form.set_last_parcel_date();
-      expect($('#maintainer_last_parcel').val()).toEqual('');
+      expect($("#maintainer_last_parcel").val()).toEqual("");
     });
 
     /**

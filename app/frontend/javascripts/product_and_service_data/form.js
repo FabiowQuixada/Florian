@@ -1,11 +1,11 @@
-import I18n from './../i18n';
-import { on_page, on_action } from './../application';
-import { current_competence, format_competence } from './../dates';
-import Constants from './../server_constants';
-import { display_info } from './../message_area';
-import { set_number_of_tabs } from './../tab_commons';
+import I18n from "./../i18n";
+import { on_page, on_action } from "./../application";
+import { current_competence, format_competence } from "./../dates";
+import Constants from "./../server_constants";
+import { display_info } from "./../message_area";
+import { set_number_of_tabs } from "./../tab_commons";
 
-$(() => { if(on_page('product_and_service_data', 'form')) new ProductAndServiceDataForm(); });
+$(() => { if(on_page("product_and_service_data", "form")) new ProductAndServiceDataForm(); });
 
 const ProductAndServiceDataForm = (function() {
   function ProductAndServiceDataForm() {
@@ -37,9 +37,9 @@ const ProductAndServiceDataForm = (function() {
     };
 
     this.update_service_totals_column_from = row => {
-      let checkups = row.find('.service_checkup').val();
-      let returns = row.find('.service_return').val();
-      let total = row.find('.service_total');
+      let checkups = row.find(".service_checkup").val();
+      let returns = row.find(".service_return").val();
+      let total = row.find(".service_total");
 
       if(isNaN(checkups)) {
         checkups = 0;
@@ -141,14 +141,14 @@ const ProductAndServiceDataForm = (function() {
     this.set_request_url = source_week_number => {
       if(source_week_number === Constants.week_final_number - 1) {
         // The final (monthly) data will be sent to the the institute's maintainers.
-        $('#hidden_week_form').attr('action', Constants.paths.send_maintainers_product_and_service_weeks);
+        $("#hidden_week_form").attr("action", Constants.paths.send_maintainers_product_and_service_weeks);
       } else if(source_week_number === Constants.week_totals_number - 1) {
         // The final (monthly) data will be sent analysis before being sent to maintainers;
-        $('#hidden_week_form').attr('action', Constants.paths.send_to_analysis_product_and_service_weeks);
+        $("#hidden_week_form").attr("action", Constants.paths.send_to_analysis_product_and_service_weeks);
       } else {
         // The partial (weekly) data will be sent to the collaborators;
-        this.update_hidden_week_field('start_date', source_week_number);
-        this.update_hidden_week_field('end_date', source_week_number);
+        this.update_hidden_week_field("start_date", source_week_number);
+        this.update_hidden_week_field("end_date", source_week_number);
       }
     };
 
@@ -186,10 +186,10 @@ const ProductAndServiceDataForm = (function() {
         this.update_hidden_serv_field(service_list[i], 1, source_week_number);
       }
 
-      this.update_hidden_week_field('id', source_week_number);
-      this.update_hidden_serv_field('id', 0, source_week_number);
-      this.update_hidden_serv_field('id', 1, source_week_number);
-      this.update_hidden_prod_field('id', source_week_number);
+      this.update_hidden_week_field("id", source_week_number);
+      this.update_hidden_serv_field("id", 0, source_week_number);
+      this.update_hidden_serv_field("id", 1, source_week_number);
+      this.update_hidden_prod_field("id", source_week_number);
 
       this.set_request_url(source_week_number);
       display_info(I18n.t("alert.email.sending"));
@@ -197,21 +197,21 @@ const ProductAndServiceDataForm = (function() {
     };
 
     this.setup_listeners = () => {
-      $('.service_input').on('blur', this.update_service_totals_for_each_tab);
-      $('.product_input').on('blur', this.update_product_totals_for_each_tab);
-      $('#update_final_data_btn').on('click', this.copy_from_totals_to_final_tab);
-      $('#aux_competence').on('change', () => {
-        format_competence('aux_competence', 'product_and_service_datum_competence');
+      $(".service_input").on("blur", this.update_service_totals_for_each_tab);
+      $(".product_input").on("blur", this.update_product_totals_for_each_tab);
+      $("#update_final_data_btn").on("click", this.copy_from_totals_to_final_tab);
+      $("#aux_competence").on("change", () => {
+        format_competence("aux_competence", "product_and_service_datum_competence");
       });
 
       for (let i = 0; i <= Constants.number_of_weeks + 1; i++) {
-        $(`#update_and_send_btn_${i}`).on('click', this.copy_to_hidden_form_and_send.bind(self, i));
+        $(`#update_and_send_btn_${i}`).on("click", this.copy_to_hidden_form_and_send.bind(self, i));
       }
 
-      $('#main_form').submit(() => {
-        if(on_action('edit')) {
+      $("#main_form").submit(() => {
+        if(on_action("edit")) {
           $("#aux_competence").prop("disabled", true);
-          format_competence('aux_competence', 'product_and_service_datum_competence');
+          format_competence("aux_competence", "product_and_service_datum_competence");
         }
       });
     };
@@ -219,10 +219,10 @@ const ProductAndServiceDataForm = (function() {
     this.initalize_fields = () => {
       $("#aux_competence").prop("disabled", false);
       // $('.service_input, .product_input').mask('999');
-      $('#competence').val(current_competence());
+      $("#competence").val(current_competence());
     };
 
-    set_number_of_tabs('prod_serv_data', 7);
+    set_number_of_tabs("prod_serv_data", 7);
     this.update_service_totals_for_each_tab();
     this.update_product_totals_for_each_tab();
     this.copy_from_totals_to_final_tab();

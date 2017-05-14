@@ -1,8 +1,8 @@
-import emails from './../../../app/frontend/javascripts/redux/reducers/emailsReducer';
-import * as actions from './../../../app/frontend/javascripts/redux/actions/emailsActionCreators';
+import emails from "./../../../app/frontend/javascripts/redux/reducers/emailsReducer";
+import * as actions from "./../../../app/frontend/javascripts/redux/actions/emailsActionCreators";
 // import I18n from './../../../app/frontend/javascripts/i18n';
 
-const deepFreeze = require('deep-freeze');
+const deepFreeze = require("deep-freeze");
 
 describe("E-mails reducer", () => {
   let action;
@@ -26,7 +26,7 @@ describe("E-mails reducer", () => {
       };
       stateAfter = {
         errors: [],
-        email_field: '',
+        email_field: "",
         rows: [{
           is_persisted: "false",
           address: email
@@ -61,12 +61,12 @@ describe("E-mails reducer", () => {
       action = actions.remove(email1);
       stateBefore = {
         errors: [],
-        email_field: '',
+        email_field: "",
         rows: [email1, email2]
       };
       stateAfter = {
         errors: [],
-        email_field: '',
+        email_field: "",
         rows: [email2]
       };
     });

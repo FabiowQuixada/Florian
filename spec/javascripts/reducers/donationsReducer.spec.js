@@ -1,9 +1,9 @@
-import donations from './../../../app/frontend/javascripts/redux/reducers/donationsReducer';
-import * as actions from './../../../app/frontend/javascripts/redux/actions/donationsActionCreators';
-import DonationFactory from './../../../app/frontend/javascripts/factories/DonationFactory';
-import I18n from './../../../app/frontend/javascripts/i18n';
+import donations from "./../../../app/frontend/javascripts/redux/reducers/donationsReducer";
+import * as actions from "./../../../app/frontend/javascripts/redux/actions/donationsActionCreators";
+import DonationFactory from "./../../../app/frontend/javascripts/factories/DonationFactory";
+import I18n from "./../../../app/frontend/javascripts/i18n";
 
-const deepFreeze = require('deep-freeze');
+const deepFreeze = require("deep-freeze");
 
 describe("Donations reducer", () => {
   let action;

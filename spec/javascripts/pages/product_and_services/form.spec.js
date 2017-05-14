@@ -1,41 +1,41 @@
-import ProductAndServiceDataForm from './../../../../app/frontend/javascripts/product_and_service_data/form';
-import Constants from './../../../../app/frontend/javascripts/server_constants';
+import ProductAndServiceDataForm from "./../../../../app/frontend/javascripts/product_and_service_data/form";
+import Constants from "./../../../../app/frontend/javascripts/server_constants";
 
 describe("Product and service form", () => {
   let ps_data_form;
 
   beforeEach(() => {
-    jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures';
-    loadFixtures('product_and_service_data/form.html');
+    jasmine.getFixtures().fixturesPath = "base/spec/javascripts/fixtures";
+    loadFixtures("product_and_service_data/form.html");
     ps_data_form = new ProductAndServiceDataForm();
     $.holdReady(true);
   });
 
   describe("update_product_totals_from_tab", () => {
     beforeEach(() => {
-      $('#total_product_week_2').val(0);
+      $("#total_product_week_2").val(0);
     });
 
     it("does so", () => {
-      $('#prod_0_week_2').val(1);
-      $('#prod_1_week_2').val(2);
-      $('#prod_2_week_2').val(4);
+      $("#prod_0_week_2").val(1);
+      $("#prod_1_week_2").val(2);
+      $("#prod_2_week_2").val(4);
 
       ps_data_form.update_product_totals_from_tab(2);
-      expect($('#total_product_week_2').val()).toEqual('7');
+      expect($("#total_product_week_2").val()).toEqual("7");
     });
   });
 
   describe("update_service_totals_from_tab", () => {
     beforeEach(() => {
-      $(`#total_service_checkup_week_3`).val(0);
-      $(`#total_service_return_week_3`).val(-4);
-      $(`#total_service_week_3`).val(0);
+      $("#total_service_checkup_week_3").val(0);
+      $("#total_service_return_week_3").val(-4);
+      $("#total_service_week_3").val(0);
 
-      $('#row_0 .service_checkup').val(2);
-      $('#row_0 .service_return').val(5);
-      $('#row_1 .service_checkup').val(4);
-      $('#row_1 .service_return').val(9);
+      $("#row_0 .service_checkup").val(2);
+      $("#row_0 .service_return").val(5);
+      $("#row_1 .service_checkup").val(4);
+      $("#row_1 .service_return").val(9);
     });
 
     // it("updates row's total", () => {
@@ -122,20 +122,20 @@ describe("Product and service form", () => {
 
   describe("update_services_in_totals_tab", () => {
     it("does so", () => {
-      $('#serv_0').val(7);
-      $('#serv_2').val(2);
+      $("#serv_0").val(7);
+      $("#serv_2").val(2);
       ps_data_form.update_services_in_totals_tab(3, 0);
 
-      expect($(`.service_row_3_col_0.week_5`).val()).toEqual('9');
+      expect($(".service_row_3_col_0.week_5").val()).toEqual("9");
     });
   });
 
   describe("update_products_in_totals_tab", () => {
     it("does so", () => {
-      $('#prod_0').val(7);
-      $('#prod_1').val(8);
+      $("#prod_0").val(7);
+      $("#prod_1").val(8);
       ps_data_form.update_products_in_totals_tab(4);
-      expect($('.product_row_4.week_5').val()).toEqual('15');
+      expect($(".product_row_4.week_5").val()).toEqual("15");
     });
   });
 
@@ -158,19 +158,19 @@ describe("Product and service form", () => {
       const week_number = 4;
       spyOn(ps_data_form, "update_hidden_week_field");
       ps_data_form.set_request_url(week_number);
-      expect(ps_data_form.update_hidden_week_field).toHaveBeenCalledWith('start_date', week_number);
-      expect(ps_data_form.update_hidden_week_field).toHaveBeenCalledWith('end_date', week_number);
+      expect(ps_data_form.update_hidden_week_field).toHaveBeenCalledWith("start_date", week_number);
+      expect(ps_data_form.update_hidden_week_field).toHaveBeenCalledWith("end_date", week_number);
     });
 
     it("sets helper form url to send data to analysis", () => {
       ps_data_form.set_request_url(5);
-      expect($('#hidden_week_form').attr('action')).toEqual(
+      expect($("#hidden_week_form").attr("action")).toEqual(
         Constants.paths.send_to_analysis_product_and_service_weeks);
     });
 
     it("sets helper form action to send data to clients", () => {
       ps_data_form.set_request_url(6);
-      expect($('#hidden_week_form').attr('action')).toEqual(
+      expect($("#hidden_week_form").attr("action")).toEqual(
         Constants.paths.send_maintainers_product_and_service_weeks);
     });
   });
