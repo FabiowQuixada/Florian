@@ -1,4 +1,4 @@
-import * as email_address_table from "./../../../../app/frontend/javascripts/others/email_address_table";
+import * as email_address_table from "./../../../../app/frontend/javascripts/pages/support/email_address_table";
 import { add_email_to_table } from "./../support/emails";
 
 describe("E-mail address table", () => {

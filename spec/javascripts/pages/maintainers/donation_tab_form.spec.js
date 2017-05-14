@@ -1,4 +1,4 @@
-import MaintainersDonationTabForm from "./../../../../app/frontend/javascripts/maintainers/donation_tab_form";
+import MaintainersDonationTabForm from "./../../../../app/frontend/javascripts/pages/maintainers/donation_tab_form";
 import Constants from "./../../../../app/frontend/javascripts/server_constants";
 
 describe("Maintainer donation tab form", () => {

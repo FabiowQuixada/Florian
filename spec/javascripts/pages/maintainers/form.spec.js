@@ -5,7 +5,7 @@
  *
 **/
 
-// import MaintainersForm from './../../../../app/frontend/javascripts/maintainers/form';
+// import MaintainersForm from './../../../../app/frontend/javascripts/pages/maintainers/form';
 // import { remove_temp_donation, remove_temp_contact } from './../support/maintainers';
 
 // describe("Maintainer form", () => {

@@ -1,5 +1,5 @@
-import contacts from "./../../../app/frontend/javascripts/redux/reducers/contactsReducer";
-import * as actions from "./../../../app/frontend/javascripts/redux/actions/contactsActionCreators";
+import contacts from "./../../../app/frontend/javascripts/reducers/contactsReducer";
+import * as actions from "./../../../app/frontend/javascripts/actions/contactsActionCreators";
 import ContactFactory from "./../../../app/frontend/javascripts/factories/ContactFactory";
 import I18n from "./../../../app/frontend/javascripts/i18n";
 

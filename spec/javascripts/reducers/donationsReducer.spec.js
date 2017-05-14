@@ -1,5 +1,5 @@
-import donations from "./../../../app/frontend/javascripts/redux/reducers/donationsReducer";
-import * as actions from "./../../../app/frontend/javascripts/redux/actions/donationsActionCreators";
+import donations from "./../../../app/frontend/javascripts/reducers/donationsReducer";
+import * as actions from "./../../../app/frontend/javascripts/actions/donationsActionCreators";
 import DonationFactory from "./../../../app/frontend/javascripts/factories/DonationFactory";
 import I18n from "./../../../app/frontend/javascripts/i18n";
 

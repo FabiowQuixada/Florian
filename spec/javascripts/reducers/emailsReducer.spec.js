@@ -1,5 +1,5 @@
-import emails from "./../../../app/frontend/javascripts/redux/reducers/emailsReducer";
-import * as actions from "./../../../app/frontend/javascripts/redux/actions/emailsActionCreators";
+import emails from "./../../../app/frontend/javascripts/reducers/emailsReducer";
+import * as actions from "./../../../app/frontend/javascripts/actions/emailsActionCreators";
 // import I18n from './../../../app/frontend/javascripts/i18n';
 
 const deepFreeze = require("deep-freeze");

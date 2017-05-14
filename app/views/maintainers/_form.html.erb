@@ -34,6 +34,10 @@
 
 <script>
 
+  // TODO: This is a quick-fix due to an issue
+  // with the communication between React and
+  // Rails. Yeah, I know, this is *really* ugly;
+
   var contactList = <%= @model.contacts.to_json.html_safe %>;
   var contact_first_time = true;
 

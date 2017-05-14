@@ -1,4 +1,4 @@
-import { add_tag_to_field } from "./../../app/frontend/javascripts/form_commons";
+import { add_tag_to_field } from "./../../app/frontend/javascripts/pages/support/form_commons";
 
 describe("Form commons", () => {
 

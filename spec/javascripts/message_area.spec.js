@@ -1,4 +1,4 @@
-import * as message_area from "./../../app/frontend/javascripts/message_area";
+import * as message_area from "./../../app/frontend/javascripts/pages/support/message_area";
 
 describe("Message area", () => {
   beforeEach(() => {
@@ -12,12 +12,12 @@ describe("Message area", () => {
       it("displays error box", () => {
         message_area.display_error("some message");
         expect($("#global_error_messages").text()).toEqual("some message");
-        expect($("#global_error_box").hasClass("hidden")).toEqual(false);
+        expect($("#global_error_box").hasClass("hidden")).toBe(false);
       });
 
       it("does not display error box when an empty string is given", () => {
         message_area.display_error("");
-        expect($("#global_error_box").hasClass("hidden")).toEqual(true);
+        expect($("#global_error_box").hasClass("hidden")).toBe(true);
       });
     });
 
@@ -25,17 +25,17 @@ describe("Message area", () => {
       it("displays array error", () => {
         message_area.display_error(["some message"]);
         expect($("#global_error_messages").text()).toEqual("some message");
-        expect($("#global_error_box").hasClass("hidden")).toEqual(false);
+        expect($("#global_error_box").hasClass("hidden")).toBe(false);
       });
 
       it("does not display array error when an empty array is given", () => {
         message_area.display_error([]);
-        expect($("#global_error_box").hasClass("hidden")).toEqual(true);
+        expect($("#global_error_box").hasClass("hidden")).toBe(true);
       });
 
       it("does not display array error when an array with an empty stringis given", () => {
         message_area.display_error([""]);
-        expect($("#global_error_box").hasClass("hidden")).toEqual(true);
+        expect($("#global_error_box").hasClass("hidden")).toBe(true);
       });
     });
   });
@@ -44,12 +44,12 @@ describe("Message area", () => {
     it("displays info box", () => {
       message_area.display_info("some message");
       expect($("#global_info_messages").text()).toEqual("some message");
-      expect($("#global_info_box").hasClass("hidden")).toEqual(false);
+      expect($("#global_info_box").hasClass("hidden")).toBe(false);
     });
 
     it("does not display info box when an empty string is given", () => {
       message_area.display_info("");
-      expect($("#global_info_box").hasClass("hidden")).toEqual(true);
+      expect($("#global_info_box").hasClass("hidden")).toBe(true);
     });
   });
 
@@ -57,12 +57,12 @@ describe("Message area", () => {
     it("displays notice box", () => {
       message_area.display_notice("some message");
       expect($("#global_notice_messages").text()).toEqual("some message");
-      expect($("#global_notice_box").hasClass("hidden")).toEqual(false);
+      expect($("#global_notice_box").hasClass("hidden")).toBe(false);
     });
 
     it("does not display notice box when an empty string is given", () => {
       message_area.display_notice("");
-      expect($("#global_notice_box").hasClass("hidden")).toEqual(true);
+      expect($("#global_notice_box").hasClass("hidden")).toBe(true);
     });
   });
 
@@ -70,12 +70,12 @@ describe("Message area", () => {
     it("displays warning box", () => {
       message_area.display_warning("some message");
       expect($("#global_warning_messages").text()).toEqual("some message");
-      expect($("#global_warning_box").hasClass("hidden")).toEqual(false);
+      expect($("#global_warning_box").hasClass("hidden")).toBe(false);
     });
 
     it("does not display warning box when an empty string is given", () => {
       message_area.display_warning("");
-      expect($("#global_warning_box").hasClass("hidden")).toEqual(true);
+      expect($("#global_warning_box").hasClass("hidden")).toBe(true);
     });
   });
 
@@ -83,12 +83,12 @@ describe("Message area", () => {
     it("displays unhideable warning box", () => {
       message_area.display_hideless_warning("some message");
       expect($("#global_hideless_warning_messages").text()).toEqual("some message");
-      expect($("#global_hideless_warning_box").hasClass("hidden")).toEqual(false);
+      expect($("#global_hideless_warning_box").hasClass("hidden")).toBe(false);
     });
 
     it("does not display unhideable warning box when an empty string is given", () => {
       message_area.display_hideless_warning("");
-      expect($("#global_hideless_warning_box").hasClass("hidden")).toEqual(true);
+      expect($("#global_hideless_warning_box").hasClass("hidden")).toBe(true);
     });
   });
 
@@ -102,7 +102,7 @@ describe("Message area", () => {
     });
 
     it("hides info box", () => {
-      expect($("#global_info_box").hasClass("hidden")).toEqual(true);
+      expect($("#global_info_box").hasClass("hidden")).toBe(true);
     });
 
     it("empties notice box text", () => {
@@ -110,7 +110,7 @@ describe("Message area", () => {
     });
 
     it("hides notice box", () => {
-      expect($("#global_notice_box").hasClass("hidden")).toEqual(true);
+      expect($("#global_notice_box").hasClass("hidden")).toBe(true);
     });
 
     it("empties error box text", () => {
@@ -118,7 +118,7 @@ describe("Message area", () => {
     });
 
     it("hides error box", () => {
-      expect($("#global_error_box").hasClass("hidden")).toEqual(true);
+      expect($("#global_error_box").hasClass("hidden")).toBe(true);
     });
   });
 
@@ -143,35 +143,35 @@ describe("Message area", () => {
   describe("is_empty", () => {
     describe("string", () => {
       it("empty", () => {
-        expect(message_area.is_empty("")).toEqual(true);
+        expect(message_area.is_empty("")).toBe(true);
       });
 
       it("non-empty", () => {
-        expect(message_area.is_empty("some message")).toEqual(false);
+        expect(message_area.is_empty("some message")).toBe(false);
       });
     });
 
     describe("array", () => {
       it("empty", () => {
-        expect(message_area.is_empty([])).toEqual(true);
+        expect(message_area.is_empty([])).toBe(true);
       });
 
       it("with a text", () => {
-        expect(message_area.is_empty(["some message"])).toEqual(false);
+        expect(message_area.is_empty(["some message"])).toBe(false);
       });
 
       it("with an empty string", () => {
-        expect(message_area.is_empty([""])).toEqual(true);
+        expect(message_area.is_empty([""])).toBe(true);
       });
     });
 
     describe("other types", () => {
       it("number", () => {
-        expect(message_area.is_empty(5)).toEqual(true);
+        expect(message_area.is_empty(5)).toBe(true);
       });
 
       it("object", () => {
-        expect(message_area.is_empty({})).toEqual(true);
+        expect(message_area.is_empty({})).toBe(true);
       });
     });
   });

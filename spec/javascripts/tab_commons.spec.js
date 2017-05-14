@@ -1,4 +1,4 @@
-import { set_number_of_tabs, hide_all_tabs_except } from "./../../app/frontend/javascripts/tab_commons";
+import { set_number_of_tabs, hide_all_tabs_except } from "./../../app/frontend/javascripts/pages/support/tab_commons";
 
 describe("Tab commons", () => {
   beforeEach(() => {

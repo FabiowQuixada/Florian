@@ -4,7 +4,7 @@
  *
 **/
 
-// import { display_confirm_modal } from './../../../../app/frontend/javascripts/others/modals';
+// import { display_confirm_modal } from './../../../../app/frontend/javascripts/pages/support/modals';
 
 // describe("Modal", () => {
 //   const title = "Some title";
@@ -42,7 +42,7 @@
 //     });
 
 //     it("does not display modal footer", () => {
-//       expect($("#confirm_modal .modal-footer").hasClass('hidden')).toEqual(true);
+//       expect($("#confirm_modal .modal-footer").hasClass('hidden')).toBe(true);
 //     });
 //   });
 
@@ -56,7 +56,7 @@
 //     });
 
 //     it("does not display cancel button", () => {
-//       expect($('#cancel_btn').hasClass('hidden')).toEqual(true);
+//       expect($('#cancel_btn').hasClass('hidden')).toBe(true);
 //     });
 //   });
 
@@ -70,7 +70,7 @@
 //     });
 
 //     it("does not display cancel button", () => {
-//       expect($('#cancel_btn').hasClass('hidden')).toEqual(true);
+//       expect($('#cancel_btn').hasClass('hidden')).toBe(true);
 //     });
 
 //     it("cancel button is bound to cancel callback", () => {
@@ -78,7 +78,7 @@
 //     });
 
 //     it("does not display cancel button", () => {
-//       expect($('#cancel_btn').hasClass('hidden')).toEqual(false);
+//       expect($('#cancel_btn').hasClass('hidden')).toBe(false);
 //     });
 //   });
 // });

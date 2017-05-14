@@ -1,4 +1,4 @@
-import * as Dates from "./../../app/frontend/javascripts/dates";
+import * as Dates from "./../../app/frontend/javascripts/pages/support/dates";
 import I18n from "./../../app/frontend/javascripts/i18n";
 
 describe("Date", () => {
