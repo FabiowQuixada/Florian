@@ -10,6 +10,13 @@ describe SystemSetting, js: true, type: :request do
       visit system_settings_path
     end
 
+    it 'displays error messages' do
+      empty_a_required_field
+      click_on_update_btn
+      attribute = I18n.t('activerecord.attributes.receipt_email.title')
+      expect_error_msg I18n.t('errors.messages.blank', attribute: attribute)
+    end
+
     it 'updates data' do
       fill_settings_fields
       click_on_update_btn
@@ -26,6 +33,11 @@ describe SystemSetting, js: true, type: :request do
   end
 
   # == Helper methods =============================================================
+  def empty_a_required_field
+    page.find('#main_tab_1_title').click
+    first('#system_setting_re_title').set ''
+  end
+
   def fill_settings_fields
     page.find('#main_tab_1_title').click
     first('#system_setting_re_title').set re_title

@@ -9,6 +9,7 @@ class SystemSettingsController < ApplicationController
 
   def update
     @model = SystemSetting.first
+    @breadcrumbs = breadcrumbs
 
     if @model.update system_settings_params
       redirect_to system_settings_path, notice: @model.was('updated')

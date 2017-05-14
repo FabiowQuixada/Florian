@@ -21,6 +21,10 @@ module RequestHelper
     page.find('body').click
   end
 
+  def expect_error_msg(msg)
+    expect(find('#form_error_box')).to have_content msg
+  end
+
   def expect_success_msg
     expect(page).to have_content 'sucesso' if I18n.locale == :"pt-BR"
     expect(page).to have_content 'success' if I18n.locale == :en
