@@ -5,7 +5,7 @@ module ButtonHelper
   end
 
   def logout_btn
-    link_to t('helpers.action.logout'), destroy_user_session_path, method: :delete, style: 'margin-left: 5px;', class: 'btn btn-primary btn-xs'
+    link_to t('helpers.action.logout'), destroy_user_session_path, method: :delete, style: 'margin-left: 5px;', class: 'btn btn-primary btn-xs logout-btn'
   end
 
   def new_btn

@@ -538,7 +538,7 @@ pt-BR:
       prompt: Selecione
     test_email_prefix: '[TESTE] '
     total: Total
-  locales:
+  locale:
     en: English
     pt-BR: Português
   menu:

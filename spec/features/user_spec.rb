@@ -84,10 +84,15 @@ describe User, js: true, type: :request do
 
     it 'language is changed' do
       visit edit_user_registration_path
-      select I18n.t('locale.pt-BR'), from: 'user_locale'
-      fill_in i18n_field('current_password'), with: 'usuario_comum'
+      fill_locale_data
       click_on_update_btn
       expect(page).to have_content 'Sua conta foi atualizada com sucesso.'
+      set_locale_back
+    end
+
+    it 'logs out' do
+      find('.profile-area.hidden-xs .logout-btn').click
+      expect_success_msg
     end
   end
 
@@ -108,6 +113,17 @@ describe User, js: true, type: :request do
 
 
   # == Helper methods =============================================================
+  def fill_locale_data
+    select I18n.t('locale.pt-BR'), from: 'user_locale'
+    fill_in i18n_field('current_password'), with: 'usuario_comum'
+  end
+
+  def set_locale_back
+    visit edit_user_registration_path
+    select I18n.t('locale.en'), from: 'user_locale'
+    fill_in 'Senha atual', with: 'usuario_comum'
+    click_on 'Atualizar'
+  end
 
   def fill_new_fields
     name_field = I18n.t('activerecord.attributes.user.name')
