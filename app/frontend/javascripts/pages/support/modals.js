@@ -2,6 +2,9 @@ export const display_confirm_modal = (title, message, confirm_callback, cancel_c
   $("#confirm_modal .modal-footer").removeClass("hidden");
   $("#cancel_btn").removeClass("hidden");
 
+  $("#confirm_btn").off();
+  $("#cancel_btn").off();
+
   $("#confirm_modal .modal-title").html(title);
   $("#confirm_modal .modal-body").html(message);
   $("#confirm_btn").on("click", confirm_callback);

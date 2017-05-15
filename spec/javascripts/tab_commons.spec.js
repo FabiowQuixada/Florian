@@ -13,27 +13,27 @@ describe("Tab commons", () => {
       });
 
       it("activates first tab title", () => {
-        expect($("#main_tab_0_title").hasClass("active")).toEqual(true);
+        expect($("#main_tab_0_title").hasClass("active")).toBe(true);
       });
 
       it("deactivates second tab title", () => {
-        expect($("#main_tab_1_title").hasClass("active")).toEqual(false);
+        expect($("#main_tab_1_title").hasClass("active")).toBe(false);
       });
 
       it("deactivates third tab title", () => {
-        expect($("#main_tab_2_title").hasClass("active")).toEqual(false);
+        expect($("#main_tab_2_title").hasClass("active")).toBe(false);
       });
 
       it("displays first tab body", () => {
-        expect($("#main_tab_0").hasClass("hidden")).toEqual(false);
+        expect($("#main_tab_0").hasClass("hidden")).toBe(false);
       });
 
       it("hides second tab body", () => {
-        expect($("#main_tab_1").hasClass("hidden")).toEqual(true);
+        expect($("#main_tab_1").hasClass("hidden")).toBe(true);
       });
 
       it("hides third tab body", () => {
-        expect($("#main_tab_2").hasClass("hidden")).toEqual(true);
+        expect($("#main_tab_2").hasClass("hidden")).toBe(true);
       });
     });
 
@@ -43,27 +43,27 @@ describe("Tab commons", () => {
       });
 
       it("activates first tab title", () => {
-        expect($("#test_tab_0_title").hasClass("active")).toEqual(true);
+        expect($("#test_tab_0_title").hasClass("active")).toBe(true);
       });
 
       it("deactivates second tab title", () => {
-        expect($("#test_tab_1_title").hasClass("active")).toEqual(false);
+        expect($("#test_tab_1_title").hasClass("active")).toBe(false);
       });
 
       it("deactivates third tab title", () => {
-        expect($("#test_tab_2_title").hasClass("active")).toEqual(false);
+        expect($("#test_tab_2_title").hasClass("active")).toBe(false);
       });
 
       it("displays first tab body", () => {
-        expect($("#test_tab_0").hasClass("hidden")).toEqual(false);
+        expect($("#test_tab_0").hasClass("hidden")).toBe(false);
       });
 
       it("hides second tab body", () => {
-        expect($("#test_tab_1").hasClass("hidden")).toEqual(true);
+        expect($("#test_tab_1").hasClass("hidden")).toBe(true);
       });
 
       it("hides third tab body", () => {
-        expect($("#test_tab_2").hasClass("hidden")).toEqual(true);
+        expect($("#test_tab_2").hasClass("hidden")).toBe(true);
       });
     });
   });
@@ -75,27 +75,27 @@ describe("Tab commons", () => {
       });
 
       it("deactivates first tab title", () => {
-        expect($("#main_tab_0_title").hasClass("active")).toEqual(false);
+        expect($("#main_tab_0_title").hasClass("active")).toBe(false);
       });
 
       it("activates second tab title", () => {
-        expect($("#main_tab_1_title").hasClass("active")).toEqual(true);
+        expect($("#main_tab_1_title").hasClass("active")).toBe(true);
       });
 
       it("deactivates third tab title", () => {
-        expect($("#main_tab_2_title").hasClass("active")).toEqual(false);
+        expect($("#main_tab_2_title").hasClass("active")).toBe(false);
       });
 
       it("hides first tab body", () => {
-        expect($("#main_tab_0").hasClass("hidden")).toEqual(true);
+        expect($("#main_tab_0").hasClass("hidden")).toBe(true);
       });
 
       it("displays second tab body", () => {
-        expect($("#main_tab_1").hasClass("hidden")).toEqual(false);
+        expect($("#main_tab_1").hasClass("hidden")).toBe(false);
       });
 
       it("hides third tab body", () => {
-        expect($("#main_tab_2").hasClass("hidden")).toEqual(true);
+        expect($("#main_tab_2").hasClass("hidden")).toBe(true);
       });
     });
 
@@ -105,27 +105,27 @@ describe("Tab commons", () => {
       });
 
       it("deactivates first tab title", () => {
-        expect($("#test_tab_0_title").hasClass("active")).toEqual(false);
+        expect($("#test_tab_0_title").hasClass("active")).toBe(false);
       });
 
       it("activates second tab title", () => {
-        expect($("#test_tab_1_title").hasClass("active")).toEqual(true);
+        expect($("#test_tab_1_title").hasClass("active")).toBe(true);
       });
 
       it("deactivates third tab title", () => {
-        expect($("#test_tab_2_title").hasClass("active")).toEqual(false);
+        expect($("#test_tab_2_title").hasClass("active")).toBe(false);
       });
 
       it("hides first tab body", () => {
-        expect($("#test_tab_0").hasClass("hidden")).toEqual(true);
+        expect($("#test_tab_0").hasClass("hidden")).toBe(true);
       });
 
       it("displays second tab body", () => {
-        expect($("#test_tab_1").hasClass("hidden")).toEqual(false);
+        expect($("#test_tab_1").hasClass("hidden")).toBe(false);
       });
 
       it("hides third tab body", () => {
-        expect($("#test_tab_2").hasClass("hidden")).toEqual(true);
+        expect($("#test_tab_2").hasClass("hidden")).toBe(true);
       });
     });
   });
