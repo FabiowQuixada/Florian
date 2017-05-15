@@ -9,11 +9,15 @@ import { on_page } from './../support/application'
 import { set_number_of_tabs } from './../support/tab_commons'
 import { init } from './../support/form_commons'
 import { display_error } from './../support/message_area'
+import { validate_email } from './../support/application'
 
 $(() => { if(on_page('maintainers', 'form')) new MaintainersForm() });
 
 const MaintainersForm = (function() {
   function MaintainersForm() {
+    const that = this;
+
+    this.before_submit_or_leave = () => (that.new_donations() || that.new_contacts())
 
     this.update_fields_by_entity_type = () => {
       $('.person_area').addClass('hidden');
@@ -41,36 +45,45 @@ const MaintainersForm = (function() {
       let new_contact = false;
 
       $("#contacts_table td.contact_id").each((index, td) => {
-        if(parseInt($(td).html()) < 0)
+        if(parseInt($(td).text()) < 0)
           new_contact = true;
       });
 
       return new_contact;
     }
 
-    this.before_submit_or_leave = () => {
-      return this.new_donations() || this.new_contacts();
-    }
-
     this.setup_listeners = () => {
-      $('#maintainer_entity_type').on('change', this.update_fields_by_entity_type);
+      $("body").on("change", "#maintainer_entity_type",
+        () => { that.update_fields_by_entity_type(); }
+      );
 
-      $('#main_form').on('submit', e => {
-        const errors = new Array();
-        const email = $('#maintainer_email_address').val();
+      $("body").on("submit", "#main_form", e => {
+        that.before_submit_or_leave();
 
-        before_submit_or_leave();
-
-        if(email && !validate_email(email)) {
-          const attribute = I18n.t('activerecord.attributes.maintainer.email_address');
-          errors.push(I18n.t('errors.messages.invalid', { attribute: attribute }));
-        }
-
-        if(errors.length > 0) {
+        if(!that.validate(that.build_form_obj())) {
           e.preventDefault();
-          display_error(errors);
         }
       });
+    }
+
+    this.build_form_obj = () => ({
+      email: $('#maintainer_email_address').val()
+    });
+
+    this.validate = form_obj => {
+      const errors = new Array();
+
+      if(form_obj.email && !validate_email(form_obj.email)) {
+        const attribute = I18n.t('activerecord.attributes.maintainer.email_address');
+        errors.push(I18n.t('errors.messages.invalid', { attribute: attribute }));
+      }
+
+      if(errors.length > 0) {
+        display_error(errors);
+        return false;
+      }
+
+      return true;
     }
 
     this.setup_view_components = () => {
