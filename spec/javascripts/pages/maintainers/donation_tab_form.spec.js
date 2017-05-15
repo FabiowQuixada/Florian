@@ -14,22 +14,22 @@ describe("Maintainer donation tab form", () => {
   describe("cant_set_parcels", () => {
     it("blocks parcel field if 'other' payment frequency option is selected", () => {
       $("#maintainer_payment_frequency").val(Constants.payment_freq.other);
-      expect(donation_tab_form.cant_set_parcels()).toEqual(true);
+      expect(donation_tab_form.cant_set_parcels()).toBe(true);
     });
 
     it("blocks parcel field if 'undefined' payment frequency option is selected", () => {
       $("#maintainer_payment_frequency").val(Constants.payment_freq.undefined);
-      expect(donation_tab_form.cant_set_parcels()).toEqual(true);
+      expect(donation_tab_form.cant_set_parcels()).toBe(true);
     });
 
     it("blocks parcel field if no payment frequency option is selected", () => {
       $("#maintainer_payment_frequency").val("");
-      expect(donation_tab_form.cant_set_parcels()).toEqual(true);
+      expect(donation_tab_form.cant_set_parcels()).toBe(true);
     });
 
     it("unblocks parcel field if a valid payment frequency option is selected", () => {
       $("#maintainer_payment_frequency").val(Constants.payment_freq.monthly);
-      expect(donation_tab_form.cant_set_parcels()).toEqual(false);
+      expect(donation_tab_form.cant_set_parcels()).toBe(false);
     });
   });
 
@@ -38,14 +38,14 @@ describe("Maintainer donation tab form", () => {
       $("#maintainer_payment_period").attr("readonly");
       $("#maintainer_payment_frequency").val(Constants.payment_freq.semiannually);
       donation_tab_form.toogle_parcel_qty_field();
-      expect($("#maintainer_payment_period").is("[readonly]")).toEqual(false);
+      expect($("#maintainer_payment_period").is("[readonly]")).toBe(false);
     });
 
     it("prevents user from editing 'payment period' if 'parcel frequency' is not set", () => {
       $("#maintainer_payment_period").removeAttr("readonly");
       $("#maintainer_payment_frequency").val(Constants.payment_freq.undefined);
       donation_tab_form.toogle_parcel_qty_field();
-      expect($("#maintainer_payment_period").is("[readonly]")).toEqual(true);
+      expect($("#maintainer_payment_period").is("[readonly]")).toBe(true);
     });
   });
 
@@ -112,6 +112,28 @@ describe("Maintainer donation tab form", () => {
   });
 
   describe("setup_listeners", () => {
-    // TODO
+    it("binds last parcel update to first parcel change", () => {
+      spyOn(donation_tab_form, "set_last_parcel_date");
+      $("#maintainer_first_parcel").trigger("change");
+      expect(donation_tab_form.set_last_parcel_date).toHaveBeenCalled();
+    });
+
+    it("binds last parcel update to payment period change", () => {
+      spyOn(donation_tab_form, "set_last_parcel_date");
+      $("#maintainer_payment_period").trigger("change");
+      expect(donation_tab_form.set_last_parcel_date).toHaveBeenCalled();
+    });
+
+    it("binds last parcel update to payment frequency change", () => {
+      spyOn(donation_tab_form, "set_last_parcel_date");
+      $("#maintainer_payment_frequency").trigger("change");
+      expect(donation_tab_form.set_last_parcel_date).toHaveBeenCalled();
+    });
+
+    it("binds parel quantity update to payment frequency change", () => {
+      spyOn(donation_tab_form, "toogle_parcel_qty_field");
+      $("#maintainer_payment_frequency").trigger("change");
+      expect(donation_tab_form.toogle_parcel_qty_field).toHaveBeenCalled();
+    });
   });
 });

@@ -23,19 +23,17 @@ const MaintainersDonationTabForm = (function() {
     };
 
     this.set_last_parcel_date = () => {
-
       const frequency = $("#maintainer_payment_frequency").val();
       const parcel_qty = $("#maintainer_payment_period").val();
 
+      let { frequency_type, qty } = this.set_frequency(frequency, parcel_qty);
 
-      let { frequency_type, temp } = this. kkk(frequency, parcel_qty);
-
-      this.update_last_parcel(parcel_qty, frequency_type, temp);
+      this.update_last_parcel(parcel_qty, frequency_type, qty);
     };
 
-    this.kkk = (frequency, parcel_qty) => {
+    this.set_frequency = (frequency, parcel_qty) => {
       let frequency_type;
-      let temp = parcel_qty;
+      let qty = parcel_qty;
 
       if(frequency === Constants.payment_freq.diary) {
         frequency_type = "days";
@@ -44,19 +42,19 @@ const MaintainersDonationTabForm = (function() {
       } else if(frequency === Constants.payment_freq.monthly) {
         frequency_type = "months";
       } else if(frequency === Constants.payment_freq.bimonthly) {
-        temp = 3;
+        qty = 3;
         frequency_type = "months";
       } else if(frequency === Constants.payment_freq.semiannually) {
-        temp = 6;
+        qty = 6;
         frequency_type = "months";
       } else if(frequency === Constants.payment_freq.annually) {
         frequency_type = "years";
       }
 
-      return { frequency_type, temp };
+      return { frequency_type, qty };
     };
 
-    this.update_last_parcel = (parcel_qty, frequency_type, temp) => {
+    this.update_last_parcel = (parcel_qty, frequency_type, qty) => {
       const first_date = $("#maintainer_first_parcel").val();
       const last_date = $("#maintainer_last_parcel");
 
@@ -68,14 +66,19 @@ const MaintainersDonationTabForm = (function() {
 
       if(parcel_qty !== 0 || (frequency_type !== undefined && frequency_type !== "")) {
         const date_format = I18n.t("date.formats.javascript_format.date").toUpperCase();
-        last_date.val(moment(first_date, date_format).add((temp-1), frequency_type).format(date_format));
+        last_date.val(moment(first_date, date_format).add((qty-1), frequency_type).format(date_format));
       }
     };
 
     this.setup_listeners = () => {
-      $("#maintainer_first_parcel, #maintainer_payment_period, #maintainer_payment_frequency").on(
-        "change", this.set_last_parcel_date);
-      $("#maintainer_payment_frequency").change(this.toogle_parcel_qty_field);
+      $("body").on("change",
+        "#maintainer_first_parcel, #maintainer_payment_period, #maintainer_payment_frequency",
+        () => { this.set_last_parcel_date(); }
+      );
+
+      $("body").on("change", "#maintainer_payment_frequency",
+        () => { this.toogle_parcel_qty_field(); }
+      );
     };
 
     this.toogle_parcel_qty_field();
