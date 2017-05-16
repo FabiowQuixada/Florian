@@ -4,7 +4,7 @@ import { createStore } from 'redux'
 import { on_page, escape_html } from './../support/application'
 import { Provider } from 'react-redux';
 import EmailAreaContainer from './../../containers/EmailAreaContainer'
-import { clean_resend_modal, clean_send_test_modal } from './../support/modals'
+import { clean_resend_modal, clean_send_test_modal } from './modals'
 import Constants from './../../server_constants'
 import emailsReducer from './../../reducers/emailsReducer';
 import { new_recipients, } from './../support/email_address_table'
@@ -16,8 +16,7 @@ $(() => { if(on_page('receipt_emails', 'form')) new ReceiptEmailsForm() });
 
 const ReceiptEmailsForm = (function() {
   function ReceiptEmailsForm() {
-    const self = this;
-    
+
     this.before_submit_or_leave = () => {
       const email_field = 'recipients_array';
       $(`#receipt_email_${email_field}`).val(formated_recipients(email_field));
@@ -38,6 +37,8 @@ const ReceiptEmailsForm = (function() {
     )
 
     this.setup_listeners = () => {
+      const that = this;
+
       $("#add_maintainer_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.maintainer')));
       $("#add_value_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.value')));
       $("#add_competence_to_body_btn").on('click', () => add_tag_to_field('receipt_email_body', I18n.t('tags.competence')));
@@ -46,10 +47,10 @@ const ReceiptEmailsForm = (function() {
         display_confirm_modal(I18n.t('modal.title.info'), I18n.t('user_help_messages.tag_buttons'));
       });
 
-      $('#main_form').on('submit', e => {
-        self.before_submit_or_leave();
+      $("body").on("submit", "#main_form", e => {
+        that.before_submit_or_leave();
 
-        if(!self.validate_tag_fields()) {
+        if(!that.validate_tag_fields()) {
           e.preventDefault();
           $('#warning_save_modal').modal('show');
           return;
@@ -79,7 +80,6 @@ const ReceiptEmailsForm = (function() {
 
     this.setup_view_components = () => {
       $('#receipt_email_title').val(escape_html(Constants.system_settings.receipt_title));
-      this.setup_listeners();
 
       ReactDOM.render(
         <Provider store={createStore(emailsReducer)}>
