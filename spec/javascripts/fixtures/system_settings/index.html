@@ -1,0 +1,44 @@
+<form id="main_form">
+
+	<!-- Buttons -->
+	<input type="button" id="add_maintainer_to_re_title_btn" />
+	<input type="button" id="add_value_to_re_title_btn" />
+	<input type="button" id="add_competence_to_re_title_btn" />
+
+	<input type="button" id="add_maintainer_to_re_body_btn" />
+	<input type="button" id="add_value_to_re_body_btn" />
+	<input type="button" id="add_competence_to_re_body_btn" />
+
+	<input type="button" id="add_competence_to_pse_body_btn" />
+	<input type="button" id="add_competence_to_pse_title_btn" />
+
+	<input type="button" id="receipt_title_tag_help_btn" />
+	<input type="button" id="pse_title_tag_help_btn" />
+	<input type="button" id="pse_body_tag_help_btn" />
+
+	<!-- Input fields -->
+	<input type="text" id="system_setting_re_title" />
+	<input type="text" id="system_setting_re_body" />
+	<input type="text" id="system_setting_pse_body" />
+	<input type="text" id="system_setting_pse_title" />
+</form>
+
+<div id="pse_recipients_array_area">
+	<!-- To be added by React -->
+</div>
+
+<div id="pse_private_recipients_array_area">
+	<!-- To be added by React -->
+</div>
+
+<script>
+
+  var email_first_time = [];
+  email_first_time['pse_recipients_array'] = true;
+  email_first_time['pse_private_recipients_array'] = true;
+
+  var emailList = [];
+  emailList['pse_recipients_array'] = ['example1@google.com', 'example2@google.com'];
+  emailList['pse_private_recipients_array'] = ['example3@google.com', 'example4@google.com'];
+
+</script>
