@@ -6,16 +6,15 @@ $(() => { if(on_page("bills", "index")) new BillsFilters(); });
 
 const BillsFilters = (function() {
   function BillsFilters() {
-
     this.setup_listeners = () => {
-      self = this;
+      const that = this;
 
       $("body").on("submit", "#search_form", e => {
         try {
           format_competence("aux_competence_lteq", "q_competence_lteq");
           format_competence("aux_competence_gteq", "q_competence_gteq");
 
-          if(!self.validate(self.build_filter_obj())) {
+          if(!that.validate(that.build_filter_obj())) {
             e.preventDefault();
           }
         } catch(error) {

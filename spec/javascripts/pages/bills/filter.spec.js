@@ -19,7 +19,7 @@ describe("Bill filters", () => {
     });
 
     it("does so based on input fields", () => {
-      expect(bill_filters.build_filter_obj).toEqual({
+      expect(bill_filters.build_filter_obj()).toEqual({
         start_date: "01/02/2011",
         end_date: "01/02/2013"
       });
@@ -40,7 +40,7 @@ describe("Bill filters", () => {
     it("formats competence on form submit", () => {
       spyOn(dates, "format_competence");
       $("#search_form").trigger("submit");
-      expect(dates.format_competence.calls.count()).toBe(2);
+      expect(dates.format_competence).toHaveBeenCalled();
     });
 
     it("performs validation on form submit", () => {
