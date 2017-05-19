@@ -1,9 +1,8 @@
+import React from 'react';
 import { is_empty } from './../../../message_area'
 import { CLEAN_ERRORS } from './../../constants/generalConstants';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-const React = require('react');
 
 const msg_as_html_ul = message => {
   let messages = [];

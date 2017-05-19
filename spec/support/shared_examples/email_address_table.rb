@@ -63,7 +63,18 @@ shared_examples 'an e-mail address table' do |fields|
     "Expected not to be nil - #{described_class.name}: #{field}, #{field_name_2}"
   end
 
-  def row(field_name, i)
-    first("tr##{field_name}_email_address_#{i}")
+  def row(field_name, email)
+    find "##{field_name}_recipients_table tr", text: email
+  rescue
+    nil
+  end
+
+  def rows_other_than(field_name, email)
+    result = []
+    temp = find "##{field_name}_recipients_table tr"
+    temp.each { |row| result << row unless row.has_content? email }
+    result
+  rescue
+    []
   end
 end
