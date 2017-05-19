@@ -11,7 +11,7 @@ describe("E-mail address table", () => {
   describe("new_recipients", () => {
     describe("some_field", () => {
       it("has no new recipients", () => {
-        expect(email_address_table.new_recipients("some_field")).toEqual(false);
+        expect(email_address_table.new_recipients("some_field")).toBe(false);
       });
 
       describe("recipient adition", () => {
@@ -20,18 +20,18 @@ describe("E-mail address table", () => {
         });
 
         it("adds e-mail to correspondent table", () => {
-          expect(email_address_table.new_recipients("some_field")).toEqual(true);
+          expect(email_address_table.new_recipients("some_field")).toBe(true);
         });
 
         it("does not add e-mail to other tables", () => {
-          expect(email_address_table.new_recipients("another_field")).not.toEqual(true);
+          expect(email_address_table.new_recipients("another_field")).not.toBe(true);
         });
       });
     });
 
     describe("another_field", () => {
       it("has no new recipients", () => {
-        expect(email_address_table.new_recipients("another_field")).toEqual(false);
+        expect(email_address_table.new_recipients("another_field")).toBe(false);
       });
 
       describe("recipient adition", () => {
@@ -40,11 +40,11 @@ describe("E-mail address table", () => {
         });
 
         it("adds e-mail to correspondent table", () => {
-          expect(email_address_table.new_recipients("another_field")).toEqual(true);
+          expect(email_address_table.new_recipients("another_field")).toBe(true);
         });
 
         it("does not add e-mail to other tables", () => {
-          expect(email_address_table.new_recipients("some_field")).not.toEqual(true);
+          expect(email_address_table.new_recipients("some_field")).not.toBe(true);
         });
       });
     });
@@ -52,7 +52,7 @@ describe("E-mail address table", () => {
 
   describe("formated_recipients", () => {
     it("formats recipients", () => {
-      const expected = "example_1@gmail.com, example_2@gmail.com";
+      const expected = "persisted_email@google.com, example_1@gmail.com, example_2@gmail.com";
       add_email_to_table("some_field", "example_1@gmail.com");
       add_email_to_table("some_field", "example_2@gmail.com");
       expect(email_address_table.formated_recipients("some_field")).toEqual(expected);
@@ -66,7 +66,15 @@ describe("E-mail address table", () => {
     });
   });
 
-  describe("setup_listeners_for_email_field", () => {
-    // TODO
+  describe("setup_listeners", () => {
+    it("removes e-mail", () => {
+      add_email_to_table("some_field", "new_email@google.com");
+      email_address_table.setup_listeners("some_field");
+      $(".some_field_email_recipient .remove_btn").last().trigger("click");
+
+      setTimeout( () => {
+        expect($("#some_field_recipients_table tbody").html()).not.toContainText("new_email@google.com");
+      }, 2000);
+    });
   });
 });

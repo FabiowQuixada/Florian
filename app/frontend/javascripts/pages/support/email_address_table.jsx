@@ -5,7 +5,7 @@
   Let's say you have a model M with a string attribute 'email_array'. Then you need to make the following
   call after page load so that event handlers are attached to view buttons:
 
-    setup_listeners_for_email_field('email_array');
+    setup_listeners('email_array');
 
   Also, to check if there are any new e-mails added, simply call:
 
@@ -34,13 +34,13 @@ export const formated_recipients = field_name => {
   return array.substring(0, array.length - 2);
 }
 
-export const setup_listeners_for_email_field = field_name => {
-  $('body').on('click', `.${field_name}_remove_recipient_btn`, e => {
+export const setup_listeners = field_name => {
+  $('body').on('click', `.${field_name}_email_recipient .remove_btn`, e => {
     const elem = $(e.currentTarget);
-    const id = elem.closest('.email_recipient').find('.recipient_id').text();
+    const row = elem.closest(`tr.${field_name}_email_recipient`);
 
-    $(`#${field_name}_email_address_${id}`).fadeOut('slow', () => {
-        $(`#${field_name}_email_address_${id}`).remove();
+    row.fadeOut('slow', () => {
+      row.remove();
     });
   });
 }
