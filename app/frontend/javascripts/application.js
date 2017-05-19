@@ -15,16 +15,16 @@
 
 */
 
-import I18n from './i18n'
+import I18n from './i18n';
 
-export const on_page = (controller, action) => on_controller(controller) && on_action(action)
+export const on_page = (controller, action) => on_controller(controller) && on_action(action);
 
 export const on_controller = controller => {
   if($("body").hasClass(controller))
     return true;
 
   return false;
-}
+};
 
 export const on_action = action => {
   if(action === 'new')
@@ -37,12 +37,12 @@ export const on_action = action => {
     return $("body").hasClass('new') || $("body").hasClass('create') || $("body").hasClass('edit') || $("body").hasClass('update');
 
   return $("body").hasClass(action);
-}
+};
 
 export const validate_email = email => (
   /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
       .test(email)
-  )
+);
 
 let displaying_admin_data = false;
 
@@ -52,17 +52,17 @@ export const toogle_admin_data = () => {
   } else {
     display_admin_data();
   }
-}
+};
 
 export const hide_admin_data = () => {
   displaying_admin_data = false;
   $('.admin-only').hide();
-}
+};
 
 export const display_admin_data = () => {
   displaying_admin_data = true;
   $('.admin-only').show();
-}
+};
 
 export const to_money = number => {
   const cents = I18n.t("number.currency.format.precision"),
@@ -88,7 +88,7 @@ export const currency_sum = elements => {
   });
 
   return to_money(sum / 100);
-}
+};
 
 export const escape_html = string => {
   const entity_map = {
@@ -101,8 +101,8 @@ export const escape_html = string => {
   };
 
   return String(string).replace(/[&<>"'\/]/g, s => entity_map[s]);
-}
+};
 
 $(() => {
   hide_admin_data();
-})
+});

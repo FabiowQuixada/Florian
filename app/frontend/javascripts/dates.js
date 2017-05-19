@@ -1,6 +1,6 @@
-require('bootstrap-datepicker');
+import I18n from './i18n';
 
-import I18n from './i18n'
+require('bootstrap-datepicker');
 
 export const set_month_datepicker = () => {
   $('.datepicker-competence').datepicker();
@@ -10,7 +10,7 @@ export const set_month_datepicker = () => {
     autoclose: true,
     language: I18n.locale
   });
-}
+};
 
 export const set_datepicker = () => {
   $('.datepicker').datepicker();
@@ -21,12 +21,12 @@ export const set_datepicker = () => {
     daysOfWeekDisabled: [0,6],
     setDate: new Date()
   });
-}
+};
 
 export const date_exc_msg = () => {
   const attribute = "Date";
   return I18n.t("errors.messages.invalid", {attribute}); 
-}
+};
 
 export const current_competence = () => {
   const today = new Date();
@@ -38,7 +38,7 @@ export const current_competence = () => {
   }
 
   return `${mm}/${yyyy}`;
-}
+};
 
 
 // source field input format: mm/yyyy;
@@ -52,7 +52,7 @@ export const format_competence = (source_field, target_field) => {
   const month = temp[0];
 
   $(`#${target_field}`).val(`${year}-${month}-01`);
-}
+};
 
 // Input format: mm/dd/yyyy;
 export const to_rails_date = date_string => {
@@ -73,18 +73,18 @@ export const to_rails_date = date_string => {
   const day = ('0' + date.getDate()).slice(-2);
 
   return `${year}-${month}-${day}`;
-}
+};
 
 // Format: yyyy-mm-dd;
 export const to_js_date = rails_date => {
-  const date_format = /[0-9]{4}-[0-9]{2}-[0-9]{2}/
+  const date_format = /[0-9]{4}-[0-9]{2}-[0-9]{2}/;
   if(!date_format.exec(rails_date)) {
     throw date_exc_msg();
   }
 
   const temp = rails_date.split("-");
   return new Date(temp[0], temp[1]-1, temp[2], 0, 0, 0, 0);
-}
+};
 
 export const is_valid_rails_date = rails_date => {
   const comp = rails_date.split('-');
@@ -93,14 +93,14 @@ export const is_valid_rails_date = rails_date => {
   const d = parseInt(comp[2], 10);
   const date = new Date(y,m-1,d);
 
-  return date.getFullYear() == y && date.getMonth() + 1 == m && date.getDate() == d;
-}
+  return date.getFullYear() === y && date.getMonth() + 1 === m && date.getDate() === d;
+};
 
 // Format: yyyy-mm-dd;
 export const is_after = (start_date, end_date) => (
   is_valid_rails_date(start_date) && is_valid_rails_date(end_date) &&
   to_js_date(start_date) > to_js_date(end_date)
-)
+);
 
 // Format: yyyy-mm-dd;
 export const validate_period = (start_date, end_date, msg = I18n.t('errors.messages.invalid_period_i')) => {
@@ -115,7 +115,7 @@ export const validate_period = (start_date, end_date, msg = I18n.t('errors.messa
   }
 
   return errors;
-}
+};
 
 // Input format: mm/dd/yyyy;
 export const is_valid_date = date_string => {
@@ -125,5 +125,5 @@ export const is_valid_date = date_string => {
   const y = parseInt(comp[2], 10);
   const date = new Date(y,m-1,d);
 
-  return date.getFullYear() == y && date.getMonth() + 1 == m && date.getDate() == d;
-}
+  return date.getFullYear() === y && date.getMonth() + 1 === m && date.getDate() === d;
+};

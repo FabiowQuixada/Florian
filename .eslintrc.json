@@ -3,9 +3,10 @@
         "browser": true,
         "es6": true,
         "node": true,
-        "jquery": true
+        "jquery": true,
+        "jasmine": true
     },
-    "extends": "eslint:recommended",
+    "extends": ["eslint:recommended", "plugin:jasmine-jquery/recommended"],
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
@@ -14,28 +15,19 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "jasmine-jquery"
     ],
     "globals": {
         "google": {},
         "bill_chart_data": []
     },
     "rules": {
-        "indent": [
-            "error",
-            2
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "off",
-            "double"
-        ],
-        "semi": [
-            "off",
-            "always"
-        ]
+        "indent": ["error", 2],
+        "linebreak-style": ["error", "unix"],
+        "quotes": ["off", "double"],
+        "semi": ["error", "always"],
+        "eol-last": ["error", "always"],
+        "eqeqeq": "error"
     }
 }

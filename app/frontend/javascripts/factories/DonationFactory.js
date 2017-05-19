@@ -34,4 +34,4 @@ class DonationFactory {
   }
 }
 
-export default DonationFactory
+export default DonationFactory;

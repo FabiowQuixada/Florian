@@ -4,8 +4,8 @@
 %>
 <%= init_comment %>
 
-import I18n from './i18n'
-import Constants from './server_constants'
+import I18n from './i18n';
+import Constants from './server_constants';
 
 // TODO Scope on path functions;
 const ServerFunctions = {
@@ -13,13 +13,13 @@ const ServerFunctions = {
     send_test_receipt_email: (id) => "<%= send_test_receipt_email_path -1 %>".replace("-1", id),
     resend_receipt_email: (id) => "<%= resend_receipt_email_path -1 %>".replace("-1", id),
     activate: (model, id) => {
-      if(model === "roles" || model == "users")
+      if(model === "roles" || model === "users")
         return "<%= activate_user_path -1 %>".replace("users", model).replace("-1", id);
 
       return "<%= activate_receipt_email_path -1 %>".replace("receipt_emails", model).replace("-1", id);
     },
     deactivate: (model, id) => {
-      if(model === "roles" || model == "users")
+      if(model === "roles" || model === "users")
         return "<%= deactivate_user_path -1 %>".replace("users", model).replace("-1", id);
       return "<%= deactivate_receipt_email_path -1 %>".replace("receipt_emails", model).replace("-1", id);
     },
@@ -33,7 +33,7 @@ const ServerFunctions = {
         class="activate_btn status_btn"
         id="change_status_${id}"
         src=${Constants.paths.assets.deactivate}
-        alt="${I18n.t('helpers.action.activate')}">`
+        alt="${I18n.t('helpers.action.activate')}">`;
     },
     deactivate: (model, id) => {
       const i18nModel = I18n.t(`activerecord.models.${model}.one`);
@@ -41,10 +41,10 @@ const ServerFunctions = {
         class="deactivate_btn status_btn"
         id="change_status_${id}"
         src=${Constants.paths.assets.activate}
-        alt="${I18n.t('helpers.action.deactivate')}">`
+        alt="${I18n.t('helpers.action.deactivate')}">`;
     }
     ,
   }
 };
 
-export default ServerFunctions
+export default ServerFunctions;

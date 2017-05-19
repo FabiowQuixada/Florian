@@ -1,5 +1,5 @@
-import * as email_address_table from './../../../../app/frontend/javascripts/others/email_address_table'
-import { add_email_to_table } from './../support/emails'
+import * as email_address_table from './../../../../app/frontend/javascripts/others/email_address_table';
+import { add_email_to_table } from './../support/emails';
 
 describe("E-mail address table", () => {
   beforeEach(() => {
@@ -59,7 +59,7 @@ describe("E-mail address table", () => {
     });
 
     it("formats recipients", () => {
-      const expected = "example_1@gmail.com, example_2@gmail.com"
+      const expected = "example_1@gmail.com, example_2@gmail.com";
       add_email_to_table("another_field", "example_1@gmail.com");
       add_email_to_table("another_field", "example_2@gmail.com");
       expect(email_address_table.formated_recipients('another_field')).toEqual(expected);

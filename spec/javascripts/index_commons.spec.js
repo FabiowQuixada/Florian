@@ -1,5 +1,3 @@
-import IndexCommons from './../../app/frontend/javascripts/index_commons'
-
 /**
  *
  * 
@@ -7,6 +5,10 @@ import IndexCommons from './../../app/frontend/javascripts/index_commons'
  *
  *
 **/
+
+
+
+// import IndexCommons from './../../app/frontend/javascripts/index_commons';
 
 // describe("Index commons", () => {
 //   let index_commons;

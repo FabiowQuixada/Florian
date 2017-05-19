@@ -1,16 +1,16 @@
-import I18n from './i18n'
-import { to_money } from './application'
+import I18n from './i18n';
+import { to_money } from './application';
 
 require('jquery-mask-plugin');
 
 $(() => {
 
-  const delimiter = I18n.t("number.currency.format.delimiter")
-  const separator = I18n.t("number.currency.format.separator")
+  const delimiter = I18n.t("number.currency.format.delimiter");
+  const separator = I18n.t("number.currency.format.separator");
 
   const celphone_mask_behavior = val => {
     return val.replace(/\D/g, '').length === 11 ? '(00) 0 0000-0000' : '(00) 0000-00009';
-  }
+  };
   const celphone_mask_options = {
     onKeyPress: (val, e, field, options) => {
       field.mask(celphone_mask_behavior.apply({}, arguments), options);
@@ -30,7 +30,7 @@ $(() => {
 
   // Field initialization;
   $(".money").each((index, field) => {
-    if(!$(field).val() || $(field).val() == '0.0' || $(field).val() == '00' || $(field).val() == '0')
+    if(!$(field).val() || $(field).val() === '0.0' || $(field).val() === '00' || $(field).val() === '0')
       $(field).val(to_money(0));
   });
 

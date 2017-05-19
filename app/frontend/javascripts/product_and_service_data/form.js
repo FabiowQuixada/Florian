@@ -1,11 +1,11 @@
-import I18n from './../i18n'
-import { on_page, on_action } from './../application'
-import { current_competence, format_competence } from './../dates'
-import Constants from './../server_constants'
-import { display_info } from './../message_area'
-import { set_number_of_tabs } from './../tab_commons'
+import I18n from './../i18n';
+import { on_page, on_action } from './../application';
+import { current_competence, format_competence } from './../dates';
+import Constants from './../server_constants';
+import { display_info } from './../message_area';
+import { set_number_of_tabs } from './../tab_commons';
 
-$(() => { if(on_page('product_and_service_data', 'form')) new ProductAndServiceDataForm() });
+$(() => { if(on_page('product_and_service_data', 'form')) new ProductAndServiceDataForm(); });
 
 const ProductAndServiceDataForm = (function() {
   function ProductAndServiceDataForm() {
@@ -19,7 +19,7 @@ const ProductAndServiceDataForm = (function() {
       });
 
       $(`#total_product_week_${i}`).val(sum);
-    }
+    };
 
     this.update_service_totals_from_tab = i => {
       let total_checkups = 0;
@@ -34,7 +34,7 @@ const ProductAndServiceDataForm = (function() {
       $(`#total_service_checkup_week_${i}`).val(total_checkups);
       $(`#total_service_return_week_${i}`).val(total_returns);
       $(`#total_service_week_${i}`).val(+total_checkups + +total_returns);
-    }
+    };
 
     this.update_service_totals_column_from = row => {
       let checkups = row.find('.service_checkup').val();
@@ -52,7 +52,7 @@ const ProductAndServiceDataForm = (function() {
       total.val(+checkups + +returns);
 
       return { checkups, returns };
-    }
+    };
 
     this.update_service_totals_for_each_tab = () => {
       for (let i = 0; i <= Constants.week_final_number; i++) {
@@ -60,7 +60,7 @@ const ProductAndServiceDataForm = (function() {
       }
 
       this.update_totals_tab();
-    }
+    };
 
     this.update_product_totals_for_each_tab = () => {
       for (let i = 0; i <= Constants.week_final_number; i++) {
@@ -68,7 +68,7 @@ const ProductAndServiceDataForm = (function() {
       }
 
       this.update_totals_tab();
-    }
+    };
 
     this.update_totals_tab = () => {
       const index = Constants.week_totals_number - 1;
@@ -85,7 +85,7 @@ const ProductAndServiceDataForm = (function() {
 
       this.update_product_totals_from_tab(index);
       this.update_service_totals_from_tab(index);
-    }
+    };
 
     this.update_services_in_totals_tab = (row, col) => {
       const index = Constants.week_totals_number - 1;
@@ -99,7 +99,7 @@ const ProductAndServiceDataForm = (function() {
       });
 
       $(`.service_row_${row}_col_${col}.week_${index}`).val(sum);
-    }
+    };
 
     this.update_products_in_totals_tab = row => {
       const index = Constants.week_totals_number - 1;
@@ -113,14 +113,14 @@ const ProductAndServiceDataForm = (function() {
       });
 
       $(`.product_row_${row}.week_${index}`).val(sum);
-    }
+    };
 
     this.copy_from_totals_to_final_tab = () => {
       this.copy_services_from_totals_to_final_tab();
       this.copy_products_from_totals_to_final_tab();
       this.update_product_totals_from_tab(6);
       this.update_service_totals_from_tab(6);
-    }
+    };
 
     this.copy_services_from_totals_to_final_tab = () => {
       for (let col = 0; col < 2; col++) {
@@ -129,14 +129,14 @@ const ProductAndServiceDataForm = (function() {
           $(`.service_row_${row}_col_${col}.week_6`).val(temp);
         }
       }
-    }
+    };
 
     this.copy_products_from_totals_to_final_tab = () => {
       for (let row = 0; row < Constants.number_of_products; row++) {
         const temp = $(`.product_row_${row}.week_5`).val();
         $(`.product_row_${row}.week_6`).val(temp);
       }
-    }
+    };
 
     this.set_request_url = source_week_number => {
       if(source_week_number === Constants.week_final_number - 1) {
@@ -150,28 +150,28 @@ const ProductAndServiceDataForm = (function() {
         this.update_hidden_week_field('start_date', source_week_number);
         this.update_hidden_week_field('end_date', source_week_number);
       }
-    }
+    };
 
     this.update_hidden_serv_field = (attr, type, source_week_number) => {
       const target = $(`#product_and_service_week_service_data_attributes_${type}_${attr}`);
       const source = $(`#product_and_service_datum_product_and_service_weeks_attributes_${source_week_number}_service_data_attributes_${type}_${attr}`);
 
       target.val(source.val());
-    }
+    };
 
     this.update_hidden_prod_field = (attr, source_week_number) => {
       const target = $(`#product_and_service_week_product_data_attributes_${attr}`);
       const source = $(`#product_and_service_datum_product_and_service_weeks_attributes_${source_week_number}_product_data_attributes_${attr}`);
 
       target.val(source.val());
-    }
+    };
 
     this.update_hidden_week_field = (attr, source_week_number) => {
       const target = $(`#product_and_service_week_${attr}`);
       const source = $(`#product_and_service_datum_product_and_service_weeks_attributes_${source_week_number}_${attr}`);
 
       target.val(source.val());
-    }
+    };
 
     this.copy_to_hidden_form_and_send = source_week_number => {
       const product_list = Constants.products_array;
@@ -194,7 +194,7 @@ const ProductAndServiceDataForm = (function() {
       this.set_request_url(source_week_number);
       display_info(I18n.t("alert.email.sending"));
       $("#hidden_week_form").submit();
-    }
+    };
 
     this.setup_listeners = () => {
       $('.service_input').on('blur', this.update_service_totals_for_each_tab);
@@ -214,13 +214,13 @@ const ProductAndServiceDataForm = (function() {
           format_competence('aux_competence', 'product_and_service_datum_competence');
         }
       });
-    }
+    };
 
     this.initalize_fields = () => {
       $("#aux_competence").prop("disabled", false);
-      $('.service_input, .product_input').mask('999');
+      // $('.service_input, .product_input').mask('999');
       $('#competence').val(current_competence());
-    }
+    };
 
     set_number_of_tabs('prod_serv_data', 7);
     this.update_service_totals_for_each_tab();

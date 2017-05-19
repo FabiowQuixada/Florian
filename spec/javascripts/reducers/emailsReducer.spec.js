@@ -1,8 +1,8 @@
-import emails from './../../../app/frontend/javascripts/redux/reducers/emailsReducer'
-import * as actions from './../../../app/frontend/javascripts/redux/actions/emailsActionCreators'
-import I18n from './../../../app/frontend/javascripts/i18n'
+import emails from './../../../app/frontend/javascripts/redux/reducers/emailsReducer';
+import * as actions from './../../../app/frontend/javascripts/redux/actions/emailsActionCreators';
+// import I18n from './../../../app/frontend/javascripts/i18n';
 
-const deepFreeze = require('deep-freeze')
+const deepFreeze = require('deep-freeze');
 
 describe("E-mails reducer", () => {
   let action;

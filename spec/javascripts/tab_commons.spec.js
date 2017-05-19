@@ -1,8 +1,6 @@
-import { set_number_of_tabs, hide_all_tabs_except } from './../../app/frontend/javascripts/tab_commons'
+import { set_number_of_tabs, hide_all_tabs_except } from './../../app/frontend/javascripts/tab_commons';
 
 describe("Tab commons", () => {
-  let index_commons;
-
   beforeEach(() => {
     jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures';
     loadFixtures('tab_commons.html');

@@ -1,8 +1,7 @@
-import { on_page } from './../application'
-import { clean_resend_modal, clean_send_test_modal } from './modals'
-import ServerFunctions from './../server_functions'
+import { on_page } from './../application';
+import { clean_resend_modal, clean_send_test_modal } from './modals';
 
-$(() => { if(on_page('receipt_emails', 'index')) new ReceiptEmailsIndex() });
+$(() => { if(on_page('receipt_emails', 'index')) new ReceiptEmailsIndex(); });
 
 const ReceiptEmailsIndex = (function() {
   function ReceiptEmailsIndex() {
@@ -26,7 +25,7 @@ const ReceiptEmailsIndex = (function() {
       $('#send_test_email_modal').modal('show');
     });
 
-    $('#recent_emails_btn').click( () => $('#recent_emails_modal').modal('show'))
+    $('#recent_emails_btn').click( () => $('#recent_emails_modal').modal('show'));
   }
 
   return ReceiptEmailsIndex;

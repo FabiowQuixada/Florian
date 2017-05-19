@@ -1,8 +1,6 @@
-import * as message_area from './../../app/frontend/javascripts/message_area'
+import * as message_area from './../../app/frontend/javascripts/message_area';
 
 describe("Message area", () => {
-  let index_commons;
-
   beforeEach(() => {
     jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures';
     loadFixtures('message_area.html');

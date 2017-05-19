@@ -1,4 +1,4 @@
-import * as application from './../../app/frontend/javascripts/application'
+import * as application from './../../app/frontend/javascripts/application';
 
 describe("application", () => {
   beforeEach(() => {

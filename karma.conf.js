@@ -25,7 +25,6 @@ module.exports = function(config) {
     files: [
       'https://code.jquery.com/jquery-1.11.2.min.js',
       'spec/javascripts/**/*.js',
-      'spec/javascripts/**/*.jsx',
       { pattern: 'app/frontend/javascripts/**/*.js', included: false },
       { pattern: 'app/frontend/javascripts/**/*.jsx', included: false },
       { pattern: 'spec/javascripts/fixtures/**/*.html', included: false, served: true }

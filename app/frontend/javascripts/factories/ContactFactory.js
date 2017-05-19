@@ -34,4 +34,4 @@ class ContactFactory {
   }
 }
 
-export default ContactFactory
+export default ContactFactory;

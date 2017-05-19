@@ -1,10 +1,10 @@
-import I18n from './i18n'
-import { on_action } from './application'
-import { display_confirm_modal } from './others/modals'
-import { display_notice, display_error, hide_all_messages, to_top, msg_as_html_ul } from './message_area'
-import ServerFunctions from './server_functions'
+import I18n from './i18n';
+import { on_action } from './application';
+import { display_confirm_modal } from './others/modals';
+import { display_notice, display_error } from './message_area';
+import ServerFunctions from './server_functions';
 
-$(() => { if(on_action('index')) new IndexCommons() });
+$(() => { if(on_action('index')) new IndexCommons(); });
 
 const IndexCommons = (function() {
   function IndexCommons() {
@@ -17,7 +17,7 @@ const IndexCommons = (function() {
           return;
         }
       });
-    }
+    };
 
     this.setup_listeners = () => {
       const self = this;
@@ -41,19 +41,18 @@ const IndexCommons = (function() {
           self.destroy_model.bind(self, id)
         );
       });
-    }
+    };
 
     this.update_status = id => {
       const self = this;
       const controller = $('#rails_controller').val();
-      const target = `#model_${id} .status > a`;
       const current_status = $(`#index_table #model_${id} .activate_btn`).length === 0;
 
       $.ajax({
         type: "POST",
         url: self.status_path(controller, id, current_status),
         beforeSend: xhr => {
-          xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+          xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
         },
         dataType: "json",
         success: response => {
@@ -78,18 +77,18 @@ const IndexCommons = (function() {
             display_error(message);
           }
         },
-        error: response => {
+        error: () => {
           display_error(I18n.t('error_pages.internal_server_error.title'));
         }
       });
-    }
+    };
 
     this.status_path = (controller, id, is_now_active) => {
       if(is_now_active)
         return ServerFunctions.paths.deactivate(controller, id);
       else
         return ServerFunctions.paths.activate(controller, id);
-    }
+    };
 
     this.destroy_model = (id) => {
       const controller = $('#rails_controller').val();
@@ -98,7 +97,7 @@ const IndexCommons = (function() {
         type: "DELETE",
         url: `${ServerFunctions.paths.index(controller)}/${id}`,
         beforeSend: xhr => {
-          xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+          xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
         },
         dataType: "json",
         success: response => {
@@ -117,11 +116,11 @@ const IndexCommons = (function() {
             display_error(message);
           }
         },
-        error: response => {
+        error: () => {
           display_error(I18n.t('error_pages.internal_server_error.title'));
         }
       });
-    }
+    };
 
     this.setup_listeners();
     this.setup_filter_panel();

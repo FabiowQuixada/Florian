@@ -1,5 +1,5 @@
-import ProductAndServiceDataForm from './../../../../app/frontend/javascripts/product_and_service_data/form'
-import Constants from './../../../../app/frontend/javascripts/server_constants'
+import ProductAndServiceDataForm from './../../../../app/frontend/javascripts/product_and_service_data/form';
+import Constants from './../../../../app/frontend/javascripts/server_constants';
 
 describe("Product and service form", () => {
   let ps_data_form;

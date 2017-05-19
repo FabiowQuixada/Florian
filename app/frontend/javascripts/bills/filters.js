@@ -1,8 +1,8 @@
-import { on_page } from './../application'
-import { display_error } from './../message_area'
-import { format_competence, validate_period } from './../dates'
+import { on_page } from './../application';
+import { display_error } from './../message_area';
+import { format_competence, validate_period } from './../dates';
 
-$(() => { if(on_page('bills', 'index')) new BillsFilters() });
+$(() => { if(on_page('bills', 'index')) new BillsFilters(); });
 
 const BillsFilters = (function() {
   function BillsFilters() {

@@ -1,6 +1,5 @@
-import MaintainersDonationTabForm from './../../../../app/frontend/javascripts/maintainers/donation_tab_form'
-import Constants from './../../../../app/frontend/javascripts/server_constants'
-
+import MaintainersDonationTabForm from './../../../../app/frontend/javascripts/maintainers/donation_tab_form';
+import Constants from './../../../../app/frontend/javascripts/server_constants';
 
 describe("Maintainer donation tab form", () => {
   let donation_tab_form;
@@ -36,7 +35,7 @@ describe("Maintainer donation tab form", () => {
 
   describe("toogle_parcel_qty_field", () => {
     it("allows user to edit 'payment period' if 'parcel frequency' is set to 'semiannually'", () => {
-      $('#maintainer_payment_period').attr('readonly')
+      $('#maintainer_payment_period').attr('readonly');
       $("#maintainer_payment_frequency").val(Constants.payment_freq.semiannually);
       donation_tab_form.toogle_parcel_qty_field();
       expect($('#maintainer_payment_period').is('[readonly]')).toEqual(false);

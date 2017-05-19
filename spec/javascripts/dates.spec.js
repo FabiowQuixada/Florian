@@ -1,5 +1,5 @@
-import * as Dates from './../../app/frontend/javascripts/dates'
-import I18n from './../../app/frontend/javascripts/i18n'
+import * as Dates from './../../app/frontend/javascripts/dates';
+import I18n from './../../app/frontend/javascripts/i18n';
 
 describe("Date", () => {
   it("formatted as competence", () => {

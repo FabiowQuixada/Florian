@@ -1,4 +1,4 @@
-import { on_controller } from './../application'
+import { on_controller } from './../application';
 
 $(() => {
   if(on_controller('errors')) {

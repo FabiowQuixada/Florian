@@ -1,9 +1,9 @@
-import I18n from './../i18n'
-import Constants from './../server_constants'
-import { on_page } from './../application'
-import { set_number_of_tabs } from './../tab_commons'
+import I18n from './../i18n';
+import Constants from './../server_constants';
+import { on_page } from './../application';
+import { set_number_of_tabs } from './../tab_commons';
 
-$(() => { if(on_page('bills', 'index')) new BillsCharts() });
+$(() => { if(on_page('bills', 'index')) new BillsCharts(); });
 
 const BillsCharts = (function() {
   function BillsCharts() {
@@ -49,12 +49,12 @@ const BillsCharts = (function() {
         // Totals;
         this.prepare_and_draw_chart(year, months, bill_types);
       }
-    }
+    };
 
     this.prepare_and_draw_chart = (year, months, type) => {
       const clean_months = months[type].filter(month => month !== null);
       this.draw_chart_by_year(year, clean_months, type);
-    }
+    };
 
     this.draw_chart_by_year = (year, months_array, type) => {
       const data = new google.visualization.DataTable();
@@ -75,7 +75,7 @@ const BillsCharts = (function() {
 
       const chart = new google.visualization.AreaChart(document.getElementById(`chart_div_${year}_${type}`));
       chart.draw(data, options);
-    }
+    };
   }
   
   return BillsCharts;

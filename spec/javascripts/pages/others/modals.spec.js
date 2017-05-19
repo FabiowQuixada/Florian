@@ -1,79 +1,84 @@
-import { display_confirm_modal } from './../../../../app/frontend/javascripts/others/modals'
+/**
+ *
+ * TODO: Bootstrap is for some reason not recognized in the tests;
+ *
+**/
 
-describe("Modal", () => {
-  const title = "Some title";
-  const msg = "Some weird message";
-  const confirm_callback = () => {};
-  const cancel_callback = () => {};
+// import { display_confirm_modal } from './../../../../app/frontend/javascripts/others/modals';
 
-  // TODO: Bootstrap is for some reason not recognized in the tests;
-  beforeEach(() => {
-    jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures';
-    loadFixtures('others/modals.html');
-    $.holdReady(true);
-  });
+// describe("Modal", () => {
+//   const title = "Some title";
+//   const msg = "Some weird message";
+//   const confirm_callback = () => {};
+//   const cancel_callback = () => {};
 
-  // it("pops-up", () => {
-  //   // TODO
-  // });
+//   beforeEach(() => {
+//     jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures';
+//     loadFixtures('others/modals.html');
+//     $.holdReady(true);
+//   });
 
-  // describe("texts", () => {
-  //   beforeEach(() => {
-  //     display_confirm_modal(title, msg);
-  //   });
+//   it("pops-up", () => {
+//     // TODO
+//   });
 
-  //   it("displays title", () => {
-  //     // expect($('#confirm_modal .modal-title').html()).toEqual(title);
-  //   });
+//   describe("texts", () => {
+//     beforeEach(() => {
+//       display_confirm_modal(title, msg);
+//     });
 
-  //   it("displays message", () => {
-  //     // expect($('#confirm_modal .modal-body').html()).toEqual(msg);
-  //   });
-  // });
+//     it("displays title", () => {
+//       // expect($('#confirm_modal .modal-title').html()).toEqual(title);
+//     });
 
-  // describe("absence of callback parameters", () => {
-  //   beforeEach(() => {
-  //     display_confirm_modal(title, msg);
-  //   });
+//     it("displays message", () => {
+//       // expect($('#confirm_modal .modal-body').html()).toEqual(msg);
+//     });
+//   });
 
-  //   it("does not display modal footer", () => {
-  //     expect($("#confirm_modal .modal-footer").hasClass('hidden')).toEqual(true);
-  //   });
-  // });
+//   describe("absence of callback parameters", () => {
+//     beforeEach(() => {
+//       display_confirm_modal(title, msg);
+//     });
 
-  // describe("with only confirm callback", () => {
-  //   beforeEach(() => {
-  //     display_confirm_modal(title, msg, confirm_callback);
-  //   });
+//     it("does not display modal footer", () => {
+//       expect($("#confirm_modal .modal-footer").hasClass('hidden')).toEqual(true);
+//     });
+//   });
 
-  //   it("confirm button is bound to confirm callback", () => {
-  //     // TODO
-  //   });
+//   describe("with only confirm callback", () => {
+//     beforeEach(() => {
+//       display_confirm_modal(title, msg, confirm_callback);
+//     });
 
-  //   it("does not display cancel button", () => {
-  //     expect($('#cancel_btn').hasClass('hidden')).toEqual(true);
-  //   });
-  // });
+//     it("confirm button is bound to confirm callback", () => {
+//       // TODO
+//     });
 
-  // describe("with both confirm and cancel callbacks", () => {
-  //   beforeEach(() => {
-  //     display_confirm_modal(title, msg, confirm_callback, cancel_callback);
-  //   });
+//     it("does not display cancel button", () => {
+//       expect($('#cancel_btn').hasClass('hidden')).toEqual(true);
+//     });
+//   });
 
-  //   it("confirm button is bound to confirm callback", () => {
-  //     // TODO
-  //   });
+//   describe("with both confirm and cancel callbacks", () => {
+//     beforeEach(() => {
+//       display_confirm_modal(title, msg, confirm_callback, cancel_callback);
+//     });
 
-  //   it("does not display cancel button", () => {
-  //     expect($('#cancel_btn').hasClass('hidden')).toEqual(true);
-  //   });
+//     it("confirm button is bound to confirm callback", () => {
+//       // TODO
+//     });
 
-  //   it("cancel button is bound to cancel callback", () => {
-  //     // TODO
-  //   });
+//     it("does not display cancel button", () => {
+//       expect($('#cancel_btn').hasClass('hidden')).toEqual(true);
+//     });
 
-  //   it("does not display cancel button", () => {
-  //     expect($('#cancel_btn').hasClass('hidden')).toEqual(false);
-  //   });
-  // });
-});
+//     it("cancel button is bound to cancel callback", () => {
+//       // TODO
+//     });
+
+//     it("does not display cancel button", () => {
+//       expect($('#cancel_btn').hasClass('hidden')).toEqual(false);
+//     });
+//   });
+// });

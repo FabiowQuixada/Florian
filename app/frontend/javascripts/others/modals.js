@@ -17,4 +17,4 @@ export const display_confirm_modal = (title, message, confirm_callback, cancel_c
   }
   
   $("#confirm_modal").modal("show");
-}
+};

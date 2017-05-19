@@ -1,8 +1,8 @@
-import { on_page } from './../application'
-import { display_error } from './../message_area'
-import { validate_period, format_competence } from './../dates'
+import { on_page } from './../application';
+import { display_error } from './../message_area';
+import { validate_period, format_competence } from './../dates';
 
-$(() => { if(on_page('product_and_service_data', 'index')) new ProductAndServiceDataFilters() });
+$(() => { if(on_page('product_and_service_data', 'index')) new ProductAndServiceDataFilters(); });
 
 const ProductAndServiceDataFilters = (function() {
   function ProductAndServiceDataFilters() {

@@ -1,7 +1,7 @@
-import { on_page } from './../application'
-import Constants from './../server_constants'
+import { on_page } from './../application';
+import Constants from './../server_constants';
 
-$(() => { if(on_page('donations', 'form')) new DonationsForm() });
+$(() => { if(on_page('donations', 'form')) new DonationsForm(); });
 
 const DonationsForm = (function() {
   function DonationsForm() {
