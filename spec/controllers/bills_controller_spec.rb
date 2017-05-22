@@ -25,4 +25,12 @@ describe BillsController, type: :controller do
       end
     end
   end
+
+  describe '#index_query' do
+    context 'with invalid attributes' do
+      subject { get :index, q: { competence_gteq: 'whatever' } }
+
+      it { expect(subject).to redirect_to bills_path }
+    end
+  end
 end

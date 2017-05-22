@@ -18,6 +18,8 @@ class BillsController < ApplicationController
     format_filter_date :competence_lteq
     @q = Bill.ransack(params[:q])
     @q.result.order(competence: :desc).page(params[:page])
+  rescue => exc
+    handle_bill_filter_exc exc
   end
 
   def populate_graph(list)
@@ -47,6 +49,13 @@ class BillsController < ApplicationController
       [:total, 3],
       (bill.water + bill.energy + bill.telephone).to_f
     )
+  end
+
+  def handle_bill_filter_exc(exc)
+    @model.errors[:base] << handle_exception(exc, I18n.t('alert.email.error_sending'))
+    redirect_to bills_path @model
+    @q = Bill.ransack('')
+    @q.result.order(competence: :desc).page(params[:page])
   end
 
   def populate(year, month, month_abbr, type, bill_type_value)
