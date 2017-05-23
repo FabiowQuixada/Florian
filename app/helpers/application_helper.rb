@@ -33,11 +33,25 @@ module ApplicationHelper
   end
 
   def filter_competence_field(f, att)
-    f.search_field att, value: params[:q] && params[:q][att] ? I18n.l(params[:q][att].to_date, format: I18n.t('date.formats.competence_i')) : '', class: 'form-control date mb-0 hidden'
+    begin
+      date = I18n.l(params[:q][att].to_date, format: I18n.t('date.formats.competence_i'))
+    rescue
+      @model.errors.add att, 'Invalid'
+      date = ''
+    end
+
+    f.search_field att, value: date, class: 'form-control competence-date mb-0 hidden'
   end
 
   def filter_aux_competence_field(f, att)
-    f.text_field att, name: "query_aux_#{att}", value: params[:q] && params[:q][att] ? I18n.l(params[:q][att].to_date, format: I18n.t('date.formats.competence_i')) : '', id: "aux_#{att}", class: 'form-control date mb-0'
+    begin
+      date = I18n.l(params[:q][att].to_date, format: I18n.t('date.formats.competence_i'))
+    rescue
+      @model.errors.add att, 'Invalid'
+      date = ''
+    end
+
+    f.text_field att, name: "query_aux_#{att}", value: date, id: "aux_#{att}", class: 'form-control competence-date mb-0'
   end
 
   def date_field(f, att)
