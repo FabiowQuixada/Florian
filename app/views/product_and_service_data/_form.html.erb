@@ -9,7 +9,7 @@
 				<%= text_field_tag :competence, I18n.localize(@model.competence, format: :competence).capitalize, { class: 'form-control', id: 'product_and_service_datum_competence', readonly: true } %>
 			<% else %>
 				<div class="input-group date" data-behaviour='datepickercompetence' >
-				<%= text_field_tag 'aux_competence', I18n.localize(@model.competence, format: :competence_i), class: 'form-control' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+				<%= text_field_tag 'aux_competence', I18n.localize(@model.competence, format: :competence_i), class: 'form-control competence-date' %><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 				</div>
 				<%= f.hidden_field :competence %>
 			<% end %>

@@ -27,6 +27,7 @@ $(() => {
   $(".day_of_month").mask("99");
   $('.numbers_only').keyup(function () { this.value = this.value.replace(/[^0-9\.]/g,''); });
   $(".money").mask(`000${delimiter}000${separator}00`, { reverse : true });
+  $(".competence-date").mask("99/9999");
 
   // Field initialization;
   $(".money").each((index, field) => {
