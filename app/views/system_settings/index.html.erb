@@ -111,12 +111,12 @@
   emailList['pse_recipients_array'] = <%= @model.recipients_as_array.to_json.html_safe %>.map(
     value => ({
       is_persisted: "true",
-      address: value
+      address: value.replace(/ /g, '')
     }));
   emailList['pse_private_recipients_array'] = <%= @model.private_recipients_as_array.to_json.html_safe %>.map(
     value => ({
       is_persisted: "true",
-      address: value
+      address: value.replace(/ /g, '')
     }));
 
 </script>
