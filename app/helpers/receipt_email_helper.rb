@@ -21,10 +21,10 @@ module ReceiptEmailHelper
   end
 
   def receipt_maintainer_select(f)
-    if @model.persisted?
-      f.collection_select(:maintainer_id, [@model.maintainer], :id, :name, {}, id: 'receipt_email_maintainer', class: 'form-control', disabled: true)
+    if f.object.persisted?
+      f.collection_select(:maintainer_id, [f.object.maintainer], :id, :name, {}, id: 'receipt_email_maintainer', class: 'form-control', disabled: true)
     else
-      f.collection_select(:maintainer_id, Maintainer.where(group: :maintainer), :id, :name, { include_blank: t('helpers.select.prompt') }, id: 'receipt_email_maintainer', class: 'form-control')
+      f.collection_select(:maintainer_id, Maintainer.where(group: Maintainer.groups[:maintainer]), :id, :name, { include_blank: t('helpers.select.prompt') }, id: 'receipt_email_maintainer', class: 'form-control')
     end
   end
 end

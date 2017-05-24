@@ -24,7 +24,8 @@ RSpec.configure do |config|
 
     FactoryGirl.create :maintainer, :with_contacts, :with_donations
     FactoryGirl.create :maintainer, category: :low
-    FactoryGirl.create :maintainer, group: :maintainer
+    FactoryGirl.create :maintainer, name: 'Maintainer in the `maintainer` group', group: :maintainer
+    FactoryGirl.create :maintainer, name: 'Maintainer in the `punctual` group', group: :punctual
     comp1 = Maintainer.create(entity_type: 'company', name: 'Empresa I', registration_name: 'Empresa I Ltda.', cnpj: '31162488000187', category: 'medium', address: 'lala', group: 'maintainer')
 
     Donation.create(value: 0.00, donation_date: Time.now, remark: '02 potes de creme', maintainer: comp1)
